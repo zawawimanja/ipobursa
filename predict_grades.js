@@ -100,7 +100,7 @@ ipoData.forEach(ipo => {
         console.log(`Factors: ${result.reasons.join(', ')}`);
         
         // Specific advice for Stratus or similar automation companies
-        if (ipo.sector.toLowerCase().includes('automation') && result.grade === 'B') {
+        if (ipo.sector && ipo.sector.toLowerCase().includes('automation') && result.grade === 'B') {
             console.log(`💡 Note: If you consider "Automation" as part of the Tech/Semi trending sector, this would score +30 more, making it a Grade A.`);
         }
         

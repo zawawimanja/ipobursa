@@ -14,6 +14,37 @@ function normalizeName(name) {
     return name.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').trim();
 }
 
+function findExistingIPO(name, existingData) {
+    const cleanName = name.trim().toUpperCase();
+    
+    // Explicit ID mapping for known entities to avoid duplicates
+    const idMap = {
+        'EMPIRE': 'empire-premium',
+        'MTTSL': 'mtt-shipping',
+        'UUE': 'uue-holdings',
+        'WENTEL': 'wentel-engineering',
+        'SWIFT': 'swift-haulage',
+        'GHS [NS]': 'ghs',
+        'SEMICO [NS]': 'semico',
+        'SALIRAN [NS]': 'saliran-group',
+        'SUPREME': 'supreme-consolidated',
+        'AZAMJAYA [NS]': 'azam-jaya',
+        'KUCINGKO [NS]': 'kucingko'
+    };
+
+    if (idMap[cleanName]) {
+        const found = existingData.find(d => d.id === idMap[cleanName]);
+        if (found) return found;
+    }
+    
+    // Fallback to fuzzy normalize match
+    const normName = normalizeName(name);
+    return existingData.find(d => {
+        const normExisting = normalizeName(d.companyName);
+        return normExisting.includes(normName) || normName.includes(normExisting);
+    });
+}
+
 async function fetchPage(url) {
     try {
         const response = await axios.get(url, { headers: HEADERS });
@@ -53,8 +84,7 @@ async function scrapeUpcomingIPOs(existingData) {
             if (label.includes('shariah')) shariah = val.toLowerCase().includes('yes');
         });
 
-        const normName = normalizeName(companyName);
-        let existing = existingData.find(d => normalizeName(d.companyName).includes(normName) || normName.includes(normalizeName(d.companyName)));
+        let existing = findExistingIPO(companyName, existingData);
 
         if (existing) {
             existing.stage = 3;
@@ -120,8 +150,7 @@ async function scrapeMitiAndDraftIPOs(existingData) {
             let stage = currentSection === 'MITI' ? 2 : 1;
             let status = currentSection === 'MITI' ? 'MITI Allocation Phase' : 'Draft / Exposure Phase';
             
-            const normName = normalizeName(companyName);
-            let existing = existingData.find(d => normalizeName(d.companyName).includes(normName) || normName.includes(normalizeName(d.companyName)));
+            let existing = findExistingIPO(companyName, existingData);
 
             if (existing) {
                 // Only update stage if it's currently a lower stage or pending
@@ -162,8 +191,7 @@ async function scrapeListedStatistics(existingData) {
             const openPrice = parseFloat($(cols[3]).text()) || 0;
             const closePrice = parseFloat($(cols[6]).text()) || 0;
 
-            const normName = normalizeName(name);
-            let existing = existingData.find(d => normalizeName(d.companyName).includes(normName) || normName.includes(normalizeName(d.companyName)));
+            let existing = findExistingIPO(name, existingData);
 
             if (existing) {
                 existing.stage = 5;
