@@ -150,17 +150,18 @@ async function fetchLiveUpdates() {
             });
         }
 
-        // 4. HYBRID MERGE: Combine Live Data with Enrichment Data
-        const finalData = liveIpos.map(live => {
+        // 4. HYBRID MERGE: Combine Live Data with Enrichment Data & Deduplicate
+        const finalData = [];
+        liveIpos.forEach(live => {
             const enrichment = IPO_DATA.find(e => {
                 const stemLive = live.companyName.toLowerCase().replace(/berhad|bhd|group|holdings/g, '').trim();
                 const stemEnrich = e.companyName.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').trim();
                 return stemLive.includes(stemEnrich) || stemEnrich.includes(stemLive);
             });
 
+            let mergedItem = live;
             if (enrichment) {
-                // IMPORTANT: Ensure the manual enrichment data's companyName is preserved if it's more descriptive
-                return { 
+                mergedItem = { 
                     ...enrichment, 
                     ...live, 
                     companyName: enrichment.companyName, // Keep the nice manual name
@@ -170,16 +171,26 @@ async function fetchLiveUpdates() {
                     currentPrice: live.currentPrice || enrichment.currentPrice 
                 };
             }
-            return live;
+
+            // Deduplicate in finalData: keep/merge and prioritize higher stage
+            const existingIdx = finalData.findIndex(f => f.id === mergedItem.id);
+            if (existingIdx !== -1) {
+                const existing = finalData[existingIdx];
+                const higherStage = Math.max(existing.stage || 0, mergedItem.stage || 0);
+                finalData[existingIdx] = {
+                    ...existing,
+                    ...mergedItem,
+                    stage: higherStage,
+                    status: higherStage === 5 ? 'Listed' : (higherStage === 4 ? 'Closed' : existing.status)
+                };
+            } else {
+                finalData.push(mergedItem);
+            }
         });
 
         // Add leftovers from IPO_DATA that weren't in the live scrape
         IPO_DATA.forEach(e => {
-            const alreadyIn = finalData.some(f => {
-                const stemF = f.companyName.toLowerCase().replace(/berhad|bhd|group|holdings/g, '').trim();
-                const stemE = e.companyName.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').trim();
-                return stemF.includes(stemE) || stemE.includes(stemF);
-            });
+            const alreadyIn = finalData.some(f => f.id === e.id);
             if (!alreadyIn) {
                 finalData.push(e);
             }
