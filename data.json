@@ -3,10 +3,10 @@
     "id": "sum-technology",
     "companyName": "Sum Technology Berhad",
     "sector": "Technology (Hardware)",
-    "stage": 3,
+    "stage": 2,
     "price": 0.28,
     "market": "126.00 M",
-    "status": "Application Open",
+    "status": "MITI Allocation Phase",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "2026-06-04T17:00:00",
     "listingDate": "2026-06-18",
@@ -29,10 +29,10 @@
     "id": "elsa",
     "companyName": "Elsa Berhad",
     "sector": "Technology (Software)",
-    "stage": 3,
+    "stage": 1,
     "price": 0.23,
     "market": "ACE Market",
-    "status": "Application Open",
+    "status": "Draft / Exposure Phase",
     "openingDate": "2026-05-21T09:00:00",
     "closingDate": "2026-06-03T17:00:00",
     "listingDate": "2026-06-17",
@@ -51,10 +51,10 @@
     "id": "pentech",
     "companyName": "Pentech Holdings Berhad",
     "sector": "Industrial Products",
-    "stage": 3,
+    "stage": 2,
     "price": 0.2,
     "market": "124.00 M",
-    "status": "Application Open",
+    "status": "MITI Allocation Phase",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "2026-05-29T17:00:00",
     "listingDate": "2026-06-12",
@@ -95,9 +95,9 @@
     "id": "1doc",
     "companyName": "1 Doc International Berhad",
     "sector": "Consumer Products (Beauty Care)",
-    "stage": 3,
+    "stage": 2,
     "market": "Main Market",
-    "status": "Application Open",
+    "status": "MITI Allocation Phase",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "year": 2026,
     "os": 0,
@@ -262,10 +262,10 @@
     "id": "stratus-global",
     "companyName": "Stratus Global Holdings Berhad",
     "sector": "Factory Automation / Cleanroom Handling",
-    "stage": 4,
+    "stage": 2,
     "price": 0.75,
     "market": "937.50 M",
-    "status": "Pre-Listing",
+    "status": "MITI Allocation Phase",
     "closingDate": "2026-05-14T17:00:00",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "year": 2026,
@@ -5847,8 +5847,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5860,8 +5860,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5873,8 +5873,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5886,8 +5886,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5899,8 +5899,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5912,8 +5912,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026
   },
   {
@@ -5925,8 +5925,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -5938,8 +5938,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -5951,8 +5951,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -5964,8 +5964,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -5977,8 +5977,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -5990,8 +5990,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6003,8 +6003,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6016,8 +6016,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6029,8 +6029,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6042,8 +6042,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6055,8 +6055,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6068,8 +6068,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6081,8 +6081,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6094,8 +6094,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6107,8 +6107,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6120,8 +6120,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6133,8 +6133,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6146,8 +6146,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6159,8 +6159,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6172,8 +6172,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6185,8 +6185,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6198,8 +6198,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6211,8 +6211,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6224,8 +6224,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6237,8 +6237,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6250,8 +6250,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6263,8 +6263,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6276,8 +6276,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6289,8 +6289,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6302,8 +6302,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6315,8 +6315,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6328,8 +6328,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6341,8 +6341,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {
@@ -6354,8 +6354,8 @@
     "closingDate": "",
     "listingDate": "",
     "shariah": false,
-    "stage": 3,
-    "status": "Application Open",
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
     "year": 2026
   },
   {

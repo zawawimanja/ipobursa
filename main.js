@@ -142,6 +142,13 @@ async function fetchLiveUpdates() {
                     if (label.includes('shariah')) shariah = val.toLowerCase().includes('yes');
                 });
 
+                let targetStage = 3;
+                let targetStatus = 'Application Open';
+                if (!price || price === 0 || !closingDate || closingDate.toLowerCase().includes('tba')) {
+                    targetStage = 1;
+                    targetStatus = 'Draft / Exposure Phase';
+                }
+
                 liveIpos.push({
                     id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                     symbol: symbol,
@@ -151,8 +158,8 @@ async function fetchLiveUpdates() {
                     closingDate: closingDate,
                     listingDate: listingDate,
                     shariah: shariah,
-                    stage: 3,
-                    status: 'Application Open'
+                    stage: targetStage,
+                    status: targetStatus
                 });
             });
         }

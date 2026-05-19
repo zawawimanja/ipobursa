@@ -89,10 +89,18 @@ async function scrapeUpcomingIPOs(existingData) {
         });
 
         let existing = findExistingIPO(companyName, existingData);
+        let targetStage = 3;
+        let targetStatus = 'Application Open';
+
+        if (price === 0 || !closingDate || closingDate.toLowerCase().includes('tba')) {
+            // It has no pricing or active closing dates yet - stay in Draft or MITI stage!
+            targetStage = (existing && existing.stage && existing.stage < 3) ? existing.stage : 1;
+            targetStatus = targetStage === 2 ? 'MITI Allocation Phase' : 'Draft / Exposure Phase';
+        }
 
         if (existing) {
-            existing.stage = 3;
-            existing.status = 'Application Open';
+            existing.stage = targetStage;
+            existing.status = targetStatus;
             existing.price = price || existing.price;
             existing.closingDate = closingDate || existing.closingDate;
             existing.listingDate = listingDate || existing.listingDate;
@@ -108,8 +116,8 @@ async function scrapeUpcomingIPOs(existingData) {
                 closingDate,
                 listingDate,
                 shariah,
-                stage: 3,
-                status: 'Application Open',
+                stage: targetStage,
+                status: targetStatus,
                 year: new Date().getFullYear()
             });
         }
