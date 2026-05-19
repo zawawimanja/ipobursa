@@ -11,8 +11,12 @@ const HEADERS = {
 };
 
 function normalizeName(name) {
-    return name.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').trim();
+    return name.toLowerCase()
+        .replace(/berhad|bhd|group|holdings|corp/g, '')
+        .replace(/[^a-z0-9]/g, '')
+        .trim();
 }
+
 
 function findExistingIPO(name, existingData) {
     const cleanName = name.trim().toUpperCase();
@@ -175,43 +179,86 @@ async function scrapeMitiAndDraftIPOs(existingData) {
     return count;
 }
 
+function formatListingDate(dateStr) {
+    if (!dateStr || dateStr === 'TBA') return null;
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+        const months = {
+            'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+            'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+        };
+        const day = parts[0].padStart(2, '0');
+        const month = months[parts[1]] || '01';
+        const year = parts[2];
+        return `${year}-${month}-${day}`;
+    }
+    return null;
+}
+
 async function scrapeListedStatistics(existingData) {
     console.log('Scraping Stage 5 (Listed Statistics) IPOs...');
     const $ = await fetchPage('https://www.isaham.my/ipo/statistics');
     if (!$) return 0;
 
     let count = 0;
-    $('table tbody tr').each((i, el) => {
+    $('#statsTable tbody tr').each((i, el) => {
         const cols = $(el).find('td');
         if (cols.length >= 7) {
-            const name = $(cols[0]).text().trim();
-            const yearText = $(cols[1]).text().trim();
-            const year = parseInt(yearText.split('-').pop()) || 2026;
-            const ipoPrice = parseFloat($(cols[2]).text()) || 0;
-            const openPrice = parseFloat($(cols[3]).text()) || 0;
-            const closePrice = parseFloat($(cols[6]).text()) || 0;
+            const date = $(cols[0]).text().trim();
+            const symbol = $(cols[2]).text().trim();
+            const listingDate = $(cols[3]).text().trim();
+            
+            let year = 2026;
+            if (listingDate && listingDate !== 'TBA') {
+                const yr = parseInt(listingDate.split('-').pop());
+                if (yr) year = yr;
+            } else if (date) {
+                const yr = parseInt(date.split('-')[0]);
+                if (yr) year = yr;
+            }
 
-            let existing = findExistingIPO(name, existingData);
+            const ipoPrice = parseFloat($(cols[4]).text()) || parseFloat($(cols[1]).text()) || 0;
+            const currentPrice = parseFloat($(cols[5]).text()) || 0;
+            
+            const scPerfText = $(cols[7]).text().trim().replace('%', '');
+            const scPerf = parseFloat(scPerfText) || 0;
+            
+            const soPerfText = $(cols[6]).text().trim().replace('%', '');
+            const soPerf = parseFloat(soPerfText) || 0;
+            
+            const openPrice = ipoPrice * (1 + soPerf / 100);
+            const closePrice = ipoPrice * (1 + scPerf / 100);
+
+            let existing = findExistingIPO(symbol, existingData);
 
             if (existing) {
                 existing.stage = 5;
                 existing.status = 'Listed';
                 existing.price = existing.price || ipoPrice;
-                existing.openPrice = existing.openPrice || openPrice;
-                existing.closePrice = closePrice;
-                existing.currentPrice = closePrice;
+                if (!existing.openPrice || existing.openPrice === 0) {
+                    existing.openPrice = openPrice;
+                }
+                existing.closePrice = existing.closePrice || closePrice || currentPrice;
+                existing.currentPrice = currentPrice || existing.currentPrice || closePrice;
                 existing.year = existing.year || year;
+                if (!existing.listingDate || existing.listingDate === 'TBA') {
+                    existing.listingDate = formatListingDate(listingDate) || date;
+                }
+                existing.symbol = symbol;
             } else {
+                const cleanId = symbol.toLowerCase().replace(/[^a-z0-9]/g, '-');
                 existingData.push({
-                    id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-                    companyName: name,
+                    id: cleanId,
+                    companyName: symbol,
+                    symbol: symbol,
                     stage: 5,
                     status: 'Listed',
                     price: ipoPrice,
                     openPrice,
-                    closePrice,
-                    currentPrice: closePrice,
-                    year
+                    closePrice: closePrice || currentPrice,
+                    currentPrice: currentPrice || closePrice,
+                    year,
+                    listingDate: formatListingDate(listingDate) || date
                 });
             }
             count++;

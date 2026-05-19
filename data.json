@@ -19,7 +19,11 @@
     "predictedGrade": "B",
     "avgTP": 0.35,
     "pe": 14.2,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Attractive pricing at RM0.28 with robust technology tailwinds. High margin hardware manufacturing profile."
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Attractive pricing at RM0.28 with robust technology tailwinds. High margin hardware manufacturing profile.",
+    "openPrice": 0.39,
+    "closePrice": 0.360009,
+    "currentPrice": 1.03,
+    "symbol": "MTEC"
   },
   {
     "id": "elsa",
@@ -131,7 +135,7 @@
     "price": 0.26,
     "openPrice": 0.285,
     "closePrice": 0.27,
-    "currentPrice": 0.275,
+    "currentPrice": 0.255,
     "performance": "+3.85%",
     "strategy": "Scalp",
     "market": "ACE Market",
@@ -141,7 +145,9 @@
     "os": 7,
     "ib": "TA Securities",
     "fundUse": "Ekspansi Kilang",
-    "highPrice": 0.31625
+    "highPrice": 0.31625,
+    "listingDate": "2026-04-15",
+    "symbol": "5ER"
   },
   {
     "id": "adnex",
@@ -150,7 +156,7 @@
     "listingDate": "17-Mar-2026",
     "year": 2026,
     "price": 0.2,
-    "currentPrice": 0.29,
+    "currentPrice": 0.96,
     "performance": "+45.0%",
     "os": 3.23,
     "ib": "Public Investment Bank",
@@ -165,7 +171,8 @@
     "strategy": "Scalp",
     "outlier": true,
     "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +42.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
-    "highPrice": 0.33349999999999996
+    "highPrice": 0.33349999999999996,
+    "symbol": "NE"
   },
   {
     "id": "aerodyne",
@@ -191,7 +198,7 @@
     "listingDate": "06-Feb-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.58,
+    "currentPrice": 0.645,
     "performance": "+132.0%",
     "os": 46.07,
     "ib": "Malacca Securities",
@@ -207,7 +214,8 @@
     "pe": 12.8,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.6669999999999999
+    "highPrice": 0.6669999999999999,
+    "symbol": "AMBEST"
   },
   {
     "id": "ams-material",
@@ -227,9 +235,11 @@
     "pe": 15.85,
     "openPrice": 0.29,
     "closePrice": 0.305,
-    "currentPrice": 0.305,
+    "currentPrice": 0.34,
     "performance": "+0.00%",
-    "highPrice": 0.35074999999999995
+    "highPrice": 0.35074999999999995,
+    "listingDate": "2026-04-23",
+    "symbol": "AMS"
   },
   {
     "id": "carsome",
@@ -319,7 +329,11 @@
         "view": "Fair Value",
         "img": "assets/reports/stocklah-logo.png"
       }
-    ]
+    ],
+    "openPrice": 0.400015,
+    "closePrice": 0.33001499999999995,
+    "currentPrice": 0.15,
+    "symbol": "POWER"
   },
   {
     "id": "empire-premium",
@@ -328,7 +342,7 @@
     "listingDate": "17-Apr-2026",
     "year": 2026,
     "price": 0.7,
-    "currentPrice": 0.975,
+    "currentPrice": 0.99,
     "performance": "+39.29%",
     "os": 23.3,
     "ib": "Maybank Investment Bank",
@@ -343,7 +357,8 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "pe": 28.68,
     "openPrice": 1.1,
-    "closePrice": 0.975
+    "closePrice": 0.975,
+    "symbol": "EMPIRE"
   },
   {
     "id": "gdgroup",
@@ -352,7 +367,7 @@
     "listingDate": "16-Apr-2026",
     "year": 2026,
     "price": 0.45,
-    "currentPrice": 0.335,
+    "currentPrice": 0.355,
     "performance": "-25.56",
     "os": 7.04,
     "ib": "UOB Kay Hian",
@@ -362,7 +377,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.38525
+    "highPrice": 0.38525,
+    "openPrice": 0.490005,
+    "closePrice": 0.400005,
+    "symbol": "GDGROUP"
   },
   {
     "id": "ghs",
@@ -371,7 +389,7 @@
     "listingDate": "13-Jan-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.2,
+    "currentPrice": 0.19,
     "performance": "-20.00%",
     "os": 24.1,
     "ib": "Malacca Securities",
@@ -385,7 +403,8 @@
     "openPrice": 0.24,
     "closePrice": 0.245,
     "strategy": "Scalp",
-    "pe": 15.2
+    "pe": 15.2,
+    "symbol": "GHS [NS]"
   },
   {
     "id": "gold-li",
@@ -395,7 +414,7 @@
     "price": 0.13,
     "openPrice": 0.12,
     "closePrice": 0.11,
-    "currentPrice": 0.11,
+    "currentPrice": 0.1,
     "highPrice": 0.12,
     "performance": "-15.38%",
     "market": "ACE Market",
@@ -409,7 +428,8 @@
     "ib": "TBA",
     "fundUse": "Working Capital & Development",
     "predictedGrade": "C",
-    "analystInsight": "⚠️ <b>AVOID</b><br>Property sector is currently cold with low retail interest. High risk of 'Inspace' performance."
+    "analystInsight": "⚠️ <b>AVOID</b><br>Property sector is currently cold with low retail interest. High risk of 'Inspace' performance.",
+    "symbol": "GOLDLI"
   },
   {
     "id": "golden-destinations",
@@ -440,7 +460,7 @@
     "listingDate": "13-Feb-2026",
     "year": 2026,
     "price": 0.6,
-    "currentPrice": 0.35,
+    "currentPrice": 0.345,
     "performance": "-41.67",
     "os": 12.5,
     "ib": "Alliance",
@@ -454,7 +474,8 @@
     "closePrice": 0.56,
     "strategy": "Scalp",
     "pe": 18.5,
-    "highPrice": 0.40249999999999997
+    "highPrice": 0.40249999999999997,
+    "symbol": "HOCKSOON"
   },
   {
     "id": "inspace-creation",
@@ -474,7 +495,7 @@
     "avgTP": 0.34,
     "openPrice": 0.265,
     "closePrice": 0.255,
-    "currentPrice": 0.255,
+    "currentPrice": 0.22,
     "highPrice": 0.28,
     "performance": "+2.00%",
     "research": [
@@ -484,7 +505,8 @@
         "view": "Buy / Fair Value",
         "img": "https://www.isaham.my/img/logo-isaham.png"
       }
-    ]
+    ],
+    "symbol": "INSPACE"
   },
   {
     "id": "isf",
@@ -493,7 +515,7 @@
     "listingDate": "28-Jan-2026",
     "year": 2026,
     "price": 0.33,
-    "currentPrice": 0.5,
+    "currentPrice": 0.525,
     "performance": "+51.52%",
     "os": 20,
     "ib": "Alliance Islamic Bank",
@@ -507,7 +529,8 @@
     "closePrice": 0.48,
     "strategy": "Swing",
     "pe": 14.2,
-    "highPrice": 0.575
+    "highPrice": 0.575,
+    "symbol": "ISF"
   },
   {
     "id": "keeming",
@@ -516,7 +539,7 @@
     "listingDate": "12-Feb-2026",
     "year": 2026,
     "price": 0.38,
-    "currentPrice": 0.905,
+    "currentPrice": 0.95,
     "performance": "+138.16%",
     "os": 85.4,
     "ib": "M&A Securities",
@@ -532,7 +555,8 @@
     "pe": 12.4,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.0407499999999998
+    "highPrice": 1.0407499999999998,
+    "symbol": "KEEMING"
   },
   {
     "id": "manforce-group",
@@ -564,7 +588,7 @@
     "listingDate": "21-Apr-2026",
     "year": 2026,
     "price": 1.03,
-    "currentPrice": 0.95,
+    "currentPrice": 2.34,
     "performance": "-7.77%",
     "os": 2.7,
     "ib": "CIMB Investment Bank",
@@ -579,7 +603,8 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "pe": 9.5,
     "openPrice": 1.08,
-    "closePrice": 0.95
+    "closePrice": 0.95,
+    "symbol": "HI"
   },
   {
     "id": "ogm",
@@ -588,7 +613,7 @@
     "listingDate": "27-Jan-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.135,
+    "currentPrice": 0.13,
     "performance": "-46.0",
     "os": 20,
     "ib": "Malacca Securities",
@@ -602,7 +627,8 @@
     "closePrice": 0.2,
     "strategy": "Scalp",
     "pe": 11.3,
-    "highPrice": 0.15525
+    "highPrice": 0.15525,
+    "symbol": "OGM"
   },
   {
     "id": "ogx",
@@ -611,7 +637,7 @@
     "listingDate": "12-Mar-2026",
     "year": 2026,
     "price": 0.35,
-    "currentPrice": 0.295,
+    "currentPrice": 0.33,
     "performance": "-15.71",
     "os": 110.1,
     "ib": "M&A Securities",
@@ -625,7 +651,8 @@
     "closePrice": 0.345,
     "strategy": "Scalp",
     "pe": 10,
-    "highPrice": 0.33924999999999994
+    "highPrice": 0.33924999999999994,
+    "symbol": "OGX"
   },
   {
     "id": "sbs",
@@ -634,7 +661,7 @@
     "listingDate": "20-Jan-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.135,
+    "currentPrice": 0.12,
     "performance": "-46.0",
     "os": 15.2,
     "ib": "Mercury Securities",
@@ -648,7 +675,8 @@
     "closePrice": 0.24,
     "strategy": "Scalp",
     "pe": 14.2,
-    "highPrice": 0.15525
+    "highPrice": 0.15525,
+    "symbol": "SBS"
   },
   {
     "id": "semico",
@@ -673,7 +701,8 @@
     "openPrice": 0.45,
     "closePrice": 0.375,
     "strategy": "Scalp",
-    "pe": 18.5
+    "pe": 18.5,
+    "symbol": "SEMICO [NS]"
   },
   {
     "id": "skyechip",
@@ -729,7 +758,7 @@
     "listingDate": "18-Mar-2026",
     "year": 2026,
     "price": 1.45,
-    "currentPrice": 1.89,
+    "currentPrice": 1.86,
     "performance": "+30.34%",
     "os": 5.57,
     "ib": "Maybank / AmInvestment",
@@ -744,7 +773,8 @@
     "strategy": "Swing",
     "outlier": true,
     "pe": 16.5,
-    "highPrice": 2.1734999999999998
+    "highPrice": 2.1734999999999998,
+    "symbol": "SUNMED"
   },
   {
     "id": "teamstr",
@@ -753,7 +783,7 @@
     "listingDate": "25-Feb-2026",
     "year": 2026,
     "price": 0.26,
-    "currentPrice": 0.245,
+    "currentPrice": 0.255,
     "performance": "-5.77",
     "os": 35.2,
     "ib": "M&A Securities",
@@ -767,7 +797,8 @@
     "closePrice": 0.235,
     "strategy": "Scalp",
     "pe": 10.5,
-    "highPrice": 0.28175
+    "highPrice": 0.28175,
+    "symbol": "TEAMSTR"
   },
   {
     "id": "a1akk",
@@ -786,7 +817,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1955
+    "highPrice": 0.1955,
+    "openPrice": 0.25,
+    "closePrice": 0.245,
+    "symbol": "A1AKK"
   },
   {
     "id": "aquawalk",
@@ -795,7 +829,7 @@
     "listingDate": "19-Nov-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.215,
+    "currentPrice": 0.16,
     "performance": "-30.65",
     "os": 7.4,
     "ib": "Maybank Investment Bank",
@@ -805,7 +839,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.24724999999999997
+    "highPrice": 0.24724999999999997,
+    "openPrice": 0.299987,
+    "closePrice": 0.379998,
+    "symbol": "AQUAWALK"
   },
   {
     "id": "asm",
@@ -814,7 +851,7 @@
     "listingDate": "02-Jul-2025",
     "year": 2025,
     "price": 0.17,
-    "currentPrice": 0.155,
+    "currentPrice": 0.145,
     "performance": "-8.82",
     "os": 20,
     "ib": "M&A Securities",
@@ -824,7 +861,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.17825
+    "highPrice": 0.17825,
+    "openPrice": 0.17,
+    "closePrice": 0.165002,
+    "symbol": "ASM"
   },
   {
     "id": "bms",
@@ -833,7 +873,7 @@
     "listingDate": "08-Dec-2025",
     "year": 2025,
     "price": 0.22,
-    "currentPrice": 0.155,
+    "currentPrice": 0.15,
     "performance": "-29.55",
     "os": 28.4,
     "ib": "M&A Securities",
@@ -843,7 +883,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.17825
+    "highPrice": 0.17825,
+    "openPrice": 0.195008,
+    "closePrice": 0.17501,
+    "symbol": "BMS"
   },
   {
     "id": "camaroe-ns",
@@ -862,7 +905,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.08625
+    "highPrice": 0.08625,
+    "openPrice": 0.160006,
+    "closePrice": 0.149996,
+    "symbol": "CAMAROE [NS]"
   },
   {
     "id": "cbhb",
@@ -871,7 +917,7 @@
     "listingDate": "16-Jan-2025",
     "year": 2025,
     "price": 0.28,
-    "currentPrice": 0.59,
+    "currentPrice": 0.55,
     "performance": "+110.71%",
     "os": 20,
     "ib": "M&A Securities",
@@ -883,7 +929,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.6784999999999999
+    "highPrice": 0.6784999999999999,
+    "openPrice": 0.33000799999999997,
+    "closePrice": 0.33499200000000007,
+    "symbol": "CBHB"
   },
   {
     "id": "cheeding",
@@ -892,7 +941,7 @@
     "listingDate": "07-Oct-2025",
     "year": 2025,
     "price": 0.36,
-    "currentPrice": 0.74,
+    "currentPrice": 0.395,
     "performance": "+105.56%",
     "os": 20,
     "ib": "TA Securities",
@@ -904,7 +953,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.851
+    "highPrice": 0.851,
+    "openPrice": 0.6999839999999999,
+    "closePrice": 0.735012,
+    "symbol": "HEGROUP"
   },
   {
     "id": "cki",
@@ -913,7 +965,7 @@
     "listingDate": "24-Jun-2025",
     "year": 2025,
     "price": 1.08,
-    "currentPrice": 0.425,
+    "currentPrice": 0.43,
     "performance": "-60.65",
     "os": 20,
     "ib": "M&A Securities",
@@ -923,7 +975,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.48874999999999996
+    "highPrice": 0.48874999999999996,
+    "openPrice": 1.0900440000000002,
+    "closePrice": 1.08,
+    "symbol": "CKI"
   },
   {
     "id": "clite",
@@ -932,7 +987,7 @@
     "listingDate": "26-Mar-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.23,
+    "currentPrice": 0.225,
     "performance": "-8.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -942,7 +997,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.2645
+    "highPrice": 0.2645,
+    "openPrice": 0.23,
+    "closePrice": 0.23,
+    "symbol": "CLITE"
   },
   {
     "id": "colform",
@@ -951,7 +1009,7 @@
     "listingDate": "10-Feb-2025",
     "year": 2025,
     "price": 0.36,
-    "currentPrice": 0.26,
+    "currentPrice": 0.255,
     "performance": "-27.78",
     "os": 20,
     "ib": "M&A Securities",
@@ -961,7 +1019,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.299
+    "highPrice": 0.299,
+    "openPrice": 0.39999599999999996,
+    "closePrice": 0.38998799999999995,
+    "symbol": "COLFORM"
   },
   {
     "id": "dengkil",
@@ -970,7 +1031,7 @@
     "listingDate": "25-Mar-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.155,
+    "currentPrice": 0.14,
     "performance": "-38.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -980,7 +1041,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.17825
+    "highPrice": 0.17825,
+    "openPrice": 0.25,
+    "closePrice": 0.23,
+    "symbol": "DENGKIL"
   },
   {
     "id": "ecoshop",
@@ -989,7 +1053,7 @@
     "listingDate": "23-May-2025",
     "year": 2025,
     "price": 1.13,
-    "currentPrice": 1.28,
+    "currentPrice": 1.25,
     "performance": "+13.27%",
     "os": 20,
     "ib": "CIMB Investment Bank",
@@ -999,7 +1063,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.472
+    "highPrice": 1.472,
+    "openPrice": 1.250006,
+    "closePrice": 1.1999469999999999,
+    "symbol": "ECOSHOP"
   },
   {
     "id": "enpro",
@@ -1008,7 +1075,7 @@
     "listingDate": "18-Jul-2025",
     "year": 2025,
     "price": 0.24,
-    "currentPrice": 0.22,
+    "currentPrice": 0.21,
     "performance": "-8.33",
     "os": 20,
     "ib": "M&A Securities",
@@ -1018,7 +1085,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.253
+    "highPrice": 0.253,
+    "openPrice": 0.259992,
+    "closePrice": 0.265008,
+    "symbol": "ENPRO"
   },
   {
     "id": "famiera",
@@ -1027,7 +1097,7 @@
     "listingDate": "12-Nov-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.19,
+    "currentPrice": 0.23,
     "performance": "-24.0",
     "os": 14.2,
     "ib": "RHB Investment Bank",
@@ -1037,7 +1107,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.21849999999999997
+    "highPrice": 0.21849999999999997,
+    "openPrice": 0.25,
+    "closePrice": 0.255,
+    "symbol": "FAMIERA"
   },
   {
     "id": "fibro",
@@ -1046,7 +1119,7 @@
     "listingDate": "08-May-2025",
     "year": 2025,
     "price": 0.55,
-    "currentPrice": 0.88,
+    "currentPrice": 0.85,
     "performance": "+60.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1056,7 +1129,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.012
+    "highPrice": 1.012,
+    "openPrice": 0.46002000000000004,
+    "closePrice": 0.49500000000000005,
+    "symbol": "FIBRO"
   },
   {
     "id": "foodie-ns",
@@ -1075,7 +1151,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.391
+    "highPrice": 0.391,
+    "openPrice": 0.35498999999999997,
+    "closePrice": 0.39998999999999996,
+    "symbol": "FOODIE [NS]"
   },
   {
     "id": "genergy",
@@ -1084,7 +1163,7 @@
     "listingDate": "11-Dec-2025",
     "year": 2025,
     "price": 1,
-    "currentPrice": 0.65,
+    "currentPrice": 0.565,
     "performance": "-35.0",
     "os": 4.2,
     "ib": "CIMB Investment Bank",
@@ -1098,7 +1177,8 @@
     "closePrice": 0.88,
     "strategy": "Wait / Exit",
     "pe": 15,
-    "highPrice": 0.7474999999999999
+    "highPrice": 0.7474999999999999,
+    "symbol": "GENERGY"
   },
   {
     "id": "geohan",
@@ -1107,7 +1187,7 @@
     "listingDate": "05-Dec-2025",
     "year": 2025,
     "price": 0.55,
-    "currentPrice": 0.295,
+    "currentPrice": 0.28,
     "performance": "-46.36",
     "os": 15,
     "ib": "UOB Kay Hian",
@@ -1117,7 +1197,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.33924999999999994
+    "highPrice": 0.33924999999999994,
+    "openPrice": 0.5399900000000001,
+    "closePrice": 0.5399900000000001,
+    "symbol": "GEOHAN"
   },
   {
     "id": "hi",
@@ -1126,7 +1209,7 @@
     "listingDate": "28-Mar-2025",
     "year": 2025,
     "price": 1.22,
-    "currentPrice": 2.24,
+    "currentPrice": 0.755,
     "performance": "+83.61%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1135,10 +1218,13 @@
     "predictedGrade": "C",
     "stage": 5,
     "status": "Listed",
-    "shariah": true,
+    "shariah": false,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.576
+    "highPrice": 2.576,
+    "openPrice": 1.65002,
+    "closePrice": 1.720055,
+    "symbol": "LHI [NS]"
   },
   {
     "id": "hkb",
@@ -1147,7 +1233,7 @@
     "listingDate": "09-Jun-2025",
     "year": 2025,
     "price": 0.16,
-    "currentPrice": 0.3,
+    "currentPrice": 0.305,
     "performance": "+87.5%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1159,7 +1245,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.345
+    "highPrice": 0.345,
+    "openPrice": 0.16,
+    "closePrice": 0.144992,
+    "symbol": "HKB"
   },
   {
     "id": "iab",
@@ -1168,7 +1257,7 @@
     "listingDate": "27-Oct-2025",
     "year": 2025,
     "price": 0.36,
-    "currentPrice": 1.48,
+    "currentPrice": 1.38,
     "performance": "+311.11%",
     "os": 11.5,
     "ib": "Alliance Islamic Bank",
@@ -1180,7 +1269,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.702
+    "highPrice": 1.702,
+    "openPrice": 0.619992,
+    "closePrice": 0.6549839999999999,
+    "symbol": "IAB"
   },
   {
     "id": "icents",
@@ -1189,7 +1281,7 @@
     "listingDate": "17-Jul-2025",
     "year": 2025,
     "price": 0.24,
-    "currentPrice": 0.385,
+    "currentPrice": 0.425,
     "performance": "+60.42%",
     "os": 20,
     "ib": "Alliance Islamic Bank",
@@ -1199,7 +1291,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.44275
+    "highPrice": 0.44275,
+    "openPrice": 0.28999199999999997,
+    "closePrice": 0.340008,
+    "symbol": "ICENTS"
   },
   {
     "id": "ictzone",
@@ -1208,7 +1303,7 @@
     "listingDate": "03-Jun-2025",
     "year": 2025,
     "price": 0.2,
-    "currentPrice": 0.18,
+    "currentPrice": 0.185,
     "performance": "-10.0",
     "os": 12,
     "ib": "Public Investment Bank",
@@ -1218,7 +1313,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.207
+    "highPrice": 0.207,
+    "openPrice": 0.2,
+    "closePrice": 0.2,
+    "symbol": "ICTZONE"
   },
   {
     "id": "jssolar",
@@ -1227,7 +1325,7 @@
     "listingDate": "23-Sep-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.23,
+    "currentPrice": 0.215,
     "performance": "-25.81",
     "os": 45.1,
     "ib": "Alliance",
@@ -1237,7 +1335,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.2645
+    "highPrice": 0.2645,
+    "openPrice": 0.399993,
+    "closePrice": 0.399993,
+    "symbol": "JSSOLAR"
   },
   {
     "id": "kopi",
@@ -1246,7 +1347,7 @@
     "listingDate": "23-Jan-2025",
     "year": 2025,
     "price": 0.44,
-    "currentPrice": 1.1,
+    "currentPrice": 1.08,
     "performance": "+150.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1258,7 +1359,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.265
+    "highPrice": 1.265,
+    "openPrice": 0.74998,
+    "closePrice": 0.874984,
+    "symbol": "KOPI"
   },
   {
     "id": "lacmed",
@@ -1267,7 +1371,7 @@
     "listingDate": "10-Dec-2025",
     "year": 2025,
     "price": 0.75,
-    "currentPrice": 0.825,
+    "currentPrice": 0.785,
     "performance": "+10.0%",
     "os": 8.5,
     "ib": "AmInvestment Bank",
@@ -1277,7 +1381,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.9487499999999999
+    "highPrice": 0.9487499999999999,
+    "openPrice": 0.75,
+    "closePrice": 0.765,
+    "symbol": "LACMED"
   },
   {
     "id": "lsh",
@@ -1286,7 +1393,7 @@
     "listingDate": "21-Mar-2025",
     "year": 2025,
     "price": 0.88,
-    "currentPrice": 1.86,
+    "currentPrice": 1.75,
     "performance": "+111.36%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1298,7 +1405,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.139
+    "highPrice": 2.139,
+    "openPrice": 0.72996,
+    "closePrice": 0.8300160000000001,
+    "symbol": "LSH"
   },
   {
     "id": "minimart-2025",
@@ -1327,7 +1437,7 @@
     "listingDate": "15-Apr-2025",
     "year": 2025,
     "price": 0.2,
-    "currentPrice": 0.07,
+    "currentPrice": 0.075,
     "performance": "-65.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -1337,7 +1447,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.0805
+    "highPrice": 0.0805,
+    "openPrice": 0.17,
+    "closePrice": 0.17,
+    "symbol": "MSB"
   },
   {
     "id": "northern-ns",
@@ -1346,7 +1459,7 @@
     "listingDate": "06-Feb-2025",
     "year": 2025,
     "price": 0.63,
-    "currentPrice": 0.635,
+    "currentPrice": 0.63,
     "performance": "+0.79%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1356,7 +1469,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.73025
+    "highPrice": 0.73025,
+    "openPrice": 0.9000179999999999,
+    "closePrice": 0.7900200000000001,
+    "symbol": "NORTHERN [NS]"
   },
   {
     "id": "northern-solar-listed",
@@ -1388,7 +1504,7 @@
     "listingDate": "28-May-2025",
     "year": 2025,
     "price": 0.28,
-    "currentPrice": 0.34,
+    "currentPrice": 0.36,
     "performance": "+21.43%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1398,7 +1514,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.391
+    "highPrice": 0.391,
+    "openPrice": 0.28501200000000004,
+    "closePrice": 0.28501200000000004,
+    "symbol": "OHM"
   },
   {
     "id": "oriental-kopi-listed",
@@ -1428,7 +1547,7 @@
     "listingDate": "09-Dec-2025",
     "year": 2025,
     "price": 0.92,
-    "currentPrice": 0.955,
+    "currentPrice": 0.87,
     "performance": "+3.8%",
     "os": 5.3,
     "ib": "CIMB Investment Bank",
@@ -1438,7 +1557,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.09825
+    "highPrice": 1.09825,
+    "openPrice": 0.92,
+    "closePrice": 0.930028,
+    "symbol": "ORKIM"
   },
   {
     "id": "oxb",
@@ -1447,7 +1569,7 @@
     "listingDate": "29-Jul-2025",
     "year": 2025,
     "price": 0.29,
-    "currentPrice": 0.32,
+    "currentPrice": 0.33,
     "performance": "+10.34%",
     "os": 22,
     "ib": "Malacca Securities",
@@ -1457,7 +1579,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.368
+    "highPrice": 0.368,
+    "openPrice": 0.360006,
+    "closePrice": 0.38500399999999996,
+    "symbol": "OXB"
   },
   {
     "id": "pantech-global",
@@ -1487,7 +1612,7 @@
     "listingDate": "10-Jun-2025",
     "year": 2025,
     "price": 1,
-    "currentPrice": 0.965,
+    "currentPrice": 0.99,
     "performance": "-3.5",
     "os": 20,
     "ib": "M&A Securities",
@@ -1497,7 +1622,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.1097499999999998
+    "highPrice": 1.1097499999999998,
+    "openPrice": 1,
+    "closePrice": 1,
+    "symbol": "PARADIGM [NS]"
   },
   {
     "id": "people",
@@ -1506,7 +1634,7 @@
     "listingDate": "20-May-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.255,
+    "currentPrice": 0.245,
     "performance": "+2.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1516,7 +1644,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.29324999999999996
+    "highPrice": 0.29324999999999996,
+    "openPrice": 0.24,
+    "closePrice": 0.265,
+    "symbol": "PEOPLE"
   },
   {
     "id": "pglobal",
@@ -1525,7 +1656,7 @@
     "listingDate": "03-Mar-2025",
     "year": 2025,
     "price": 0.68,
-    "currentPrice": 0.46,
+    "currentPrice": 0.475,
     "performance": "-32.35",
     "os": 20,
     "ib": "M&A Securities",
@@ -1535,7 +1666,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.529
+    "highPrice": 0.529,
+    "openPrice": 0.464984,
+    "closePrice": 0.5750080000000001,
+    "symbol": "PGLOBAL"
   },
   {
     "id": "pmck",
@@ -1554,7 +1688,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22424999999999998
+    "highPrice": 0.22424999999999998,
+    "openPrice": 0.224994,
+    "closePrice": 0.23001000000000002,
+    "symbol": "PMCK"
   },
   {
     "id": "pmibhd",
@@ -1563,7 +1700,7 @@
     "listingDate": "26-Jun-2025",
     "year": 2025,
     "price": 0.27,
-    "currentPrice": 0.22,
+    "currentPrice": 0.47,
     "performance": "-18.52",
     "os": 20,
     "ib": "Affin Hwang Investment Bank",
@@ -1573,7 +1710,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.253
+    "highPrice": 0.253,
+    "openPrice": 0.235008,
+    "closePrice": 0.23001300000000002,
+    "symbol": "TOPMIX"
   },
   {
     "id": "pmw",
@@ -1582,7 +1722,7 @@
     "listingDate": "18-Nov-2025",
     "year": 2025,
     "price": 0.34,
-    "currentPrice": 0.275,
+    "currentPrice": 0.26,
     "performance": "-19.12",
     "os": 9.8,
     "ib": "Public Investment Bank",
@@ -1592,7 +1732,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.31625
+    "highPrice": 0.31625,
+    "openPrice": 0.34,
+    "closePrice": 0.344998,
+    "symbol": "PMW"
   },
   {
     "id": "polymer",
@@ -1601,7 +1744,7 @@
     "listingDate": "25-Nov-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.14,
+    "currentPrice": 0.13,
     "performance": "-44.0",
     "os": 18.5,
     "ib": "Kenanga Investment Bank",
@@ -1611,7 +1754,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.161
+    "highPrice": 0.161,
+    "openPrice": 0.25,
+    "closePrice": 0.25,
+    "symbol": "POLYMER"
   },
   {
     "id": "power",
@@ -1649,7 +1795,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.14375
+    "highPrice": 0.14375,
+    "openPrice": 0.16,
+    "closePrice": 0.144992,
+    "symbol": "PSP"
   },
   {
     "id": "reachten",
@@ -1658,7 +1807,7 @@
     "listingDate": "02-May-2025",
     "year": 2025,
     "price": 0.52,
-    "currentPrice": 0.41,
+    "currentPrice": 0.42,
     "performance": "-21.15",
     "os": 20,
     "ib": "M&A Securities",
@@ -1668,7 +1817,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.4714999999999999
+    "highPrice": 0.4714999999999999,
+    "openPrice": 0.52,
+    "closePrice": 0.5400200000000001,
+    "symbol": "REACHTEN"
   },
   {
     "id": "rtech",
@@ -1677,7 +1829,7 @@
     "listingDate": "17-Feb-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.18,
+    "currentPrice": 0.19,
     "performance": "-28.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -1687,7 +1839,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.207
+    "highPrice": 0.207,
+    "openPrice": 0.75,
+    "closePrice": 0.32,
+    "symbol": "RTECH"
   },
   {
     "id": "sag",
@@ -1696,7 +1851,7 @@
     "listingDate": "05-Jun-2025",
     "year": 2025,
     "price": 0.62,
-    "currentPrice": 0.73,
+    "currentPrice": 0.715,
     "performance": "+17.74%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1706,7 +1861,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.8394999999999999
+    "highPrice": 0.8394999999999999,
+    "openPrice": 0.680016,
+    "closePrice": 0.69998,
+    "symbol": "SAG"
   },
   {
     "id": "saliran-group",
@@ -1729,7 +1887,8 @@
     "openPrice": 0.27,
     "closePrice": 0.52,
     "strategy": "Swing",
-    "pe": 14.5
+    "pe": 14.5,
+    "symbol": "SALIRAN [NS]"
   },
   {
     "id": "set",
@@ -1738,7 +1897,7 @@
     "listingDate": "08-Jan-2025",
     "year": 2025,
     "price": 0.28,
-    "currentPrice": 0.175,
+    "currentPrice": 0.195,
     "performance": "-37.5",
     "os": 20,
     "ib": "M&A Securities",
@@ -1748,7 +1907,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.20124999999999998
+    "highPrice": 0.20124999999999998,
+    "openPrice": 0.35999600000000004,
+    "closePrice": 0.39499600000000007,
+    "symbol": "TJSETIA"
   },
   {
     "id": "sumi",
@@ -1757,7 +1919,7 @@
     "listingDate": "09-Apr-2025",
     "year": 2025,
     "price": 0.24,
-    "currentPrice": 0.1,
+    "currentPrice": 0.095,
     "performance": "-58.33",
     "os": 20,
     "ib": "M&A Securities",
@@ -1767,7 +1929,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.11499999999999999
+    "highPrice": 0.11499999999999999,
+    "openPrice": 0.18,
+    "closePrice": 0.18,
+    "symbol": "SUMI"
   },
   {
     "id": "sunlogy",
@@ -1776,7 +1941,7 @@
     "listingDate": "20-Feb-2025",
     "year": 2025,
     "price": 0.3,
-    "currentPrice": 0.285,
+    "currentPrice": 0.255,
     "performance": "-5.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -1786,7 +1951,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.32774999999999993
+    "highPrice": 0.32774999999999993,
+    "openPrice": 0.30500999999999995,
+    "closePrice": 0.3,
+    "symbol": "SUNLOGY"
   },
   {
     "id": "supreme-consolidated",
@@ -1795,7 +1963,7 @@
     "listingDate": "29-Nov-2024",
     "year": 2024,
     "price": 0.25,
-    "currentPrice": 0.195,
+    "currentPrice": 0.2,
     "performance": "-22.00%",
     "os": 15,
     "ib": "M&A Securities",
@@ -1809,7 +1977,8 @@
     "openPrice": 0.4,
     "closePrice": 0.33,
     "strategy": "Scalp",
-    "pe": 10.4
+    "pe": 10.4,
+    "symbol": "SUPREME"
   },
   {
     "id": "techstore",
@@ -1818,7 +1987,7 @@
     "listingDate": "18-Feb-2025",
     "year": 2025,
     "price": 0.2,
-    "currentPrice": 0.25,
+    "currentPrice": 0.23,
     "performance": "+25.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1828,7 +1997,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.2875
+    "highPrice": 0.2875,
+    "openPrice": 0.255,
+    "closePrice": 0.22000000000000003,
+    "symbol": "TECHSTORE"
   },
   {
     "id": "thmy",
@@ -1837,7 +2009,7 @@
     "listingDate": "23-Oct-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 1.3,
+    "currentPrice": 1.35,
     "performance": "+319.35%",
     "os": 12.4,
     "ib": "Kenanga",
@@ -1849,7 +2021,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.4949999999999999
+    "highPrice": 1.4949999999999999,
+    "openPrice": 0.799986,
+    "closePrice": 0.9100050000000001,
+    "symbol": "THMY"
   },
   {
     "id": "verdant",
@@ -1858,7 +2033,7 @@
     "listingDate": "22-Oct-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.205,
+    "currentPrice": 0.2,
     "performance": "-33.87",
     "os": 18.2,
     "ib": "Mercury Securities",
@@ -1868,7 +2043,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.23574999999999996
+    "highPrice": 0.23574999999999996,
+    "openPrice": 0.369985,
+    "closePrice": 0.369985,
+    "symbol": "VERDANT"
   },
   {
     "id": "wawasan-dengkil",
@@ -1897,7 +2075,7 @@
     "listingDate": "05-May-2025",
     "year": 2025,
     "price": 0.39,
-    "currentPrice": 0.2,
+    "currentPrice": 0.235,
     "performance": "-48.72",
     "os": 20,
     "ib": "M&A Securities",
@@ -1907,7 +2085,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22999999999999998
+    "highPrice": 0.22999999999999998,
+    "openPrice": 0.394992,
+    "closePrice": 0.369993,
+    "symbol": "WESTRVR"
   },
   {
     "id": "wtec",
@@ -1916,7 +2097,7 @@
     "listingDate": "29-Apr-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.12,
+    "currentPrice": 0.13,
     "performance": "-52.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -1926,7 +2107,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.13799999999999998
+    "highPrice": 0.13799999999999998,
+    "openPrice": 0.25,
+    "closePrice": 0.235,
+    "symbol": "WTEC"
   },
   {
     "id": "xpb",
@@ -1945,7 +2129,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.161
+    "highPrice": 0.161,
+    "openPrice": 0.215,
+    "closePrice": 0.225,
+    "symbol": "XPB"
   },
   {
     "id": "3ren-ns",
@@ -1954,7 +2141,7 @@
     "listingDate": "06-Nov-2024",
     "year": 2024,
     "price": 0.28,
-    "currentPrice": 0.37,
+    "currentPrice": 0.385,
     "performance": "+32.14%",
     "os": 20,
     "ib": "M&A Securities",
@@ -1964,7 +2151,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.4255
+    "highPrice": 0.4255,
+    "openPrice": 0.33499200000000007,
+    "closePrice": 0.39499600000000007,
+    "symbol": "3REN [NS]"
   },
   {
     "id": "99-speedmart",
@@ -1994,7 +2184,7 @@
     "listingDate": "09-Sep-2024",
     "year": 2024,
     "price": 1.65,
-    "currentPrice": 3.45,
+    "currentPrice": 0.165,
     "performance": "+109.09%",
     "os": 3.04,
     "ib": "CIMB Investment Bank",
@@ -2006,7 +2196,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 3.9675
+    "highPrice": 3.9675,
+    "openPrice": 1.84998,
+    "closePrice": 1.8800099999999997,
+    "symbol": "SMART"
   },
   {
     "id": "agricor",
@@ -2015,7 +2208,7 @@
     "listingDate": "21-Jun-2024",
     "year": 2024,
     "price": 0.5,
-    "currentPrice": 0.39,
+    "currentPrice": 0.385,
     "performance": "-22.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -2025,7 +2218,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.44849999999999995
+    "highPrice": 0.44849999999999995,
+    "openPrice": 0.79,
+    "closePrice": 0.875,
+    "symbol": "AGRICOR"
   },
   {
     "id": "agx",
@@ -2034,7 +2230,7 @@
     "listingDate": "07-Feb-2024",
     "year": 2024,
     "price": 0.35,
-    "currentPrice": 0.43,
+    "currentPrice": 0.4,
     "performance": "+22.86%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2044,7 +2240,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.49449999999999994
+    "highPrice": 0.49449999999999994,
+    "openPrice": 0.40998999999999997,
+    "closePrice": 0.36000999999999994,
+    "symbol": "AGX"
   },
   {
     "id": "alpha-ivf",
@@ -2054,7 +2253,7 @@
     "price": 0.32,
     "openPrice": 0.32,
     "closePrice": 0.31,
-    "currentPrice": 0.28,
+    "currentPrice": 0.105,
     "performance": "0.0%",
     "strategy": "Swing",
     "market": "Main Market",
@@ -2065,7 +2264,9 @@
     "ib": "AmInvestment",
     "fundUse": "35% Bayar Hutang, 20% Operasi",
     "pe": 24.2,
-    "highPrice": 0.322
+    "highPrice": 0.322,
+    "listingDate": "2023-01-03",
+    "symbol": "L&PBHD"
   },
   {
     "id": "alpha-ns",
@@ -2074,7 +2275,7 @@
     "listingDate": "22-Mar-2024",
     "year": 2024,
     "price": 0.32,
-    "currentPrice": 0.27,
+    "currentPrice": 0.25,
     "performance": "-15.62",
     "os": 20,
     "ib": "M&A Securities",
@@ -2084,7 +2285,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3105
+    "highPrice": 0.3105,
+    "openPrice": 0.32,
+    "closePrice": 0.32,
+    "symbol": "ALPHA [NS]"
   },
   {
     "id": "azam-jaya",
@@ -2093,7 +2297,7 @@
     "listingDate": "11-Nov-2024",
     "year": 2024,
     "price": 0.78,
-    "currentPrice": 1.01,
+    "currentPrice": 1.02,
     "performance": "+29.49%",
     "os": 23,
     "ib": "Maybank",
@@ -2107,7 +2311,8 @@
     "openPrice": 1.09,
     "closePrice": 1.09,
     "strategy": "Swing",
-    "pe": 16.5
+    "pe": 16.5,
+    "symbol": "AZAMJAYA [NS]"
   },
   {
     "id": "bwys",
@@ -2116,7 +2321,7 @@
     "listingDate": "22-Jul-2024",
     "year": 2024,
     "price": 0.22,
-    "currentPrice": 0.175,
+    "currentPrice": 0.165,
     "performance": "-20.45",
     "os": 20,
     "ib": "M&A Securities",
@@ -2126,7 +2331,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.20124999999999998
+    "highPrice": 0.20124999999999998,
+    "openPrice": 0.31999,
+    "closePrice": 0.349998,
+    "symbol": "BWYS"
   },
   {
     "id": "carlorino",
@@ -2135,7 +2343,7 @@
     "listingDate": "18-Dec-2024",
     "year": 2024,
     "price": 0.27,
-    "currentPrice": 0.205,
+    "currentPrice": 0.275,
     "performance": "-62.04",
     "os": 20,
     "ib": "M&A Securities",
@@ -2145,7 +2353,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.23574999999999996
+    "highPrice": 0.23574999999999996,
+    "openPrice": 0.235008,
+    "closePrice": 0.23001300000000002,
+    "symbol": "RL"
   },
   {
     "id": "crest",
@@ -2154,7 +2365,7 @@
     "listingDate": "09-Oct-2024",
     "year": 2024,
     "price": 0.35,
-    "currentPrice": 0.2,
+    "currentPrice": 0.21,
     "performance": "-42.86",
     "os": 20,
     "ib": "M&A Securities",
@@ -2164,7 +2375,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22999999999999998
+    "highPrice": 0.22999999999999998,
+    "openPrice": 0.39501,
+    "closePrice": 0.35,
+    "symbol": "CREST"
   },
   {
     "id": "crpmate",
@@ -2183,7 +2397,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.21849999999999997
+    "highPrice": 0.21849999999999997,
+    "openPrice": 0.24500000000000002,
+    "closePrice": 0.21000000000000002,
+    "symbol": "CRPMATE"
   },
   {
     "id": "elridge",
@@ -2192,7 +2409,7 @@
     "listingDate": "22-Aug-2024",
     "year": 2024,
     "price": 0.29,
-    "currentPrice": 0.905,
+    "currentPrice": 0.85,
     "performance": "+212.07%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2204,7 +2421,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.0407499999999998
+    "highPrice": 1.0407499999999998,
+    "openPrice": 0.339996,
+    "closePrice": 0.399997,
+    "symbol": "ELRIDGE"
   },
   {
     "id": "epb",
@@ -2213,7 +2433,7 @@
     "listingDate": "23-Aug-2024",
     "year": 2024,
     "price": 0.56,
-    "currentPrice": 0.315,
+    "currentPrice": 0.245,
     "performance": "-43.75",
     "os": 20,
     "ib": "M&A Securities",
@@ -2223,7 +2443,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.36224999999999996
+    "highPrice": 0.36224999999999996,
+    "openPrice": 0.6499920000000001,
+    "closePrice": 0.6199760000000001,
+    "symbol": "EPB"
   },
   {
     "id": "farm-price",
@@ -2255,7 +2478,7 @@
     "listingDate": "21-May-2024",
     "year": 2024,
     "price": 0.8,
-    "currentPrice": 0.225,
+    "currentPrice": 0.22,
     "performance": "-71.88",
     "os": 15.6,
     "ib": "TA Securities",
@@ -2269,7 +2492,8 @@
     "closePrice": 1.05,
     "strategy": "Swing",
     "pe": 18.1,
-    "highPrice": 0.25875
+    "highPrice": 0.25875,
+    "symbol": "FEYTECH"
   },
   {
     "id": "fphb",
@@ -2278,7 +2502,7 @@
     "listingDate": "14-May-2024",
     "year": 2024,
     "price": 0.24,
-    "currentPrice": 0.33,
+    "currentPrice": 0.325,
     "performance": "+37.5%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2288,7 +2512,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3795
+    "highPrice": 0.3795,
+    "openPrice": 0.48,
+    "closePrice": 0.40999199999999997,
+    "symbol": "FPHB"
   },
   {
     "id": "gohub",
@@ -2297,7 +2524,7 @@
     "listingDate": "03-Jul-2024",
     "year": 2024,
     "price": 0.35,
-    "currentPrice": 0.975,
+    "currentPrice": 1.28,
     "performance": "+178.57%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2309,7 +2536,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.1212499999999999
+    "highPrice": 1.1212499999999999,
+    "openPrice": 0.7999949999999999,
+    "closePrice": 0.950005,
+    "symbol": "GOHUB"
   },
   {
     "id": "hawk",
@@ -2318,7 +2548,7 @@
     "listingDate": "05-Sep-2024",
     "year": 2024,
     "price": 0.15,
-    "currentPrice": 0.21,
+    "currentPrice": 0.205,
     "performance": "+40.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2328,7 +2558,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.24149999999999996
+    "highPrice": 0.24149999999999996,
+    "openPrice": 0.3,
+    "closePrice": 0.345,
+    "symbol": "HAWK"
   },
   {
     "id": "hegroup",
@@ -2337,7 +2570,7 @@
     "listingDate": "30-Jan-2024",
     "year": 2024,
     "price": 0.28,
-    "currentPrice": 0.32,
+    "currentPrice": 0.755,
     "performance": "+14.29%",
     "os": 63.35,
     "ib": "Alliance Islamic Bank",
@@ -2347,7 +2580,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": false,
-    "highPrice": 0.368
+    "highPrice": 0.368,
+    "openPrice": 0.899977,
+    "closePrice": 0.855037,
+    "symbol": "YENHER [NS]"
   },
   {
     "id": "johor-plantations",
@@ -2378,7 +2614,7 @@
     "listingDate": "09-Jul-2024",
     "year": 2024,
     "price": 0.84,
-    "currentPrice": 1.88,
+    "currentPrice": 1.64,
     "performance": "+123.81%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2390,7 +2626,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.162
+    "highPrice": 2.162,
+    "openPrice": 0.84,
+    "closePrice": 0.8999759999999999,
+    "symbol": "JPG"
   },
   {
     "id": "kawan-renergy",
@@ -2420,7 +2659,7 @@
     "listingDate": "29-May-2024",
     "year": 2024,
     "price": 0.3,
-    "currentPrice": 0.52,
+    "currentPrice": 0.515,
     "performance": "+73.33%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2430,7 +2669,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.598
+    "highPrice": 0.598,
+    "openPrice": 0.44999999999999996,
+    "closePrice": 0.46499999999999997,
+    "symbol": "KENERGY"
   },
   {
     "id": "keyfield",
@@ -2439,7 +2681,7 @@
     "listingDate": "22-Apr-2024",
     "year": 2024,
     "price": 0.9,
-    "currentPrice": 1.75,
+    "currentPrice": 1.61,
     "performance": "+94.44%",
     "os": 9.69,
     "ib": "M&A Securities",
@@ -2455,7 +2697,8 @@
     "pe": 8,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.0124999999999997
+    "highPrice": 2.0124999999999997,
+    "symbol": "KEYFIELD"
   },
   {
     "id": "khb-ns",
@@ -2474,7 +2717,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1035
+    "highPrice": 0.1035,
+    "openPrice": 0.29,
+    "closePrice": 0.215,
+    "symbol": "KHB [NS]"
   },
   {
     "id": "kjts",
@@ -2483,7 +2729,7 @@
     "listingDate": "26-Jan-2024",
     "year": 2024,
     "price": 0.27,
-    "currentPrice": 0.86,
+    "currentPrice": 0.48,
     "performance": "+218.52%",
     "os": 31.28,
     "ib": "Hong Leong Investment Bank",
@@ -2495,7 +2741,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.9889999999999999
+    "highPrice": 0.9889999999999999,
+    "openPrice": 0.439992,
+    "closePrice": 0.500013,
+    "symbol": "JTGROUP"
   },
   {
     "id": "kti",
@@ -2516,7 +2765,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.644
+    "highPrice": 0.644,
+    "openPrice": 0.3,
+    "closePrice": 0.285,
+    "symbol": "KTI"
   },
   {
     "id": "kucingko",
@@ -2525,7 +2777,7 @@
     "listingDate": "26-Jul-2024",
     "year": 2024,
     "price": 0.3,
-    "currentPrice": 0.07,
+    "currentPrice": 0.075,
     "performance": "-76.67%",
     "os": 99.02,
     "ib": "M&A Securities",
@@ -2541,7 +2793,8 @@
     "strategy": "Scalp",
     "pe": 25,
     "outlier": true,
-    "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading."
+    "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
+    "symbol": "KUCINGKO [NS]"
   },
   {
     "id": "lwsabah",
@@ -2550,7 +2803,7 @@
     "listingDate": "13-Nov-2024",
     "year": 2024,
     "price": 0.65,
-    "currentPrice": 1.32,
+    "currentPrice": 1.41,
     "performance": "+103.08%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2562,7 +2815,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.518
+    "highPrice": 1.518,
+    "openPrice": 0.7699900000000001,
+    "closePrice": 0.94003,
+    "symbol": "LWSABAH"
   },
   {
     "id": "master-tec",
@@ -2613,7 +2869,7 @@
     "listingDate": "11-Nov-2024",
     "year": 2024,
     "price": 0.67,
-    "currentPrice": 1.4,
+    "currentPrice": 1.62,
     "performance": "+108.96%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2625,7 +2881,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.6099999999999999
+    "highPrice": 1.6099999999999999,
+    "openPrice": 0.67,
+    "closePrice": 0.654992,
+    "symbol": "MEGAFB [NS]"
   },
   {
     "id": "metro",
@@ -2634,7 +2893,7 @@
     "listingDate": "15-Nov-2024",
     "year": 2024,
     "price": 0.25,
-    "currentPrice": 0.22,
+    "currentPrice": 0.225,
     "performance": "-12.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -2644,7 +2903,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.253
+    "highPrice": 0.253,
+    "openPrice": 0.255,
+    "closePrice": 0.255,
+    "symbol": "METRO"
   },
   {
     "id": "mkh-oil",
@@ -2674,7 +2936,7 @@
     "listingDate": "30-Apr-2024",
     "year": 2024,
     "price": 0.62,
-    "currentPrice": 0.61,
+    "currentPrice": 0.66,
     "performance": "-1.61",
     "os": 20,
     "ib": "M&A Securities",
@@ -2684,7 +2946,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.7014999999999999
+    "highPrice": 0.7014999999999999,
+    "openPrice": 0.629982,
+    "closePrice": 0.614978,
+    "symbol": "MKHOP"
   },
   {
     "id": "mtec",
@@ -2714,7 +2979,7 @@
     "listingDate": "15-Oct-2024",
     "year": 2024,
     "price": 0.5,
-    "currentPrice": 0.79,
+    "currentPrice": 0.12,
     "performance": "+58.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2724,7 +2989,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": false,
-    "highPrice": 0.9085
+    "highPrice": 0.9085,
+    "openPrice": 0.37999099999999997,
+    "closePrice": 0.35002,
+    "symbol": "ANEKA"
   },
   {
     "id": "obhb",
@@ -2743,7 +3011,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.24149999999999996
+    "highPrice": 0.24149999999999996,
+    "openPrice": 0.250008,
+    "closePrice": 0.250008,
+    "symbol": "OBHB"
   },
   {
     "id": "ocean-fresh",
@@ -2775,7 +3046,7 @@
     "listingDate": "04-Jul-2024",
     "year": 2024,
     "price": 0.28,
-    "currentPrice": 0.16,
+    "currentPrice": 0.155,
     "performance": "-42.86",
     "os": 20,
     "ib": "M&A Securities",
@@ -2785,7 +3056,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.184
+    "highPrice": 0.184,
+    "openPrice": 0.8499960000000001,
+    "closePrice": 0.77,
+    "symbol": "OFB"
   },
   {
     "id": "plintas",
@@ -2794,7 +3068,7 @@
     "listingDate": "25-Mar-2024",
     "year": 2024,
     "price": 0.95,
-    "currentPrice": 0.935,
+    "currentPrice": 0.925,
     "performance": "-1.58",
     "os": 20,
     "ib": "M&A Securities",
@@ -2804,7 +3078,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.07525
+    "highPrice": 1.07525,
+    "openPrice": 0.95,
+    "closePrice": 0.9700449999999998,
+    "symbol": "PLINTAS"
   },
   {
     "id": "prolintas",
@@ -2834,7 +3111,7 @@
     "listingDate": "08-Apr-2024",
     "year": 2024,
     "price": 0.22,
-    "currentPrice": 0.155,
+    "currentPrice": 0.145,
     "performance": "-29.55",
     "os": 20,
     "ib": "M&A Securities",
@@ -2844,7 +3121,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.17825
+    "highPrice": 0.17825,
+    "openPrice": 0.255002,
+    "closePrice": 0.255002,
+    "symbol": "SBH"
   },
   {
     "id": "scb",
@@ -2853,7 +3133,7 @@
     "listingDate": "13-Aug-2024",
     "year": 2024,
     "price": 0.27,
-    "currentPrice": 0.125,
+    "currentPrice": 0.135,
     "performance": "-53.7",
     "os": 20,
     "ib": "M&A Securities",
@@ -2863,7 +3143,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.14375
+    "highPrice": 0.14375,
+    "openPrice": 0.500013,
+    "closePrice": 0.359991,
+    "symbol": "SCB"
   },
   {
     "id": "sdcg",
@@ -2872,7 +3155,7 @@
     "listingDate": "19-Sep-2024",
     "year": 2024,
     "price": 0.38,
-    "currentPrice": 0.665,
+    "currentPrice": 0.695,
     "performance": "+75.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2882,7 +3165,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.7647499999999999
+    "highPrice": 0.7647499999999999,
+    "openPrice": 0.500004,
+    "closePrice": 0.504982,
+    "symbol": "SDCG"
   },
   {
     "id": "sinkung",
@@ -2901,7 +3187,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.092
+    "highPrice": 0.092,
+    "openPrice": 0.13,
+    "closePrice": 0.139997,
+    "symbol": "SINKUNG"
   },
   {
     "id": "smart",
@@ -2929,7 +3218,7 @@
     "listingDate": "28-Oct-2024",
     "year": 2024,
     "price": 0.37,
-    "currentPrice": 0.655,
+    "currentPrice": 0.64,
     "performance": "+77.03%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2939,7 +3228,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.75325
+    "highPrice": 0.75325,
+    "openPrice": 0.374995,
+    "closePrice": 0.374995,
+    "symbol": "SORENTO"
   },
   {
     "id": "steel-hawk",
@@ -2971,7 +3263,7 @@
     "listingDate": "12-Dec-2024",
     "year": 2024,
     "price": 1.75,
-    "currentPrice": 1.64,
+    "currentPrice": 1.85,
     "performance": "-6.29",
     "os": 20,
     "ib": "M&A Securities",
@@ -2981,7 +3273,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.8859999999999997
+    "highPrice": 1.8859999999999997,
+    "openPrice": 1.9699749999999998,
+    "closePrice": 1.9199249999999999,
+    "symbol": "TMK"
   },
   {
     "id": "topmix",
@@ -3009,7 +3304,7 @@
     "listingDate": "16-Dec-2024",
     "year": 2024,
     "price": 0.33,
-    "currentPrice": 0.16,
+    "currentPrice": 0.165,
     "performance": "-51.52",
     "os": 20,
     "ib": "M&A Securities",
@@ -3019,7 +3314,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.184
+    "highPrice": 0.184,
+    "openPrice": 0.389994,
+    "closePrice": 0.339999,
+    "symbol": "TOPVISN"
   },
   {
     "id": "tsa",
@@ -3038,7 +3336,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.9889999999999999
+    "highPrice": 0.9889999999999999,
+    "openPrice": 0.579975,
+    "closePrice": 0.5750250000000001,
+    "symbol": "TSA"
   },
   {
     "id": "uue-holdings",
@@ -3047,7 +3348,7 @@
     "listingDate": "02-Jul-2024",
     "year": 2024,
     "price": 0.24,
-    "currentPrice": 0.425,
+    "currentPrice": 0.385,
     "performance": "+165.62%",
     "os": 103.83,
     "ib": "M&A Securities",
@@ -3063,7 +3364,8 @@
     "openPrice": 0.66,
     "closePrice": 0.69,
     "strategy": "Scalp",
-    "pe": 65
+    "pe": 65,
+    "symbol": "UUE"
   },
   {
     "id": "vanzo",
@@ -3072,7 +3374,7 @@
     "listingDate": "17-Dec-2024",
     "year": 2024,
     "price": 0.15,
-    "currentPrice": 0.125,
+    "currentPrice": 0.14,
     "performance": "-16.67",
     "os": 20,
     "ib": "M&A Securities",
@@ -3082,7 +3384,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.14375
+    "highPrice": 0.14375,
+    "openPrice": 0.175005,
+    "closePrice": 0.165,
+    "symbol": "VANZO"
   },
   {
     "id": "vtc",
@@ -3091,7 +3396,7 @@
     "listingDate": "28-Aug-2024",
     "year": 2024,
     "price": 0.25,
-    "currentPrice": 0.23,
+    "currentPrice": 0.25,
     "performance": "-8.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -3101,7 +3406,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.2645
+    "highPrice": 0.2645,
+    "openPrice": 0.5,
+    "closePrice": 0.405,
+    "symbol": "VTC"
   },
   {
     "id": "wellchip-ns",
@@ -3129,7 +3437,7 @@
     "listingDate": "06-Feb-2024",
     "year": 2024,
     "price": 0.26,
-    "currentPrice": 0.24,
+    "currentPrice": 0.27,
     "performance": "-7.69%",
     "os": 17.75,
     "ib": "TA Securities",
@@ -3143,7 +3451,8 @@
     "openPrice": 0.26,
     "closePrice": 0.25,
     "strategy": "Scalp",
-    "pe": 11.3
+    "pe": 11.3,
+    "symbol": "WENTEL"
   },
   {
     "id": "winstar",
@@ -3152,7 +3461,7 @@
     "listingDate": "19-Dec-2024",
     "year": 2024,
     "price": 0.35,
-    "currentPrice": 0.55,
+    "currentPrice": 0.56,
     "performance": "+57.14%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3162,7 +3471,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.6325
+    "highPrice": 0.6325,
+    "openPrice": 0.48999999999999994,
+    "closePrice": 0.509985,
+    "symbol": "WINSTAR"
   },
   {
     "id": "zantat",
@@ -3171,7 +3483,7 @@
     "listingDate": "27-Mar-2024",
     "year": 2024,
     "price": 0.25,
-    "currentPrice": 0.175,
+    "currentPrice": 0.17,
     "performance": "-30.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -3185,7 +3497,8 @@
     "closePrice": 0.38,
     "strategy": "Scalp",
     "pe": 10.4,
-    "highPrice": 0.20124999999999998
+    "highPrice": 0.20124999999999998,
+    "symbol": "ZANTAT"
   },
   {
     "id": "adb-ns",
@@ -3194,7 +3507,7 @@
     "listingDate": "09-May-2023",
     "year": 2023,
     "price": 0.33,
-    "currentPrice": 0.635,
+    "currentPrice": 0.66,
     "performance": "+92.42%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3206,7 +3519,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.73025
+    "highPrice": 0.73025,
+    "openPrice": 1.08999,
+    "closePrice": 0.749991,
+    "symbol": "ADB [NS]"
   },
   {
     "id": "ceb-ns",
@@ -3215,7 +3531,7 @@
     "listingDate": "10-Mar-2023",
     "year": 2023,
     "price": 0.9,
-    "currentPrice": 0.295,
+    "currentPrice": 0.275,
     "performance": "-67.22",
     "os": 20,
     "ib": "M&A Securities",
@@ -3225,7 +3541,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.33924999999999994
+    "highPrice": 0.33924999999999994,
+    "openPrice": 1.4200199999999998,
+    "closePrice": 1.5000300000000002,
+    "symbol": "CEB [NS]"
   },
   {
     "id": "chb",
@@ -3234,7 +3553,7 @@
     "listingDate": "18-Dec-2023",
     "year": 2023,
     "price": 0.35,
-    "currentPrice": 0.825,
+    "currentPrice": 0.865,
     "performance": "+135.71%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3246,7 +3565,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.9487499999999999
+    "highPrice": 0.9487499999999999,
+    "openPrice": 0.50001,
+    "closePrice": 0.57001,
+    "symbol": "CHB"
   },
   {
     "id": "cloudpt",
@@ -3255,7 +3577,7 @@
     "listingDate": "29-May-2023",
     "year": 2023,
     "price": 0.38,
-    "currentPrice": 0.525,
+    "currentPrice": 0.55,
     "performance": "+38.16%",
     "os": 43.94,
     "ib": "M&A Securities",
@@ -3265,7 +3587,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.60375
+    "highPrice": 0.60375,
+    "openPrice": 0.7500060000000001,
+    "closePrice": 0.515014,
+    "symbol": "CLOUDPT"
   },
   {
     "id": "cpetech",
@@ -3274,7 +3599,7 @@
     "listingDate": "07-Dec-2023",
     "year": 2023,
     "price": 1.07,
-    "currentPrice": 0.78,
+    "currentPrice": 0.79,
     "performance": "-27.1",
     "os": 20,
     "ib": "M&A Securities",
@@ -3284,7 +3609,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.8969999999999999
+    "highPrice": 0.8969999999999999,
+    "openPrice": 0.899977,
+    "closePrice": 0.914957,
+    "symbol": "CPETECH"
   },
   {
     "id": "day3",
@@ -3293,7 +3621,7 @@
     "listingDate": "26-Jul-2023",
     "year": 2023,
     "price": 0.3,
-    "currentPrice": 0.125,
+    "currentPrice": 0.135,
     "performance": "-58.33",
     "os": 20,
     "ib": "M&A Securities",
@@ -3303,7 +3631,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.14375
+    "highPrice": 0.14375,
+    "openPrice": 0.65001,
+    "closePrice": 0.6249899999999999,
+    "symbol": "DAY3"
   },
   {
     "id": "dchcare",
@@ -3322,7 +3653,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1265
+    "highPrice": 0.1265,
+    "openPrice": 0.4,
+    "closePrice": 0.45,
+    "symbol": "DCHCARE"
   },
   {
     "id": "dss",
@@ -3331,7 +3665,7 @@
     "listingDate": "06-Jan-2023",
     "year": 2023,
     "price": 0.55,
-    "currentPrice": 0.255,
+    "currentPrice": 0.25,
     "performance": "-53.64",
     "os": 20,
     "ib": "M&A Securities",
@@ -3341,7 +3675,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.29324999999999996
+    "highPrice": 0.29324999999999996,
+    "openPrice": 0.8099850000000002,
+    "closePrice": 0.620015,
+    "symbol": "DSS"
   },
   {
     "id": "dxn",
@@ -3350,7 +3687,7 @@
     "listingDate": "19-May-2023",
     "year": 2023,
     "price": 0.7,
-    "currentPrice": 0.465,
+    "currentPrice": 0.45,
     "performance": "-33.57",
     "os": 15.6,
     "ib": "Maybank Investment Bank",
@@ -3360,7 +3697,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.53475
+    "highPrice": 0.53475,
+    "openPrice": 0.68999,
+    "closePrice": 0.6649999999999999,
+    "symbol": "DXN"
   },
   {
     "id": "edelteq",
@@ -3369,7 +3709,7 @@
     "listingDate": "07-Jun-2023",
     "year": 2023,
     "price": 0.24,
-    "currentPrice": 0.38,
+    "currentPrice": 0.37,
     "performance": "+58.33%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3379,7 +3719,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.43699999999999994
+    "highPrice": 0.43699999999999994,
+    "openPrice": 0.75,
+    "closePrice": 0.730008,
+    "symbol": "EDELTEQ"
   },
   {
     "id": "emcc-ns",
@@ -3388,7 +3731,7 @@
     "listingDate": "26-Sep-2023",
     "year": 2023,
     "price": 0.24,
-    "currentPrice": 0.315,
+    "currentPrice": 0.325,
     "performance": "+31.25%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3398,7 +3741,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.36224999999999996
+    "highPrice": 0.36224999999999996,
+    "openPrice": 0.319992,
+    "closePrice": 0.315,
+    "symbol": "EMCC [NS]"
   },
   {
     "id": "glxt",
@@ -3407,7 +3753,7 @@
     "listingDate": "15-Aug-2023",
     "year": 2023,
     "price": 0.19,
-    "currentPrice": 0.21,
+    "currentPrice": 0.215,
     "performance": "+10.53%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3417,7 +3763,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.24149999999999996
+    "highPrice": 0.24149999999999996,
+    "openPrice": 0.6500090000000001,
+    "closePrice": 0.25499900000000003,
+    "symbol": "GLXT"
   },
   {
     "id": "jtgroup",
@@ -3457,7 +3806,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.12074999999999998
+    "highPrice": 0.12074999999999998,
+    "openPrice": 0.22999199999999997,
+    "closePrice": 0.22999199999999997,
+    "symbol": "KGW"
   },
   {
     "id": "kitacon",
@@ -3466,7 +3818,7 @@
     "listingDate": "17-Jan-2023",
     "year": 2023,
     "price": 0.68,
-    "currentPrice": 0.69,
+    "currentPrice": 0.165,
     "performance": "+1.47%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3476,7 +3828,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.7934999999999999
+    "highPrice": 0.7934999999999999,
+    "openPrice": 0.990012,
+    "closePrice": 0.7499720000000001,
+    "symbol": "ACO"
   },
   {
     "id": "lpbhd",
@@ -3504,7 +3859,7 @@
     "listingDate": "25-Jul-2023",
     "year": 2023,
     "price": 0.21,
-    "currentPrice": 0.115,
+    "currentPrice": 0.1,
     "performance": "-45.24",
     "os": 20,
     "ib": "M&A Securities",
@@ -3514,7 +3869,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.13225
+    "highPrice": 0.13225,
+    "openPrice": 0.279993,
+    "closePrice": 0.269997,
+    "symbol": "MBN [NS]"
   },
   {
     "id": "mersec-ns",
@@ -3533,7 +3891,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3105
+    "highPrice": 0.3105,
+    "openPrice": 0.27,
+    "closePrice": 0.3,
+    "symbol": "MERSEC [NS]"
   },
   {
     "id": "minox",
@@ -3542,7 +3903,7 @@
     "listingDate": "17-Oct-2023",
     "year": 2023,
     "price": 0.25,
-    "currentPrice": 0.19,
+    "currentPrice": 0.175,
     "performance": "-22.45",
     "os": 20,
     "ib": "M&A Securities",
@@ -3552,7 +3913,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.21849999999999997
+    "highPrice": 0.21849999999999997,
+    "openPrice": 0.315,
+    "closePrice": 0.37,
+    "symbol": "MINOX"
   },
   {
     "id": "mstgolf",
@@ -3561,7 +3925,7 @@
     "listingDate": "20-Jul-2023",
     "year": 2023,
     "price": 0.81,
-    "currentPrice": 0.16,
+    "currentPrice": 0.17,
     "performance": "-80.25",
     "os": 5.28,
     "ib": "RHB",
@@ -3571,7 +3935,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.184
+    "highPrice": 0.184,
+    "openPrice": 0.784971,
+    "closePrice": 0.78003,
+    "symbol": "MSTGOLF"
   },
   {
     "id": "natgate",
@@ -3580,7 +3947,7 @@
     "listingDate": "12-Jan-2023",
     "year": 2023,
     "price": 0.38,
-    "currentPrice": 0.74,
+    "currentPrice": 0.79,
     "performance": "+94.74%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3592,7 +3959,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.851
+    "highPrice": 0.851,
+    "openPrice": 0.810008,
+    "closePrice": 1.000008,
+    "symbol": "NATGATE"
   },
   {
     "id": "oppstar",
@@ -3601,7 +3971,7 @@
     "listingDate": "15-Mar-2023",
     "year": 2023,
     "price": 0.63,
-    "currentPrice": 0.32,
+    "currentPrice": 0.825,
     "performance": "-49.21",
     "os": 20,
     "ib": "M&A Securities",
@@ -3613,7 +3983,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.368
+    "highPrice": 0.368,
+    "openPrice": 2.05002,
+    "closePrice": 2.429973,
+    "symbol": "OPPSTAR"
   },
   {
     "id": "panda",
@@ -3622,7 +3995,7 @@
     "listingDate": "27-Nov-2023",
     "year": 2023,
     "price": 0.16,
-    "currentPrice": 0.215,
+    "currentPrice": 0.205,
     "performance": "+34.37%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3632,7 +4005,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": false,
-    "highPrice": 0.24724999999999997
+    "highPrice": 0.24724999999999997,
+    "openPrice": 0.29,
+    "closePrice": 0.26,
+    "symbol": "PANDA"
   },
   {
     "id": "plytec",
@@ -3651,7 +4027,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1955
+    "highPrice": 0.1955,
+    "openPrice": 0.36000999999999994,
+    "closePrice": 0.32500999999999997,
+    "symbol": "PLYTEC"
   },
   {
     "id": "radium",
@@ -3674,7 +4053,8 @@
     "closePrice": 0.38,
     "strategy": "Wait / Exit",
     "pe": 17.1,
-    "highPrice": 0.575
+    "highPrice": 0.575,
+    "symbol": "RADIUM"
   },
   {
     "id": "skywld",
@@ -3683,7 +4063,7 @@
     "listingDate": "10-Jul-2023",
     "year": 2023,
     "price": 0.8,
-    "currentPrice": 0.38,
+    "currentPrice": 0.44,
     "performance": "-52.5",
     "os": 20,
     "ib": "M&A Securities",
@@ -3693,7 +4073,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.43699999999999994
+    "highPrice": 0.43699999999999994,
+    "openPrice": 0.8,
+    "closePrice": 0.7400000000000001,
+    "symbol": "SKYWLD"
   },
   {
     "id": "skyworld",
@@ -3723,7 +4106,7 @@
     "listingDate": "12-Oct-2023",
     "year": 2023,
     "price": 0.25,
-    "currentPrice": 0.385,
+    "currentPrice": 0.39,
     "performance": "+54.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3733,7 +4116,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.44275
+    "highPrice": 0.44275,
+    "openPrice": 0.25,
+    "closePrice": 0.265,
+    "symbol": "SSF"
   },
   {
     "id": "synergy",
@@ -3761,7 +4147,7 @@
     "listingDate": "18-Jan-2023",
     "year": 2023,
     "price": 0.34,
-    "currentPrice": 0.195,
+    "currentPrice": 0.35,
     "performance": "-42.65",
     "os": 20,
     "ib": "M&A Securities",
@@ -3771,7 +4157,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22424999999999998
+    "highPrice": 0.22424999999999998,
+    "openPrice": 1.4900160000000002,
+    "closePrice": 1.2799980000000002,
+    "symbol": "TTVHB"
   },
   {
     "id": "vlb",
@@ -3780,7 +4169,7 @@
     "listingDate": "31-Jan-2023",
     "year": 2023,
     "price": 0.33,
-    "currentPrice": 0.585,
+    "currentPrice": 0.57,
     "performance": "+77.27%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3790,7 +4179,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.67275
+    "highPrice": 0.67275,
+    "openPrice": 0.379995,
+    "closePrice": 0.389994,
+    "symbol": "VLB"
   },
   {
     "id": "wells",
@@ -3799,7 +4191,7 @@
     "listingDate": "16-Jan-2023",
     "year": 2023,
     "price": 0.23,
-    "currentPrice": 0.66,
+    "currentPrice": 0.6,
     "performance": "+186.96%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3811,7 +4203,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.759
+    "highPrice": 0.759,
+    "openPrice": 0.330004,
+    "closePrice": 0.430008,
+    "symbol": "WELLS"
   },
   {
     "id": "agmo",
@@ -3820,7 +4215,7 @@
     "listingDate": "18-Aug-2022",
     "year": 2022,
     "price": 0.26,
-    "currentPrice": 0.34,
+    "currentPrice": 0.385,
     "performance": "+30.77%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3830,7 +4225,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.391
+    "highPrice": 0.391,
+    "openPrice": 0.7750080000000001,
+    "closePrice": 0.7849919999999999,
+    "symbol": "AGMO"
   },
   {
     "id": "amereit",
@@ -3839,7 +4237,7 @@
     "listingDate": "20-Sep-2022",
     "year": 2022,
     "price": 1.13,
-    "currentPrice": 1.69,
+    "currentPrice": 1.51,
     "performance": "+49.56%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3849,7 +4247,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.9434999999999998
+    "highPrice": 1.9434999999999998,
+    "openPrice": 1.13,
+    "closePrice": 1.1599449999999998,
+    "symbol": "AME"
   },
   {
     "id": "beta",
@@ -3858,7 +4259,7 @@
     "listingDate": "26-Oct-2022",
     "year": 2022,
     "price": 0.5,
-    "currentPrice": 0.575,
+    "currentPrice": 0.6,
     "performance": "+15.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3868,7 +4269,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.6612499999999999
+    "highPrice": 0.6612499999999999,
+    "openPrice": 0.615,
+    "closePrice": 0.71,
+    "symbol": "BETA"
   },
   {
     "id": "cengild",
@@ -3877,7 +4281,7 @@
     "listingDate": "18-Apr-2022",
     "year": 2022,
     "price": 0.33,
-    "currentPrice": 0.205,
+    "currentPrice": 0.22,
     "performance": "-37.88",
     "os": 20,
     "ib": "M&A Securities",
@@ -3887,7 +4291,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.23574999999999996
+    "highPrice": 0.23574999999999996,
+    "openPrice": 0.495,
+    "closePrice": 0.46500300000000006,
+    "symbol": "CENGILD"
   },
   {
     "id": "cnergen",
@@ -3915,7 +4322,7 @@
     "listingDate": "20-Jan-2022",
     "year": 2022,
     "price": 0.28,
-    "currentPrice": 0.795,
+    "currentPrice": 0.855,
     "performance": "+183.93%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3927,7 +4334,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.91425
+    "highPrice": 0.91425,
+    "openPrice": 0.7000000000000001,
+    "closePrice": 0.6450080000000001,
+    "symbol": "CORAZA"
   },
   {
     "id": "cosmos-ns",
@@ -3936,7 +4346,7 @@
     "listingDate": "06-Oct-2022",
     "year": 2022,
     "price": 0.35,
-    "currentPrice": 0.27,
+    "currentPrice": 0.485,
     "performance": "-22.86",
     "os": 20,
     "ib": "M&A Securities",
@@ -3946,7 +4356,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3105
+    "highPrice": 0.3105,
+    "openPrice": 0.509985,
+    "closePrice": 0.5599999999999999,
+    "symbol": "SNS"
   },
   {
     "id": "eca",
@@ -3955,7 +4368,7 @@
     "listingDate": "23-Nov-2022",
     "year": 2022,
     "price": 0.17,
-    "currentPrice": 0.17,
+    "currentPrice": 0.2,
     "performance": "0.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3965,7 +4378,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1955
+    "highPrice": 0.1955,
+    "openPrice": 0.6499950000000001,
+    "closePrice": 0.7550040000000001,
+    "symbol": "ECA"
   },
   {
     "id": "eib-ns",
@@ -3974,7 +4390,7 @@
     "listingDate": "18-Jul-2022",
     "year": 2022,
     "price": 0.3,
-    "currentPrice": 0.155,
+    "currentPrice": 0.165,
     "performance": "-48.33",
     "os": 20,
     "ib": "M&A Securities",
@@ -3984,7 +4400,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.17825
+    "highPrice": 0.17825,
+    "openPrice": 0.27501,
+    "closePrice": 0.26001,
+    "symbol": "EIB [NS]"
   },
   {
     "id": "ffb",
@@ -3993,7 +4412,7 @@
     "listingDate": "22-Mar-2022",
     "year": 2022,
     "price": 1.35,
-    "currentPrice": 2.54,
+    "currentPrice": 2.33,
     "performance": "+88.15%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4005,7 +4424,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.921
+    "highPrice": 2.921,
+    "openPrice": 1.7000550000000003,
+    "closePrice": 1.7200350000000002,
+    "symbol": "FFB"
   },
   {
     "id": "infom",
@@ -4014,7 +4436,7 @@
     "listingDate": "25-Nov-2022",
     "year": 2022,
     "price": 0.4,
-    "currentPrice": 1.07,
+    "currentPrice": 1.18,
     "performance": "+167.5%",
     "os": 33.58,
     "ib": "M&A Securities",
@@ -4026,7 +4448,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.2305
+    "highPrice": 1.2305,
+    "openPrice": 0.6000000000000001,
+    "closePrice": 0.535,
+    "symbol": "INFOM"
   },
   {
     "id": "infotec",
@@ -4035,7 +4460,7 @@
     "listingDate": "13-Jul-2022",
     "year": 2022,
     "price": 0.32,
-    "currentPrice": 0.34,
+    "currentPrice": 0.355,
     "performance": "+6.25%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4045,7 +4470,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.391
+    "highPrice": 0.391,
+    "openPrice": 0.33001600000000003,
+    "closePrice": 0.304992,
+    "symbol": "INFOTEC"
   },
   {
     "id": "itmax",
@@ -4054,7 +4482,7 @@
     "listingDate": "13-Dec-2022",
     "year": 2022,
     "price": 1.07,
-    "currentPrice": 4.85,
+    "currentPrice": 4.73,
     "performance": "+353.27%",
     "os": 20,
     "ib": "Maybank Investment Bank",
@@ -4066,7 +4494,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 5.577499999999999
+    "highPrice": 5.577499999999999,
+    "openPrice": 1.5200420000000001,
+    "closePrice": 1.379979,
+    "symbol": "ITMAX"
   },
   {
     "id": "leform",
@@ -4085,7 +4516,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1955
+    "highPrice": 0.1955,
+    "openPrice": 0.194994,
+    "closePrice": 0.18498900000000001,
+    "symbol": "LEFORM"
   },
   {
     "id": "lgms",
@@ -4094,7 +4528,7 @@
     "listingDate": "08-Jun-2022",
     "year": 2022,
     "price": 0.5,
-    "currentPrice": 0.54,
+    "currentPrice": 0.53,
     "performance": "+8.0%",
     "os": 20,
     "ib": "UOB Kay Hian",
@@ -4104,7 +4538,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.621
+    "highPrice": 0.621,
+    "openPrice": 0.6,
+    "closePrice": 0.845,
+    "symbol": "LGMS"
   },
   {
     "id": "mnhldg",
@@ -4113,7 +4550,7 @@
     "listingDate": "28-Apr-2022",
     "year": 2022,
     "price": 0.21,
-    "currentPrice": 2.16,
+    "currentPrice": 2.39,
     "performance": "+928.57%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4125,7 +4562,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.484
+    "highPrice": 2.484,
+    "openPrice": 0.260001,
+    "closePrice": 0.23498999999999998,
+    "symbol": "MNHLDG"
   },
   {
     "id": "orgabio",
@@ -4134,7 +4574,7 @@
     "listingDate": "05-Jul-2022",
     "year": 2022,
     "price": 0.31,
-    "currentPrice": 0.28,
+    "currentPrice": 0.3,
     "performance": "-9.68",
     "os": 20,
     "ib": "M&A Securities",
@@ -4144,7 +4584,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.322
+    "highPrice": 0.322,
+    "openPrice": 0.360003,
+    "closePrice": 0.340008,
+    "symbol": "ORGABIO"
   },
   {
     "id": "ppjack-ns",
@@ -4153,7 +4596,7 @@
     "listingDate": "01-Apr-2022",
     "year": 2022,
     "price": 0.3,
-    "currentPrice": 0.91,
+    "currentPrice": 0.905,
     "performance": "+203.33%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4165,7 +4608,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.0465
+    "highPrice": 1.0465,
+    "openPrice": 0.39,
+    "closePrice": 0.39501,
+    "symbol": "PPJACK [NS]"
   },
   {
     "id": "ptrb",
@@ -4174,7 +4620,7 @@
     "listingDate": "27-Sep-2022",
     "year": 2022,
     "price": 0.36,
-    "currentPrice": 0.31,
+    "currentPrice": 0.29,
     "performance": "-13.89",
     "os": 20,
     "ib": "M&A Securities",
@@ -4184,7 +4630,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3565
+    "highPrice": 0.3565,
+    "openPrice": 0.370008,
+    "closePrice": 0.370008,
+    "symbol": "PTRB"
   },
   {
     "id": "senfong",
@@ -4193,7 +4642,7 @@
     "listingDate": "07-Jul-2022",
     "year": 2022,
     "price": 0.75,
-    "currentPrice": 0.67,
+    "currentPrice": 0.675,
     "performance": "+18.58%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4203,7 +4652,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.7705
+    "highPrice": 0.7705,
+    "openPrice": 0.75,
+    "closePrice": 0.675,
+    "symbol": "SENFONG"
   },
   {
     "id": "senheng",
@@ -4235,7 +4687,7 @@
     "listingDate": "20-Jun-2022",
     "year": 2022,
     "price": 0.3,
-    "currentPrice": 0.135,
+    "currentPrice": 0.195,
     "performance": "+35.0%",
     "os": 41.61,
     "ib": "Public Investment Bank",
@@ -4245,7 +4697,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.15525
+    "highPrice": 0.15525,
+    "openPrice": 0.6,
+    "closePrice": 0.66999,
+    "symbol": "SFPTECH"
   },
   {
     "id": "sns",
@@ -4275,7 +4730,7 @@
     "listingDate": "17-Oct-2022",
     "year": 2022,
     "price": 0.29,
-    "currentPrice": 0.365,
+    "currentPrice": 0.37,
     "performance": "+25.86%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4285,7 +4740,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.41974999999999996
+    "highPrice": 0.41974999999999996,
+    "openPrice": 0.6000099999999999,
+    "closePrice": 0.4599979999999999,
+    "symbol": "SUNVIEW"
   },
   {
     "id": "taghill",
@@ -4313,7 +4771,7 @@
     "listingDate": "26-Jul-2022",
     "year": 2022,
     "price": 0.32,
-    "currentPrice": 0.31,
+    "currentPrice": 0.32,
     "performance": "-3.13",
     "os": 20,
     "ib": "M&A Securities",
@@ -4323,7 +4781,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.3565
+    "highPrice": 0.3565,
+    "openPrice": 0.5,
+    "closePrice": 0.44,
+    "symbol": "UMC"
   },
   {
     "id": "unique",
@@ -4332,7 +4793,7 @@
     "listingDate": "05-Aug-2022",
     "year": 2022,
     "price": 0.26,
-    "currentPrice": 0.385,
+    "currentPrice": 0.365,
     "performance": "+63.83%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4342,7 +4803,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.44275
+    "highPrice": 0.44275,
+    "openPrice": 0.210002,
+    "closePrice": 0.22500399999999998,
+    "symbol": "UNIQUE"
   },
   {
     "id": "unitrad-ns",
@@ -4351,7 +4815,7 @@
     "listingDate": "14-Jun-2022",
     "year": 2022,
     "price": 0.32,
-    "currentPrice": 0.23,
+    "currentPrice": 0.24,
     "performance": "-28.12",
     "os": 20,
     "ib": "M&A Securities",
@@ -4361,7 +4825,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.2645
+    "highPrice": 0.2645,
+    "openPrice": 0.264992,
+    "closePrice": 0.3,
+    "symbol": "UNITRAD [NS]"
   },
   {
     "id": "unitrade",
@@ -4391,7 +4858,7 @@
     "listingDate": "07-Jun-2022",
     "year": 2022,
     "price": 0.28,
-    "currentPrice": 0.555,
+    "currentPrice": 0.57,
     "performance": "+122.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4403,7 +4870,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.63825
+    "highPrice": 0.63825,
+    "openPrice": 0.28501200000000004,
+    "closePrice": 0.28999600000000003,
+    "symbol": "YEWLEE"
   },
   {
     "id": "yxpm",
@@ -4422,7 +4892,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.24149999999999996
+    "highPrice": 0.24149999999999996,
+    "openPrice": 0.28,
+    "closePrice": 0.270004,
+    "symbol": "YXPM"
   },
   {
     "id": "atech",
@@ -4431,7 +4904,7 @@
     "listingDate": "16-Dec-2021",
     "year": 2021,
     "price": 1.36,
-    "currentPrice": 0.725,
+    "currentPrice": 0.74,
     "performance": "+61.11%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4441,7 +4914,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.8337499999999999
+    "highPrice": 0.8337499999999999,
+    "openPrice": 1.410048,
+    "closePrice": 1.7000000000000002,
+    "symbol": "ATECH"
   },
   {
     "id": "cekd",
@@ -4450,7 +4926,7 @@
     "listingDate": "29-Sep-2021",
     "year": 2021,
     "price": 0.48,
-    "currentPrice": 0.295,
+    "currentPrice": 0.3,
     "performance": "-38.54",
     "os": 20,
     "ib": "M&A Securities",
@@ -4460,7 +4936,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.33924999999999994
+    "highPrice": 0.33924999999999994,
+    "openPrice": 0.6,
+    "closePrice": 0.5449919999999999,
+    "symbol": "CEKD"
   },
   {
     "id": "ctos",
@@ -4469,7 +4948,7 @@
     "listingDate": "19-Jul-2021",
     "year": 2021,
     "price": 1.1,
-    "currentPrice": 0.71,
+    "currentPrice": 0.67,
     "performance": "-35.45",
     "os": 20,
     "ib": "M&A Securities",
@@ -4479,7 +4958,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.8164999999999999
+    "highPrice": 0.8164999999999999,
+    "openPrice": 1.49996,
+    "closePrice": 1.6199700000000004,
+    "symbol": "CTOS"
   },
   {
     "id": "ecomate",
@@ -4500,7 +4982,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.9774999999999999
+    "highPrice": 0.9774999999999999,
+    "openPrice": 0.679998,
+    "closePrice": 0.485001,
+    "symbol": "ECOMATE"
   },
   {
     "id": "flexi",
@@ -4509,7 +4994,7 @@
     "listingDate": "30-Mar-2021",
     "year": 2021,
     "price": 0.2,
-    "currentPrice": 0.13,
+    "currentPrice": 0.155,
     "performance": "-35.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -4519,7 +5004,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1495
+    "highPrice": 0.1495,
+    "openPrice": 0.6900000000000001,
+    "closePrice": 0.43,
+    "symbol": "FLEXI"
   },
   {
     "id": "haily",
@@ -4538,7 +5026,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22424999999999998
+    "highPrice": 0.22424999999999998,
+    "openPrice": 0.7900240000000001,
+    "closePrice": 0.7399760000000001,
+    "symbol": "HAILY"
   },
   {
     "id": "hpphb",
@@ -4547,7 +5038,7 @@
     "listingDate": "20-Jan-2021",
     "year": 2021,
     "price": 0.36,
-    "currentPrice": 0.28,
+    "currentPrice": 0.275,
     "performance": "-22.22",
     "os": 20,
     "ib": "M&A Securities",
@@ -4557,7 +5048,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.322
+    "highPrice": 0.322,
+    "openPrice": 0.5699879999999999,
+    "closePrice": 0.709992,
+    "symbol": "HPPHB"
   },
   {
     "id": "mobilia",
@@ -4576,7 +5070,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.09775
+    "highPrice": 0.09775,
+    "openPrice": 0.6500030000000001,
+    "closePrice": 0.5549900000000001,
+    "symbol": "MOBILIA"
   },
   {
     "id": "nestcon",
@@ -4604,7 +5101,7 @@
     "listingDate": "23-Jun-2021",
     "year": 2021,
     "price": 0.32,
-    "currentPrice": 1.6,
+    "currentPrice": 1.53,
     "performance": "+400.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4616,7 +5113,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.8399999999999999
+    "highPrice": 1.8399999999999999,
+    "openPrice": 0.8499840000000001,
+    "closePrice": 0.815008,
+    "symbol": "PEKAT"
   },
   {
     "id": "ramssol",
@@ -4625,7 +5125,7 @@
     "listingDate": "13-Jul-2021",
     "year": 2021,
     "price": 0.45,
-    "currentPrice": 0.73,
+    "currentPrice": 0.74,
     "performance": "+60.44%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4635,7 +5135,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.8394999999999999
+    "highPrice": 0.8394999999999999,
+    "openPrice": 0.7000200000000001,
+    "closePrice": 0.509985,
+    "symbol": "RAMSSOL"
   },
   {
     "id": "swift-haulage",
@@ -4644,7 +5147,7 @@
     "listingDate": "21-Dec-2021",
     "year": 2021,
     "price": 1.03,
-    "currentPrice": 0.445,
+    "currentPrice": 0.45,
     "performance": "-56.8%",
     "os": 18.85,
     "ib": "MIDF",
@@ -4658,7 +5161,8 @@
     "openPrice": 1.03,
     "closePrice": 0.96,
     "strategy": "Wait / Exit",
-    "pe": 17.5
+    "pe": 17.5,
+    "symbol": "SWIFT"
   },
   {
     "id": "teladan",
@@ -4667,7 +5171,7 @@
     "listingDate": "16-Mar-2021",
     "year": 2021,
     "price": 0.48,
-    "currentPrice": 0.79,
+    "currentPrice": 0.785,
     "performance": "+73.63%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4677,7 +5181,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.9085
+    "highPrice": 0.9085,
+    "openPrice": 0.6,
+    "closePrice": 0.57,
+    "symbol": "TELADAN"
   },
   {
     "id": "tjsetia",
@@ -4705,7 +5212,7 @@
     "listingDate": "6-Apr-2021",
     "year": 2021,
     "price": 0.35,
-    "currentPrice": 0.245,
+    "currentPrice": 0.29,
     "performance": "-30.0",
     "os": 20,
     "ib": "M&A Securities",
@@ -4715,7 +5222,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.28175
+    "highPrice": 0.28175,
+    "openPrice": 0.7,
+    "closePrice": 0.48499499999999995,
+    "symbol": "VOLCANO"
   },
   {
     "id": "yenher-ns",
@@ -4781,7 +5291,7 @@
     "listingDate": "27-Oct-2020",
     "year": 2020,
     "price": 0.28,
-    "currentPrice": 0.28,
+    "currentPrice": 0.27,
     "performance": "+24.44%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4791,7 +5301,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.322
+    "highPrice": 0.322,
+    "openPrice": 0.344988,
+    "closePrice": 0.3699920000000001,
+    "symbol": "EFRAME"
   },
   {
     "id": "innature-ns",
@@ -4800,7 +5313,7 @@
     "listingDate": "20-Feb-2020",
     "year": 2020,
     "price": 0.64,
-    "currentPrice": 0.175,
+    "currentPrice": 0.185,
     "performance": "-71.77",
     "os": 20,
     "ib": "M&A Securities",
@@ -4810,7 +5323,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.20124999999999998
+    "highPrice": 0.20124999999999998,
+    "openPrice": 0.72,
+    "closePrice": 0.6549760000000001,
+    "symbol": "INNATURE [NS]"
   },
   {
     "id": "mrdiy",
@@ -4819,7 +5335,7 @@
     "listingDate": "26-Oct-2020",
     "year": 2020,
     "price": 1.6,
-    "currentPrice": 1.67,
+    "currentPrice": 1.73,
     "performance": "+56.07%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4829,7 +5345,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.9204999999999999
+    "highPrice": 1.9204999999999999,
+    "openPrice": 1.6,
+    "closePrice": 1.74992,
+    "symbol": "MRDIY"
   },
   {
     "id": "optimax",
@@ -4838,7 +5357,7 @@
     "listingDate": "18-Aug-2020",
     "year": 2020,
     "price": 0.3,
-    "currentPrice": 0.56,
+    "currentPrice": 0.545,
     "performance": "+273.33%",
     "os": 82.07,
     "ib": "Affinhwang",
@@ -4850,7 +5369,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.644
+    "highPrice": 0.644,
+    "openPrice": 0.7100099999999999,
+    "closePrice": 0.68001,
+    "symbol": "OPTIMAX"
   },
   {
     "id": "ovh-ns",
@@ -4859,7 +5381,7 @@
     "listingDate": "22-Jul-2020",
     "year": 2020,
     "price": 0.26,
-    "currentPrice": 0.2,
+    "currentPrice": 0.23,
     "performance": "-23.08",
     "os": 20,
     "ib": "M&A Securities",
@@ -4869,7 +5391,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22999999999999998
+    "highPrice": 0.22999999999999998,
+    "openPrice": 0.429988,
+    "closePrice": 0.53001,
+    "symbol": "OVH [NS]"
   },
   {
     "id": "pwrwell",
@@ -4878,7 +5403,7 @@
     "listingDate": "22-Jan-2020",
     "year": 2020,
     "price": 0.25,
-    "currentPrice": 0.7,
+    "currentPrice": 0.76,
     "performance": "+180.0%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4890,7 +5415,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.8049999999999999
+    "highPrice": 0.8049999999999999,
+    "openPrice": 0.255,
+    "closePrice": 0.28500000000000003,
+    "symbol": "PWRWELL"
   },
   {
     "id": "rl",
@@ -4918,7 +5446,7 @@
     "listingDate": "15-Oct-2020",
     "year": 2020,
     "price": 0.48,
-    "currentPrice": 1.28,
+    "currentPrice": 1.21,
     "performance": "+383.02%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4930,7 +5458,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.472
+    "highPrice": 1.472,
+    "openPrice": 0.999984,
+    "closePrice": 0.8050079999999998,
+    "symbol": "SAMAIDEN"
   },
   {
     "id": "scgbhd",
@@ -4939,7 +5470,7 @@
     "listingDate": "16-Oct-2020",
     "year": 2020,
     "price": 0.34,
-    "currentPrice": 1.89,
+    "currentPrice": 1.99,
     "performance": "+455.88%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4951,7 +5482,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.1734999999999998
+    "highPrice": 2.1734999999999998,
+    "openPrice": 0.335002,
+    "closePrice": 0.330004,
+    "symbol": "SCGBHD"
   },
   {
     "id": "tcs",
@@ -4970,7 +5504,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1035
+    "highPrice": 0.1035,
+    "openPrice": 0.585005,
+    "closePrice": 0.44999500000000003,
+    "symbol": "TCS"
   },
   {
     "id": "aimflex",
@@ -4989,7 +5526,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.092
+    "highPrice": 0.092,
+    "openPrice": 0.25,
+    "closePrice": 0.24499200000000002,
+    "symbol": "AIMFLEX"
   },
   {
     "id": "ame",
@@ -5027,7 +5567,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.12074999999999998
+    "highPrice": 0.12074999999999998,
+    "openPrice": 0.345,
+    "closePrice": 0.27,
+    "symbol": "DPIH"
   },
   {
     "id": "greatec",
@@ -5036,7 +5579,7 @@
     "listingDate": "13-Jun-2019",
     "year": 2019,
     "price": 0.61,
-    "currentPrice": 2.38,
+    "currentPrice": 2.49,
     "performance": "+1435.48%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5048,7 +5591,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.7369999999999997
+    "highPrice": 2.7369999999999997,
+    "openPrice": 0.6400119999999999,
+    "closePrice": 0.7399910000000001,
+    "symbol": "GREATEC"
   },
   {
     "id": "hpmt",
@@ -5057,7 +5603,7 @@
     "listingDate": "12-Jun-2019",
     "year": 2019,
     "price": 0.56,
-    "currentPrice": 0.18,
+    "currentPrice": 0.185,
     "performance": "-67.86",
     "os": 20,
     "ib": "M&A Securities",
@@ -5067,7 +5613,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.207
+    "highPrice": 0.207,
+    "openPrice": 0.5799920000000001,
+    "closePrice": 0.500024,
+    "symbol": "HPMT"
   },
   {
     "id": "khjb-ns",
@@ -5076,7 +5625,7 @@
     "listingDate": "8-Jul-2019",
     "year": 2019,
     "price": 0.43,
-    "currentPrice": 0.11,
+    "currentPrice": 0.105,
     "performance": "-74.42",
     "os": 20,
     "ib": "M&A Securities",
@@ -5086,7 +5635,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1265
+    "highPrice": 0.1265,
+    "openPrice": 0.39001,
+    "closePrice": 0.35002,
+    "symbol": "KHJB [NS]"
   },
   {
     "id": "lhi-ns",
@@ -5124,7 +5676,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.15525
+    "highPrice": 0.15525,
+    "openPrice": 0.2,
+    "closePrice": 0.16500800000000002,
+    "symbol": "MESTRON"
   },
   {
     "id": "mtag",
@@ -5143,7 +5698,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.27599999999999997
+    "highPrice": 0.27599999999999997,
+    "openPrice": 0.700024,
+    "closePrice": 0.44000600000000006,
+    "symbol": "MTAG"
   },
   {
     "id": "nadibhd",
@@ -5152,7 +5710,7 @@
     "listingDate": "8-Jan-2019",
     "year": 2019,
     "price": 0.3,
-    "currentPrice": 0.35,
+    "currentPrice": 0.345,
     "performance": "+16.67%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5162,7 +5720,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.40249999999999997
+    "highPrice": 0.40249999999999997,
+    "openPrice": 0.39,
+    "closePrice": 0.30500999999999995,
+    "symbol": "NADIBHD"
   },
   {
     "id": "sds",
@@ -5171,7 +5732,7 @@
     "listingDate": "7-Oct-2019",
     "year": 2019,
     "price": 0.23,
-    "currentPrice": 0.48,
+    "currentPrice": 0.455,
     "performance": "+174.29%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5183,7 +5744,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.5519999999999999
+    "highPrice": 0.5519999999999999,
+    "openPrice": 0.259992,
+    "closePrice": 0.25500100000000003,
+    "symbol": "SDS"
   },
   {
     "id": "slvest",
@@ -5192,7 +5756,7 @@
     "listingDate": "26-Nov-2019",
     "year": 2019,
     "price": 0.35,
-    "currentPrice": 2.72,
+    "currentPrice": 2.59,
     "performance": "+1226.83%",
     "os": 35.01,
     "ib": "M&A Securities",
@@ -5204,7 +5768,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 3.128
+    "highPrice": 3.128,
+    "openPrice": 0.600005,
+    "closePrice": 0.7549849999999999,
+    "symbol": "SLVEST"
   },
   {
     "id": "spring",
@@ -5223,7 +5790,10 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.13799999999999998
+    "highPrice": 0.13799999999999998,
+    "openPrice": 0.25,
+    "closePrice": 0.25,
+    "symbol": "SPRING"
   },
   {
     "id": "tashin",
@@ -5251,7 +5821,7 @@
     "listingDate": "10-Jul-2019",
     "year": 2019,
     "price": 0.82,
-    "currentPrice": 4.87,
+    "currentPrice": 5.5,
     "performance": "+1670.91%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5263,2515 +5833,10 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 5.600499999999999
-  },
-  {
-    "id": "2026-05-18",
-    "companyName": "2026-05-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": -7.69,
-    "currentPrice": -7.69,
-    "year": 2026
-  },
-  {
-    "id": "2026-05-08",
-    "companyName": "2026-05-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 6,
-    "currentPrice": 6,
-    "year": 2026
-  },
-  {
-    "id": "2026-05-06",
-    "companyName": "2026-05-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": -1.32,
-    "currentPrice": -1.32,
-    "year": 2026
-  },
-  {
-    "id": "2026-04-23",
-    "companyName": "2026-04-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2026-04-21",
-    "companyName": "2026-04-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": 4.85,
-    "currentPrice": 4.85,
-    "year": 1
-  },
-  {
-    "id": "2026-04-17",
-    "companyName": "2026-04-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 57.14,
-    "currentPrice": 57.14,
-    "year": 2026
-  },
-  {
-    "id": "2026-04-16",
-    "companyName": "2026-04-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 8.89,
-    "currentPrice": 8.89,
-    "year": 2026
-  },
-  {
-    "id": "2026-04-15",
-    "companyName": "2026-04-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 5,
-    "openPrice": 15,
-    "closePrice": 9.62,
-    "currentPrice": 9.62,
-    "year": 2026
-  },
-  {
-    "id": "2026-03-18",
-    "companyName": "2026-03-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 17.24,
-    "currentPrice": 17.24,
-    "year": 1
-  },
-  {
-    "id": "2026-03-17",
-    "companyName": "2026-03-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 25,
-    "currentPrice": 25,
-    "year": 2026
-  },
-  {
-    "id": "2026-03-12",
-    "companyName": "2026-03-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": -20,
-    "currentPrice": -20,
-    "year": 2026
-  },
-  {
-    "id": "2026-02-25",
-    "companyName": "2026-02-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2026-02-13",
-    "companyName": "2026-02-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": -11.67,
-    "currentPrice": -11.67,
-    "year": 2026
-  },
-  {
-    "id": "2026-02-12",
-    "companyName": "2026-02-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 107.89,
-    "currentPrice": 107.89,
-    "year": 2026
-  },
-  {
-    "id": "2026-02-06",
-    "companyName": "2026-02-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 16,
-    "currentPrice": 16,
-    "year": 2026
-  },
-  {
-    "id": "2026-01-28",
-    "companyName": "2026-01-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 51.52,
-    "currentPrice": 51.52,
-    "year": 2026
-  },
-  {
-    "id": "2026-01-27",
-    "companyName": "2026-01-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": -6,
-    "currentPrice": -6,
-    "year": 2026
-  },
-  {
-    "id": "2026-01-22",
-    "companyName": "2026-01-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": -4,
-    "currentPrice": -4,
-    "year": 2026
-  },
-  {
-    "id": "2026-01-20",
-    "companyName": "2026-01-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2026-01-13",
-    "companyName": "2026-01-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 80,
-    "currentPrice": 80,
-    "year": 2026
-  },
-  {
-    "id": "2025-12-11",
-    "companyName": "2025-12-11",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 11,
-    "closePrice": -5,
-    "currentPrice": -5,
-    "year": 1
-  },
-  {
-    "id": "2025-12-10",
-    "companyName": "2025-12-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-12-09",
-    "companyName": "2025-12-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-12-08",
-    "companyName": "2025-12-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": -11.36,
-    "currentPrice": -11.36,
-    "year": 2026
-  },
-  {
-    "id": "2025-12-05",
-    "companyName": "2025-12-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": -1.82,
-    "currentPrice": -1.82,
-    "year": 2026
-  },
-  {
-    "id": "2025-12-04",
-    "companyName": "2025-12-04",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 4,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-11-28",
-    "companyName": "2025-11-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 18.33,
-    "currentPrice": 18.33,
-    "year": 2026
-  },
-  {
-    "id": "2025-11-25",
-    "companyName": "2025-11-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-11-19",
-    "companyName": "2025-11-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": -3.23,
-    "currentPrice": -3.23,
-    "year": 2026
-  },
-  {
-    "id": "2025-11-18",
-    "companyName": "2025-11-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-11-12",
-    "companyName": "2025-11-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-28",
-    "companyName": "2025-10-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 14.29,
-    "currentPrice": 14.29,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-27",
-    "companyName": "2025-10-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": 72.22,
-    "currentPrice": 72.22,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-23",
-    "companyName": "2025-10-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 158.06,
-    "currentPrice": 158.06,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-22",
-    "companyName": "2025-10-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 19.35,
-    "currentPrice": 19.35,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-07",
-    "companyName": "2025-10-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 94.44,
-    "currentPrice": 94.44,
-    "year": 2026
-  },
-  {
-    "id": "2025-10-02",
-    "companyName": "2025-10-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 14.29,
-    "currentPrice": 14.29,
-    "year": 2026
-  },
-  {
-    "id": "2025-09-24",
-    "companyName": "2025-09-24",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 24,
-    "closePrice": 7.5,
-    "currentPrice": 7.5,
-    "year": 2026
-  },
-  {
-    "id": "2025-09-23",
-    "companyName": "2025-09-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 29.03,
-    "currentPrice": 29.03,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-29",
-    "companyName": "2025-07-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 24.14,
-    "currentPrice": 24.14,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-18",
-    "companyName": "2025-07-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 8.33,
-    "currentPrice": 8.33,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-17",
-    "companyName": "2025-07-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 20.83,
-    "currentPrice": 20.83,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-11",
-    "companyName": "2025-07-11",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 11,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-09",
-    "companyName": "2025-07-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 2.27,
-    "currentPrice": 2.27,
-    "year": 2026
-  },
-  {
-    "id": "2025-07-02",
-    "companyName": "2025-07-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-06-26",
-    "companyName": "2025-06-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": -12.96,
-    "currentPrice": -12.96,
-    "year": 2026
-  },
-  {
-    "id": "2025-06-24",
-    "companyName": "2025-06-24",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 24,
-    "closePrice": 0.93,
-    "currentPrice": 0.93,
-    "year": 1
-  },
-  {
-    "id": "2025-06-10",
-    "companyName": "2025-06-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 1
-  },
-  {
-    "id": "2025-06-09",
-    "companyName": "2025-06-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-06-05",
-    "companyName": "2025-06-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": 9.68,
-    "currentPrice": 9.68,
-    "year": 2026
-  },
-  {
-    "id": "2025-06-03",
-    "companyName": "2025-06-03",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 3,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-05-28",
-    "companyName": "2025-05-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 1.79,
-    "currentPrice": 1.79,
-    "year": 2026
-  },
-  {
-    "id": "2025-05-23",
-    "companyName": "2025-05-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 10.62,
-    "currentPrice": 10.62,
-    "year": 1
-  },
-  {
-    "id": "2025-05-20",
-    "companyName": "2025-05-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": -4,
-    "currentPrice": -4,
-    "year": 2026
-  },
-  {
-    "id": "2025-05-08",
-    "companyName": "2025-05-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": -16.36,
-    "currentPrice": -16.36,
-    "year": 2026
-  },
-  {
-    "id": "2025-05-05",
-    "companyName": "2025-05-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": 1.28,
-    "currentPrice": 1.28,
-    "year": 2026
-  },
-  {
-    "id": "2025-05-02",
-    "companyName": "2025-05-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-04-29",
-    "companyName": "2025-04-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-04-15",
-    "companyName": "2025-04-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": -15,
-    "currentPrice": -15,
-    "year": 2026
-  },
-  {
-    "id": "2025-04-09",
-    "companyName": "2025-04-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": -25,
-    "currentPrice": -25,
-    "year": 2026
-  },
-  {
-    "id": "2025-03-28",
-    "companyName": "2025-03-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 4.1,
-    "currentPrice": 4.1,
-    "year": 1
-  },
-  {
-    "id": "2025-03-26",
-    "companyName": "2025-03-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": -8,
-    "currentPrice": -8,
-    "year": 2026
-  },
-  {
-    "id": "2025-03-25",
-    "companyName": "2025-03-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2025-03-21",
-    "companyName": "2025-03-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": -17.05,
-    "currentPrice": -17.05,
-    "year": 2026
-  },
-  {
-    "id": "2025-03-13",
-    "companyName": "2025-03-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 1.85,
-    "currentPrice": 1.85,
-    "year": 2026
-  },
-  {
-    "id": "2025-03-03",
-    "companyName": "2025-03-03",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 3,
-    "closePrice": -31.62,
-    "currentPrice": -31.62,
-    "year": 2026
-  },
-  {
-    "id": "2025-02-20",
-    "companyName": "2025-02-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 1.67,
-    "currentPrice": 1.67,
-    "year": 2026
-  },
-  {
-    "id": "2025-02-18",
-    "companyName": "2025-02-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 27.5,
-    "currentPrice": 27.5,
-    "year": 2026
-  },
-  {
-    "id": "2025-02-17",
-    "companyName": "2025-02-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 200,
-    "currentPrice": 200,
-    "year": 2026
-  },
-  {
-    "id": "2025-02-10",
-    "companyName": "2025-02-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 11.11,
-    "currentPrice": 11.11,
-    "year": 2026
-  },
-  {
-    "id": "2025-02-06",
-    "companyName": "2025-02-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 42.86,
-    "currentPrice": 42.86,
-    "year": 2026
-  },
-  {
-    "id": "2025-01-23",
-    "companyName": "2025-01-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 70.45,
-    "currentPrice": 70.45,
-    "year": 2026
-  },
-  {
-    "id": "2025-01-16",
-    "companyName": "2025-01-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 17.86,
-    "currentPrice": 17.86,
-    "year": 2026
-  },
-  {
-    "id": "2025-01-08",
-    "companyName": "2025-01-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 28.57,
-    "currentPrice": 28.57,
-    "year": 2026
-  },
-  {
-    "id": "2024-12-19",
-    "companyName": "2024-12-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 40,
-    "currentPrice": 40,
-    "year": 2026
-  },
-  {
-    "id": "2024-12-18",
-    "companyName": "2024-12-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": -12.96,
-    "currentPrice": -12.96,
-    "year": 2026
-  },
-  {
-    "id": "2024-12-17",
-    "companyName": "2024-12-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 16.67,
-    "currentPrice": 16.67,
-    "year": 2026
-  },
-  {
-    "id": "2024-12-16",
-    "companyName": "2024-12-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 18.18,
-    "currentPrice": 18.18,
-    "year": 2026
-  },
-  {
-    "id": "2024-12-12",
-    "companyName": "2024-12-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 12.57,
-    "currentPrice": 12.57,
-    "year": 1
-  },
-  {
-    "id": "2024-12-05",
-    "companyName": "2024-12-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": 22.5,
-    "currentPrice": 22.5,
-    "year": 2026
-  },
-  {
-    "id": "2024-11-29",
-    "companyName": "2024-11-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 48,
-    "currentPrice": 48,
-    "year": 2026
-  },
-  {
-    "id": "2024-11-15",
-    "companyName": "2024-11-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 2,
-    "currentPrice": 2,
-    "year": 2026
-  },
-  {
-    "id": "2024-11-13",
-    "companyName": "2024-11-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 18.46,
-    "currentPrice": 18.46,
-    "year": 2026
-  },
-  {
-    "id": "2024-11-11",
-    "companyName": "2024-11-11",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 11,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-11-06",
-    "companyName": "2024-11-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 3,
-    "openPrice": 6,
-    "closePrice": 19.64,
-    "currentPrice": 19.64,
-    "year": 2026
-  },
-  {
-    "id": "2024-10-29",
-    "companyName": "2024-10-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 4.17,
-    "currentPrice": 4.17,
-    "year": 2026
-  },
-  {
-    "id": "2024-10-28",
-    "companyName": "2024-10-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 1.35,
-    "currentPrice": 1.35,
-    "year": 2026
-  },
-  {
-    "id": "2024-10-15",
-    "companyName": "2024-10-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 6,
-    "currentPrice": 6,
-    "year": 2026
-  },
-  {
-    "id": "2024-10-09",
-    "companyName": "2024-10-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 12.86,
-    "currentPrice": 12.86,
-    "year": 2026
-  },
-  {
-    "id": "2024-10-08",
-    "companyName": "2024-10-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 45,
-    "currentPrice": 45,
-    "year": 2026
-  },
-  {
-    "id": "2024-09-19",
-    "companyName": "2024-09-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 31.58,
-    "currentPrice": 31.58,
-    "year": 2026
-  },
-  {
-    "id": "2024-09-09",
-    "companyName": "2024-09-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 99,
-    "openPrice": 9,
-    "closePrice": 12.12,
-    "currentPrice": 12.12,
-    "year": 1
-  },
-  {
-    "id": "2024-09-05",
-    "companyName": "2024-09-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": 100,
-    "currentPrice": 100,
-    "year": 2026
-  },
-  {
-    "id": "2024-08-28",
-    "companyName": "2024-08-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 100,
-    "currentPrice": 100,
-    "year": 2026
-  },
-  {
-    "id": "2024-08-23",
-    "companyName": "2024-08-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 16.07,
-    "currentPrice": 16.07,
-    "year": 2026
-  },
-  {
-    "id": "2024-08-22",
-    "companyName": "2024-08-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 17.24,
-    "currentPrice": 17.24,
-    "year": 2026
-  },
-  {
-    "id": "2024-08-13",
-    "companyName": "2024-08-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 85.19,
-    "currentPrice": 85.19,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-26",
-    "companyName": "2024-07-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 168.33,
-    "currentPrice": 168.33,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-23",
-    "companyName": "2024-07-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 43.48,
-    "currentPrice": 43.48,
-    "year": 1
-  },
-  {
-    "id": "2024-07-22",
-    "companyName": "2024-07-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 45.45,
-    "currentPrice": 45.45,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-09",
-    "companyName": "2024-07-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-04",
-    "companyName": "2024-07-04",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 4,
-    "closePrice": 203.57,
-    "currentPrice": 203.57,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-03",
-    "companyName": "2024-07-03",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 3,
-    "closePrice": 128.57,
-    "currentPrice": 128.57,
-    "year": 2026
-  },
-  {
-    "id": "2024-07-02",
-    "companyName": "2024-07-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 175,
-    "currentPrice": 175,
-    "year": 2026
-  },
-  {
-    "id": "2024-06-21",
-    "companyName": "2024-06-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": 58,
-    "currentPrice": 58,
-    "year": 2026
-  },
-  {
-    "id": "2024-06-19",
-    "companyName": "2024-06-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-05-29",
-    "companyName": "2024-05-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 50,
-    "currentPrice": 50,
-    "year": 2026
-  },
-  {
-    "id": "2024-05-28",
-    "companyName": "2024-05-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 25,
-    "currentPrice": 25,
-    "year": 2026
-  },
-  {
-    "id": "2024-05-21",
-    "companyName": "2024-05-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": 37.5,
-    "currentPrice": 37.5,
-    "year": 2026
-  },
-  {
-    "id": "2024-05-15",
-    "companyName": "2024-05-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-05-14",
-    "companyName": "2024-05-14",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 14,
-    "closePrice": 100,
-    "currentPrice": 100,
-    "year": 2026
-  },
-  {
-    "id": "2024-04-30",
-    "companyName": "2024-04-30",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 30,
-    "closePrice": 1.61,
-    "currentPrice": 1.61,
-    "year": 2026
-  },
-  {
-    "id": "2024-04-23",
-    "companyName": "2024-04-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 32.26,
-    "currentPrice": 32.26,
-    "year": 2026
-  },
-  {
-    "id": "2024-04-22",
-    "companyName": "2024-04-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 88.89,
-    "currentPrice": 88.89,
-    "year": 2026
-  },
-  {
-    "id": "2024-04-08",
-    "companyName": "2024-04-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 15.91,
-    "currentPrice": 15.91,
-    "year": 2026
-  },
-  {
-    "id": "2024-03-27",
-    "companyName": "2024-03-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": 60,
-    "currentPrice": 60,
-    "year": 2026
-  },
-  {
-    "id": "2024-03-25",
-    "companyName": "2024-03-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-03-22",
-    "companyName": "2024-03-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-02-07",
-    "companyName": "2024-02-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 17.14,
-    "currentPrice": 17.14,
-    "year": 2026
-  },
-  {
-    "id": "2024-02-06",
-    "companyName": "2024-02-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-02-02",
-    "companyName": "2024-02-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 5.45,
-    "currentPrice": 5.45,
-    "year": 2026
-  },
-  {
-    "id": "2024-01-30",
-    "companyName": "2024-01-30",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 30,
-    "closePrice": 53.57,
-    "currentPrice": 53.57,
-    "year": 2026
-  },
-  {
-    "id": "2024-01-29",
-    "companyName": "2024-01-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2024-01-26",
-    "companyName": "2024-01-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 62.96,
-    "currentPrice": 62.96,
-    "year": 2026
-  },
-  {
-    "id": "2023-12-20",
-    "companyName": "2023-12-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 12.96,
-    "currentPrice": 12.96,
-    "year": 2026
-  },
-  {
-    "id": "2023-12-18",
-    "companyName": "2023-12-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 42.86,
-    "currentPrice": 42.86,
-    "year": 2026
-  },
-  {
-    "id": "2023-12-07",
-    "companyName": "2023-12-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": -15.89,
-    "currentPrice": -15.89,
-    "year": 1
-  },
-  {
-    "id": "2023-11-27",
-    "companyName": "2023-11-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": 81.25,
-    "currentPrice": 81.25,
-    "year": 2026
-  },
-  {
-    "id": "2023-11-15",
-    "companyName": "2023-11-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 2.86,
-    "currentPrice": 2.86,
-    "year": 2026
-  },
-  {
-    "id": "2023-10-17",
-    "companyName": "2023-10-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 26,
-    "currentPrice": 26,
-    "year": 2026
-  },
-  {
-    "id": "2023-10-12",
-    "companyName": "2023-10-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2023-09-26",
-    "companyName": "2023-09-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 33.33,
-    "currentPrice": 33.33,
-    "year": 2026
-  },
-  {
-    "id": "2023-09-19",
-    "companyName": "2023-09-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 8,
-    "currentPrice": 8,
-    "year": 2026
-  },
-  {
-    "id": "2023-08-15",
-    "companyName": "2023-08-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 242.11,
-    "currentPrice": 242.11,
-    "year": 2026
-  },
-  {
-    "id": "2023-08-01",
-    "companyName": "2023-08-01",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 1,
-    "closePrice": 9.52,
-    "currentPrice": 9.52,
-    "year": 2026
-  },
-  {
-    "id": "2023-07-26",
-    "companyName": "2023-07-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 116.67,
-    "currentPrice": 116.67,
-    "year": 2026
-  },
-  {
-    "id": "2023-07-25",
-    "companyName": "2023-07-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 33.33,
-    "currentPrice": 33.33,
-    "year": 2026
-  },
-  {
-    "id": "2023-07-20",
-    "companyName": "2023-07-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": -3.09,
-    "currentPrice": -3.09,
-    "year": 2026
-  },
-  {
-    "id": "2023-07-17",
-    "companyName": "2023-07-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 60,
-    "currentPrice": 60,
-    "year": 2026
-  },
-  {
-    "id": "2023-07-10",
-    "companyName": "2023-07-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2023-06-07",
-    "companyName": "2023-06-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 212.5,
-    "currentPrice": 212.5,
-    "year": 2026
-  },
-  {
-    "id": "2023-06-01",
-    "companyName": "2023-06-01",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 1,
-    "closePrice": -11.63,
-    "currentPrice": -11.63,
-    "year": 2026
-  },
-  {
-    "id": "2023-05-31",
-    "companyName": "2023-05-31",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 31,
-    "closePrice": -30,
-    "currentPrice": -30,
-    "year": 2026
-  },
-  {
-    "id": "2023-05-29",
-    "companyName": "2023-05-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 97.37,
-    "currentPrice": 97.37,
-    "year": 2026
-  },
-  {
-    "id": "2023-05-19",
-    "companyName": "2023-05-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": -1.43,
-    "currentPrice": -1.43,
-    "year": 2026
-  },
-  {
-    "id": "2023-05-09",
-    "companyName": "2023-05-09",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 9,
-    "closePrice": 230.3,
-    "currentPrice": 230.3,
-    "year": 2026
-  },
-  {
-    "id": "2023-03-15",
-    "companyName": "2023-03-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 225.4,
-    "currentPrice": 225.4,
-    "year": 2026
-  },
-  {
-    "id": "2023-03-10",
-    "companyName": "2023-03-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 57.78,
-    "currentPrice": 57.78,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-31",
-    "companyName": "2023-01-31",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 31,
-    "closePrice": 15.15,
-    "currentPrice": 15.15,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-18",
-    "companyName": "2023-01-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 338.24,
-    "currentPrice": 338.24,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-17",
-    "companyName": "2023-01-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 45.59,
-    "currentPrice": 45.59,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-16",
-    "companyName": "2023-01-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 43.48,
-    "currentPrice": 43.48,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-12",
-    "companyName": "2023-01-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 113.16,
-    "currentPrice": 113.16,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-06",
-    "companyName": "2023-01-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 47.27,
-    "currentPrice": 47.27,
-    "year": 2026
-  },
-  {
-    "id": "2023-01-03",
-    "companyName": "2023-01-03",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 3,
-    "closePrice": 40,
-    "currentPrice": 40,
-    "year": 2026
-  },
-  {
-    "id": "2022-12-13",
-    "companyName": "2022-12-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 42.06,
-    "currentPrice": 42.06,
-    "year": 1
-  },
-  {
-    "id": "2022-11-30",
-    "companyName": "2022-11-30",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 30,
-    "closePrice": -15.22,
-    "currentPrice": -15.22,
-    "year": 2026
-  },
-  {
-    "id": "2022-11-25",
-    "companyName": "2022-11-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 50,
-    "currentPrice": 50,
-    "year": 2026
-  },
-  {
-    "id": "2022-11-23",
-    "companyName": "2022-11-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 282.35,
-    "currentPrice": 282.35,
-    "year": 2026
-  },
-  {
-    "id": "2022-10-26",
-    "companyName": "2022-10-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 23,
-    "currentPrice": 23,
-    "year": 2026
-  },
-  {
-    "id": "2022-10-17",
-    "companyName": "2022-10-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 106.9,
-    "currentPrice": 106.9,
-    "year": 2026
-  },
-  {
-    "id": "2022-10-06",
-    "companyName": "2022-10-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 45.71,
-    "currentPrice": 45.71,
-    "year": 2026
-  },
-  {
-    "id": "2022-09-27",
-    "companyName": "2022-09-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": 2.78,
-    "currentPrice": 2.78,
-    "year": 2026
-  },
-  {
-    "id": "2022-09-20",
-    "companyName": "2022-09-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 1
-  },
-  {
-    "id": "2022-09-02",
-    "companyName": "2022-09-02",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 2,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2022-08-18",
-    "companyName": "2022-08-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 198.08,
-    "currentPrice": 198.08,
-    "year": 2026
-  },
-  {
-    "id": "2022-08-05",
-    "companyName": "2022-08-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": -19.23,
-    "currentPrice": -19.23,
-    "year": 2026
-  },
-  {
-    "id": "2022-07-26",
-    "companyName": "2022-07-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 56.25,
-    "currentPrice": 56.25,
-    "year": 2026
-  },
-  {
-    "id": "2022-07-18",
-    "companyName": "2022-07-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": -8.33,
-    "currentPrice": -8.33,
-    "year": 2026
-  },
-  {
-    "id": "2022-07-13",
-    "companyName": "2022-07-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 3.13,
-    "currentPrice": 3.13,
-    "year": 2026
-  },
-  {
-    "id": "2022-07-07",
-    "companyName": "2022-07-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2022-07-05",
-    "companyName": "2022-07-05",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 5,
-    "closePrice": 16.13,
-    "currentPrice": 16.13,
-    "year": 2026
-  },
-  {
-    "id": "2022-06-23",
-    "companyName": "2022-06-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2022-06-20",
-    "companyName": "2022-06-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 100,
-    "currentPrice": 100,
-    "year": 2026
-  },
-  {
-    "id": "2022-06-14",
-    "companyName": "2022-06-14",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 14,
-    "closePrice": -17.19,
-    "currentPrice": -17.19,
-    "year": 2026
-  },
-  {
-    "id": "2022-06-08",
-    "companyName": "2022-06-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 20,
-    "currentPrice": 20,
-    "year": 2026
-  },
-  {
-    "id": "2022-06-07",
-    "companyName": "2022-06-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 1.79,
-    "currentPrice": 1.79,
-    "year": 2026
-  },
-  {
-    "id": "2022-05-24",
-    "companyName": "2022-05-24",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 24,
-    "closePrice": 4.31,
-    "currentPrice": 4.31,
-    "year": 2026
-  },
-  {
-    "id": "2022-04-28",
-    "companyName": "2022-04-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 23.81,
-    "currentPrice": 23.81,
-    "year": 2026
-  },
-  {
-    "id": "2022-04-18",
-    "companyName": "2022-04-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 50,
-    "currentPrice": 50,
-    "year": 2026
-  },
-  {
-    "id": "2022-04-01",
-    "companyName": "2022-04-01",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 1,
-    "closePrice": 30,
-    "currentPrice": 30,
-    "year": 2026
-  },
-  {
-    "id": "2022-03-22",
-    "companyName": "2022-03-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 25.93,
-    "currentPrice": 25.93,
-    "year": 1
-  },
-  {
-    "id": "2022-02-28",
-    "companyName": "2022-02-28",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 28,
-    "closePrice": 3.33,
-    "currentPrice": 3.33,
-    "year": 2026
-  },
-  {
-    "id": "2022-01-25",
-    "companyName": "2022-01-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": -15.89,
-    "currentPrice": -15.89,
-    "year": 1
-  },
-  {
-    "id": "2022-01-20",
-    "companyName": "2022-01-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 150,
-    "currentPrice": 150,
-    "year": 2026
-  },
-  {
-    "id": "2021-12-21",
-    "companyName": "2021-12-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": 4.85,
-    "currentPrice": 4.85,
-    "year": 1
-  },
-  {
-    "id": "2021-12-16",
-    "companyName": "2021-12-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 3.68,
-    "currentPrice": 3.68,
-    "year": 1
-  },
-  {
-    "id": "2021-11-08",
-    "companyName": "2021-11-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 106.06,
-    "currentPrice": 106.06,
-    "year": 2026
-  },
-  {
-    "id": "2021-09-29",
-    "companyName": "2021-09-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 25,
-    "currentPrice": 25,
-    "year": 2026
-  },
-  {
-    "id": "2021-07-21",
-    "companyName": "2021-07-21",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 21,
-    "closePrice": 16.18,
-    "currentPrice": 16.18,
-    "year": 2026
-  },
-  {
-    "id": "2021-07-19",
-    "companyName": "2021-07-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 36.36,
-    "currentPrice": 36.36,
-    "year": 1
-  },
-  {
-    "id": "2021-07-15",
-    "companyName": "2021-07-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 4.74,
-    "currentPrice": 4.74,
-    "year": 2026
-  },
-  {
-    "id": "2021-07-13",
-    "companyName": "2021-07-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 55.56,
-    "currentPrice": 55.56,
-    "year": 2026
-  },
-  {
-    "id": "2021-06-29",
-    "companyName": "2021-06-29",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 29,
-    "closePrice": 7.14,
-    "currentPrice": 7.14,
-    "year": 2026
-  },
-  {
-    "id": "2021-06-23",
-    "companyName": "2021-06-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 165.62,
-    "currentPrice": 165.62,
-    "year": 2026
-  },
-  {
-    "id": "2021-05-19",
-    "companyName": "2021-05-19",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 19,
-    "closePrice": 12.14,
-    "currentPrice": 12.14,
-    "year": 2026
-  },
-  {
-    "id": "2021-04-06",
-    "companyName": "2021-04-06",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 6,
-    "closePrice": 100,
-    "currentPrice": 100,
-    "year": 2026
-  },
-  {
-    "id": "2021-03-30",
-    "companyName": "2021-03-30",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 30,
-    "closePrice": 245,
-    "currentPrice": 245,
-    "year": 2026
-  },
-  {
-    "id": "2021-03-16",
-    "companyName": "2021-03-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 25,
-    "currentPrice": 25,
-    "year": 2026
-  },
-  {
-    "id": "2021-02-23",
-    "companyName": "2021-02-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 182.61,
-    "currentPrice": 182.61,
-    "year": 2026
-  },
-  {
-    "id": "2021-01-20",
-    "companyName": "2021-01-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 58.33,
-    "currentPrice": 58.33,
-    "year": 2026
-  },
-  {
-    "id": "2020-10-27",
-    "companyName": "2020-10-27",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 27,
-    "closePrice": 23.21,
-    "currentPrice": 23.21,
-    "year": 2026
-  },
-  {
-    "id": "2020-10-26",
-    "companyName": "2020-10-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 1
-  },
-  {
-    "id": "2020-10-20",
-    "companyName": "2020-10-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 6.06,
-    "currentPrice": 6.06,
-    "year": 2026
-  },
-  {
-    "id": "2020-10-16",
-    "companyName": "2020-10-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": -1.47,
-    "currentPrice": -1.47,
-    "year": 2026
-  },
-  {
-    "id": "2020-10-15",
-    "companyName": "2020-10-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 108.33,
-    "currentPrice": 108.33,
-    "year": 2026
-  },
-  {
-    "id": "2020-08-18",
-    "companyName": "2020-08-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 136.67,
-    "currentPrice": 136.67,
-    "year": 2026
-  },
-  {
-    "id": "2020-07-23",
-    "companyName": "2020-07-23",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 23,
-    "closePrice": 154.35,
-    "currentPrice": 154.35,
-    "year": 2026
-  },
-  {
-    "id": "2020-07-22",
-    "companyName": "2020-07-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 65.38,
-    "currentPrice": 65.38,
-    "year": 2026
-  },
-  {
-    "id": "2020-07-15",
-    "companyName": "2020-07-15",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 15,
-    "closePrice": 58.54,
-    "currentPrice": 58.54,
-    "year": 2026
-  },
-  {
-    "id": "2020-03-18",
-    "companyName": "2020-03-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": -28.57,
-    "currentPrice": -28.57,
-    "year": 2026
-  },
-  {
-    "id": "2020-02-20",
-    "companyName": "2020-02-20",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 20,
-    "closePrice": 12.5,
-    "currentPrice": 12.5,
-    "year": 2026
-  },
-  {
-    "id": "2020-01-22",
-    "companyName": "2020-01-22",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 22,
-    "closePrice": 2,
-    "currentPrice": 2,
-    "year": 2026
-  },
-  {
-    "id": "2019-11-26",
-    "companyName": "2019-11-26",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 26,
-    "closePrice": 71.43,
-    "currentPrice": 71.43,
-    "year": 2026
-  },
-  {
-    "id": "2019-11-08",
-    "companyName": "2019-11-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2019-10-14",
-    "companyName": "2019-10-14",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 14,
-    "closePrice": -1.54,
-    "currentPrice": -1.54,
-    "year": 1
-  },
-  {
-    "id": "2019-10-07",
-    "companyName": "2019-10-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 13.04,
-    "currentPrice": 13.04,
-    "year": 2026
-  },
-  {
-    "id": "2019-09-25",
-    "companyName": "2019-09-25",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 25,
-    "closePrice": 32.08,
-    "currentPrice": 32.08,
-    "year": 2026
-  },
-  {
-    "id": "2019-08-01",
-    "companyName": "2019-08-01",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 1,
-    "closePrice": 0,
-    "currentPrice": 0,
-    "year": 2026
-  },
-  {
-    "id": "2019-07-17",
-    "companyName": "2019-07-17",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 17,
-    "closePrice": 56.25,
-    "currentPrice": 56.25,
-    "year": 2026
-  },
-  {
-    "id": "2019-07-10",
-    "companyName": "2019-07-10",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 10,
-    "closePrice": 34.15,
-    "currentPrice": 34.15,
-    "year": 2026
-  },
-  {
-    "id": "2019-07-08",
-    "companyName": "2019-07-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": -9.3,
-    "currentPrice": -9.3,
-    "year": 2026
-  },
-  {
-    "id": "2019-06-18",
-    "companyName": "2019-06-18",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 18,
-    "closePrice": 25,
-    "currentPrice": 25,
-    "year": 2026
-  },
-  {
-    "id": "2019-06-13",
-    "companyName": "2019-06-13",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 13,
-    "closePrice": 4.92,
-    "currentPrice": 4.92,
-    "year": 2026
-  },
-  {
-    "id": "2019-06-12",
-    "companyName": "2019-06-12",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 12,
-    "closePrice": 3.57,
-    "currentPrice": 3.57,
-    "year": 2026
-  },
-  {
-    "id": "2019-05-16",
-    "companyName": "2019-05-16",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 16,
-    "closePrice": 1.82,
-    "currentPrice": 1.82,
-    "year": 1
-  },
-  {
-    "id": "2019-01-08",
-    "companyName": "2019-01-08",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 8,
-    "closePrice": 30,
-    "currentPrice": 30,
-    "year": 2026
-  },
-  {
-    "id": "2019-01-07",
-    "companyName": "2019-01-07",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0,
-    "openPrice": 7,
-    "closePrice": 38,
-    "currentPrice": 38,
-    "year": 2026
+    "highPrice": 5.600499999999999,
+    "openPrice": 1.1000299999999998,
+    "closePrice": 1.399986,
+    "symbol": "UWC"
   },
   {
     "id": "rng-tech-berhad",

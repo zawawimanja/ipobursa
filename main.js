@@ -57,26 +57,64 @@ async function fetchLiveUpdates() {
         // 1. Parse Stage 4: Statistics (Listed)
         if (statRes.contents) {
             const doc = parser.parseFromString(statRes.contents, 'text/html');
-            const rows = doc.querySelectorAll('table tbody tr');
+            const rows = doc.querySelectorAll('#statsTable tbody tr');
+            
+            const formatListingDate = (dateStr) => {
+                if (!dateStr || dateStr === 'TBA') return null;
+                const parts = dateStr.split('-');
+                if (parts.length === 3) {
+                    const months = {
+                        'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                        'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+                    };
+                    const day = parts[0].padStart(2, '0');
+                    const month = months[parts[1]] || '01';
+                    const year = parts[2];
+                    return `${year}-${month}-${day}`;
+                }
+                return null;
+            };
+
             rows.forEach(row => {
                 const cols = row.querySelectorAll('td');
                 if (cols.length >= 7) {
-                    const name = cols[0].innerText.trim();
-                    const open = parseFloat(cols[3].innerText);
-                    const close = parseFloat(cols[6].innerText);
-                    const ipoPrice = parseFloat(cols[2].innerText);
-                    const year = cols[1].innerText.trim().split('-').pop();
+                    const date = cols[0].innerText.trim();
+                    const symbol = cols[2].innerText.trim();
+                    const listingDate = cols[3].innerText.trim();
+                    
+                    let year = 2026;
+                    if (listingDate && listingDate !== 'TBA') {
+                        const yr = parseInt(listingDate.split('-').pop());
+                        if (yr) year = yr;
+                    } else if (date) {
+                        const yr = parseInt(date.split('-')[0]);
+                        if (yr) year = yr;
+                    }
+
+                    const ipoPrice = parseFloat(cols[4].innerText) || parseFloat(cols[1].innerText) || 0;
+                    const currentPrice = parseFloat(cols[5].innerText) || 0;
+                    
+                    const scPerfText = cols[7].innerText.trim().replace('%', '');
+                    const scPerf = parseFloat(scPerfText) || 0;
+                    
+                    const soPerfText = cols[6].innerText.trim().replace('%', '');
+                    const soPerf = parseFloat(soPerfText) || 0;
+                    
+                    const open = ipoPrice * (1 + soPerf / 100);
+                    const close = ipoPrice * (1 + scPerf / 100);
 
                     liveIpos.push({
-                        id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-                        companyName: name,
+                        id: symbol.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                        companyName: symbol,
+                        symbol: symbol,
                         stage: 5,
                         price: ipoPrice,
                         openPrice: open,
-                        currentPrice: close,
-                        closePrice: close,
-                        year: parseInt(year) || 2026,
-                        status: 'Listed'
+                        currentPrice: currentPrice || close,
+                        closePrice: close || currentPrice,
+                        year: year,
+                        status: 'Listed',
+                        listingDate: formatListingDate(listingDate) || date
                     });
                 }
             });
@@ -154,9 +192,13 @@ async function fetchLiveUpdates() {
         const finalData = [];
         liveIpos.forEach(live => {
             const enrichment = IPO_DATA.find(e => {
-                const stemLive = live.companyName.toLowerCase().replace(/berhad|bhd|group|holdings/g, '').trim();
-                const stemEnrich = e.companyName.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').trim();
-                return stemLive.includes(stemEnrich) || stemEnrich.includes(stemLive);
+                const cleanLive = live.companyName.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').replace(/[^a-z0-9]/g, '');
+                const cleanEnrich = e.companyName.toLowerCase().replace(/berhad|bhd|group|holdings|corp/g, '').replace(/[^a-z0-9]/g, '');
+                
+                const symbolMatch = (live.symbol && e.symbol && live.symbol.toUpperCase() === e.symbol.toUpperCase()) ||
+                                   (live.companyName.toUpperCase() === e.symbol?.toUpperCase());
+                
+                return cleanLive.includes(cleanEnrich) || cleanEnrich.includes(cleanLive) || symbolMatch;
             });
 
             let mergedItem = live;
