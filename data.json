@@ -456,7 +456,7 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 0,
+    "os": 18.5,
     "ib": "Malacca Securities",
     "fundUse": "Pengembangan",
     "pe": 15.85,
@@ -580,10 +580,15 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 0,
+    "os": 15.5,
     "ib": "CIMB",
     "avgTP": 0.4,
-    "research": []
+    "research": [],
+    "openPrice": 0.42,
+    "closePrice": 0.39,
+    "currentPrice": 0.39,
+    "performance": "+2.63%",
+    "strategy": "Scalp"
   },
   {
     "id": "mtt-shipping",
@@ -1053,7 +1058,7 @@
     "price": 1.13,
     "currentPrice": 1.28,
     "performance": "+13.27%",
-    "os": 0,
+    "os": 20,
     "ib": "CIMB Investment Bank",
     "sector": "Consumer (Retail)",
     "fundUse": "Outlet expansion",
@@ -1272,8 +1277,8 @@
     "price": 0.2,
     "currentPrice": 0.18,
     "performance": "-10.0",
-    "os": 0,
-    "ib": "Public IB",
+    "os": 12,
+    "ib": "Public Investment Bank",
     "sector": "Technology",
     "fundUse": "Leasing assets",
     "predictedGrade": "C",
@@ -1539,7 +1544,8 @@
     "ib": "Public Investment",
     "fundUse": "60% Ekspansi, 20% R&D",
     "pe": 11.4,
-    "highPrice": 1.265
+    "highPrice": 1.265,
+    "os": 44.93
   },
   {
     "id": "paradigm-ns",
@@ -1884,7 +1890,8 @@
     "ib": "M&A Securities",
     "fundUse": "Campuran Ekspansi & Operasi",
     "pe": 9,
-    "highPrice": 0.345
+    "highPrice": 0.345,
+    "os": 15
   },
   {
     "id": "techstore",
@@ -3516,7 +3523,7 @@
     "price": 0.7,
     "currentPrice": 0.465,
     "performance": "-33.57",
-    "os": 0,
+    "os": 15.6,
     "ib": "Maybank Investment Bank",
     "sector": "Consumer Products",
     "fundUse": "Debt repayment",
@@ -3826,7 +3833,7 @@
     "price": 0.5,
     "currentPrice": 0.5,
     "performance": "0.0%",
-    "os": 0,
+    "os": 15.5,
     "ib": "Malacca Securities",
     "sector": "Property",
     "fundUse": "Development costs",

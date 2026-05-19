@@ -578,6 +578,20 @@ function getOpenPerformance(ipo) {
     return ((ipo.openPrice - ipo.price) / ipo.price) * 100;
 }
 
+function getBestSortDate(ipo) {
+    let dateStr = ipo.listingDate || ipo.closingDate || ipo.openingDate;
+    if (dateStr) {
+        const parsed = parseFlexDate(dateStr);
+        if (parsed && !isNaN(parsed.getTime())) {
+            return parsed.getTime();
+        }
+    }
+    if (ipo.year) {
+        return new Date(ipo.year, 0, 1).getTime();
+    }
+    return 0;
+}
+
 function getOpenPerfString(ipo) {
     const perf = getOpenPerformance(ipo);
     return (perf >= 0 ? '+' : '') + perf.toFixed(1) + '%';
@@ -950,8 +964,10 @@ function renderIPOs(stage) {
                 } else if (currentSort === 'name-asc') {
                     return a.companyName.localeCompare(b.companyName);
                 } else {
-                    if (a.year !== b.year) return b.year - a.year;
-                    return (b.id || '').localeCompare(a.id || '');
+                    const dateA = getBestSortDate(a);
+                    const dateB = getBestSortDate(b);
+                    if (dateA !== dateB) return dateB - dateA;
+                    return a.companyName.localeCompare(b.companyName);
                 }
             });
 
