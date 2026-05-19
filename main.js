@@ -799,6 +799,19 @@ function getIpoGrade(ipo) {
     }
 
     if (ipo.market === 'ACE Market') {
+        // Downgrade if the stock is currently trading below its IPO price (negative return/underperforming)
+        if (ipo.stage === 5) {
+            const perfVal = getOpenPerformance(ipo) || 0;
+            const isRedPerf = perfVal < 0 || (ipo.currentPrice && ipo.price && ipo.currentPrice < ipo.price) || (ipo.performance && ipo.performance.includes('-'));
+            if (isRedPerf) {
+                const holdPerf = (ipo.currentPrice && ipo.price) ? ((ipo.currentPrice - ipo.price) / ipo.price) * 100 : perfVal;
+                return { 
+                    grade: 'C', 
+                    reason: `<b>Sentiment Risk:</b><br>📉 Underperforming IPO price (${holdPerf.toFixed(1)}%)` 
+                };
+            }
+        }
+
         const reasonParts = [];
         if (os >= 50) reasonParts.push(`🚀 Exceptional Demand (${os}x)`);
         else if (os >= 20) reasonParts.push(`✅ High Demand (${os}x)`);
