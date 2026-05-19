@@ -197,7 +197,7 @@ async function deepHuntData(existingData) {
     let huntedCount = 0;
 
     for (let ipo of existingData) {
-        if ((ipo.stage >= 3) && (!ipo.os || !ipo.avgTP || !ipo.pe)) {
+        if ((ipo.stage === 3 || ipo.stage === 4) && (!ipo.os || !ipo.avgTP || !ipo.pe)) {
             const stem = normalizeName(ipo.companyName).replace(/\s+/g, '-');
             const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
             
@@ -293,6 +293,71 @@ async function deepHuntData(existingData) {
     return huntedCount;
 }
 
+function parseFlexDate(str) {
+    if (!str) return null;
+    const iso = new Date(str);
+    if (!isNaN(iso.getTime())) return iso;
+    const dashMonth = str.match(/^(\d{1,2})-([A-Za-z]+)-(\d{4})$/);
+    if (dashMonth) return new Date(`${dashMonth[2]} ${dashMonth[1]}, ${dashMonth[3]}`);
+    const fullDate = str.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+    if (fullDate) return new Date(`${fullDate[2]} ${fullDate[1]}, ${fullDate[3]}`);
+    const shortMonth = str.match(/^(\d{1,2})\s+([A-Za-z]+)$/);
+    if (shortMonth) return new Date(`${shortMonth[2]} ${shortMonth[1]}, ${new Date().getFullYear()}`);
+    return null;
+}
+
+function autoPromoteIPOs(finalData) {
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let promotedCount = 0;
+    finalData.forEach(ipo => {
+        if (ipo.stage === 5) return;
+        
+        if (ipo.status === 'Listed' || (ipo.year && ipo.year < 2026)) {
+            ipo.stage = 5;
+            ipo.status = 'Listed';
+            promotedCount++;
+            console.log(`  [Auto-Promote] ${ipo.companyName} (Status Listed or Year < 2026 -> Stage 5)`);
+        }
+
+        if (ipo.stage >= 3) {
+            if (ipo.listingDate) {
+                const listDate = parseFlexDate(ipo.listingDate);
+                if (listDate) {
+                    listDate.setHours(0, 0, 0, 0);
+                    if (listDate <= today) {
+                        ipo.stage = 5;
+                        ipo.status = 'Listed';
+                        promotedCount++;
+                        console.log(`  [Auto-Promote] ${ipo.companyName} (Listing date ${ipo.listingDate} passed -> Stage 5)`);
+                    } else if (ipo.closingDate) {
+                        const closeDate = parseFlexDate(ipo.closingDate);
+                        if (closeDate && closeDate < now) {
+                            if (ipo.stage === 3) {
+                                ipo.stage = 4;
+                                ipo.status = 'Pre-Listing';
+                                console.log(`  [Auto-Promote] ${ipo.companyName} (Closing date passed -> Stage 4)`);
+                            }
+                        }
+                    }
+                }
+            } else if (ipo.closingDate) {
+                const closeDate = parseFlexDate(ipo.closingDate);
+                if (closeDate && closeDate < now) {
+                    if (ipo.stage === 3) {
+                        ipo.stage = 4;
+                        ipo.status = 'Pre-Listing';
+                        console.log(`  [Auto-Promote] ${ipo.companyName} (Closing date passed -> Stage 4)`);
+                    }
+                }
+            }
+        }
+    });
+    return promotedCount;
+}
+
 async function main() {
     console.log('--- Starting IPO Hunter Sync ---');
     
@@ -308,6 +373,15 @@ async function main() {
     await scrapeListedStatistics(existingData);
     await scrapeUpcomingIPOs(existingData);
     await scrapeMitiAndDraftIPOs(existingData);
+    // Run fallback auto-promotion logic based on dates
+    console.log('Running Fallback Auto-Promotion Sweep...');
+    const promoted = autoPromoteIPOs(existingData);
+    if (promoted > 0) {
+        console.log(`  Successfully auto-promoted ${promoted} IPO(s).`);
+    } else {
+        console.log('  No fallback promotions required.');
+    }
+
     await deepHuntData(existingData);
 
     // Save back to data.json

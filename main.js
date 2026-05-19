@@ -14,6 +14,9 @@ function initializeData() {
             const stage4Count = IPO_DATA.filter(i => i.stage === 4).length;
             console.log('DEBUG: Items in Stage 4 in data.js: ' + stage4Count);
             ipoData = JSON.parse(JSON.stringify(IPO_DATA)); 
+            
+            // Auto-promote IPOs whose listing date has passed
+            autoPromoteIPOs(ipoData);
         }
 
         // Step 2: Show initial state
@@ -182,67 +185,7 @@ async function fetchLiveUpdates() {
             }
         });
 
-        const now = new Date();
-        const today = new Date();
-        today.setHours(0,0,0,0);
-
-        // Robust date parser - handles all formats from iSaham and data.js
-        // "08-May-2026", "13-Feb-2026", "2026-05-08", "08 May 2026", "06 May", ISO strings
-        function parseFlexDate(str) {
-            if (!str) return null;
-            // Already a valid ISO/JS date string like "2026-05-08" or "2026-05-08T17:00:00"
-            const iso = new Date(str);
-            if (!isNaN(iso.getTime())) return iso;
-            // Handle "08-May-2026" or "13-Feb-2026" (DD-MMM-YYYY)
-            const dashMonth = str.match(/^(\d{1,2})-([A-Za-z]+)-(\d{4})$/);
-            if (dashMonth) return new Date(`${dashMonth[2]} ${dashMonth[1]}, ${dashMonth[3]}`);
-            // Handle "08 May 2026" (DD MMM YYYY) - iSaham format
-            const fullDate = str.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
-            if (fullDate) return new Date(`${fullDate[2]} ${fullDate[1]}, ${fullDate[3]}`);
-            // Handle "06 May" (no year — assume current year)
-            const shortMonth = str.match(/^(\d{1,2})\s+([A-Za-z]+)$/);
-            if (shortMonth) return new Date(`${shortMonth[2]} ${shortMonth[1]}, ${new Date().getFullYear()}`);
-            return null;
-        }
-
-        finalData.forEach(ipo => {
-            // Skip auto-promotion if manually set to Stage 5 (Listed)
-            if (ipo.stage === 5) return;
-            
-            if (ipo.year && ipo.year < 2026) {
-                ipo.stage = 5;
-                ipo.status = 'Listed';
-            }
-
-            if (ipo.stage >= 3) {
-                // Auto-promote to Listed if listingDate has passed
-                if (ipo.listingDate) {
-                    const listDate = parseFlexDate(ipo.listingDate);
-                    if (listDate) {
-                        listDate.setHours(0, 0, 0, 0);
-                        if (listDate <= today) {
-                            ipo.stage = 5;
-                            ipo.status = 'Listed';
-                        } else if (ipo.closingDate) {
-                            const closeDate = parseFlexDate(ipo.closingDate);
-                            if (closeDate && closeDate < now) {
-                                ipo.stage = 4;
-                                ipo.status = 'Pre-Listing';
-                            } else if (closeDate) {
-                                ipo.stage = 3;
-                                ipo.status = 'Application Open';
-                            }
-                        }
-                    }
-                } else if (ipo.closingDate) {
-                    const closeDate = parseFlexDate(ipo.closingDate);
-                    if (closeDate && closeDate < now) {
-                        ipo.stage = 4;
-                        ipo.status = 'Pre-Listing';
-                    }
-                }
-            }
-        });
+        autoPromoteIPOs(finalData);
 
         // 6. NOTIFICATION SYSTEM: Detect New Listings
         if (ipoData.length > 0) {
@@ -557,6 +500,70 @@ function triggerDeepSync() {
     ipoData.forEach(ipo => {
         if ((ipo.stage === 3 || ipo.stage === 5) && (!ipo.os || !ipo.avgTP)) {
             autoHuntData(ipo);
+        }
+    });
+}
+
+// Robust date parser - handles all formats from iSaham and data.js
+// "08-May-2026", "13-Feb-2026", "2026-05-08", "08 May 2026", "06 May", ISO strings
+function parseFlexDate(str) {
+    if (!str) return null;
+    // Already a valid ISO/JS date string like "2026-05-08" or "2026-05-08T17:00:00"
+    const iso = new Date(str);
+    if (!isNaN(iso.getTime())) return iso;
+    // Handle "08-May-2026" or "13-Feb-2026" (DD-MMM-YYYY)
+    const dashMonth = str.match(/^(\d{1,2})-([A-Za-z]+)-(\d{4})$/);
+    if (dashMonth) return new Date(`${dashMonth[2]} ${dashMonth[1]}, ${dashMonth[3]}`);
+    // Handle "08 May 2026" (DD MMM YYYY) - iSaham format
+    const fullDate = str.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+    if (fullDate) return new Date(`${fullDate[2]} ${fullDate[1]}, ${fullDate[3]}`);
+    // Handle "06 May" (no year — assume current year)
+    const shortMonth = str.match(/^(\d{1,2})\s+([A-Za-z]+)$/);
+    if (shortMonth) return new Date(`${shortMonth[2]} ${shortMonth[1]}, ${new Date().getFullYear()}`);
+    return null;
+}
+
+function autoPromoteIPOs(finalData) {
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    finalData.forEach(ipo => {
+        // Skip auto-promotion if manually set to Stage 5 (Listed)
+        if (ipo.stage === 5) return;
+        
+        if (ipo.year && ipo.year < 2026) {
+            ipo.stage = 5;
+            ipo.status = 'Listed';
+        }
+
+        if (ipo.stage >= 3) {
+            // Auto-promote to Listed if listingDate has passed
+            if (ipo.listingDate) {
+                const listDate = parseFlexDate(ipo.listingDate);
+                if (listDate) {
+                    listDate.setHours(0, 0, 0, 0);
+                    if (listDate <= today) {
+                        ipo.stage = 5;
+                        ipo.status = 'Listed';
+                    } else if (ipo.closingDate) {
+                        const closeDate = parseFlexDate(ipo.closingDate);
+                        if (closeDate && closeDate < now) {
+                            ipo.stage = 4;
+                            ipo.status = 'Pre-Listing';
+                        } else if (closeDate) {
+                            ipo.stage = 3;
+                            ipo.status = 'Application Open';
+                        }
+                    }
+                }
+            } else if (ipo.closingDate) {
+                const closeDate = parseFlexDate(ipo.closingDate);
+                if (closeDate && closeDate < now) {
+                    ipo.stage = 4;
+                    ipo.status = 'Pre-Listing';
+                }
+            }
         }
     });
 }
