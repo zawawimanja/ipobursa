@@ -143,25 +143,6 @@
     "highPrice": 0.31625
   },
   {
-    "id": "5er",
-    "companyName": "5ER",
-    "market": "ACE Market",
-    "listingDate": "15-Apr-2026",
-    "year": 2026,
-    "price": 0.26,
-    "currentPrice": 0.26,
-    "performance": "0.0%",
-    "os": 20,
-    "ib": "TA Securities",
-    "sector": "Industrial (Waste Management)",
-    "fundUse": "Expansion of facilities, capital expenditure",
-    "predictedGrade": "B",
-    "stage": 5,
-    "status": "Listed",
-    "shariah": true,
-    "highPrice": 0.299
-  },
-  {
     "id": "adnex",
     "companyName": "ADNEX",
     "market": "ACE Market",
@@ -170,7 +151,7 @@
     "price": 0.2,
     "currentPrice": 0.29,
     "performance": "+45.0%",
-    "os": 20,
+    "os": 3.23,
     "ib": "Public Investment Bank",
     "sector": "Construction (Interior Fit-out)",
     "fundUse": "Expansion, working capital",
@@ -211,7 +192,7 @@
     "price": 0.25,
     "currentPrice": 0.58,
     "performance": "+132.0%",
-    "os": 20,
+    "os": 46.07,
     "ib": "Malacca Securities",
     "sector": "Industrial (Precision Engineering)",
     "fundUse": "Debt repayment, new machinery, working capital",
@@ -228,25 +209,6 @@
     "highPrice": 0.6669999999999999
   },
   {
-    "id": "ams",
-    "companyName": "AMS",
-    "market": "ACE Market",
-    "listingDate": "23-Apr-2026",
-    "year": 2026,
-    "price": 0.29,
-    "currentPrice": 0.345,
-    "performance": "+18.97%",
-    "os": 20,
-    "ib": "M&A Securities",
-    "sector": "Industrial (Aluminium)",
-    "fundUse": "New plant & warehouse, distribution point, debt repayment, working capital",
-    "predictedGrade": "B",
-    "stage": 5,
-    "status": "Listed",
-    "shariah": true,
-    "highPrice": 0.39674999999999994
-  },
-  {
     "id": "ams-material",
     "companyName": "AMS Advanced Material Berhad",
     "sector": "Industrial Products",
@@ -258,7 +220,7 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 9.1,
+    "os": 9.03,
     "ib": "M&A Securities",
     "fundUse": "Kilang / Mesin",
     "pe": 15.85,
@@ -476,7 +438,7 @@
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 0,
+    "os": 3.26,
     "ib": "TBA",
     "fundUse": "Working Capital & Development",
     "predictedGrade": "C",
@@ -819,7 +781,8 @@
         "view": "Fair Value",
         "img": "assets/reports/ta-logo.png"
       }
-    ]
+    ],
+    "os": 95.03
   },
   {
     "id": "sunmed",
@@ -830,7 +793,7 @@
     "price": 1.45,
     "currentPrice": 1.89,
     "performance": "+30.34%",
-    "os": 20,
+    "os": 5.57,
     "ib": "Maybank / AmInvestment",
     "sector": "Healthcare",
     "fundUse": "Hospital expansion, capital expenditure",
