@@ -1113,6 +1113,141 @@ function getPredictedGrade(ipo) {
     return null;
 }
 
+function renderStyledVerdict(reason, grade, ipo) {
+    if (!reason) return '<span style="color: var(--text-dim);">No verdict available</span>';
+
+    let verdictType = 'PENDING';
+    let badgeText = 'PRE-OS EVALUATION';
+    let badgeColor = '#818cf8'; // Indigo
+    let badgeBg = 'rgba(99, 102, 241, 0.1)';
+    let badgeBorder = 'rgba(99, 102, 241, 0.2)';
+    let badgeIcon = 'clock';
+
+    const reasonUpper = reason.toUpperCase();
+    
+    if (reasonUpper.includes('MUST BUY') || reasonUpper.includes('ELITE SETUP') || reasonUpper.includes('MUST APPLY')) {
+        verdictType = 'MUST_BUY';
+        badgeText = 'MUST BUY';
+        badgeColor = '#c084fc'; // Purple
+        badgeBg = 'rgba(139, 92, 246, 0.15)';
+        badgeBorder = 'rgba(139, 92, 246, 0.3)';
+        badgeIcon = 'crown';
+    } else if (reasonUpper.includes('WORTH IT') || reasonUpper.includes('STRONG SETUP') || reasonUpper.includes('STRONG DEMAND') || reasonUpper.includes('SAFE ENTRY') || reasonUpper.includes('SOLID PERFORMANCE') || reasonUpper.includes('VALUE PICK')) {
+        verdictType = 'WORTH_IT';
+        badgeText = 'WORTH IT';
+        badgeColor = '#34d399'; // Emerald
+        badgeBg = 'rgba(16, 185, 129, 0.15)';
+        badgeBorder = 'rgba(16, 185, 129, 0.3)';
+        badgeIcon = 'shield-check';
+    } else if (reasonUpper.includes('AVOID') || reasonUpper.includes('HIGH RISK') || reasonUpper.includes('EXTREME RISK') || reasonUpper.includes('WEAK SETUP')) {
+        verdictType = 'AVOID';
+        badgeText = 'AVOID';
+        badgeColor = '#f87171'; // Red
+        badgeBg = 'rgba(239, 68, 68, 0.15)';
+        badgeBorder = 'rgba(239, 68, 68, 0.3)';
+        badgeIcon = 'alert-triangle';
+    } else if (reasonUpper.includes('OUTLIER')) {
+        verdictType = 'OUTLIER';
+        badgeText = 'OUTLIER';
+        badgeColor = '#fbbf24'; // Amber
+        badgeBg = 'rgba(245, 158, 11, 0.15)';
+        badgeBorder = 'rgba(245, 158, 11, 0.3)';
+        badgeIcon = 'zap';
+    } else if (reasonUpper.includes('SCALP') || reasonUpper.includes('MOMENTUM')) {
+        verdictType = 'SCALP';
+        badgeText = 'SCALP';
+        badgeColor = '#38bdf8'; // Sky Blue
+        badgeBg = 'rgba(56, 189, 248, 0.15)';
+        badgeBorder = 'rgba(56, 189, 248, 0.3)';
+        badgeIcon = 'trending-up';
+    }
+
+    // Clean up the verdict title from the reason text so it isn't redundant
+    let cleanText = reason
+        .replace(/^[✅⚠️🌟🚀💎🔥⚡📈📈❌💡⏳\s\-\•\*\(\)]+/, '') // strip starting emojis
+        .replace(/^<b>(WORTH IT|AVOID|MUST BUY|REMAINS A|PRE-OS GRADE|Elite Setup|Value Pick|Momentum Setup|Solid Performance|Safe Entry|Weak Setup|High Risk|Lack of Support|Extreme Risk|Demand Rescue|No Momentum|Caution)[^<]*<\/b>/i, '') // strip title tags
+        .replace(/^<br\s*\/?>/i, '') // strip starting break
+        .trim();
+
+    // Split text by lines
+    const lines = cleanText.split(/<br\s*\/?>|\n/i).map(l => l.trim()).filter(Boolean);
+
+    let listHtml = '';
+    let noteHtml = '';
+
+    lines.forEach(line => {
+        // If line is a note
+        if (line.includes('💡') || line.toLowerCase().startsWith('note:')) {
+            const noteText = line.replace(/^[💡\s\-\•]+/, '').replace(/^note:/i, '').trim();
+            noteHtml = `
+                <div style="margin-top: 0.4rem; padding: 0.35rem 0.5rem; background: rgba(245, 158, 11, 0.08); border-left: 2px solid #f59e0b; border-radius: 2px 4px 4px 2px; font-size: 0.7rem; color: #fde047; line-height: 1.3;">
+                    ${noteText}
+                </div>
+            `;
+        } else {
+            // Render line as a stylized list item
+            let lineIcon = 'check';
+            let iconColor = '#34d399';
+            let content = line;
+
+            if (line.includes('❌') || line.includes('⚠️')) {
+                lineIcon = 'alert-circle';
+                iconColor = '#f87171';
+                content = line.replace(/^[❌⚠️\s\-\•]+/, '');
+            } else if (line.includes('🚀') || line.includes('🔥') || line.includes('⚡')) {
+                lineIcon = 'zap';
+                iconColor = '#fbbf24';
+                content = line.replace(/^[🚀🔥⚡\s\-\•]+/, '');
+            } else if (line.includes('💎') || line.includes('💰')) {
+                lineIcon = 'sparkles';
+                iconColor = '#38bdf8';
+                content = line.replace(/^[💎💰\s\-\•]+/, '');
+            } else if (line.includes('⏳')) {
+                lineIcon = 'clock';
+                iconColor = '#a5b4fc';
+                content = line.replace(/^[⏳\s\-\•]+/, '');
+            } else {
+                content = line.replace(/^[\s\-\•]+/, '');
+            }
+
+            listHtml += `
+                <div style="display: flex; align-items: flex-start; gap: 0.35rem; margin-bottom: 0.25rem; line-height: 1.3;">
+                    <i data-lucide="${lineIcon}" style="width: 11px; height: 11px; color: ${iconColor}; margin-top: 2px; flex-shrink: 0;"></i>
+                    <span style="color: var(--text-main); font-size: 0.75rem;">${content}</span>
+                </div>
+            `;
+        }
+    });
+
+    if (!listHtml && !noteHtml) {
+        // Fallback if cleaning removed everything
+        return `
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 320px;">
+                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                    <span style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeBorder}; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.25rem;">
+                        <i data-lucide="${badgeIcon}" style="width: 10px; height: 10px;"></i> ${badgeText}
+                    </span>
+                </div>
+                <div style="color: var(--text-dim); font-size: 0.75rem;">${reason}</div>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="verdict-card" style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 320px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <span style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeBorder}; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.25rem;">
+                    <i data-lucide="${badgeIcon}" style="width: 10px; height: 10px;"></i> ${badgeText}
+                </span>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                ${listHtml}
+                ${noteHtml}
+            </div>
+        </div>
+    `;
+}
+
 function createIPOCard(ipo, index = 0) {
     let specificDetails = '';
     const statusClass = ipo.status?.toLowerCase().includes('live') ? 'live' : (ipo.status?.toLowerCase().includes('open') ? 'open' : 'pending');
@@ -1226,8 +1361,8 @@ function createIPOCard(ipo, index = 0) {
                 </div>
                 ` : ''}
             </td>
-            <td style="padding: 0.75rem 1rem; min-width: 180px; font-size: 0.75rem; color: var(--text-dim); line-height: 1.3;">
-                ${gradeObj.reason}
+            <td style="padding: 0.75rem 1rem; min-width: 220px; max-width: 320px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
+                ${renderStyledVerdict(gradeObj.reason, grade, ipo)}
             </td>
             <td style="padding: 0.75rem 1rem; white-space: nowrap;">${actionBtn}</td>
         </tr>
