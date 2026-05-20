@@ -683,7 +683,7 @@ function getIpoGrade(ipo) {
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0; 
     
     // PRIORITY 1: Respect manual Predicted Grade from data.js if it exists
-    if (ipo.predictedGrade && ipo.stage < 5) {
+    if (ipo.predictedGrade && (ipo.stage < 5 || ipo.analystInsight)) {
         return { 
             grade: ipo.predictedGrade, 
             reason: ipo.analystInsight || 'Manual rating applied.' 
