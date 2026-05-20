@@ -286,6 +286,29 @@
                     </tfoot>
                 </table>
             </div>
+            
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <strong style="color: var(--accent-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+                        <i class="fas fa-question-circle"></i> How to Read the Table
+                    </strong>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                        The values show the <strong>total combined gain</strong> for all IPOs of that grade in that year. The number in parentheses, like <strong>(8)</strong>, indicates the <strong>number of IPO listings</strong> in that category.
+                        <br><br>
+                        <em>Example:</em> In 2024, there were <strong>35</strong> Grade B IPOs, yielding an accumulated day-1 gain of <strong>+1,780.1%</strong>.
+                    </p>
+                </div>
+                <div>
+                    <strong style="color: var(--accent-primary); display: flex; align-items: center; gap: 8px; font-size: 0.95rem; margin-bottom: 8px;">
+                        <i class="fas fa-filter"></i> Understanding the Grades
+                    </strong>
+                    <ul style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 5px;"><strong style="color: var(--grade-a);">Grade A (Stars):</strong> Rare, high-demand IPOs (e.g. over 50x oversubscribed). High Day 1 pop but hard to get allocated.</li>
+                        <li style="margin-bottom: 5px;"><strong style="color: var(--grade-b);">Grade B (Workhorses):</strong> Consistent, standard IPOs. Slightly smaller average pops but high frequency. Excellent for compounding.</li>
+                        <li><strong style="color: var(--grade-c);">Grade C (Landmines):</strong> High-risk IPOs that fail to perform. Total returns are <strong>-237.7%</strong>—we skip these completely.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="card">
@@ -369,6 +392,24 @@
                     </tbody>
                 </table>
             </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                <div>
+                    <strong style="color: #facc15; font-size: 0.9rem; display: block; margin-bottom: 5px;"><i class="fas fa-percentage"></i> What is 5% Average Allocation?</strong>
+                    <p style="font-size: 0.8rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                        Because of high demand, retail applications are oversubscribed. If you apply for <strong>RM 10,000</strong>, you will usually only get allocated about <strong>5% (RM 500)</strong> worth of shares. The other <strong>RM 9,500</strong> cash is immediately refunded to your bank account.
+                    </p>
+                </div>
+                <div>
+                    <strong style="color: var(--accent-primary); font-size: 0.9rem; display: block; margin-bottom: 5px;"><i class="fas fa-columns"></i> What do the Columns mean?</strong>
+                    <ul style="font-size: 0.8rem; color: #94a3b8; line-height: 1.4; margin: 0; padding-left: 15px;">
+                        <li style="margin-bottom: 4px;"><strong>Fixed:</strong> You apply for RM 10k every time, but you withdraw your profits instead of reinvesting. You grow slowly.</li>
+                        <li style="margin-bottom: 4px;"><strong>Compounded (Cash):</strong> You add your profits back to your capital pool to apply for larger share volumes on subsequent IPOs.</li>
+                        <li><strong>Hunter Pro (2x Leverage):</strong> You compound cash profits <em>and</em> use preferred broker financing to double your application power, multiplying your returns.</li>
+                    </ul>
+                </div>
+            </div>
+            
             <div class="pro-tip" style="margin-top: 25px; border-color: #facc15; background: rgba(250, 204, 21, 0.05);">
                 <i class="fas fa-bolt" style="color: #facc15;"></i>
                 <p><b>Leverage is a Speed Multiplier:</b> By using 2x leverage financing, you double your share allocation per IPO. This accelerates compounding exponentially. In 7 years, the difference between Cash and Leverage is a staggering <b>RM 1.9 Million</b>.</p>
@@ -382,6 +423,15 @@
             </div>
             <div class="projection-grid" id="projectionGrid">
                 <!-- Filled by JS -->
+            </div>
+            
+            <div style="margin-top: 25px; padding: 15px; background: rgba(56, 189, 248, 0.05); border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <strong style="color: var(--accent-primary); font-size: 0.95rem; display: block; margin-bottom: 5px;"><i class="fas fa-info-circle"></i> Understanding the 7-Year Projections</strong>
+                <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0;">
+                    These cards show your simulated wealth growth based on your <strong>"Apply size per IPO"</strong>. 
+                    <br><br>
+                    Notice how the **Grade B Focus** yields over **13 times more wealth** than the **Grade A Focus**. This is because Grade B IPOs occur very frequently (133 times in 7 years), allowing your money to compound repeatedly. Grade A IPOs are highly profitable but too rare (only 19 times in 7 years) to create an effective compounding chain by themselves.
+                </p>
             </div>
         </div>
 
