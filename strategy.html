@@ -378,7 +378,7 @@
         <div class="card">
             <div class="section-title">
                 <i class="fas fa-bullseye"></i>
-                Wealth Projections (Grade B Focus)
+                Side-by-Side Projections (Grade B vs. Grade A Focus)
             </div>
             <div class="projection-grid" id="projectionGrid">
                 <!-- Filled by JS -->
@@ -464,23 +464,36 @@
 
             // Render Projections
             STRATEGY_DATA.projections.forEach(proj => {
-                const total7 = proj.amt * STRATEGY_DATA.multiplier;
-                const perYear = total7 / 7;
-                const perMonth = perYear / 12;
+                const multiplierB = STRATEGY_DATA.multiplier;
+                const multiplierA = parseFloat(STRATEGY_DATA.totals.a) / 100;
+
+                const total7B = proj.amt * multiplierB;
+                const perMonthB = (total7B / 7) / 12;
+
+                const total7A = proj.amt * multiplierA;
+                const perMonthA = (total7A / 7) / 12;
 
                 const card = document.createElement('div');
                 card.className = `projection-card ${proj.highlight ? 'highlight' : ''}`;
                 card.innerHTML = `
                     <div class="proj-label">${proj.label}</div>
                     <div class="proj-amount">RM ${proj.amt.toLocaleString()} <span style="font-size:0.8rem; font-weight:400; color:#94a3b8;">per IPO</span></div>
-                    <div class="proj-stats">
-                        <div class="stat-item">
-                            <span>7 Year Total</span>
-                            <b>RM ${Math.round(total7).toLocaleString()}</b>
+                    
+                    <div class="proj-stats" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left;">
+                        <div style="border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 10px;">
+                            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--grade-b); font-weight: 700; display: block; margin-bottom: 5px;">🤖 Grade B Focus</span>
+                            <div style="font-size: 0.75rem; color: #94a3b8;">7-Year Total:</div>
+                            <b style="font-size: 1.1rem; color: white;">RM ${Math.round(total7B).toLocaleString()}</b>
+                            <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">Avg Income:</div>
+                            <b style="font-size: 1rem; color: #10b981;">RM ${Math.round(perMonthB).toLocaleString()}/mo</b>
                         </div>
-                        <div class="stat-item">
-                            <span>Avg Income</span>
-                            <b>RM ${Math.round(perMonth).toLocaleString()}/mo</b>
+                        
+                        <div style="padding-left: 5px;">
+                            <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--grade-a); font-weight: 700; display: block; margin-bottom: 5px;">⭐ Grade A Focus</span>
+                            <div style="font-size: 0.75rem; color: #94a3b8;">7-Year Total:</div>
+                            <b style="font-size: 1.1rem; color: white;">RM ${Math.round(total7A).toLocaleString()}</b>
+                            <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">Avg Income:</div>
+                            <b style="font-size: 1rem; color: #38bdf8;">RM ${Math.round(perMonthA).toLocaleString()}/mo</b>
                         </div>
                     </div>
                 `;
