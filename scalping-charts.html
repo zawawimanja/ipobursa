@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Day Visual Charts | IPO Hunter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .visual-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .visual-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .visual-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .chart-card {
+            background: rgba(30, 41, 59, 0.55);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .chart-image-wrap {
+            position: relative;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 1rem;
+            cursor: zoom-in;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            height: 380px;
+        }
+
+        .chart-image-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.4s ease;
+        }
+
+        .chart-card:hover .chart-image-wrap img {
+            transform: scale(1.025);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .chart-card:hover .zoom-badge {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+
+        .chart-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .status-badge {
+            align-self: flex-start;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .status-exit {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .status-hold {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .status-info {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .chart-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .chart-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+            max-width: 700px;
+            font-weight: 500;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3.5rem;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: #ef4444;
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.25);"></div>
+        <div class="blob blob-3" style="background: rgba(99, 102, 241, 0.25);"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up" style="color: var(--primary-light);"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links" style="display: flex; gap: 0.75rem;">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none;">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="tips.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none;">
+                    <i data-lucide="award"></i> <span class="nav-text">Tips</span>
+                </a>
+                <a href="strategy.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none;">
+                    <i data-lucide="line-chart"></i> <span class="nav-text">Strategy</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 4rem; padding-bottom: 6rem;">
+        <!-- Header -->
+        <header class="hero" style="text-align: center; margin-bottom: 3rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <span class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.05em;">VISUAL ALBUM</span>
+            </div>
+            <h1>Listing Day <span>Visual Album</span></h1>
+            <p style="max-width: 600px; margin: 0 auto; color: var(--text-dim);">Himpunan 5 imej utama Listing Day secara bersih, lapang, dan distraction-free. Klik untuk besarkan saiz penuh.</p>
+        </header>
+
+        <!-- Visual Grid -->
+        <div class="visual-grid">
+            <!-- 1. SKYECHIP BERHAD -->
+            <div class="chart-card">
+                <div class="chart-image-wrap" onclick="openLightbox('assets/media__1779259139146.jpg', '<b>SkyeChip Berhad tf1M:</b> Minit ke-2 memecahkan sokongan Minit 1 dan terus menjunam tanpa kembali. Isyarat keluar mandatori!')">
+                    <img src="assets/media__1779259139146.jpg" alt="SkyeChip tf1M Chart">
+                    <div class="zoom-badge">
+                        <i class="fas fa-search-plus"></i> Zoom Chart
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <span class="status-badge status-exit">
+                        <i class="fas fa-times-circle"></i> Exit / Cut Loss
+                    </span>
+                    <h3>1. SkyeChip Berhad (tf1M)</h3>
+                    <p>Corak lilin Minit Ke-2 pecah sokongan lilin pertama dan terus junam teruk. Exit mandatori!</p>
+                </div>
+            </div>
+
+            <!-- 2. SUNWAY HEALTHCARE -->
+            <div class="chart-card">
+                <div class="chart-image-wrap" onclick="openLightbox('assets/media__1779259139211.jpg', '<b>SunMed tf1M:</b> Kenaikan konsisten membuat New High berturut-turut pada timeframe 1 Minit disokong volume kuat. Sesuai untuk hold.')">
+                    <img src="assets/media__1779259139211.jpg" alt="Sunway Healthcare tf1M Chart">
+                    <div class="zoom-badge">
+                        <i class="fas fa-search-plus"></i> Zoom Chart
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <span class="status-badge status-hold">
+                        <i class="fas fa-check-circle"></i> Ride Trend / Hold
+                    </span>
+                    <h3>2. SunMed Berhad (tf1M)</h3>
+                    <p>Konsisten mencatatkan New High berturut-turut pada timeframe 1 Minit. Boleh hold & ride.</p>
+                </div>
+            </div>
+
+            <!-- 3. PRE-OPEN ORDER BOOK -->
+            <div class="chart-card">
+                <div class="chart-image-wrap" onclick="openLightbox('assets/media__1779259139149.jpg', '<b>Bursa Order Book Pre-Open Depth:</b> Screenshot depth bids/asks di platform Moomoo jam 8:58 AM sebelum pasaran dibuka untuk mengesan hype.')">
+                    <img src="assets/media__1779259139149.jpg" alt="Order Book Queue Depth">
+                    <div class="zoom-badge">
+                        <i class="fas fa-search-plus"></i> Zoom Chart
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <span class="status-badge status-info">
+                        <i class="fas fa-book-open"></i> Pre-Open Order Book
+                    </span>
+                    <h3>3. Moomoo Order Book Depth</h3>
+                    <p>Barisan harga Bid dan Ask Queue jam 8:58 AM untuk menilai kedalaman queue dan demand sebelum listing.</p>
+                </div>
+            </div>
+
+            <!-- 4. EMPIRE PREMIUM FOOD BHD -->
+            <div class="chart-card">
+                <div class="chart-image-wrap" onclick="openLightbox('assets/media__1779259139140.jpg', '<b>Empire Premium Food Bhd:</b> Lilin Minit Ke-2 memecahkan sokongan kuning 1.18 dan terus menjunam tanpa kembali ke paras 1.06.')">
+                    <img src="assets/media__1779259139140.jpg" alt="Empire Premium Food tf1M Chart">
+                    <div class="zoom-badge">
+                        <i class="fas fa-search-plus"></i> Zoom Chart
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <span class="status-badge status-exit">
+                        <i class="fas fa-times-circle"></i> Exit / Cut Loss
+                    </span>
+                    <h3>4. Empire Premium Food (tf1M)</h3>
+                    <p>Contoh penentu "Minute 2 Rule" di mana support 1.18 dipecahkan dan harga junam ke 1.06.</p>
+                </div>
+            </div>
+
+            <!-- 5. INSPACE CREATION BERHAD -->
+            <div class="chart-card">
+                <div class="chart-image-wrap" onclick="openLightbox('assets/media__1779259139139.jpg', '<b>Inspace Creation Berhad:</b> Lilin Minit Ke-2 pecah di bawah paras sokongan kuning 0.285 yang ditandakan sebagai BOS (Break of Structure).')">
+                    <img src="assets/media__1779259139139.jpg" alt="Inspace Creation Berhad tf1M Chart">
+                    <div class="zoom-badge">
+                        <i class="fas fa-search-plus"></i> Zoom Chart
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <span class="status-badge status-exit">
+                        <i class="fas fa-ban"></i> Break of Structure (BOS)
+                    </span>
+                    <h3>5. Inspace Creation (tf1M)</h3>
+                    <p>Support kuning 0.285 gagal bertahan dan mencetuskan isyarat Break of Structure (BOS) bearish.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action return buttons -->
+        <div style="margin-top: 4rem; text-align: center;">
+            <a href="scalping-sop.html" class="btn-moomoo" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; padding: 0.8rem 1.5rem; border-radius: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); transition: var(--transition);">
+                <i class="fas fa-chevron-left"></i> Kembali ke Scalping SOP Playbook
+            </a>
+        </div>
+    </main>
+
+    <!-- Lightbox Zoom Modal -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Full Zoomed Chart">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <footer class="glass-footer">
+        <div class="container" style="text-align: center; color: var(--text-dim); font-size: 0.85rem;">
+            <p>&copy; 2026 Bursa IPO Dashboard. Trading involves risk. Designed to be simple & distraction-free.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function openLightbox(src, captionText) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            
+            img.src = src;
+            caption.innerHTML = captionText;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // prevent background scrolling
+        }
+
+        function closeLightbox(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // restore scrolling
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
