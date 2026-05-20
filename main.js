@@ -1567,8 +1567,8 @@ function showResearch(ipoId) {
             <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.75rem;">
                 <h4 style="margin: 0 0 0.5rem 0; color: #10b981;">Hunter Strategy Analysis:</h4>
                 <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.5;">
-                    The consensus from TA Securities and M+ Global confirms a strong upside potential of ${((ipo.avgTP - ipo.price) / ipo.price * 100).toFixed(1)}%. 
-                    While TA is more conservative at RM 0.83, M+ projects a "Fair Value" of RM 0.93. 
+                    The consensus from major research houses confirms a strong upside potential of ${((ipo.avgTP - ipo.price) / ipo.price * 100).toFixed(1)}% compared to the retail price. 
+                    While some analysts are more conservative, others project a higher "Fair Value" target. 
                     <strong>Our Take:</strong> Accumulate for Step 3, but prioritize taking partial profits at ${ipo.avgTP}.
                 </p>
             </div>
@@ -1747,7 +1747,7 @@ function syncHunterProCalculator() {
 
     const grossProceeds = bestTier.units * sellPrice;
     
-    // Brokerage: M+ (0.08% or min RM8)
+    // Brokerage: Standard cash upfront (0.08% or min RM8)
     const buyBrokerage = Math.max(8, actualCost * 0.0008);
     const sellBrokerage = Math.max(8, grossProceeds * 0.0008);
     

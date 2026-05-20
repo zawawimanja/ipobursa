@@ -305,12 +305,7 @@ const IPO_DATA = [
         "view": "Fair Value",
         "img": "assets/reports/ta-logo.png"
       },
-      {
-        "house": "M+ Global",
-        "tp": 0.66,
-        "view": "Fair Value",
-        "img": "assets/reports/mplus-logo.png"
-      },
+
       {
         "house": "Public Investment",
         "tp": 0.56,

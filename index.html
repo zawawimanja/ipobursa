@@ -26,11 +26,21 @@
 
     <nav class="glass-header">
         <div class="container">
-            <div class="logo">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
                 <i data-lucide="trending-up"></i>
                 <span class="logo-text"><span>Bursa</span>IPO</span>
             </div>
-            <div class="nav-links">
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="strategy.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
+                    <i data-lucide="line-chart"></i> <span class="nav-text">Strategy</span>
+                </a>
+                <a href="tips.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
+                    <i data-lucide="sparkles"></i> <span class="nav-text">Tips</span>
+                </a>
+                <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-moomoo" style="background: #10b981; border: none; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); display: flex !important; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="user-plus"></i> <span>Register Moomoo</span>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -47,18 +57,15 @@
                     <span class="dot"></span>
                     <span id="update-time">Syncing latest market prices...</span>
                 </div>
-                <div style="display: flex; gap: 1rem;">
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
                     <button onclick="fetchLiveUpdates()" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); cursor: pointer;">
                         <i data-lucide="refresh-cw"></i> Force Refresh
                     </button>
                     <button onclick="openCalculatorModal()" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); cursor: pointer; color: #f59e0b; font-weight: 800; border-radius: 2rem;">
                         <i data-lucide="crown"></i> Hunter Pro Hub
                     </button>
-                    <a href="https://mplusonline.com/campaigns/newuser?lang=en-US&inviteCode=DMEICG&activityId=86&_scnl=1111738" target="_blank" class="btn-moomoo hero-cta" style="text-decoration: none; background: linear-gradient(135deg, var(--primary), #4f46e5); border-color: rgba(255,255,255,0.1);">
-                        <i data-lucide="shield-check"></i> Open M+ Account
-                    </a>
-                    <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-moomoo hero-cta" style="text-decoration: none;">
-                        <i data-lucide="pie-chart"></i> Open Moomoo Account
+                    <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-moomoo hero-cta" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border-color: rgba(16, 185, 129, 0.4); color: white; font-weight: 700; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
+                        <i data-lucide="user-plus"></i> Open Moomoo Account
                     </a>
                     <button onclick="openSyncHub()" class="btn-moomoo hero-cta" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border-color: rgba(16, 185, 129, 0.4); color: white;">
                         <i data-lucide="zap"></i> Hunter Sync Hub
@@ -278,40 +285,25 @@
                 </div>
             </section>
 
-            <section class="broker-choice glass-card" style="margin-bottom: 4rem; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255,255,255,0.02); padding: 2.5rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Hunter's <span>Preferred Brokers</span></h2>
+            <section class="broker-choice glass-card" style="margin-bottom: 4rem; border: 1px solid rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent); padding: 2.5rem;">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Hunter's <span>Preferred Broker</span></h2>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <!-- M+ Online Card -->
-                    <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 1.5rem; padding: 2rem; position: relative; overflow: hidden;">
-                        <div style="font-size: 0.7rem; color: #a5b4fc; text-transform: uppercase; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: 0.1em;">Best for Financing</div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: white;">M+ Online</h3>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 2rem 0; font-size: 0.9rem; color: var(--text-dim);">
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> 2x Leverage for IPOs</li>
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> Dedicated Financing Pool</li>
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> Established Local Broker</li>
-                        </ul>
-                        <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem; text-align: center; border: 1px dashed rgba(165, 180, 252, 0.3);">
-                            <span style="font-size: 0.65rem; color: #a5b4fc; display: block; margin-bottom: 0.25rem;">INVITE CODE</span>
-                            <span style="font-size: 1.25rem; font-weight: 800; color: white; letter-spacing: 0.1em;">DMEICG</span>
-                        </div>
-                        <a href="https://mplusonline.com/campaigns/newuser?lang=en-US&inviteCode=DMEICG&activityId=86&_scnl=1111738" target="_blank" class="btn-moomoo" style="display: block; text-align: center; padding: 1rem; text-decoration: none; border-radius: 0.75rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), #4f46e5); color: white; border: 1px solid rgba(255,255,255,0.1);">Open M+ Account</a>
-                    </div>
-
+                <div style="display: flex; justify-content: center;">
                     <!-- Moomoo Card -->
-                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), transparent); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 1.5rem; padding: 2rem; position: relative; overflow: hidden;">
-                        <div style="font-size: 0.7rem; color: #10b981; text-transform: uppercase; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: 0.1em;">Best for Platform</div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: white;">Moomoo MY</h3>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 2rem 0; font-size: 0.9rem; color: var(--text-dim);">
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> Pro-Level Charting Tools</li>
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> Free Level 2 Market Data</li>
-                            <li style="margin-bottom: 0.75rem;"><i data-lucide="check" style="width: 16px; color: #10b981; margin-right: 8px;"></i> 0* Brokerage for 180 Days</li>
+                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), transparent); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 1.5rem; padding: 2.5rem; position: relative; overflow: hidden; max-width: 600px; width: 100%; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);">
+                        <div style="font-size: 0.8rem; color: #10b981; text-transform: uppercase; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: 0.15em; text-align: center;">Best Pro-Level Platform</div>
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: white; text-align: center;">Moomoo MY</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0 0 2.5rem 0; font-size: 1rem; color: var(--text-dim);">
+                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Pro-Level Charting & Research Tools</li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Free Level 2 Market Data for Bursa Malaysia</li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> 0* Brokerage Fee for first 180 Days</li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Direct Digital IPO Subscriptions</li>
                         </ul>
-                        <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem; text-align: center; border: 1px dashed rgba(16, 185, 129, 0.3);">
-                            <span style="font-size: 0.65rem; color: #10b981; display: block; margin-bottom: 0.25rem;">NEW USER REWARD</span>
-                            <span style="font-size: 1rem; font-weight: 700; color: white;">Free Shares/Cash Coupons</span>
+                        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 0.75rem; margin-bottom: 2rem; text-align: center; border: 1px dashed rgba(16, 185, 129, 0.4);">
+                            <span style="font-size: 0.75rem; color: #10b981; display: block; margin-bottom: 0.4rem; font-weight: 600; letter-spacing: 0.05em;">EXCLUSIVE NEW USER REWARD</span>
+                            <span style="font-size: 1.2rem; font-weight: 800; color: white;">Free Shares & Cash Coupons</span>
                         </div>
-                        <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-primary" style="display: block; text-align: center; padding: 1rem; text-decoration: none; border-radius: 0.75rem; font-weight: 700; background: #10b981;">Open Moomoo Account</a>
+                        <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-primary" style="display: block; text-align: center; padding: 1.2rem; text-decoration: none; border-radius: 0.75rem; font-weight: 800; background: #10b981; font-size: 1.1rem; border: none; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); transition: all 0.3s;">Open Moomoo Account</a>
                     </div>
                 </div>
             </section>
@@ -456,10 +448,8 @@
     <footer class="glass-footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2026 IPO Hunter Dashboard. Multi-Broker Support Active.</p>
+                <p>&copy; 2026 IPO Hunter Dashboard. Trading involves risk.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem;">
-                    <a href="https://mplusonline.com/campaigns/newuser?lang=en-US&inviteCode=DMEICG&activityId=86&_scnl=1111738" target="_blank" style="color: var(--primary-light); text-decoration: none; font-size: 0.85rem;">M+ Sign Up →</a>
-                    <span style="color: rgba(255,255,255,0.2);">|</span>
                     <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" style="color: #10b981; text-decoration: none; font-size: 0.85rem;">Moomoo Sign Up →</a>
                 </div>
             </div>
@@ -482,10 +472,7 @@
 
     <!-- Mobile Floating Broker Hub -->
     <div style="position: fixed; bottom: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000;">
-        <a href="https://mplusonline.com/campaigns/newuser?lang=en-US&inviteCode=DMEICG&activityId=86&_scnl=1111738" target="_blank" class="mobile-moomoo-fab" style="position: static; background: linear-gradient(135deg, var(--primary), #4f46e5); width: 45px; height: 45px; border-radius: 12px;">
-            <i data-lucide="shield-check" style="width: 20px;"></i>
-        </a>
-        <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="mobile-moomoo-fab" style="position: static; background: #10b981; width: 45px; height: 45px; border-radius: 12px;">
+        <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="mobile-moomoo-fab" style="position: static; background: #10b981; width: 45px; height: 45px; border-radius: 12px;" title="Open Moomoo Account">
             <i data-lucide="trending-up" style="width: 20px;"></i>
         </a>
     </div>
@@ -526,7 +513,7 @@
                             <label><i data-lucide="zap" style="width: 14px;"></i> Leverage</label>
                             <select id="calc-leverage" onchange="syncHunterProCalculator()">
                                 <option value="1">1x (Cash Only)</option>
-                                <option value="2" selected>2x (M+ Financing)</option>
+                                <option value="2" selected>2x (Standard Leverage)</option>
                             </select>
                         </div>
                     </div>
@@ -620,7 +607,7 @@
                             </div>
                         </div>
                         <p style="font-size: 0.7rem; color: var(--text-dim); margin-top: 1rem; font-style: italic;">
-                            *Using M+ Online cash upfront rate (0.08% or min RM8) for brokerage calculation.
+                            *Using standard cash upfront rate (0.08% or min RM8) for brokerage calculation.
                         </p>
                     </div>
                 </div>
