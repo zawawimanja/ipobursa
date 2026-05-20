@@ -248,6 +248,80 @@
         }
         .pro-tip i { color: var(--accent-primary); margin-top: 3px; flex-shrink: 0; }
         .pro-tip p { margin: 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+            max-width: 700px;
+            font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            background: #ef4444;
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body>
@@ -338,20 +412,27 @@
                     </div>
                     
                     <!-- Visual Case Studies in Strategy -->
-                    <div style="margin: 15px 0 20px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-                        <div style="background: rgba(239, 68, 68, 0.05); padding: 10px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.15); text-align: center;">
-                            <img src="assets/media__1779257880683.jpg" alt="Skyechip Minute 2 Plunge" style="width: 100%; max-height: 110px; object-fit: contain; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                            <div style="font-size: 0.72rem; color: #f87171; font-weight: 700; margin-top: 6px;">
+                    <div style="margin: 15px 0 20px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                        <div style="background: rgba(239, 68, 68, 0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.15); text-align: center; cursor: zoom-in;" onclick="openLightbox('assets/media__1779259139146.jpg', '<b>SkyeChip tf1M Chart:</b> Kejatuhan Minit Kedua (Min 2) memecahkan sokongan Minit Pertama (M1) dan terus melorot tanpa kembali. Isyarat keluar mandatori!')">
+                            <img src="assets/media__1779259139146.jpg" alt="Skyechip Minute 2 Plunge" style="width: 100%; max-width: 110px; height: auto; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                            <div style="font-size: 0.72rem; color: #f87171; font-weight: 700; margin-top: 8px;">
                                 <i class="fas fa-arrow-down"></i> Case SkyeChip: Min 2 Plunge
                             </div>
                             <div style="font-size: 0.65rem; color: #cbd5e1; margin-top: 2px;">Break support Minit 1 = terus exit/CL.</div>
                         </div>
-                        <div style="background: rgba(16, 185, 129, 0.05); padding: 10px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15); text-align: center;">
-                            <img src="assets/media__1779257880688.jpg" alt="SunMed New High Hold" style="width: 100%; max-height: 110px; object-fit: contain; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                            <div style="font-size: 0.72rem; color: #34d399; font-weight: 700; margin-top: 6px;">
+                        <div style="background: rgba(16, 185, 129, 0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15); text-align: center; cursor: zoom-in;" onclick="openLightbox('assets/media__1779259139211.jpg', '<b>SunMed tf1M Chart:</b> Kenaikan berterusan mencipta New High berturut-turut pada timeframe 1 Minit disokong volume kukuh. Sesuai untuk hold & ride.')">
+                            <img src="assets/media__1779259139211.jpg" alt="SunMed New High Hold" style="width: 100%; max-width: 110px; height: auto; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                            <div style="font-size: 0.72rem; color: #34d399; font-weight: 700; margin-top: 8px;">
                                 <i class="fas fa-arrow-up"></i> Case SunMed: New High Hold
                             </div>
                             <div style="font-size: 0.65rem; color: #cbd5e1; margin-top: 2px;">Konsisten new high = boleh hold & ride.</div>
+                        </div>
+                        <div style="background: rgba(56, 189, 248, 0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.15); text-align: center; cursor: zoom-in;" onclick="openLightbox('assets/media__1776227926283.png', '<b>SOP Entri & Trend Sell:</b> Contoh isyarat belian (Buy) dan jualan berasaskan trend (Trend Sell) yang jelas pada candlestick chart.')">
+                            <img src="assets/media__1776227926283.png" alt="SOP Entry & Trend Sell Signal" style="width: 100%; max-width: 120px; height: auto; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                            <div style="font-size: 0.72rem; color: var(--accent-primary); font-weight: 700; margin-top: 8px;">
+                                <i class="fas fa-tag"></i> SOP Entri & Trend Sell
+                            </div>
+                            <div style="font-size: 0.65rem; color: #cbd5e1; margin-top: 2px;">Beli tapak trend, keluar bila isyarat dicetus.</div>
                         </div>
                     </div>
 
@@ -582,6 +663,45 @@
                 projectionGrid.appendChild(card);
             });
         });
+
+        // Global Lightbox Modal Handlers
+        function openLightbox(src, captionText) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            
+            img.src = src;
+            caption.innerHTML = captionText;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // prevent background scrolling
+        }
+
+        function closeLightbox(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // restore scrolling
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     </script>
+
+    <!-- LIGHTBOX LIGHT-WEIGHT MODAL -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Zoomed view">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
 </body>
 </html>
