@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Visual 5 Carta Utama | SOP Scalping</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --secondary: #0ea5e9;
+            --accent: #f43f5e;
+            --bg-dark: #090d16;
+            --bg-deep: #020617;
+            --card-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .ambient-glow {
+            position: fixed;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -10vw;
+            left: -10vw;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(50px);
+        }
+
+        .ambient-glow-2 {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: -5vw;
+            right: -5vw;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(50px);
+        }
+
+        /* Glass Header */
+        .glass-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(9, 13, 22, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            padding: 10px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary-light);
+            transform: translateX(-3px);
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-count {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Content Layout */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-intro {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        .page-intro h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f8fafc 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-intro p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Floating quick jump controls */
+        .jump-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .jump-tab {
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--text-dim);
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .jump-tab:hover, .jump-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Chart Cards */
+        .chart-card {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+            scroll-margin-top: 100px;
+        }
+
+        .chart-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chart-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .study-badge {
+            background: linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .study-badge.bullish {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+        }
+
+        .chart-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .chart-info-tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--secondary);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .image-wrapper {
+            position: relative;
+            background: var(--bg-deep);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: zoom-in;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .chart-img {
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+
+        .image-wrapper:hover .chart-img {
+            transform: scale(1.01);
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .image-wrapper:hover .zoom-hint {
+            background: var(--primary);
+            border-color: var(--primary-light);
+            transform: scale(1.05);
+        }
+
+        /* Brief Context Caption directly below chart */
+        .chart-desc-bar {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--primary);
+            padding: 12px 18px;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .chart-desc-bar strong {
+            color: #f8fafc;
+        }
+
+        /* Gorgeous Custom Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            z-index: 1010;
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent);
+            border-color: #ff8a9e;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            z-index: 1005;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary);
+            border-color: var(--primary-light);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        .lightbox-stage {
+            width: 100%;
+            height: calc(100% - 140px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.15);
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+            cursor: grab;
+            user-select: none;
+        }
+
+        .lightbox-img:active {
+            cursor: grabbing;
+        }
+
+        /* Lightbox Toolbar */
+        .lightbox-toolbar {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--glass-border);
+            padding: 8px 20px;
+            border-radius: 50px;
+            z-index: 1005;
+        }
+
+        .tool-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .tool-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Lightbox Caption */
+        .lightbox-caption {
+            color: #f8fafc;
+            font-size: 1.05rem;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 15px;
+            max-width: 800px;
+            line-height: 1.5;
+            padding: 0 20px;
+            z-index: 1005;
+        }
+
+        /* Help Info toast */
+        .help-info {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive UI adjustments */
+        @media (max-width: 900px) {
+            .lightbox-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            .lightbox-prev {
+                left: 15px;
+            }
+            .lightbox-next {
+                right: 15px;
+            }
+            .page-intro h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .glass-header {
+                padding: 12px 15px;
+            }
+            .logo-title {
+                font-size: 1.1rem;
+            }
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+            .chart-card {
+                padding: 15px;
+                border-radius: 16px;
+            }
+            .chart-title {
+                font-size: 1.05rem;
+            }
+            .jump-nav {
+                margin-bottom: 20px;
+            }
+            .lightbox-toolbar {
+                padding: 6px 12px;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Ambient Glow -->
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="glass-header">
+        <a href="scalping-sop.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Kembali ke Playbook
+        </a>
+        <div class="logo-wrap">
+            <span class="logo-title">SOP Scalping</span>
+            <span class="badge-count">5 Carta Utama</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Intro Headings -->
+        <section class="page-intro">
+            <h1>Album Visual 5 Carta Utama</h1>
+            <p>Halaman khas bebas gangguan yang mengandungi 5 tangkapan skrin asal daripada Listing Day. Klik pada mana-mana gambar untuk mod Zoom Interaktif beresolusi penuh.</p>
+        </section>
+
+        <!-- Toast Help Info -->
+        <div class="help-info">
+            <i class="fas fa-info-circle"></i>
+            <span><strong>Tip Ringkas:</strong> Anda boleh zoom, seret (drag) dan selak imej menggunakan kekunci anak panah kiri/kanan di dalam mod paparan besar.</span>
+        </div>
+
+        <!-- Floating Quick Jump Tab Links -->
+        <nav class="jump-nav">
+            <button class="jump-tab" onclick="scrollToCard('inspace')">1. Inspace (BOS)</button>
+            <button class="jump-tab" onclick="scrollToCard('empire')">2. Empire Food</button>
+            <button class="jump-tab" onclick="scrollToCard('skyechip')">3. SkyeChip</button>
+            <button class="jump-tab" onclick="scrollToCard('moomoo')">4. Order Book</button>
+            <button class="jump-tab" onclick="scrollToCard('sunway')">5. Sunway Med</button>
+        </nav>
+
+        <!-- 1. INSPACE CREATION BERHAD -->
+        <article class="chart-card" id="inspace">
+            <header class="chart-header">
+                <div class="chart-title-group">
+                    <span class="study-badge">Kajian #1</span>
+                    <h2 class="chart-title">Inspace Creation Berhad (tf1M)</h2>
+                </div>
+                <span class="chart-info-tag">Cut Loss Mandatori</span>
+            </header>
+            <div class="image-wrapper" onclick="openLightbox(0)">
+                <img src="assets/media__1779259139139.jpg" alt="Inspace Creation Berhad Chart" class="chart-img">
+                <div class="zoom-hint">
+                    <i class="fas fa-search-plus"></i> Klik untuk Paparan Penuh
+                </div>
+            </div>
+            <div class="chart-desc-bar">
+                <strong>Corak BOS (Break of Structure):</strong> Lilin Minit Ke-2 pecah di bawah paras sokongan kuning 0.285 yang ditandakan sebagai BOS. Kejatuhan pantas berlaku sejurus selepas zon kritikal ini dilepasi.
+            </div>
+        </article>
+
+        <!-- 2. EMPIRE PREMIUM FOOD BHD -->
+        <article class="chart-card" id="empire">
+            <header class="chart-header">
+                <div class="chart-title-group">
+                    <span class="study-badge">Kajian #2</span>
+                    <h2 class="chart-title">Empire Premium Food Bhd (tf1M)</h2>
+                </div>
+                <span class="chart-info-tag">Cut Loss Mandatori</span>
+            </header>
+            <div class="image-wrapper" onclick="openLightbox(1)">
+                <img src="assets/media__1779259139140.jpg" alt="Empire Premium Food Bhd Chart" class="chart-img">
+                <div class="zoom-hint">
+                    <i class="fas fa-search-plus"></i> Klik untuk Paparan Penuh
+                </div>
+            </div>
+            <div class="chart-desc-bar">
+                <strong>Kejatuhan Minit Kedua:</strong> Lilin Minit Ke-2 memecahkan sokongan kuning 1.18 dan terus menjunam tanpa kembali ke paras 1.06. Kegagalan bertindak pada 2 minit awal membawa kerugian besar.
+            </div>
+        </article>
+
+        <!-- 3. SKYECHIP BERHAD -->
+        <article class="chart-card" id="skyechip">
+            <header class="chart-header">
+                <div class="chart-title-group">
+                    <span class="study-badge">Kajian #3</span>
+                    <h2 class="chart-title">SkyeChip Berhad (tf1M)</h2>
+                </div>
+                <span class="chart-info-tag">Cut Loss Mandatori</span>
+            </header>
+            <div class="image-wrapper" onclick="openLightbox(2)">
+                <img src="assets/media__1779259139146.jpg" alt="SkyeChip Berhad Chart" class="chart-img">
+                <div class="zoom-hint">
+                    <i class="fas fa-search-plus"></i> Klik untuk Paparan Penuh
+                </div>
+            </div>
+            <div class="chart-desc-bar">
+                <strong>Sokongan Min 1 Pecah:</strong> Minit ke-2 memecahkan sokongan Minit 1 dan terus menjunam teruk tanpa sebarang petunjuk melantun semula. Isyarat keluar mandatori!
+            </div>
+        </article>
+
+        <!-- 4. MOOMOO PRE-OPEN ORDER BOOK -->
+        <article class="chart-card" id="moomoo">
+            <header class="chart-header">
+                <div class="chart-title-group">
+                    <span class="study-badge">Kajian #4</span>
+                    <h2 class="chart-title">Listing Day Pre-Open Order Book (8:58 AM Queue Depth)</h2>
+                </div>
+                <span class="chart-info-tag">Order Book Depth</span>
+            </header>
+            <div class="image-wrapper" onclick="openLightbox(3)">
+                <img src="assets/media__1779259139149.jpg" alt="Moomoo Pre-Open Order Book Chart" class="chart-img">
+                <div class="zoom-hint">
+                    <i class="fas fa-search-plus"></i> Klik untuk Paparan Penuh
+                </div>
+            </div>
+            <div class="chart-desc-bar">
+                <strong>Queue Depth Moomoo (8:58 AM):</strong> Mempamerkan barisan harga bid dan ask depth sebelum pasaran dibuka rasmi pada jam 9:00 AM untuk menilai kekuatan pembeli awal.
+            </div>
+        </article>
+
+        <!-- 5. SUNWAY HEALTHCARE HOLDINGS BERHAD -->
+        <article class="chart-card" id="sunway">
+            <header class="chart-header">
+                <div class="chart-title-group">
+                    <span class="study-badge bullish">Kajian #5</span>
+                    <h2 class="chart-title">Sunway Healthcare Holdings Berhad (tf1M)</h2>
+                </div>
+                <span class="chart-info-tag">Contoh Hold & Ride (Bullish)</span>
+            </header>
+            <div class="image-wrapper" onclick="openLightbox(4)">
+                <img src="assets/media__1779259139211.jpg" alt="Sunway Healthcare Chart" class="chart-img">
+                <div class="zoom-hint">
+                    <i class="fas fa-search-plus"></i> Klik untuk Paparan Penuh
+                </div>
+            </div>
+            <div class="chart-desc-bar">
+                <strong>Momentum Bullish Mampan:</strong> Kenaikan konsisten membuat New High berturut-turut pada timeframe 1 Minit disokong volume kuat. Lilin kekal di atas EMA, membolehkan pelabur hold dengan tenang.
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Interactive Lightbox Modal -->
+    <div id="customLightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        
+        <button class="lightbox-nav lightbox-prev" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav lightbox-next" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+        
+        <div class="lightbox-stage">
+            <img id="lightboxImg" class="lightbox-img" src="" alt="Lightbox View" draggable="false">
+        </div>
+
+        <div class="lightbox-toolbar">
+            <button class="tool-btn" onclick="zoomImage(0.1)" title="Zoom In"><i class="fas fa-search-plus"></i></button>
+            <button class="tool-btn" onclick="zoomImage(-0.1)" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+            <button class="tool-btn" onclick="resetZoom()" title="Reset Zoom"><i class="fas fa-sync-alt"></i></button>
+            <button class="tool-btn" onclick="toggleFullscreen()" title="Fullscreen"><i class="fas fa-expand"></i></button>
+        </div>
+
+        <h3 id="lightboxTitle" style="font-family: 'Outfit', sans-serif; color: #fff; margin-top: 15px; font-size: 1.2rem; text-align: center;"></h3>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+
+    <!-- Interactive Logic Scripts -->
+    <script>
+        // List of all images, titles and descriptions
+        const chartData = [
+            {
+                src: "assets/media__1779259139139.jpg",
+                title: "1. Inspace Creation Berhad (tf1M)",
+                caption: "Corak BOS (Break of Structure): Minit Ke-2 pecah di bawah paras sokongan kuning 0.285 yang ditandakan dengan BOS. Ini adalah isyarat keluar mandatori demi mengelakkan kerugian besar.",
+                id: "inspace"
+            },
+            {
+                src: "assets/media__1779259139140.jpg",
+                title: "2. Empire Premium Food Bhd (tf1M)",
+                caption: "Kejatuhan Minit Kedua: Lilin Minit Ke-2 memecahkan sokongan kuning 1.18 dan terus menjunam tanpa kembali ke paras 1.06. Cut loss mandatori pada minit kedua!",
+                id: "empire"
+            },
+            {
+                src: "assets/media__1779259139146.jpg",
+                title: "3. SkyeChip Berhad (tf1M)",
+                caption: "Sokongan Minit 1 Pecah: Minit ke-2 memecahkan sokongan Minit 1 dan terus menjunam teruk tanpa petunjuk melantun semula. Amaran keluar mandatori!",
+                id: "skyechip"
+            },
+            {
+                src: "assets/media__1779259139149.jpg",
+                title: "4. Listing Day Pre-Open Order Book (8:58 AM Queue Depth)",
+                caption: "Queue Depth Moomoo (8:58 AM): Paparan barisan harga bid dan ask depth sebelum pasaran dibuka rasmi pada jam 9:00 AM untuk mengesan volume awal dan hype.",
+                id: "moomoo"
+            },
+            {
+                src: "assets/media__1779259139211.jpg",
+                title: "5. Sunway Healthcare Holdings Berhad (tf1M)",
+                caption: "Momentum Bullish Mampan: Kenaikan konsisten membuat New High berturut-turut pada timeframe 1 Minit disokong volume kuat. Lilin kekal di atas EMA, membolehkan pelabur hold dengan tenang.",
+                id: "sunway"
+            }
+        ];
+
+        let currentIndex = 0;
+        let zoomLevel = 1;
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
+
+        const lightbox = document.getElementById('customLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        // Scroll to card
+        function scrollToCard(id) {
+            const card = document.getElementById(id);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth' });
+                
+                // Highlight jump tab
+                document.querySelectorAll('.jump-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.getAttribute('onclick').includes(id)) {
+                        tab.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Open Lightbox
+        function openLightbox(index) {
+            currentIndex = index;
+            zoomLevel = 1;
+            translateX = 0;
+            translateY = 0;
+            updateLightboxContent();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+        }
+
+        // Close Lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Unlock background scroll
+            resetZoom();
+        }
+
+        // Update Lightbox Content
+        function updateLightboxContent() {
+            const data = chartData[currentIndex];
+            lightboxImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                lightboxImg.src = data.src;
+                lightboxTitle.textContent = data.title;
+                lightboxCaption.textContent = data.caption;
+                resetZoom();
+                lightboxImg.style.opacity = '1';
+            }, 150);
+
+            // Highlight corresponding jump navigation item
+            document.querySelectorAll('.jump-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('onclick').includes(data.id)) {
+                    tab.classList.add('active');
+                }
+            });
+        }
+
+        // Next / Prev functions
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % chartData.length;
+            updateLightboxContent();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + chartData.length) % chartData.length;
+            updateLightboxContent();
+        }
+
+        // Zoom Controls
+        function zoomImage(amount) {
+            zoomLevel = Math.max(0.5, Math.min(4, zoomLevel + amount));
+            applyTransforms();
+        }
+
+        function resetZoom() {
+            zoomLevel = 1;
+            translateX = 0;
+            translateY = 0;
+            applyTransforms();
+        }
+
+        function applyTransforms() {
+            lightboxImg.style.transform = `scale(${zoomLevel}) translate(${translateX}px, ${translateY}px)`;
+        }
+
+        // Dragging & Panning Logic
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (zoomLevel > 1) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                lightboxImg.style.transition = 'none';
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransforms();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            lightboxImg.style.transition = 'transform 0.2s ease';
+        });
+
+        // Touch support for mobile dragging
+        lightboxImg.addEventListener('touchstart', (e) => {
+            if (zoomLevel > 1 && e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+                lightboxImg.style.transition = 'none';
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (isDragging && e.touches.length === 1) {
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+                applyTransforms();
+            }
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+            lightboxImg.style.transition = 'transform 0.2s ease';
+        });
+
+        // Fullscreen Toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                lightbox.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Mouse Wheel Zoom
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const amount = e.deltaY < 0 ? 0.1 : -0.1;
+            zoomImage(amount);
+        }, { passive: false });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === '+' || e.key === '=') zoomImage(0.2);
+                if (e.key === '-') zoomImage(-0.2);
+            }
+        });
+    </script>
+</body>
+</html>
