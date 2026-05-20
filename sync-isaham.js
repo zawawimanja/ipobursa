@@ -33,7 +33,11 @@ function findExistingIPO(name, existingData) {
         'SALIRAN [NS]': 'saliran-group',
         'SUPREME': 'supreme-consolidated',
         'AZAMJAYA [NS]': 'azam-jaya',
-        'KUCINGKO [NS]': 'kucingko'
+        'KUCINGKO [NS]': 'kucingko',
+        'MFGROUP': 'manforce-group',
+        'ADNEX': 'adnex',
+        'NE': 'adnex',
+        '5ER': '5e-resources'
     };
 
     if (idMap[cleanName]) {
