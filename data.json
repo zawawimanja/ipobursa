@@ -108,10 +108,11 @@
     "os": 0,
     "ib": "TBA",
     "fundUse": "IT support service expansion, system integration upgrades, working capital",
-    "predictedGrade": "B",
-    "avgTP": 0.28,
+    "predictedGrade": "C",
+    "avgTP": 0.23,
     "pe": 13.4,
-    "analystInsight": "✅ <b>WORTH IT - MOMENTUM POP (GRADE B)</b><br>Premium underwriter M&A Securities backing rumored, which historically carries a 90%+ track record of explosive Day 1 pops on the ACE Market. Affordable low entry barrier at RM0.22 and Shariah compliant <code>[S]</code> status fuel highly aggressive retail subscription. Ideal momentum scalp play. Application closes on 25 May."
+    "ofs": true,
+    "analystInsight": "⚠️ <b>AVOID / HIGH RISK (GRADE C)</b><br>Potential 'OGX' trap. Sizable Offer for Sale (OFS) of 47.3M shares on the ACE Market. High risk of opening discount unless retail oversubscription is exceptionally strong."
   },
   {
     "id": "1doc",
@@ -675,6 +676,7 @@
     "strategy": "Scalp",
     "pe": 10,
     "highPrice": 0.33924999999999994,
+    "ofs": true,
     "symbol": "OGX"
   },
   {

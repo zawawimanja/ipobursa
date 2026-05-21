@@ -26,7 +26,8 @@ const heroIBs = ["maybank", "public", "kaf", "alliance", "cimb"];
 const topTierIBs = ["maybank", "cimb", "rhb", "public", "aminvestment", "alliance", "affin hwang", "kaf"];
 const momentumIBs = ["m&a", "malacca", "kenanga", "ta securities", "uob kay hian", "mercury", "apex", "sj securities"];
 
-const trendingSectors = ["data centre", "solar", "ai", "technology", "renewable energy", "ev", "semiconductor", "digital", "cybersecurity"];
+const highMomentumSectors = ["data centre", "solar", "ai", "semiconductor", "cleanroom", "hardware", "renewable energy", "ev", "cybersecurity"];
+const lowMomentumSectors = ["it services", "software", "infrastructure", "services", "digital"];
 const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
 
 function predictGrade(ipo) {
@@ -34,11 +35,16 @@ function predictGrade(ipo) {
     const sector = (ipo.sector || '').toLowerCase();
     const fundUse = (ipo.fundUse || '').toLowerCase();
     const market = ipo.market;
+    const hasOFS = ipo.ofs === true || ipo.hasOFS === true;
 
     const isHero = heroIBs.some(tier => ib.includes(tier));
     const isTopTier = topTierIBs.some(tier => ib.includes(tier));
     const isMomentum = momentumIBs.some(tier => ib.includes(tier));
-    const isTrendingSector = trendingSectors.some(s => sector.includes(s));
+    
+    const isHighMomentum = highMomentumSectors.some(s => sector.includes(s));
+    const isLowMomentum = lowMomentumSectors.some(s => sector.includes(s));
+    const isGeneralTech = sector.includes("technology") || sector.includes("tech");
+    
     const isExpansionFund = expansionKeywords.some(k => fundUse.includes(k));
 
     // Scoring system
@@ -58,9 +64,15 @@ function predictGrade(ipo) {
     }
     
     // Sector Score (Max 30)
-    if (isTrendingSector) {
+    if (isHighMomentum) {
         score += 30;
-        reasons.push("Trending Sector (+30)");
+        reasons.push("High Momentum Tech Sector (+30)");
+    } else if (isLowMomentum) {
+        score += 10;
+        reasons.push("Low Momentum IT/Tech Services Sector (+10)");
+    } else if (isGeneralTech) {
+        score += 15;
+        reasons.push("General Technology Sector (+15)");
     }
     
     // Fund Use Score (Max 20)
@@ -76,6 +88,19 @@ function predictGrade(ipo) {
     } else if (market === 'ACE Market') {
         score += 5;
         reasons.push("ACE Market (+5)");
+    }
+
+    // OFS (Offer for Sale) Penalties
+    if (hasOFS) {
+        score -= 20;
+        reasons.push("Offer for Sale (OFS) component (-20)");
+        
+        // Extra penalty for ACE Market + OFS (potential OGX trap)
+        const isMain = market === 'Main Market' || (typeof market === 'string' && market.toLowerCase().includes('main'));
+        if (!isMain) {
+            score -= 10;
+            reasons.push("ACE Market OFS Risk (Potential OGX trap) (-10)");
+        }
     }
 
     // Grade Assignment
