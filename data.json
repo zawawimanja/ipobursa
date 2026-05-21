@@ -180,7 +180,7 @@
     "year": 2026,
     "price": 0.2,
     "currentPrice": 0.935,
-    "performance": "+47.5%",
+    "performance": "+25.00%",
     "os": 3.23,
     "ib": "Public Investment Bank",
     "sector": "Construction (Interior Fit-out)",
@@ -194,8 +194,8 @@
     "strategy": "Scalp",
     "outlier": true,
     "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +47.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
-    "highPrice": 0.33349999999999996,
-    "symbol": "NE"
+    "highPrice": 0.335,
+    "symbol": "ADNEX"
   },
   {
     "id": "aerodyne",
@@ -222,7 +222,7 @@
     "year": 2026,
     "price": 0.25,
     "currentPrice": 0.65,
-    "performance": "+132.0%",
+    "performance": "+38.00%",
     "os": 46.07,
     "ib": "Malacca Securities",
     "sector": "Industrial (Precision Engineering)",
@@ -237,7 +237,7 @@
     "pe": 12.8,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.6669999999999999,
+    "highPrice": 0.67,
     "symbol": "AMBEST"
   },
   {
@@ -259,8 +259,8 @@
     "openPrice": 0.29,
     "closePrice": 0.305,
     "currentPrice": 0.335,
-    "performance": "+0.00%",
-    "highPrice": 0.35074999999999995,
+    "performance": "+5.17%",
+    "highPrice": 0.35,
     "listingDate": "2026-04-23",
     "symbol": "AMS"
   },
@@ -303,12 +303,12 @@
     "id": "ei-power",
     "companyName": "EI Power Berhad [S]",
     "sector": "Industrial / Energy",
-    "stage": 4,
+    "stage": 5,
     "price": 0.48,
     "market": "336.00 M",
-    "status": "Pre-Listing",
+    "status": "Listed",
     "closingDate": "06-May-2026",
-    "listingDate": "21-May-2026",
+    "listingDate": "2026-05-21",
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
@@ -320,7 +320,7 @@
     "predictedGrade": "B",
     "pe": 14.5,
     "avgTP": 0.61,
-    "analystInsight": "✅ <b>WORTH IT</b><br>🚀 Exceptional Demand (85x)<br>⚡ M&A Securities (Momentum IB)<br>📈 Expansion Fund Use",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Listed 21 May 2026. Opened +20% above IPO price but profit-taking capped the close at ~+10%. Despite HPE data center hype, selling pressure weighed on closing performance. 85x OS demand was reflected in the open spike but not sustained.",
     "research": [
       {
         "house": "TA Securities",
@@ -353,10 +353,13 @@
         "img": "assets/reports/stocklah-logo.png"
       }
     ],
-    "openPrice": 0.400015,
-    "closePrice": 0.33001499999999995,
-    "currentPrice": 0.15,
-    "symbol": "POWER"
+    "openPrice": 0.575,
+    "highPrice": 0.58,
+    "closePrice": 0.53,
+    "currentPrice": 0.55,
+    "performance": "+10.42%",
+    "strategy": "Scalp",
+    "symbol": "EIPOWER"
   },
   {
     "id": "empire-premium",
@@ -391,7 +394,7 @@
     "year": 2026,
     "price": 0.45,
     "currentPrice": 0.355,
-    "performance": "-25.56",
+    "performance": "-11.11%",
     "os": 7.04,
     "ib": "UOB Kay Hian",
     "sector": "Consumer (Tourism)",
@@ -400,9 +403,9 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.38525,
-    "openPrice": 0.490005,
-    "closePrice": 0.400005,
+    "highPrice": 0.505,
+    "openPrice": 0.49,
+    "closePrice": 0.4,
     "symbol": "GDGROUP"
   },
   {
@@ -413,7 +416,7 @@
     "year": 2026,
     "price": 0.25,
     "currentPrice": 0.19,
-    "performance": "-20.00%",
+    "performance": "+12.00%",
     "os": 24.1,
     "ib": "Malacca Securities",
     "sector": "Industrial",
@@ -422,12 +425,12 @@
     "stage": 5,
     "status": "Listed",
     "shariah": false,
-    "highPrice": 0.21275,
-    "openPrice": 0.24,
-    "closePrice": 0.245,
+    "highPrice": 0.315,
+    "openPrice": 0.27,
+    "closePrice": 0.28,
     "strategy": "Scalp",
     "pe": 15.2,
-    "symbol": "GHS [NS]"
+    "symbol": "GHS"
   },
   {
     "id": "gold-li",
@@ -473,8 +476,8 @@
     "openPrice": 0.49,
     "closePrice": 0.4,
     "currentPrice": 0.35,
-    "performance": "+8.89%",
-    "highPrice": 0.40249999999999997
+    "performance": "-11.11%",
+    "highPrice": 0.505
   },
   {
     "id": "hocksoon",
@@ -484,7 +487,7 @@
     "year": 2026,
     "price": 0.6,
     "currentPrice": 0.34,
-    "performance": "-41.67",
+    "performance": "-6.67%",
     "os": 12.5,
     "ib": "Alliance",
     "sector": "Consumer",
@@ -497,7 +500,7 @@
     "closePrice": 0.56,
     "strategy": "Scalp",
     "pe": 18.5,
-    "highPrice": 0.40249999999999997,
+    "highPrice": 0.63,
     "symbol": "HOCKSOON"
   },
   {
@@ -539,7 +542,7 @@
     "year": 2026,
     "price": 0.33,
     "currentPrice": 0.53,
-    "performance": "+51.52%",
+    "performance": "+45.45%",
     "os": 20,
     "ib": "Alliance Islamic Bank",
     "sector": "Industrial (Piping)",
@@ -563,7 +566,7 @@
     "year": 2026,
     "price": 0.38,
     "currentPrice": 0.925,
-    "performance": "+138.16%",
+    "performance": "+128.95%",
     "os": 85.4,
     "ib": "M&A Securities",
     "sector": "Industrial",
@@ -578,7 +581,7 @@
     "pe": 12.4,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.0407499999999998,
+    "highPrice": 1.04,
     "symbol": "KEEMING"
   },
   {
@@ -601,9 +604,10 @@
     "openPrice": 0.375,
     "closePrice": 0.375,
     "currentPrice": 0.26,
-    "performance": "-31.6%",
+    "performance": "-1.32%",
     "symbol": "MFGROUP",
-    "strategy": "Scalp"
+    "strategy": "Scalp",
+    "highPrice": 0.415
   },
   {
     "id": "mtt-shipping",
@@ -612,8 +616,8 @@
     "listingDate": "21-Apr-2026",
     "year": 2026,
     "price": 1.03,
-    "currentPrice": 2.34,
-    "performance": "-10.2%",
+    "currentPrice": 1.09,
+    "performance": "-2.91%",
     "os": 2.7,
     "ib": "CIMB Investment Bank",
     "sector": "Transportation (Shipping)",
@@ -628,7 +632,7 @@
     "pe": 9.5,
     "openPrice": 1.08,
     "closePrice": 1,
-    "symbol": "HI"
+    "symbol": "MTTSL"
   },
   {
     "id": "ogm",
@@ -638,7 +642,7 @@
     "year": 2026,
     "price": 0.25,
     "currentPrice": 0.125,
-    "performance": "-46.0",
+    "performance": "-12.00%",
     "os": 20,
     "ib": "Malacca Securities",
     "sector": "Industrial (Environmental Monitoring)",
@@ -647,11 +651,11 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "openPrice": 0.235,
-    "closePrice": 0.2,
+    "openPrice": 0.24,
+    "closePrice": 0.22,
     "strategy": "Scalp",
     "pe": 11.3,
-    "highPrice": 0.15525,
+    "highPrice": 0.265,
     "symbol": "OGM"
   },
   {
@@ -662,7 +666,7 @@
     "year": 2026,
     "price": 0.35,
     "currentPrice": 0.33,
-    "performance": "-15.71",
+    "performance": "-1.43%",
     "os": 110.1,
     "ib": "M&A Securities",
     "sector": "Industrial",
@@ -675,7 +679,7 @@
     "closePrice": 0.345,
     "strategy": "Scalp",
     "pe": 10,
-    "highPrice": 0.33924999999999994,
+    "highPrice": 0.355,
     "ofs": true,
     "symbol": "OGX"
   },
@@ -687,7 +691,7 @@
     "year": 2026,
     "price": 0.25,
     "currentPrice": 0.12,
-    "performance": "-46.0",
+    "performance": "-2.00%",
     "os": 15.2,
     "ib": "Mercury Securities",
     "sector": "Consumer",
@@ -697,10 +701,10 @@
     "status": "Listed",
     "shariah": true,
     "openPrice": 0.25,
-    "closePrice": 0.24,
+    "closePrice": 0.245,
     "strategy": "Scalp",
     "pe": 14.2,
-    "highPrice": 0.15525,
+    "highPrice": 0.265,
     "symbol": "SBS"
   },
   {
@@ -711,7 +715,7 @@
     "year": 2026,
     "price": 0.25,
     "currentPrice": 0.545,
-    "performance": "+116.0%",
+    "performance": "+50.00%",
     "os": 120.5,
     "ib": "M&A Securities",
     "sector": "Technology",
@@ -727,7 +731,7 @@
     "closePrice": 0.375,
     "strategy": "Scalp",
     "pe": 18.5,
-    "symbol": "SEMICO [NS]"
+    "symbol": "SEMICO"
   },
   {
     "id": "skyechip",
