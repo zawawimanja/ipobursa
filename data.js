@@ -16,10 +16,10 @@ const IPO_DATA = [
     "os": 0,
     "ib": "M&A Securities",
     "fundUse": "67% Construction of new facility/lab, 15% new rubber production line, 18% debt repayment & working capital.",
-    "predictedGrade": "B",
+    "predictedGrade": "D",
     "avgTP": 0.15,
     "pe": 12.5,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Specialty industrial chemical solutions provider underwritten by M&A Securities. Strong allocation for expansion (67% for new facility & lab) but Shariah non-compliant status may restrict retail interest."
+    "analystInsight": "🚫 <b>TIDAK SESUAI — BUKAN SHARIAH</b><br>Eckem Holdings tidak patuh Syariah. Walaupun IB M&A Securities (rekod bagus) dan ada ekspansi kilang yang menarik, <b>skip terus bagi pelabur Shariah.</b> Untuk pelabur konvensional: Grade B kerana M&A IB + industrial expansion focus."
   },
   {
     "id": "sum-technology",
@@ -41,7 +41,7 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "avgTP": 0.35,
     "pe": 14.2,
-    "analystInsight": "✅ <b>MUST APPLY (GRADE B &rarr; A)</b><br>The #1 Tech Momentum play following SkyeChip's blockbuster listing. Extremely high retail demand expected, with gray market pricing already pointing to a massive +264% premium (RM1.02 vs RM0.28). Robust hardware manufacturing profile and Shariah-compliant <code>[S]</code> status make this a prime target for heavy institutional buying. Ideal for listing day scalp.",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Sektor Tech (Hardware) adalah sektor terbaik 2026 — SEMICO (+50%) dan SkyeChip (+151%) dah buktikan. Tiada OFS, Shariah-compliant. Tapi IB masih TBA — ini risiko utama. <b>Formula baru: apply kalau IB keluar Maybank/M&A/Alliance Islamic. Skip kalau IB Mercury/UOB/CIMB sole.</b> Harga RM0.28 berpatutan untuk entry.",
     "openPrice": 0.39,
     "closePrice": 0.360009,
     "currentPrice": 1.02,
@@ -64,10 +64,10 @@ const IPO_DATA = [
     "os": 0,
     "ib": "TBA",
     "fundUse": "Software Suite R&D, cloud infrastructure, and market expansion",
-    "predictedGrade": "B",
+    "predictedGrade": "C",
     "avgTP": 0.29,
     "pe": 15.6,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Pure-play enterprise software listing. Lower pricing (RM0.23) filters out high risk. Target is stable growth."
+    "analystInsight": "⚠️ <b>AVOID / HIGH RISK (GRADE C)</b><br>Sektor O&G services sedang sejuk — retail masih trauma dengan OGX dan OGM. Ada OFS (36.4M shares) yang menambah tekanan jual. IB belum disahkan. Walaupun ada elemen robotik dan digital, market 2026 tidak hargai O&G-adjacent dengan baik. Risiko tinggi untuk open below atau flat. <b>Skip kecuali IB Maybank/M&A dan OS cecah 80x+.</b>"
   },
   {
     "id": "pentech",
@@ -86,10 +86,10 @@ const IPO_DATA = [
     "os": 0,
     "ib": "TBA",
     "fundUse": "Purchase of new machinery, facility upgrading, and business expansion",
-    "predictedGrade": "B",
+    "predictedGrade": "C",
     "avgTP": 0.25,
     "pe": 11.8,
-    "analystInsight": "✅ <b>WORTH IT - BUY & HOLD (GRADE B)</b><br>Undervalued entry at 11.8x PE makes this a highly secure defensive play. Focus of IPO proceeds is dedicated heavily to capacity expansion (new machinery & facilities upgrade) which drives organic earnings growth over the next 12-18 months. Highly cash-generative industrial product profile holds solid potential for stable dividend yields. Excellent compounder to hold for long-term value appreciation."
+    "analystInsight": "⚠️ <b>NEUTRAL / LOW PRIORITY (GRADE C)</b><br>ICT infrastructure adalah sektor \"boring\" — tiada momentum tema besar seperti AI, semiconductor, atau data center. Tiada OFS, Shariah OK, harga murah RM0.20. Tapi IB TBA dan sektor ini jarang deliver listing day pop yang besar. Based on 2026 data, Industrial/ICT tanpa strong IB = avg +3-5% je. <b>Boleh apply tapi jangan harap besar. Low conviction.</b>"
   },
   {
     "id": "mm-computer",
@@ -112,7 +112,7 @@ const IPO_DATA = [
     "avgTP": 0.23,
     "pe": 13.4,
     "ofs": true,
-    "analystInsight": "⚠️ <b>AVOID / HIGH RISK (GRADE C)</b><br>Potential 'OGX' trap. Sizable Offer for Sale (OFS) of 47.3M shares on the ACE Market. High risk of opening discount unless retail oversubscription is exceptionally strong."
+    "analystInsight": "❌ <b>AVOID (GRADE C — DOUBLE RED FLAG)</b><br>Dua sebab utama untuk skip:<br>1️⃣ <b>OFS besar (47.34M shares)</b> — historical data tunjuk OFS = avg -1.4% vs Non-OFS +21.2%<br>2️⃣ <b>IT Services sektor biasa</b> — bukan tech momentum, bukan industrial expansion<br>Walaupun Shariah-compliant, profil ini hampir sama dengan OGX (110x OS, ada OFS, result flat). <b>Jangan apply.</b>"
   },
   {
     "id": "1doc",
