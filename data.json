@@ -19,7 +19,8 @@
     "predictedGrade": "D",
     "avgTP": 0.15,
     "pe": 12.5,
-    "analystInsight": "🚫 <b>TIDAK SESUAI — BUKAN SHARIAH</b><br>Eckem Holdings tidak patuh Syariah. Walaupun IB M&A Securities (rekod bagus) dan ada ekspansi kilang yang menarik, <b>skip terus bagi pelabur Shariah.</b> Untuk pelabur konvensional: Grade B kerana M&A IB + industrial expansion focus."
+    "analystInsight": "🚫 <b>Ko skip — bukan Shariah</b><br>Industrial Chemical. Walaupun IB bagus, tidak patuh Syariah.",
+    "ofs": false
   },
   {
     "id": "sum-technology",
@@ -41,11 +42,12 @@
     "predictedGrade": "B",
     "avgTP": 0.35,
     "pe": 14.2,
-    "analystInsight": "✅ <b>WORTH IT — TAPI JANGAN HARAP BESAR (GRADE B)</b><br>Sektor Tech Hardware adalah sektor terbaik 2026 (SEMICO +50%, SkyeChip +151%). Tiada OFS, Shariah-compliant, harga RM0.28 berpatutan.<br><br>⚠️ <b>Caveat penting:</b> IB adalah <b>Malacca Securities</b> — mid-tier IB dengan rekod 2026: avg +5.8%, 3/5 win rate. Berbanding M&A atau Maybank yang biasa deliver pop besar, Malacca lebih conservative. Jangkaan realistik: <b>+5% hingga +20% listing day</b>, bukan +50%.<br><br>Strategi: Apply untuk scalp ringan. Jangan lebih-lebih harap.",
+    "analystInsight": "⚠️ <b>Boleh apply, jangan harap besar</b><br>Sektor Tech Hardware adalah sektor terbaik. Tiada OFS, Shariah-compliant. Tapi IB adalah Malacca Securities (mid-tier).",
     "openPrice": 0.39,
     "closePrice": 0.360009,
     "currentPrice": 1.02,
-    "symbol": "MTEC"
+    "symbol": "MTEC",
+    "ofs": false
   },
   {
     "id": "elsa",
@@ -67,7 +69,8 @@
     "predictedGrade": "C",
     "avgTP": 0.29,
     "pe": 15.6,
-    "analystInsight": "⚠️ <b>AVOID / HIGH RISK (GRADE C)</b><br>Sektor O&G services sedang sejuk — retail masih trauma dengan OGX dan OGM. Ada OFS (36.4M shares) yang menambah tekanan jual. IB belum disahkan. Walaupun ada elemen robotik dan digital, market 2026 tidak hargai O&G-adjacent dengan baik. Risiko tinggi untuk open below atau flat. <b>Skip kecuali IB Maybank/M&A dan OS cecah 80x+.</b>"
+    "analystInsight": "❌ <b>SKIP</b><br>Sektor O&G services sedang sejuk. Ada OFS yang menambah tekanan jual. Risiko tinggi untuk open below atau flat.",
+    "ofs": true
   },
   {
     "id": "pentech",
@@ -89,7 +92,8 @@
     "predictedGrade": "C",
     "avgTP": 0.25,
     "pe": 11.8,
-    "analystInsight": "⚠️ <b>NEUTRAL / LOW PRIORITY (GRADE C)</b><br>ICT infrastructure adalah sektor \"boring\" — tiada momentum tema besar seperti AI, semiconductor, atau data center. Tiada OFS, Shariah OK, harga murah RM0.20. Tapi IB TBA dan sektor ini jarang deliver listing day pop yang besar. Based on 2026 data, Industrial/ICT tanpa strong IB = avg +3-5% je. <b>Boleh apply tapi jangan harap besar. Low conviction.</b>"
+    "analystInsight": "⚠️ <b>Low conviction, skip je</b><br>ICT Infra adalah sektor boring. Tiada momentum tema besar. IB TBA.",
+    "ofs": false
   },
   {
     "id": "mm-computer",
@@ -112,7 +116,7 @@
     "avgTP": 0.23,
     "pe": 13.4,
     "ofs": true,
-    "analystInsight": "❌ <b>AVOID (GRADE C — DOUBLE RED FLAG)</b><br>Dua sebab utama untuk skip:<br>1️⃣ <b>OFS besar (47.34M shares)</b> — historical data tunjuk OFS = avg -1.4% vs Non-OFS +21.2%<br>2️⃣ <b>IT Services sektor biasa</b> — bukan tech momentum, bukan industrial expansion<br>Walaupun Shariah-compliant, profil ini hampir sama dengan OGX (110x OS, ada OFS, result flat). <b>Jangan apply.</b>"
+    "analystInsight": "❌ <b>SKIP</b><br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX. Jangan apply."
   },
   {
     "id": "1doc",
