@@ -19,7 +19,7 @@ const IPO_DATA = [
     "predictedGrade": "D",
     "avgTP": 0.15,
     "pe": 12.5,
-    "analystInsight": "🚫 <b>Ko skip — bukan Shariah</b><br>Industrial Chemical. Walaupun IB bagus, tidak patuh Syariah.",
+    "analystInsight": "🚫 <b>AVOID</b><br>💡 Note: Ko skip — bukan Shariah.<br>Industrial Chemical. Walaupun IB bagus (M&A), tidak patuh Syariah.",
     "ofs": false
   },
   {
@@ -42,7 +42,7 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "avgTP": 0.35,
     "pe": 14.2,
-    "analystInsight": "⚠️ <b>Boleh apply, jangan harap besar</b><br>Sektor Tech Hardware adalah sektor terbaik. Tiada OFS, Shariah-compliant. Tapi IB adalah Malacca Securities (mid-tier).",
+    "analystInsight": "⚠️ <b>WORTH IT</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>Sektor Tech Hardware adalah sektor terbaik 2026. Tiada OFS, Shariah-compliant. Tapi IB adalah Malacca Securities (mid-tier).",
     "openPrice": 0.39,
     "closePrice": 0.360009,
     "currentPrice": 1.02,
@@ -69,7 +69,7 @@ const IPO_DATA = [
     "predictedGrade": "C",
     "avgTP": 0.29,
     "pe": 15.6,
-    "analystInsight": "❌ <b>SKIP</b><br>Sektor O&G services sedang sejuk. Ada OFS yang menambah tekanan jual. Risiko tinggi untuk open below atau flat.",
+    "analystInsight": "❌ <b>AVOID</b><br>Sektor O&G services sedang sejuk. Ada OFS yang menambah tekanan jual. Risiko tinggi untuk open below atau flat. Skip.",
     "ofs": true
   },
   {
@@ -92,7 +92,7 @@ const IPO_DATA = [
     "predictedGrade": "C",
     "avgTP": 0.25,
     "pe": 11.8,
-    "analystInsight": "⚠️ <b>Low conviction, skip je</b><br>ICT Infra adalah sektor boring. Tiada momentum tema besar. IB TBA.",
+    "analystInsight": "⚠️ <b>AVOID</b><br>💡 Note: Low conviction, skip je.<br>ICT Infra adalah sektor boring. Tiada momentum tema besar. IB TBA.",
     "ofs": false
   },
   {
@@ -116,7 +116,7 @@ const IPO_DATA = [
     "avgTP": 0.23,
     "pe": 13.4,
     "ofs": true,
-    "analystInsight": "❌ <b>SKIP</b><br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX. Jangan apply."
+    "analystInsight": "❌ <b>AVOID</b><br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX. Jangan apply."
   },
   {
     "id": "1doc",
