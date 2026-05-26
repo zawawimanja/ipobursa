@@ -20,10 +20,12 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install axios cheerio
+        run: npm install
           
-      - name: Run IPO Data Scraper
-        run: node scraper.js
+      - name: Run Scrapers (iSaham + Yahoo Finance)
+        run: |
+          node scraper.js
+          node scrape-yahoo.js
         
       - name: Commit and Push Changes
         run: |
