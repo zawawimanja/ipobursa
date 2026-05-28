@@ -1331,7 +1331,10 @@ function createIPOCard(ipo, index = 0) {
                     <span class="badge ${ipo.market?.includes('Main') ? 'main-market' : 'ace-market'}" style="padding: 0.15rem 0.4rem; font-size: 0.65rem; min-width: 35px; text-align: center;">${ipo.market === 'Main Market' ? 'MAIN' : 'ACE'}</span>
                     ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
                     ${ipo.outlier ? '<span class="badge outlier-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="zap" style="width: 10px; height: 10px; margin-right: 2px;"></i> Outlier Watch</span>' : ''}
-                    <div style="font-weight: 600; font-size: 0.9rem;">${ipo.companyName} ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}</div>
+                    <div style="font-weight: 600; font-size: 0.9rem;">
+                        ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Buka chart TradingView (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName} 
+                        ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
+                    </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.3rem; color: var(--text-dim); padding-left: 2.8rem;">
                     <span class="status-dot ${statusClass}" style="width: 6px; height: 6px; display: inline-block; border-radius: 50%;"></span>
