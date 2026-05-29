@@ -5905,19 +5905,6 @@
         "year": 2026
     },
     {
-        "id": "eckem-holdings-berhad",
-        "companyName": "Eckem Holdings Berhad",
-        "symbol": "Eckem Holdings Berhad",
-        "market": "81.25 M",
-        "price": 0,
-        "closingDate": "",
-        "listingDate": "",
-        "shariah": false,
-        "stage": 2,
-        "status": "MITI Allocation Phase",
-        "year": 2026
-    },
-    {
         "id": "hss-holdings-berhad",
         "companyName": "HSS Holdings Berhad",
         "symbol": "HSS Holdings Berhad",
