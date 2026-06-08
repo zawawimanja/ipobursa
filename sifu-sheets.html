@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sifu's Valuation Sheet | Bursa IPO Tracker</title>
+    <meta name="description" content="Replicate Sifu's fundamental Excel sheet calculations for Bursa Malaysia IPOs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="data.js?v=1.1"></script>
+    <style>
+        .sheet-container {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 1100px) {
+            .sheet-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sheet-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sheet-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .sheet-title-glow {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+            color: #10b981;
+        }
+
+        .excel-table-wrapper {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            overflow-x: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            min-width: 900px;
+        }
+
+        .excel-table th {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.75rem 0.75rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .excel-table td {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.6rem 0.75rem;
+            vertical-align: middle;
+            transition: var(--transition);
+        }
+
+        .excel-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .excel-table tr.section-header td {
+            background: rgba(16, 185, 129, 0.12) !important;
+            color: #10b981;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .excel-table tr.section-header-blue td {
+            background: rgba(99, 102, 241, 0.12) !important;
+            color: var(--primary-light);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.25);
+        }
+
+        .excel-table input[type="number"] {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            padding: 0.35rem 0.5rem;
+            border-radius: 0.25rem;
+            width: 100%;
+            font-family: inherit;
+            font-size: 0.8rem;
+            text-align: right;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .excel-table input[type="number"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .excel-table td.calculated {
+            font-weight: 700;
+            color: #10b981;
+            text-align: right;
+        }
+
+        .excel-table td.calculated-highlight {
+            font-weight: 800;
+            color: #f59e0b;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        .excel-table td.label-cell {
+            font-weight: 600;
+            color: var(--text-dim);
+            background: rgba(0, 0, 0, 0.15);
+            width: 240px;
+        }
+
+        .excel-table td.title-col {
+            font-weight: 800;
+            color: white;
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .verdict-banner {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .verdict-banner.buy {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        .verdict-banner.hold {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #f59e0b;
+        }
+
+        .verdict-banner.avoid {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .catalyst-list {
+            padding-left: 1rem;
+            margin: 0;
+        }
+
+        .catalyst-list li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
+                    <i data-lucide="arrow-left"></i> <span class="nav-text">Back to Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 5rem;">
+        <header style="text-align: center; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <i data-lucide="table" style="color: #10b981; width: 32px; height: 32px;"></i>
+                <h1 style="margin: 0; font-size: 2.25rem;">Sifu's <span class="sheet-title-glow">Valuation Sheets</span></h1>
+            </div>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0 auto;">
+                Replicate your Sifu's exact Excel financial modeling workspace. Pick a stock, customize projections, and calculate target valuations instantly.
+            </p>
+        </header>
+
+        <div class="sheet-container">
+            <!-- Left Panel: Controls & Guides -->
+            <div class="sheet-sidebar">
+                <div class="sheet-card">
+                    <h3 style="margin-top: 0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="database" style="color: var(--primary-light); width: 18px;"></i>
+                        Load Stock Profile
+                    </h3>
+                    <div class="calc-form-group" style="margin-bottom: 1rem;">
+                        <label>Select IPO or Stock</label>
+                        <select id="sheet-stock-select" onchange="loadSelectedStock()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem;">
+                            <!-- Dynamically populated -->
+                        </select>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4;">
+                        Select a company to load default metrics. You can edit any input cells directly in the table to test custom scenarios.
+                    </div>
+                </div>
+
+                <!-- Catalyst & Research Notes Panel -->
+                <div class="sheet-card" id="sheet-notes-card">
+                    <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #10b981;">
+                        <i data-lucide="sparkles" style="width: 18px; color: #10b981;"></i>
+                        Sifu's Research Notes
+                    </h3>
+                    <div id="sheet-catalysts-content" style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <!-- Dynamically filled -->
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.75rem; color: var(--text-dim);" id="sheet-peers-content">
+                        <!-- Dynamically filled -->
+                    </div>
+                </div>
+
+                <div class="sheet-card">
+                    <h3 style="margin-top: 0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: #f59e0b;">
+                        <i data-lucide="shield-alert" style="width: 18px;"></i>
+                        Safety Cushion
+                    </h3>
+                    <div class="calc-form-group" style="margin-bottom: 1.25rem;">
+                        <label>Margin of Safety (MoS %)</label>
+                        <input type="range" id="sheet-mos-slider" min="0" max="50" value="20" step="5" oninput="document.getElementById('sheet-mos-display').innerText = this.value + '%'; calculateSheet();" style="width: 100%; accent-color: #f59e0b; cursor: pointer;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 0.25rem;">
+                            <span>0% (Risk-on)</span>
+                            <strong id="sheet-mos-display" style="color: #f59e0b;">20%</strong>
+                            <span>50% (Sifu Safe)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-form-group" style="margin-bottom: 0;">
+                        <label>Target PE Multiple (Valuation 1)</label>
+                        <input type="number" id="sheet-target-pe" value="9.0" step="0.5" oninput="calculateSheet()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem; text-align: left;">
+                        <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.35rem;">
+                            PE multiplier target used to determine Valuation 1.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: The 5-Column Excel Table Replicate -->
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="excel-table-wrapper">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 250px;">Parameter (Income & Ratios)</th>
+                                <th style="width: 80px;">Unit</th>
+                                <th>FYE 23 (Hist)</th>
+                                <th>FYE 24 (Hist)</th>
+                                <th>FYE 25 (Hist)</th>
+                                <th>Projection (FYE F)</th>
+                                <th>Projection (FYE F+1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Stock Header Metadata -->
+                            <tr>
+                                <td class="label-cell">STOCK NAME</td>
+                                <td>-</td>
+                                <td colspan="5" class="title-col" id="td-stock-name">BUSCAP</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">SHARE PRICE (RM)</td>
+                                <td>RM</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td colspan="2"><input type="number" id="inp-price" value="0.230" step="0.005" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">TOTAL SHARES OUTSTANDING</td>
+                                <td>Shares</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td colspan="2"><input type="number" id="inp-total-shares" value="383391304" step="100000" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">MARKET CAPITALIZATION (RM)</td>
+                                <td>RM</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td colspan="2" class="calculated" id="td-market-cap">RM 88,179,999.92</td>
+                            </tr>
+
+                            <!-- Income Statement -->
+                            <tr class="section-header-blue">
+                                <td colspan="7">INCOME STATEMENT & FINANCIAL METRICS</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Revenue</td>
+                                <td>RM</td>
+                                <td><input type="number" id="inp-rev-23" value="55016600" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-rev-24" value="75000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-rev-25" value="90000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-rev-fye-f" value="110034449.21" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-rev-fye-f1" value="128500000.00" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Gross Profit (GP)</td>
+                                <td>RM</td>
+                                <td><input type="number" id="inp-gp-23" value="14500000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-gp-24" value="20000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-gp-25" value="24500000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-gp-fye-f" value="29500000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-gp-fye-f1" value="34000000" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Profit After Tax (PAT)</td>
+                                <td>RM</td>
+                                <td><input type="number" id="inp-pat-23" value="6850000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-pat-24" value="9500000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-pat-25" value="11200000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-pat-fye-f" value="13754306.15" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-pat-fye-f1" value="16300000" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Earnings Per Share (EPS)</td>
+                                <td>sen</td>
+                                <td class="calculated" id="td-eps-23">1.79</td>
+                                <td class="calculated" id="td-eps-24">2.48</td>
+                                <td class="calculated" id="td-eps-25">2.92</td>
+                                <td class="calculated" id="td-eps-fye-f">3.59</td>
+                                <td class="calculated" id="td-eps-fye-f1">4.25</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">EPS Growth Rate</td>
+                                <td>%</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><input type="number" id="inp-eps-growth-f" value="40" step="1" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-eps-growth-f1" value="18.5" step="1" oninput="calculateSheet()"></td>
+                            </tr>
+
+                            <!-- Balance Sheet -->
+                            <tr class="section-header">
+                                <td colspan="7">BALANCE SHEET (KUNCI KIRA-KIRA)</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Total Assets</td>
+                                <td>RM</td>
+                                <td><input type="number" id="inp-assets-23" value="35000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-assets-24" value="38000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-assets-25" value="40000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-assets-fye-f" value="42000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-assets-fye-f1" value="48000000" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Total Liabilities</td>
+                                <td>RM</td>
+                                <td><input type="number" id="inp-liab-23" value="15000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-liab-24" value="16000000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-liab-25" value="17500000" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-liab-fye-f" value="18391500" oninput="calculateSheet()"></td>
+                                <td><input type="number" id="inp-liab-fye-f1" value="21000000" oninput="calculateSheet()"></td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Total Shareholder Equity</td>
+                                <td>RM</td>
+                                <td class="calculated" id="td-equity-23">RM 20,000,000.00</td>
+                                <td class="calculated" id="td-equity-24">RM 22,000,000.00</td>
+                                <td class="calculated" id="td-equity-25">RM 22,500,000.00</td>
+                                <td class="calculated" id="td-equity-fye-f">RM 23,608,500.00</td>
+                                <td class="calculated" id="td-equity-fye-f1">RM 27,000,000.00</td>
+                            </tr>
+
+                            <!-- Ratios & Valuations -->
+                            <tr class="section-header-blue">
+                                <td colspan="7">VALUATION RATIOS & SIFU TARGETS</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Price-to-Earnings Ratio (PER)</td>
+                                <td>x</td>
+                                <td class="calculated" id="td-per-23">12.87</td>
+                                <td class="calculated" id="td-per-24">9.28</td>
+                                <td class="calculated" id="td-per-25">7.87</td>
+                                <td class="calculated" id="td-per-fye-f" style="font-weight: 800; text-decoration: underline;">6.41</td>
+                                <td class="calculated" id="td-per-fye-f1">5.41</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">PEG Ratio</td>
+                                <td>x</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="calculated" id="td-peg-fye-f">0.16</td>
+                                <td class="calculated" id="td-peg-fye-f1">0.29</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Price-to-Sales Ratio (PSR)</td>
+                                <td>x</td>
+                                <td class="calculated" id="td-psr-23">1.60</td>
+                                <td class="calculated" id="td-psr-24">1.17</td>
+                                <td class="calculated" id="td-psr-25">0.98</td>
+                                <td class="calculated" id="td-psr-fye-f">0.80</td>
+                                <td class="calculated" id="td-psr-fye-f1">0.69</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Price-to-Book Ratio (PBR)</td>
+                                <td>x</td>
+                                <td class="calculated" id="td-pbr-23">4.41</td>
+                                <td class="calculated" id="td-pbr-24">4.01</td>
+                                <td class="calculated" id="td-pbr-25">3.92</td>
+                                <td class="calculated" id="td-pbr-fye-f">3.74</td>
+                                <td class="calculated" id="td-pbr-fye-f1">3.27</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Return on Equity (ROE)</td>
+                                <td>%</td>
+                                <td class="calculated" id="td-roe-23">34.25%</td>
+                                <td class="calculated" id="td-roe-24">43.18%</td>
+                                <td class="calculated" id="td-roe-25">49.78%</td>
+                                <td class="calculated" id="td-roe-fye-f">58.26%</td>
+                                <td class="calculated" id="td-roe-fye-f1">60.37%</td>
+                            </tr>
+                            <tr style="border-top: 2px dashed rgba(255,255,255,0.1);">
+                                <td class="label-cell" style="color: #f59e0b;">Sifu Valuation 1 (Target PE basis)</td>
+                                <td>RM</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="calculated-highlight" id="td-val1-fye-f">RM 0.320</td>
+                                <td class="calculated-highlight" id="td-val1-fye-f1">RM 0.380</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell" style="color: #f59e0b;">Buy Zone Limit (After MOS Discount)</td>
+                                <td>RM</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="calculated-highlight" id="td-buy1-fye-f" style="color: #10b981;">RM 0.256</td>
+                                <td class="calculated-highlight" id="td-buy1-fye-f1" style="color: #10b981;">RM 0.304</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Verdict Summary Box with Qualitative Overlay -->
+                <div class="sheet-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div>
+                        <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; color: #10b981;">
+                            <i data-lucide="compass" style="width: 20px;"></i>
+                            Sifu's Quantitative Verdict (Math Analysis)
+                        </h4>
+                        <div id="sheet-verdict-box" class="verdict-banner buy">
+                            Loading recommendation...
+                        </div>
+                    </div>
+                    
+                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                        <h4 style="margin: 0 0 0.75rem 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; color: #3b82f6;">
+                            <i data-lucide="shield-check" style="width: 20px;"></i>
+                            Sifu's Qualitative Overlay (Grade & Sentiment Filter)
+                        </h4>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+                            <!-- Grade Badge -->
+                            <div id="qual-grade" style="padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 0.25rem;">
+                                Grade: --
+                            </div>
+                            <!-- Shariah Badge -->
+                            <div id="qual-shariah" style="padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 0.25rem;">
+                                Shariah: --
+                            </div>
+                            <!-- OFS Badge -->
+                            <div id="qual-ofs" style="padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 0.25rem;">
+                                OFS: --
+                            </div>
+                            <!-- Oversubscription Badge -->
+                            <div id="qual-os" style="padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 0.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main);">
+                                OS: --
+                            </div>
+                        </div>
+                        
+                        <div id="qual-insight" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 0.75rem; color: var(--text-main); font-size: 0.9rem; line-height: 1.6;">
+                            Loading qualitative insight...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); font-size: 0.8rem;">
+        <p>© 2026 Bursa IPO Tracker. All calculations modeled after Sifu's proprietary valuation method.</p>
+    </footer>
+
+    <script>
+        // Map external IPO_DATA from data.js
+        const ipoData = typeof IPO_DATA !== 'undefined' ? IPO_DATA : [];
+
+        // Database of stock profiles (containing sifu's excel metrics & research insights)
+        const stockProfiles = {
+            'bus-cap': {
+                id: 'bus-cap',
+                companyName: 'Bus Cap Berhad',
+                price: 0.23,
+                totalShares: 383391304,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 55016600, rev24: 75000000, rev25: 90000000,
+                revF: 110034449.21, revF1: 128500000.00,
+                
+                gp23: 14500000, gp24: 20000000, gp25: 24500000,
+                gpF: 29500000, gpF1: 34000000,
+                
+                pat23: 6850000, pat24: 9500000, pat25: 11200000,
+                patF: 13754306.15, patF1: 16300000,
+                
+                eps23: 1.79, eps24: 2.48, eps25: 2.92,
+                
+                epsGrowthF: 40, epsGrowthF1: 18.5,
+                
+                assets23: 35000000, assets24: 38000000, assets25: 40000000,
+                assetsF: 42000000, assetsF1: 48000000,
+                
+                liab23: 15000000, liab24: 16000000, liab25: 17500000,
+                liabF: 18391500, liabF1: 21000000,
+                
+                targetPe: 9.0,
+                catalysts: [
+                    "<strong>Sebab Apply:</strong> Sektor boring (bus body fabrication) tapi owner letak valuation sangat murah (implied PE 8.9x).",
+                    "<strong>Forward PE Sifu:</strong> Selepas unjuran sifu dibuat, PER jatuh ke paras super-cheap iaitu <strong>6.41x</strong> pada harga IPO RM0.23.",
+                    "<strong>Wow Factor:</strong> Margin kasar unjuran meningkat disebabkan skala ekonomi baru."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Pesaing traded sekitar 12x - 15x PE. Bus Cap adalah industri tradisional tetapi dijamin murah."
+            },
+            'pentech': {
+                id: 'pentech',
+                companyName: 'Pentech Holdings Berhad',
+                price: 0.20,
+                totalShares: 407607338,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 85000000, rev24: 110000000, rev25: 138000000,
+                revF: 170000000, revF1: 210000000,
+                
+                gp23: 11000000, gp24: 17000000, gp25: 22000000,
+                gpF: 35000000, gpF1: 46000000,
+                
+                pat23: 6280000, pat24: 8100000, pat25: 10200000,
+                patF: 12554306.15, patF1: 15400000,
+                
+                eps23: 1.54, eps24: 1.99, eps25: 2.50,
+                
+                epsGrowthF: 40, epsGrowthF1: 22.6,
+                
+                assets23: 30000000, assets24: 37000000, assets25: 42000000,
+                assetsF: 45000000, assetsF1: 52000000,
+                
+                liab23: 12000000, liab24: 14000000, liab25: 16500000,
+                liabF: 18000000, liabF1: 20000000,
+                
+                targetPe: 9.0,
+                catalysts: [
+                    "<strong>Sebab Apply:</strong> Cincai-cincai kira sasaran ada potensi peningkatan 9 sen (<strong>+45% upside potential</strong>) daripada harga IPO RM0.20.",
+                    "<strong>Catalyst Utama:</strong> Pentech berjaya pelbagaikan perniagaan ke sektor bermargin tinggi (menyumbang dari 9% meningkat ke 30% hasil melalui cloud/managed services).",
+                    "<strong>Wow Factor:</strong> Sektor ICT infra mungkin hambar tetapi peningkatan margin cloud menaikkan profitability syarikat secara ketara."
+                ],
+                peers: "<strong>Peer Comparison:</strong> ICT peers average PE ~8x, CP PE ~12x, manakala Infotec PE ~118x (disebabkan loss making tahun lepas). Valuation owner PE 11x, tapi forward PE sifu hanyalah <strong>6.50x</strong>!"
+            },
+            'ei-power': {
+                id: 'ei-power',
+                companyName: 'EI Power Berhad [S]',
+                price: 0.48,
+                totalShares: 700000000,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 42067000, rev24: 50440000, rev25: 77395000,
+                revF: 94887262.58, revF1: 95858440.00,
+                
+                gp23: 8600000, gp24: 15043000, gp25: 15043000,
+                gpF: 24500000, gpF1: 26000000,
+                
+                pat23: 4488000, pat24: 9057000, pat25: 19118000,
+                patF: 23437153.86, patF1: 23677034.68,
+                
+                eps23: 0.64, eps24: 1.29, eps25: 2.73,
+                
+                epsGrowthF: 22.53, epsGrowthF1: 1.12,
+                
+                assets23: 25198000, assets24: 38289000, assets25: 38289000,
+                assetsF: 45000000, assetsF1: 52000000,
+                
+                liab23: 16772000, liab24: 23806000, liab25: 23806000,
+                liabF: 21250000, liabF1: 24000000,
+                
+                targetPe: 17.5,
+                catalysts: [
+                    "<strong>Sebab Apply:</strong> Ride the Malaysia Data Center Boom (NTT, Oracle, Google/Gamuda). Pengiraan cincai-cincai sifu unjurkan <strong>RM0.59 - RM0.69</strong> (potensi peningkatan 23% - 44%).",
+                    "<strong>Market Leader:</strong> Pemimpin pasaran dalam EPCC untuk diesel power backup & fuel distribution system bagi Data Center Tier 3 dan Tier 4 di Malaysia. Satu-satunya niche DC player seumpamanya di Bursa.",
+                    "<strong>Operating Leverage Padu:</strong> Pertumbuhan PAT yang eksponen (+111% YoY untung bersih dari RM9m ke RM19.1m) dengan pengembangan margin bersih (10.7% -> 18.0% -> 24.8%)."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan = 17.4x. Walaupun nampak premium berbanding peers biasa, kedudukan niche dan pertumbuhan profit +111% menjustifikasikan premium ini."
+            },
+            'sunmed': {
+                id: 'sunmed',
+                companyName: 'SUNMED',
+                price: 1.45,
+                totalShares: 11500165558,
+                headers: ["FYE 22", "FYE 23", "FYE 24 (FPE)", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 1456893000, rev24: 1852462000, rev25: 1585749000,
+                revF: 2182869417.53, revF1: 2400000000.00,
+                
+                gp23: 932081000, gp24: 1184891000, gp25: 1010000000,
+                gpF: 1400000000, gpF1: 1550000000,
+                
+                pat23: 181631000, pat24: 257506000, pat25: 220000000,
+                patF: 327430412.63, patF1: 360000000.00,
+                
+                eps23: 1.58, eps24: 2.24, eps25: 1.91,
+                
+                epsGrowthF: 27.0, epsGrowthF1: 10.0,
+                
+                assets23: 3936948000, assets24: 4677929000, assets25: 4677929000,
+                assetsF: 5200000000, assetsF1: 5500000000,
+                
+                liab23: 1291682000, liab24: 1786653000, liab25: 1786653000,
+                liabF: 1900000000, liabF1: 2000000000,
+                
+                targetPe: 64.6,
+                catalysts: [
+                    "<strong>Sebab Apply:</strong> Cincai-cincai kira sasaran unjurkan RM1.84 (potensi peningkatan +26.9% atau 39 sen untung kasar dari RM1.45).",
+                    "<strong>Hype Applicant Terbesar:</strong> Walaupun harga tawarkan PE agak premium/overvalued, sentimen & hype runcit merekodkan jumlah permohonan awam tertinggi setakat ini.",
+                    "<strong>Defensive & Expansion Story:</strong> Sunway Medical Group adalah rangkaian hospital terkemuka dengan profil pendapatan pertahanan bertaraf mega."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 50.93x. Sangat premium berbanding hospital biasa, tetapi disokong oleh kualiti aset gred-A dan rekod pencapaian jenama Sunway."
+            },
+            'mm-computer': {
+                id: 'mm-computer',
+                companyName: 'MMCS Berhad (MM Computer Systems)',
+                price: 0.22,
+                totalShares: 567000000,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 42000000, rev24: 73710000, rev25: 98680000,
+                revF: 115000000.00, revF1: 130000000.00,
+                
+                gp23: 11000000, gp24: 18500000, gp25: 25000000,
+                gpF: 29500000, gpF1: 34000000,
+                
+                pat23: 5200000, pat24: 8690000, pat25: 10120000,
+                patF: 12000000.00, patF1: 14000000.00,
+                
+                eps23: 0.92, eps24: 1.53, eps25: 1.79,
+                
+                epsGrowthF: 18.5, epsGrowthF1: 16.6,
+                
+                assets23: 45000000, assets24: 58000000, assets25: 68251000,
+                assetsF: 75000000, assetsF1: 85000000,
+                
+                liab23: 15000000, liab24: 18000000, liab25: 20566000,
+                liabF: 22000000, liabF1: 24000000,
+                
+                targetPe: 15.0,
+                catalysts: [
+                    "<strong>Sebab Apply (Ralat Sifu Diperbetulkan):</strong> Selepas membetulkan kesilapan taip sifu (saham sebenar ialah 567 Juta unit, bukan 5.67 Bilion), gandaan PE listing sebenar jatuh dari PE 134x kepada **12.3x PE sahaja**!",
+                    "<strong>Pertumbuhan Kewangan Solid:</strong> Hasil FYE 25 meningkat pesat +33.8% (RM98.68M) dan PAT naik +16.4% (RM10.12M).",
+                    "<strong>Upside Potential Tinggi:</strong> Nilai wajar unjuran pada target PE 15.0x ialah **RM 0.32** (potensi peningkatan **+45.4% upside** dari harga IPO RM0.22)."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Pada PE 12.3x, MMCS didagangkan pada harga diskaun berbanding peers ICT yang biasanya traded sekitar 15x - 18x PE. Kadar oversubscription awam adalah tinggi pada 42.12x!"
+            },
+            'inspace-creation': {
+                id: 'inspace-creation',
+                companyName: 'Inspace Creation Berhad',
+                price: 0.25,
+                totalShares: 369301600,
+                headers: ["FYE 22", "FYE 23", "FYE 24 (FPE)", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 31000000, rev24: 78600000, rev25: 84000000,
+                revF: 98605913.98, revF1: 110000000.00,
+                
+                gp23: 9000000, gp24: 22000000, gp25: 24000000,
+                gpF: 28000000, gpF1: 31000000,
+                
+                pat23: 2500000, pat24: 7500000, pat25: 8500000,
+                patF: 10511390.43, patF1: 12000000.00,
+                
+                eps23: 0.68, eps24: 2.03, eps25: 2.30,
+                
+                epsGrowthF: 24.0, epsGrowthF1: 14.2,
+                
+                assets23: 15000000, assets24: 35000000, assets25: 39124000,
+                assetsF: 45000000, assetsF1: 50000000,
+                
+                liab23: 5000000, liab24: 15000000, liab25: 18000000,
+                liabF: 20000000, liabF1: 22000000,
+                
+                targetPe: 11.4,
+                catalysts: [
+                    "<strong>Sambutan Balloting Mengagumkan:</strong> Kadar oversubscription (OS) awam yang mengejutkan mencecah **70.30x** (melibatkan dana permohonan **RM329.2M**), menandakan minat runcit yang sangat kuat.",
+                    "<strong>Pertumbuhan Industri & Untung Tinggi:</strong> PAT CAGR naik superb **300%** dalam 3 tahun, dipacu oleh CAGR IMR industri sebanyak **26.3%** yang merupakan antara tertinggi.",
+                    "<strong>Analisis QR Pertama (Kemas kini Sifu):</strong> Pasaran bimbang sebab 1st QR pasca-listing lemah. Bagi Sifu, ia tidak mencerminkan FY26 kerana kemerosotan bermusim (perayaan & isu pekerja). Sentiasa pantau QR seterusnya untuk re-rating."
+                ],
+                peers: "<strong>Peer Comparison & Risiko:</strong> Penilaian murah (11.4x PE sasaran vs peers 15.5x). Risiko utama: Tiada pendapatan berulang (project-based), Order Book kecil, tumpuan pelanggan tinggi (Top 5 = 62.9%), dan OCF negatif."
+            },
+            'ambest': {
+                id: 'ambest',
+                companyName: 'AMBEST',
+                price: 0.25,
+                totalShares: 510000002,
+                headers: ["FYE 23", "FYE 24", "FYE 25 (FPE)", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 25000000, rev24: 35000000, rev25: 39785000,
+                revF: 63405918.26, revF1: 51513400.00,
+                
+                gp23: 8000000, gp24: 11000000, gp25: 13000000,
+                gpF: 20000000, gpF1: 16000000,
+                
+                pat23: 4000000, pat24: 6000000, pat25: 7500000,
+                patF: 12681183.65, patF1: 10302680.00,
+                
+                eps23: 0.78, eps24: 1.18, eps25: 1.47,
+                
+                epsGrowthF: 69.3, epsGrowthF1: -18.7,
+                
+                assets23: 30000000, assets24: 40000000, assets25: 50000000,
+                assetsF: 70000000, assetsF1: 80000000,
+                
+                liab23: 10000000, liab24: 12000000, liab25: 15000000,
+                liabF: 20000000, liabF1: 22000000,
+                
+                targetPe: 18.0,
+                catalysts: [
+                    "<strong>Dasar NSS Negara (National Semiconductor Strategy):</strong> Ambest mendapat manfaat langsung dari dasar NSS 3-fasa yang diumumkan oleh Perdana Menteri pada 2024.",
+                    "<strong>Upside Potential Tinggi:</strong> Pengiraan 'Cincai-Cincai' Sifu mengunjurkan target PE 18.0x dengan nilai wajar **RM 0.45** (+80% upside potential dari harga IPO RM0.25).",
+                    "<strong>Katalis vs Angka Kewangan:</strong> Ambest dan AMS membuktikan bahawa kajian IPO bukan sahaja melihat angka, tetapi melihat tema pemangkin yang besar."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 10.05x. Sangat murah berbanding peers industri yang biasanya berdagang sekitar 15.5x PE."
+            },
+            'hocksoon': {
+                id: 'hocksoon',
+                companyName: 'HOCKSOON',
+                price: 0.60,
+                totalShares: 500000000,
+                headers: ["FYE 23", "FYE 24", "FYE 25 (FPE)", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 120000000.00, rev24: 147000000.00, rev25: 115703300.00,
+                revF: 169873717.07, revF1: 151823486.39,
+                
+                gp23: 40000000.00, gp24: 50000000.00, gp25: 45000000.00,
+                gpF: 60000000.00, gpF1: 53000000.00,
+                
+                pat23: 25000000.00, pat24: 42000000.00, pat25: 35000000.00,
+                patF: 48414009.37, patF1: 43269693.62,
+                
+                eps23: 5.00, eps24: 8.40, eps25: 7.00,
+                
+                epsGrowthF: 15.0, epsGrowthF1: 3.0,
+                
+                assets23: 350000000, assets24: 420000000, assets25: 486945000,
+                assetsF: 520000000, assetsF1: 550000000,
+                
+                liab23: 90000000, liab24: 100000000, liab25: 115736000,
+                liabF: 125000000, liabF1: 130000000,
+                
+                targetPe: 7.1,
+                catalysts: [
+                    "<strong>Katalis Khas Penyingkiran Subsidi (Subsidy Removal):</strong> Hock Soon membuktikan kekuatan kawalan kos yang tinggi. Selepas penyingkiran subsidi poultry, margin mereka kekal pada **17.6%** (line with Sifu's projection) berbanding pesaing yang turun mendadak ke 10-12%.",
+                    "<strong>Dividen Defensif Jangka Panjang:</strong> Walaupun harga IPO tidak perform kerana ketiadaan minat belian, unjuran QR akan datang menunjukkan potensi pengumuman dividen interim yang baik.",
+                    "<strong>Sebab Beliau Disiplin Skip/Loss (🚀🚀🚀 Rating):</strong> Cincai-cincai kira menunjukkan potensi peningkatan (upside) yang amat rendah iaitu sekitar **3% hingga 5%** sahaja, maka ia adalah Skip/Avoid bagi dagangan jangka pendek."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 6.20x - 6.93x. Nampak sangat murah berbanding poultry peers yang lain di Bursa Malaysia."
+            },
+            'ogx': {
+                id: 'ogx',
+                companyName: 'OGX',
+                price: 0.35,
+                totalShares: 750000000,
+                headers: ["FYE 21", "FYE 22", "FYE 23", "FPE 24", "FPE 25 (Q2)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev21: 120201000.00, rev22: 172474000.00, rev23: 176308000.00,
+                revF: 247505256.87, revF1: 200321085.54,
+                
+                gp21: 19246000.00, gp22: 28430000.00, gp23: 38950000.00,
+                gpF: 50000000.00, gpF1: 42000000.00,
+                
+                pat21: 3808000.00, pat22: 8064000.00, pat23: 15464000.00,
+                patF: 21706211.03, patF1: 17568159.20,
+                
+                eps21: 0.51, eps22: 1.08, eps23: 2.06,
+                
+                epsGrowthF: 40.4, epsGrowthF1: 13.6,
+                
+                assets21: 80000000, assets22: 100000000, assets23: 120000000,
+                assetsF: 150000000, assetsF1: 170000000,
+                
+                liab21: 30000000, liab22: 35000000, liab23: 40000000,
+                liabF: 50000000, liabF1: 55000000,
+                
+                targetPe: 17.0,
+                catalysts: [
+                    "<strong>Laporan Suku Tahun FPE 25Q2 Meningkat:</strong> Walaupun hasil tahunan sebelum ini stagnant (FY22 ke FY23 hanya tumbuh +2.2%), keputusan FPE 25Q2 melonjak ketara dari RM66.9M ke RM94M, menandakan perniagaan mula memasuki fasa growth semula.",
+                    "<strong>Upside Potential Sederhana:</strong> Pengiraan Cincai-Cincai Sifu mengunjurkan target PE 17.0x dengan Nilai Wajar **RM 0.40 - RM 0.49** (+15% hingga +40% upside potential).",
+                    "<strong>Risiko Sentimen Pasaran (Sebab Barai):</strong> Walaupun fundamental syarikat solid dan balance sheet decent, ketiadaan sentiment pasaran yang menyokong semasa listing menyebabkan harganya merosot di bawah IPO."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada di sekitar 12.09x hingga 14.94x. Wajar dipantau untuk pengumpulan semula jika sentimen pasaran pulih."
+            },
+            '5e-resources': {
+                id: '5e-resources',
+                companyName: '5E Resources Berhad',
+                price: 0.26,
+                totalShares: 1540000000,
+                headers: ["FYE 22", "FYE 23", "FPE 24", "FPE 25 (Q2)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev22: 60000000.00, rev23: 70000000.00, rev24: 55000000.00, rev25: 67754000.00,
+                revF: 79732415.37, revF1: 85959804.04,
+                
+                gp22: 27000000.00, gp23: 31500000.00, gp24: 25000000.00, gp25: 30500000.00,
+                gpF: 36000000.00, gpF1: 38700000.00,
+                
+                pat22: 15000000.00, pat23: 18000000.00, pat24: 14000000.00, pat25: 17000000.00,
+                patF: 23879858.40, patF1: 25744961.31,
+                
+                eps22: 0.97, eps23: 1.17, eps24: 0.91, eps25: 1.10,
+                
+                epsGrowthF: 10.0, epsGrowthF1: 18.0,
+                
+                assets22: 120000000, assets23: 140000000, assets24: 130000000, assets25: 160000000,
+                assetsF: 180000000, assetsF1: 200000000,
+                
+                liab22: 20000000, liab23: 22000000, liab24: 21000000, liab25: 25000000,
+                liabF: 30000000, liabF1: 32000000,
+                
+                targetPe: 18.6,
+                catalysts: [
+                    "<strong>Niche Waste-to-Asset dengan Barrier Tinggi:</strong> 5E Resources bukan syarikat waste management biasa. Bisnes niche kitar semula scheduled waste memerlukan lesen DOE yang ketat, fasiliti khas, dan piawaian pematuhan yang sangat tinggi.",
+                    "<strong>Katalis Pengembangan & Semicon/ESG:</strong> Rangkaian pengembangan fasiliti dari Johor ke Perak serta peningkatan permintaan hasil daripada sektor semikonduktor & pusat data (Data Center).",
+                    "<strong>Kekuatan Aliran Tunai (Net Cash):</strong> Memiliki ROE >20%, profit margin >25% dan posisi tunai bersih +RM49.3M yang memberikan perlindungan kuat semasa ketidaktentuan pasaran."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada pada 15.55x - 16.77x. Sangat munasabah untuk syarikat niche pengurusan sisa scheduled waste dengan profit margin melebihi 25%."
+            },
+            'empire-premium': {
+                id: 'empire-premium',
+                companyName: 'Empire Sushi (Empire Premium Food Berhad)',
+                price: 0.70,
+                totalShares: 1100000000,
+                headers: ["FYE 23", "FPE 24 (9M)", "FPE 25 (9M)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev23: 235600000.00, rev24: 113775000.00, rev25: 135813000.00,
+                revF: 281235269.61, revF1: 341620080.00,
+                
+                gp23: 98274000.00, gp24: 45510000.00, gp25: 54325200.00,
+                gpF: 112494107.84, gpF1: 136648032.00,
+                
+                pat23: 37920000.00, pat24: 18000000.00, pat25: 35000000.00,
+                patF: 44997643.14, patF1: 54659212.80,
+                
+                eps23: 3.45, eps24: 1.64, eps25: 3.18,
+                
+                epsGrowthF: 19.0, epsGrowthF1: 44.0,
+                
+                assets23: 150000000, assets24: 160000000, assets25: 180000000,
+                assetsF: 220000000, assetsF1: 250000000,
+                
+                liab23: 40000000, liab24: 42000000, liab25: 45000000,
+                liabF: 50000000, liabF1: 55000000,
+                
+                targetPe: 20.3,
+                catalysts: [
+                    "<strong>Pertumbuhan Sangat Pantas & Menguntungkan:</strong> PAT CAGR 3 tahun berada pada 61% dengan GP margin stabil sekitar 40%. Keputusan suku ketiga 3Q25 mencatatkan margin meningkat ke 18% (Untung Q3 RM15M, Kumulatif 3Q RM35M) menghampiri keuntungan penuh FY24 (RM37M).",
+                    "<strong>Model Perniagaan Sangat Skalable (Grab & Go):</strong> Model perniagaan berisiko rendah, kos permulaan outlet yang rendah dengan tumpuan pada trafik tinggi membolehkan pengembangan pantas (56 outlet baharu dalam 3 tahun).",
+                    "<strong>Premium Brand Power & Listing Main Market:</strong> Penyenaraian di Pasaran Utama (Main Market) dengan sokongan Maybank IB memberikan kredibiliti besar dan tarikan kepada pelabur institusi."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada pada 14.09x - 17.11x, sangat berpatutan berbanding purata PE industri makanan berjenama premium di Bursa Malaysia yang melebihi 25x. Menawarkan Fair Value **RM 0.83 - RM 1.01**."
+            },
+            'mtt-shipping': {
+                id: 'mtt-shipping',
+                companyName: 'MTT Shipping and Logistics Bhd',
+                price: 1.03,
+                totalShares: 2542300000,
+                headers: ["FYE 23", "FPE 24 (9M)", "FPE 25 (9M)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev23: 998591000.00, rev24: 847957000.00, rev25: 961400000.00,
+                revF: 1358943186.27, revF1: 1241408792.35,
+                
+                gp23: 209704110.00, gp24: 178070970.00, gp25: 201894000.00,
+                gpF: 285378069.12, gpF1: 260695846.39,
+                
+                pat23: 253620000.00, pat24: 180000000.00, pat25: 210000000.00,
+                patF: 285378069.12, patF1: 260695846.39,
+                
+                eps23: 9.98, eps24: 7.08, eps25: 8.26,
+                
+                epsGrowthF: 13.0, epsGrowthF1: 3.0,
+                
+                assets23: 1200000000, assets24: 1300000000, assets25: 1400000000,
+                assetsF: 1600000000, assetsF1: 1700000000,
+                
+                liab23: 400000000, liab24: 420000000, liab25: 450000000,
+                liabF: 500000000, liabF1: 520000000,
+                
+                targetPe: 10.3,
+                catalysts: [
+                    "<strong>Peneraju Tempatan Domestic Shipping:</strong> MTT Shipping merupakan market leader dalam domestic shipping di Malaysia dengan pemilikan armada kapal kontena yang moden, besar, dan cekap.",
+                    "<strong>Pelan Pengembangan Kapasiti Fleet:</strong> Sebahagian besar dana IPO digunakan untuk membeli kapal kontena baru (fleet expansion) bagi menambah kapasiti pengangkutan.",
+                    "<strong>Status Kewangan & Dividen Solid:</strong> Kadar hutang yang terurus (Gearing 0.5x, Current Ratio 1.5x) berserta dengan polisi dividen yang tinggi (50% payout ratio) dan Net Assets RM0.92."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada pada 9.18x - 10.04x. Sektor perkapalan dinilai pada gandaan PE yang rendah kerana sifatnya yang kitaran (cyclical) dan telah melepasi kemuncak prestasi industri perkapalan global (peak cycle 2022)."
+            },
+            'ams-material': {
+                id: 'ams-material',
+                companyName: 'AMS Advanced Material Berhad',
+                price: 0.29,
+                totalShares: 612008041,
+                headers: ["FYE 21", "FYE 22", "FYE 23", "FPE 24 (9M)", "FPE 25 (9M)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev21: 61261000.00, rev22: 60486000.00, rev23: 99194000.00,
+                rev24: 43254000.00, rev25: 64912000.00,
+                revF: 148862092.01, revF1: 116480308.12,
+                
+                gp21: 8678000.00, gp22: 7239000.00, gp23: 13126000.00,
+                gp24: 5500000.00, gp25: 8500000.00,
+                gpF: 19649796.15, gpF1: 15375400.67,
+                
+                pat21: 4240000.00, pat22: 2512000.00, pat23: 6162000.00,
+                pat24: 3000000.00, pat25: 4500000.00,
+                patF: 10420346.44, patF1: 8153621.57,
+                
+                eps21: 0.69, eps22: 0.41, eps23: 1.01,
+                
+                epsGrowthF: 69.0, epsGrowthF1: 32.0,
+                
+                assets21: 39731000, assets22: 38359000, assets23: 73801000,
+                assetsF: 95000000, assetsF1: 90000000,
+                
+                liab21: 24273000, liab22: 21308000, liab23: 52779000,
+                liabF: 58000000, liabF1: 55000000,
+                
+                targetPe: 28.6,
+                catalysts: [
+                    "<strong>Pendedahan Rantaian Bekalan Semikonduktor Peringkat Ke-3:</strong> AMS Advanced Material membekalkan aluminium dan tembaga separuh siap yang sangat penting bagi industri aeroangkasa dan sokongan kejuruteraan semikonduktor.",
+                    "<strong>Hasil dan Keuntungan FPE 25 Meningkat Kuat:</strong> Angka FPE 25 menunjukkan lonjakan hasil kepada RM64.9M berbanding RM43.2M FPE 24, menunjukkan aktiviti pemprosesan bahan industri yang rancak.",
+                    "<strong>Maybank IB dan M&A Securities Backing:</strong> Sokongan padu penaja jamin dengan rekod langganan awam yang baik memberikan sokongan premium yang sihat semasa listing day."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada pada 17.03x - 21.77x, menawarkan nilai diskaun ketara berbanding dengan gergasi industrial material yang tersenarai di papan utama. Nilai wajar dianggarkan di paras **RM 0.38 - RM 0.49**."
+            },
+            'manforce-group': {
+                id: 'manforce-group',
+                companyName: 'Manforce Group Berhad',
+                price: 0.38,
+                totalShares: 375000000,
+                headers: ["FYE 23", "FPE 24 (9M)", "FPE 25 (9M)", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev23: 150000000.00, rev24: 120000000.00, rev25: 135000000.00,
+                revF: 235000000.00, revF1: 200000000.00,
+                
+                gp23: 45000000.00, gp24: 36000000.00, gp25: 40500000.00,
+                gpF: 70500000.00, gpF1: 60000000.00,
+                
+                pat23: 6500000.00, pat24: 5500000.00, pat25: 6000000.00,
+                patF: 11400000.00, patF1: 9800000.00,
+                
+                eps23: 1.73, eps24: 1.47, eps25: 1.60,
+                
+                epsGrowthF: 16.0, epsGrowthF1: 10.0,
+                
+                assets23: 80000000, assets24: 85000000, assets25: 90000000,
+                assetsF: 110000000, assetsF1: 105000000,
+                
+                liab23: 25000000, liab24: 26000000, liab25: 27000000,
+                liabF: 30000000, liabF1: 29000000,
+                
+                targetPe: 13.0,
+                catalysts: [
+                    "<strong>Unjuran Kuota Penempatan Pekerja Asing:</strong> Pertumbuhan didorong oleh sasaran peningkatan saiz tenaga kerja tajaan daripada 6,761 pekerja kepada 11,230 pekerja menjelang FY27 (+16% EPS growth).",
+                    "<strong>Perpindahan Papan Penyenaraian LEAP ke ACE:</strong> Perpindahan ini meningkatkan kecairan dagangan dan membolehkan penyertaan pelabur runcit yang lebih luas."
+                ],
+                peers: "<strong>Peer Comparison:</strong> Forward PE berada pada 12.5x - 14.5x. Sektor pengurusan tenaga kerja asing menghadapi risiko dasar kawal selia kemasukan pekerja asing yang tidak menentu. Ditawarkan pada nilai saksama **RM 0.395** (+3.9% upside)."
+            },
+            'elsa': {
+                id: 'elsa',
+                companyName: 'Elsa Berhad',
+                price: 0.23,
+                totalShares: 538391304,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev23: 180000000.00, rev24: 220000000.00, rev25: 264660000.00,
+                revF: 304360000.00, revF1: 345000000.00,
+                
+                gp23: 18000000.00, gp24: 22000000.00, gp25: 26500000.00,
+                gpF: 32000000.00, gpF1: 38000000.00,
+                
+                pat23: 7500000.00, pat24: 9200000.00, pat25: 10760000.00,
+                patF: 13700000.00, patF1: 16500000.00,
+                
+                eps23: 1.39, eps24: 1.71, eps25: 2.00,
+                
+                epsGrowthF: 27.3, epsGrowthF1: 20.4,
+                
+                assets23: 45000000, assets24: 55000000, assets25: 68000000,
+                assetsF: 80000000, assetsF1: 95000000,
+                
+                liab23: 15000000, liab24: 18000000, liab25: 22000000,
+                liabF: 24000000, liabF1: 28000000,
+                
+                targetPe: 12.0,
+                catalysts: [
+                    "<strong>Asset-Light OGSE Solutions:</strong> Penyedia khidmat minyak & gas bersepadu tanpa pemilikan aset berat (kapal/pelantar), mengehadkan perbelanjaan capex.",
+                    "<strong>Risiko Tekanan Jualan (OFS):</strong> Tawaran jualan (Offer for Sale) sebanyak RM8.37 juta daripada pemegang saham sedia ada boleh mewujudkan tekanan jualan pasca-listing."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 11.5x. Ditawarkan pada diskaun berbanding peers OGSE Main Market (14x-18x), tetapi sektor ini kurang momentum semasa. Nilai wajar Sifu dianggarkan sekitar **RM 0.305** (+32.6% upside)."
+            },
+            'sum-technology': {
+                id: 'sum-technology',
+                companyName: 'Sum Technology Berhad',
+                price: 0.28,
+                totalShares: 450000000,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev23: 50000000.00, rev24: 29000000.00, rev25: 65670000.00,
+                revF: 95000000.00, revF1: 120000000.00,
+                
+                gp23: 8500000.00, gp24: 5200000.00, gp25: 11500000.00,
+                gpF: 19500000.00, gpF1: 26000000.00,
+                
+                pat23: 2900000.00, pat24: 3045000.00, pat25: 6060000.00,
+                patF: 10920000.00, patF1: 14500000.00,
+                
+                eps23: 0.64, eps24: 0.68, eps25: 1.35,
+                
+                epsGrowthF: 80.2, epsGrowthF1: 32.8,
+                
+                assets23: 25000000, assets24: 28000000, assets25: 38000000,
+                assetsF: 50000000, assetsF1: 65000000,
+                
+                liab23: 10000000, liab24: 11000000, liab25: 14000000,
+                liabF: 16000000, liabF1: 19000000,
+                
+                targetPe: 16.0,
+                catalysts: [
+                    "<strong>Cleanroom & MEPF Services Boom:</strong> Penerima manfaat langsung daripada limpahan pembangunan Pusat Data (Data Center) dan kilang semikonduktor berteknologi tinggi di Malaysia.",
+                    "<strong>Solid Retail Demand (110.54x OS):</strong> Tiada tawaran jualan (OFS) bersama permintaan runcit yang sangat kuat (110.54 kali ganda oversubscription) memberikan pemangkin kecairan pasca-listing."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 20.7x. Didagangkan hampir setaraf dengan purata peers kejuruteraan industri (18x-22x), tetapi disokong oleh kitaran pertumbuhan bilik bersih yang agresif. Nilai wajar Sifu dianggarkan sekitar **RM 0.39** (+39.3% upside)."
+            }
+        };
+
+        // Populate stock select
+        function initSelect() {
+            const select = document.getElementById('sheet-stock-select');
+            select.innerHTML = '';
+            
+            // Sort all profiles from stockProfiles alphabetically by company name
+            const profiles = Object.values(stockProfiles).sort((a, b) => a.companyName.localeCompare(b.companyName));
+            
+            profiles.forEach(profile => {
+                select.innerHTML += `<option value="${profile.id}">${profile.companyName}</option>`;
+            });
+        }
+
+        // Load data from selection
+        function loadSelectedStock() {
+            const id = document.getElementById('sheet-stock-select').value;
+            let data = null;
+            
+            if (stockProfiles[id]) {
+                data = stockProfiles[id];
+                fillFormValues(data);
+                document.getElementById('sheet-target-pe').value = data.targetPe.toFixed(1);
+                updateNotes(data);
+            } else if (typeof ipoData !== 'undefined') {
+                const ipo = ipoData.find(x => x.id === id);
+                if (ipo) {
+                    const price = ipo.currentPrice || ipo.price || 0.50;
+                    const pe = ipo.pe || 15;
+                    const eps = price > 0 ? (price / pe) * 100 : 4.5;
+                    const totalShares = ipo.marketCap ? Math.round(ipo.marketCap / price) : 250000000;
+                    const revenue = ipo.revenue || 80000000;
+                    const pat = ipo.pat || (revenue * 0.12);
+                    
+                    data = {
+                        id: ipo.id,
+                        companyName: ipo.companyName,
+                        price: price,
+                        totalShares: totalShares,
+                        headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                        
+                        rev23: revenue * 0.3, rev24: revenue * 0.5, rev25: revenue * 0.8,
+                        revF: revenue, revF1: revenue * 1.15,
+                        
+                        gp23: revenue * 0.08, gp24: revenue * 0.15, gp25: revenue * 0.24,
+                        gpF: revenue * 0.3, gpF1: revenue * 0.35,
+                        
+                        pat23: pat * 0.3, pat24: pat * 0.5, pat25: pat * 0.8,
+                        patF: pat, patF1: pat * 1.2,
+                        
+                        eps23: (pat * 0.3 / totalShares) * 100,
+                        eps24: (pat * 0.5 / totalShares) * 100,
+                        eps25: (pat * 0.8 / totalShares) * 100,
+                        
+                        epsGrowthF: 30, epsGrowthF1: 20,
+                        
+                        assets23: revenue * 0.3, assets24: revenue * 0.4, assets25: revenue * 0.45,
+                        assetsF: revenue * 0.5, assetsF1: revenue * 0.6,
+                        
+                        liab23: revenue * 0.15, liab24: revenue * 0.2, liab25: revenue * 0.22,
+                        liabF: revenue * 0.22, liabF1: revenue * 0.25,
+                        
+                        targetPe: pe,
+                        catalysts: [
+                            `Syarikat IPO sektor ${ipo.sector || 'N/A'}.`,
+                            `Harga IPO ditawarkan pada RM ${price.toFixed(3)}.`,
+                            `Analyst Target Price purata: RM ${(ipo.avgTP || price).toFixed(3)}.`
+                        ],
+                        peers: `<strong>Peer Comparison:</strong> Implied PE owner: ${pe}x. Sila masukkan data kewangan sasaran untuk melihat unjuran perbandingan.`
+                    };
+                    fillFormValues(data);
+                    document.getElementById('sheet-target-pe').value = pe;
+                    updateNotes(data);
+                }
+            }
+            
+            if (data) {
+                // Update table headers dynamically
+                const h = data.headers || ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"];
+                const thead = document.querySelector('.excel-table thead tr');
+                if (thead) {
+                    thead.innerHTML = `
+                        <th style="width: 250px;">Parameter (Income & Ratios)</th>
+                        <th style="width: 80px;">Unit</th>
+                        <th>${h[0]} (Hist)</th>
+                        <th>${h[1]} (Hist)</th>
+                        <th>${h[2]} (Hist)</th>
+                        <th>${h[3]}</th>
+                        <th>${h[4]}</th>
+                    `;
+                }
+            }
+            
+            calculateSheet();
+            updateQualitativeOverlay(id);
+        }
+
+        function fillFormValues(data) {
+            document.getElementById('td-stock-name').innerText = data.companyName.toUpperCase();
+            document.getElementById('inp-price').value = data.price.toFixed(3);
+            document.getElementById('inp-total-shares').value = data.totalShares;
+            
+            // Revenues
+            document.getElementById('inp-rev-23').value = data.rev23.toFixed(2);
+            document.getElementById('inp-rev-24').value = data.rev24.toFixed(2);
+            document.getElementById('inp-rev-25').value = data.rev25.toFixed(2);
+            document.getElementById('inp-rev-fye-f').value = data.revF.toFixed(2);
+            document.getElementById('inp-rev-fye-f1').value = data.revF1.toFixed(2);
+            
+            // GPs
+            document.getElementById('inp-gp-23').value = data.gp23.toFixed(2);
+            document.getElementById('inp-gp-24').value = data.gp24.toFixed(2);
+            document.getElementById('inp-gp-25').value = data.gp25.toFixed(2);
+            document.getElementById('inp-gp-fye-f').value = data.gpF.toFixed(2);
+            document.getElementById('inp-gp-fye-f1').value = data.gpF1.toFixed(2);
+            
+            // PATs
+            document.getElementById('inp-pat-23').value = data.pat23.toFixed(2);
+            document.getElementById('inp-pat-24').value = data.pat24.toFixed(2);
+            document.getElementById('inp-pat-25').value = data.pat25.toFixed(2);
+            document.getElementById('inp-pat-fye-f').value = data.patF.toFixed(2);
+            document.getElementById('inp-pat-fye-f1').value = data.patF1.toFixed(2);
+            
+            // Growth
+            document.getElementById('inp-eps-growth-f').value = data.epsGrowthF;
+            document.getElementById('inp-eps-growth-f1').value = data.epsGrowthF1;
+            
+            // Assets
+            document.getElementById('inp-assets-23').value = data.assets23.toFixed(2);
+            document.getElementById('inp-assets-24').value = data.assets24.toFixed(2);
+            document.getElementById('inp-assets-25').value = data.assets25.toFixed(2);
+            document.getElementById('inp-assets-fye-f').value = data.assetsF.toFixed(2);
+            document.getElementById('inp-assets-fye-f1').value = data.assetsF1.toFixed(2);
+            
+            // Liab
+            document.getElementById('inp-liab-23').value = data.liab23.toFixed(2);
+            document.getElementById('inp-liab-24').value = data.liab24.toFixed(2);
+            document.getElementById('inp-liab-25').value = data.liab25.toFixed(2);
+            document.getElementById('inp-liab-fye-f').value = data.liabF.toFixed(2);
+            document.getElementById('inp-liab-fye-f1').value = data.liabF1.toFixed(2);
+        }
+
+        function updateNotes(data) {
+            const notesCard = document.getElementById('sheet-notes-card');
+            const catalystsContent = document.getElementById('sheet-catalysts-content');
+            const peersContent = document.getElementById('sheet-peers-content');
+            
+            if (data.catalysts && data.catalysts.length > 0) {
+                notesCard.style.display = 'flex';
+                let html = '<ul class="catalyst-list">';
+                data.catalysts.forEach(c => {
+                    html += `<li>${c}</li>`;
+                });
+                html += '</ul>';
+                catalystsContent.innerHTML = html;
+                peersContent.innerHTML = data.peers || '';
+            } else {
+                notesCard.style.display = 'none';
+            }
+        }
+
+        function updateQualitativeOverlay(id) {
+            const gradeEl = document.getElementById('qual-grade');
+            const shariahEl = document.getElementById('qual-shariah');
+            const ofsEl = document.getElementById('qual-ofs');
+            const osEl = document.getElementById('qual-os');
+            const insightEl = document.getElementById('qual-insight');
+            
+            if (!gradeEl || !shariahEl || !ofsEl || !osEl || !insightEl) return;
+            
+            const ipo = ipoData.find(x => x.id === id);
+            if (ipo) {
+                // Grade
+                const grade = ipo.predictedGrade || '--';
+                gradeEl.innerText = `Grade: ${grade}`;
+                if (grade === 'A') {
+                    gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;';
+                } else if (grade === 'B') {
+                    gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;';
+                } else if (grade === 'C') {
+                    gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;';
+                } else {
+                    gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
+                }
+                
+                // Shariah
+                const shariah = ipo.shariah;
+                if (shariah === true) {
+                    shariahEl.innerHTML = '<i data-lucide="check-circle-2" style="width: 14px; height: 14px; vertical-align: middle; display: inline-block; margin-right: 2px;"></i> Shariah Compliant';
+                    shariahEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;';
+                } else if (shariah === false) {
+                    shariahEl.innerHTML = '<i data-lucide="x-circle" style="width: 14px; height: 14px; vertical-align: middle; display: inline-block; margin-right: 2px;"></i> Non-Shariah';
+                    shariahEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;';
+                } else {
+                    shariahEl.innerText = 'Shariah: --';
+                    shariahEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
+                }
+                
+                // OFS
+                const ofs = ipo.ofs;
+                if (ofs === true) {
+                    ofsEl.innerText = 'OFS: Yes (Selling Pressure) ⚠️';
+                    ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444;';
+                } else {
+                    ofsEl.innerText = 'OFS: No (Pure Issue) ✅';
+                    ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981;';
+                }
+                
+                // OS
+                const os = ipo.os || 0;
+                if (os > 0) {
+                    osEl.innerText = `OS: ${os}x`;
+                } else {
+                    osEl.innerText = 'OS: Pending / TBA';
+                }
+                
+                // Insight
+                insightEl.innerHTML = ipo.analystInsight || 'Tiada ulasan bertulis dalam pangkalan data.';
+            } else {
+                gradeEl.innerText = 'Grade: --';
+                gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
+                shariahEl.innerText = 'Shariah: --';
+                shariahEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
+                ofsEl.innerText = 'OFS: --';
+                ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
+                osEl.innerText = 'OS: --';
+                insightEl.innerHTML = 'Tiada ulasan kualitatif bertulis.';
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // Core Calculation Engine
+        function calculateSheet() {
+            const price = parseFloat(document.getElementById('inp-price').value) || 0;
+            const totalShares = parseFloat(document.getElementById('inp-total-shares').value) || 1;
+            
+            // Market Cap
+            const marketCap = price * totalShares;
+            document.getElementById('td-market-cap').innerText = 'RM ' + marketCap.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            // Historical variables
+            const rev23 = parseFloat(document.getElementById('inp-rev-23').value) || 0;
+            const rev24 = parseFloat(document.getElementById('inp-rev-24').value) || 0;
+            const rev25 = parseFloat(document.getElementById('inp-rev-25').value) || 0;
+            const revF = parseFloat(document.getElementById('inp-rev-fye-f').value) || 0;
+            const revF1 = parseFloat(document.getElementById('inp-rev-fye-f1').value) || 0;
+            
+            const pat23 = parseFloat(document.getElementById('inp-pat-23').value) || 0;
+            const pat24 = parseFloat(document.getElementById('inp-pat-24').value) || 0;
+            const pat25 = parseFloat(document.getElementById('inp-pat-25').value) || 0;
+            const patF = parseFloat(document.getElementById('inp-pat-fye-f').value) || 0;
+            const patF1 = parseFloat(document.getElementById('inp-pat-fye-f1').value) || 0;
+            
+            const epsGrowthF = parseFloat(document.getElementById('inp-eps-growth-f').value) || 0;
+            const epsGrowthF1 = parseFloat(document.getElementById('inp-eps-growth-f1').value) || 0;
+            
+            // Calculate EPS (sen) = (PAT / shares) * 100
+            const eps23 = (pat23 / totalShares) * 100;
+            const eps24 = (pat24 / totalShares) * 100;
+            const eps25 = (pat25 / totalShares) * 100;
+            const epsF = (patF / totalShares) * 100;
+            const epsF1 = (patF1 / totalShares) * 100;
+            
+            document.getElementById('td-eps-23').innerText = eps23.toFixed(2);
+            document.getElementById('td-eps-24').innerText = eps24.toFixed(2);
+            document.getElementById('td-eps-25').innerText = eps25.toFixed(2);
+            document.getElementById('td-eps-fye-f').innerText = epsF.toFixed(2);
+            document.getElementById('td-eps-fye-f1').innerText = epsF1.toFixed(2);
+            
+            // Balance Sheet variables
+            const assets23 = parseFloat(document.getElementById('inp-assets-23').value) || 0;
+            const assets24 = parseFloat(document.getElementById('inp-assets-24').value) || 0;
+            const assets25 = parseFloat(document.getElementById('inp-assets-25').value) || 0;
+            const assetsF = parseFloat(document.getElementById('inp-assets-fye-f').value) || 0;
+            const assetsF1 = parseFloat(document.getElementById('inp-assets-fye-f1').value) || 0;
+            
+            const liab23 = parseFloat(document.getElementById('inp-liab-23').value) || 0;
+            const liab24 = parseFloat(document.getElementById('inp-liab-24').value) || 0;
+            const liab25 = parseFloat(document.getElementById('inp-liab-25').value) || 0;
+            const liabF = parseFloat(document.getElementById('inp-liab-fye-f').value) || 0;
+            const liabF1 = parseFloat(document.getElementById('inp-liab-fye-f1').value) || 0;
+            
+            // Calculate Equity = Assets - Liabilities
+            const eq23 = assets23 - liab23;
+            const eq24 = assets24 - liab24;
+            const eq25 = assets25 - liab25;
+            const eqF = assetsF - liabF;
+            const eqF1 = assetsF1 - liabF1;
+            
+            document.getElementById('td-equity-23').innerText = 'RM ' + eq23.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-equity-24').innerText = 'RM ' + eq24.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-equity-25').innerText = 'RM ' + eq25.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-equity-fye-f').innerText = 'RM ' + eqF.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-equity-fye-f1').innerText = 'RM ' + eqF1.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            // PER = price / (eps/100)
+            const per23 = eps23 > 0 ? price / (eps23 / 100) : 0;
+            const per24 = eps24 > 0 ? price / (eps24 / 100) : 0;
+            const per25 = eps25 > 0 ? price / (eps25 / 100) : 0;
+            const perF = epsF > 0 ? price / (epsF / 100) : 0;
+            const perF1 = epsF1 > 0 ? price / (epsF1 / 100) : 0;
+            
+            document.getElementById('td-per-23').innerText = per23.toFixed(2);
+            document.getElementById('td-per-24').innerText = per24.toFixed(2);
+            document.getElementById('td-per-25').innerText = per25.toFixed(2);
+            document.getElementById('td-per-fye-f').innerText = perF.toFixed(2);
+            document.getElementById('td-per-fye-f1').innerText = perF1.toFixed(2);
+            
+            // PEG = PER / Growth
+            const pegF = epsGrowthF > 0 ? perF / epsGrowthF : 0;
+            const pegF1 = epsGrowthF1 > 0 ? perF1 / epsGrowthF1 : 0;
+            
+            document.getElementById('td-peg-fye-f').innerText = pegF.toFixed(2);
+            document.getElementById('td-peg-fye-f1').innerText = pegF1.toFixed(2);
+            
+            // PSR = Price / (Revenue / shares)
+            const psr23 = rev23 > 0 ? price / (rev23 / totalShares) : 0;
+            const psr24 = rev24 > 0 ? price / (rev24 / totalShares) : 0;
+            const psr25 = rev25 > 0 ? price / (rev25 / totalShares) : 0;
+            const psrF = revF > 0 ? price / (revF / totalShares) : 0;
+            const psrF1 = revF1 > 0 ? price / (revF1 / totalShares) : 0;
+            
+            document.getElementById('td-psr-23').innerText = psr23.toFixed(2);
+            document.getElementById('td-psr-24').innerText = psr24.toFixed(2);
+            document.getElementById('td-psr-25').innerText = psr25.toFixed(2);
+            document.getElementById('td-psr-fye-f').innerText = psrF.toFixed(2);
+            document.getElementById('td-psr-fye-f1').innerText = psrF1.toFixed(2);
+            
+            // PBR = Price / (Equity / shares)
+            const pbr23 = eq23 > 0 ? price / (eq23 / totalShares) : 0;
+            const pbr24 = eq24 > 0 ? price / (eq24 / totalShares) : 0;
+            const pbr25 = eq25 > 0 ? price / (eq25 / totalShares) : 0;
+            const pbrF = eqF > 0 ? price / (eqF / totalShares) : 0;
+            const pbrF1 = eqF1 > 0 ? price / (eqF1 / totalShares) : 0;
+            
+            document.getElementById('td-pbr-23').innerText = pbr23.toFixed(2);
+            document.getElementById('td-pbr-24').innerText = pbr24.toFixed(2);
+            document.getElementById('td-pbr-25').innerText = pbr25.toFixed(2);
+            document.getElementById('td-pbr-fye-f').innerText = pbrF.toFixed(2);
+            document.getElementById('td-pbr-fye-f1').innerText = pbrF1.toFixed(2);
+            
+            // ROE = (PAT / Equity) * 100
+            const roe23 = eq23 > 0 ? (pat23 / eq23) * 100 : 0;
+            const roe24 = eq24 > 0 ? (pat24 / eq24) * 100 : 0;
+            const roe25 = eq25 > 0 ? (pat25 / eq25) * 100 : 0;
+            const roeF = eqF > 0 ? (patF / eqF) * 100 : 0;
+            const roeF1 = eqF1 > 0 ? (patF1 / eqF1) * 100 : 0;
+            
+            document.getElementById('td-roe-23').innerText = roe23.toFixed(2) + '%';
+            document.getElementById('td-roe-24').innerText = roe24.toFixed(2) + '%';
+            document.getElementById('td-roe-25').innerText = roe25.toFixed(2) + '%';
+            document.getElementById('td-roe-fye-f').innerText = roeF.toFixed(2) + '%';
+            document.getElementById('td-roe-fye-f1').innerText = roeF1.toFixed(2) + '%';
+            
+            // Valuations
+            const targetPe = parseFloat(document.getElementById('sheet-target-pe').value) || 10;
+            const valF = (epsF * targetPe) / 100;
+            const valF1 = (epsF1 * targetPe) / 100;
+            
+            document.getElementById('td-val1-fye-f').innerText = 'RM ' + valF.toFixed(3);
+            document.getElementById('td-val1-fye-f1').innerText = 'RM ' + valF1.toFixed(3);
+            
+            // Buy limits with MOS
+            const mos = parseInt(document.getElementById('sheet-mos-slider').value) || 0;
+            const buyF = valF * (1 - (mos / 100));
+            const buyF1 = valF1 * (1 - (mos / 100));
+            
+            document.getElementById('td-buy1-fye-f').innerText = 'RM ' + buyF.toFixed(3);
+            document.getElementById('td-buy1-fye-f1').innerText = 'RM ' + buyF1.toFixed(3);
+            
+            // Verdict logic
+            const verdictBox = document.getElementById('sheet-verdict-box');
+            if (price <= buyF) {
+                verdictBox.className = 'verdict-banner buy';
+                verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(3)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(3)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar!`;
+            } else if (price <= valF) {
+                verdictBox.className = 'verdict-banner hold';
+                verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(3)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(3)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(3)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran.`;
+            } else {
+                verdictBox.className = 'verdict-banner avoid';
+                verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(3)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(3)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula.`;
+            }
+        }
+
+        // Initialize Page
+        window.onload = function() {
+            initSelect();
+            fillFormValues(stockProfiles['bus-cap']);
+            updateNotes(stockProfiles['bus-cap']);
+            calculateSheet();
+            updateQualitativeOverlay('bus-cap');
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>
