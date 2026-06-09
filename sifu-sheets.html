@@ -1102,6 +1102,40 @@
                     "<strong>Solid Retail Demand (110.54x OS):</strong> Tiada tawaran jualan (OFS) bersama permintaan runcit yang sangat kuat (110.54 kali ganda oversubscription) memberikan pemangkin kecairan pasca-listing."
                 ],
                 peers: "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 20.7x. Didagangkan hampir setaraf dengan purata peers kejuruteraan industri (18x-22x), tetapi disokong oleh kitaran pertumbuhan bilik bersih yang agresif. Nilai wajar Sifu dianggarkan sekitar **RM 0.39** (+39.3% upside)."
+            },
+            'skyechip': {
+                id: 'skyechip',
+                companyName: 'SkyeChip Berhad',
+                price: 0.88,
+                totalShares: 288000000,
+                headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+                
+                rev23: 110000000.00, rev24: 125000000.00, rev25: 140000000.00,
+                revF: 152807101.00, revF1: 166715627.35,
+                
+                gp23: 42570000.00, gp24: 48375000.00, gp25: 54180000.00,
+                gpF: 59136348.09, gpF1: 64518947.78,
+                
+                pat23: 6820000.00, pat24: 7750000.00, pat25: 8680000.00,
+                patF: 9480000.00, patF1: 10340000.00,
+                
+                eps23: 2.37, eps24: 2.69, eps25: 3.01,
+                
+                epsGrowthF: 9.3, epsGrowthF1: 9.1,
+                
+                assets23: 55000000, assets24: 62000000, assets25: 70000000,
+                assetsF: 82000000, assetsF1: 95000000,
+                
+                liab23: 15000000, liab24: 18000000, liab25: 20000000,
+                liabF: 22000000, liabF1: 25000000,
+                
+                targetPe: 26.73,
+                catalysts: [
+                    "<strong>Spectacular Listing Hype:</strong> Dibuka pada paras RM3.50 (+297.7% premium) pada hari debut dengan langganan awam 95.03x menunjukkan tarikan runcit dan institusi yang luar biasa.",
+                    "<strong>Sektor IC Design Premium:</strong> Pembuat cip rekaan litar bersepadu (IC Design) Penang berasaskan AI dan HPC (High Performance Computing) dengan pertumbuhan kukuh.",
+                    "<strong>Rekod Kewangan Mantap:</strong> Hasil meningkat dari RM152.8M (FYE F) ke RM166.7M (FYE F+1) dengan margin kasar (GP margin) yang stabil pada 38.7%."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (FY26) berada di sekitar 24.50x - 26.73x. Premium yang wajar berbanding peers semikonduktor tempatan kerana pendedahan langsung kepada rekaan litar AI/HPC proprietary."
             }
         };
 
@@ -1146,8 +1180,29 @@
             const select = document.getElementById('sheet-stock-select');
             select.innerHTML = '';
             
-            // Sort all profiles from stockProfiles alphabetically by company name
-            const profiles = Object.values(stockProfiles).sort((a, b) => a.companyName.localeCompare(b.companyName));
+            // 1. Get all profiles from stockProfiles
+            const profiles = Object.values(stockProfiles).map(p => ({
+                id: p.id,
+                companyName: p.companyName
+            }));
+            
+            // 2. Scan ipoData to find listed Shariah 2026 IPOs that are not in stockProfiles
+            if (typeof ipoData !== 'undefined') {
+                ipoData.forEach(ipo => {
+                    if (ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true) {
+                        const exists = profiles.some(p => p.id === ipo.id);
+                        if (!exists) {
+                            profiles.push({
+                                id: ipo.id,
+                                companyName: ipo.companyName
+                            });
+                        }
+                    }
+                });
+            }
+            
+            // Sort all profiles alphabetically by company name
+            profiles.sort((a, b) => a.companyName.localeCompare(b.companyName));
             
             profiles.forEach(profile => {
                 select.innerHTML += `<option value="${profile.id}">${profile.companyName}</option>`;

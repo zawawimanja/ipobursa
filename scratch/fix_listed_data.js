@@ -16,7 +16,6 @@
  * HOCKSOON  - 0.60 / 0.53 / 0.63  / 0.56  / 0.34   / -6.67%
  * OGX       - 0.35 / 0.28 / 0.355 / 0.345 / 0.33   / -1.43%
  * GDGROUP   - 0.45 / 0.49 / 0.505 / 0.40  / 0.355  / -11.11%
- * Golden D  - 0.45 / 0.49 / 0.505 / 0.40  / 0.35   / -11.11%
  * AMS       - 0.29 / 0.29 / 0.35  / 0.305 / 0.335  / +5.17%
  * MTT       - 1.03 / 1.08 / 1.09  / 1.00  / 2.34   / -2.91%  (current is WRONG vs high)
  * MFGROUP   - 0.38 / 0.375/ 0.415 / 0.375 / 0.26   / -1.32%
@@ -42,7 +41,6 @@ const fixes = [
   { id: 'hocksoon',           openPrice: 0.53,   highPrice: 0.63,   closePrice: 0.56,  currentPrice: 0.34,  performance: '-6.67%',   symbol: 'HOCKSOON' },
   { id: 'ogx',                openPrice: 0.28,   highPrice: 0.355,  closePrice: 0.345, currentPrice: 0.33,  performance: '-1.43%',   symbol: 'OGX' },
   { id: 'gdgroup',            openPrice: 0.49,   highPrice: 0.505,  closePrice: 0.40,  currentPrice: 0.355, performance: '-11.11%',  symbol: 'GDGROUP' },
-  { id: 'golden-destinations', openPrice: 0.49,  highPrice: 0.505,  closePrice: 0.40,  currentPrice: 0.35,  performance: '-11.11%' },
   { id: 'ams-material',       openPrice: 0.29,   highPrice: 0.35,   closePrice: 0.305, currentPrice: 0.335, performance: '+5.17%',   symbol: 'AMS' },
   { id: 'mtt-shipping',       openPrice: 1.08,   highPrice: 1.09,   closePrice: 1.00,  currentPrice: 1.09,  performance: '-2.91%',   symbol: 'MTTSL' },
   { id: 'manforce-group',     openPrice: 0.375,  highPrice: 0.415,  closePrice: 0.375, currentPrice: 0.26,  performance: '-1.32%',   symbol: 'MFGROUP' },

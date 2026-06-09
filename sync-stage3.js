@@ -63,9 +63,9 @@ const liveStage3 = [
         pe: 15.85
     },
     {
-        id: 'golden-destinations',
+        id: 'gdgroup',
         companyName: 'Golden Destinations Group Berhad',
-        sector: 'Consumer Products', // Tourism/Travel
+        sector: 'Consumer (Tourism)', // Tourism/Travel
         stage: 3,
         price: 0.45,
         market: 'ACE Market',
@@ -75,8 +75,8 @@ const liveStage3 = [
         year: 2026,
         shariah: true,
         os: 0,
-        ib: 'Malacca Securities',
-        fundUse: 'Pengembangan',
+        ib: 'UOB Kay Hian',
+        fundUse: 'Business expansion, working capital',
         pe: 15.85
     }
 ];
