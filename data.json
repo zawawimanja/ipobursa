@@ -4055,7 +4055,8 @@
         "status": "Listed",
         "shariah": true,
         "outlier": true,
-        "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
+        "sifuTargetPrice": 0.85,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Premium IC design house in Malaysia. Direct proxy to AI and semiconductor growth, highly attractive near IPO price.",
         "highPrice": 0.368,
         "openPrice": 2.05002,
         "closePrice": 2.429973,
@@ -4298,10 +4299,12 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Digitalization and application developer backed by MYEG. Net cash position and solid record of dividends.",
         "highPrice": 0.391,
         "openPrice": 0.7750080000000001,
         "closePrice": 0.7849919999999999,
-        "symbol": "AGMO"
+        "symbol": "AGMO",
+        "sifuTargetPrice": 0.50
     },
     {
         "id": "amereit",
@@ -4611,10 +4614,12 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Leading cybersecurity consulting firm with zero debt and high net cash. Ride the cybersecurity megatrend.",
         "highPrice": 0.621,
         "openPrice": 0.6,
         "closePrice": 0.845,
-        "symbol": "LGMS"
+        "symbol": "LGMS",
+        "sifuTargetPrice": 0.65
     },
     {
         "id": "mnhldg",
@@ -5032,10 +5037,12 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
+        "analystInsight": "✅ <b>WORTH IT (GRADE A)</b><br>Monopoly in credit reporting database in Malaysia. High-margin cash-cow business, excellent defensive play.",
         "highPrice": 0.8164999999999999,
         "openPrice": 1.49996,
         "closePrice": 1.6199700000000004,
-        "symbol": "CTOS"
+        "symbol": "CTOS",
+        "sifuTargetPrice": 0.90
     },
     {
         "id": "ecomate",
