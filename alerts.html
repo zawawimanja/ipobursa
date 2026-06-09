@@ -254,7 +254,6 @@
             <select id="alert-filter" class="alert-filter-select" onchange="renderAlerts()">
                 <option value="portfolio">Portfolio & Watchlist Sifu</option>
                 <option value="grade_ab">Saham Gred A/B Lain (Zon Beli)</option>
-                <option value="all_shariah">Semua Saham Shariah (Zon Beli)</option>
             </select>
         </div>
 
@@ -270,10 +269,10 @@
                         <tr>
                             <th>Syarikat</th>
                             <th>Sektor</th>
+                            <th style="text-align: center;">Gred</th>
                             <th style="text-align: right;">Harga Semasa</th>
                             <th style="text-align: right;">Harga Sasaran</th>
                             <th style="text-align: right;">Diskaun %</th>
-                            <th style="width: 180px; text-align: center;">Tindakan</th>
                         </tr>
                     </thead>
                     <tbody id="tbody-active">
@@ -298,10 +297,10 @@
                         <tr>
                             <th>Syarikat</th>
                             <th>Sektor</th>
+                            <th style="text-align: center;">Gred</th>
                             <th style="text-align: right;">Harga Semasa</th>
                             <th style="text-align: right;">Harga Sasaran</th>
                             <th style="text-align: right;">Diskaun %</th>
-                            <th style="width: 180px; text-align: center;">Tindakan</th>
                         </tr>
                     </thead>
                     <tbody id="tbody-muted">
@@ -418,7 +417,8 @@
                 }
                 
                 const hasTarget = targetPrice > 0;
-                if (!isShariah || !hasTarget) return;
+                const isListed = ipo.stage === 5;
+                if (!isShariah || !hasTarget || !isListed) return;
 
                 const curPrice = ipo.currentPrice || ipo.price || 0;
                 const isTriggered = curPrice > 0 && curPrice <= targetPrice;
@@ -433,10 +433,6 @@
                     const isGradeAB = ipo.predictedGrade === 'A' || ipo.predictedGrade === 'B';
                     const isRecent = ipo.year >= 2025;
                     if (!inPortfolio && (!isGradeAB || !isRecent)) return;
-                } else if (filterVal === 'all_shariah') {
-                    if (!isTriggered) return;
-                    const isRecent = ipo.year >= 2025;
-                    if (!inPortfolio && !isRecent) return;
                 }
                 
                 // Match search filter
@@ -469,6 +465,10 @@
                     discountClass = 'premium-text';
                 }
 
+                const grade = ipo.predictedGrade || 'Pending';
+                const gradeColor = grade === 'A' ? '#10b981' : grade === 'B' ? '#f59e0b' : (grade === 'Pending' ? '#a5b4fc' : '#ef4444');
+                const gradeBadge = `<span style="color: ${gradeColor}; font-weight: bold; font-size: 0.8rem; padding: 0.15rem 0.4rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10;">${grade}</span>`;
+
                 const rowHtml = `
                     <tr>
                         <td>
@@ -480,6 +480,9 @@
                         <td>
                             <div class="sector">${ipo.sector || 'Sektor N/A'}</div>
                         </td>
+                        <td style="text-align: center;">
+                            ${gradeBadge}
+                        </td>
                         <td style="text-align: right;">
                             <span class="price-val price-curr">RM ${curPrice.toFixed(3)}</span>
                         </td>
@@ -489,16 +492,6 @@
                         </td>
                         <td style="text-align: right;">
                             <span class="${discountClass}">${discountText}</span>
-                        </td>
-                        <td style="text-align: center;">
-                            ${isMuted ? 
-                                `<button class="btn-table-action btn-table-unmute" onclick="unmuteAlert('${ipo.id}')">
-                                    <i data-lucide="bell" style="width:14px;"></i> Aktifkan
-                                 </button>` : 
-                                `<button class="btn-table-action btn-table-mute" onclick="muteAlert('${ipo.id}')">
-                                    <i data-lucide="bell-off" style="width:14px;"></i> Padam Alert
-                                 </button>`
-                            }
                         </td>
                     </tr>
                 `;
