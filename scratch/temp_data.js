@@ -1,4 +1,4 @@
-const IPO_DATA = [
+module.exports = [
   {
     "id": "eckem",
     "companyName": "Eckem Holdings Berhad",
@@ -6552,29 +6552,6 @@ const IPO_DATA = [
     "openPrice": 0.35,
     "closePrice": 0.305,
     "sifuTargetPrice": 0.58
-  },
-  {
-    "id": "solarvest",
-    "companyName": "Solarvest Holdings Berhad",
-    "symbol": "SLVEST",
-    "market": "Main Market",
-    "listingDate": "26-Nov-2019",
-    "year": 2019,
-    "price": 0.35,
-    "currentPrice": 2.91,
-    "performance": "+731.4%",
-    "os": 35.4,
-    "ib": "M&A Securities",
-    "sector": "Utilities (Solar EPCC)",
-    "fundUse": "Business expansion, purchase of machinery & equipment, working capital",
-    "stage": 5,
-    "status": "Listed",
-    "shariah": true,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Leading solar EPCC player in Malaysia. Massive beneficiary of NETR green energy policies with record RM536.8M revenue in FY25. Growing recurring income from owned solar asset portfolio.",
-    "highPrice": 3.44,
-    "openPrice": 0.35,
-    "closePrice": 2.91,
-    "sifuTargetPrice": 3.10
   }
 ];
 

@@ -14,173 +14,147 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="data.js?v=1.1"></script>
     <style>
-        .alerts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .alert-card {
+        .alerts-table-container {
+            width: 100%;
+            overflow-x: auto;
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(12px);
             border-radius: 1rem;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .alert-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
+        .alerts-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
         }
 
-        .alert-card.muted {
-            border-color: rgba(239, 68, 68, 0.2);
-            opacity: 0.7;
+        .alerts-table th, .alerts-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
         }
 
-        .alert-card.muted:hover {
-            border-color: rgba(239, 68, 68, 0.4);
-            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.15);
-        }
-
-        .alert-card-glow {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .alert-card.muted .alert-card-glow {
-            background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .discount-badge.fair {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: #f59e0b;
-        }
-
-        .discount-badge.muted-badge {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-        }
-
-        .alert-header {
-            margin-bottom: 1rem;
-            padding-right: 3.5rem;
-        }
-
-        .alert-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .alert-sector {
-            font-size: 0.75rem;
+        .alerts-table th {
+            background: rgba(15, 23, 42, 0.6);
             color: var(--text-dim);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
             text-transform: uppercase;
+            font-size: 0.75rem;
             letter-spacing: 0.05em;
         }
 
-        .alert-price-comparison {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            margin-bottom: 1.25rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .alerts-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .alerts-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .alerts-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .alerts-table.active-table tbody tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .alerts-table.muted-table tbody tr:hover {
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .alerts-table .company-name {
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
             gap: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: color 0.2s ease;
         }
 
-        .price-box {
-            text-align: center;
+        .alerts-table .company-name:hover {
+            color: var(--primary-light);
         }
 
-        .price-box label {
-            display: block;
-            font-size: 0.65rem;
+        .alerts-table .sector {
             color: var(--text-dim);
-            margin-bottom: 0.25rem;
-            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
-        .price-box span {
-            font-size: 1.1rem;
-            font-weight: 800;
+        .alerts-table .price-val {
+            font-family: monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        .price-box.curr span {
+        .alerts-table .price-curr {
             color: #ef4444;
         }
 
-        .price-box.target span {
+        .alerts-table .price-target {
             color: #10b981;
         }
 
-        .alert-btn {
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            transition: var(--transition);
+        .alerts-table .discount-text {
+            font-weight: 700;
+            color: #10b981;
         }
 
-        .alert-btn-mute {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
+        .alerts-table .fair-text {
+            font-weight: 700;
+            color: #f59e0b;
+        }
+
+        .alerts-table .muted-text {
+            font-weight: 700;
             color: #ef4444;
         }
 
-        .alert-btn-mute:hover {
+        .alerts-table .premium-text {
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .btn-table-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            background: none;
+            width: 100%;
+        }
+
+        .btn-table-mute {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .btn-table-mute:hover {
             background: #ef4444;
             color: white;
         }
 
-        .alert-btn-unmute {
+        .btn-table-unmute {
             background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.2);
             color: #10b981;
         }
 
-        .alert-btn-unmute:hover {
+        .btn-table-unmute:hover {
             background: #10b981;
             color: white;
         }
@@ -210,7 +184,8 @@
             border-radius: 1rem;
             text-align: center;
             color: var(--text-dim);
-            margin-top: 2rem;
+            margin: 1.5rem 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -246,7 +221,7 @@
                 <h1 style="margin: 0; font-size: 2.25rem;">Zon Beli <span style="text-shadow: 0 0 10px rgba(245, 158, 11, 0.4); color: #f59e0b;">Sifu Alerts</span></h1>
             </div>
             <p style="color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0 auto;">
-                Senarai saham patuh Shariah yang kini didagangkan pada atau di bawah harga kajian sasaran Sifu (Zon Beli).
+                Senarai saham pilihan / pegangan portfolio Sifu (Patuh Shariah) yang kini didagangkan pada atau di bawah harga kajian sasaran (Zon Beli).
             </p>
         </header>
 
@@ -261,8 +236,25 @@
                 <i data-lucide="bell-ring" style="color: #10b981; width: 20px;"></i>
                 Alert Aktif (<span id="count-active">0</span>)
             </h2>
-            <div class="alerts-grid" id="grid-active">
-                <!-- Dynamically filled -->
+            <div class="alerts-table-container" id="container-active">
+                <table class="alerts-table active-table">
+                    <thead>
+                        <tr>
+                            <th>Syarikat</th>
+                            <th>Sektor</th>
+                            <th style="text-align: right;">Harga Semasa</th>
+                            <th style="text-align: right;">Kajian Sifu</th>
+                            <th style="text-align: right;">Diskaun %</th>
+                            <th style="width: 180px; text-align: center;">Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-active">
+                        <!-- Dynamically filled -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="empty-active" class="empty-state" style="display: none;">
+                Tiada alert aktif untuk kriteria carian anda. Semua harga berada di atas zon sasaran.
             </div>
         </section>
 
@@ -272,8 +264,25 @@
                 <i data-lucide="bell-off" style="color: #ef4444; width: 20px;"></i>
                 Alert Dipadam/Senyap (<span id="count-muted">0</span>)
             </h2>
-            <div class="alerts-grid" id="grid-muted">
-                <!-- Dynamically filled -->
+            <div class="alerts-table-container" id="container-muted">
+                <table class="alerts-table muted-table">
+                    <thead>
+                        <tr>
+                            <th>Syarikat</th>
+                            <th>Sektor</th>
+                            <th style="text-align: right;">Harga Semasa</th>
+                            <th style="text-align: right;">Kajian Sifu</th>
+                            <th style="text-align: right;">Diskaun %</th>
+                            <th style="width: 180px; text-align: center;">Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-muted">
+                        <!-- Dynamically filled -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="empty-muted" class="empty-state" style="display: none;">
+                Tiada alert yang dipadamkan.
             </div>
         </section>
     </main>
@@ -316,17 +325,25 @@
             const searchVal = document.getElementById('alert-search').value.toLowerCase();
             const dismissed = getDismissedAlerts();
             
-            const activeContainer = document.getElementById('grid-active');
-            const mutedContainer = document.getElementById('grid-muted');
+            const activeTableBody = document.getElementById('tbody-active');
+            const mutedTableBody = document.getElementById('tbody-muted');
             
-            activeContainer.innerHTML = '';
-            mutedContainer.innerHTML = '';
+            const containerActive = document.getElementById('container-active');
+            const containerMuted = document.getElementById('container-muted');
+            
+            const emptyActive = document.getElementById('empty-active');
+            const emptyMuted = document.getElementById('empty-muted');
+            
+            activeTableBody.innerHTML = '';
+            mutedTableBody.innerHTML = '';
             
             let activeCount = 0;
             let mutedCount = 0;
             
             if (typeof IPO_DATA === 'undefined') {
-                activeContainer.innerHTML = '<div class="empty-state">Data tidak dapat dimuatkan. Sila semak fail data.js.</div>';
+                containerActive.style.display = 'none';
+                emptyActive.style.display = 'block';
+                emptyActive.innerText = 'Data tidak dapat dimuatkan. Sila semak fail data.js.';
                 return;
             }
 
@@ -360,71 +377,81 @@
                 
                 if (!isShariah || !hasTarget) return;
 
+                const sifuPortfolio = ['cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 'iab', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 'solarvest'];
+                if (!sifuPortfolio.includes(ipo.id)) return;
+
                 const curPrice = ipo.currentPrice || ipo.price || 0;
                 const targetPrice = ipo.sifuTargetPrice;
                 
-                // Alert triggers when currentPrice <= sifuTargetPrice
-                const isTriggered = curPrice > 0 && curPrice <= targetPrice;
-                
-                if (!isTriggered) return;
-
                 // Match search filter
                 const nameMatch = ipo.companyName.toLowerCase().includes(searchVal);
                 const sectorMatch = (ipo.sector || '').toLowerCase().includes(searchVal);
                 const idMatch = ipo.id.toLowerCase().includes(searchVal);
                 if (!nameMatch && !sectorMatch && !idMatch) return;
 
-                // Calculate discount percent
-                const discount = ((targetPrice - curPrice) / targetPrice * 100);
-                let badgeHtml = '';
-                if (discount > 0.01) {
-                    badgeHtml = `<div class="discount-badge">Diskaun ${discount.toFixed(1)}%</div>`;
+                const isMuted = currentDismissed.includes(ipo.id);
+                const isTriggered = curPrice > 0 && curPrice <= targetPrice;
+                
+                let iconName = 'trending-down';
+                let iconColor = '#10b981';
+                let discountText = '';
+                let discountClass = '';
+                
+                if (isMuted) {
+                    iconColor = '#ef4444';
+                    discountText = 'Senyap';
+                    discountClass = 'muted-text';
+                } else if (isTriggered) {
+                    iconColor = '#10b981';
+                    const discount = ((targetPrice - curPrice) / targetPrice * 100);
+                    discountText = discount > 0.01 ? `Diskaun ${discount.toFixed(1)}%` : 'Harga Wajar';
+                    discountClass = discount > 0.01 ? 'discount-text' : 'fair-text';
                 } else {
-                    badgeHtml = `<div class="discount-badge fair">Harga Wajar</div>`;
+                    iconName = 'trending-up';
+                    iconColor = '#64748b';
+                    const premium = ((curPrice - targetPrice) / targetPrice * 100);
+                    discountText = `Di atas Target (+${premium.toFixed(1)}%)`;
+                    discountClass = 'premium-text';
                 }
 
-                const cardHtml = `
-                    <div class="alert-card ${currentDismissed.includes(ipo.id) ? 'muted' : ''}">
-                        <div class="alert-card-glow"></div>
-                        ${currentDismissed.includes(ipo.id) ? '<div class="discount-badge muted-badge">Senyap</div>' : badgeHtml}
-                        
-                        <div class="alert-header">
-                            <div class="alert-title">
-                                <i data-lucide="trending-down" style="width:16px; color:${currentDismissed.includes(ipo.id) ? '#ef4444' : '#10b981'}"></i>
-                                <span style="cursor:pointer;" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">${ipo.companyName}</span>
+                const rowHtml = `
+                    <tr>
+                        <td>
+                            <div class="company-name" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">
+                                <i data-lucide="${iconName}" style="width:16px; color:${iconColor}"></i>
+                                <span>${ipo.companyName}</span>
                             </div>
-                            <div class="alert-sector">${ipo.sector || 'Sektor N/A'}</div>
-                        </div>
-
-                        <div class="alert-price-comparison">
-                            <div class="price-box curr">
-                                <label>Harga Semasa</label>
-                                <span>RM ${curPrice.toFixed(3)}</span>
-                            </div>
-                            <div class="price-box target">
-                                <label>Kajian Sifu</label>
-                                <span>RM ${targetPrice.toFixed(3)}</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            ${currentDismissed.includes(ipo.id) ? 
-                                `<button class="alert-btn alert-btn-unmute" onclick="unmuteAlert('${ipo.id}')">
-                                    <i data-lucide="bell" style="width:14px;"></i> Aktifkan Alert
+                        </td>
+                        <td>
+                            <div class="sector">${ipo.sector || 'Sektor N/A'}</div>
+                        </td>
+                        <td style="text-align: right;">
+                            <span class="price-val price-curr">RM ${curPrice.toFixed(3)}</span>
+                        </td>
+                        <td style="text-align: right;">
+                            <span class="price-val price-target">RM ${targetPrice.toFixed(3)}</span>
+                        </td>
+                        <td style="text-align: right;">
+                            <span class="${discountClass}">${discountText}</span>
+                        </td>
+                        <td style="text-align: center;">
+                            ${isMuted ? 
+                                `<button class="btn-table-action btn-table-unmute" onclick="unmuteAlert('${ipo.id}')">
+                                    <i data-lucide="bell" style="width:14px;"></i> Aktifkan
                                  </button>` : 
-                                `<button class="alert-btn alert-btn-mute" onclick="muteAlert('${ipo.id}')">
-                                    <i data-lucide="bell-off" style="width:14px;"></i> Padam Alert (Mute)
+                                `<button class="btn-table-action btn-table-mute" onclick="muteAlert('${ipo.id}')">
+                                    <i data-lucide="bell-off" style="width:14px;"></i> Padam Alert
                                  </button>`
                             }
-                        </div>
-                    </div>
+                        </td>
+                    </tr>
                 `;
 
-                if (currentDismissed.includes(ipo.id)) {
-                    mutedContainer.innerHTML += cardHtml;
+                if (isMuted) {
+                    mutedTableBody.innerHTML += rowHtml;
                     mutedCount++;
                 } else {
-                    activeContainer.innerHTML += cardHtml;
+                    activeTableBody.innerHTML += rowHtml;
                     activeCount++;
                 }
             });
@@ -433,10 +460,19 @@
             document.getElementById('count-muted').innerText = mutedCount;
             
             if (activeCount === 0) {
-                activeContainer.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Tiada alert aktif untuk kriteria carian anda. Semua harga berada di atas zon sasaran.</div>';
+                containerActive.style.display = 'none';
+                emptyActive.style.display = 'block';
+            } else {
+                containerActive.style.display = 'block';
+                emptyActive.style.display = 'none';
             }
+            
             if (mutedCount === 0) {
-                mutedContainer.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Tiada alert yang dipadamkan.</div>';
+                containerMuted.style.display = 'none';
+                emptyMuted.style.display = 'block';
+            } else {
+                containerMuted.style.display = 'block';
+                emptyMuted.style.display = 'none';
             }
             
             if (typeof lucide !== 'undefined') {

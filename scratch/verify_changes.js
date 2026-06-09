@@ -11,8 +11,8 @@ try {
     const filtered = data.filter(ipo => ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true);
     
     console.log(`Found ${filtered.length} Listed Shariah 2026 IPOs in data.json.`);
-    if (filtered.length !== 21) {
-        console.error('FAIL: Expected exactly 21 Listed Shariah 2026 IPOs, but found', filtered.length);
+    if (filtered.length !== 22) {
+        console.error('FAIL: Expected exactly 22 Listed Shariah 2026 IPOs, but found', filtered.length);
         process.exit(1);
     }
     
@@ -34,18 +34,11 @@ try {
     
     // 3. Verify data.js
     console.log('\nTesting data.js syntax and export...');
-    const jsContent = fs.readFileSync(jsPath, 'utf8');
-    // We can evaluate it by replacing "const IPO_DATA =" with "module.exports ="
-    const modContent = jsContent.replace('const IPO_DATA =', 'module.exports =');
-    const tempFilePath = path.join(__dirname, 'temp_data.js');
-    fs.writeFileSync(tempFilePath, modContent);
-    
-    const importedData = require(tempFilePath);
-    fs.unlinkSync(tempFilePath);
+    const importedData = require(jsPath);
     
     const filteredJs = importedData.filter(ipo => ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true);
     console.log(`Found ${filteredJs.length} Listed Shariah 2026 IPOs in data.js.`);
-    if (filteredJs.length !== 21) {
+    if (filteredJs.length !== 22) {
         console.error('FAIL: data.js count mismatch:', filteredJs.length);
         process.exit(1);
     }
