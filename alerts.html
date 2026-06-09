@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zon Beli Alerts | Bursa IPO Tracker</title>
+    <meta name="description" content="View and manage active Sifu target price alerts.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="data.js?v=1.1"></script>
+    <style>
+        .alerts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .alert-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .alert-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
+        }
+
+        .alert-card.muted {
+            border-color: rgba(239, 68, 68, 0.2);
+            opacity: 0.7;
+        }
+
+        .alert-card.muted:hover {
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.15);
+        }
+
+        .alert-card-glow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .alert-card.muted .alert-card-glow {
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .discount-badge.fair {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #f59e0b;
+        }
+
+        .discount-badge.muted-badge {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .alert-header {
+            margin-bottom: 1rem;
+            padding-right: 3.5rem;
+        }
+
+        .alert-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-sector {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .alert-price-comparison {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .price-box {
+            text-align: center;
+        }
+
+        .price-box label {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .price-box span {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .price-box.curr span {
+            color: #ef4444;
+        }
+
+        .price-box.target span {
+            color: #10b981;
+        }
+
+        .alert-btn {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+
+        .alert-btn-mute {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .alert-btn-mute:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .alert-btn-unmute {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .alert-btn-unmute:hover {
+            background: #10b981;
+            color: white;
+        }
+
+        .alert-search-bar {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.75rem 1rem;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .alert-search-bar:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
+        }
+
+        .empty-state {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px dashed rgba(255,255,255,0.1);
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            color: var(--text-dim);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
+                    <i data-lucide="arrow-left"></i> <span class="nav-text">Back to Dashboard</span>
+                </a>
+                <a href="sifu-sheets.html" class="btn-moomoo" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="table" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu's Sheet</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 5.5rem;">
+        <header style="text-align: center; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                <div class="live-indicator pulse-green" style="width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+                <h1 style="margin: 0; font-size: 2.25rem;">Zon Beli <span style="text-shadow: 0 0 10px rgba(245, 158, 11, 0.4); color: #f59e0b;">Sifu Alerts</span></h1>
+            </div>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0 auto;">
+                Senarai saham patuh Shariah yang kini didagangkan pada atau di bawah harga kajian sasaran Sifu (Zon Beli).
+            </p>
+        </header>
+
+        <!-- Search Controls -->
+        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+            <input type="text" id="alert-search" class="alert-search-bar" placeholder="Cari nama syarikat atau sektor..." oninput="renderAlerts()">
+        </div>
+
+        <!-- Section: Active Alerts -->
+        <section>
+            <h2 style="font-size: 1.25rem; border-left: 4px solid #10b981; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="bell-ring" style="color: #10b981; width: 20px;"></i>
+                Alert Aktif (<span id="count-active">0</span>)
+            </h2>
+            <div class="alerts-grid" id="grid-active">
+                <!-- Dynamically filled -->
+            </div>
+        </section>
+
+        <!-- Section: Muted Alerts -->
+        <section style="margin-top: 3rem;">
+            <h2 style="font-size: 1.25rem; border-left: 4px solid #ef4444; padding-left: 0.5rem; display: flex; align-items: center; gap: 0.5rem; color: #ef4444;">
+                <i data-lucide="bell-off" style="color: #ef4444; width: 20px;"></i>
+                Alert Dipadam/Senyap (<span id="count-muted">0</span>)
+            </h2>
+            <div class="alerts-grid" id="grid-muted">
+                <!-- Dynamically filled -->
+            </div>
+        </section>
+    </main>
+
+    <footer style="margin-top: 5rem; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-dim); font-size: 0.8rem;">
+        <div class="container">
+            <p>&copy; 2026 Bursa IPO Tracker. Rujukan fundamental berpandukan formula Sifu. Bukan nasihat pelaburan rasmi.</p>
+        </div>
+    </footer>
+
+    <script>
+        function getDismissedAlerts() {
+            return JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
+        }
+
+        function setDismissedAlerts(arr) {
+            localStorage.setItem('dismissedPriceAlerts', JSON.stringify(arr));
+        }
+
+        function muteAlert(id) {
+            const arr = getDismissedAlerts();
+            if (!arr.includes(id)) {
+                arr.push(id);
+                setDismissedAlerts(arr);
+            }
+            renderAlerts();
+            // Dispatch event to update other tabs if listening
+            window.dispatchEvent(new Event('storage'));
+        }
+
+        function unmuteAlert(id) {
+            let arr = getDismissedAlerts();
+            arr = arr.filter(x => x !== id);
+            setDismissedAlerts(arr);
+            renderAlerts();
+            window.dispatchEvent(new Event('storage'));
+        }
+
+        function renderAlerts() {
+            const searchVal = document.getElementById('alert-search').value.toLowerCase();
+            const dismissed = getDismissedAlerts();
+            
+            const activeContainer = document.getElementById('grid-active');
+            const mutedContainer = document.getElementById('grid-muted');
+            
+            activeContainer.innerHTML = '';
+            mutedContainer.innerHTML = '';
+            
+            let activeCount = 0;
+            let mutedCount = 0;
+            
+            if (typeof IPO_DATA === 'undefined') {
+                activeContainer.innerHTML = '<div class="empty-state">Data tidak dapat dimuatkan. Sila semak fail data.js.</div>';
+                return;
+            }
+
+            // Sync and clean up dismissed list if price has recovered above target
+            const cleanedDismissed = [...dismissed];
+            let cleanNeeded = false;
+            
+            IPO_DATA.forEach(ipo => {
+                if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number' && ipo.shariah === true) {
+                    const curPrice = ipo.currentPrice || ipo.price || 0;
+                    const targetPrice = ipo.sifuTargetPrice;
+                    if (curPrice > targetPrice) {
+                        const idx = cleanedDismissed.indexOf(ipo.id);
+                        if (idx !== -1) {
+                            cleanedDismissed.splice(idx, 1);
+                            cleanNeeded = true;
+                        }
+                    }
+                }
+            });
+            if (cleanNeeded) {
+                setDismissedAlerts(cleanedDismissed);
+            }
+            
+            const currentDismissed = getDismissedAlerts();
+
+            IPO_DATA.forEach(ipo => {
+                // We strictly focus on Shariah-compliant listed/open-public IPOs that have a target price
+                const isShariah = ipo.shariah === true;
+                const hasTarget = typeof ipo.sifuTargetPrice === 'number' && ipo.sifuTargetPrice > 0;
+                
+                if (!isShariah || !hasTarget) return;
+
+                const curPrice = ipo.currentPrice || ipo.price || 0;
+                const targetPrice = ipo.sifuTargetPrice;
+                
+                // Alert triggers when currentPrice <= sifuTargetPrice
+                const isTriggered = curPrice > 0 && curPrice <= targetPrice;
+                
+                if (!isTriggered) return;
+
+                // Match search filter
+                const nameMatch = ipo.companyName.toLowerCase().includes(searchVal);
+                const sectorMatch = (ipo.sector || '').toLowerCase().includes(searchVal);
+                const idMatch = ipo.id.toLowerCase().includes(searchVal);
+                if (!nameMatch && !sectorMatch && !idMatch) return;
+
+                // Calculate discount percent
+                const discount = ((targetPrice - curPrice) / targetPrice * 100);
+                let badgeHtml = '';
+                if (discount > 0.01) {
+                    badgeHtml = `<div class="discount-badge">Diskaun ${discount.toFixed(1)}%</div>`;
+                } else {
+                    badgeHtml = `<div class="discount-badge fair">Harga Wajar</div>`;
+                }
+
+                const cardHtml = `
+                    <div class="alert-card ${currentDismissed.includes(ipo.id) ? 'muted' : ''}">
+                        <div class="alert-card-glow"></div>
+                        ${currentDismissed.includes(ipo.id) ? '<div class="discount-badge muted-badge">Senyap</div>' : badgeHtml}
+                        
+                        <div class="alert-header">
+                            <div class="alert-title">
+                                <i data-lucide="trending-down" style="width:16px; color:${currentDismissed.includes(ipo.id) ? '#ef4444' : '#10b981'}"></i>
+                                <span style="cursor:pointer;" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">${ipo.companyName}</span>
+                            </div>
+                            <div class="alert-sector">${ipo.sector || 'Sektor N/A'}</div>
+                        </div>
+
+                        <div class="alert-price-comparison">
+                            <div class="price-box curr">
+                                <label>Harga Semasa</label>
+                                <span>RM ${curPrice.toFixed(3)}</span>
+                            </div>
+                            <div class="price-box target">
+                                <label>Kajian Sifu</label>
+                                <span>RM ${targetPrice.toFixed(3)}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            ${currentDismissed.includes(ipo.id) ? 
+                                `<button class="alert-btn alert-btn-unmute" onclick="unmuteAlert('${ipo.id}')">
+                                    <i data-lucide="bell" style="width:14px;"></i> Aktifkan Alert
+                                 </button>` : 
+                                `<button class="alert-btn alert-btn-mute" onclick="muteAlert('${ipo.id}')">
+                                    <i data-lucide="bell-off" style="width:14px;"></i> Padam Alert (Mute)
+                                 </button>`
+                            }
+                        </div>
+                    </div>
+                `;
+
+                if (currentDismissed.includes(ipo.id)) {
+                    mutedContainer.innerHTML += cardHtml;
+                    mutedCount++;
+                } else {
+                    activeContainer.innerHTML += cardHtml;
+                    activeCount++;
+                }
+            });
+            
+            document.getElementById('count-active').innerText = activeCount;
+            document.getElementById('count-muted').innerText = mutedCount;
+            
+            if (activeCount === 0) {
+                activeContainer.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Tiada alert aktif untuk kriteria carian anda. Semua harga berada di atas zon sasaran.</div>';
+            }
+            if (mutedCount === 0) {
+                mutedContainer.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Tiada alert yang dipadamkan.</div>';
+            }
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        window.onload = function() {
+            renderAlerts();
+            // Automatically listen to localstorage changes across tabs
+            window.addEventListener('storage', renderAlerts);
+        }
+    </script>
+</body>
+
+</html>
