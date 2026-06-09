@@ -304,6 +304,29 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Educational Sifu Warning Card -->
+                <div id="sifu-edu-warning-card" class="sheet-card" style="margin-top: 1rem; display: none;">
+                    <!-- Dynamically populated in updateQualitativeOverlay() -->
+                </div>
+
+                <!-- SOP Pelaburan Card -->
+                <div class="sheet-card" style="border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.03); margin-top: 1rem;">
+                    <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #10b981; font-size: 1rem;">
+                        <i data-lucide="list-checks" style="width: 18px;"></i>
+                        Keputusan SOP Sifu
+                    </h3>
+                    <div id="sifu-sop-dynamic-content" style="margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1);">
+                        <!-- Dynamically filled -->
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--text-dim); line-height: 1.45;">
+                        <span style="font-weight: bold; color: #ffffff; display: block; margin-bottom: 0.25rem;">Rujukan Panduan SOP:</span>
+                        • <strong>Tapis 1:</strong> Beli jika harga IPO &lt; Target Sifu (ada MoS).<br>
+                        • <strong>Tapis 2 Gred A/B:</strong> Boleh Apply & Hold (Swing/DCA).<br>
+                        • <strong>Tapis 2 Gred C + OS Tinggi:</strong> Scalp sahaja (jual 10m pertama).<br>
+                        • <strong>Tapis 2 Gred C + OS Rendah:</strong> SKIP terus.
+                    </div>
+                </div>
             </div>
 
             <!-- Right Panel: The 5-Column Excel Table Replicate -->
@@ -1817,6 +1840,90 @@
                 
                 // Insight
                 insightEl.innerHTML = ipo.analystInsight || 'Tiada ulasan bertulis dalam pangkalan data.';
+                
+                // Dynamic Warning Card
+                const warningCard = document.getElementById('sifu-edu-warning-card');
+                if (warningCard) {
+                    const grade = ipo.predictedGrade || '--';
+                    if (grade === 'C' || grade === 'D') {
+                        warningCard.style.display = 'block';
+                        warningCard.style.cssText = 'border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); margin-top: 1rem; padding: 1.5rem; border-radius: 1rem;';
+                        warningCard.innerHTML = `
+                            <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #ef4444; font-size: 1rem;">
+                                <i data-lucide="alert-triangle" style="width: 18px;"></i>
+                                Amaran Gred ${grade} (Kualitatif Rendah)
+                            </h3>
+                            <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
+                                Jangan hanya melihat <strong>Kuantitatif (Math/Formula Cincai)</strong> sahaja. Anda <strong>WAJIB</strong> menyilang dengan <strong>Gred Kualitatif & Sentimen Pasaran</strong>!
+                            </p>
+                            <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(239, 68, 68, 0.15); font-size: 0.75rem; line-height: 1.45;">
+                                <strong style="color: #ef4444; display: block; margin-bottom: 0.25rem;">Kes Hock Soon (Formula OK tapi Barai?):</strong>
+                                Secara formula matematik/PE, Hock Soon nampak murah (PE 6.2x) dan margin stabil (17.6%). Tetapi harganya merosot teruk (-11.7% Open, -36.7% Hold) kerana ia bertaraf <strong>Gred C</strong> disebabkan oversubscription sangat rendah (1.36x), ketiadaan minat belian, dan sentimen pasaran yang buruk semasa listing.
+                            </div>
+                        `;
+                    } else if (grade === 'A' || grade === 'B') {
+                        warningCard.style.display = 'block';
+                        warningCard.style.cssText = 'border-left: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.03); margin-top: 1rem; padding: 1.5rem; border-radius: 1rem;';
+                        warningCard.innerHTML = `
+                            <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #3b82f6; font-size: 1rem;">
+                                <i data-lucide="info" style="width: 18px;"></i>
+                                Info Gred ${grade} (Kualitatif Baik)
+                            </h3>
+                            <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
+                                Kaunter ini dikelaskan sebagai <strong>Gred ${grade}</strong>. Mengikut SOP Sifu, kaunter kualiti tinggi/sederhana ini sesuai untuk <strong>Swing</strong> atau <strong>DCA Jangka Panjang</strong>.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(59, 130, 246, 0.15); font-size: 0.75rem; line-height: 1.45; color: var(--text-dim);">
+                                <strong style="color: #3b82f6; display: block; margin-bottom: 0.25rem;">Strategi Pelaburan:</strong>
+                                Bandingkan harga tawaran dengan <strong>Harga Sasaran Sifu</strong>. Selagi harga di bawah target (ada Margin of Safety), ia adalah pilihan yang baik untuk pelaburan berdisiplin.
+                            </div>
+                        `;
+                    } else {
+                        warningCard.style.display = 'none';
+                    }
+                }
+
+                // Dynamic SOP Card
+                const sopDynamicEl = document.getElementById('sifu-sop-dynamic-content');
+                if (sopDynamicEl) {
+                    let tapis1Text = '';
+                    if (ipo.sifuTargetPrice && ipo.price) {
+                        if (ipo.price < ipo.sifuTargetPrice) {
+                            tapis1Text = '<span style="color: #10b981; font-weight: bold;">LULUS ✅</span>';
+                        } else {
+                            tapis1Text = '<span style="color: #ef4444; font-weight: bold;">GAGAL ❌ (MAHAL)</span>';
+                        }
+                    } else {
+                        tapis1Text = '<span style="color: var(--text-dim);">TBA ⏳</span>';
+                    }
+
+                    const grade = ipo.predictedGrade || '--';
+                    let tapis2Text = '';
+                    if (grade === 'A') {
+                        tapis2Text = 'Gred A (<span style="color: #10b981; font-weight: bold;">BAIK SANGAT 🟢</span>)';
+                    } else if (grade === 'B') {
+                        tapis2Text = 'Gred B (<span style="color: #f59e0b; font-weight: bold;">SEDERHANA BAIK 🟡</span>)';
+                    } else if (grade === 'C') {
+                        const os = ipo.os || 0;
+                        if (os >= 40) {
+                            tapis2Text = `Gred C (<span style="color: #f59e0b; font-weight: bold;">SCALP SAHAJA 🟡</span> — OS ${os}x)`;
+                        } else if (os > 0) {
+                            tapis2Text = `Gred C (<span style="color: #ef4444; font-weight: bold;">SKIP TERUS 🔴</span> — OS Rendah ${os}x)`;
+                        } else {
+                            tapis2Text = 'Gred C (<span style="color: #ef4444; font-weight: bold;">TUNGGU KEPUTUSAN OS 🔴</span>)';
+                        }
+                    } else if (grade === 'D') {
+                        tapis2Text = 'Gred D (<span style="color: #ef4444; font-weight: bold;">SKIP TERUS 🚫</span>)';
+                    } else {
+                        tapis2Text = '<span style="color: var(--text-dim);">TBA ⏳</span>';
+                    }
+
+                    sopDynamicEl.innerHTML = `
+                        <div style="font-size: 0.8rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.4rem;">
+                            <div><strong>Tapisan 1:</strong> Kuantitatif (${tapis1Text})</div>
+                            <div><strong>Tapisan 2:</strong> Kualitatif — ${tapis2Text}</div>
+                        </div>
+                    `;
+                }
             } else {
                 gradeEl.innerText = 'Grade: --';
                 gradeEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
@@ -1826,6 +1933,12 @@
                 ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);';
                 osEl.innerText = 'OS: --';
                 insightEl.innerHTML = 'Tiada ulasan kualitatif bertulis.';
+                
+                const warningCard = document.getElementById('sifu-edu-warning-card');
+                if (warningCard) warningCard.style.display = 'none';
+                
+                const sopDynamicEl = document.getElementById('sifu-sop-dynamic-content');
+                if (sopDynamicEl) sopDynamicEl.innerHTML = '<div style="font-size: 0.8rem; color: var(--text-dim);">Sila muat naik profil saham terlebih dahulu.</div>';
             }
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
