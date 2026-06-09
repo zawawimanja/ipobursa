@@ -177,6 +177,29 @@
             box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
         }
 
+        .alert-filter-select {
+            padding: 0.75rem 1rem;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 0.5rem;
+            outline: none;
+            font-family: inherit;
+            cursor: pointer;
+            min-width: 220px;
+            transition: var(--transition);
+        }
+
+        .alert-filter-select:focus, .alert-filter-select:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
+        }
+
+        .alert-filter-select option {
+            background: #0f172a;
+            color: white;
+        }
+
         .empty-state {
             background: rgba(30, 41, 59, 0.2);
             border: 1px dashed rgba(255,255,255,0.1);
@@ -226,8 +249,13 @@
         </header>
 
         <!-- Search Controls -->
-        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-            <input type="text" id="alert-search" class="alert-search-bar" placeholder="Cari nama syarikat atau sektor..." oninput="renderAlerts()">
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="alert-search" class="alert-search-bar" placeholder="Cari nama syarikat atau sektor..." oninput="renderAlerts()" style="flex: 1; max-width: 400px; margin: 0;">
+            <select id="alert-filter" class="alert-filter-select" onchange="renderAlerts()">
+                <option value="portfolio">Portfolio & Watchlist Sifu</option>
+                <option value="grade_ab">Saham Gred A/B Lain (Zon Beli)</option>
+                <option value="all_shariah">Semua Saham Shariah (Zon Beli)</option>
+            </select>
         </div>
 
         <!-- Section: Active Alerts -->
@@ -324,6 +352,7 @@
         function renderAlerts() {
             const searchVal = document.getElementById('alert-search').value.toLowerCase();
             const dismissed = getDismissedAlerts();
+            const filterVal = document.getElementById('alert-filter') ? document.getElementById('alert-filter').value : 'portfolio';
             
             const activeTableBody = document.getElementById('tbody-active');
             const mutedTableBody = document.getElementById('tbody-muted');
@@ -377,11 +406,21 @@
                 
                 if (!isShariah || !hasTarget) return;
 
-                const sifuPortfolio = ['cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 'iab', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 'solarvest'];
-                if (!sifuPortfolio.includes(ipo.id)) return;
-
                 const curPrice = ipo.currentPrice || ipo.price || 0;
                 const targetPrice = ipo.sifuTargetPrice;
+                const isTriggered = curPrice > 0 && curPrice <= targetPrice;
+
+                const sifuPortfolio = ['cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 'iab', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 'solarvest'];
+                const inPortfolio = sifuPortfolio.includes(ipo.id);
+
+                if (filterVal === 'portfolio') {
+                    if (!inPortfolio) return;
+                } else if (filterVal === 'grade_ab') {
+                    const isGradeAB = ipo.predictedGrade === 'A' || ipo.predictedGrade === 'B';
+                    if (!inPortfolio && (!isGradeAB || !isTriggered)) return;
+                } else if (filterVal === 'all_shariah') {
+                    if (!inPortfolio && !isTriggered) return;
+                }
                 
                 // Match search filter
                 const nameMatch = ipo.companyName.toLowerCase().includes(searchVal);
@@ -390,7 +429,6 @@
                 if (!nameMatch && !sectorMatch && !idMatch) return;
 
                 const isMuted = currentDismissed.includes(ipo.id);
-                const isTriggered = curPrice > 0 && curPrice <= targetPrice;
                 
                 let iconName = 'trending-down';
                 let iconColor = '#10b981';
