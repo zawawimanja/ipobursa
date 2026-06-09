@@ -21,6 +21,7 @@ function initializeData() {
 
         // Step 2: Show initial state
         renderIPOs(currentStage);
+        setTimeout(() => { checkPriceAlerts(); }, 500);
 
         console.log('Sync Engine: Ready (Manual trigger only)');
         
@@ -276,6 +277,7 @@ async function fetchLiveUpdates() {
 
         ipoData = finalData;
         renderIPOs(currentStage);
+        setTimeout(() => { checkPriceAlerts(); }, 500);
         
         // Trigger deep sync for missing OS/TP
         triggerDeepSync();
@@ -1322,6 +1324,56 @@ function createIPOCard(ipo, index = 0) {
         actionBtn = `<span style="font-size: 0.8rem; color: var(--text-dim);">${getIpoStrategy(ipo)}</span>`;
     }
 
+    // Wrap in a flex container with the price alert button for listed stocks (stage 5)
+    let finalActionCol = actionBtn;
+    if (ipo.stage === 5) {
+        if (typeof ipo.sifuTargetPrice === 'number') {
+            const curPrice = ipo.currentPrice || ipo.price || 0;
+            const targetPrice = ipo.sifuTargetPrice;
+            const isTriggered = curPrice > 0 && curPrice <= targetPrice;
+            
+            const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
+            const isDismissed = dismissed.includes(ipo.id);
+            
+            let bellColor = 'rgba(255,255,255,0.25)';
+            let alertIcon = 'bell';
+            let alertTitle = `Sifu Buy Target: RM ${targetPrice.toFixed(2)} (Semasa: RM ${curPrice.toFixed(2)})`;
+            let extraStyles = '';
+            
+            if (isTriggered) {
+                if (isDismissed) {
+                    bellColor = '#ef4444'; // Red-ish/Dimmed to indicate dismissed but triggered
+                    alertIcon = 'bell-off';
+                    alertTitle = `Triggered (Muted): RM ${curPrice.toFixed(2)} <= RM ${targetPrice.toFixed(2)}. Click to unmute alert banner.`;
+                    extraStyles = 'opacity: 0.6;';
+                } else {
+                    bellColor = '#10b981'; // Bright green for active trigger!
+                    alertIcon = 'bell-ring';
+                    alertTitle = `TRIGGERED BUY ALERT! Harga RM ${curPrice.toFixed(2)} <= RM ${targetPrice.toFixed(2)}. Click to mute alert banner.`;
+                    extraStyles = 'box-shadow: 0 0 10px rgba(16,185,129,0.5); animation: pulse-green 1.5s infinite; border-color: rgba(16,185,129,0.4);';
+                }
+            } else {
+                bellColor = 'var(--text-dim)';
+                alertIcon = 'bell';
+                alertTitle = `Alert Beli Sifu Aktif: RM ${targetPrice.toFixed(2)}. Klik untuk semak.`;
+            }
+            
+            finalActionCol = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    ${actionBtn}
+                    <button onclick="promptPriceAlert('${ipo.id}', '${ipo.companyName}', ${curPrice})" 
+                            class="btn-moomoo" 
+                            style="padding: 0.35rem; font-size: 0.8rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: ${bellColor}; transition: all 0.3s; ${extraStyles}" 
+                            title="${alertTitle}">
+                        <i data-lucide="${alertIcon}" style="width: 13px; height: 13px;"></i>
+                    </button>
+                </div>
+            `;
+        } else {
+            finalActionCol = actionBtn;
+        }
+    }
+
     const isSurging = ipo.price > 0 && ipo.avgTP > (ipo.price * 1.5);
 
     return `
@@ -1354,6 +1406,11 @@ function createIPOCard(ipo, index = 0) {
                 <div style="font-size: 0.65rem; color: var(--text-dim);">IPO: ${priceDisplay}</div>
                 ${ipo.highPrice ? `<div style="font-size: 0.65rem; color: #f59e0b; margin-top: 2px;">High: RM ${ipo.highPrice.toFixed(2)}</div>` : ''}
                 ${ipo.stage === 3 && ipo.estOpen ? `<div style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 600;">Est. Open: RM ${ipo.estOpen.toFixed(2)}</div>` : ''}
+                ${(ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number') ? (
+                    (ipo.currentPrice || ipo.price || 0) <= ipo.sifuTargetPrice
+                    ? `<div class="pulse-green-text" style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 800;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)} ✅</div>`
+                    : `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>`
+                ) : ''}
             </td>
             <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">${perfDisplay}</td>
             <td style="padding: 0.75rem 1rem; white-space: nowrap;">
@@ -1387,7 +1444,7 @@ function createIPOCard(ipo, index = 0) {
             <td style="padding: 0.75rem 1rem; min-width: 220px; max-width: 320px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
                 ${renderStyledVerdict(gradeObj.reason, grade, ipo)}
             </td>
-            <td style="padding: 0.75rem 1rem; white-space: nowrap;">${actionBtn}</td>
+            <td style="padding: 0.75rem 1rem; white-space: nowrap;">${finalActionCol}</td>
         </tr>
     `;
 }
@@ -1909,3 +1966,113 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
 
 window.toggleChat = toggleChat;
 window.sendAIMessage = sendAIMessage;
+
+// Price Alert System
+function promptPriceAlert(id, companyName, currentPrice) {
+    const ipo = ipoData.find(x => x.id === id);
+    if (!ipo || typeof ipo.sifuTargetPrice !== 'number') {
+        showToast("Tiada harga sasaran Sifu untuk kaunter ini.");
+        return;
+    }
+    
+    const targetPrice = ipo.sifuTargetPrice;
+    const isTriggered = currentPrice > 0 && currentPrice <= targetPrice;
+    
+    if (isTriggered) {
+        const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
+        const index = dismissed.indexOf(id);
+        
+        if (index !== -1) {
+            // Unmute / Undismiss
+            dismissed.splice(index, 1);
+            localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
+            showToast(`Alert diaktifkan semula untuk ${companyName}!`);
+        } else {
+            // Mute / Dismiss
+            dismissed.push(id);
+            localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
+            showToast(`Alert dipadam untuk ${companyName}.`);
+        }
+    } else {
+        showToast(`Alert Beli Aktif: Sistem akan memberitahu jika harga turun ke RM ${targetPrice.toFixed(2)} (semasa: RM ${currentPrice.toFixed(2)}).`);
+    }
+    
+    renderIPOs(currentStage);
+    checkPriceAlerts();
+}
+
+function clearPriceAlert(id) {
+    const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
+    if (!dismissed.includes(id)) {
+        dismissed.push(id);
+        localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
+    }
+    renderIPOs(currentStage);
+    checkPriceAlerts();
+    showToast("Alert harga dipadam.");
+}
+
+function checkPriceAlerts() {
+    const container = document.getElementById('active-price-alerts-container');
+    if (!container) return;
+    
+    const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
+    const activeAlerts = [];
+    
+    ipoData.forEach(ipo => {
+        if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number') {
+            const curPrice = ipo.currentPrice || ipo.price || 0;
+            const targetPrice = ipo.sifuTargetPrice;
+            
+            if (curPrice > 0 && curPrice <= targetPrice) {
+                if (!dismissed.includes(ipo.id)) {
+                    activeAlerts.push({
+                        id: ipo.id,
+                        companyName: ipo.companyName,
+                        curPrice,
+                        targetPrice
+                    });
+                }
+            } else {
+                // Auto-cleanup from dismissed state if price rises back above target
+                const index = dismissed.indexOf(ipo.id);
+                if (index !== -1) {
+                    dismissed.splice(index, 1);
+                    localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
+                }
+            }
+        }
+    });
+    
+    if (activeAlerts.length > 0) {
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div class="glass-card" style="border: 1px solid rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.5)); padding: 1.25rem 1.5rem; border-radius: 1rem; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12); display: flex; flex-direction: column; gap: 0.75rem;">
+                <h3 style="margin: 0; color: #10b981; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; font-family: 'Outfit', sans-serif; font-weight: 700;">
+                    <i data-lucide="bell-ring" class="pulse-primary" style="width: 18px; color: #10b981;"></i> 
+                    Alert Harga Kajian Sasaran Dipicu!
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    ${activeAlerts.map(alert => `
+                        <div style="font-size: 0.85rem; color: #f8fafc; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.06); padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.75rem;">
+                            <span style="display: flex; align-items: center; gap: 0.35rem;">
+                                🎯 Ok kita boleh beli <strong>${alert.companyName}</strong> sekarang sebab harga dah ok! (Harga semasa: <strong style="color: #10b981;">RM ${alert.curPrice.toFixed(2)}</strong> <= Harga kajian Sifu: <strong>RM ${alert.targetPrice.toFixed(2)}</strong>)
+                            </span>
+                            <button onclick="clearPriceAlert('${alert.id}')" class="btn-moomoo" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #f87171; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
+                                Padam Alert
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        if(typeof lucide !== 'undefined') lucide.createIcons();
+    } else {
+        container.style.display = 'none';
+        container.innerHTML = '';
+    }
+}
+
+window.promptPriceAlert = promptPriceAlert;
+window.clearPriceAlert = clearPriceAlert;
+window.checkPriceAlerts = checkPriceAlerts;

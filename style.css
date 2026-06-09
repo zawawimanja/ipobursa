@@ -1689,4 +1689,30 @@ h3,
 .spin {
     animation: spin 1s linear infinite;
 }
+
+/* Green Pulse Alert Animations & Utilities */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.pulse-green-text {
+    animation: pulse-green-txt-anim 2s infinite;
+}
+
+@keyframes pulse-green-txt-anim {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
 
