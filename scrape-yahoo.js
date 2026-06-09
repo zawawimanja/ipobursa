@@ -9,8 +9,32 @@ async function updateLivePricesYahoo() {
         let existingData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
         let updatedCount = 0;
 
-        // Cari IPO di stage 4 (Listed) yang ada field symbol
-        const listedIpos = existingData.filter(ipo => ipo.stage === 4 && ipo.symbol);
+        // Candidates: IPOs that have a symbol and either already listed (stage 5)
+        // or are on/after listing date (stage 4 with listingDate <= today)
+        const today = new Date();
+        function parseListingDate(s) {
+            if (!s) return null;
+            // Expect formats like "03-Jun-2026" or "3-Jun-2026"
+            const parts = s.split('-');
+            if (parts.length !== 3) return null;
+            const day = parts[0].padStart(2, '0');
+            const monStr = parts[1];
+            const year = parts[2];
+            const months = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+            const m = months[monStr.substring(0,3)];
+            if (m === undefined) return null;
+            return new Date(parseInt(year,10), m, parseInt(day,10));
+        }
+
+        const listedIpos = existingData.filter(ipo => {
+            if (!ipo.symbol) return false;
+            if (ipo.stage === 5) return true;
+            if (ipo.listingDate) {
+                const ld = parseListingDate(ipo.listingDate);
+                if (ld && ld <= today) return true;
+            }
+            return false;
+        });
 
         if (listedIpos.length === 0) {
             console.log('No listed IPOs with symbols found.');
@@ -76,6 +100,20 @@ async function updateLivePricesYahoo() {
                             const newPerf = ((currentPrice - ipo.price) / ipo.price) * 100;
                             ipo.performance = (newPerf >= 0 ? '+' : '') + newPerf.toFixed(1) + '%';
                         }
+                        // If openPrice is missing and this looks like listing day or recently listed,
+                        // set openPrice to the first seen market price.
+                        try {
+                            const ld = parseListingDate(ipo.listingDate);
+                            const isListingDay = ld && ld.toDateString() === new Date().toDateString();
+                            const listedAlready = ipo.stage === 5 || (ld && ld <= today);
+                            if ((isListingDay || listedAlready) && (ipo.openPrice === undefined || ipo.openPrice === null)) {
+                                ipo.openPrice = currentPrice;
+                                console.log(`   -> Set openPrice for ${yahooSymbol} to RM ${currentPrice}`);
+                            }
+                        } catch (e) {
+                            // ignore parse errors
+                        }
+
                         updatedCount++;
                     }
                 } else {

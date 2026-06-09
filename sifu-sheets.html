@@ -1759,11 +1759,18 @@
                 // OFS
                 const ofs = ipo.ofs;
                 if (ofs === true) {
-                    ofsEl.innerText = 'OFS: Yes (Selling Pressure) ⚠️';
+                    // show percentage or value when available
+                    let ofsText = 'OFS: Yes (Selling Pressure) ⚠️';
+                    if (ipo.ofsPercentage !== undefined) ofsText += ` — ${ipo.ofsPercentage}%`;
+                    else if (ipo.ofsValue !== undefined) ofsText += ` — RM ${ipo.ofsValue}`;
+                    ofsEl.innerText = ofsText;
                     ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444;';
+                    if (ipo.ofsValue !== undefined) ofsEl.title = `OFS amount: RM ${ipo.ofsValue.toLocaleString ? ipo.ofsValue.toLocaleString() : ipo.ofsValue}`;
+                    else if (ipo.ofsPercentage !== undefined) ofsEl.title = `${ipo.ofsPercentage}% of total IPO raise`;
                 } else {
                     ofsEl.innerText = 'OFS: No (Pure Issue) ✅';
                     ofsEl.style.cssText = 'padding: 0.35rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: bold; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981;';
+                    ofsEl.title = '';
                 }
                 
                 // OS

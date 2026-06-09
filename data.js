@@ -156,7 +156,9 @@ const IPO_DATA = [
     "fundUse": "Construction of new production facility & procurement of machines",
     "predictedGrade": "C",
     "avgTP": 0.28,
-    "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>"
+    "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>",
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "5e-resources",
@@ -181,7 +183,9 @@ const IPO_DATA = [
     "symbol": "5ER",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>5E Resources mempunyai kedudukan pasaran yang kuat dalam pengurusan sisa berjadual (scheduled waste management) Johor dengan lesen DOE yang ketat. ROE tinggi >20% dengan baki tunai bersih RM49.3M memberi kelebihan fundamental kukuh.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keuntungan margin tinggi >25% dengan ROE >20%.<br>• Posisi tunai bersih RM49.3M.<br>• Kriteria ESG & limpahan permintaan dari Pusat Data (Data Center) Johor.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.29
+    "sifuTargetPrice": 0.29,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "adnex",
@@ -207,7 +211,9 @@ const IPO_DATA = [
     "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +47.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
     "highPrice": 0.335,
     "symbol": "ADNEX",
-    "sifuTargetPrice": 0.2
+    "sifuTargetPrice": 0.2,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "aerodyne",
@@ -224,7 +230,9 @@ const IPO_DATA = [
     "ib": "Maybank IB",
     "fundUse": "R&D / Ekspansi Global",
     "predictedGrade": "A",
-    "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>"
+    "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>",
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ambest",
@@ -251,7 +259,9 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 0.67,
     "symbol": "AMBEST",
-    "sifuTargetPrice": 0.36
+    "sifuTargetPrice": 0.36,
+    "ofs": true,
+    "ofsValue": "rM12"
   },
   {
     "id": "ams-material",
@@ -278,7 +288,9 @@ const IPO_DATA = [
     "symbol": "AMS",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.38
+    "sifuTargetPrice": 0.38,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "carsome",
@@ -295,7 +307,9 @@ const IPO_DATA = [
     "ib": "CIMB",
     "fundUse": "Pengembangan",
     "predictedGrade": "A",
-    "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window."
+    "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window.",
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "stratus-global",
@@ -313,7 +327,9 @@ const IPO_DATA = [
     "ib": "UOB Kay Hian",
     "fundUse": "Expansion & R&D",
     "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT — VALUE PLAY SEBENAR (GRADE B)</b><br>Stratus Global adalah <b>factory automation + cleanroom AMHS provider untuk industri semiconductor</b> — sektor paling hot 2026.<br><br>📊 <b>Kenapa menarik:</b><br>• PE hanya ~14x vs peers Tech (29.8x) dan Semiconductor (38.2x) = <b>diskaun 50-60%</b><br>• Tiada OFS — pure public issue 356.25M shares<br>• Main Market (RM937M mktcap) = institutional backing kuat<br>• Shariah-compliant ✅<br><br>⚠️ <b>Satu-satunya risiko:</b> IB UOB Kay Hian — rekod kita hanya GDGROUP (Consumer sector, -11%) tapi tu sektor berbeza. Untuk Main Market semiconductor play, story fundamental lebih dominant dari IB retail reputation.<br><br><b>Kesimpulan: Apply. Target RM0.95+. Ini lebih kepada hold play bukan pure scalp.</b>"
+    "analystInsight": "✅ <b>WORTH IT — VALUE PLAY SEBENAR (GRADE B)</b><br>Stratus Global adalah <b>factory automation + cleanroom AMHS provider untuk industri semiconductor</b> — sektor paling hot 2026.<br><br>📊 <b>Kenapa menarik:</b><br>• PE hanya ~14x vs peers Tech (29.8x) dan Semiconductor (38.2x) = <b>diskaun 50-60%</b><br>• Tiada OFS — pure public issue 356.25M shares<br>• Main Market (RM937M mktcap) = institutional backing kuat<br>• Shariah-compliant ✅<br><br>⚠️ <b>Satu-satunya risiko:</b> IB UOB Kay Hian — rekod kita hanya GDGROUP (Consumer sector, -11%) tapi tu sektor berbeza. Untuk Main Market semiconductor play, story fundamental lebih dominant dari IB retail reputation.<br><br><b>Kesimpulan: Apply. Target RM0.95+. Ini lebih kepada hold play bukan pure scalp.</b>",
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ei-power",
@@ -376,7 +392,9 @@ const IPO_DATA = [
     "performance": "+10.42%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
-    "sifuTargetPrice": 0.59
+    "sifuTargetPrice": 0.59,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "empire-premium",
@@ -403,7 +421,9 @@ const IPO_DATA = [
     "closePrice": 0.975,
     "symbol": "EMPIRE",
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Empire Premium Food mempamerkan prestasi pertumbuhan luar biasa dengan PAT CAGR 3 tahun cecah 61% menerusi model grab-and-go. Keputusan 3Q25 sangat mantap membuktikan keberkesanan fasa scale-up.<br><br>📊 <b>Kelebihan Utama:</b><br>• Margin kasar stabil sekitar 40% dengan CAGR PAT 61%.<br>• Model perniagaan grab-and-go berisiko rendah & kos cawangan rendah.<br>• Penyenaraian Main Market dengan sokongan Maybank IB.",
-    "sifuTargetPrice": 0.83
+    "sifuTargetPrice": 0.83,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "gdgroup",
@@ -430,7 +450,9 @@ const IPO_DATA = [
     "closingDate": "2026-04-06T17:00:00",
     "prospectusUrl": "https://bursamalaysia.com/",
     "analystInsight": "⚠️ <b>AVOID / RISK OF WEAK LISTING (GRADE C)</b><br>Golden Destinations Berhad didagangkan di bawah harga tawaran selepas debut (-11.11%). Sektor pelancongan (Consumer - Tourism) kurang mendapat minat runcit dengan langganan (OS) yang rendah sebanyak 7.04x. Sokongan daripada UOB Kay Hian juga tidak mencukupi untuk menaikkan harga.",
-    "sifuTargetPrice": 0.45
+    "sifuTargetPrice": 0.45,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ghs",
@@ -480,7 +502,9 @@ const IPO_DATA = [
     "predictedGrade": "C",
     "analystInsight": "⚠️ <b>AVOID</b><br>Property sector is currently cold with low retail interest. High risk of 'Inspace' performance.",
     "symbol": "GOLDLI",
-    "sifuTargetPrice": 0.13
+    "sifuTargetPrice": 0.13,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "hocksoon",
@@ -506,7 +530,9 @@ const IPO_DATA = [
     "highPrice": 0.63,
     "symbol": "HOCKSOON",
     "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
-    "sifuTargetPrice": 0.61
+    "sifuTargetPrice": 0.61,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "inspace-creation",
@@ -540,7 +566,9 @@ const IPO_DATA = [
     "symbol": "INSPACE",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Inspace Creation menerima sambutan balloting yang sangat padat mencecah 70.30x langganan awam. Pertumbuhan PAT CAGR sangat memberangsangkan sebanyak 300% dalam tempoh 3 tahun dipacu pertumbuhan pasaran hiasan dalaman.<br><br>📊 <b>Kelebihan Utama:</b><br>• Oversubscription runcit sangat kukuh pada 70.30x.<br>• PAT CAGR tumbuh 300% disokong pasaran domestik yang berkembang.<br>• PE Sasaran murah pada 11.4x berbanding purata peers 15.5x.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.32
+    "sifuTargetPrice": 0.32,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "isf",
@@ -566,7 +594,9 @@ const IPO_DATA = [
     "highPrice": 0.575,
     "symbol": "ISF",
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-    "sifuTargetPrice": 0.33
+    "sifuTargetPrice": 0.33,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "keeming",
@@ -593,7 +623,9 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 1.04,
     "symbol": "KEEMING",
-    "sifuTargetPrice": 0.38
+    "sifuTargetPrice": 0.38,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "manforce-group",
@@ -621,7 +653,9 @@ const IPO_DATA = [
     "highPrice": 0.415,
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Manforce Group Berhad didagangkan menerusi perpindahan papan LEAP ke ACE. Menyasarkan peningkatan kuota penempatan pekerja asing daripada 6,761 kepada 11,230 pekerja menjelang FY27.<br><br>📊 <b>Kelebihan Utama:</b><br>• Perpindahan ke papan ACE meningkatkan kecairan pasaran runcit.<br>• Unjuran peningkatan saiz pekerja asing menyokong EPS growth +16%.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.34
+    "sifuTargetPrice": 0.34,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "mtt-shipping",
@@ -648,7 +682,9 @@ const IPO_DATA = [
     "closePrice": 1,
     "symbol": "MTTSL",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>MTT Shipping and Logistics merupakan peneraju pasaran (market leader) kapal kargo domestik di semenanjung dan Sabah/Sarawak. Mempunyai baki lembaran yang mantap dengan gearing rendah 0.5x.<br><br>📊 <b>Kelebihan Utama:</b><br>• Peneraju pasaran domestic shipping dengan fleet moden.<br>• Polisi dividen tinggi (50% payout ratio) & gearing 0.5x.<br>• PE Terbitan munasabah di paras 9.18x - 10.04x.",
-    "sifuTargetPrice": 1.06
+    "sifuTargetPrice": 1.06,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ogm",
@@ -674,7 +710,9 @@ const IPO_DATA = [
     "highPrice": 0.265,
     "symbol": "OGM",
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
-    "sifuTargetPrice": 0.25
+    "sifuTargetPrice": 0.25,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ogx",
@@ -727,7 +765,9 @@ const IPO_DATA = [
     "highPrice": 0.265,
     "symbol": "SBS",
     "analystInsight": "⚠️ <b>AVOID / LOW INTEREST (GRADE C)</b><br>SBS (SBS Nexus Berhad) mencatatkan permulaan hambar dengan penurunan -2.00% (tutup RM0.245). Profil syarikat sektor Consumer ini mempunyai margin keuntungan yang nipis dan dana kegunaan kebanyakannya untuk pemasaran (marketing), yang dilihat kurang memberi nilai tambah fundamental berbanding pelaburan CAPEX.",
-    "sifuTargetPrice": 0.25
+    "sifuTargetPrice": 0.25,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "semico",
@@ -754,7 +794,9 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "pe": 18.5,
     "symbol": "SEMICO",
-    "sifuTargetPrice": 0.25
+    "sifuTargetPrice": 0.25,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "skyechip",
@@ -809,7 +851,9 @@ const IPO_DATA = [
     "performance": "+151.14%",
     "symbol": "SKYECHIP",
     "strategy": "Swing",
-    "sifuTargetPrice": 0.88
+    "sifuTargetPrice": 0.88,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "sunmed",
@@ -836,7 +880,9 @@ const IPO_DATA = [
     "highPrice": 2.1734999999999998,
     "symbol": "SUNMED",
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Sunway Healthcare (SUNMED) merekodkan permohonan runcit tertinggi dengan tarikan jenama Sunway yang sangat kuat. Merupakan hospital pertahanan bertaraf mega dengan profil pertumbuhan jangka panjang yang mantap.<br><br>📊 <b>Kelebihan Utama:</b><br>• Rekod jumlah permohonan runcit tertinggi (hype amat besar).<br>• Hospital defensif bertaraf mega dengan kualiti aset gred-A.<br>• Potensi sasaran Fair Value RM1.84 (+26.9% upside).",
-    "sifuTargetPrice": 1.76
+    "sifuTargetPrice": 1.76,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "teamstr",
@@ -862,7 +908,9 @@ const IPO_DATA = [
     "highPrice": 0.28175,
     "symbol": "TEAMSTR",
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
-    "sifuTargetPrice": 0.26
+    "sifuTargetPrice": 0.26,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "a1akk",
@@ -5917,7 +5965,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "liftech-group-berhad",
@@ -5933,7 +5983,9 @@ const IPO_DATA = [
     "year": 2026,
     "currentPrice": 0.29,
     "analystInsight": "🏗️ <b>NEUTRAL/SKIP — FLAT EARNINGS MECHANICAL HANDLING PLAY</b><br>Liftech ditawarkan pada PE Terbitan 13.9x. Walaupun mempunyai baki buku pesanan unbilled RM41.6 juta, unjuran hasil dan untung bersih yang agak rata (flat) menjadikannya kurang menarik untuk premium yang tinggi. Skip bagi dagangan jangka pendek.",
-    "sifuTargetPrice": 0.26
+    "sifuTargetPrice": 0.26,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "hss-holdings-berhad",
@@ -5949,6 +6001,10 @@ const IPO_DATA = [
     "year": 2026,
     "currentPrice": 0.18,
     "analystInsight": "🧁 <b>WORTH IT — BAKERY PRODUCTS PLAY</b><br>HSS Holdings Berhad ditawarkan pada harga menarik RM0.18 (PE Terbitan 10.5x). Disokong oleh pengembangan talian pengeluaran automatik kek & biskut dengan peruntukan capex RM2.57 juta. Menjual jenama terkenal Sinar, Sa1ko, dan HSS dengan portfolio SKU melebihi 6,000.",
+    "ofs": true,
+    "ofsPercentage": 40,
+    "ofsValue": 9180000,
+    "fundUse": "33% bank repayment, 22% working capital, 19% capital expenditure, remainder for listing expenses (total IPO ≈ RM22.95M, OFS ≈ 40%)",
     "sifuTargetPrice": 0.22
   },
   {
@@ -5978,7 +6034,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "tuc-holdings-berhad",
@@ -6004,7 +6062,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "wastech-resources-berhad",
@@ -6030,7 +6090,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "cmgi-berhad",
@@ -6043,7 +6105,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "eplas-global-berhad",
@@ -6082,7 +6146,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "custom-food-holding-berhad",
@@ -6095,7 +6161,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "srkk-ai-berhad",
@@ -6108,7 +6176,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "wintech-metal-berhad",
@@ -6121,7 +6191,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "likei-logistic-services-berhad",
@@ -6134,7 +6206,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "goldfinch-group-berhad",
@@ -6173,7 +6247,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "chubb-insurance-malaysia-berhad",
@@ -6212,7 +6288,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "ecosys--malaysia--berhad",
@@ -6277,7 +6355,9 @@ const IPO_DATA = [
     "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
+    "year": 2026,
+    "ofs": true,
+    "ofsValue": "rm,"
   },
   {
     "id": "jrk-holdings-berhad",
@@ -6469,3 +6549,7 @@ const IPO_DATA = [
     "sifuTargetPrice": 0.58
   }
 ];
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = IPO_DATA;
+}
