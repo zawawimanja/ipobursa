@@ -18,12 +18,12 @@ try {
     eval('var stockProfiles = {' + stockProfilesMatch[1] + '};');
     
     const targets = data.filter(ipo => 
-        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'rt-pastry-holdings-berhad', 'liftech-group-berhad'].includes(ipo.id)) && 
+        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad'].includes(ipo.id)) && 
         (ipo.status === 'Listed' || ipo.status === 'Application Open') && 
-        (ipo.shariah === true || ipo.id === 'rt-pastry-holdings-berhad')
+        ipo.shariah === true
     );
     
-    console.log('Calculating Sifu Study Target Prices (Valuation 1) for Listed/Open Shariah & Special IPOs:\n');
+    console.log('Calculating Sifu Study Target Prices (Valuation 1) for Shariah-Compliant IPOs:\n');
     
     const sifuTargets = {};
     
