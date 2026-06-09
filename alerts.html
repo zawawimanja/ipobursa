@@ -271,7 +271,7 @@
                             <th>Syarikat</th>
                             <th>Sektor</th>
                             <th style="text-align: right;">Harga Semasa</th>
-                            <th style="text-align: right;">Kajian Sifu</th>
+                            <th style="text-align: right;">Harga Sasaran</th>
                             <th style="text-align: right;">Diskaun %</th>
                             <th style="width: 180px; text-align: center;">Tindakan</th>
                         </tr>
@@ -299,7 +299,7 @@
                             <th>Syarikat</th>
                             <th>Sektor</th>
                             <th style="text-align: right;">Harga Semasa</th>
-                            <th style="text-align: right;">Kajian Sifu</th>
+                            <th style="text-align: right;">Harga Sasaran</th>
                             <th style="text-align: right;">Diskaun %</th>
                             <th style="width: 180px; text-align: center;">Tindakan</th>
                         </tr>
@@ -381,10 +381,10 @@
             let cleanNeeded = false;
             
             IPO_DATA.forEach(ipo => {
-                if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number' && ipo.shariah === true) {
+                if (ipo.stage === 5 && ipo.shariah === true) {
                     const curPrice = ipo.currentPrice || ipo.price || 0;
-                    const targetPrice = ipo.sifuTargetPrice;
-                    if (curPrice > targetPrice) {
+                    const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || ipo.price || 0;
+                    if (targetPrice > 0 && curPrice > targetPrice) {
                         const idx = cleanedDismissed.indexOf(ipo.id);
                         if (idx !== -1) {
                             cleanedDismissed.splice(idx, 1);
@@ -402,12 +402,25 @@
             IPO_DATA.forEach(ipo => {
                 // We strictly focus on Shariah-compliant listed/open-public IPOs that have a target price
                 const isShariah = ipo.shariah === true;
-                const hasTarget = typeof ipo.sifuTargetPrice === 'number' && ipo.sifuTargetPrice > 0;
                 
+                let targetPrice = 0;
+                let targetTypeLabel = '';
+                
+                if (typeof ipo.sifuTargetPrice === 'number' && ipo.sifuTargetPrice > 0) {
+                    targetPrice = ipo.sifuTargetPrice;
+                    targetTypeLabel = 'Sifu';
+                } else if (typeof ipo.avgTP === 'number' && ipo.avgTP > 0) {
+                    targetPrice = ipo.avgTP;
+                    targetTypeLabel = 'Analyst';
+                } else if (typeof ipo.price === 'number' && ipo.price > 0) {
+                    targetPrice = ipo.price;
+                    targetTypeLabel = 'IPO';
+                }
+                
+                const hasTarget = targetPrice > 0;
                 if (!isShariah || !hasTarget) return;
 
                 const curPrice = ipo.currentPrice || ipo.price || 0;
-                const targetPrice = ipo.sifuTargetPrice;
                 const isTriggered = curPrice > 0 && curPrice <= targetPrice;
 
                 const sifuPortfolio = ['cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 'iab', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 'solarvest'];
@@ -416,10 +429,14 @@
                 if (filterVal === 'portfolio') {
                     if (!inPortfolio) return;
                 } else if (filterVal === 'grade_ab') {
+                    if (!isTriggered) return;
                     const isGradeAB = ipo.predictedGrade === 'A' || ipo.predictedGrade === 'B';
-                    if (!inPortfolio && (!isGradeAB || !isTriggered)) return;
+                    const isRecent = ipo.year >= 2025;
+                    if (!inPortfolio && (!isGradeAB || !isRecent)) return;
                 } else if (filterVal === 'all_shariah') {
-                    if (!inPortfolio && !isTriggered) return;
+                    if (!isTriggered) return;
+                    const isRecent = ipo.year >= 2025;
+                    if (!inPortfolio && !isRecent) return;
                 }
                 
                 // Match search filter
@@ -468,6 +485,7 @@
                         </td>
                         <td style="text-align: right;">
                             <span class="price-val price-target">RM ${targetPrice.toFixed(3)}</span>
+                            <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.15rem;">(${targetTypeLabel})</div>
                         </td>
                         <td style="text-align: right;">
                             <span class="${discountClass}">${discountText}</span>
