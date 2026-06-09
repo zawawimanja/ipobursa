@@ -2020,7 +2020,7 @@ function checkPriceAlerts() {
     const activeAlerts = [];
     
     ipoData.forEach(ipo => {
-        if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number') {
+        if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number' && ipo.shariah === true) {
             const curPrice = ipo.currentPrice || ipo.price || 0;
             const targetPrice = ipo.sifuTargetPrice;
             
@@ -2047,23 +2047,14 @@ function checkPriceAlerts() {
     if (activeAlerts.length > 0) {
         container.style.display = 'block';
         container.innerHTML = `
-            <div class="glass-card" style="border: 1px solid rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.5)); padding: 1.25rem 1.5rem; border-radius: 1rem; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12); display: flex; flex-direction: column; gap: 0.75rem;">
-                <h3 style="margin: 0; color: #10b981; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; font-family: 'Outfit', sans-serif; font-weight: 700;">
-                    <i data-lucide="bell-ring" class="pulse-primary" style="width: 18px; color: #10b981;"></i> 
-                    Alert Harga Kajian Sasaran Dipicu!
-                </h3>
-                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-                    ${activeAlerts.map(alert => `
-                        <div style="font-size: 0.85rem; color: #f8fafc; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.06); padding-bottom: 0.5rem; flex-wrap: wrap; gap: 0.75rem;">
-                            <span style="display: flex; align-items: center; gap: 0.35rem;">
-                                🎯 Ok kita boleh beli <strong>${alert.companyName}</strong> sekarang sebab harga dah ok! (Harga semasa: <strong style="color: #10b981;">RM ${alert.curPrice.toFixed(2)}</strong> <= Harga kajian Sifu: <strong>RM ${alert.targetPrice.toFixed(2)}</strong>)
-                            </span>
-                            <button onclick="clearPriceAlert('${alert.id}')" class="btn-moomoo" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #f87171; border-radius: 6px; cursor: pointer; transition: all 0.3s;">
-                                Padam Alert
-                            </button>
-                        </div>
-                    `).join('')}
-                </div>
+            <div class="glass-card" style="border: 1px solid rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.5)); padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: 0 8px 32px rgba(245, 158, 11, 0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                <span style="font-size: 0.9rem; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="bell-ring" class="pulse-green-text" style="width: 18px; color: #f59e0b;"></i> 
+                    Kita ada <strong style="color: #f59e0b; font-size: 1.05rem;">${activeAlerts.length}</strong> alert harga sasaran Zon Beli yang dipicu sekarang!
+                </span>
+                <a href="alerts.html" class="btn-moomoo" style="background: #f59e0b; border: none; color: white; font-weight: 700; text-decoration: none; padding: 0.4rem 1rem; border-radius: 0.5rem; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); display: flex; align-items: center; gap: 0.4rem;">
+                    Lihat & Urus Alert <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
+                </a>
             </div>
         `;
         if(typeof lucide !== 'undefined') lucide.createIcons();
