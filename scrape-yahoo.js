@@ -77,17 +77,19 @@ async function updateLivePricesYahoo() {
                 await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
                 
                 // Cari harga guna selector Yahoo Finance terkini
-                const currentPriceStr = await page.evaluate(() => {
-                    // Try data-field regularMarketPrice
-                    let priceElement = document.querySelector('fin-streamer[data-field="regularMarketPrice"]');
+                const currentPriceStr = await page.evaluate((sym) => {
+                    // Try data-field regularMarketPrice for this specific symbol
+                    let priceElement = document.querySelector(`fin-streamer[data-symbol="${sym}"][data-field="regularMarketPrice"]`)
+                                    || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"][data-field="regularMarketPrice"]`);
                     if (priceElement) return priceElement.getAttribute('value') || priceElement.innerText;
                     
-                    // Fallback
-                    let fallback = document.querySelector(`fin-streamer[data-symbol$=".KL"]`);
+                    // Fallback to any streamer for this symbol
+                    let fallback = document.querySelector(`fin-streamer[data-symbol="${sym}"]`)
+                                || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"]`);
                     if (fallback) return fallback.getAttribute('value') || fallback.innerText;
                     
                     return null;
-                });
+                }, yahooSymbol);
 
                 if (currentPriceStr) {
                     const currentPrice = parseFloat(currentPriceStr.replace(/,/g, ''));
