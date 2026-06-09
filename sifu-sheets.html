@@ -1105,6 +1105,42 @@
             }
         };
 
+        // Utility to find the 3 best historical years
+        function getHistoricalSuffixes(data) {
+            const suffixes = [];
+            for (const key in data) {
+                if (key.startsWith('rev') && key !== 'revF' && key !== 'revF1') {
+                    const suffix = key.replace('rev', '');
+                    if (!isNaN(suffix) && suffix !== '') {
+                        suffixes.push(parseInt(suffix));
+                    }
+                }
+            }
+            suffixes.sort((a, b) => a - b);
+            
+            // Find years that have complete data (both income statement and balance sheet)
+            const completeSuffixes = suffixes.filter(s => {
+                return data[`rev${s}`] !== undefined &&
+                       data[`gp${s}`] !== undefined &&
+                       data[`pat${s}`] !== undefined &&
+                       data[`assets${s}`] !== undefined &&
+                       data[`liab${s}`] !== undefined;
+            });
+            
+            const finalSuffixes = completeSuffixes.length >= 3 ? completeSuffixes : suffixes;
+            const result = finalSuffixes.slice(-3);
+            
+            // Fallback to guarantee exactly 3 suffixes
+            while (result.length < 3) {
+                if (result.length === 0) {
+                    result.push(23);
+                } else {
+                    result.push(result[result.length - 1] + 1);
+                }
+            }
+            return result;
+        }
+
         // Populate stock select
         function initSelect() {
             const select = document.getElementById('sheet-stock-select');
@@ -1169,8 +1205,8 @@
                         targetPe: pe,
                         catalysts: [
                             `Syarikat IPO sektor ${ipo.sector || 'N/A'}.`,
-                            `Harga IPO ditawarkan pada RM ${price.toFixed(3)}.`,
-                            `Analyst Target Price purata: RM ${(ipo.avgTP || price).toFixed(3)}.`
+                            `Harga IPO ditawarkan pada RM ${price.toFixed(2)}.`,
+                            `Analyst Target Price purata: RM ${(ipo.avgTP || price).toFixed(2)}.`
                         ],
                         peers: `<strong>Peer Comparison:</strong> Implied PE owner: ${pe}x. Sila masukkan data kewangan sasaran untuk melihat unjuran perbandingan.`
                     };
@@ -1181,18 +1217,30 @@
             }
             
             if (data) {
-                // Update table headers dynamically
-                const h = data.headers || ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"];
+                // Get suffixes and match headers
+                const suffixes = getHistoricalSuffixes(data);
+                const s1 = suffixes[0];
+                const s2 = suffixes[1];
+                const s3 = suffixes[2];
+                
+                const h = data.headers || [];
+                const h1 = h.find(x => x.includes(s1.toString())) || `FYE ${s1}`;
+                const h2 = h.find(x => x.includes(s2.toString())) || `FYE ${s2}`;
+                const h3 = h.find(x => x.includes(s3.toString())) || `FYE ${s3}`;
+                
+                const hp1 = h[h.length - 2] || "Projection (FYE F)";
+                const hp2 = h[h.length - 1] || "Projection (FYE F+1)";
+                
                 const thead = document.querySelector('.excel-table thead tr');
                 if (thead) {
                     thead.innerHTML = `
                         <th style="width: 250px;">Parameter (Income & Ratios)</th>
                         <th style="width: 80px;">Unit</th>
-                        <th>${h[0]} (Hist)</th>
-                        <th>${h[1]} (Hist)</th>
-                        <th>${h[2]} (Hist)</th>
-                        <th>${h[3]}</th>
-                        <th>${h[4]}</th>
+                        <th>${h1} (Hist)</th>
+                        <th>${h2} (Hist)</th>
+                        <th>${h3} (Hist)</th>
+                        <th>${hp1}</th>
+                        <th>${hp2}</th>
                     `;
                 }
             }
@@ -1203,47 +1251,53 @@
 
         function fillFormValues(data) {
             document.getElementById('td-stock-name').innerText = data.companyName.toUpperCase();
-            document.getElementById('inp-price').value = data.price.toFixed(3);
+            document.getElementById('inp-price').value = data.price.toFixed(2);
             document.getElementById('inp-total-shares').value = data.totalShares;
             
+            // Get the 3 historical suffixes
+            const suffixes = getHistoricalSuffixes(data);
+            const s1 = suffixes[0];
+            const s2 = suffixes[1];
+            const s3 = suffixes[2];
+            
             // Revenues
-            document.getElementById('inp-rev-23').value = data.rev23.toFixed(2);
-            document.getElementById('inp-rev-24').value = data.rev24.toFixed(2);
-            document.getElementById('inp-rev-25').value = data.rev25.toFixed(2);
-            document.getElementById('inp-rev-fye-f').value = data.revF.toFixed(2);
-            document.getElementById('inp-rev-fye-f1').value = data.revF1.toFixed(2);
+            document.getElementById('inp-rev-23').value = (data[`rev${s1}`] || 0).toFixed(2);
+            document.getElementById('inp-rev-24').value = (data[`rev${s2}`] || 0).toFixed(2);
+            document.getElementById('inp-rev-25').value = (data[`rev${s3}`] || 0).toFixed(2);
+            document.getElementById('inp-rev-fye-f').value = (data.revF || 0).toFixed(2);
+            document.getElementById('inp-rev-fye-f1').value = (data.revF1 || 0).toFixed(2);
             
             // GPs
-            document.getElementById('inp-gp-23').value = data.gp23.toFixed(2);
-            document.getElementById('inp-gp-24').value = data.gp24.toFixed(2);
-            document.getElementById('inp-gp-25').value = data.gp25.toFixed(2);
-            document.getElementById('inp-gp-fye-f').value = data.gpF.toFixed(2);
-            document.getElementById('inp-gp-fye-f1').value = data.gpF1.toFixed(2);
+            document.getElementById('inp-gp-23').value = (data[`gp${s1}`] || 0).toFixed(2);
+            document.getElementById('inp-gp-24').value = (data[`gp${s2}`] || 0).toFixed(2);
+            document.getElementById('inp-gp-25').value = (data[`gp${s3}`] || 0).toFixed(2);
+            document.getElementById('inp-gp-fye-f').value = (data.gpF || 0).toFixed(2);
+            document.getElementById('inp-gp-fye-f1').value = (data.gpF1 || 0).toFixed(2);
             
             // PATs
-            document.getElementById('inp-pat-23').value = data.pat23.toFixed(2);
-            document.getElementById('inp-pat-24').value = data.pat24.toFixed(2);
-            document.getElementById('inp-pat-25').value = data.pat25.toFixed(2);
-            document.getElementById('inp-pat-fye-f').value = data.patF.toFixed(2);
-            document.getElementById('inp-pat-fye-f1').value = data.patF1.toFixed(2);
+            document.getElementById('inp-pat-23').value = (data[`pat${s1}`] || 0).toFixed(2);
+            document.getElementById('inp-pat-24').value = (data[`pat${s2}`] || 0).toFixed(2);
+            document.getElementById('inp-pat-25').value = (data[`pat${s3}`] || 0).toFixed(2);
+            document.getElementById('inp-pat-fye-f').value = (data.patF || 0).toFixed(2);
+            document.getElementById('inp-pat-fye-f1').value = (data.patF1 || 0).toFixed(2);
             
             // Growth
-            document.getElementById('inp-eps-growth-f').value = data.epsGrowthF;
-            document.getElementById('inp-eps-growth-f1').value = data.epsGrowthF1;
+            document.getElementById('inp-eps-growth-f').value = data.epsGrowthF || 0;
+            document.getElementById('inp-eps-growth-f1').value = data.epsGrowthF1 || 0;
             
             // Assets
-            document.getElementById('inp-assets-23').value = data.assets23.toFixed(2);
-            document.getElementById('inp-assets-24').value = data.assets24.toFixed(2);
-            document.getElementById('inp-assets-25').value = data.assets25.toFixed(2);
-            document.getElementById('inp-assets-fye-f').value = data.assetsF.toFixed(2);
-            document.getElementById('inp-assets-fye-f1').value = data.assetsF1.toFixed(2);
+            document.getElementById('inp-assets-23').value = (data[`assets${s1}`] || 0).toFixed(2);
+            document.getElementById('inp-assets-24').value = (data[`assets${s2}`] || 0).toFixed(2);
+            document.getElementById('inp-assets-25').value = (data[`assets${s3}`] || 0).toFixed(2);
+            document.getElementById('inp-assets-fye-f').value = (data.assetsF || 0).toFixed(2);
+            document.getElementById('inp-assets-fye-f1').value = (data.assetsF1 || 0).toFixed(2);
             
             // Liab
-            document.getElementById('inp-liab-23').value = data.liab23.toFixed(2);
-            document.getElementById('inp-liab-24').value = data.liab24.toFixed(2);
-            document.getElementById('inp-liab-25').value = data.liab25.toFixed(2);
-            document.getElementById('inp-liab-fye-f').value = data.liabF.toFixed(2);
-            document.getElementById('inp-liab-fye-f1').value = data.liabF1.toFixed(2);
+            document.getElementById('inp-liab-23').value = (data[`liab${s1}`] || 0).toFixed(2);
+            document.getElementById('inp-liab-24').value = (data[`liab${s2}`] || 0).toFixed(2);
+            document.getElementById('inp-liab-25').value = (data[`liab${s3}`] || 0).toFixed(2);
+            document.getElementById('inp-liab-fye-f').value = (data.liabF || 0).toFixed(2);
+            document.getElementById('inp-liab-fye-f1').value = (data.liabF1 || 0).toFixed(2);
         }
 
         function updateNotes(data) {
@@ -1463,28 +1517,28 @@
             const valF = (epsF * targetPe) / 100;
             const valF1 = (epsF1 * targetPe) / 100;
             
-            document.getElementById('td-val1-fye-f').innerText = 'RM ' + valF.toFixed(3);
-            document.getElementById('td-val1-fye-f1').innerText = 'RM ' + valF1.toFixed(3);
+            document.getElementById('td-val1-fye-f').innerText = 'RM ' + valF.toFixed(2);
+            document.getElementById('td-val1-fye-f1').innerText = 'RM ' + valF1.toFixed(2);
             
             // Buy limits with MOS
             const mos = parseInt(document.getElementById('sheet-mos-slider').value) || 0;
             const buyF = valF * (1 - (mos / 100));
             const buyF1 = valF1 * (1 - (mos / 100));
             
-            document.getElementById('td-buy1-fye-f').innerText = 'RM ' + buyF.toFixed(3);
-            document.getElementById('td-buy1-fye-f1').innerText = 'RM ' + buyF1.toFixed(3);
+            document.getElementById('td-buy1-fye-f').innerText = 'RM ' + buyF.toFixed(2);
+            document.getElementById('td-buy1-fye-f1').innerText = 'RM ' + buyF1.toFixed(2);
             
             // Verdict logic
             const verdictBox = document.getElementById('sheet-verdict-box');
             if (price <= buyF) {
                 verdictBox.className = 'verdict-banner buy';
-                verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(3)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(3)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar!`;
+                verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(2)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(2)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar!`;
             } else if (price <= valF) {
                 verdictBox.className = 'verdict-banner hold';
-                verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(3)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(3)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(3)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran.`;
+                verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(2)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(2)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(2)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran.`;
             } else {
                 verdictBox.className = 'verdict-banner avoid';
-                verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(3)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(3)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula.`;
+                verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(2)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(2)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula.`;
             }
         }
 
