@@ -14,6 +14,27 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="data.js?v=1.1"></script>
     <style>
+        #sheet-stock-select {
+            width: 100%;
+            padding: 0.6rem;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 0.5rem;
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        #sheet-stock-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
+        }
+        #sheet-stock-select option {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 0.5rem;
+        }
+
         .sheet-container {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -234,7 +255,7 @@
                     </h3>
                     <div class="calc-form-group" style="margin-bottom: 1rem;">
                         <label>Select IPO or Stock</label>
-                        <select id="sheet-stock-select" onchange="loadSelectedStock()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem;">
+                        <select id="sheet-stock-select" onchange="loadSelectedStock()">
                             <!-- Dynamically populated -->
                         </select>
                     </div>
