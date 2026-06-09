@@ -1845,21 +1845,52 @@
                 const warningCard = document.getElementById('sifu-edu-warning-card');
                 if (warningCard) {
                     const grade = ipo.predictedGrade || '--';
-                    if (grade === 'C' || grade === 'D') {
+                    if (grade === 'C') {
+                        const os = ipo.os || 0;
+                        if (os >= 40) {
+                            warningCard.style.display = 'block';
+                            warningCard.style.cssText = 'border-left: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.03); margin-top: 1rem; padding: 1.5rem; border-radius: 1rem;';
+                            warningCard.innerHTML = `
+                                <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #f59e0b; font-size: 1rem;">
+                                    <i data-lucide="zap" style="width: 18px;"></i>
+                                    Gred C + OS Tinggi (Hanya Scalping ⚡)
+                                </h3>
+                                <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
+                                    Kaunter ini bertaraf Gred C tetapi mempunyai kadar oversubscription tinggi (<strong>${os}x</strong>). Ini menghasilkan momentum jangka pendek yang kuat!
+                                </p>
+                                <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(245, 158, 11, 0.15); font-size: 0.75rem; line-height: 1.45;">
+                                    <strong style="color: #f59e0b; display: block; margin-bottom: 0.25rem;">Strategi Scalp Pantas Sifu:</strong>
+                                    Permintaan pasaran runcit sangat tinggi. Boleh mohon, tetapi <strong>wajib jual dalam tempoh 10 minit pertama listing</strong> semasa harga melonjak naik (seperti kes <em>Bus Cap</em>). Jangan bawa tidur (*hold*) jangka panjang!
+                                </div>
+                            `;
+                        } else {
+                            warningCard.style.display = 'block';
+                            warningCard.style.cssText = 'border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); margin-top: 1rem; padding: 1.5rem; border-radius: 1rem;';
+                            warningCard.innerHTML = `
+                                <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #ef4444; font-size: 1rem;">
+                                    <i data-lucide="alert-triangle" style="width: 18px;"></i>
+                                    Amaran Gred C (Kualitatif Rendah + OS Lemah ⚠️)
+                                </h3>
+                                <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
+                                    Jangan hanya melihat <strong>Kuantitatif (Math/Formula Cincai)</strong> sahaja. Anda <strong>WAJIB</strong> menyilang dengan <strong>Gred Kualitatif & Sentimen Pasaran</strong>!
+                                </p>
+                                <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(239, 68, 68, 0.15); font-size: 0.75rem; line-height: 1.45;">
+                                    <strong style="color: #ef4444; display: block; margin-bottom: 0.25rem;">Kes Hock Soon (Formula OK tapi Barai?):</strong>
+                                    Secara formula matematik/PE, Hock Soon nampak murah (PE 6.2x) tetapi harganya merosot teruk (-11.7% Open, -36.7% Hold) kerana ia bertaraf <strong>Gred C</strong> disebabkan oversubscription sangat rendah (1.36x), ketiadaan minat belian, dan sentimen pasaran yang buruk semasa listing.
+                                </div>
+                            `;
+                        }
+                    } else if (grade === 'D') {
                         warningCard.style.display = 'block';
                         warningCard.style.cssText = 'border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.03); margin-top: 1rem; padding: 1.5rem; border-radius: 1rem;';
                         warningCard.innerHTML = `
                             <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #ef4444; font-size: 1rem;">
-                                <i data-lucide="alert-triangle" style="width: 18px;"></i>
-                                Amaran Gred ${grade} (Kualitatif Rendah)
+                                <i data-lucide="x-octagon" style="width: 18px;"></i>
+                                Gred D — SKIP TERUS 🚫
                             </h3>
                             <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
-                                Jangan hanya melihat <strong>Kuantitatif (Math/Formula Cincai)</strong> sahaja. Anda <strong>WAJIB</strong> menyilang dengan <strong>Gred Kualitatif & Sentimen Pasaran</strong>!
+                                Saham ini bertaraf Gred D. Tiada sebarang Margin of Safety atau pemangkin yang membolehkan ia dibeli. Sifu mencadangkan untuk <strong>SKIP TERUS</strong>.
                             </p>
-                            <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(239, 68, 68, 0.15); font-size: 0.75rem; line-height: 1.45;">
-                                <strong style="color: #ef4444; display: block; margin-bottom: 0.25rem;">Kes Hock Soon (Formula OK tapi Barai?):</strong>
-                                Secara formula matematik/PE, Hock Soon nampak murah (PE 6.2x) dan margin stabil (17.6%). Tetapi harganya merosot teruk (-11.7% Open, -36.7% Hold) kerana ia bertaraf <strong>Gred C</strong> disebabkan oversubscription sangat rendah (1.36x), ketiadaan minat belian, dan sentimen pasaran yang buruk semasa listing.
-                            </div>
                         `;
                     } else if (grade === 'A' || grade === 'B') {
                         warningCard.style.display = 'block';
