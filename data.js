@@ -155,7 +155,7 @@ const IPO_DATA = [
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 0,
+    "os": 72.24,
     "ib": "TA Securities",
     "fundUse": "Construction of new production facility & procurement of machines",
     "predictedGrade": "C",
