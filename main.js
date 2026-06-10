@@ -1,6 +1,6 @@
 let ipoData = [];
 let currentStage = 1;
-let currentGrade = 'all';
+let selectedGrades = ['A', 'B', 'C', 'Pending'];
 let currentYear = 'all';
 let currentSearch = '';
 let currentSort = 'newest';
@@ -20,6 +20,7 @@ function initializeData() {
         }
 
         // Step 2: Show initial state
+        updateGradeFilterUI();
         renderIPOs(currentStage);
         setTimeout(() => { checkPriceAlerts(); }, 500);
 
@@ -1010,8 +1011,11 @@ function renderIPOs(stage) {
             }
 
             let displayData = filtered;
-            if (typeof currentGrade !== 'undefined' && currentGrade !== 'all') {
-                displayData = displayData.filter(ipo => getIpoGrade(ipo).grade === currentGrade);
+            if (typeof selectedGrades !== 'undefined') {
+                displayData = displayData.filter(ipo => {
+                    const cleanGrade = getIpoGrade(ipo).grade.replace('Pred: ', '').trim();
+                    return selectedGrades.includes(cleanGrade);
+                });
             }
             
             if (typeof currentYear !== 'undefined' && currentYear !== 'all') {
@@ -1479,24 +1483,11 @@ tabBtns.forEach(btn => {
 });
 
 function resetFilters() {
-    currentGrade = 'all';
+    selectedGrades = ['A', 'B', 'C', 'Pending'];
     currentYear = 'all';
     currentSearch = '';
     currentSort = 'newest';
-    // Reset filter button styles
-    document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('active');
-        b.style.background = 'transparent';
-        b.style.color = 'var(--text-main)';
-        b.style.borderColor = 'rgba(255,255,255,0.2)';
-    });
-    const allFilterBtn = document.querySelector('.filter-btn[data-grade="all"]');
-    if (allFilterBtn) {
-        allFilterBtn.classList.add('active');
-        allFilterBtn.style.background = 'var(--primary)';
-        allFilterBtn.style.color = 'white';
-        allFilterBtn.style.borderColor = 'var(--primary)';
-    }
+    updateGradeFilterUI();
     // Reset year buttons
     document.querySelectorAll('.year-btn').forEach(b => {
         b.classList.remove('active');
@@ -1519,20 +1510,73 @@ function resetFilters() {
     if (sortSelect) sortSelect.value = 'newest';
 }
 
+function updateGradeFilterUI() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const isAllSelected = ['A', 'B', 'C', 'Pending'].every(g => selectedGrades.includes(g));
+    const isNoneSelected = selectedGrades.length === 0;
+
+    filterBtns.forEach(btn => {
+        const grade = btn.dataset.grade;
+        if (grade === 'all') {
+            if (isAllSelected || isNoneSelected) {
+                btn.classList.add('active');
+                btn.style.background = 'var(--primary)';
+                btn.style.color = 'white';
+                btn.style.borderColor = 'var(--primary)';
+            } else {
+                btn.classList.remove('active');
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-main)';
+                btn.style.borderColor = 'rgba(255,255,255,0.2)';
+            }
+        } else {
+            const isActive = selectedGrades.includes(grade);
+            if (isActive) {
+                btn.classList.add('active');
+                if (grade === 'A') {
+                    btn.style.background = 'rgba(16, 185, 129, 0.15)';
+                    btn.style.color = '#10b981';
+                    btn.style.borderColor = '#10b981';
+                } else if (grade === 'B') {
+                    btn.style.background = 'rgba(245, 158, 11, 0.15)';
+                    btn.style.color = '#f59e0b';
+                    btn.style.borderColor = '#f59e0b';
+                } else if (grade === 'C') {
+                    btn.style.background = 'rgba(239, 68, 68, 0.15)';
+                    btn.style.color = '#ef4444';
+                    btn.style.borderColor = '#ef4444';
+                } else if (grade === 'Pending') {
+                    btn.style.background = 'rgba(165, 180, 252, 0.15)';
+                    btn.style.color = '#a5b4fc';
+                    btn.style.borderColor = '#a5b4fc';
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-dim)';
+                btn.style.borderColor = 'rgba(255,255,255,0.1)';
+            }
+        }
+    });
+}
+
+// Initialize button UI
+setTimeout(updateGradeFilterUI, 50);
+
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-            b.classList.remove('active');
-            b.style.background = 'transparent';
-            b.style.color = 'var(--text-main)';
-            b.style.borderColor = 'rgba(255,255,255,0.2)';
-        });
-        btn.classList.add('active');
-        btn.style.background = 'var(--primary)';
-        btn.style.color = 'white';
-        btn.style.borderColor = 'var(--primary)';
-        currentGrade = btn.dataset.grade;
+        const grade = btn.dataset.grade;
+        if (grade === 'all') {
+            selectedGrades = ['A', 'B', 'C', 'Pending'];
+        } else {
+            if (selectedGrades.includes(grade)) {
+                selectedGrades = selectedGrades.filter(g => g !== grade);
+            } else {
+                selectedGrades.push(grade);
+            }
+        }
+        updateGradeFilterUI();
         renderIPOs();
     });
 });
