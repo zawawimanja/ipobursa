@@ -1414,6 +1414,7 @@ function createIPOCard(ipo, index = 0) {
             <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">
                 <div style="font-weight: 600;">${currentOpenPrice}</div>
                 <div style="font-size: 0.65rem; color: var(--text-dim);">IPO: ${priceDisplay}</div>
+                ${(ipo.stage === 5 && ipo.openPrice) ? `<div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Open: RM ${ipo.openPrice.toFixed(2)}</div>` : ''}
                 ${ipo.highPrice ? `<div style="font-size: 0.65rem; color: #f59e0b; margin-top: 2px;">High: RM ${ipo.highPrice.toFixed(2)}</div>` : ''}
                 ${ipo.stage === 3 && ipo.estOpen ? `<div style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 600;">Est. Open: RM ${ipo.estOpen.toFixed(2)}</div>` : ''}
                 ${(ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number') ? (

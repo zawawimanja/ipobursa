@@ -26,6 +26,20 @@ function saveDatabase(data) {
     }
 }
 
+// Fetch helper with retry and timeout
+async function fetchWithRetry(url, retries = 2) {
+    for (let i = 0; i <= retries; i++) {
+        try {
+            const res = await axios.get(url, { headers: HEADERS, timeout: 8000 });
+            return res;
+        } catch (err) {
+            if (i === retries) throw err;
+            console.log(`   -> [Retry ${i + 1}/${retries}] Error: ${err.message}. Retrying in 2s...`);
+            await new Promise(r => setTimeout(r, 2000));
+        }
+    }
+}
+
 async function scrapeI3PricesAxios() {
     try {
         console.log('Reading data.json...');
@@ -43,7 +57,8 @@ async function scrapeI3PricesAxios() {
         
         let updatedCount = 0;
 
-        for (let ipo of listedIpos) {
+        for (let i = 0; i < listedIpos.length; i++) {
+            let ipo = listedIpos[i];
             let symbolClean = ipo.symbol.replace(/\[.*?\]/g, '').trim();
             if (!symbolClean) continue;
             
@@ -51,8 +66,8 @@ async function scrapeI3PricesAxios() {
             let url = `https://klse.i3investor.com/web/stock/overview/${symbolClean}`;
             
             try {
-                console.log(`Fetching ${ipo.companyName} (${symbolClean})...`);
-                const res = await axios.get(url, { headers: HEADERS, timeout: 10000 });
+                console.log(`[${i + 1}/${listedIpos.length}] Fetching ${ipo.companyName} (${symbolClean})...`);
+                const res = await fetchWithRetry(url);
                 const $ = cheerio.load(res.data);
                 
                 let priceText = null;
@@ -89,11 +104,11 @@ async function scrapeI3PricesAxios() {
                     console.log(`   -> Price element not found for ${symbolClean}`);
                 }
                 
-                // Small delay to be polite
-                await new Promise(r => setTimeout(r, 150));
+                // Polite delay: 1.0 to 1.5 seconds
+                await new Promise(r => setTimeout(r, 1000 + Math.random() * 500));
                 
             } catch (err) {
-                console.error(`Error fetching ${symbolClean}: ${err.message}`);
+                console.error(`❌ Error fetching ${symbolClean}: ${err.message}`);
             }
         }
 
