@@ -119,7 +119,7 @@ const IPO_DATA = [
     "avgTP": 0.23,
     "pe": 13.4,
     "ofs": true,
-    "analystInsight": "❌ <b>AVOID</b><br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX. Jangan apply.",
+    "analystInsight": "❌ <b>AVOID</b><br>💡 Note: Jangan apply.<br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX.",
     "sifuTargetPrice": 0.32
   },
   {
@@ -689,8 +689,8 @@ const IPO_DATA = [
     "listingDate": "12-Mar-2026",
     "year": 2026,
     "price": 0.35,
-    "currentPrice": 0.49,
-    "performance": "+40.00%",
+    "currentPrice": 0.6,
+    "performance": "+71.43%",
     "os": 110.1,
     "ib": "M&A Securities",
     "sector": "Industrial",
@@ -706,7 +706,7 @@ const IPO_DATA = [
     "highPrice": 0.355,
     "ofs": true,
     "symbol": "OGX",
-    "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M), namun ketiadaan sentimen pasaran yang menyokong semasa listing menyebabkan harganya merosot di bawah IPO.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
+    "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M). Meskipun harganya merosot di bawah IPO pada hari pertama (sebab sentimen perang/geopolitik), syarikat telah melonjak melebihi 70% (ke RM0.60) disokong fundamental dan anugerah kontrak data center yang besar.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
     "sifuTargetPrice": 0.4
   },
   {
