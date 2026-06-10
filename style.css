@@ -1715,4 +1715,35 @@ h3,
         opacity: 0.6;
     }
 }
+
+/* Beautiful custom scrollbar for table container */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+.table-responsive::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 4px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.7);
+}
+
+/* Ensure sticky table headers look smooth and opaque */
+.table-responsive {
+    scrollbar-gutter: stable;
+}
+
+.table-responsive th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #1e293b !important;
+}
+
 

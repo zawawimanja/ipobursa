@@ -1061,19 +1061,19 @@ function renderIPOs(stage) {
             }
 
             ipoGrid.innerHTML = `
-                <div class="table-responsive" style="width: 100%; overflow-x: auto; grid-column: 1 / -1;">
-                    <table class="ipo-table" style="width: 100%; border-collapse: collapse; text-align: left; background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 1rem; overflow: hidden;">
-                        <thead style="background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <div class="table-responsive" style="width: 100%; overflow-x: auto; overflow-y: auto; max-height: 70vh; grid-column: 1 / -1; border-radius: 1rem; border: 1px solid var(--glass-border); background: var(--card-bg); backdrop-filter: blur(16px);">
+                    <table class="ipo-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead style="position: sticky; top: 0; z-index: 10; background: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
                             <tr>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Symbol & Market</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Date</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Demand (OS)</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Price Info</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Performance (IPO to Now)</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Open to Now %</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">IPO Score</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Analyst Verdict</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Action</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Symbol & Market</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Date</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Demand (OS)</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Price Info</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Perf. (IPO to Now)</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Open to Now</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Score</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Verdict</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1388,7 +1388,7 @@ function createIPOCard(ipo, index = 0) {
 
     return `
         <tr class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
-            <td style="padding: 0.75rem 1rem;">
+            <td style="padding: 0.75rem 0.6rem;">
                 <div style="display: flex; align-items: center; gap: 0.6rem;">
                     <span class="badge ${ipo.market?.includes('Main') ? 'main-market' : 'ace-market'}" style="padding: 0.15rem 0.4rem; font-size: 0.65rem; min-width: 35px; text-align: center;">${ipo.market === 'Main Market' ? 'MAIN' : 'ACE'}</span>
                     ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
@@ -1403,15 +1403,15 @@ function createIPOCard(ipo, index = 0) {
                     ${ipo.sector} • ${ipo.ib || 'TBA'}
                 </div>
             </td>
-            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; color: var(--text-dim); white-space: nowrap;">${dateDisplay}</td>
-            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">
+            <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; color: var(--text-dim); white-space: nowrap;">${dateDisplay}</td>
+            <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">
                 <div style="font-weight: 600; color: ${ipo.os >= 20 ? '#10b981' : 'var(--text-main)'}; display: flex; align-items: center; gap: 0.3rem;">
                     ${ipo.os ? ipo.os.toFixed(1) + 'x' : (ipo.predictedOS ? '<span style="color: var(--accent-primary);">' + ipo.predictedOS + '</span>' : 'TBA')}
                     ${ipo.isAutoOS ? '<i data-lucide="cpu" style="width: 12px; color: #10b981;" title="Auto-Hunted"></i>' : ''}
                 </div>
                 <div style="font-size: 0.65rem; color: var(--text-dim);">Subscription</div>
             </td>
-            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">
+            <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">
                 <div style="font-weight: 600;">${currentOpenPrice}</div>
                 <div style="font-size: 0.65rem; color: var(--text-dim);">IPO: ${priceDisplay}</div>
                 ${(ipo.stage === 5 && ipo.openPrice) ? `<div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Open: RM ${ipo.openPrice.toFixed(2)}</div>` : ''}
@@ -1423,9 +1423,9 @@ function createIPOCard(ipo, index = 0) {
                     : `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>`
                 ) : ''}
             </td>
-            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">${perfDisplay}</td>
-            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">${openToNowDisplay}</td>
-            <td style="padding: 0.75rem 1rem; white-space: nowrap;">
+            <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">${perfDisplay}</td>
+            <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">${openToNowDisplay}</td>
+            <td style="padding: 0.75rem 0.6rem; white-space: nowrap;">
                 <span style="color: ${gradeColor}; font-weight: bold; font-size: 0.8rem; padding: 0.15rem 0.4rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10;">
                     ${ipo.stage < 5 && grade !== 'Pending' ? 'Pred: ' : ''}${grade === 'Pending' ? 'Pending' : grade}
                 </span>
@@ -1453,10 +1453,10 @@ function createIPOCard(ipo, index = 0) {
                 </div>
                 ` : ''}
             </td>
-            <td style="padding: 0.75rem 1rem; min-width: 220px; max-width: 320px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
+            <td style="padding: 0.75rem 0.6rem; min-width: 200px; max-width: 300px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
                 ${renderStyledVerdict(gradeObj.reason, grade, ipo)}
             </td>
-            <td style="padding: 0.75rem 1rem; white-space: nowrap;">${finalActionCol}</td>
+            <td style="padding: 0.75rem 0.6rem; white-space: nowrap;">${finalActionCol}</td>
         </tr>
     `;
 }
