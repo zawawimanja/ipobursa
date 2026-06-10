@@ -1425,10 +1425,20 @@ function createIPOCard(ipo, index = 0) {
                 ${(ipo.stage === 5 && ipo.openPrice) ? `<div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Open: RM ${ipo.openPrice.toFixed(2)}</div>` : ''}
                 ${ipo.highPrice ? `<div style="font-size: 0.65rem; color: #f59e0b; margin-top: 2px;">High: RM ${ipo.highPrice.toFixed(2)}</div>` : ''}
                 ${ipo.stage === 3 && ipo.estOpen ? `<div style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 600;">Est. Open: RM ${ipo.estOpen.toFixed(2)}</div>` : ''}
-                ${(ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number') ? (
-                    (ipo.currentPrice || ipo.price || 0) <= ipo.sifuTargetPrice
-                    ? `<div class="pulse-green-text" style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 800;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)} ✅</div>`
-                    : `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>`
+                ${(typeof ipo.sifuTargetPrice === 'number') ? (
+                    (() => {
+                        const gradeObj = getIpoGrade(ipo);
+                        const cleanGrade = gradeObj.grade.replace('Pred: ', '').trim();
+                        const currentVal = ipo.currentPrice || ipo.price || 0;
+                        const passesTapis1 = currentVal <= ipo.sifuTargetPrice;
+                        const passesTapis2 = (cleanGrade === 'A' || cleanGrade === 'B');
+                        
+                        if (passesTapis1 && passesTapis2) {
+                            return `<div class="pulse-green-text" style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 800;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)} ✅</div>`;
+                        } else {
+                            return `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Target: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>`;
+                        }
+                    })()
                 ) : ''}
             </td>
             <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">${perfDisplay}</td>
