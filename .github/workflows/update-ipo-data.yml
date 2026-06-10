@@ -24,11 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
           
-      - name: Run Scrapers (iSaham + Yahoo Finance)
+      - name: Run Scrapers (iSaham + i3investor)
         run: |
           node scraper.js
-          node scrape-yahoo.js
-          node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('./data.json', 'utf8')); fs.writeFileSync('./data.js', 'const IPO_DATA = ' + JSON.stringify(data, null, 2) + ';\\n');"
+          node scrape-i3.js
         
       - name: Commit and Push Changes
         run: |

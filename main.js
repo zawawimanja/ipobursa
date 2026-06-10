@@ -1069,7 +1069,8 @@ function renderIPOs(stage) {
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Date</th>
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Demand (OS)</th>
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Price Info</th>
-                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Performance</th>
+                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Performance (IPO to Now)</th>
+                                <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Open to Now %</th>
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">IPO Score</th>
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Analyst Verdict</th>
                                 <th style="padding: 1rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Action</th>
@@ -1090,6 +1091,7 @@ function renderIPOs(stage) {
             `;
             if(typeof lucide !== 'undefined') lucide.createIcons();
             checkMissingListings();
+            renderListedSidebar();
         } catch(err) {
             console.error('renderIPOs error:', err);
             ipoGrid.innerHTML = `
@@ -1302,6 +1304,7 @@ function createIPOCard(ipo, index = 0) {
     else if (ipo.openPrice) currentOpenPrice = 'RM ' + ipo.openPrice.toFixed(2);
 
     let perfDisplay = '-';
+    let openToNowDisplay = '-';
     if (ipo.stage === 5) {
         if (ipo.currentPrice) {
             const holdPerf = ((ipo.currentPrice - ipo.price) / ipo.price * 100);
@@ -1310,6 +1313,13 @@ function createIPOCard(ipo, index = 0) {
             perfDisplay = `<span style="color: ${perfColor}; font-weight: 600;">${holdPerf > 0 ? '+' : ''}${holdPerf.toFixed(1)}%</span>`;
         } else if (ipo.openPrice) {
             perfDisplay = `<span style="color: ${perfValue >= 0 ? '#10b981' : '#ef4444'}; font-weight: 600;">${perfString}</span>`;
+        }
+
+        if (ipo.currentPrice && ipo.openPrice) {
+            const openToNow = ((ipo.currentPrice - ipo.openPrice) / ipo.openPrice * 100);
+            const isProfit = openToNow >= 0;
+            const perfColor = isProfit ? '#10b981' : '#ef4444';
+            openToNowDisplay = `<span style="color: ${perfColor}; font-weight: 600;">${openToNow > 0 ? '+' : ''}${openToNow.toFixed(1)}%</span>`;
         }
     }
 
@@ -1413,6 +1423,7 @@ function createIPOCard(ipo, index = 0) {
                 ) : ''}
             </td>
             <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">${perfDisplay}</td>
+            <td style="padding: 0.75rem 1rem; font-size: 0.85rem; white-space: nowrap;">${openToNowDisplay}</td>
             <td style="padding: 0.75rem 1rem; white-space: nowrap;">
                 <span style="color: ${gradeColor}; font-weight: bold; font-size: 0.8rem; padding: 0.15rem 0.4rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10;">
                     ${ipo.stage < 5 && grade !== 'Pending' ? 'Pred: ' : ''}${grade === 'Pending' ? 'Pending' : grade}
@@ -2067,3 +2078,113 @@ function checkPriceAlerts() {
 window.promptPriceAlert = promptPriceAlert;
 window.clearPriceAlert = clearPriceAlert;
 window.checkPriceAlerts = checkPriceAlerts;
+
+function renderListedSidebar() {
+    const sidebarEl = document.getElementById('listed-sidebar');
+    const sidebarListEl = document.getElementById('listed-sidebar-list');
+    const sidebarCountEl = document.getElementById('sidebar-count');
+    
+    if (!sidebarEl || !sidebarListEl) return;
+    
+    const stageNum = parseInt(currentStage || 1);
+    if (stageNum === 5) {
+        sidebarEl.style.display = 'none';
+        return;
+    }
+    
+    sidebarEl.style.display = 'flex';
+    
+    // Get all listed IPOs
+    const listedIpos = ipoData.filter(ipo => ipo.stage === 5);
+    
+    // Sort by listing date newest first
+    listedIpos.sort((a, b) => getBestSortDate(b) - getBestSortDate(a));
+    
+    if (sidebarCountEl) {
+        sidebarCountEl.textContent = listedIpos.length;
+    }
+    
+    if (listedIpos.length === 0) {
+        sidebarListEl.innerHTML = `
+            <div style="color: var(--text-dim); font-size: 0.85rem; text-align: center; padding: 1rem;">
+                No listed IPOs found.
+            </div>
+        `;
+        return;
+    }
+    
+    sidebarListEl.innerHTML = listedIpos.map(ipo => {
+        const gradeObj = getIpoGrade(ipo);
+        const grade = gradeObj.grade;
+        const baseGrade = grade.replace('Pred: ', '');
+        const gradeColor = baseGrade === 'A' ? '#10b981' : baseGrade === 'B' ? '#f59e0b' : (baseGrade === 'Pending' ? '#a5b4fc' : '#ef4444');
+        
+        const curPrice = ipo.currentPrice || ipo.price || 0;
+        const openPrice = ipo.openPrice || ipo.price || 0;
+        
+        let holdPerf = 0;
+        let perfColor = 'var(--text-main)';
+        if (ipo.currentPrice) {
+            holdPerf = ((ipo.currentPrice - ipo.price) / ipo.price * 100);
+            perfColor = holdPerf >= 0 ? '#10b981' : '#ef4444';
+        }
+        
+        let openToNow = 0;
+        let openToNowColor = 'var(--text-main)';
+        let hasOpenToNow = false;
+        if (ipo.currentPrice && ipo.openPrice) {
+            openToNow = ((ipo.currentPrice - ipo.openPrice) / ipo.openPrice * 100);
+            openToNowColor = openToNow >= 0 ? '#10b981' : '#ef4444';
+            hasOpenToNow = true;
+        }
+        
+        return `
+            <div class="sidebar-ipo-card" style="padding: 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(99,102,241,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.05)';">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem;">
+                    <div style="font-weight: 600; font-size: 0.85rem; color: var(--text-main); line-height: 1.3;">
+                        <a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); transition: color 0.2s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">
+                            ${ipo.companyName} 🔗
+                        </a>
+                        ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
+                    </div>
+                    <span style="color: ${gradeColor}; font-weight: bold; font-size: 0.7rem; padding: 0.1rem 0.35rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10; flex-shrink: 0;">
+                        ${baseGrade}
+                    </span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim);">
+                    <span>${ipo.sector} • ${ipo.symbol || 'TBA'}</span>
+                    <span>${ipo.listingDate || ipo.year}</span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 0.4rem; border-radius: 0.35rem; text-align: center; margin: 0.25rem 0;">
+                    <div>
+                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">IPO</div>
+                        <div style="font-weight: 600;">RM ${ipo.price.toFixed(3)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">Open</div>
+                        <div style="font-weight: 600;">RM ${openPrice.toFixed(3)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">Current</div>
+                        <div style="font-weight: 600; color: #60a5fa;">RM ${curPrice.toFixed(3)}</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; gap: 0.5rem; margin-top: 0.25rem;">
+                    <div style="flex: 1; background: rgba(255,255,255,0.01); padding: 0.35rem; border-radius: 0.25rem; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <div style="font-size: 0.6rem; color: var(--text-dim);">IPO to Now</div>
+                        <div style="font-weight: 700; color: ${perfColor};">${holdPerf > 0 ? '+' : ''}${holdPerf.toFixed(1)}%</div>
+                    </div>
+                    <div style="flex: 1; background: rgba(255,255,255,0.01); padding: 0.35rem; border-radius: 0.25rem; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
+                        <div style="font-size: 0.6rem; color: var(--text-dim);">Open to Now</div>
+                        <div style="font-weight: 700; color: ${openToNowColor};">${hasOpenToNow ? (openToNow > 0 ? '+' : '') + openToNow.toFixed(1) + '%' : '-'}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+window.renderListedSidebar = renderListedSidebar;
