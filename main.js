@@ -1412,7 +1412,11 @@ function createIPOCard(ipo, index = 0) {
                 <div style="font-size: 0.65rem; color: var(--text-dim);">Subscription</div>
             </td>
             <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">
-                <div style="font-weight: 600;">${currentOpenPrice}</div>
+                ${(ipo.stage === 5 && ipo.currentPrice) ? `
+                    <div style="font-weight: 700; color: #60a5fa; margin-bottom: 2px;">Current: RM ${ipo.currentPrice.toFixed(2)}</div>
+                ` : `
+                    <div style="font-weight: 600;">${currentOpenPrice}</div>
+                `}
                 <div style="font-size: 0.65rem; color: var(--text-dim);">IPO: ${priceDisplay}</div>
                 ${(ipo.stage === 5 && ipo.openPrice) ? `<div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Open: RM ${ipo.openPrice.toFixed(2)}</div>` : ''}
                 ${ipo.highPrice ? `<div style="font-size: 0.65rem; color: #f59e0b; margin-top: 2px;">High: RM ${ipo.highPrice.toFixed(2)}</div>` : ''}
