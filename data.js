@@ -4055,12 +4055,12 @@ const IPO_DATA = [
     "status": "Listed",
     "shariah": true,
     "outlier": true,
+    "sifuTargetPrice": 0.85,
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Premium IC design house in Malaysia. Direct proxy to AI and semiconductor growth, highly attractive near IPO price.",
     "highPrice": 0.368,
     "openPrice": 2.05002,
     "closePrice": 2.429973,
-    "symbol": "OPPSTAR",
-    "sifuTargetPrice": 0.85
+    "symbol": "OPPSTAR"
   },
   {
     "id": "panda",
@@ -4304,7 +4304,7 @@ const IPO_DATA = [
     "openPrice": 0.7750080000000001,
     "closePrice": 0.7849919999999999,
     "symbol": "AGMO",
-    "sifuTargetPrice": 0.50
+    "sifuTargetPrice": 0.5
   },
   {
     "id": "amereit",
@@ -5042,7 +5042,7 @@ const IPO_DATA = [
     "openPrice": 1.49996,
     "closePrice": 1.6199700000000004,
     "symbol": "CTOS",
-    "sifuTargetPrice": 0.90
+    "sifuTargetPrice": 0.9
   },
   {
     "id": "ecomate",
@@ -6513,7 +6513,3 @@ const IPO_DATA = [
     "sifuTargetPrice": 3.1
   }
 ];
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = IPO_DATA;
-}

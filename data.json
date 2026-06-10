@@ -4304,7 +4304,7 @@
         "openPrice": 0.7750080000000001,
         "closePrice": 0.7849919999999999,
         "symbol": "AGMO",
-        "sifuTargetPrice": 0.50
+        "sifuTargetPrice": 0.5
     },
     {
         "id": "amereit",
@@ -5042,7 +5042,7 @@
         "openPrice": 1.49996,
         "closePrice": 1.6199700000000004,
         "symbol": "CTOS",
-        "sifuTargetPrice": 0.90
+        "sifuTargetPrice": 0.9
     },
     {
         "id": "ecomate",
