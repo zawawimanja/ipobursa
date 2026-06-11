@@ -6224,13 +6224,18 @@ const IPO_DATA = [
     "companyName": "SLGC Berhad",
     "symbol": "SLGC Berhad",
     "market": "ACE Market",
-    "price": 0,
+    "price": 0.28,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "year": 2026
+    "stage": 2,
+    "status": "MITI Allocation Phase",
+    "year": 2026,
+    "currentPrice": 0.28,
+    "sector": "Construction",
+    "predictedGrade": "B",
+    "sifuTargetPrice": 0.36,
+    "analystInsight": "🏗️ <b>WORTH IT — DISCOUNTED G7 CONSTRUCTION PLAY</b><br>SLGC ditawarkan pada harga menarik RM0.28 (PE Terbitan 10.7x berdasarkan PAT FY24 RM16.0M). Sebagai kontraktor G7 bertapak kukuh di Johor dengan peluang JS-SEZ, Forward PE jatuh ke paras menarik 9.4x (FY25F). Menawarkan Margin of Safety sekitar 12.5% berbanding harga had beli RM0.32 dan potensi upside +28.6% ke harga sasaran RM0.36."
   },
   {
     "id": "ecosys--malaysia--berhad",

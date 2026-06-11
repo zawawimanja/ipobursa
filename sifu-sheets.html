@@ -128,24 +128,25 @@
             border-bottom: 2px solid rgba(99, 102, 241, 0.25);
         }
 
-        .excel-table input[type="number"] {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: white;
+        .excel-table input {
+            background: transparent;
+            border: none;
+            color: #10b981;
+            font-weight: 700;
             padding: 0.35rem 0.5rem;
-            border-radius: 0.25rem;
             width: 100%;
             font-family: inherit;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-align: right;
             outline: none;
             transition: var(--transition);
+            cursor: default;
         }
 
-        .excel-table input[type="number"]:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
-            background: rgba(0, 0, 0, 0.55);
+        .excel-table input:focus {
+            outline: none;
+            background: transparent;
+            border: none;
         }
 
         .excel-table td.calculated {
@@ -1538,6 +1539,40 @@
                     "<strong>Nilaian Premium Mampan:</strong> Dagangan PE premium sekitar 25x-35x disokong oleh CAGR untung bersih melebihi 40%."
                 ],
                 peers: "<strong>Peer Comparison:</strong> PE Terbitan sekitar 30.0x-35.0x disokong oleh CAGR untung melebihi 40% berbanding purata industri utility-scale solar."
+            },
+            'slgc-berhad': {
+                id: 'slgc-berhad',
+                companyName: 'SLGC Berhad',
+                price: 0.28,
+                totalShares: 610000000,
+                headers: ["FYE 22", "FYE 23", "FYE 24", "Projection (FYE F)", "Alternative (FYE F)"],
+                
+                rev22: 180000000.00, rev23: 205000000.00, rev24: 229600000.00,
+                revF: 260000000.00, revF1: 300000000.00,
+                
+                gp22: 24000000.00, gp23: 27500000.00, gp24: 31000000.00,
+                gpF: 35000000.00, gpF1: 41000000.00,
+                
+                pat22: 12000000.00, pat23: 14500000.00, pat24: 16000000.00,
+                patF: 18200000.00, patF1: 21000000.00,
+                
+                eps22: 1.97, eps23: 2.38, eps24: 2.62,
+                
+                epsGrowthF: 13.8, epsGrowthF1: 15.4,
+                
+                assets22: 100000000.00, assets23: 120000000.00, assets24: 140000000.00,
+                assetsF: 165000000.00, assetsF1: 190000000.00,
+                
+                liab22: 55000000.00, liab23: 65000000.00, liab24: 70000000.00,
+                liabF: 80000000.00, liabF1: 90000000.00,
+                
+                targetPe: 12.0,
+                catalysts: [
+                    "<strong>CIDB Grade G7 Contractor:</strong> SLGC mempunyai reputasi kukuh sebagai kontraktor G7 di Johor dengan kepakaran dalam design-and-build dan pembinaan bangunan am.",
+                    "<strong>Peluang Pertumbuhan Melalui IPO:</strong> Hasil IPO digunakan untuk membeli jentera baru, menaik taraf perisian pembinaan, dan membayar sebahagian hutang bank bagi mengurangkan kos gearing.",
+                    "<strong>Projek Pembangunan Wilayah Selatan:</strong> Mempunyai kedudukan strategik untuk merebut peluang daripada limpahan ekonomi Johor-Singapore Special Economic Zone (JS-SEZ) dan projek infrastruktur serantau."
+                ],
+                peers: "<strong>Peer Comparison:</strong> PE Terbitan (FY24) = 10.7x. Didagangkan pada gandaan diskaun yang menarik untuk kontraktor ACE Market (purata 12x-15x PE). Nilai wajar Sifu dianggarkan sekitar **RM 0.36** pada PE 12x (FY25F PAT RM18.2M), menawarkan potensi upside sekitar +28.6%."
             }
         };
 
@@ -1706,10 +1741,24 @@
             updateQualitativeOverlay(id);
         }
 
+        // Helpers to format and parse numbers
+        function formatNumber(num, decimals = 2) {
+            if (num === undefined || num === null || isNaN(num)) {
+                return (0).toFixed(decimals);
+            }
+            return Number(num).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+        }
+
+        function parseInputValue(id) {
+            const el = document.getElementById(id);
+            if (!el) return 0;
+            return parseFloat(el.value.replace(/,/g, '')) || 0;
+        }
+
         function fillFormValues(data) {
             document.getElementById('td-stock-name').innerText = data.companyName.toUpperCase();
-            document.getElementById('inp-price').value = data.price.toFixed(2);
-            document.getElementById('inp-total-shares').value = data.totalShares;
+            document.getElementById('inp-price').value = formatNumber(data.price, 2);
+            document.getElementById('inp-total-shares').value = formatNumber(data.totalShares, 0);
             
             // Get the 3 historical suffixes
             const suffixes = getHistoricalSuffixes(data);
@@ -1718,43 +1767,43 @@
             const s3 = suffixes[2];
             
             // Revenues
-            document.getElementById('inp-rev-23').value = (data[`rev${s1}`] || 0).toFixed(2);
-            document.getElementById('inp-rev-24').value = (data[`rev${s2}`] || 0).toFixed(2);
-            document.getElementById('inp-rev-25').value = (data[`rev${s3}`] || 0).toFixed(2);
-            document.getElementById('inp-rev-fye-f').value = (data.revF || 0).toFixed(2);
-            document.getElementById('inp-rev-fye-f1').value = (data.revF1 || 0).toFixed(2);
+            document.getElementById('inp-rev-23').value = formatNumber(data[`rev${s1}`], 0);
+            document.getElementById('inp-rev-24').value = formatNumber(data[`rev${s2}`], 0);
+            document.getElementById('inp-rev-25').value = formatNumber(data[`rev${s3}`], 0);
+            document.getElementById('inp-rev-fye-f').value = formatNumber(data.revF, 0);
+            document.getElementById('inp-rev-fye-f1').value = formatNumber(data.revF1, 0);
             
             // GPs
-            document.getElementById('inp-gp-23').value = (data[`gp${s1}`] || 0).toFixed(2);
-            document.getElementById('inp-gp-24').value = (data[`gp${s2}`] || 0).toFixed(2);
-            document.getElementById('inp-gp-25').value = (data[`gp${s3}`] || 0).toFixed(2);
-            document.getElementById('inp-gp-fye-f').value = (data.gpF || 0).toFixed(2);
-            document.getElementById('inp-gp-fye-f1').value = (data.gpF1 || 0).toFixed(2);
+            document.getElementById('inp-gp-23').value = formatNumber(data[`gp${s1}`], 0);
+            document.getElementById('inp-gp-24').value = formatNumber(data[`gp${s2}`], 0);
+            document.getElementById('inp-gp-25').value = formatNumber(data[`gp${s3}`], 0);
+            document.getElementById('inp-gp-fye-f').value = formatNumber(data.gpF, 0);
+            document.getElementById('inp-gp-fye-f1').value = formatNumber(data.gpF1, 0);
             
             // PATs
-            document.getElementById('inp-pat-23').value = (data[`pat${s1}`] || 0).toFixed(2);
-            document.getElementById('inp-pat-24').value = (data[`pat${s2}`] || 0).toFixed(2);
-            document.getElementById('inp-pat-25').value = (data[`pat${s3}`] || 0).toFixed(2);
-            document.getElementById('inp-pat-fye-f').value = (data.patF || 0).toFixed(2);
-            document.getElementById('inp-pat-fye-f1').value = (data.patF1 || 0).toFixed(2);
+            document.getElementById('inp-pat-23').value = formatNumber(data[`pat${s1}`], 0);
+            document.getElementById('inp-pat-24').value = formatNumber(data[`pat${s2}`], 0);
+            document.getElementById('inp-pat-25').value = formatNumber(data[`pat${s3}`], 0);
+            document.getElementById('inp-pat-fye-f').value = formatNumber(data.patF, 0);
+            document.getElementById('inp-pat-fye-f1').value = formatNumber(data.patF1, 0);
             
             // Growth
-            document.getElementById('inp-eps-growth-f').value = data.epsGrowthF || 0;
-            document.getElementById('inp-eps-growth-f1').value = data.epsGrowthF1 || 0;
+            document.getElementById('inp-eps-growth-f').value = formatNumber(data.epsGrowthF, 1);
+            document.getElementById('inp-eps-growth-f1').value = formatNumber(data.epsGrowthF1, 1);
             
             // Assets
-            document.getElementById('inp-assets-23').value = (data[`assets${s1}`] || 0).toFixed(2);
-            document.getElementById('inp-assets-24').value = (data[`assets${s2}`] || 0).toFixed(2);
-            document.getElementById('inp-assets-25').value = (data[`assets${s3}`] || 0).toFixed(2);
-            document.getElementById('inp-assets-fye-f').value = (data.assetsF || 0).toFixed(2);
-            document.getElementById('inp-assets-fye-f1').value = (data.assetsF1 || 0).toFixed(2);
+            document.getElementById('inp-assets-23').value = formatNumber(data[`assets${s1}`], 0);
+            document.getElementById('inp-assets-24').value = formatNumber(data[`assets${s2}`], 0);
+            document.getElementById('inp-assets-25').value = formatNumber(data[`assets${s3}`], 0);
+            document.getElementById('inp-assets-fye-f').value = formatNumber(data.assetsF, 0);
+            document.getElementById('inp-assets-fye-f1').value = formatNumber(data.assetsF1, 0);
             
             // Liab
-            document.getElementById('inp-liab-23').value = (data[`liab${s1}`] || 0).toFixed(2);
-            document.getElementById('inp-liab-24').value = (data[`liab${s2}`] || 0).toFixed(2);
-            document.getElementById('inp-liab-25').value = (data[`liab${s3}`] || 0).toFixed(2);
-            document.getElementById('inp-liab-fye-f').value = (data.liabF || 0).toFixed(2);
-            document.getElementById('inp-liab-fye-f1').value = (data.liabF1 || 0).toFixed(2);
+            document.getElementById('inp-liab-23').value = formatNumber(data[`liab${s1}`], 0);
+            document.getElementById('inp-liab-24').value = formatNumber(data[`liab${s2}`], 0);
+            document.getElementById('inp-liab-25').value = formatNumber(data[`liab${s3}`], 0);
+            document.getElementById('inp-liab-fye-f').value = formatNumber(data.liabF, 0);
+            document.getElementById('inp-liab-fye-f1').value = formatNumber(data.liabF1, 0);
         }
 
         function updateNotes(data) {
@@ -1763,7 +1812,7 @@
             const peersContent = document.getElementById('sheet-peers-content');
             
             if (data.catalysts && data.catalysts.length > 0) {
-                notesCard.style.display = 'flex';
+                notesCard.style.display = 'block';
                 let html = '<ul class="catalyst-list">';
                 data.catalysts.forEach(c => {
                     html += `<li>${c}</li>`;
@@ -1976,28 +2025,28 @@
 
         // Core Calculation Engine
         function calculateSheet() {
-            const price = parseFloat(document.getElementById('inp-price').value) || 0;
-            const totalShares = parseFloat(document.getElementById('inp-total-shares').value) || 1;
+            const price = parseInputValue('inp-price');
+            const totalShares = parseInputValue('inp-total-shares') || 1;
             
             // Market Cap
             const marketCap = price * totalShares;
-            document.getElementById('td-market-cap').innerText = 'RM ' + marketCap.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-market-cap').innerText = 'RM ' + marketCap.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
             
             // Historical variables
-            const rev23 = parseFloat(document.getElementById('inp-rev-23').value) || 0;
-            const rev24 = parseFloat(document.getElementById('inp-rev-24').value) || 0;
-            const rev25 = parseFloat(document.getElementById('inp-rev-25').value) || 0;
-            const revF = parseFloat(document.getElementById('inp-rev-fye-f').value) || 0;
-            const revF1 = parseFloat(document.getElementById('inp-rev-fye-f1').value) || 0;
+            const rev23 = parseInputValue('inp-rev-23');
+            const rev24 = parseInputValue('inp-rev-24');
+            const rev25 = parseInputValue('inp-rev-25');
+            const revF = parseInputValue('inp-rev-fye-f');
+            const revF1 = parseInputValue('inp-rev-fye-f1');
             
-            const pat23 = parseFloat(document.getElementById('inp-pat-23').value) || 0;
-            const pat24 = parseFloat(document.getElementById('inp-pat-24').value) || 0;
-            const pat25 = parseFloat(document.getElementById('inp-pat-25').value) || 0;
-            const patF = parseFloat(document.getElementById('inp-pat-fye-f').value) || 0;
-            const patF1 = parseFloat(document.getElementById('inp-pat-fye-f1').value) || 0;
+            const pat23 = parseInputValue('inp-pat-23');
+            const pat24 = parseInputValue('inp-pat-24');
+            const pat25 = parseInputValue('inp-pat-25');
+            const patF = parseInputValue('inp-pat-fye-f');
+            const patF1 = parseInputValue('inp-pat-fye-f1');
             
-            const epsGrowthF = parseFloat(document.getElementById('inp-eps-growth-f').value) || 0;
-            const epsGrowthF1 = parseFloat(document.getElementById('inp-eps-growth-f1').value) || 0;
+            const epsGrowthF = parseInputValue('inp-eps-growth-f');
+            const epsGrowthF1 = parseInputValue('inp-eps-growth-f1');
             
             // Calculate EPS (sen) = (PAT / shares) * 100
             const eps23 = (pat23 / totalShares) * 100;
@@ -2013,17 +2062,17 @@
             document.getElementById('td-eps-fye-f1').innerText = epsF1.toFixed(2);
             
             // Balance Sheet variables
-            const assets23 = parseFloat(document.getElementById('inp-assets-23').value) || 0;
-            const assets24 = parseFloat(document.getElementById('inp-assets-24').value) || 0;
-            const assets25 = parseFloat(document.getElementById('inp-assets-25').value) || 0;
-            const assetsF = parseFloat(document.getElementById('inp-assets-fye-f').value) || 0;
-            const assetsF1 = parseFloat(document.getElementById('inp-assets-fye-f1').value) || 0;
+            const assets23 = parseInputValue('inp-assets-23');
+            const assets24 = parseInputValue('inp-assets-24');
+            const assets25 = parseInputValue('inp-assets-25');
+            const assetsF = parseInputValue('inp-assets-fye-f');
+            const assetsF1 = parseInputValue('inp-assets-fye-f1');
             
-            const liab23 = parseFloat(document.getElementById('inp-liab-23').value) || 0;
-            const liab24 = parseFloat(document.getElementById('inp-liab-24').value) || 0;
-            const liab25 = parseFloat(document.getElementById('inp-liab-25').value) || 0;
-            const liabF = parseFloat(document.getElementById('inp-liab-fye-f').value) || 0;
-            const liabF1 = parseFloat(document.getElementById('inp-liab-fye-f1').value) || 0;
+            const liab23 = parseInputValue('inp-liab-23');
+            const liab24 = parseInputValue('inp-liab-24');
+            const liab25 = parseInputValue('inp-liab-25');
+            const liabF = parseInputValue('inp-liab-fye-f');
+            const liabF1 = parseInputValue('inp-liab-fye-f1');
             
             // Calculate Equity = Assets - Liabilities
             const eq23 = assets23 - liab23;
@@ -2032,11 +2081,11 @@
             const eqF = assetsF - liabF;
             const eqF1 = assetsF1 - liabF1;
             
-            document.getElementById('td-equity-23').innerText = 'RM ' + eq23.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('td-equity-24').innerText = 'RM ' + eq24.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('td-equity-25').innerText = 'RM ' + eq25.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('td-equity-fye-f').innerText = 'RM ' + eqF.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('td-equity-fye-f1').innerText = 'RM ' + eqF1.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('td-equity-23').innerText = 'RM ' + eq23.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('td-equity-24').innerText = 'RM ' + eq24.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('td-equity-25').innerText = 'RM ' + eq25.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('td-equity-fye-f').innerText = 'RM ' + eqF.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('td-equity-fye-f1').innerText = 'RM ' + eqF1.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
             
             // PER = price / (eps/100)
             const per23 = eps23 > 0 ? price / (eps23 / 100) : 0;
@@ -2113,23 +2162,56 @@
             document.getElementById('td-buy1-fye-f').innerText = 'RM ' + buyF.toFixed(2);
             document.getElementById('td-buy1-fye-f1').innerText = 'RM ' + buyF1.toFixed(2);
             
-            // Verdict logic
+            // Verdict logic and dynamic coloring (Green = OK, Orange = Watchlist, Red = Avoid/Not OK)
             const verdictBox = document.getElementById('sheet-verdict-box');
+            
+            let colorF = '#10b981'; // Green (OK)
             if (price <= buyF) {
+                colorF = '#10b981';
                 verdictBox.className = 'verdict-banner buy';
                 verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(2)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(2)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar!`;
             } else if (price <= valF) {
+                colorF = '#f59e0b'; // Orange (Watchlist)
                 verdictBox.className = 'verdict-banner hold';
                 verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(2)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(2)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(2)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran.`;
             } else {
+                colorF = '#ef4444'; // Red (Not OK)
                 verdictBox.className = 'verdict-banner avoid';
                 verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(2)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(2)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula.`;
             }
+
+            let colorF1 = '#10b981';
+            if (price <= buyF1) {
+                colorF1 = '#10b981';
+            } else if (price <= valF1) {
+                colorF1 = '#f59e0b';
+            } else {
+                colorF1 = '#ef4444';
+            }
+
+            // Apply dynamic colors to input and projected cells
+            document.getElementById('inp-price').style.color = colorF;
+            document.getElementById('td-val1-fye-f').style.color = colorF;
+            document.getElementById('td-buy1-fye-f').style.color = colorF;
+            document.getElementById('td-per-fye-f').style.color = colorF;
+            document.getElementById('td-peg-fye-f').style.color = colorF;
+
+            document.getElementById('td-val1-fye-f1').style.color = colorF1;
+            document.getElementById('td-buy1-fye-f1').style.color = colorF1;
+            document.getElementById('td-per-fye-f1').style.color = colorF1;
+            document.getElementById('td-peg-fye-f1').style.color = colorF1;
         }
 
         // Initialize Page
         window.onload = function() {
             initSelect();
+            
+            // Convert table inputs to type="text" and make them read-only
+            document.querySelectorAll('.excel-table input').forEach(input => {
+                input.setAttribute('type', 'text');
+                input.setAttribute('readonly', true);
+            });
+
             fillFormValues(stockProfiles['bus-cap']);
             updateNotes(stockProfiles['bus-cap']);
             calculateSheet();
