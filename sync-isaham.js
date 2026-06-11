@@ -45,6 +45,10 @@ function findExistingIPO(name, existingData) {
         if (found) return found;
     }
     
+    // Match by symbol first if the input matches d.symbol
+    const symbolMatch = existingData.find(d => d.symbol && d.symbol.toUpperCase() === cleanName);
+    if (symbolMatch) return symbolMatch;
+    
     // Fallback to fuzzy normalize match
     const normName = normalizeName(name);
     return existingData.find(d => {
@@ -110,6 +114,9 @@ async function scrapeUpcomingIPOs(existingData) {
             existing.listingDate = listingDate || existing.listingDate;
             existing.market = market.includes('ACE') ? 'ACE Market' : (market.includes('Main') ? 'Main Market' : market);
             existing.shariah = shariah;
+            if (!existing.symbol) {
+                existing.symbol = symbol;
+            }
         } else {
             existingData.push({
                 id: companyName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
