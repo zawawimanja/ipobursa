@@ -19,7 +19,7 @@ try {
     
     const targets = data.filter(ipo => 
         (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad'].includes(ipo.id)) && 
-        (ipo.status === 'Listed' || ipo.status === 'Application Open') && 
+        (ipo.status === 'Listed' || ipo.status === 'Application Open' || ipo.status === 'MITI Allocation Phase') && 
         ipo.shariah === true
     );
     
@@ -70,7 +70,7 @@ try {
     
     // Also save to data.js
     const jsPath = path.join(__dirname, '..', 'data.js');
-    const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n`;
+    const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
     fs.writeFileSync(jsPath, jsContent);
     console.log('Successfully saved to data.js!');
     

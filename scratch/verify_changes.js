@@ -11,8 +11,8 @@ try {
     const filtered = data.filter(ipo => ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true);
     
     console.log(`Found ${filtered.length} Listed Shariah 2026 IPOs in data.json.`);
-    if (filtered.length !== 22) {
-        console.error('FAIL: Expected exactly 22 Listed Shariah 2026 IPOs, but found', filtered.length);
+    if (filtered.length !== 23) {
+        console.error('FAIL: Expected exactly 23 Listed Shariah 2026 IPOs, but found', filtered.length);
         process.exit(1);
     }
     
@@ -38,7 +38,7 @@ try {
     
     const filteredJs = importedData.filter(ipo => ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true);
     console.log(`Found ${filteredJs.length} Listed Shariah 2026 IPOs in data.js.`);
-    if (filteredJs.length !== 22) {
+    if (filteredJs.length !== 23) {
         console.error('FAIL: data.js count mismatch:', filteredJs.length);
         process.exit(1);
     }

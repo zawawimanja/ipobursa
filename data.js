@@ -5,7 +5,7 @@ const IPO_DATA = [
     "sector": "Industrial Chemical Solutions",
     "stage": 3,
     "price": 0.12,
-    "market": "75.00 M",
+    "market": "ACE Market",
     "status": "Application Open",
     "openingDate": "2026-05-25T09:00:00",
     "closingDate": "19-Jun-2026",
@@ -29,7 +29,7 @@ const IPO_DATA = [
     "sector": "Technology (Hardware)",
     "stage": 4,
     "price": 0.28,
-    "market": "126.00 M",
+    "market": "ACE Market",
     "status": "Pre-Listing",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "04-Jun-2026",
@@ -46,11 +46,10 @@ const IPO_DATA = [
     "analystInsight": "⚠️ <b>WORTH IT</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>Sektor Tech Hardware adalah sektor terbaik 2026. Tiada OFS, Shariah-compliant. Tapi IB adalah Malacca Securities (mid-tier).",
     "openPrice": 0.39,
     "closePrice": 0.360009,
-    "currentPrice": 1.009,
+    "currentPrice": 0.99,
     "symbol": "MTEC",
     "ofs": false,
-    "sifuTargetPrice": 0.39,
-    "performance": "+260.4%"
+    "sifuTargetPrice": 0.39
   },
   {
     "id": "elsa",
@@ -58,7 +57,7 @@ const IPO_DATA = [
     "sector": "Technology (Software)",
     "stage": 4,
     "price": 0.23,
-    "market": "123.83 M",
+    "market": "ACE Market",
     "status": "Pre-Listing",
     "openingDate": "2026-05-21T09:00:00",
     "closingDate": "03-Jun-2026",
@@ -83,7 +82,7 @@ const IPO_DATA = [
     "sector": "Industrial Products",
     "stage": 4,
     "price": 0.2,
-    "market": "124.00 M",
+    "market": "ACE Market",
     "status": "Pre-Listing",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "29-May-2026",
@@ -108,7 +107,7 @@ const IPO_DATA = [
     "sector": "Technology (IT Services)",
     "stage": 5,
     "price": 0.22,
-    "market": "124.74 M",
+    "market": "ACE Market",
     "status": "Listed",
     "openingDate": "2026-05-11T09:00:00",
     "closingDate": "25-May-2026",
@@ -123,13 +122,14 @@ const IPO_DATA = [
     "avgTP": 0.23,
     "pe": 13.4,
     "ofs": true,
-    "analystInsight": "❌ <b>AVOID</b><br>💡 Note: Jangan apply.<br>OFS besar (47M!) dan IT Services sektor biasa. Profil hampir sama dengan OGX.",
+    "analystInsight": "❌ <b>AVOID (GRADE C — SEPERTI DIJANGKA)</b><br>💡 Walaupun OS runcit mencecah 42.12x, kaunter ini dibuka flat (0.00%) dan ditutup di bawah harga IPO pada RM0.215 (-2.27%) disebabkan oleh tekanan jualan OFS yang besar (47.34M unit) dan tiada momentum sektor. Elakkan.",
     "sifuTargetPrice": 0.32,
     "symbol": "MMCS",
     "openPrice": 0.22,
-    "closePrice": 0.22,
-    "currentPrice": 0.225,
-    "performance": "+2.27%"
+    "highPrice": 0.225,
+    "closePrice": 0.215,
+    "currentPrice": 0.215,
+    "performance": "-2.27%"
   },
   {
     "id": "1doc",
@@ -146,7 +146,8 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Main Market listing backed by Top Tier IB (RHB). Expansion plans are solid. However, beauty sector is not a high-momentum theme.",
     "shariah": true,
-    "symbol": "1 Doc International Berhad"
+    "symbol": "1 Doc International Berhad",
+    "sifuTargetPrice": 0.5
   },
   {
     "id": "bus-cap",
@@ -172,7 +173,8 @@ const IPO_DATA = [
     "predictedGrade": "C",
     "avgTP": 0.28,
     "symbol": "BUSCAP",
-    "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>"
+    "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>",
+    "sifuTargetPrice": 0.32
   },
   {
     "id": "5e-resources",
@@ -240,7 +242,8 @@ const IPO_DATA = [
     "ib": "Maybank IB",
     "fundUse": "R&D / Ekspansi Global",
     "predictedGrade": "A",
-    "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>"
+    "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>",
+    "sifuTargetPrice": 0.85
   },
   {
     "id": "ambest",
@@ -311,7 +314,8 @@ const IPO_DATA = [
     "ib": "CIMB",
     "fundUse": "Pengembangan",
     "predictedGrade": "A",
-    "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window."
+    "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window.",
+    "sifuTargetPrice": 1.2
   },
   {
     "id": "stratus-global",
@@ -319,7 +323,7 @@ const IPO_DATA = [
     "sector": "Factory Automation / Cleanroom Handling",
     "stage": 2,
     "price": 0.75,
-    "market": "937.50 M",
+    "market": "Main Market",
     "status": "MITI Allocation Phase",
     "closingDate": "2026-05-14T17:00:00",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
@@ -330,7 +334,8 @@ const IPO_DATA = [
     "fundUse": "Expansion & R&D",
     "predictedGrade": "B",
     "analystInsight": "✅ <b>WORTH IT — VALUE PLAY SEBENAR (GRADE B)</b><br>Stratus Global adalah <b>factory automation + cleanroom AMHS provider untuk industri semiconductor</b> — sektor paling hot 2026.<br><br>📊 <b>Kenapa menarik:</b><br>• PE hanya ~14x vs peers Tech (29.8x) dan Semiconductor (38.2x) = <b>diskaun 50-60%</b><br>• Tiada OFS — pure public issue 356.25M shares<br>• Main Market (RM937M mktcap) = institutional backing kuat<br>• Shariah-compliant ✅<br><br>⚠️ <b>Satu-satunya risiko:</b> IB UOB Kay Hian — rekod kita hanya GDGROUP (Consumer sector, -11%) tapi tu sektor berbeza. Untuk Main Market semiconductor play, story fundamental lebih dominant dari IB retail reputation.<br><br><b>Kesimpulan: Apply. Target RM0.95+. Ini lebih kepada hold play bukan pure scalp.</b>",
-    "symbol": "Stratus Global Holdings Berhad"
+    "symbol": "Stratus Global Holdings Berhad",
+    "sifuTargetPrice": 1.04
   },
   {
     "id": "ei-power",
@@ -338,7 +343,7 @@ const IPO_DATA = [
     "sector": "Industrial / Energy",
     "stage": 5,
     "price": 0.48,
-    "market": "336.00 M",
+    "market": "ACE Market",
     "status": "Listed",
     "closingDate": "06-May-2026",
     "listingDate": "2026-05-21",
@@ -440,8 +445,8 @@ const IPO_DATA = [
     "status": "Listed",
     "shariah": true,
     "highPrice": 0.505,
-    "openPrice": 0.49,
-    "closePrice": 0.4,
+    "openPrice": 0.490005,
+    "closePrice": 0.400005,
     "symbol": "GDGROUP",
     "pe": 15.85,
     "closingDate": "2026-04-06T17:00:00",
@@ -5936,19 +5941,25 @@ const IPO_DATA = [
     "companyName": "RNG Tech Berhad",
     "symbol": "RNG Tech Berhad",
     "market": "ACE Market",
-    "price": 0,
+    "price": 0.22,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
-    "year": 2026
+    "year": 2026,
+    "currentPrice": 0.22,
+    "sifuTargetPrice": 0.33,
+    "ofs": true,
+    "ofsPercentage": 38.4,
+    "predictedGrade": "C",
+    "analystInsight": "⚠️ <b>WORTH IT UNTUK SCALP SAHAJA (GRADE C)</b><br>💡 Rest N Go mempunyai fundamental cash-cow yang baik dengan margin bersih tinggi (~36%) dan dibimbing oleh IB cemerlang (M&A Securities). Walau bagaimanapun, penawaran ini mempunyai <b>OFS besar (38.4%)</b> yang boleh mendatangkan tekanan jualan di hari listing. Sesuai untuk <b>Scalping sahaja</b> jika OS runcit kelak melebihi 45x+. Jika OS lemah, elak terus."
   },
   {
     "id": "liftech-group-berhad",
     "companyName": "Liftech Group Berhad",
     "symbol": "Liftech Group Berhad",
-    "market": "91.33 M",
+    "market": "ACE Market",
     "price": 0.29,
     "closingDate": "16-Jun-2026",
     "listingDate": "30-Jun-2026",
@@ -5964,7 +5975,7 @@ const IPO_DATA = [
     "id": "hss-holdings-berhad",
     "companyName": "HSS Holdings Berhad",
     "symbol": "HSS Holdings Berhad",
-    "market": "90.00 M",
+    "market": "ACE Market",
     "price": 0.18,
     "closingDate": "09-Jun-2026",
     "listingDate": "23-Jun-2026",
@@ -5972,21 +5983,21 @@ const IPO_DATA = [
     "stage": 4,
     "status": "Pre-Listing",
     "year": 2026,
-    "currentPrice": 0.182,
-    "predictedGrade": "B",
-    "analystInsight": "🧁 <b>WORTH IT — BAKERY PRODUCTS PLAY</b><br>HSS Holdings Berhad ditawarkan pada harga menarik RM0.18 (PE Terbitan 10.5x). Disokong oleh pengembangan talian pengeluaran automatik kek & biskut dengan peruntukan capex RM2.57 juta. Menjual jenama terkenal Sinar, Sa1ko, dan HSS dengan portfolio SKU melebihi 6,000.",
+    "currentPrice": 0.18,
+    "predictedGrade": "C",
+    "analystInsight": "⚠️ <b>AVOID / RISK PLAY (GRADE C — OS LEMAH)</b><br>💡 Keputusan oversubscription (OS) adalah sangat lemah pada <b>10.56x</b>. Dengan permintaan retail yang sangat rendah bagi ACE Market (< 20x) berserta dengan komponen OFS yang agak besar (40%), kaunter ini berisiko tinggi untuk dibuka flat atau jatuh di bawah harga IPO (junam) pada hari penyenaraian 23 Jun. Elakkan.",
     "sifuTargetPrice": 0.22,
     "ofs": true,
     "ofsPercentage": 40,
     "ofsValue": 9180000,
     "fundUse": "33% bank repayment, 22% working capital, 19% capital expenditure, remainder for listing expenses (total IPO ≈ RM22.95M, OFS ≈ 40%)",
-    "performance": "+1.1%"
+    "os": 10.56
   },
   {
     "id": "rt-pastry-holdings-berhad",
     "companyName": "RT Pastry Holdings Berhad",
     "symbol": "RT Pastry Holdings Berhad",
-    "market": "61.03 M",
+    "market": "ACE Market",
     "price": 0.18,
     "closingDate": "15-Jun-2026",
     "listingDate": "29-Jun-2026",
@@ -6002,14 +6013,15 @@ const IPO_DATA = [
     "id": "spb-development-berhad",
     "companyName": "SPB Development Berhad",
     "symbol": "SPB Development Berhad",
-    "market": "MAIN",
+    "market": "Main Market",
     "price": 0,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
-    "year": 2026
+    "year": 2026,
+    "sifuTargetPrice": 0.5
   },
   {
     "id": "tuc-holdings-berhad",
@@ -6223,14 +6235,15 @@ const IPO_DATA = [
     "id": "evocom-berhad",
     "companyName": "Evocom Berhad",
     "symbol": "Evocom Berhad",
-    "market": "82.01 M",
+    "market": "ACE Market",
     "price": 0,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
-    "year": 2026
+    "year": 2026,
+    "sifuTargetPrice": 0.5
   },
   {
     "id": "slgc-berhad",
@@ -6531,20 +6544,6 @@ const IPO_DATA = [
     "sifuTargetPrice": 3.1
   },
   {
-    "id": "gdgroup",
-    "companyName": "GDGROUP",
-    "symbol": "GDGROUP",
-    "stage": 5,
-    "status": "Listed",
-    "price": 0.45,
-    "openPrice": 0.490005,
-    "closePrice": 0.400005,
-    "currentPrice": 0.345,
-    "year": 2026,
-    "listingDate": "2026-04-16",
-    "performance": "-23.33%"
-  },
-  {
     "id": "wil-key-berhad",
     "companyName": "Wil-Key Berhad",
     "symbol": "Wil-Key Berhad",
@@ -6555,78 +6554,6 @@ const IPO_DATA = [
     "shariah": false,
     "stage": 1,
     "status": "Draft / Exposure Phase",
-    "year": 2026
-  },
-  {
-    "id": "register",
-    "companyName": "Register",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "access",
-    "companyName": "Access",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "seminars",
-    "companyName": "Seminars",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "recommended-amount-to-subscribe-",
-    "companyName": "Recommended amount to subscribe:",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "cost-breakdown-",
-    "companyName": "Cost Breakdown:",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "filtered-statistics",
-    "companyName": "Filtered Statistics",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "select-stocks-",
-    "companyName": "Select stocks:",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "features",
-    "companyName": "Features",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
-    "year": 2026
-  },
-  {
-    "id": "company",
-    "companyName": "Company",
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "price": 0,
     "year": 2026
   }
 ];
