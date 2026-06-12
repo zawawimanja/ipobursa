@@ -1660,7 +1660,7 @@
             // 2. Scan ipoData to find listed Shariah 2026 IPOs that are not in stockProfiles
             if (typeof ipoData !== 'undefined') {
                 ipoData.forEach(ipo => {
-                    if (ipo.year === 2026 && ipo.status === 'Listed' && ipo.shariah === true) {
+                    if (ipo.year === 2026 && ipo.shariah === true && (ipo.status === 'Listed' || ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4)) {
                         const exists = profiles.some(p => p.id === ipo.id);
                         if (!exists) {
                             profiles.push({
