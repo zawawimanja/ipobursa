@@ -24,14 +24,15 @@ jobs:
       - name: Install dependencies
         run: npm install
           
-      - name: Run Scrapers (iSaham + i3investor)
+      - name: Run Scrapers (iSaham + i3investor) and Archive Daily Groups
         run: |
           node sync-isaham.js
           node scrape-i3.js
+          node archive-groups.js
         
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json data.js
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data" && git push)
+          git add data.json data.js archive/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git push)
