@@ -31,12 +31,23 @@ try {
             ? parseFloat((((ipo.sifuTargetPrice - ipo.currentPrice) / ipo.currentPrice) * 100).toFixed(1))
             : null;
 
+        const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
+        let trend = 'Uptrend';
+        if (ipo.currentPrice < ipo.price) {
+            trend = 'Bearish';
+        } else if (dailyChange !== null && dailyChange >= 3.0) {
+            trend = 'Breakout';
+        } else if (dailyChange !== null && Math.abs(dailyChange) < 1.0) {
+            trend = 'Sikat';
+        }
+
         const cleanIpo = {
             id: ipo.id,
             companyName: ipo.companyName,
             symbol: ipo.symbol || ipo.id.toUpperCase(),
             currentPrice: ipo.currentPrice,
-            dailyChange: typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null,
+            dailyChange: dailyChange,
+            trend: trend,
             sifuTargetPrice: ipo.sifuTargetPrice || null,
             upside: upside,
             highPrice: ipo.highPrice || null,

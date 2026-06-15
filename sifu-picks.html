@@ -234,6 +234,46 @@
             color: #818cf8;
             box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
         }
+
+        /* Trend Badge Styles */
+        .trend-badge {
+            font-size: 0.68rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .trend-breakout {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .trend-uptrend {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.15);
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            box-shadow: 0 0 8px rgba(96, 165, 250, 0.2);
+        }
+
+        .trend-sikat {
+            color: #94a3b8;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .trend-bearish {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.15);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            box-shadow: 0 0 8px rgba(248, 113, 113, 0.2);
+        }
     </style>
 </head>
 
@@ -502,6 +542,21 @@
                     ? `<span class="portfolio-badge"><i data-lucide="check-circle" style="width: 10px; height: 10px;"></i> Portfolio</span>` 
                     : `<span class="watchlist-badge"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> Watchlist</span>`;
 
+                // Calculate dynamic trend status
+                let trendText = 'Uptrend';
+                let trendClass = 'trend-uptrend';
+                if (ipo.currentPrice < ipo.price) {
+                    trendText = 'Bearish';
+                    trendClass = 'trend-bearish';
+                } else if (dailyChange !== null && dailyChange >= 3.0) {
+                    trendText = '⚡ Breakout';
+                    trendClass = 'trend-breakout';
+                } else if (dailyChange !== null && Math.abs(dailyChange) < 1.0) {
+                    trendText = '💤 Sikat';
+                    trendClass = 'trend-sikat';
+                }
+                const trendHtml = `<span class="trend-badge ${trendClass}">${trendText}</span>`;
+
                 const cleanSymbol = (ipo.symbol || '').replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
                 const showTv = ipo.stage === 5 && cleanSymbol;
                 const tvBadgeHtml = showTv 
@@ -516,9 +571,10 @@
                         <td style="font-weight: 600;">
                             <div style="display: flex; flex-direction: column; gap: 0.25rem;">
                                 <span style="color: white; font-size: 0.9rem;">${nameDisplay}</span>
-                                <div style="display: flex; align-items: center; gap: 0.4rem;">
+                                <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                                     <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
                                     ${badgeHtml}
+                                    ${trendHtml}
                                     ${tvBadgeHtml}
                                 </div>
                             </div>
