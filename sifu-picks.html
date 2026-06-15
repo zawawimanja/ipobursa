@@ -199,6 +199,41 @@
             padding: 2rem;
             font-style: italic;
         }
+
+        /* Tab Filter Styles */
+        .tabs-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+            color: #818cf8;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+        }
     </style>
 </head>
 
@@ -240,15 +275,34 @@
             </p>
         </header>
 
-        <!-- Global Sort Controller -->
-        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem; backdrop-filter: blur(10px);">
-            <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
-                <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i> Urutkan Mengikut:
-            </span>
-            <select id="sort-selector" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
-                <option value="upside">Potensi Upside (Tinggi ke Rendah)</option>
-            </select>
+        <!-- Global Control Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem; backdrop-filter: blur(10px); flex-wrap: wrap;">
+            <!-- Tab buttons -->
+            <div class="tabs-container" id="group-tabs">
+                <button class="tab-btn active" onclick="filterGroup('all', this)">
+                    <i data-lucide="layout-grid" style="width: 14px; height: 14px;"></i> Semua
+                </button>
+                <button class="tab-btn" onclick="filterGroup('g1', this)">
+                    <i data-lucide="sparkles" style="width: 14px; height: 14px; color: #10b981;"></i> Kumpulan 1
+                </button>
+                <button class="tab-btn" onclick="filterGroup('g2', this)">
+                    <i data-lucide="refresh-cw" style="width: 14px; height: 14px; color: #f59e0b;"></i> Kumpulan 2
+                </button>
+                <button class="tab-btn" onclick="filterGroup('g3', this)">
+                    <i data-lucide="shield" style="width: 14px; height: 14px; color: #818cf8;"></i> Kumpulan 3
+                </button>
+            </div>
+
+            <!-- Sort Controller -->
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                    <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i> Urutkan Mengikut:
+                </span>
+                <select id="sort-selector" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
+                    <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
+                    <option value="upside">Potensi Upside (Tinggi ke Rendah)</option>
+                </select>
+            </div>
         </div>
 
         <div class="groups-container">
@@ -507,6 +561,36 @@
             }
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function filterGroup(group, btn) {
+            // Update active class on buttons
+            const buttons = document.querySelectorAll('#group-tabs .tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Show/Hide cards
+            const g1Card = document.getElementById('group-1-card');
+            const g2Card = document.getElementById('group-2-card');
+            const g3Card = document.getElementById('group-3-card');
+
+            if (group === 'all') {
+                g1Card.style.display = 'block';
+                g2Card.style.display = 'block';
+                g3Card.style.display = 'block';
+            } else if (group === 'g1') {
+                g1Card.style.display = 'block';
+                g2Card.style.display = 'none';
+                g3Card.style.display = 'none';
+            } else if (group === 'g2') {
+                g1Card.style.display = 'none';
+                g2Card.style.display = 'block';
+                g3Card.style.display = 'none';
+            } else if (group === 'g3') {
+                g1Card.style.display = 'none';
+                g2Card.style.display = 'none';
+                g3Card.style.display = 'block';
+            }
         }
 
         window.onload = function() {
