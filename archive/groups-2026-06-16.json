@@ -1,7 +1,7 @@
 {
     "date": "2026-06-16",
-    "timestamp": "2026-06-16T00:49:14.841Z",
-    "total_stocks": 103,
+    "timestamp": "2026-06-16T00:53:32.496Z",
+    "total_stocks": 94,
     "kumpulan_1": {
         "count": 6,
         "stocks": [
@@ -86,7 +86,7 @@
         ]
     },
     "kumpulan_2": {
-        "count": 11,
+        "count": 10,
         "stocks": [
             {
                 "id": "ei-power",
@@ -139,19 +139,6 @@
                 "price": 0.88,
                 "predictedGrade": "A",
                 "sector": "Technology (IC Design)"
-            },
-            {
-                "id": "semico",
-                "companyName": "SEMICO Berhad",
-                "symbol": "SEMICO[NS]",
-                "currentPrice": 0.56,
-                "dailyChange": 1.6,
-                "sifuTargetPrice": 0.25,
-                "upside": -55.4,
-                "highPrice": 0.621,
-                "price": 0.25,
-                "predictedGrade": "B",
-                "sector": "Technology"
             },
             {
                 "id": "adnex",
@@ -234,7 +221,7 @@
         ]
     },
     "kumpulan_3": {
-        "count": 86,
+        "count": 78,
         "stocks": [
             {
                 "id": "lwsabah",
@@ -259,32 +246,6 @@
                 "upside": 8.7,
                 "highPrice": 2.484,
                 "price": 0.21,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
-            },
-            {
-                "id": "99smart-ns",
-                "companyName": "99SMART [NS]",
-                "symbol": "99SMART [NS]",
-                "currentPrice": 3.44,
-                "dailyChange": 5.2,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 3.9675,
-                "price": 1.65,
-                "predictedGrade": "A",
-                "sector": "Consumer Products (Retail)"
-            },
-            {
-                "id": "3ren-ns",
-                "companyName": "3REN [NS]",
-                "symbol": "3REN [NS]",
-                "currentPrice": 0.405,
-                "dailyChange": 4.6,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 0.4255,
-                "price": 0.28,
                 "predictedGrade": "B",
                 "sector": "Industrial / Consumer"
             },
@@ -510,19 +471,6 @@
                 "sector": "Industrial / Consumer"
             },
             {
-                "id": "ppjack-ns",
-                "companyName": "PPJACK [NS]",
-                "symbol": "PPJACK [NS]",
-                "currentPrice": 0.925,
-                "dailyChange": 1.7,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 1.0465,
-                "price": 0.3,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
-            },
-            {
                 "id": "agmo",
                 "companyName": "AGMO",
                 "symbol": "AGMO",
@@ -562,19 +510,6 @@
                 "sector": "Industrial / Consumer"
             },
             {
-                "id": "northern-ns",
-                "companyName": "NORTHERN [NS]",
-                "symbol": "NORTHERN [NS]",
-                "currentPrice": 0.63,
-                "dailyChange": 1.5,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 0.73025,
-                "price": 0.63,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
-            },
-            {
                 "id": "itmax",
                 "companyName": "ITMAX",
                 "symbol": "ITMAX",
@@ -597,32 +532,6 @@
                 "upside": null,
                 "highPrice": 1.472,
                 "price": 0.48,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
-            },
-            {
-                "id": "megafb-ns",
-                "companyName": "MEGAFB [NS]",
-                "symbol": "MEGAFB",
-                "currentPrice": 1.7,
-                "dailyChange": 1.4,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 1.6099999999999999,
-                "price": 0.67,
-                "predictedGrade": "C",
-                "sector": "Industrial / Consumer"
-            },
-            {
-                "id": "mersec-ns",
-                "companyName": "MERSEC [NS]",
-                "symbol": "MERSEC [NS]",
-                "currentPrice": 0.26,
-                "dailyChange": 1.4,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 0.3105,
-                "price": 0.25,
                 "predictedGrade": "B",
                 "sector": "Industrial / Consumer"
             },
@@ -874,19 +783,6 @@
                 "sector": "Industrial / Consumer"
             },
             {
-                "id": "emcc-ns",
-                "companyName": "EMCC [NS]",
-                "symbol": "EMCC [NS]",
-                "currentPrice": 0.325,
-                "dailyChange": 0.6,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 0.36224999999999996,
-                "price": 0.24,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
-            },
-            {
                 "id": "vlb",
                 "companyName": "VLB",
                 "symbol": "VLB",
@@ -1054,19 +950,6 @@
                 "price": 0.3,
                 "predictedGrade": "C",
                 "sector": "Property"
-            },
-            {
-                "id": "adb-ns",
-                "companyName": "ADB [NS]",
-                "symbol": "ADB",
-                "currentPrice": 0.605,
-                "dailyChange": 0.2,
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 0.73025,
-                "price": 0.33,
-                "predictedGrade": "B",
-                "sector": "Industrial / Consumer"
             },
             {
                 "id": "hawk",
