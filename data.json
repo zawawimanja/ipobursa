@@ -22,7 +22,8 @@
         "pe": 18.15,
         "analystInsight": "⚠️ <b>WORTH IT (GRADE B)</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>SRKK AI Berhad merupakan penyedia transformasi digital & rakan kongsi Microsoft (Microsoft Managed Partner pertama di Malaysia dengan kesemua kompetensi AI Cloud).<br><br>📊 <b>Valuation & Fundamental:</b><br>• Harga IPO RM0.32 memberikan PE 18.15x berdasarkan PAT FY24 (RM5.01 juta). Ini adalah wajar (Fair Value RM0.39 berdasarkan 22x PE).<br>• Sekitar 50% hasil adalah pendapatan berulang (recurring revenue).<br><br>⚠️ <b>Risiko:</b> Terdapat komponen Offer for Sale (OFS) sebanyak 13 juta unit saham sedia ada & ditaja jamin oleh TA Securities (mid-tier IB).",
         "ofs": true,
-        "symbol": "SRKK"
+        "symbol": "SRKK",
+        "dailyChange": null
     },
     {
         "id": "eckem",
@@ -46,7 +47,8 @@
         "pe": 12.5,
         "analystInsight": "🚫 <b>AVOID</b><br>💡 Note: Ko skip — bukan Shariah.<br>Industrial Chemical. Walaupun IB bagus (M&A), tidak patuh Syariah.",
         "ofs": false,
-        "symbol": "ECKEM"
+        "symbol": "ECKEM",
+        "dailyChange": null
     },
     {
         "id": "sum-technology",
@@ -75,7 +77,8 @@
         "symbol": "MTEC",
         "ofs": false,
         "sifuTargetPrice": 0.39,
-        "performance": "+256.1%"
+        "performance": "+256.1%",
+        "dailyChange": 2.5
     },
     {
         "id": "elsa",
@@ -100,7 +103,8 @@
         "analystInsight": "❌ <b>AVOID</b><br>Sektor O&G services sedang sejuk. Ada OFS yang menambah tekanan jual. Risiko tinggi untuk open below atau flat. Skip.",
         "ofs": true,
         "sifuTargetPrice": 0.31,
-        "symbol": "ELSA"
+        "symbol": "ELSA",
+        "dailyChange": null
     },
     {
         "id": "pentech",
@@ -127,7 +131,8 @@
         "sifuTargetPrice": 0.28,
         "symbol": "PENTECH",
         "currentPrice": 0.26,
-        "performance": "+30.00%"
+        "performance": "+30.00%",
+        "dailyChange": 30
     },
     {
         "id": "mm-computer",
@@ -157,7 +162,8 @@
         "highPrice": 0.225,
         "closePrice": 0.225,
         "currentPrice": 0.225,
-        "performance": "+2.27%"
+        "performance": "+2.27%",
+        "dailyChange": 2.27
     },
     {
         "id": "1doc",
@@ -175,7 +181,8 @@
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Main Market listing backed by Top Tier IB (RHB). Expansion plans are solid. However, beauty sector is not a high-momentum theme.",
         "shariah": true,
         "symbol": "1 Doc International Berhad",
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "bus-cap",
@@ -202,7 +209,8 @@
         "avgTP": 0.28,
         "symbol": "BUSCAP",
         "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>",
-        "sifuTargetPrice": 0.32
+        "sifuTargetPrice": 0.32,
+        "dailyChange": 0
     },
     {
         "id": "5e-resources",
@@ -227,7 +235,8 @@
         "symbol": "5ER",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>5E Resources mempunyai kedudukan pasaran yang kuat dalam pengurusan sisa berjadual (scheduled waste management) Johor dengan lesen DOE yang ketat. ROE tinggi >20% dengan baki tunai bersih RM49.3M memberi kelebihan fundamental kukuh.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keuntungan margin tinggi >25% dengan ROE >20%.<br>• Posisi tunai bersih RM49.3M.<br>• Kriteria ESG & limpahan permintaan dari Pusat Data (Data Center) Johor.",
         "predictedGrade": "B",
-        "sifuTargetPrice": 0.29
+        "sifuTargetPrice": 0.29,
+        "dailyChange": null
     },
     {
         "id": "adnex",
@@ -253,7 +262,8 @@
         "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +47.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
         "highPrice": 0.335,
         "symbol": "NE",
-        "sifuTargetPrice": 0.2
+        "sifuTargetPrice": 0.2,
+        "dailyChange": 0.7
     },
     {
         "id": "aerodyne",
@@ -271,7 +281,8 @@
         "fundUse": "R&D / Ekspansi Global",
         "predictedGrade": "A",
         "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>",
-        "sifuTargetPrice": 0.85
+        "sifuTargetPrice": 0.85,
+        "dailyChange": null
     },
     {
         "id": "ambest",
@@ -298,7 +309,8 @@
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 0.67,
         "symbol": "AMBEST",
-        "sifuTargetPrice": 0.45
+        "sifuTargetPrice": 0.45,
+        "dailyChange": 0.3
     },
     {
         "id": "ams-material",
@@ -325,7 +337,8 @@
         "symbol": "AMS",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
         "predictedGrade": "B",
-        "sifuTargetPrice": 0.49
+        "sifuTargetPrice": 0.49,
+        "dailyChange": 3.9
     },
     {
         "id": "carsome",
@@ -343,7 +356,8 @@
         "fundUse": "Pengembangan",
         "predictedGrade": "A",
         "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window.",
-        "sifuTargetPrice": 1.2
+        "sifuTargetPrice": 1.2,
+        "dailyChange": null
     },
     {
         "id": "stratus-global",
@@ -363,7 +377,8 @@
         "predictedGrade": "B",
         "analystInsight": "✅ <b>WORTH IT — VALUE PLAY SEBENAR (GRADE B)</b><br>Stratus Global adalah <b>factory automation + cleanroom AMHS provider untuk industri semiconductor</b> — sektor paling hot 2026.<br><br>📊 <b>Kenapa menarik:</b><br>• PE hanya ~14x vs peers Tech (29.8x) dan Semiconductor (38.2x) = <b>diskaun 50-60%</b><br>• Tiada OFS — pure public issue 356.25M shares<br>• Main Market (RM937M mktcap) = institutional backing kuat<br>• Shariah-compliant ✅<br><br>⚠️ <b>Satu-satunya risiko:</b> IB UOB Kay Hian — rekod kita hanya GDGROUP (Consumer sector, -11%) tapi tu sektor berbeza. Untuk Main Market semiconductor play, story fundamental lebih dominant dari IB retail reputation.<br><br><b>Kesimpulan: Apply. Target RM0.95+. Ini lebih kepada hold play bukan pure scalp.</b>",
         "symbol": "Stratus Global Holdings Berhad",
-        "sifuTargetPrice": 1.04
+        "sifuTargetPrice": 1.04,
+        "dailyChange": null
     },
     {
         "id": "ei-power",
@@ -426,7 +441,8 @@
         "performance": "+46.87%",
         "strategy": "Scalp",
         "symbol": "EIPOWER",
-        "sifuTargetPrice": 0.69
+        "sifuTargetPrice": 0.69,
+        "dailyChange": 12.9
     },
     {
         "id": "empire-premium",
@@ -453,7 +469,8 @@
         "closePrice": 0.975,
         "symbol": "EMPIRE",
         "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Empire Premium Food mempamerkan prestasi pertumbuhan luar biasa dengan PAT CAGR 3 tahun cecah 61% menerusi model grab-and-go. Keputusan 3Q25 sangat mantap membuktikan keberkesanan fasa scale-up.<br><br>📊 <b>Kelebihan Utama:</b><br>• Margin kasar stabil sekitar 40% dengan CAGR PAT 61%.<br>• Model perniagaan grab-and-go berisiko rendah & kos cawangan rendah.<br>• Penyenaraian Main Market dengan sokongan Maybank IB.",
-        "sifuTargetPrice": 0.83
+        "sifuTargetPrice": 0.83,
+        "dailyChange": 0
     },
     {
         "id": "gdgroup",
@@ -480,7 +497,8 @@
         "closingDate": "2026-04-06T17:00:00",
         "prospectusUrl": "https://bursamalaysia.com/",
         "analystInsight": "⚠️ <b>AVOID / RISK OF WEAK LISTING (GRADE C)</b><br>Golden Destinations Berhad didagangkan di bawah harga tawaran selepas debut (-11.11%). Sektor pelancongan (Consumer - Tourism) kurang mendapat minat runcit dengan langganan (OS) yang rendah sebanyak 7.04x. Sokongan daripada UOB Kay Hian juga tidak mencukupi untuk menaikkan harga.",
-        "sifuTargetPrice": 0.45
+        "sifuTargetPrice": 0.45,
+        "dailyChange": null
     },
     {
         "id": "ghs",
@@ -504,7 +522,8 @@
         "closePrice": 0.28,
         "strategy": "Scalp",
         "pe": 15.2,
-        "symbol": "GHS[NS]"
+        "symbol": "GHS[NS]",
+        "dailyChange": null
     },
     {
         "id": "gold-li",
@@ -530,7 +549,8 @@
         "predictedGrade": "C",
         "analystInsight": "⚠️ <b>AVOID</b><br>Property sector is currently cold with low retail interest. High risk of 'Inspace' performance.",
         "symbol": "GOLDLI",
-        "sifuTargetPrice": 0.13
+        "sifuTargetPrice": 0.13,
+        "dailyChange": null
     },
     {
         "id": "hocksoon",
@@ -556,7 +576,8 @@
         "highPrice": 0.63,
         "symbol": "HOCKSOON",
         "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
-        "sifuTargetPrice": 0.69
+        "sifuTargetPrice": 0.69,
+        "dailyChange": null
     },
     {
         "id": "inspace-creation",
@@ -590,7 +611,8 @@
         "symbol": "INSPACE",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Inspace Creation menerima sambutan balloting yang sangat padat mencecah 70.30x langganan awam. Pertumbuhan PAT CAGR sangat memberangsangkan sebanyak 300% dalam tempoh 3 tahun dipacu pertumbuhan pasaran hiasan dalaman.<br><br>📊 <b>Kelebihan Utama:</b><br>• Oversubscription runcit sangat kukuh pada 70.30x.<br>• PAT CAGR tumbuh 300% disokong pasaran domestik yang berkembang.<br>• PE Sasaran murah pada 11.4x berbanding purata peers 15.5x.",
         "predictedGrade": "B",
-        "sifuTargetPrice": 0.32
+        "sifuTargetPrice": 0.32,
+        "dailyChange": null
     },
     {
         "id": "isf",
@@ -616,7 +638,8 @@
         "highPrice": 0.575,
         "symbol": "ISF",
         "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-        "sifuTargetPrice": 0.36
+        "sifuTargetPrice": 0.36,
+        "dailyChange": -0.3
     },
     {
         "id": "keeming",
@@ -643,7 +666,8 @@
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 1.04,
         "symbol": "KEEMING",
-        "sifuTargetPrice": 0.38
+        "sifuTargetPrice": 0.38,
+        "dailyChange": 8
     },
     {
         "id": "manforce-group",
@@ -671,7 +695,8 @@
         "highPrice": 0.415,
         "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Manforce Group Berhad didagangkan menerusi perpindahan papan LEAP ke ACE. Menyasarkan peningkatan kuota penempatan pekerja asing daripada 6,761 kepada 11,230 pekerja menjelang FY27.<br><br>📊 <b>Kelebihan Utama:</b><br>• Perpindahan ke papan ACE meningkatkan kecairan pasaran runcit.<br>• Unjuran peningkatan saiz pekerja asing menyokong EPS growth +16%.",
         "predictedGrade": "B",
-        "sifuTargetPrice": 0.4
+        "sifuTargetPrice": 0.4,
+        "dailyChange": null
     },
     {
         "id": "mtt-shipping",
@@ -698,7 +723,8 @@
         "closePrice": 1,
         "symbol": "MTTSL",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>MTT Shipping and Logistics merupakan peneraju pasaran (market leader) kapal kargo domestik di semenanjung dan Sabah/Sarawak. Mempunyai baki lembaran yang mantap dengan gearing rendah 0.5x.<br><br>📊 <b>Kelebihan Utama:</b><br>• Peneraju pasaran domestic shipping dengan fleet moden.<br>• Polisi dividen tinggi (50% payout ratio) & gearing 0.5x.<br>• PE Terbitan munasabah di paras 9.18x - 10.04x.",
-        "sifuTargetPrice": 1.16
+        "sifuTargetPrice": 1.16,
+        "dailyChange": null
     },
     {
         "id": "ogm",
@@ -724,7 +750,8 @@
         "highPrice": 0.265,
         "symbol": "OGM",
         "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
-        "sifuTargetPrice": 0.25
+        "sifuTargetPrice": 0.25,
+        "dailyChange": null
     },
     {
         "id": "ogx",
@@ -751,7 +778,8 @@
         "ofs": true,
         "symbol": "OGX",
         "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M). Meskipun harganya merosot di bawah IPO pada hari pertama (sebab sentimen perang/geopolitik), syarikat telah melonjak melebihi 70% (ke RM0.60) disokong fundamental dan anugerah kontrak data center yang besar.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
-        "sifuTargetPrice": 0.49
+        "sifuTargetPrice": 0.49,
+        "dailyChange": 5
     },
     {
         "id": "sbs",
@@ -777,7 +805,8 @@
         "highPrice": 0.265,
         "symbol": "SBS",
         "analystInsight": "⚠️ <b>AVOID / LOW INTEREST (GRADE C)</b><br>SBS (SBS Nexus Berhad) mencatatkan permulaan hambar dengan penurunan -2.00% (tutup RM0.245). Profil syarikat sektor Consumer ini mempunyai margin keuntungan yang nipis dan dana kegunaan kebanyakannya untuk pemasaran (marketing), yang dilihat kurang memberi nilai tambah fundamental berbanding pelaburan CAPEX.",
-        "sifuTargetPrice": 0.25
+        "sifuTargetPrice": 0.25,
+        "dailyChange": null
     },
     {
         "id": "semico",
@@ -804,7 +833,8 @@
         "strategy": "Scalp",
         "pe": 18.5,
         "symbol": "SEMICO[NS]",
-        "sifuTargetPrice": 0.25
+        "sifuTargetPrice": 0.25,
+        "dailyChange": 1.6
     },
     {
         "id": "skyechip",
@@ -859,7 +889,8 @@
         "performance": "+230.68%",
         "symbol": "SKYECHIP",
         "strategy": "Swing",
-        "sifuTargetPrice": 0.88
+        "sifuTargetPrice": 0.88,
+        "dailyChange": 1.7
     },
     {
         "id": "sunmed",
@@ -886,7 +917,8 @@
         "highPrice": 2.1734999999999998,
         "symbol": "SUNMED",
         "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Sunway Healthcare (SUNMED) merekodkan permohonan runcit tertinggi dengan tarikan jenama Sunway yang sangat kuat. Merupakan hospital pertahanan bertaraf mega dengan profil pertumbuhan jangka panjang yang mantap.<br><br>📊 <b>Kelebihan Utama:</b><br>• Rekod jumlah permohonan runcit tertinggi (hype amat besar).<br>• Hospital defensif bertaraf mega dengan kualiti aset gred-A.<br>• Potensi sasaran Fair Value RM1.84 (+26.9% upside).",
-        "sifuTargetPrice": 1.84
+        "sifuTargetPrice": 1.84,
+        "dailyChange": 0.5
     },
     {
         "id": "teamstr",
@@ -912,7 +944,8 @@
         "highPrice": 0.28175,
         "symbol": "TEAMSTR",
         "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
-        "sifuTargetPrice": 0.26
+        "sifuTargetPrice": 0.26,
+        "dailyChange": null
     },
     {
         "id": "a1akk",
@@ -934,7 +967,8 @@
         "highPrice": 0.1955,
         "openPrice": 0.25,
         "closePrice": 0.245,
-        "symbol": "A1AKK"
+        "symbol": "A1AKK",
+        "dailyChange": null
     },
     {
         "id": "aquawalk",
@@ -956,7 +990,8 @@
         "highPrice": 0.24724999999999997,
         "openPrice": 0.299987,
         "closePrice": 0.379998,
-        "symbol": "AQUAWALK"
+        "symbol": "AQUAWALK",
+        "dailyChange": null
     },
     {
         "id": "asm",
@@ -978,7 +1013,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.17,
         "closePrice": 0.165002,
-        "symbol": "ASM"
+        "symbol": "ASM",
+        "dailyChange": null
     },
     {
         "id": "bms",
@@ -1000,7 +1036,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.195008,
         "closePrice": 0.17501,
-        "symbol": "BMS"
+        "symbol": "BMS",
+        "dailyChange": null
     },
     {
         "id": "camaroe-ns",
@@ -1022,7 +1059,8 @@
         "highPrice": 0.08625,
         "openPrice": 0.160006,
         "closePrice": 0.149996,
-        "symbol": "CAMAROE [NS]"
+        "symbol": "CAMAROE [NS]",
+        "dailyChange": null
     },
     {
         "id": "cbhb",
@@ -1047,7 +1085,8 @@
         "openPrice": 0.33000799999999997,
         "closePrice": 0.33499200000000007,
         "symbol": "CBHB",
-        "sifuTargetPrice": 0.53
+        "sifuTargetPrice": 0.53,
+        "dailyChange": 4.5
     },
     {
         "id": "cheeding",
@@ -1071,7 +1110,8 @@
         "highPrice": 0.851,
         "openPrice": 0.6999839999999999,
         "closePrice": 0.735012,
-        "symbol": "CHEEDING"
+        "symbol": "CHEEDING",
+        "dailyChange": -0.8
     },
     {
         "id": "cki",
@@ -1093,7 +1133,8 @@
         "highPrice": 0.48874999999999996,
         "openPrice": 1.0900440000000002,
         "closePrice": 1.08,
-        "symbol": "CKI"
+        "symbol": "CKI",
+        "dailyChange": null
     },
     {
         "id": "clite",
@@ -1115,7 +1156,8 @@
         "highPrice": 0.2645,
         "openPrice": 0.23,
         "closePrice": 0.23,
-        "symbol": "CLITE"
+        "symbol": "CLITE",
+        "dailyChange": null
     },
     {
         "id": "colform",
@@ -1137,7 +1179,8 @@
         "highPrice": 0.299,
         "openPrice": 0.39999599999999996,
         "closePrice": 0.38998799999999995,
-        "symbol": "COLFORM"
+        "symbol": "COLFORM",
+        "dailyChange": null
     },
     {
         "id": "dengkil",
@@ -1159,7 +1202,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.25,
         "closePrice": 0.23,
-        "symbol": "DENGKIL"
+        "symbol": "DENGKIL",
+        "dailyChange": null
     },
     {
         "id": "ecoshop",
@@ -1181,7 +1225,8 @@
         "highPrice": 1.472,
         "openPrice": 1.250006,
         "closePrice": 1.1999469999999999,
-        "symbol": "ECOSHOP"
+        "symbol": "ECOSHOP",
+        "dailyChange": 0.3
     },
     {
         "id": "enpro",
@@ -1203,7 +1248,8 @@
         "highPrice": 0.253,
         "openPrice": 0.259992,
         "closePrice": 0.265008,
-        "symbol": "ENPRO"
+        "symbol": "ENPRO",
+        "dailyChange": null
     },
     {
         "id": "famiera",
@@ -1225,7 +1271,8 @@
         "highPrice": 0.21849999999999997,
         "openPrice": 0.25,
         "closePrice": 0.255,
-        "symbol": "FAMIERA"
+        "symbol": "FAMIERA",
+        "dailyChange": null
     },
     {
         "id": "fibro",
@@ -1247,7 +1294,8 @@
         "highPrice": 1.012,
         "openPrice": 0.46002000000000004,
         "closePrice": 0.49500000000000005,
-        "symbol": "FIBRO"
+        "symbol": "FIBRO",
+        "dailyChange": 0.3
     },
     {
         "id": "foodie-ns",
@@ -1269,7 +1317,8 @@
         "highPrice": 0.391,
         "openPrice": 0.35498999999999997,
         "closePrice": 0.39998999999999996,
-        "symbol": "FOODIE[NS]"
+        "symbol": "FOODIE[NS]",
+        "dailyChange": null
     },
     {
         "id": "genergy",
@@ -1293,7 +1342,8 @@
         "strategy": "Wait / Exit",
         "pe": 15,
         "highPrice": 0.7474999999999999,
-        "symbol": "GENERGY"
+        "symbol": "GENERGY",
+        "dailyChange": null
     },
     {
         "id": "geohan",
@@ -1315,7 +1365,8 @@
         "highPrice": 0.33924999999999994,
         "openPrice": 0.5399900000000001,
         "closePrice": 0.5399900000000001,
-        "symbol": "GEOHAN"
+        "symbol": "GEOHAN",
+        "dailyChange": null
     },
     {
         "id": "hi",
@@ -1339,7 +1390,8 @@
         "highPrice": 2.576,
         "openPrice": 1.65002,
         "closePrice": 1.720055,
-        "symbol": "HI"
+        "symbol": "HI",
+        "dailyChange": -0.1
     },
     {
         "id": "hkb",
@@ -1364,7 +1416,8 @@
         "openPrice": 0.16,
         "closePrice": 0.144992,
         "symbol": "HKB",
-        "sifuTargetPrice": 0.21
+        "sifuTargetPrice": 0.21,
+        "dailyChange": 2.34
     },
     {
         "id": "iab",
@@ -1389,7 +1442,8 @@
         "openPrice": 0.619992,
         "closePrice": 0.6549839999999999,
         "symbol": "IAB",
-        "sifuTargetPrice": 1.53
+        "sifuTargetPrice": 1.53,
+        "dailyChange": 3.82
     },
     {
         "id": "icents",
@@ -1411,7 +1465,8 @@
         "highPrice": 0.44275,
         "openPrice": 0.28999199999999997,
         "closePrice": 0.340008,
-        "symbol": "ICENTS"
+        "symbol": "ICENTS",
+        "dailyChange": 1
     },
     {
         "id": "ictzone",
@@ -1433,7 +1488,8 @@
         "highPrice": 0.207,
         "openPrice": 0.2,
         "closePrice": 0.2,
-        "symbol": "ICTZONE"
+        "symbol": "ICTZONE",
+        "dailyChange": null
     },
     {
         "id": "jssolar",
@@ -1455,7 +1511,8 @@
         "highPrice": 0.2645,
         "openPrice": 0.399993,
         "closePrice": 0.399993,
-        "symbol": "JSSOLAR"
+        "symbol": "JSSOLAR",
+        "dailyChange": null
     },
     {
         "id": "kopi",
@@ -1479,7 +1536,8 @@
         "highPrice": 1.265,
         "openPrice": 0.74998,
         "closePrice": 0.874984,
-        "symbol": "KOPI"
+        "symbol": "KOPI",
+        "dailyChange": 0.2
     },
     {
         "id": "lacmed",
@@ -1501,7 +1559,8 @@
         "highPrice": 0.9487499999999999,
         "openPrice": 0.75,
         "closePrice": 0.765,
-        "symbol": "LACMED"
+        "symbol": "LACMED",
+        "dailyChange": null
     },
     {
         "id": "lsh",
@@ -1525,7 +1584,8 @@
         "highPrice": 2.139,
         "openPrice": 0.72996,
         "closePrice": 0.8300160000000001,
-        "symbol": "LSH"
+        "symbol": "LSH",
+        "dailyChange": 0.2
     },
     {
         "id": "minimart-2025",
@@ -1545,7 +1605,8 @@
         "os": 5,
         "ib": "Small Broker",
         "fundUse": "Repay Loans",
-        "highPrice": 0.43699999999999994
+        "highPrice": 0.43699999999999994,
+        "dailyChange": null
     },
     {
         "id": "msb",
@@ -1567,7 +1628,8 @@
         "highPrice": 0.0805,
         "openPrice": 0.17,
         "closePrice": 0.17,
-        "symbol": "MSB"
+        "symbol": "MSB",
+        "dailyChange": null
     },
     {
         "id": "northern-ns",
@@ -1589,7 +1651,8 @@
         "highPrice": 0.73025,
         "openPrice": 0.9000179999999999,
         "closePrice": 0.7900200000000001,
-        "symbol": "NORTHERN [NS]"
+        "symbol": "NORTHERN [NS]",
+        "dailyChange": 1.5
     },
     {
         "id": "northern-solar-listed",
@@ -1612,7 +1675,8 @@
         "pe": 18.7,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 0.48299999999999993
+        "highPrice": 0.48299999999999993,
+        "dailyChange": 0
     },
     {
         "id": "ohm",
@@ -1634,7 +1698,8 @@
         "highPrice": 0.391,
         "openPrice": 0.28501200000000004,
         "closePrice": 0.28501200000000004,
-        "symbol": "OHM"
+        "symbol": "OHM",
+        "dailyChange": 1
     },
     {
         "id": "oriental-kopi-listed",
@@ -1655,7 +1720,8 @@
         "ib": "CIMB",
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 32.3,
-        "highPrice": 1.2189999999999999
+        "highPrice": 1.2189999999999999,
+        "dailyChange": 0.1
     },
     {
         "id": "orkim",
@@ -1677,7 +1743,8 @@
         "highPrice": 1.09825,
         "openPrice": 0.92,
         "closePrice": 0.930028,
-        "symbol": "ORKIM"
+        "symbol": "ORKIM",
+        "dailyChange": null
     },
     {
         "id": "oxb",
@@ -1699,7 +1766,8 @@
         "highPrice": 0.368,
         "openPrice": 0.360006,
         "closePrice": 0.38500399999999996,
-        "symbol": "OXB"
+        "symbol": "OXB",
+        "dailyChange": -0.1
     },
     {
         "id": "pantech-global",
@@ -1720,7 +1788,8 @@
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 11.4,
         "highPrice": 1.265,
-        "os": 44.93
+        "os": 44.93,
+        "dailyChange": 1
     },
     {
         "id": "paradigm-ns",
@@ -1742,7 +1811,8 @@
         "highPrice": 1.1097499999999998,
         "openPrice": 1,
         "closePrice": 1,
-        "symbol": "PARADIGM [NS]"
+        "symbol": "PARADIGM [NS]",
+        "dailyChange": null
     },
     {
         "id": "people",
@@ -1764,7 +1834,8 @@
         "highPrice": 0.29324999999999996,
         "openPrice": 0.24,
         "closePrice": 0.265,
-        "symbol": "PEOPLE"
+        "symbol": "PEOPLE",
+        "dailyChange": null
     },
     {
         "id": "pglobal",
@@ -1786,7 +1857,8 @@
         "highPrice": 0.529,
         "openPrice": 0.464984,
         "closePrice": 0.5750080000000001,
-        "symbol": "PGLOBAL"
+        "symbol": "PGLOBAL",
+        "dailyChange": null
     },
     {
         "id": "pmck",
@@ -1808,7 +1880,8 @@
         "highPrice": 0.22424999999999998,
         "openPrice": 0.224994,
         "closePrice": 0.23001000000000002,
-        "symbol": "PMCK"
+        "symbol": "PMCK",
+        "dailyChange": null
     },
     {
         "id": "pmibhd",
@@ -1830,7 +1903,8 @@
         "highPrice": 0.253,
         "openPrice": 0.235008,
         "closePrice": 0.23001300000000002,
-        "symbol": "PMIBHD"
+        "symbol": "PMIBHD",
+        "dailyChange": null
     },
     {
         "id": "pmw",
@@ -1852,7 +1926,8 @@
         "highPrice": 0.31625,
         "openPrice": 0.34,
         "closePrice": 0.344998,
-        "symbol": "PMW"
+        "symbol": "PMW",
+        "dailyChange": null
     },
     {
         "id": "polymer",
@@ -1874,7 +1949,8 @@
         "highPrice": 0.161,
         "openPrice": 0.25,
         "closePrice": 0.25,
-        "symbol": "POLYMER"
+        "symbol": "POLYMER",
+        "dailyChange": null
     },
     {
         "id": "power",
@@ -1896,7 +1972,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.400015,
         "closePrice": 0.33001499999999995,
-        "symbol": "POWER"
+        "symbol": "POWER",
+        "dailyChange": null
     },
     {
         "id": "psp",
@@ -1918,7 +1995,8 @@
         "highPrice": 0.14375,
         "openPrice": 0.16,
         "closePrice": 0.144992,
-        "symbol": "PSP"
+        "symbol": "PSP",
+        "dailyChange": null
     },
     {
         "id": "reachten",
@@ -1940,7 +2018,8 @@
         "highPrice": 0.4714999999999999,
         "openPrice": 0.52,
         "closePrice": 0.5400200000000001,
-        "symbol": "REACHTEN"
+        "symbol": "REACHTEN",
+        "dailyChange": null
     },
     {
         "id": "rtech",
@@ -1962,7 +2041,8 @@
         "highPrice": 0.207,
         "openPrice": 0.75,
         "closePrice": 0.32,
-        "symbol": "RTECH"
+        "symbol": "RTECH",
+        "dailyChange": null
     },
     {
         "id": "sag",
@@ -1984,7 +2064,8 @@
         "highPrice": 0.8394999999999999,
         "openPrice": 0.680016,
         "closePrice": 0.69998,
-        "symbol": "SAG"
+        "symbol": "SAG",
+        "dailyChange": 0.8
     },
     {
         "id": "saliran-group",
@@ -2008,7 +2089,8 @@
         "closePrice": 0.52,
         "strategy": "Swing",
         "pe": 14.5,
-        "symbol": "SALIRAN [NS]"
+        "symbol": "SALIRAN [NS]",
+        "dailyChange": null
     },
     {
         "id": "set",
@@ -2030,7 +2112,8 @@
         "highPrice": 0.20124999999999998,
         "openPrice": 0.35999600000000004,
         "closePrice": 0.39499600000000007,
-        "symbol": "SET"
+        "symbol": "SET",
+        "dailyChange": null
     },
     {
         "id": "sumi",
@@ -2052,7 +2135,8 @@
         "highPrice": 0.11499999999999999,
         "openPrice": 0.18,
         "closePrice": 0.18,
-        "symbol": "SUMI"
+        "symbol": "SUMI",
+        "dailyChange": null
     },
     {
         "id": "sunlogy",
@@ -2074,7 +2158,8 @@
         "highPrice": 0.32774999999999993,
         "openPrice": 0.30500999999999995,
         "closePrice": 0.3,
-        "symbol": "SUNLOGY"
+        "symbol": "SUNLOGY",
+        "dailyChange": null
     },
     {
         "id": "supreme-consolidated",
@@ -2098,7 +2183,8 @@
         "closePrice": 0.33,
         "strategy": "Scalp",
         "pe": 10.4,
-        "symbol": "SUPREME"
+        "symbol": "SUPREME",
+        "dailyChange": null
     },
     {
         "id": "techstore",
@@ -2120,7 +2206,8 @@
         "highPrice": 0.2875,
         "openPrice": 0.255,
         "closePrice": 0.22000000000000003,
-        "symbol": "TECHSTORE"
+        "symbol": "TECHSTORE",
+        "dailyChange": null
     },
     {
         "id": "thmy",
@@ -2144,7 +2231,8 @@
         "highPrice": 1.4949999999999999,
         "openPrice": 0.799986,
         "closePrice": 0.9100050000000001,
-        "symbol": "THMY"
+        "symbol": "THMY",
+        "dailyChange": 2.7
     },
     {
         "id": "verdant",
@@ -2166,7 +2254,8 @@
         "highPrice": 0.23574999999999996,
         "openPrice": 0.369985,
         "closePrice": 0.369985,
-        "symbol": "VERDANT"
+        "symbol": "VERDANT",
+        "dailyChange": null
     },
     {
         "id": "wawasan-dengkil",
@@ -2186,7 +2275,8 @@
         "os": 56,
         "ib": "Public Investment",
         "fundUse": "60% Ekspansi, 20% R&D",
-        "highPrice": 0.713
+        "highPrice": 0.713,
+        "dailyChange": 1.7
     },
     {
         "id": "westrvr",
@@ -2208,7 +2298,8 @@
         "highPrice": 0.22999999999999998,
         "openPrice": 0.394992,
         "closePrice": 0.369993,
-        "symbol": "WESTRVR"
+        "symbol": "WESTRVR",
+        "dailyChange": null
     },
     {
         "id": "wtec",
@@ -2230,7 +2321,8 @@
         "highPrice": 0.13799999999999998,
         "openPrice": 0.25,
         "closePrice": 0.235,
-        "symbol": "WTEC"
+        "symbol": "WTEC",
+        "dailyChange": null
     },
     {
         "id": "xpb",
@@ -2252,7 +2344,8 @@
         "highPrice": 0.161,
         "openPrice": 0.215,
         "closePrice": 0.225,
-        "symbol": "XPB"
+        "symbol": "XPB",
+        "dailyChange": null
     },
     {
         "id": "3ren-ns",
@@ -2274,7 +2367,8 @@
         "highPrice": 0.4255,
         "openPrice": 0.33499200000000007,
         "closePrice": 0.39499600000000007,
-        "symbol": "3REN [NS]"
+        "symbol": "3REN [NS]",
+        "dailyChange": 4.6
     },
     {
         "id": "99-speedmart",
@@ -2295,7 +2389,8 @@
         "ib": "CIMB",
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 50.2,
-        "highPrice": 2.852
+        "highPrice": 2.852,
+        "dailyChange": 5.3
     },
     {
         "id": "99smart-ns",
@@ -2319,7 +2414,8 @@
         "highPrice": 3.9675,
         "openPrice": 1.84998,
         "closePrice": 1.8800099999999997,
-        "symbol": "99SMART [NS]"
+        "symbol": "99SMART [NS]",
+        "dailyChange": 5.2
     },
     {
         "id": "agricor",
@@ -2341,7 +2437,8 @@
         "highPrice": 0.44849999999999995,
         "openPrice": 0.79,
         "closePrice": 0.875,
-        "symbol": "AGRICOR"
+        "symbol": "AGRICOR",
+        "dailyChange": null
     },
     {
         "id": "agx",
@@ -2363,7 +2460,8 @@
         "highPrice": 0.49449999999999994,
         "openPrice": 0.40998999999999997,
         "closePrice": 0.36000999999999994,
-        "symbol": "AGX"
+        "symbol": "AGX",
+        "dailyChange": 0.7
     },
     {
         "id": "alpha-ivf",
@@ -2386,7 +2484,8 @@
         "pe": 24.2,
         "highPrice": 0.322,
         "listingDate": "2023-01-03",
-        "symbol": "L&PBHD"
+        "symbol": "L&PBHD",
+        "dailyChange": null
     },
     {
         "id": "alpha-ns",
@@ -2408,7 +2507,8 @@
         "highPrice": 0.3105,
         "openPrice": 0.32,
         "closePrice": 0.32,
-        "symbol": "ALPHA [NS]"
+        "symbol": "ALPHA [NS]",
+        "dailyChange": null
     },
     {
         "id": "azam-jaya",
@@ -2432,7 +2532,8 @@
         "closePrice": 1.09,
         "strategy": "Swing",
         "pe": 16.5,
-        "symbol": "AZAMJAYA"
+        "symbol": "AZAMJAYA",
+        "dailyChange": -1.6
     },
     {
         "id": "bwys",
@@ -2454,7 +2555,8 @@
         "highPrice": 0.20124999999999998,
         "openPrice": 0.31999,
         "closePrice": 0.349998,
-        "symbol": "BWYS"
+        "symbol": "BWYS",
+        "dailyChange": null
     },
     {
         "id": "carlorino",
@@ -2476,7 +2578,8 @@
         "highPrice": 0.23574999999999996,
         "openPrice": 0.235008,
         "closePrice": 0.23001300000000002,
-        "symbol": "CARLORINO"
+        "symbol": "CARLORINO",
+        "dailyChange": null
     },
     {
         "id": "crest",
@@ -2498,7 +2601,8 @@
         "highPrice": 0.22999999999999998,
         "openPrice": 0.39501,
         "closePrice": 0.35,
-        "symbol": "CREST"
+        "symbol": "CREST",
+        "dailyChange": null
     },
     {
         "id": "crpmate",
@@ -2520,7 +2624,8 @@
         "highPrice": 0.21849999999999997,
         "openPrice": 0.24500000000000002,
         "closePrice": 0.21000000000000002,
-        "symbol": "CRPMATE"
+        "symbol": "CRPMATE",
+        "dailyChange": null
     },
     {
         "id": "elridge",
@@ -2544,7 +2649,8 @@
         "highPrice": 1.0407499999999998,
         "openPrice": 0.339996,
         "closePrice": 0.399997,
-        "symbol": "ELRIDGE"
+        "symbol": "ELRIDGE",
+        "dailyChange": -0.8
     },
     {
         "id": "epb",
@@ -2566,7 +2672,8 @@
         "highPrice": 0.36224999999999996,
         "openPrice": 0.6499920000000001,
         "closePrice": 0.6199760000000001,
-        "symbol": "EPB"
+        "symbol": "EPB",
+        "dailyChange": null
     },
     {
         "id": "farm-price",
@@ -2589,7 +2696,8 @@
         "pe": 17.9,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 0.5175
+        "highPrice": 0.5175,
+        "dailyChange": -0.7
     },
     {
         "id": "feytech",
@@ -2613,7 +2721,8 @@
         "strategy": "Swing",
         "pe": 18.1,
         "highPrice": 0.25875,
-        "symbol": "FEYTECH"
+        "symbol": "FEYTECH",
+        "dailyChange": null
     },
     {
         "id": "fphb",
@@ -2635,7 +2744,8 @@
         "highPrice": 0.3795,
         "openPrice": 0.48,
         "closePrice": 0.40999199999999997,
-        "symbol": "FPHB"
+        "symbol": "FPHB",
+        "dailyChange": -1
     },
     {
         "id": "gohub",
@@ -2659,7 +2769,8 @@
         "highPrice": 1.1212499999999999,
         "openPrice": 0.7999949999999999,
         "closePrice": 0.950005,
-        "symbol": "GOHUB"
+        "symbol": "GOHUB",
+        "dailyChange": -0.9
     },
     {
         "id": "hawk",
@@ -2681,7 +2792,8 @@
         "highPrice": 0.24149999999999996,
         "openPrice": 0.3,
         "closePrice": 0.345,
-        "symbol": "HAWK"
+        "symbol": "HAWK",
+        "dailyChange": 0.1
     },
     {
         "id": "hegroup",
@@ -2703,7 +2815,8 @@
         "highPrice": 0.368,
         "openPrice": 0.899977,
         "closePrice": 0.855037,
-        "symbol": "HEGROUP"
+        "symbol": "HEGROUP",
+        "dailyChange": null
     },
     {
         "id": "johor-plantations",
@@ -2725,7 +2838,8 @@
         "ib": "RHB",
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 11.7,
-        "highPrice": 1.9779999999999998
+        "highPrice": 1.9779999999999998,
+        "dailyChange": 1.1
     },
     {
         "id": "jpg",
@@ -2749,7 +2863,8 @@
         "highPrice": 2.162,
         "openPrice": 0.84,
         "closePrice": 0.8999759999999999,
-        "symbol": "JPG"
+        "symbol": "JPG",
+        "dailyChange": -0.1
     },
     {
         "id": "kawan-renergy",
@@ -2770,7 +2885,8 @@
         "ib": "M&A Securities",
         "fundUse": "Expansion",
         "pe": 10.8,
-        "highPrice": 0.598
+        "highPrice": 0.598,
+        "dailyChange": 1.8
     },
     {
         "id": "kenergy",
@@ -2792,7 +2908,8 @@
         "highPrice": 0.598,
         "openPrice": 0.44999999999999996,
         "closePrice": 0.46499999999999997,
-        "symbol": "KENERGY"
+        "symbol": "KENERGY",
+        "dailyChange": 1.8
     },
     {
         "id": "keyfield",
@@ -2818,7 +2935,8 @@
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 2.0124999999999997,
-        "symbol": "KEYFIELD"
+        "symbol": "KEYFIELD",
+        "dailyChange": -0.3
     },
     {
         "id": "khb-ns",
@@ -2840,7 +2958,8 @@
         "highPrice": 0.1035,
         "openPrice": 0.29,
         "closePrice": 0.215,
-        "symbol": "KHB [NS]"
+        "symbol": "KHB [NS]",
+        "dailyChange": null
     },
     {
         "id": "kjts",
@@ -2864,7 +2983,8 @@
         "highPrice": 0.9889999999999999,
         "openPrice": 0.439992,
         "closePrice": 0.500013,
-        "symbol": "KJTS"
+        "symbol": "KJTS",
+        "dailyChange": 1.2
     },
     {
         "id": "kti",
@@ -2888,7 +3008,8 @@
         "highPrice": 0.644,
         "openPrice": 0.3,
         "closePrice": 0.285,
-        "symbol": "KTI"
+        "symbol": "KTI",
+        "dailyChange": 0.2
     },
     {
         "id": "kucingko",
@@ -2914,7 +3035,8 @@
         "pe": 25,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "symbol": "KUCINGKO [NS]"
+        "symbol": "KUCINGKO [NS]",
+        "dailyChange": null
     },
     {
         "id": "lwsabah",
@@ -2939,7 +3061,8 @@
         "openPrice": 0.7699900000000001,
         "closePrice": 0.94003,
         "symbol": "LWSABAH",
-        "sifuTargetPrice": 1.6
+        "sifuTargetPrice": 1.6,
+        "dailyChange": 10.08
     },
     {
         "id": "master-tec",
@@ -2960,7 +3083,8 @@
         "ib": "SJ Securities",
         "fundUse": "Working Capital",
         "pe": 38.9,
-        "highPrice": 1.288
+        "highPrice": 1.288,
+        "dailyChange": -0.2
     },
     {
         "id": "mega-fortris",
@@ -2981,7 +3105,8 @@
         "ib": "MIDF",
         "fundUse": "35% Bayar Hutang, 20% Operasi",
         "pe": 16.2,
-        "highPrice": 0.7474999999999999
+        "highPrice": 0.7474999999999999,
+        "dailyChange": null
     },
     {
         "id": "megafb-ns",
@@ -3005,7 +3130,8 @@
         "highPrice": 1.6099999999999999,
         "openPrice": 0.67,
         "closePrice": 0.654992,
-        "symbol": "MEGAFB"
+        "symbol": "MEGAFB",
+        "dailyChange": 1.4
     },
     {
         "id": "metro",
@@ -3027,7 +3153,8 @@
         "highPrice": 0.253,
         "openPrice": 0.255,
         "closePrice": 0.255,
-        "symbol": "METRO"
+        "symbol": "METRO",
+        "dailyChange": null
     },
     {
         "id": "mkh-oil",
@@ -3048,7 +3175,8 @@
         "ib": "M&A Securities",
         "fundUse": "35% Bayar Hutang, 20% Operasi",
         "pe": 7.6,
-        "highPrice": 0.6669999999999999
+        "highPrice": 0.6669999999999999,
+        "dailyChange": null
     },
     {
         "id": "mkhop",
@@ -3070,7 +3198,8 @@
         "highPrice": 0.7014999999999999,
         "openPrice": 0.629982,
         "closePrice": 0.614978,
-        "symbol": "MKHOP"
+        "symbol": "MKHOP",
+        "dailyChange": 1.1
     },
     {
         "id": "mtec",
@@ -3091,7 +3220,8 @@
         "shariah": true,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 1.1844999999999999
+        "highPrice": 1.1844999999999999,
+        "dailyChange": -0.2
     },
     {
         "id": "ne",
@@ -3113,7 +3243,8 @@
         "highPrice": 0.9085,
         "openPrice": 0.37999099999999997,
         "closePrice": 0.35002,
-        "symbol": "ANEKA"
+        "symbol": "ANEKA",
+        "dailyChange": null
     },
     {
         "id": "obhb",
@@ -3135,7 +3266,8 @@
         "highPrice": 0.24149999999999996,
         "openPrice": 0.250008,
         "closePrice": 0.250008,
-        "symbol": "OBHB"
+        "symbol": "OBHB",
+        "dailyChange": null
     },
     {
         "id": "ocean-fresh",
@@ -3158,7 +3290,8 @@
         "pe": 15.5,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 0.6669999999999999
+        "highPrice": 0.6669999999999999,
+        "dailyChange": 0.5
     },
     {
         "id": "ofb",
@@ -3180,7 +3313,8 @@
         "highPrice": 0.184,
         "openPrice": 0.8499960000000001,
         "closePrice": 0.77,
-        "symbol": "OFB"
+        "symbol": "OFB",
+        "dailyChange": null
     },
     {
         "id": "plintas",
@@ -3202,7 +3336,8 @@
         "highPrice": 1.07525,
         "openPrice": 0.95,
         "closePrice": 0.9700449999999998,
-        "symbol": "PLINTAS"
+        "symbol": "PLINTAS",
+        "dailyChange": null
     },
     {
         "id": "prolintas",
@@ -3223,7 +3358,8 @@
         "ib": "AmInvestment",
         "fundUse": "35% Bayar Hutang, 20% Operasi",
         "pe": 35.8,
-        "highPrice": 1.081
+        "highPrice": 1.081,
+        "dailyChange": null
     },
     {
         "id": "sbh",
@@ -3245,7 +3381,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.255002,
         "closePrice": 0.255002,
-        "symbol": "SBH"
+        "symbol": "SBH",
+        "dailyChange": null
     },
     {
         "id": "scb",
@@ -3267,7 +3404,8 @@
         "highPrice": 0.14375,
         "openPrice": 0.500013,
         "closePrice": 0.359991,
-        "symbol": "SCB"
+        "symbol": "SCB",
+        "dailyChange": null
     },
     {
         "id": "sdcg",
@@ -3289,7 +3427,8 @@
         "highPrice": 0.7647499999999999,
         "openPrice": 0.500004,
         "closePrice": 0.504982,
-        "symbol": "SDCG"
+        "symbol": "SDCG",
+        "dailyChange": 0.8
     },
     {
         "id": "sinkung",
@@ -3311,7 +3450,8 @@
         "highPrice": 0.092,
         "openPrice": 0.13,
         "closePrice": 0.139997,
-        "symbol": "SINKUNG"
+        "symbol": "SINKUNG",
+        "dailyChange": null
     },
     {
         "id": "smart",
@@ -3333,7 +3473,8 @@
         "highPrice": 0.1725,
         "openPrice": 0.5,
         "closePrice": 0.45999999999999996,
-        "symbol": "SMART"
+        "symbol": "SMART",
+        "dailyChange": null
     },
     {
         "id": "sorento",
@@ -3355,7 +3496,8 @@
         "highPrice": 0.75325,
         "openPrice": 0.374995,
         "closePrice": 0.374995,
-        "symbol": "SORENTO"
+        "symbol": "SORENTO",
+        "dailyChange": 1.6
     },
     {
         "id": "steel-hawk",
@@ -3378,7 +3520,8 @@
         "pe": 10.4,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 0.40249999999999997
+        "highPrice": 0.40249999999999997,
+        "dailyChange": 1.2
     },
     {
         "id": "tmk",
@@ -3400,7 +3543,8 @@
         "highPrice": 1.8859999999999997,
         "openPrice": 1.9699749999999998,
         "closePrice": 1.9199249999999999,
-        "symbol": "TMK"
+        "symbol": "TMK",
+        "dailyChange": 1.3
     },
     {
         "id": "topmix",
@@ -3422,7 +3566,8 @@
         "highPrice": 0.5462499999999999,
         "openPrice": 0.410006,
         "closePrice": 0.419988,
-        "symbol": "TOPMIX"
+        "symbol": "TOPMIX",
+        "dailyChange": 2.6
     },
     {
         "id": "topvisn",
@@ -3444,7 +3589,8 @@
         "highPrice": 0.184,
         "openPrice": 0.389994,
         "closePrice": 0.339999,
-        "symbol": "TOPVISN"
+        "symbol": "TOPVISN",
+        "dailyChange": null
     },
     {
         "id": "tsa",
@@ -3466,7 +3612,8 @@
         "highPrice": 0.9889999999999999,
         "openPrice": 0.579975,
         "closePrice": 0.5750250000000001,
-        "symbol": "TSA"
+        "symbol": "TSA",
+        "dailyChange": 0.3
     },
     {
         "id": "uue-holdings",
@@ -3492,7 +3639,8 @@
         "closePrice": 0.69,
         "strategy": "Scalp",
         "pe": 65,
-        "symbol": "UUE"
+        "symbol": "UUE",
+        "dailyChange": 2.2
     },
     {
         "id": "vanzo",
@@ -3514,7 +3662,8 @@
         "highPrice": 0.14375,
         "openPrice": 0.175005,
         "closePrice": 0.165,
-        "symbol": "VANZO"
+        "symbol": "VANZO",
+        "dailyChange": null
     },
     {
         "id": "vtc",
@@ -3536,7 +3685,8 @@
         "highPrice": 0.2645,
         "openPrice": 0.5,
         "closePrice": 0.405,
-        "symbol": "VTC"
+        "symbol": "VTC",
+        "dailyChange": null
     },
     {
         "id": "wellchip-ns",
@@ -3558,7 +3708,8 @@
         "highPrice": 1.6099999999999999,
         "openPrice": 1.65002,
         "closePrice": 1.720055,
-        "symbol": "WELLCHIP [NS]"
+        "symbol": "WELLCHIP [NS]",
+        "dailyChange": null
     },
     {
         "id": "wentel-engineering",
@@ -3582,7 +3733,8 @@
         "closePrice": 0.25,
         "strategy": "Scalp",
         "pe": 11.3,
-        "symbol": "WENTEL"
+        "symbol": "WENTEL",
+        "dailyChange": 1.2
     },
     {
         "id": "winstar",
@@ -3604,7 +3756,8 @@
         "highPrice": 0.6325,
         "openPrice": 0.48999999999999994,
         "closePrice": 0.509985,
-        "symbol": "WINSTAR"
+        "symbol": "WINSTAR",
+        "dailyChange": 2.3
     },
     {
         "id": "zantat",
@@ -3628,7 +3781,8 @@
         "strategy": "Scalp",
         "pe": 10.4,
         "highPrice": 0.20124999999999998,
-        "symbol": "ZANTAT"
+        "symbol": "ZANTAT",
+        "dailyChange": null
     },
     {
         "id": "adb-ns",
@@ -3652,7 +3806,8 @@
         "highPrice": 0.73025,
         "openPrice": 1.08999,
         "closePrice": 0.749991,
-        "symbol": "ADB"
+        "symbol": "ADB",
+        "dailyChange": 0.2
     },
     {
         "id": "ceb-ns",
@@ -3674,7 +3829,8 @@
         "highPrice": 0.33924999999999994,
         "openPrice": 1.4200199999999998,
         "closePrice": 1.5000300000000002,
-        "symbol": "CEB [NS]"
+        "symbol": "CEB [NS]",
+        "dailyChange": null
     },
     {
         "id": "chb",
@@ -3698,7 +3854,8 @@
         "highPrice": 0.9487499999999999,
         "openPrice": 0.50001,
         "closePrice": 0.57001,
-        "symbol": "CHB"
+        "symbol": "CHB",
+        "dailyChange": -1.3
     },
     {
         "id": "cloudpt",
@@ -3720,7 +3877,8 @@
         "highPrice": 0.60375,
         "openPrice": 0.7500060000000001,
         "closePrice": 0.515014,
-        "symbol": "CLOUDPT"
+        "symbol": "CLOUDPT",
+        "dailyChange": 0.5
     },
     {
         "id": "cpetech",
@@ -3742,7 +3900,8 @@
         "highPrice": 0.8969999999999999,
         "openPrice": 0.899977,
         "closePrice": 0.914957,
-        "symbol": "CPETECH"
+        "symbol": "CPETECH",
+        "dailyChange": null
     },
     {
         "id": "day3",
@@ -3764,7 +3923,8 @@
         "highPrice": 0.14375,
         "openPrice": 0.65001,
         "closePrice": 0.6249899999999999,
-        "symbol": "DAY3"
+        "symbol": "DAY3",
+        "dailyChange": null
     },
     {
         "id": "dchcare",
@@ -3786,7 +3946,8 @@
         "highPrice": 0.1265,
         "openPrice": 0.4,
         "closePrice": 0.45,
-        "symbol": "DCHCARE"
+        "symbol": "DCHCARE",
+        "dailyChange": null
     },
     {
         "id": "dss",
@@ -3808,7 +3969,8 @@
         "highPrice": 0.29324999999999996,
         "openPrice": 0.8099850000000002,
         "closePrice": 0.620015,
-        "symbol": "DSS"
+        "symbol": "DSS",
+        "dailyChange": null
     },
     {
         "id": "dxn",
@@ -3830,7 +3992,8 @@
         "highPrice": 0.53475,
         "openPrice": 0.68999,
         "closePrice": 0.6649999999999999,
-        "symbol": "DXN"
+        "symbol": "DXN",
+        "dailyChange": null
     },
     {
         "id": "edelteq",
@@ -3852,7 +4015,8 @@
         "highPrice": 0.43699999999999994,
         "openPrice": 0.75,
         "closePrice": 0.730008,
-        "symbol": "EDELTEQ"
+        "symbol": "EDELTEQ",
+        "dailyChange": 0.4
     },
     {
         "id": "emcc-ns",
@@ -3874,7 +4038,8 @@
         "highPrice": 0.36224999999999996,
         "openPrice": 0.319992,
         "closePrice": 0.315,
-        "symbol": "EMCC [NS]"
+        "symbol": "EMCC [NS]",
+        "dailyChange": 0.6
     },
     {
         "id": "glxt",
@@ -3896,7 +4061,8 @@
         "highPrice": 0.24149999999999996,
         "openPrice": 0.6500090000000001,
         "closePrice": 0.25499900000000003,
-        "symbol": "GLXT"
+        "symbol": "GLXT",
+        "dailyChange": 0.9
     },
     {
         "id": "jtgroup",
@@ -3920,7 +4086,8 @@
         "highPrice": 0.62675,
         "openPrice": 0.304992,
         "closePrice": 0.309987,
-        "symbol": "JTGROUP"
+        "symbol": "JTGROUP",
+        "dailyChange": 0.8
     },
     {
         "id": "kgw",
@@ -3942,7 +4109,8 @@
         "highPrice": 0.12074999999999998,
         "openPrice": 0.22999199999999997,
         "closePrice": 0.22999199999999997,
-        "symbol": "KGW"
+        "symbol": "KGW",
+        "dailyChange": null
     },
     {
         "id": "kitacon",
@@ -3964,7 +4132,8 @@
         "highPrice": 0.7934999999999999,
         "openPrice": 0.990012,
         "closePrice": 0.7499720000000001,
-        "symbol": "KITACON"
+        "symbol": "KITACON",
+        "dailyChange": 0.7
     },
     {
         "id": "lpbhd",
@@ -3983,7 +4152,8 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
-        "highPrice": 0.12074999999999998
+        "highPrice": 0.12074999999999998,
+        "dailyChange": null
     },
     {
         "id": "mbn-ns",
@@ -4005,7 +4175,8 @@
         "highPrice": 0.13225,
         "openPrice": 0.279993,
         "closePrice": 0.269997,
-        "symbol": "MBN [NS]"
+        "symbol": "MBN [NS]",
+        "dailyChange": null
     },
     {
         "id": "mersec-ns",
@@ -4027,7 +4198,8 @@
         "highPrice": 0.3105,
         "openPrice": 0.27,
         "closePrice": 0.3,
-        "symbol": "MERSEC [NS]"
+        "symbol": "MERSEC [NS]",
+        "dailyChange": 1.4
     },
     {
         "id": "minox",
@@ -4049,7 +4221,8 @@
         "highPrice": 0.21849999999999997,
         "openPrice": 0.315,
         "closePrice": 0.37,
-        "symbol": "MINOX"
+        "symbol": "MINOX",
+        "dailyChange": null
     },
     {
         "id": "mstgolf",
@@ -4071,7 +4244,8 @@
         "highPrice": 0.184,
         "openPrice": 0.784971,
         "closePrice": 0.78003,
-        "symbol": "MSTGOLF"
+        "symbol": "MSTGOLF",
+        "dailyChange": null
     },
     {
         "id": "natgate",
@@ -4095,7 +4269,8 @@
         "highPrice": 0.851,
         "openPrice": 0.810008,
         "closePrice": 1.000008,
-        "symbol": "NATGATE"
+        "symbol": "NATGATE",
+        "dailyChange": 0.1
     },
     {
         "id": "oppstar",
@@ -4120,7 +4295,8 @@
         "highPrice": 0.368,
         "openPrice": 2.05002,
         "closePrice": 2.429973,
-        "symbol": "OPPSTAR"
+        "symbol": "OPPSTAR",
+        "dailyChange": null
     },
     {
         "id": "panda",
@@ -4142,7 +4318,8 @@
         "highPrice": 0.24724999999999997,
         "openPrice": 0.29,
         "closePrice": 0.26,
-        "symbol": "PANDA"
+        "symbol": "PANDA",
+        "dailyChange": null
     },
     {
         "id": "plytec",
@@ -4164,7 +4341,8 @@
         "highPrice": 0.1955,
         "openPrice": 0.36000999999999994,
         "closePrice": 0.32500999999999997,
-        "symbol": "PLYTEC"
+        "symbol": "PLYTEC",
+        "dailyChange": null
     },
     {
         "id": "radium",
@@ -4188,7 +4366,8 @@
         "strategy": "Wait / Exit",
         "pe": 17.1,
         "highPrice": 0.575,
-        "symbol": "RADIUM"
+        "symbol": "RADIUM",
+        "dailyChange": 1.3
     },
     {
         "id": "skywld",
@@ -4210,7 +4389,8 @@
         "highPrice": 0.43699999999999994,
         "openPrice": 0.8,
         "closePrice": 0.7400000000000001,
-        "symbol": "SKYWLD"
+        "symbol": "SKYWLD",
+        "dailyChange": null
     },
     {
         "id": "skyworld",
@@ -4231,7 +4411,8 @@
         "ib": "Kenanga",
         "fundUse": "Land Acquisition",
         "pe": 5.56,
-        "highPrice": 0.6325
+        "highPrice": 0.6325,
+        "dailyChange": null
     },
     {
         "id": "ssf",
@@ -4253,7 +4434,8 @@
         "highPrice": 0.44275,
         "openPrice": 0.25,
         "closePrice": 0.265,
-        "symbol": "SSF"
+        "symbol": "SSF",
+        "dailyChange": 0.7
     },
     {
         "id": "synergy",
@@ -4275,7 +4457,8 @@
         "highPrice": 0.24724999999999997,
         "openPrice": 0.37999099999999997,
         "closePrice": 0.35002,
-        "symbol": "SYNERGY"
+        "symbol": "SYNERGY",
+        "dailyChange": null
     },
     {
         "id": "ttvhb",
@@ -4297,7 +4480,8 @@
         "highPrice": 0.22424999999999998,
         "openPrice": 1.4900160000000002,
         "closePrice": 1.2799980000000002,
-        "symbol": "TTVHB"
+        "symbol": "TTVHB",
+        "dailyChange": null
     },
     {
         "id": "vlb",
@@ -4319,7 +4503,8 @@
         "highPrice": 0.67275,
         "openPrice": 0.379995,
         "closePrice": 0.389994,
-        "symbol": "VLB"
+        "symbol": "VLB",
+        "dailyChange": 0.6
     },
     {
         "id": "wells",
@@ -4343,7 +4528,8 @@
         "highPrice": 0.759,
         "openPrice": 0.330004,
         "closePrice": 0.430008,
-        "symbol": "WELLS"
+        "symbol": "WELLS",
+        "dailyChange": 2.4
     },
     {
         "id": "agmo",
@@ -4367,7 +4553,8 @@
         "openPrice": 0.7750080000000001,
         "closePrice": 0.7849919999999999,
         "symbol": "AGMO",
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": 1.61
     },
     {
         "id": "amereit",
@@ -4389,7 +4576,8 @@
         "highPrice": 1.9434999999999998,
         "openPrice": 1.13,
         "closePrice": 1.1599449999999998,
-        "symbol": "AMEREIT"
+        "symbol": "AMEREIT",
+        "dailyChange": 0.3
     },
     {
         "id": "beta",
@@ -4411,7 +4599,8 @@
         "highPrice": 0.6612499999999999,
         "openPrice": 0.615,
         "closePrice": 0.71,
-        "symbol": "BETA"
+        "symbol": "BETA",
+        "dailyChange": -1.5
     },
     {
         "id": "cengild",
@@ -4433,7 +4622,8 @@
         "highPrice": 0.23574999999999996,
         "openPrice": 0.495,
         "closePrice": 0.46500300000000006,
-        "symbol": "CENGILD"
+        "symbol": "CENGILD",
+        "dailyChange": null
     },
     {
         "id": "cnergen",
@@ -4452,7 +4642,8 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
-        "highPrice": 0.46575
+        "highPrice": 0.46575,
+        "dailyChange": null
     },
     {
         "id": "coraza",
@@ -4476,7 +4667,8 @@
         "highPrice": 0.91425,
         "openPrice": 0.7000000000000001,
         "closePrice": 0.6450080000000001,
-        "symbol": "CORAZA"
+        "symbol": "CORAZA",
+        "dailyChange": -1.4
     },
     {
         "id": "cosmos-ns",
@@ -4498,7 +4690,8 @@
         "highPrice": 0.3105,
         "openPrice": 0.509985,
         "closePrice": 0.5599999999999999,
-        "symbol": "COSMOS [NS]"
+        "symbol": "COSMOS [NS]",
+        "dailyChange": null
     },
     {
         "id": "eca",
@@ -4520,7 +4713,8 @@
         "highPrice": 0.1955,
         "openPrice": 0.6499950000000001,
         "closePrice": 0.7550040000000001,
-        "symbol": "ECA"
+        "symbol": "ECA",
+        "dailyChange": -1.2
     },
     {
         "id": "eib-ns",
@@ -4542,7 +4736,8 @@
         "highPrice": 0.17825,
         "openPrice": 0.27501,
         "closePrice": 0.26001,
-        "symbol": "EIB [NS]"
+        "symbol": "EIB [NS]",
+        "dailyChange": null
     },
     {
         "id": "ffb",
@@ -4566,7 +4761,8 @@
         "highPrice": 2.921,
         "openPrice": 1.7000550000000003,
         "closePrice": 1.7200350000000002,
-        "symbol": "FFB"
+        "symbol": "FFB",
+        "dailyChange": -1
     },
     {
         "id": "infom",
@@ -4590,7 +4786,8 @@
         "highPrice": 1.2305,
         "openPrice": 0.6000000000000001,
         "closePrice": 0.535,
-        "symbol": "INFOM"
+        "symbol": "INFOM",
+        "dailyChange": 0.4
     },
     {
         "id": "infotec",
@@ -4612,7 +4809,8 @@
         "highPrice": 0.391,
         "openPrice": 0.33001600000000003,
         "closePrice": 0.304992,
-        "symbol": "INFOTEC"
+        "symbol": "INFOTEC",
+        "dailyChange": -0.6
     },
     {
         "id": "itmax",
@@ -4636,7 +4834,8 @@
         "highPrice": 5.577499999999999,
         "openPrice": 1.5200420000000001,
         "closePrice": 1.379979,
-        "symbol": "ITMAX"
+        "symbol": "ITMAX",
+        "dailyChange": 1.5
     },
     {
         "id": "leform",
@@ -4658,7 +4857,8 @@
         "highPrice": 0.1955,
         "openPrice": 0.194994,
         "closePrice": 0.18498900000000001,
-        "symbol": "LEFORM"
+        "symbol": "LEFORM",
+        "dailyChange": null
     },
     {
         "id": "lgms",
@@ -4682,7 +4882,8 @@
         "openPrice": 0.6,
         "closePrice": 0.845,
         "symbol": "LGMS",
-        "sifuTargetPrice": 0.65
+        "sifuTargetPrice": 0.65,
+        "dailyChange": null
     },
     {
         "id": "mnhldg",
@@ -4707,7 +4908,8 @@
         "openPrice": 0.260001,
         "closePrice": 0.23498999999999998,
         "symbol": "MNHLDG",
-        "sifuTargetPrice": 2.99
+        "sifuTargetPrice": 2.99,
+        "dailyChange": 6.2
     },
     {
         "id": "orgabio",
@@ -4729,7 +4931,8 @@
         "highPrice": 0.322,
         "openPrice": 0.360003,
         "closePrice": 0.340008,
-        "symbol": "ORGABIO"
+        "symbol": "ORGABIO",
+        "dailyChange": null
     },
     {
         "id": "ppjack-ns",
@@ -4753,7 +4956,8 @@
         "highPrice": 1.0465,
         "openPrice": 0.39,
         "closePrice": 0.39501,
-        "symbol": "PPJACK [NS]"
+        "symbol": "PPJACK [NS]",
+        "dailyChange": 1.7
     },
     {
         "id": "ptrb",
@@ -4775,7 +4979,8 @@
         "highPrice": 0.3565,
         "openPrice": 0.370008,
         "closePrice": 0.370008,
-        "symbol": "PTRB"
+        "symbol": "PTRB",
+        "dailyChange": null
     },
     {
         "id": "senfong",
@@ -4797,7 +5002,8 @@
         "highPrice": 0.7705,
         "openPrice": 0.75,
         "closePrice": 0.675,
-        "symbol": "SENFONG"
+        "symbol": "SENFONG",
+        "dailyChange": null
     },
     {
         "id": "senheng",
@@ -4821,7 +5027,8 @@
         "strategy": "Wait / Exit",
         "pe": 28.8,
         "highPrice": 0.207,
-        "symbol": "SENHENG"
+        "symbol": "SENHENG",
+        "dailyChange": null
     },
     {
         "id": "sfptech",
@@ -4843,7 +5050,8 @@
         "highPrice": 0.15525,
         "openPrice": 0.6,
         "closePrice": 0.66999,
-        "symbol": "SFPTECH"
+        "symbol": "SFPTECH",
+        "dailyChange": null
     },
     {
         "id": "sns",
@@ -4867,7 +5075,8 @@
         "highPrice": 0.5405,
         "openPrice": 0.25,
         "closePrice": 0.265,
-        "symbol": "SNS"
+        "symbol": "SNS",
+        "dailyChange": 2
     },
     {
         "id": "sunview",
@@ -4889,7 +5098,8 @@
         "highPrice": 0.41974999999999996,
         "openPrice": 0.6000099999999999,
         "closePrice": 0.4599979999999999,
-        "symbol": "SUNVIEW"
+        "symbol": "SUNVIEW",
+        "dailyChange": 2.4
     },
     {
         "id": "taghill",
@@ -4911,7 +5121,8 @@
         "highPrice": 0.06899999999999999,
         "openPrice": 0.30999000000000004,
         "closePrice": 0.30999000000000004,
-        "symbol": "TAGHILL"
+        "symbol": "TAGHILL",
+        "dailyChange": null
     },
     {
         "id": "umc",
@@ -4933,7 +5144,8 @@
         "highPrice": 0.3565,
         "openPrice": 0.5,
         "closePrice": 0.44,
-        "symbol": "UMC"
+        "symbol": "UMC",
+        "dailyChange": null
     },
     {
         "id": "unique",
@@ -4955,7 +5167,8 @@
         "highPrice": 0.44275,
         "openPrice": 0.210002,
         "closePrice": 0.22500399999999998,
-        "symbol": "UNIQUE"
+        "symbol": "UNIQUE",
+        "dailyChange": 0.8
     },
     {
         "id": "unitrad-ns",
@@ -4977,7 +5190,8 @@
         "highPrice": 0.2645,
         "openPrice": 0.264992,
         "closePrice": 0.3,
-        "symbol": "UNITRAD [NS]"
+        "symbol": "UNITRAD [NS]",
+        "dailyChange": null
     },
     {
         "id": "unitrade",
@@ -4998,7 +5212,8 @@
         "ib": "M&A Securities",
         "fundUse": "Working Capital",
         "pe": 11.9,
-        "highPrice": 0.1725
+        "highPrice": 0.1725,
+        "dailyChange": null
     },
     {
         "id": "yewlee",
@@ -5022,7 +5237,8 @@
         "highPrice": 0.63825,
         "openPrice": 0.28501200000000004,
         "closePrice": 0.28999600000000003,
-        "symbol": "YEWLEE"
+        "symbol": "YEWLEE",
+        "dailyChange": 1.2
     },
     {
         "id": "yxpm",
@@ -5044,7 +5260,8 @@
         "highPrice": 0.24149999999999996,
         "openPrice": 0.28,
         "closePrice": 0.270004,
-        "symbol": "YXPM"
+        "symbol": "YXPM",
+        "dailyChange": null
     },
     {
         "id": "atech",
@@ -5066,7 +5283,8 @@
         "highPrice": 0.8337499999999999,
         "openPrice": 1.410048,
         "closePrice": 1.7000000000000002,
-        "symbol": "ATECH"
+        "symbol": "ATECH",
+        "dailyChange": null
     },
     {
         "id": "cekd",
@@ -5088,7 +5306,8 @@
         "highPrice": 0.33924999999999994,
         "openPrice": 0.6,
         "closePrice": 0.5449919999999999,
-        "symbol": "CEKD"
+        "symbol": "CEKD",
+        "dailyChange": null
     },
     {
         "id": "ctos",
@@ -5112,7 +5331,8 @@
         "openPrice": 1.49996,
         "closePrice": 1.6199700000000004,
         "symbol": "CTOS",
-        "sifuTargetPrice": 0.9
+        "sifuTargetPrice": 0.9,
+        "dailyChange": null
     },
     {
         "id": "ecomate",
@@ -5136,7 +5356,8 @@
         "highPrice": 0.9774999999999999,
         "openPrice": 0.679998,
         "closePrice": 0.485001,
-        "symbol": "ECOMATE"
+        "symbol": "ECOMATE",
+        "dailyChange": -0.8
     },
     {
         "id": "flexi",
@@ -5158,7 +5379,8 @@
         "highPrice": 0.1495,
         "openPrice": 0.6900000000000001,
         "closePrice": 0.43,
-        "symbol": "FLEXI"
+        "symbol": "FLEXI",
+        "dailyChange": null
     },
     {
         "id": "haily",
@@ -5180,7 +5402,8 @@
         "highPrice": 0.22424999999999998,
         "openPrice": 0.7900240000000001,
         "closePrice": 0.7399760000000001,
-        "symbol": "HAILY"
+        "symbol": "HAILY",
+        "dailyChange": null
     },
     {
         "id": "hpphb",
@@ -5202,7 +5425,8 @@
         "highPrice": 0.322,
         "openPrice": 0.5699879999999999,
         "closePrice": 0.709992,
-        "symbol": "HPPHB"
+        "symbol": "HPPHB",
+        "dailyChange": null
     },
     {
         "id": "mobilia",
@@ -5224,7 +5448,8 @@
         "highPrice": 0.09775,
         "openPrice": 0.6500030000000001,
         "closePrice": 0.5549900000000001,
-        "symbol": "MOBILIA"
+        "symbol": "MOBILIA",
+        "dailyChange": null
     },
     {
         "id": "nestcon",
@@ -5246,7 +5471,8 @@
         "highPrice": 0.39674999999999994,
         "openPrice": 0.299992,
         "closePrice": 0.320012,
-        "symbol": "NESTCON"
+        "symbol": "NESTCON",
+        "dailyChange": 1
     },
     {
         "id": "pekat",
@@ -5270,7 +5496,8 @@
         "highPrice": 1.8399999999999999,
         "openPrice": 0.8499840000000001,
         "closePrice": 0.815008,
-        "symbol": "PEKAT"
+        "symbol": "PEKAT",
+        "dailyChange": 1.8
     },
     {
         "id": "ramssol",
@@ -5292,7 +5519,8 @@
         "highPrice": 0.8394999999999999,
         "openPrice": 0.7000200000000001,
         "closePrice": 0.509985,
-        "symbol": "RAMSSOL"
+        "symbol": "RAMSSOL",
+        "dailyChange": 1.2
     },
     {
         "id": "swift-haulage",
@@ -5316,7 +5544,8 @@
         "closePrice": 0.96,
         "strategy": "Wait / Exit",
         "pe": 17.5,
-        "symbol": "SWIFT"
+        "symbol": "SWIFT",
+        "dailyChange": null
     },
     {
         "id": "teladan",
@@ -5338,7 +5567,8 @@
         "highPrice": 0.9085,
         "openPrice": 0.6,
         "closePrice": 0.57,
-        "symbol": "TELADAN"
+        "symbol": "TELADAN",
+        "dailyChange": 1.6
     },
     {
         "id": "tjsetia",
@@ -5360,7 +5590,8 @@
         "highPrice": 0.24724999999999997,
         "openPrice": 0.7849799999999999,
         "closePrice": 0.7399699999999999,
-        "symbol": "TJSETIA"
+        "symbol": "TJSETIA",
+        "dailyChange": null
     },
     {
         "id": "volcano",
@@ -5382,7 +5613,8 @@
         "highPrice": 0.28175,
         "openPrice": 0.7,
         "closePrice": 0.48499499999999995,
-        "symbol": "VOLCANO"
+        "symbol": "VOLCANO",
+        "dailyChange": null
     },
     {
         "id": "yenher-ns",
@@ -5404,7 +5636,8 @@
         "highPrice": 0.9199999999999999,
         "openPrice": 0.9950300000000001,
         "closePrice": 0.90003,
-        "symbol": "YENHER [NS]"
+        "symbol": "YENHER [NS]",
+        "dailyChange": null
     },
     {
         "id": "aco",
@@ -5426,7 +5659,8 @@
         "highPrice": 0.184,
         "openPrice": 0.200004,
         "closePrice": 0.15999200000000002,
-        "symbol": "ACO"
+        "symbol": "ACO",
+        "dailyChange": null
     },
     {
         "id": "aneka",
@@ -5445,7 +5679,8 @@
         "stage": 5,
         "status": "Listed",
         "shariah": true,
-        "highPrice": 0.14375
+        "highPrice": 0.14375,
+        "dailyChange": null
     },
     {
         "id": "eframe",
@@ -5467,7 +5702,8 @@
         "highPrice": 0.322,
         "openPrice": 0.344988,
         "closePrice": 0.3699920000000001,
-        "symbol": "EFRAME"
+        "symbol": "EFRAME",
+        "dailyChange": null
     },
     {
         "id": "innature-ns",
@@ -5489,7 +5725,8 @@
         "highPrice": 0.20124999999999998,
         "openPrice": 0.72,
         "closePrice": 0.6549760000000001,
-        "symbol": "INNATURE [NS]"
+        "symbol": "INNATURE [NS]",
+        "dailyChange": null
     },
     {
         "id": "mrdiy",
@@ -5511,7 +5748,8 @@
         "highPrice": 1.9204999999999999,
         "openPrice": 1.6,
         "closePrice": 1.74992,
-        "symbol": "MRDIY"
+        "symbol": "MRDIY",
+        "dailyChange": null
     },
     {
         "id": "optimax",
@@ -5535,7 +5773,8 @@
         "highPrice": 0.644,
         "openPrice": 0.7100099999999999,
         "closePrice": 0.68001,
-        "symbol": "OPTIMAX"
+        "symbol": "OPTIMAX",
+        "dailyChange": 2.1
     },
     {
         "id": "ovh-ns",
@@ -5557,7 +5796,8 @@
         "highPrice": 0.22999999999999998,
         "openPrice": 0.429988,
         "closePrice": 0.53001,
-        "symbol": "OVH [NS]"
+        "symbol": "OVH [NS]",
+        "dailyChange": null
     },
     {
         "id": "pwrwell",
@@ -5581,7 +5821,8 @@
         "highPrice": 0.8049999999999999,
         "openPrice": 0.255,
         "closePrice": 0.28500000000000003,
-        "symbol": "PWRWELL"
+        "symbol": "PWRWELL",
+        "dailyChange": 1
     },
     {
         "id": "rl",
@@ -5603,7 +5844,8 @@
         "highPrice": 0.30474999999999997,
         "symbol": "RL",
         "openPrice": 0.650014,
-        "closePrice": 0.5150009999999999
+        "closePrice": 0.5150009999999999,
+        "dailyChange": null
     },
     {
         "id": "samaiden",
@@ -5627,7 +5869,8 @@
         "highPrice": 1.472,
         "openPrice": 0.999984,
         "closePrice": 0.8050079999999998,
-        "symbol": "SAMAIDEN"
+        "symbol": "SAMAIDEN",
+        "dailyChange": 1.5
     },
     {
         "id": "scgbhd",
@@ -5651,7 +5894,8 @@
         "highPrice": 2.1734999999999998,
         "openPrice": 0.335002,
         "closePrice": 0.330004,
-        "symbol": "SCGBHD"
+        "symbol": "SCGBHD",
+        "dailyChange": 0.5
     },
     {
         "id": "tcs",
@@ -5673,7 +5917,8 @@
         "highPrice": 0.1035,
         "openPrice": 0.585005,
         "closePrice": 0.44999500000000003,
-        "symbol": "TCS"
+        "symbol": "TCS",
+        "dailyChange": null
     },
     {
         "id": "aimflex",
@@ -5695,7 +5940,8 @@
         "highPrice": 0.092,
         "openPrice": 0.25,
         "closePrice": 0.24499200000000002,
-        "symbol": "AIMFLEX"
+        "symbol": "AIMFLEX",
+        "dailyChange": null
     },
     {
         "id": "ame",
@@ -5717,7 +5963,8 @@
         "highPrice": 1.7479999999999998,
         "openPrice": 1.2799800000000001,
         "closePrice": 1.54999,
-        "symbol": "AME"
+        "symbol": "AME",
+        "dailyChange": -1.2
     },
     {
         "id": "dpih",
@@ -5739,7 +5986,8 @@
         "highPrice": 0.12074999999999998,
         "openPrice": 0.345,
         "closePrice": 0.27,
-        "symbol": "DPIH"
+        "symbol": "DPIH",
+        "dailyChange": null
     },
     {
         "id": "greatec",
@@ -5763,7 +6011,8 @@
         "highPrice": 2.7369999999999997,
         "openPrice": 0.6400119999999999,
         "closePrice": 0.7399910000000001,
-        "symbol": "GREATEC"
+        "symbol": "GREATEC",
+        "dailyChange": -0.8
     },
     {
         "id": "hpmt",
@@ -5785,7 +6034,8 @@
         "highPrice": 0.207,
         "openPrice": 0.5799920000000001,
         "closePrice": 0.500024,
-        "symbol": "HPMT"
+        "symbol": "HPMT",
+        "dailyChange": null
     },
     {
         "id": "khjb-ns",
@@ -5807,7 +6057,8 @@
         "highPrice": 0.1265,
         "openPrice": 0.39001,
         "closePrice": 0.35002,
-        "symbol": "KHJB [NS]"
+        "symbol": "KHJB [NS]",
+        "dailyChange": null
     },
     {
         "id": "lhi-ns",
@@ -5829,7 +6080,8 @@
         "highPrice": 0.851,
         "openPrice": 1.12002,
         "closePrice": 1.1,
-        "symbol": "LHI [NS]"
+        "symbol": "LHI [NS]",
+        "dailyChange": null
     },
     {
         "id": "mestron",
@@ -5851,7 +6103,8 @@
         "highPrice": 0.15525,
         "openPrice": 0.2,
         "closePrice": 0.16500800000000002,
-        "symbol": "MESTRON"
+        "symbol": "MESTRON",
+        "dailyChange": null
     },
     {
         "id": "mtag",
@@ -5873,7 +6126,8 @@
         "highPrice": 0.27599999999999997,
         "openPrice": 0.700024,
         "closePrice": 0.44000600000000006,
-        "symbol": "MTAG"
+        "symbol": "MTAG",
+        "dailyChange": null
     },
     {
         "id": "nadibhd",
@@ -5895,7 +6149,8 @@
         "highPrice": 0.40249999999999997,
         "openPrice": 0.39,
         "closePrice": 0.30500999999999995,
-        "symbol": "NADIBHD"
+        "symbol": "NADIBHD",
+        "dailyChange": 0
     },
     {
         "id": "sds",
@@ -5919,7 +6174,8 @@
         "highPrice": 0.5519999999999999,
         "openPrice": 0.259992,
         "closePrice": 0.25500100000000003,
-        "symbol": "SDS"
+        "symbol": "SDS",
+        "dailyChange": 2
     },
     {
         "id": "slvest",
@@ -5943,7 +6199,8 @@
         "highPrice": 3.128,
         "openPrice": 0.600005,
         "closePrice": 0.7549849999999999,
-        "symbol": "SLVEST"
+        "symbol": "SLVEST",
+        "dailyChange": 2.1
     },
     {
         "id": "spring",
@@ -5965,7 +6222,8 @@
         "highPrice": 0.13799999999999998,
         "openPrice": 0.25,
         "closePrice": 0.25,
-        "symbol": "SPRING"
+        "symbol": "SPRING",
+        "dailyChange": null
     },
     {
         "id": "tashin",
@@ -5987,7 +6245,8 @@
         "highPrice": 0.23574999999999996,
         "openPrice": 0.58,
         "closePrice": 0.484996,
-        "symbol": "TASHIN"
+        "symbol": "TASHIN",
+        "dailyChange": null
     },
     {
         "id": "uwc",
@@ -6011,7 +6270,8 @@
         "highPrice": 5.600499999999999,
         "openPrice": 1.1000299999999998,
         "closePrice": 1.399986,
-        "symbol": "UWC"
+        "symbol": "UWC",
+        "dailyChange": 0.6
     },
     {
         "id": "rng-tech-berhad",
@@ -6030,7 +6290,8 @@
         "ofs": true,
         "ofsPercentage": 38.4,
         "predictedGrade": "C",
-        "analystInsight": "⚠️ <b>WORTH IT UNTUK SCALP SAHAJA (GRADE C)</b><br>💡 Rest N Go mempunyai fundamental cash-cow yang baik dengan margin bersih tinggi (~36%) dan dibimbing oleh IB cemerlang (M&A Securities). Walau bagaimanapun, penawaran ini mempunyai <b>OFS besar (38.4%)</b> yang boleh mendatangkan tekanan jualan di hari listing. Sesuai untuk <b>Scalping sahaja</b> jika OS runcit kelak melebihi 45x+. Jika OS lemah, elak terus."
+        "analystInsight": "⚠️ <b>WORTH IT UNTUK SCALP SAHAJA (GRADE C)</b><br>💡 Rest N Go mempunyai fundamental cash-cow yang baik dengan margin bersih tinggi (~36%) dan dibimbing oleh IB cemerlang (M&A Securities). Walau bagaimanapun, penawaran ini mempunyai <b>OFS besar (38.4%)</b> yang boleh mendatangkan tekanan jualan di hari listing. Sesuai untuk <b>Scalping sahaja</b> jika OS runcit kelak melebihi 45x+. Jika OS lemah, elak terus.",
+        "dailyChange": 0.4
     },
     {
         "id": "liftech-group-berhad",
@@ -6046,7 +6307,8 @@
         "year": 2026,
         "currentPrice": 0.29,
         "analystInsight": "🏗️ <b>NEUTRAL/SKIP — FLAT EARNINGS MECHANICAL HANDLING PLAY</b><br>Liftech ditawarkan pada PE Terbitan 13.9x. Walaupun mempunyai baki buku pesanan unbilled RM41.6 juta, unjuran hasil dan untung bersih yang agak rata (flat) menjadikannya kurang menarik untuk premium yang tinggi. Skip bagi dagangan jangka pendek.",
-        "sifuTargetPrice": 0.28
+        "sifuTargetPrice": 0.28,
+        "dailyChange": -0.2
     },
     {
         "id": "hss-holdings-berhad",
@@ -6069,7 +6331,8 @@
         "ofsValue": 9180000,
         "fundUse": "33% bank repayment, 22% working capital, 19% capital expenditure, remainder for listing expenses (total IPO ≈ RM22.95M, OFS ≈ 40%)",
         "os": 10.56,
-        "performance": "-0.6%"
+        "performance": "-0.6%",
+        "dailyChange": null
     },
     {
         "id": "rt-pastry-holdings-berhad",
@@ -6086,7 +6349,8 @@
         "currentPrice": 0.179,
         "analystInsight": "🥐 <b>NEUTRAL — RETAIL BAKERY CHAIN (NON-SHARIAH)</b><br>RT Pastry ditawarkan pada PE Terbitan 10.2x. Pengembangan cawangan Lembah Klang dan Pahang menjadi pemangkin. Namun status Non-Shariah mengehadkan minat belian institusi dan pelabur patuh syariah.",
         "sifuTargetPrice": 0.22,
-        "performance": "-0.6%"
+        "performance": "-0.6%",
+        "dailyChange": null
     },
     {
         "id": "spb-development-berhad",
@@ -6100,7 +6364,8 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "tuc-holdings-berhad",
@@ -6113,7 +6378,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "readycare-holdings-berhad",
@@ -6127,7 +6393,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "wastech-resources-berhad",
@@ -6140,7 +6407,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "ttl-holdings-berhad",
@@ -6154,7 +6422,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "cmgi-berhad",
@@ -6168,7 +6437,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "eplas-global-berhad",
@@ -6181,7 +6451,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "loob-berhad",
@@ -6194,7 +6465,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "mmc-port-holdings-berhad",
@@ -6208,7 +6480,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "custom-food-holding-berhad",
@@ -6222,7 +6495,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "srkk-ai-berhad",
@@ -6236,7 +6510,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "wintech-metal-berhad",
@@ -6250,7 +6525,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "likei-logistic-services-berhad",
@@ -6264,7 +6540,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "goldfinch-group-berhad",
@@ -6277,7 +6554,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "unioleo-holdings-berhad",
@@ -6290,7 +6568,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "butterfield-fb-berhad",
@@ -6304,7 +6583,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "chubb-insurance-malaysia-berhad",
@@ -6317,7 +6597,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "evocom-berhad",
@@ -6331,7 +6612,8 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "slgc-berhad",
@@ -6349,7 +6631,8 @@
         "sector": "Construction",
         "predictedGrade": "B",
         "sifuTargetPrice": 0.36,
-        "analystInsight": "🏗️ <b>WORTH IT — DISCOUNTED G7 CONSTRUCTION PLAY</b><br>SLGC ditawarkan pada harga menarik RM0.28 (PE Terbitan 10.7x berdasarkan PAT FY24 RM16.0M). Sebagai kontraktor G7 bertapak kukuh di Johor dengan peluang JS-SEZ, Forward PE jatuh ke paras menarik 9.4x (FY25F). Menawarkan Margin of Safety sekitar 12.5% berbanding harga had beli RM0.32 dan potensi upside +28.6% ke harga sasaran RM0.36."
+        "analystInsight": "🏗️ <b>WORTH IT — DISCOUNTED G7 CONSTRUCTION PLAY</b><br>SLGC ditawarkan pada harga menarik RM0.28 (PE Terbitan 10.7x berdasarkan PAT FY24 RM16.0M). Sebagai kontraktor G7 bertapak kukuh di Johor dengan peluang JS-SEZ, Forward PE jatuh ke paras menarik 9.4x (FY25F). Menawarkan Margin of Safety sekitar 12.5% berbanding harga had beli RM0.32 dan potensi upside +28.6% ke harga sasaran RM0.36.",
+        "dailyChange": 0.5
     },
     {
         "id": "ecosys--malaysia--berhad",
@@ -6362,7 +6645,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "qube-international-berhad",
@@ -6375,7 +6659,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "egh-international-berhad",
@@ -6388,7 +6673,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "keb-berhad",
@@ -6402,7 +6688,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "impact-capital-holdings-berhad",
@@ -6416,7 +6703,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "year": 2026,
-        "sifuTargetPrice": 0.5
+        "sifuTargetPrice": 0.5,
+        "dailyChange": null
     },
     {
         "id": "jrk-holdings-berhad",
@@ -6429,7 +6717,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "mydcd-berhad",
@@ -6442,7 +6731,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -6455,7 +6745,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "empg-group-berhad",
@@ -6468,7 +6759,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "gta-holdings-berhad",
@@ -6481,7 +6773,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "emits-berhad",
@@ -6494,7 +6787,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "sca-solutions-berhad",
@@ -6507,7 +6801,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "yes-group-management-berhad",
@@ -6520,7 +6815,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "big-caring-group-bhd",
@@ -6533,7 +6829,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "kk-mart-retail-berhad",
@@ -6546,7 +6843,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "ska-capital-berhad",
@@ -6559,7 +6857,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "cnergenz",
@@ -6583,7 +6882,8 @@
         "highPrice": 0.9,
         "openPrice": 0.6,
         "closePrice": 0.58,
-        "sifuTargetPrice": 0.53
+        "sifuTargetPrice": 0.53,
+        "dailyChange": 2.59
     },
     {
         "id": "destini",
@@ -6607,7 +6907,8 @@
         "highPrice": 0.51,
         "openPrice": 0.35,
         "closePrice": 0.305,
-        "sifuTargetPrice": 0.58
+        "sifuTargetPrice": 0.58,
+        "dailyChange": null
     },
     {
         "id": "solarvest",
@@ -6631,7 +6932,8 @@
         "highPrice": 3.44,
         "openPrice": 0.35,
         "closePrice": 2.91,
-        "sifuTargetPrice": 3.1
+        "sifuTargetPrice": 3.1,
+        "dailyChange": 2.1
     },
     {
         "id": "wil-key-berhad",
@@ -6644,7 +6946,8 @@
         "shariah": false,
         "stage": 1,
         "status": "Draft / Exposure Phase",
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "register",
@@ -6652,7 +6955,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "access",
@@ -6660,7 +6964,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "seminars",
@@ -6668,7 +6973,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "recommended-amount-to-subscribe-",
@@ -6676,7 +6982,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "financing-details-",
@@ -6684,7 +6991,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "cost-breakdown-",
@@ -6692,7 +7000,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "filtered-statistics",
@@ -6700,7 +7009,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "select-stocks-",
@@ -6708,7 +7018,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "features",
@@ -6716,7 +7027,8 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     },
     {
         "id": "company",
@@ -6724,6 +7036,7 @@
         "stage": 1,
         "status": "Draft / Exposure Phase",
         "price": 0,
-        "year": 2026
+        "year": 2026,
+        "dailyChange": null
     }
 ]

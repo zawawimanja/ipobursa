@@ -259,6 +259,7 @@
                             <tr>
                                 <th style="width: 280px;">Nama Saham (Kod)</th>
                                 <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
                                 <th>Target Sifu (TP)</th>
                                 <th>ATH Sejarah</th>
                                 <th>Potensi Upside</th>
@@ -291,6 +292,7 @@
                             <tr>
                                 <th style="width: 280px;">Nama Saham (Kod)</th>
                                 <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
                                 <th>Target Sifu (TP)</th>
                                 <th>ATH Sejarah</th>
                                 <th>Potensi Upside</th>
@@ -323,6 +325,7 @@
                             <tr>
                                 <th style="width: 280px;">Nama Saham (Kod)</th>
                                 <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
                                 <th>Target Sifu (TP)</th>
                                 <th>ATH Sejarah</th>
                                 <th>Potensi Upside</th>
@@ -394,6 +397,18 @@
                     : 'N/A';
                 const athDisplay = ipo.highPrice ? 'RM ' + ipo.highPrice.toFixed(3) : 'N/A';
                 
+                const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
+                let dailyChangeHtml = '';
+                if (dailyChange === null) {
+                    dailyChangeHtml = `<span style="color: var(--text-dim); font-size: 0.85rem; font-weight: normal;">-</span>`;
+                } else if (dailyChange > 0) {
+                    dailyChangeHtml = `<span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">+${dailyChange.toFixed(2)}%</span>`;
+                } else if (dailyChange < 0) {
+                    dailyChangeHtml = `<span style="color: #ef4444; font-weight: bold; font-size: 0.9rem;">${dailyChange.toFixed(2)}%</span>`;
+                } else {
+                    dailyChangeHtml = `<span style="color: var(--text-dim); font-size: 0.85rem; font-weight: normal;">0.00%</span>`;
+                }
+
                 let upsideDisplay = '';
                 let upsideStyle = 'font-weight: 800; color: #10b981; font-size: 0.95rem;';
                 if (ipo.upside === null) {
@@ -433,6 +448,7 @@
                             </div>
                         </td>
                         <td style="font-weight: 700; color: #f8fafc;">${curDisplay}</td>
+                        <td style="font-weight: 700;">${dailyChangeHtml}</td>
                         <td style="font-weight: 700; color: #a5b4fc;">${targetDisplay}</td>
                         <td style="color: var(--text-dim);">${athDisplay}</td>
                         <td style="${upsideStyle}">${upsideDisplay}</td>
