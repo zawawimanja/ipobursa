@@ -18,8 +18,7 @@ try {
     eval('var stockProfiles = {' + stockProfilesMatch[1] + '};');
     
     const targets = data.filter(ipo => 
-        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad'].includes(ipo.id)) && 
-        (ipo.status === 'Listed' || ipo.status === 'Application Open' || ipo.status === 'MITI Allocation Phase') && 
+        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad', 'solarvest'].includes(ipo.id)) && 
         ipo.shariah === true
     );
     
@@ -33,20 +32,15 @@ try {
         
         if (stockProfiles[ipo.id]) {
             const p = stockProfiles[ipo.id];
-            // Calculate Valuation 1 for Projection F (earlier column) or alternative
+            // Calculate Valuation 1 for Projection F (first projection column)
             // Sifu Sheets calculates EPS = (patF / totalShares) * 100
             // Valuation 1 = targetPe * EPS / 100
-            // Since we want the entry target price, let's look at the unjuran columns.
-            // Sifu Sheets has two unjuran columns: revF/patF and revF1/patF1
             const epsF = (p.patF / p.totalShares) * 100;
             const valF = p.targetPe * epsF / 100;
             
-            const epsF1 = (p.patF1 / p.totalShares) * 100;
-            const valF1 = p.targetPe * epsF1 / 100;
-            
-            // We take the minimum (conservative) valuation target of the two columns as the sifu buy alert trigger!
-            sifuTP = Math.min(valF, valF1);
-            source = `stockProfiles (min of Projections: RM ${valF.toFixed(2)} vs RM ${valF1.toFixed(2)})`;
+            // We take the primary valuation target (valF) as the Sifu target price
+            sifuTP = valF;
+            source = `stockProfiles (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs:
             // Sifu's buy target is usually the average target price (avgTP) or IPO price

@@ -231,6 +231,9 @@
                 <a href="alerts.html" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 600;">
                     <i data-lucide="bell" style="width: 14px; height: 14px;"></i> <span class="nav-text">Zon Beli Alerts</span>
                 </a>
+                <a href="sifu-picks.html" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="folders" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu Picks</span>
+                </a>
                 <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
                     <i data-lucide="arrow-left"></i> <span class="nav-text">Back to Dashboard</span>
                 </a>
@@ -662,25 +665,25 @@
                 headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
                 
                 rev23: 42067000, rev24: 50440000, rev25: 77395000,
-                revF: 94887262.58, revF1: 95858440.00,
+                revF: 138842975, revF1: 140260000,
                 
                 gp23: 8600000, gp24: 15043000, gp25: 15043000,
-                gpF: 24500000, gpF1: 26000000,
+                gpF: 36000000, gpF1: 37500000,
                 
                 pat23: 4488000, pat24: 9057000, pat25: 19118000,
-                patF: 23437153.86, patF1: 23677034.68,
+                patF: 34778027, patF1: 35130000,
                 
                 eps23: 0.64, eps24: 1.29, eps25: 2.73,
                 
-                epsGrowthF: 22.53, epsGrowthF1: 1.12,
+                epsGrowthF: 43.9, epsGrowthF1: 1.0,
                 
                 assets23: 25198000, assets24: 38289000, assets25: 38289000,
-                assetsF: 45000000, assetsF1: 52000000,
+                assetsF: 38289000, assetsF1: 40000000,
                 
                 liab23: 16772000, liab24: 23806000, liab25: 23806000,
-                liabF: 21250000, liabF1: 24000000,
+                liabF: 23806000, liabF1: 25000000,
                 
-                targetPe: 17.5,
+                targetPe: 13.9,
                 catalysts: [
                     "<strong>Sebab Apply:</strong> Ride the Malaysia Data Center Boom (NTT, Oracle, Google/Gamuda). Pengiraan cincai-cincai sifu unjurkan <strong>RM0.59 - RM0.69</strong> (potensi peningkatan 23% - 44%).",
                     "<strong>Market Leader:</strong> Pemimpin pasaran dalam EPCC untuk diesel power backup & fuel distribution system bagi Data Center Tier 3 dan Tier 4 di Malaysia. Satu-satunya niche DC player seumpamanya di Bursa.",
@@ -1514,13 +1517,13 @@
                 headers: ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Alternative (FYE F)"],
                 
                 rev23: 365500000.00, rev24: 492600000.00, rev25: 536800000.00,
-                revF: 650000000.00, revF1: 600000000.00,
+                revF: 730000000.00, revF1: 600000000.00,
                 
                 gp23: 73100000.00, gp24: 98520000.00, gp25: 118096000.00,
-                gpF: 143000000.00, gpF1: 132000000.00,
+                gpF: 160600000.00, gpF1: 132000000.00,
                 
                 pat23: 19700000.00, pat24: 32300000.00, pat25: 51900000.00,
-                patF: 75000000.00, patF1: 62000000.00,
+                patF: 84248314.00, patF1: 62000000.00,
                 
                 eps23: 2.07, eps24: 3.40, eps25: 5.46,
                 
@@ -2246,10 +2249,25 @@
                 input.setAttribute('readonly', true);
             });
 
-            fillFormValues(stockProfiles['bus-cap']);
-            updateNotes(stockProfiles['bus-cap']);
-            calculateSheet();
-            updateQualitativeOverlay('bus-cap');
+            // Check URL query parameters for a specific stock
+            const urlParams = new URLSearchParams(window.location.search);
+            const stockParam = urlParams.get('stock');
+            
+            // Verify if the stock id is valid (either in profiles or general data)
+            const selectEl = document.getElementById('sheet-stock-select');
+            let defaultStock = 'bus-cap';
+            if (stockParam) {
+                const isValid = stockProfiles[stockParam] || (typeof ipoData !== 'undefined' && ipoData.some(x => x.id === stockParam));
+                if (isValid) {
+                    defaultStock = stockParam;
+                }
+            }
+            
+            if (selectEl) {
+                selectEl.value = defaultStock;
+            }
+            
+            loadSelectedStock();
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
     </script>

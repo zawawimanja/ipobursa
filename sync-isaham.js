@@ -49,8 +49,12 @@ function findExistingIPO(name, existingData) {
     const symbolMatch = existingData.find(d => d.symbol && d.symbol.toUpperCase() === cleanName);
     if (symbolMatch) return symbolMatch;
     
-    // Fallback to fuzzy normalize match
+    // Fallback to exact normalize match first to avoid greedy substring matching
     const normName = normalizeName(name);
+    const exactNormalizeMatch = existingData.find(d => normalizeName(d.companyName) === normName);
+    if (exactNormalizeMatch) return exactNormalizeMatch;
+    
+    // Fallback to fuzzy normalize match
     return existingData.find(d => {
         const normExisting = normalizeName(d.companyName);
         return normExisting.includes(normName) || normName.includes(normExisting);
