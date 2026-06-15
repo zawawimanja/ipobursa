@@ -389,7 +389,7 @@
                 const cleanSymbol = (ipo.symbol || '').replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
                 const showTv = ipo.stage === 5 && cleanSymbol;
                 const tvBadgeHtml = showTv 
-                    ? `<a href="https://www.tradingview.com/symbols/MYX-${cleanSymbol}/" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Lihat carta TradingView untuk ${symbolDisplay}"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
+                    ? `<a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${cleanSymbol}" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Buka carta TradingView untuk ${symbolDisplay}"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
                     : '';
 
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : 'grade-b';
