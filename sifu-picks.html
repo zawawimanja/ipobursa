@@ -240,6 +240,17 @@
             </p>
         </header>
 
+        <!-- Global Sort Controller -->
+        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem; backdrop-filter: blur(10px);">
+            <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i> Urutkan Mengikut:
+            </span>
+            <select id="sort-selector" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
+                <option value="upside">Potensi Upside (Tinggi ke Rendah)</option>
+                <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
+            </select>
+        </div>
+
         <div class="groups-container">
             <!-- GROUP 1: FRESH IPO -->
             <section class="group-card" id="group-1-card">
@@ -368,6 +379,9 @@
             let g2Count = 0;
             let g3Count = 0;
 
+            const sortSelector = document.getElementById('sort-selector');
+            const sortBy = sortSelector ? sortSelector.value : 'upside';
+
             // Sort by upside potential descending, allowing Grades A, B, and C that are in uptrend (currentPrice >= price)
             const validPicks = list.filter(ipo => 
                 ipo.shariah === true && 
@@ -381,12 +395,20 @@
                 return { ...ipo, upside };
             });
 
-            validPicks.sort((a, b) => {
-                if (a.upside === null && b.upside !== null) return 1;
-                if (a.upside !== null && b.upside === null) return -1;
-                if (a.upside === null && b.upside === null) return 0;
-                return b.upside - a.upside;
-            });
+            if (sortBy === 'upside') {
+                validPicks.sort((a, b) => {
+                    if (a.upside === null && b.upside !== null) return 1;
+                    if (a.upside !== null && b.upside === null) return -1;
+                    if (a.upside === null && b.upside === null) return 0;
+                    return b.upside - a.upside;
+                });
+            } else if (sortBy === 'dailyGain') {
+                validPicks.sort((a, b) => {
+                    const changeA = typeof a.dailyChange === 'number' ? a.dailyChange : -999;
+                    const changeB = typeof b.dailyChange === 'number' ? b.dailyChange : -999;
+                    return changeB - changeA;
+                });
+            }
 
             validPicks.forEach(ipo => {
                 const nameDisplay = ipo.companyName;
