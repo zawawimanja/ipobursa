@@ -143,6 +143,30 @@
             letter-spacing: 0.05em;
         }
 
+        .tv-badge {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            padding: 0.15rem 0.45rem;
+            border-radius: 0.25rem;
+            font-size: 0.65rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .tv-badge:hover {
+            background: #6366f1;
+            color: white;
+            border-color: #818cf8;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
         .grade-badge {
             font-weight: bold;
             font-size: 0.8rem;
@@ -362,6 +386,12 @@
                     ? `<span class="portfolio-badge"><i data-lucide="check-circle" style="width: 10px; height: 10px;"></i> Portfolio</span>` 
                     : `<span class="watchlist-badge"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> Watchlist</span>`;
 
+                const cleanSymbol = (ipo.symbol || '').replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
+                const showTv = ipo.stage === 5 && cleanSymbol;
+                const tvBadgeHtml = showTv 
+                    ? `<a href="https://www.tradingview.com/symbols/MYX-${cleanSymbol}/" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Lihat carta TradingView untuk ${symbolDisplay}"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
+                    : '';
+
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : 'grade-b';
                 const sectorDisplay = ipo.sector || 'N/A';
 
@@ -373,6 +403,7 @@
                                 <div style="display: flex; align-items: center; gap: 0.4rem;">
                                     <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
                                     ${badgeHtml}
+                                    ${tvBadgeHtml}
                                 </div>
                             </div>
                         </td>
