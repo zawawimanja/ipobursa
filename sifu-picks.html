@@ -246,8 +246,8 @@
                 <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i> Urutkan Mengikut:
             </span>
             <select id="sort-selector" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                <option value="upside">Potensi Upside (Tinggi ke Rendah)</option>
                 <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
+                <option value="upside">Potensi Upside (Tinggi ke Rendah)</option>
             </select>
         </div>
 
@@ -380,7 +380,7 @@
             let g3Count = 0;
 
             const sortSelector = document.getElementById('sort-selector');
-            const sortBy = sortSelector ? sortSelector.value : 'upside';
+            const sortBy = sortSelector ? sortSelector.value : 'dailyGain';
 
             // Sort by upside potential descending, allowing Grades A, B, and C that are in uptrend (currentPrice >= price)
             const validPicks = list.filter(ipo => 
