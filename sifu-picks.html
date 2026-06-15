@@ -369,26 +369,37 @@
             const validPicks = list.filter(ipo => 
                 ipo.shariah === true && 
                 ['A', 'B', 'C'].includes(ipo.predictedGrade) && 
-                typeof ipo.sifuTargetPrice === 'number' && 
                 ipo.currentPrice > 0 && 
                 ipo.currentPrice >= ipo.price // ONLY UPTREND (Current Price >= IPO Price)
             ).map(ipo => {
-                const upside = ((ipo.sifuTargetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
+                const upside = typeof ipo.sifuTargetPrice === 'number'
+                    ? ((ipo.sifuTargetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
+                    : null;
                 return { ...ipo, upside };
             });
 
-            validPicks.sort((a, b) => b.upside - a.upside);
+            validPicks.sort((a, b) => {
+                if (a.upside === null && b.upside !== null) return 1;
+                if (a.upside !== null && b.upside === null) return -1;
+                if (a.upside === null && b.upside === null) return 0;
+                return b.upside - a.upside;
+            });
 
             validPicks.forEach(ipo => {
                 const nameDisplay = ipo.companyName;
                 const symbolDisplay = ipo.symbol || ipo.id.toUpperCase();
                 const curDisplay = 'RM ' + ipo.currentPrice.toFixed(3);
-                const targetDisplay = 'RM ' + ipo.sifuTargetPrice.toFixed(2);
+                const targetDisplay = typeof ipo.sifuTargetPrice === 'number' 
+                    ? 'RM ' + ipo.sifuTargetPrice.toFixed(2) 
+                    : 'N/A';
                 const athDisplay = ipo.highPrice ? 'RM ' + ipo.highPrice.toFixed(3) : 'N/A';
                 
                 let upsideDisplay = '';
                 let upsideStyle = 'font-weight: 800; color: #10b981; font-size: 0.95rem;';
-                if (ipo.upside >= 0) {
+                if (ipo.upside === null) {
+                    upsideDisplay = 'N/A (Tiada TP)';
+                    upsideStyle = 'color: var(--text-dim); font-size: 0.8rem; font-style: italic;';
+                } else if (ipo.upside >= 0) {
                     upsideDisplay = '+' + ipo.upside.toFixed(1) + '%';
                 } else {
                     upsideDisplay = 'Above TP (' + Math.abs(ipo.upside).toFixed(1) + '%)';
