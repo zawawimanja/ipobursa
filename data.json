@@ -420,7 +420,7 @@
             }
         ],
         "openPrice": 0.575,
-        "highPrice": 0.58,
+        "highPrice": 0.78,
         "closePrice": 0.62,
         "currentPrice": 0.705,
         "performance": "+46.87%",
@@ -747,7 +747,7 @@
         "closePrice": 0.345,
         "strategy": "Scalp",
         "pe": 10,
-        "highPrice": 0.355,
+        "highPrice": 0.6,
         "ofs": true,
         "symbol": "OGX",
         "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M). Meskipun harganya merosot di bawah IPO pada hari pertama (sebab sentimen perang/geopolitik), syarikat telah melonjak melebihi 70% (ke RM0.60) disokong fundamental dan anugerah kontrak data center yang besar.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
@@ -2938,7 +2938,8 @@
         "highPrice": 1.518,
         "openPrice": 0.7699900000000001,
         "closePrice": 0.94003,
-        "symbol": "LWSABAH"
+        "symbol": "LWSABAH",
+        "sifuTargetPrice": 1.6
     },
     {
         "id": "master-tec",

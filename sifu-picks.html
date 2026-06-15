@@ -187,6 +187,12 @@
             border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
+        .grade-c {
+            color: #ec4899;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
         .empty-row td {
             text-align: center;
             color: var(--text-dim);
@@ -340,7 +346,7 @@
     <script>
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
-            'iab', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
+            'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
             'solarvest', 'ctos', 'lgms', 'oppstar', 'agmo'
         ];
 
@@ -359,13 +365,13 @@
             let g2Count = 0;
             let g3Count = 0;
 
-            // Sort by upside potential descending
+            // Sort by upside potential descending, allowing Grades A, B, and C that are in uptrend (currentPrice >= price)
             const validPicks = list.filter(ipo => 
                 ipo.shariah === true && 
-                ['A', 'B'].includes(ipo.predictedGrade) && 
+                ['A', 'B', 'C'].includes(ipo.predictedGrade) && 
                 typeof ipo.sifuTargetPrice === 'number' && 
                 ipo.currentPrice > 0 && 
-                ipo.currentPrice < ipo.sifuTargetPrice
+                ipo.currentPrice >= ipo.price // ONLY UPTREND (Current Price >= IPO Price)
             ).map(ipo => {
                 const upside = ((ipo.sifuTargetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
                 return { ...ipo, upside };
@@ -379,7 +385,15 @@
                 const curDisplay = 'RM ' + ipo.currentPrice.toFixed(3);
                 const targetDisplay = 'RM ' + ipo.sifuTargetPrice.toFixed(2);
                 const athDisplay = ipo.highPrice ? 'RM ' + ipo.highPrice.toFixed(3) : 'N/A';
-                const upsideDisplay = '+' + ipo.upside.toFixed(1) + '%';
+                
+                let upsideDisplay = '';
+                let upsideStyle = 'font-weight: 800; color: #10b981; font-size: 0.95rem;';
+                if (ipo.upside >= 0) {
+                    upsideDisplay = '+' + ipo.upside.toFixed(1) + '%';
+                } else {
+                    upsideDisplay = 'Above TP (' + Math.abs(ipo.upside).toFixed(1) + '%)';
+                    upsideStyle = 'font-weight: 800; color: #3b82f6; font-size: 0.85rem;'; // Blue/purple-blue for above target
+                }
                 
                 const isPortfolio = sifuPortfolio.includes(ipo.id);
                 const badgeHtml = isPortfolio 
@@ -392,7 +406,7 @@
                     ? `<a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${cleanSymbol}" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Buka carta TradingView untuk ${symbolDisplay}"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
                     : '';
 
-                const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : 'grade-b';
+                const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : (ipo.predictedGrade === 'B' ? 'grade-b' : 'grade-c');
                 const sectorDisplay = ipo.sector || 'N/A';
 
                 const rowHtml = `
@@ -410,7 +424,7 @@
                         <td style="font-weight: 700; color: #f8fafc;">${curDisplay}</td>
                         <td style="font-weight: 700; color: #a5b4fc;">${targetDisplay}</td>
                         <td style="color: var(--text-dim);">${athDisplay}</td>
-                        <td style="font-weight: 800; color: #10b981; font-size: 0.95rem;">${upsideDisplay}</td>
+                        <td style="${upsideStyle}">${upsideDisplay}</td>
                         <td><span class="grade-badge ${gradeClass}">Gred ${ipo.predictedGrade}</span></td>
                         <td style="color: var(--text-dim); font-size: 0.8rem;">${sectorDisplay}</td>
                     </tr>
