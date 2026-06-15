@@ -1,7 +1,7 @@
 {
     "date": "2026-06-16",
-    "timestamp": "2026-06-16T01:01:23.312Z",
-    "total_stocks": 94,
+    "timestamp": "2026-06-16T01:11:28.012Z",
+    "total_stocks": 93,
     "kumpulan_1": {
         "count": 6,
         "stocks": [
@@ -237,7 +237,7 @@
         ]
     },
     "kumpulan_3": {
-        "count": 78,
+        "count": 77,
         "stocks": [
             {
                 "id": "lwsabah",
@@ -420,20 +420,6 @@
                 "price": 0.3,
                 "predictedGrade": "B",
                 "sector": "Healthcare"
-            },
-            {
-                "id": "slvest",
-                "companyName": "SLVEST",
-                "symbol": "SLVEST",
-                "currentPrice": 3,
-                "dailyChange": 2.1,
-                "trend": "Uptrend",
-                "sifuTargetPrice": null,
-                "upside": null,
-                "highPrice": 3.128,
-                "price": 0.35,
-                "predictedGrade": "C",
-                "sector": "Industrial (Solar PV)"
             },
             {
                 "id": "solarvest",
