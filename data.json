@@ -2301,7 +2301,7 @@
         "listingDate": "18-Dec-2024",
         "year": 2024,
         "price": 0.27,
-        "currentPrice": 0.27,
+        "currentPrice": 0.19,
         "performance": "-29.63%",
         "os": 20,
         "ib": "M&A Securities",
@@ -2314,8 +2314,8 @@
         "highPrice": 0.23574999999999996,
         "openPrice": 0.235008,
         "closePrice": 0.23001300000000002,
-        "symbol": "RL",
-        "dailyChange": null
+        "symbol": "CARLO",
+        "dailyChange": -0.5
     },
     {
         "id": "crest",
@@ -9244,7 +9244,7 @@
         "sector": "Technology",
         "stage": 5,
         "price": 0.05,
-        "currentPrice": 0.06,
+        "currentPrice": 0.08,
         "sifuTargetPrice": 0.1,
         "highPrice": 0.08,
         "dailyChange": 0.5,
