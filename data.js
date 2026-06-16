@@ -160,9 +160,9 @@ const IPO_DATA = [
         "openPrice": 0.22,
         "highPrice": 0.225,
         "closePrice": 0.225,
-        "currentPrice": 0.23,
+        "currentPrice": 0.230,
         "performance": "+2.27%",
-        "dailyChange": 2.27
+        "dailyChange": 2.22
     },
     {
         "id": "1doc",
@@ -329,15 +329,15 @@ const IPO_DATA = [
         "pe": 15.85,
         "openPrice": 0.29,
         "closePrice": 0.305,
-        "currentPrice": 0.415,
-        "performance": "+36.21%",
-        "highPrice": 0.35,
+        "currentPrice": 0.410,
+        "performance": "+41.38%",
+        "highPrice": 0.415,
         "listingDate": "2026-04-23",
         "symbol": "AMS",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
         "predictedGrade": "B",
         "sifuTargetPrice": 0.49,
-        "dailyChange": 3.9
+        "dailyChange": 3.80
     },
     {
         "id": "carsome",
@@ -436,12 +436,12 @@ const IPO_DATA = [
         "openPrice": 0.575,
         "highPrice": 0.78,
         "closePrice": 0.62,
-        "currentPrice": 0.7,
-        "performance": "+46.87%",
+        "currentPrice": 0.720,
+        "performance": "+50.00%",
         "strategy": "Scalp",
         "symbol": "EIPOWER",
         "sifuTargetPrice": 0.69,
-        "dailyChange": 12.9
+        "dailyChange": 2.13
     },
     {
         "id": "empire-premium",
@@ -734,8 +734,8 @@ const IPO_DATA = [
         "listingDate": "12-Mar-2026",
         "year": 2026,
         "price": 0.35,
-        "currentPrice": 0.515,
-        "performance": "+50.00%",
+        "currentPrice": 0.520,
+        "performance": "+48.57%",
         "os": 110.1,
         "ib": "M&A Securities",
         "sector": "Industrial",
@@ -753,7 +753,7 @@ const IPO_DATA = [
         "symbol": "OGX",
         "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M). Meskipun harganya merosot di bawah IPO pada hari pertama (sebab sentimen perang/geopolitik), syarikat telah melonjak melebihi 70% (ke RM0.60) disokong fundamental dan anugerah kontrak data center yang besar.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
         "sifuTargetPrice": 0.49,
-        "dailyChange": 5
+        "dailyChange": -0.95
     },
     {
         "id": "sbs",
@@ -992,8 +992,8 @@ const IPO_DATA = [
         "listingDate": "16-Jan-2025",
         "year": 2025,
         "price": 0.28,
-        "currentPrice": 0.69,
-        "performance": "+142.86%",
+        "currentPrice": 0.685,
+        "performance": "+144.64%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -1004,12 +1004,12 @@ const IPO_DATA = [
         "shariah": true,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 0.6784999999999999,
+        "highPrice": 0.685,
         "openPrice": 0.33000799999999997,
         "closePrice": 0.33499200000000007,
         "symbol": "CBHB",
         "sifuTargetPrice": 0.53,
-        "dailyChange": 4.5
+        "dailyChange": 0.74
     },
     {
         "id": "cheeding",
@@ -1326,7 +1326,7 @@ const IPO_DATA = [
         "listingDate": "27-Oct-2025",
         "year": 2025,
         "price": 0.36,
-        "currentPrice": 1.36,
+        "currentPrice": 1.37,
         "performance": "+280.56%",
         "os": 11.5,
         "ib": "Alliance Islamic Bank",
@@ -2730,8 +2730,8 @@ const IPO_DATA = [
         "listingDate": "13-Nov-2024",
         "year": 2024,
         "price": 0.65,
-        "currentPrice": 1.4,
-        "performance": "+118.46%",
+        "currentPrice": 1.29,
+        "performance": "+98.46%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -4323,8 +4323,8 @@ const IPO_DATA = [
         "listingDate": "28-Apr-2022",
         "year": 2022,
         "price": 0.21,
-        "currentPrice": 2.79,
-        "performance": "+1209.52%",
+        "currentPrice": 2.80,
+        "performance": "+1233.33%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -4335,12 +4335,12 @@ const IPO_DATA = [
         "shariah": true,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-        "highPrice": 2.484,
+        "highPrice": 2.80,
         "openPrice": 0.260001,
         "closePrice": 0.23498999999999998,
         "symbol": "MNHLDG",
         "sifuTargetPrice": 2.99,
-        "dailyChange": 6.2
+        "dailyChange": 1.82
     },
     {
         "id": "orgabio",
@@ -5783,8 +5783,8 @@ const IPO_DATA = [
         "listingDate": "2022-05-24",
         "year": 2022,
         "price": 0.58,
-        "currentPrice": 0.625,
-        "performance": "+2.59%",
+        "currentPrice": 0.635,
+        "performance": "+9.48%",
         "os": 40.29,
         "ib": "UOB Kay Hian",
         "sector": "Technology (Semiconductor)",
@@ -5798,7 +5798,7 @@ const IPO_DATA = [
         "openPrice": 0.6,
         "closePrice": 0.58,
         "sifuTargetPrice": 0.53,
-        "dailyChange": 2.59
+        "dailyChange": 6.72
     },
     {
         "id": "destini",

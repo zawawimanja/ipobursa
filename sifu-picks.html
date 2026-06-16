@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sifu's Watchlist Groups | Bursa IPO Tracker</title>
-    <meta name="description" content="Categorized fundamental stock watchlists modeled after Sifu's strategies.">
+    <title>Sifu Picks & Tindakan | Bursa IPO Tracker</title>
+    <meta name="description" content="Kajian fundamental unjuran saham Sifu Picks disusun mengikut Kumpulan atau Status Tindakan.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=1.2"></script>
+    <script src="data.js?v=1.3"></script>
     <style>
         .groups-container {
             display: flex;
             flex-direction: column;
             gap: 2.5rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             margin-bottom: 4rem;
         }
 
@@ -83,7 +82,7 @@
             border-collapse: collapse;
             font-size: 0.85rem;
             text-align: left;
-            min-width: 800px;
+            min-width: 900px;
         }
 
         .picks-table th {
@@ -175,29 +174,69 @@
             text-transform: uppercase;
         }
 
-        .grade-a {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
+        .grade-a { color: #10b981; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .grade-b { color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .grade-c { color: #ec4899; background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.3); }
 
-        .grade-b {
-            color: #f59e0b;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+        .kump-badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.15rem 0.45rem;
+            border-radius: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
+        .badge-k1 { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25); }
+        .badge-k2 { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); }
+        .badge-k3 { background: rgba(129, 140, 248, 0.12); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.25); }
 
-        .grade-c {
-            color: #ec4899;
-            background: rgba(236, 72, 153, 0.1);
-            border: 1px solid rgba(236, 72, 153, 0.3);
-        }
+        .upside-val { font-weight: 800; font-size: 0.9rem; }
+        .upside-green { color: #10b981; }
+        .upside-blue { color: #3b82f6; }
 
         .empty-row td {
             text-align: center;
             color: var(--text-dim);
             padding: 2rem;
             font-style: italic;
+        }
+
+        /* View Mode Toggle Styles */
+        .mode-container {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 1.5rem;
+            gap: 0.25rem;
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .mode-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .mode-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
         }
 
         /* Tab Filter Styles */
@@ -284,6 +323,7 @@
         <div class="blob blob-3"></div>
     </div>
 
+    <!-- Navigation Header (Cleaned up, only Morning Brief & Back to Dashboard) -->
     <nav class="glass-header">
         <div class="container">
             <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
@@ -291,11 +331,8 @@
                 <span class="logo-text"><span>Bursa</span>IPO</span>
             </div>
             <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
-                <a href="sifu-sheets.html" class="btn-moomoo" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="table" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu Sheets</span>
-                </a>
-                <a href="alerts.html" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="bell" style="width: 14px; height: 14px;"></i> <span class="nav-text">Zon Beli Alerts</span>
+                <a href="morning-brief.html" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="sun" style="width: 14px; height: 14px;"></i> <span class="nav-text">Morning Brief</span>
                 </a>
                 <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
                     <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> <span class="nav-text">Dashboard</span>
@@ -305,21 +342,33 @@
     </nav>
 
     <main class="container" style="margin-top: 5.5rem;">
-        <header style="text-align: center; margin-bottom: 2.5rem;">
+        <header style="text-align: center; margin-bottom: 2rem;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.5rem;">
                 <i data-lucide="folders" style="color: #6366f1; width: 32px; height: 32px;"></i>
-                <h1 style="margin: 0; font-size: 2.25rem;">Sifu's <span style="text-shadow: 0 0 10px rgba(99, 102, 241, 0.4); color: #818cf8;">Watchlist Groups</span></h1>
+                <h1 style="margin: 0; font-size: 2.25rem;">Sifu's <span style="text-shadow: 0 0 10px rgba(99, 102, 241, 0.4); color: #818cf8;">Picks & Tindakan</span></h1>
             </div>
             <p style="color: var(--text-dim); max-width: 650px; margin: 0.5rem auto 0 auto;">
-                Kajian fundamental saham patuh Shariah yang belum hit target unjuran, dibahagikan mengikut gaya pelaburan Sifu: Saham Fresh, DCA/Swing, dan Saham Turnaround Mapan.
+                Kajian fundamental unjuran saham Sifu Picks. Susun mengikut Kumpulan Watchlist atau Status Tindakan semasa.
             </p>
         </header>
 
+        <!-- View Mode Toggle -->
+        <div style="text-align: center;">
+            <div class="mode-container">
+                <button class="mode-btn active" id="mode-groups" onclick="switchMode('groups')">
+                    <i data-lucide="folders"></i> Susunan Kumpulan
+                </button>
+                <button class="mode-btn" id="mode-actions" onclick="switchMode('actions')">
+                    <i data-lucide="clipboard-check"></i> Status Tindakan
+                </button>
+            </div>
+        </div>
+
         <!-- Global Control Bar -->
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem; backdrop-filter: blur(10px); flex-wrap: wrap;">
-            <!-- Tab buttons -->
-            <div class="tabs-container" id="group-tabs">
-                <button class="tab-btn active" onclick="filterGroup('all', this)">
+            <!-- Tab buttons (Visible in groups mode only) -->
+            <div class="tabs-container" id="group-tabs-wrap">
+                <button class="tab-btn active" id="btn-tab-all" onclick="filterGroup('all', this)">
                     <i data-lucide="layout-grid" style="width: 14px; height: 14px;"></i> Semua
                 </button>
                 <button class="tab-btn" onclick="filterGroup('g1', this)">
@@ -332,9 +381,24 @@
                     <i data-lucide="shield" style="width: 14px; height: 14px; color: #818cf8;"></i> Kumpulan 3
                 </button>
             </div>
+            
+            <div id="actions-tabs-placeholder" style="display: none; color: var(--text-dim); font-size: 0.85rem; font-weight: 500; align-items: center; gap: 0.3rem;">
+                <i data-lucide="clipboard-check" style="width: 14px; color: #10b981;"></i> Pandangan Susunan Tindakan
+            </div>
 
             <!-- Filters & Sort -->
             <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <!-- Scope selection (Visible in actions mode only) -->
+                <div id="scope-selector-wrap" style="display: none; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                        <i data-lucide="filter" style="width: 14px; height: 14px;"></i> Liputan:
+                    </span>
+                    <select id="scope-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
+                        <option value="portfolio">Portfolio Sifu</option>
+                        <option value="all">Semua Saham Aktif</option>
+                    </select>
+                </div>
+
                 <!-- Archive Date Picker -->
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
@@ -370,7 +434,8 @@
             </div>
         </div>
 
-        <div class="groups-container">
+        <!-- 1. GROUP MODE VIEW -->
+        <div class="groups-container" id="groups-view">
             <!-- GROUP 1: FRESH IPO -->
             <section class="group-card" id="group-1-card">
                 <div class="group-header">
@@ -470,6 +535,111 @@
                 </div>
             </section>
         </div>
+
+        <!-- 2. ACTION MODE VIEW -->
+        <div class="groups-container" id="actions-view" style="display: none;">
+            <!-- ACTION 1: BUY NOW -->
+            <section class="group-card" id="action-buy-card">
+                <div class="group-header">
+                    <div class="group-title-area">
+                        <i data-lucide="check-circle-2" style="color: #10b981; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #10b981;">1. BOLEH BELI SEKARANG</h2>
+                    </div>
+                    <span class="group-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;" id="count-buy">0 Kaunter</span>
+                </div>
+                <div class="group-desc" style="border-left-color: #10b981;">
+                    Harga pasaran semasa berada <strong>di bawah atau setara</strong> dengan target unjuran Sifu (Zon Beli). Sangat sesuai untuk entri segera.
+                </div>
+                <div class="picks-table-wrapper">
+                    <table class="picks-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 280px;">Nama Saham (Kod)</th>
+                                <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
+                                <th>Target Sifu (TP)</th>
+                                <th>Potensi Upside</th>
+                                <th>Gred</th>
+                                <th>Kumpulan</th>
+                                <th>Tema / Sektor</th>
+                                <th>Chart</th>
+                            </tr>
+                        </thead>
+                        <tbody id="action-buy-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ACTION 2: PULLBACK -->
+            <section class="group-card" id="action-wait-card">
+                <div class="group-header">
+                    <div class="group-title-area">
+                        <i data-lucide="clock" style="color: #f59e0b; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #f59e0b;">2. TUNGGU PULLBACK (Dah melepasi TP)</h2>
+                    </div>
+                    <span class="group-badge" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;" id="count-wait">0 Kaunter</span>
+                </div>
+                <div class="group-desc" style="border-left-color: #f59e0b;">
+                    Saham yang bagus tetapi harganya <strong>telah melepasi</strong> Target Price Sifu. Tunggu pembetulan harga ke zon entri.
+                </div>
+                <div class="picks-table-wrapper">
+                    <table class="picks-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 280px;">Nama Saham (Kod)</th>
+                                <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
+                                <th>Target Sifu (TP)</th>
+                                <th>Potensi Upside / Kedudukan</th>
+                                <th>Gred</th>
+                                <th>Kumpulan</th>
+                                <th>Tema / Sektor</th>
+                                <th>Chart</th>
+                            </tr>
+                        </thead>
+                        <tbody id="action-wait-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ACTION 3: SKIP -->
+            <section class="group-card" id="action-skip-card">
+                <div class="group-header">
+                    <div class="group-title-area">
+                        <i data-lucide="alert-octagon" style="color: #ef4444; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #ef4444;">3. ELAK / SKIP (Risiko / Terlampau Mahal)</h2>
+                    </div>
+                    <span class="group-badge" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;" id="count-skip">0 Kaunter</span>
+                </div>
+                <div class="group-desc" style="border-left-color: #ef4444;">
+                    Saham yang tidak sesuai dibeli kerana **Gred C** (berisiko tinggi) atau harganya **sudah melambung terlampau tinggi** melebihi nilai wajarnya.
+                </div>
+                <div class="picks-table-wrapper">
+                    <table class="picks-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 280px;">Nama Saham (Kod)</th>
+                                <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
+                                <th>Target Sifu (TP)</th>
+                                <th>Potensi Upside / Kedudukan</th>
+                                <th>Gred</th>
+                                <th>Kumpulan</th>
+                                <th>Tema / Sektor</th>
+                                <th>Chart</th>
+                            </tr>
+                        </thead>
+                        <tbody id="action-skip-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer style="text-align: center; padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); font-size: 0.8rem;">
@@ -483,20 +653,58 @@
             'solarvest', 'ctos', 'lgms', 'oppstar', 'agmo'
         ];
 
+        const explicitSkips = ['adnex', 'ogx', 'mmcs'];
+        let activeViewMode = 'groups';
+
+        function switchMode(mode) {
+            activeViewMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('mode-' + mode).classList.add('active');
+            
+            const groupsView = document.getElementById('groups-view');
+            const actionsView = document.getElementById('actions-view');
+            const groupTabsWrap = document.getElementById('group-tabs-wrap');
+            const actionsTabsPlaceholder = document.getElementById('actions-tabs-placeholder');
+            const scopeSelectorWrap = document.getElementById('scope-selector-wrap');
+
+            if (mode === 'groups') {
+                groupsView.style.display = 'flex';
+                actionsView.style.display = 'none';
+                groupTabsWrap.style.display = 'flex';
+                actionsTabsPlaceholder.style.display = 'none';
+                scopeSelectorWrap.style.display = 'none';
+            } else {
+                groupsView.style.display = 'none';
+                actionsView.style.display = 'flex';
+                groupTabsWrap.style.display = 'none';
+                actionsTabsPlaceholder.style.display = 'flex';
+                scopeSelectorWrap.style.display = 'flex';
+            }
+            renderTables();
+        }
+
         function renderTables(overrideData = null) {
             const list = overrideData || (typeof ipoData !== 'undefined' ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []));
             
+            // Group Views Bodies
             const g1Body = document.getElementById('group-1-body');
             const g2Body = document.getElementById('group-2-body');
             const g3Body = document.getElementById('group-3-body');
 
+            // Action Views Bodies
+            const actionBuyBody = document.getElementById('action-buy-body');
+            const actionWaitBody = document.getElementById('action-wait-body');
+            const actionSkipBody = document.getElementById('action-skip-body');
+
             g1Body.innerHTML = '';
             g2Body.innerHTML = '';
             g3Body.innerHTML = '';
+            actionBuyBody.innerHTML = '';
+            actionWaitBody.innerHTML = '';
+            actionSkipBody.innerHTML = '';
 
-            let g1Count = 0;
-            let g2Count = 0;
-            let g3Count = 0;
+            let g1Count = 0; let g2Count = 0; let g3Count = 0;
+            let buyCount = 0; let waitCount = 0; let skipCount = 0;
 
             const sortSelector = document.getElementById('sort-selector');
             const sortBy = sortSelector ? sortSelector.value : 'dailyGain';
@@ -504,7 +712,9 @@
             const trendFilter = document.getElementById('trend-filter');
             const selectedTrend = trendFilter ? trendFilter.value : 'all';
 
-            // Sort by upside potential descending, allowing Grades A, B, and C that are in uptrend (currentPrice >= price)
+            const scopeVal = document.getElementById('scope-filter').value;
+
+            // Sort & Filter logic
             const validPicks = list.filter(ipo => {
                 const isMatch = ipo.shariah === true && 
                     ['A', 'B', 'C'].includes(ipo.predictedGrade) && 
@@ -512,6 +722,11 @@
                     ipo.currentPrice >= ipo.price;
                 
                 if (!isMatch) return false;
+
+                // Actions view scope filter
+                if (activeViewMode === 'actions' && scopeVal === 'portfolio') {
+                    if (!sifuPortfolio.includes(ipo.id)) return false;
+                }
 
                 if (selectedTrend === 'all') return true;
 
@@ -525,7 +740,7 @@
                 if (selectedTrend === 'active') return isBreakout || isUptrend;
                 if (selectedTrend === 'sikat') return isSikat;
                 if (selectedTrend === 'ath') {
-                    const hasHitBefore = ipo.highPrice && ipo.highPrice >= ipo.sifuTargetPrice;
+                    const hasHitBefore = ipo.highPrice && ipo.highPrice >= (ipo.sifuTargetPrice || ipo.avgTP);
                     const isAth = ipo.year === 2026 
                         ? !hasHitBefore 
                         : (ipo.highPrice && ipo.currentPrice >= ipo.highPrice);
@@ -534,10 +749,11 @@
 
                 return true;
             }).map(ipo => {
-                const upside = typeof ipo.sifuTargetPrice === 'number'
-                    ? ((ipo.sifuTargetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
+                const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
+                const upside = targetPrice > 0
+                    ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
                     : null;
-                return { ...ipo, upside };
+                return { ...ipo, targetPrice, upside };
             });
 
             if (sortBy === 'upside') {
@@ -559,36 +775,36 @@
                 const nameDisplay = ipo.companyName;
                 const symbolDisplay = ipo.symbol || ipo.id.toUpperCase();
                 const curDisplay = 'RM ' + ipo.currentPrice.toFixed(3);
-                const targetDisplay = typeof ipo.sifuTargetPrice === 'number' 
-                    ? 'RM ' + ipo.sifuTargetPrice.toFixed(2) 
+                const targetDisplay = ipo.targetPrice > 0 
+                    ? 'RM ' + ipo.targetPrice.toFixed(2) 
                     : 'N/A';
                 const athDisplay = ipo.highPrice ? 'RM ' + ipo.highPrice.toFixed(3) : 'N/A';
                 
                 const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
                 let dailyChangeHtml = '';
                 if (dailyChange === null) {
-                    dailyChangeHtml = `<span style="color: var(--text-dim); font-size: 0.85rem; font-weight: normal;">-</span>`;
+                    dailyChangeHtml = `<span style="color: var(--text-dim);">-</span>`;
                 } else if (dailyChange > 0) {
-                    dailyChangeHtml = `<span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">+${dailyChange.toFixed(2)}%</span>`;
+                    dailyChangeHtml = `<span style="color: #10b981; font-weight: bold;">+${dailyChange.toFixed(2)}%</span>`;
                 } else if (dailyChange < 0) {
-                    dailyChangeHtml = `<span style="color: #ef4444; font-weight: bold; font-size: 0.9rem;">${dailyChange.toFixed(2)}%</span>`;
+                    dailyChangeHtml = `<span style="color: #ef4444; font-weight: bold;">${dailyChange.toFixed(2)}%</span>`;
                 } else {
-                    dailyChangeHtml = `<span style="color: var(--text-dim); font-size: 0.85rem; font-weight: normal;">0.00%</span>`;
+                    dailyChangeHtml = `<span style="color: var(--text-dim);">0.00%</span>`;
                 }
 
                 let upsideDisplay = '';
-                let upsideStyle = 'font-weight: 800; color: #10b981; font-size: 0.95rem;';
+                let upsideStyle = 'font-weight: 800; color: #10b981;';
                 if (ipo.upside === null) {
-                    upsideDisplay = 'N/A (Tiada TP)';
-                    upsideStyle = 'color: var(--text-dim); font-size: 0.8rem; font-style: italic;';
+                    upsideDisplay = 'N/A';
+                    upsideStyle = 'color: var(--text-dim); font-style: italic;';
                 } else if (ipo.upside >= 0) {
                     upsideDisplay = '+' + ipo.upside.toFixed(1) + '%';
                 } else {
-                    upsideDisplay = 'Above TP (' + Math.abs(ipo.upside).toFixed(1) + '%)';
-                    upsideStyle = 'font-weight: 800; color: #3b82f6; font-size: 0.85rem;'; // Blue/purple-blue for above target
+                    upsideDisplay = 'Atas TP (' + Math.abs(ipo.upside).toFixed(1) + '%)';
+                    upsideStyle = 'font-weight: 800; color: #3b82f6;';
                 }
                 
-                const hasHitBefore = ipo.highPrice && ipo.highPrice >= ipo.sifuTargetPrice;
+                const hasHitBefore = ipo.highPrice && ipo.highPrice >= ipo.targetPrice;
                 const isAth = ipo.year === 2026 
                     ? !hasHitBefore 
                     : (ipo.highPrice && ipo.currentPrice >= ipo.highPrice);
@@ -602,7 +818,7 @@
                     badgeHtml += ` <span style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 5px; animation: pulse 2s infinite; white-space: nowrap;"><i data-lucide="rocket" style="width: 10px; height: 10px; display: inline; margin-bottom: -1px;"></i> ATH</span>`;
                 }
 
-                // Calculate dynamic trend status
+                // Trend badge
                 let trendText = 'Uptrend';
                 let trendClass = 'trend-uptrend';
                 if (ipo.currentPrice < ipo.price) {
@@ -617,16 +833,16 @@
                 }
                 const trendHtml = `<span class="trend-badge ${trendClass}">${trendText}</span>`;
 
-                const cleanSymbol = (ipo.symbol || '').replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
-                const showTv = ipo.stage === 5 && cleanSymbol;
-                const tvBadgeHtml = showTv 
-                    ? `<a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${cleanSymbol}" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Buka carta TradingView untuk ${symbolDisplay}"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
+                const cleanSymbol = symbolDisplay.replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
+                const tvBadgeHtml = cleanSymbol 
+                    ? `<a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${cleanSymbol}" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Buka carta TradingView"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
                     : '';
 
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : (ipo.predictedGrade === 'B' ? 'grade-b' : 'grade-c');
                 const sectorDisplay = ipo.sector || 'N/A';
 
-                const rowHtml = `
+                // 1. Group Mode Row HTML
+                const rowHtmlGroups = `
                     <tr class="clickable-row" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">
                         <td style="font-weight: 600;">
                             <div style="display: flex; flex-direction: column; gap: 0.25rem;">
@@ -649,43 +865,95 @@
                     </tr>
                 `;
 
+                // 2. Action Mode Row HTML
+                let kumpulanLabel = 'K3 Mapan';
+                let kumpulanClass = 'badge-k3';
+                if (ipo.year === 2026 || ipo.status === 'MITI Allocation Phase' || ipo.stage < 5) {
+                    kumpulanLabel = hasHitBefore ? 'K2 DCA' : 'K1 Fresh';
+                    kumpulanClass = hasHitBefore ? 'badge-k2' : 'badge-k1';
+                }
+
+                const rowHtmlActions = `
+                    <tr class="clickable-row" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">
+                        <td style="font-weight: 600;">
+                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                <span style="color: white; font-size: 0.9rem;">${nameDisplay}</span>
+                                <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                                    <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
+                                    ${badgeHtml}
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-weight: 700; color: #f8fafc;">${curDisplay}</td>
+                        <td style="font-weight: 700;">${dailyChangeHtml}</td>
+                        <td style="font-weight: 700; color: #a5b4fc;">${targetDisplay}</td>
+                        <td style="font-weight: 700; ${upsideStyle}">${upsideDisplay}</td>
+                        <td><span class="grade-badge ${gradeClass}">Gred ${ipo.predictedGrade}</span></td>
+                        <td><span class="kump-badge ${kumpulanClass}">${kumpulanLabel}</span></td>
+                        <td style="color: var(--text-dim); font-size: 0.8rem;">${sectorDisplay}</td>
+                        <td>${tvBadgeHtml}</td>
+                    </tr>
+                `;
+
+                // Render into Groups bodies
                 if (ipo.year === 2026 || ipo.status === 'MITI Allocation Phase' || ipo.stage < 5) {
                     if (hasHitBefore) {
-                        g2Body.innerHTML += rowHtml;
+                        g2Body.innerHTML += rowHtmlGroups;
                         g2Count++;
                     } else {
-                        g1Body.innerHTML += rowHtml;
+                        g1Body.innerHTML += rowHtmlGroups;
                         g1Count++;
                     }
                 } else {
                     if (ipo.currentPrice < 3.0) {
-                        g3Body.innerHTML += rowHtml;
+                        g3Body.innerHTML += rowHtmlGroups;
                         g3Count++;
                     }
                 }
+
+                // Render into Actions bodies
+                let actionCategory = 'wait';
+                if (ipo.predictedGrade === 'C' || explicitSkips.includes(ipo.id)) {
+                    actionCategory = 'skip';
+                } else if (ipo.targetPrice > 0 && ipo.currentPrice <= ipo.targetPrice) {
+                    actionCategory = 'buy';
+                }
+
+                if (actionCategory === 'buy') {
+                    actionBuyBody.innerHTML += rowHtmlActions;
+                    buyCount++;
+                } else if (actionCategory === 'wait') {
+                    actionWaitBody.innerHTML += rowHtmlActions;
+                    waitCount++;
+                } else if (actionCategory === 'skip') {
+                    actionSkipBody.innerHTML += rowHtmlActions;
+                    skipCount++;
+                }
             });
 
-            // Fallback for empty tables
-            if (g1Count === 0) {
-                g1Body.innerHTML = `<tr class="empty-row"><td colspan="7">Tiada kaunter fresh aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-            }
-            if (g2Count === 0) {
-                g2Body.innerHTML = `<tr class="empty-row"><td colspan="7">Tiada kaunter DCA aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-            }
-            if (g3Count === 0) {
-                g3Body.innerHTML = `<tr class="empty-row"><td colspan="7">Tiada kaunter mapan aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-            }
+            // Fallback for empty group tables
+            if (g1Count === 0) g1Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter fresh aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
+            if (g2Count === 0) g2Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter DCA aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
+            if (g3Count === 0) g3Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter mapan aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
+
+            // Fallback for empty action tables
+            if (buyCount === 0) actionBuyBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter dalam zon belian sekarang.</td></tr>`;
+            if (waitCount === 0) actionWaitBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter menunggu pullback.</td></tr>`;
+            if (skipCount === 0) actionSkipBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter yang perlu diskip.</td></tr>`;
+
+            // Update badge counters
+            document.getElementById('count-buy').innerText = buyCount + ' Kaunter';
+            document.getElementById('count-wait').innerText = waitCount + ' Kaunter';
+            document.getElementById('count-skip').innerText = skipCount + ' Kaunter';
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
         function filterGroup(group, btn) {
-            // Update active class on buttons
-            const buttons = document.querySelectorAll('#group-tabs .tab-btn');
+            const buttons = document.querySelectorAll('#group-tabs-wrap .tab-btn');
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Show/Hide cards
             const g1Card = document.getElementById('group-1-card');
             const g2Card = document.getElementById('group-2-card');
             const g3Card = document.getElementById('group-3-card');
@@ -720,22 +988,20 @@
                 if (!res.ok) throw new Error('Not found');
                 const data = await res.json();
                 
-                // Reconstruct a flat list that tricks renderTables into grouping them exactly as the archive did
                 let flatList = [];
-                
                 if (data.kumpulan_1 && data.kumpulan_1.stocks) {
                     data.kumpulan_1.stocks.forEach(s => {
-                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2026, highPrice: null, stage: 5});
+                        flatList.push({...s, shariah: true, year: 2026, highPrice: null, status: 'Listed', stage: 5});
                     });
                 }
                 if (data.kumpulan_2 && data.kumpulan_2.stocks) {
                     data.kumpulan_2.stocks.forEach(s => {
-                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2026, highPrice: 10, sifuTargetPrice: 5, stage: 5});
+                        flatList.push({...s, shariah: true, year: 2026, highPrice: 10, status: 'Listed', stage: 5});
                     });
                 }
                 if (data.kumpulan_3 && data.kumpulan_3.stocks) {
                     data.kumpulan_3.stocks.forEach(s => {
-                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2024, highPrice: null, stage: 5});
+                        flatList.push({...s, shariah: true, year: 2024, highPrice: null, status: 'Listed', stage: 5});
                     });
                 }
                 
@@ -748,7 +1014,6 @@
         }
 
         window.onload = function() {
-            // Set max date to today
             const today = new Date().toISOString().split('T')[0];
             const datePicker = document.getElementById('archive-date');
             if (datePicker) datePicker.setAttribute('max', today);
@@ -757,5 +1022,4 @@
         }
     </script>
 </body>
-
 </html>

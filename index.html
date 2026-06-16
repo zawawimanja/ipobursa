@@ -40,14 +40,8 @@
                 <a href="scalping-sop.html" class="btn-moomoo" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.2); color: #ec4899; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
                     <i data-lucide="zap" style="width: 14px; height: 14px;"></i> <span class="nav-text">Scalping SOP</span>
                 </a>
-                <a href="alerts.html" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="bell" style="width: 14px; height: 14px;"></i> <span class="nav-text">Zon Beli Alerts</span>
-                </a>
-                <a href="sifu-sheets.html" class="btn-moomoo" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="table" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu's Sheet</span>
-                </a>
-                <a href="sifu-picks.html" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="folders" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu Picks</span>
+                <a href="morning-brief.html" class="btn-moomoo" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="sun" style="width: 14px; height: 14px;"></i> <span class="nav-text">Morning Brief</span>
                 </a>
                 <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-moomoo" style="background: #10b981; border: none; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); display: flex !important; align-items: center; gap: 0.5rem;">
                     <i data-lucide="user-plus"></i> <span>Register Moomoo</span>
@@ -74,6 +68,41 @@
 
         <div id="reminder-banner-container"></div>
         <div id="active-price-alerts-container" style="margin-bottom: 2rem; display: none;"></div>
+
+        <!-- SIFU PREMIUM PORTAL CARDS (CENTER PAGE) -->
+        <div class="sifu-portal-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; margin-top: 1rem;">
+            <!-- Sifu Picks Card -->
+            <div class="glass-card" style="padding: 1.75rem 2rem; border: 1px solid rgba(99, 102, 241, 0.3); background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 23, 42, 0.4)); border-radius: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12); transition: all 0.3s; cursor: pointer;" onclick="location.href='sifu-picks.html'">
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: rgba(99, 102, 241, 0.15); padding: 0.75rem; border-radius: 0.75rem; color: #818cf8; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(99, 102, 241, 0.2); flex-shrink: 0;">
+                        <i data-lucide="folders" style="width: 26px; height: 26px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.35rem; margin: 0 0 0.35rem 0; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 700;">Sifu's Picks & Tindakan</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0; line-height: 1.45;">Kajian fundamental unjuran saham Sifu. Susun mengikut <b>Kumpulan Watchlist (K1/K2/K3)</b> atau semak keputusan segera di tab <b>Status Tindakan (Beli/Tunggu)</b>.</p>
+                    </div>
+                </div>
+                <a href="sifu-picks.html" class="btn-moomoo hero-cta" style="text-decoration: none; background: linear-gradient(135deg, #6366f1, #4f46e5); border: 1px solid rgba(99, 102, 241, 0.4); color: white; font-weight: 800; font-size: 0.9rem; padding: 0.75rem 1.5rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2); transition: all 0.3s;">
+                    <i data-lucide="eye" style="width: 14px;"></i> Buka Sifu Picks & Tindakan
+                </a>
+            </div>
+
+            <!-- Sifu Sheets Card -->
+            <div class="glass-card" style="padding: 1.75rem 2rem; border: 1px solid rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.4)); border-radius: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12); transition: all 0.3s; cursor: pointer;" onclick="location.href='sifu-sheets.html'">
+                <div style="display: flex; gap: 1.25rem; align-items: flex-start;">
+                    <div style="background: rgba(16, 185, 129, 0.15); padding: 0.75rem; border-radius: 0.75rem; color: #10b981; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); flex-shrink: 0;">
+                        <i data-lucide="table" style="width: 26px; height: 26px;"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.35rem; margin: 0 0 0.35rem 0; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 700;">Sifu's Projection Sheets</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0; line-height: 1.45;">Helaian interaktif data modeling fundamental. Bandingkan hasil untung bersih (PAT), margin perniagaan, PE Premium, dan nilai wajar unjuran Sifu.</p>
+                    </div>
+                </div>
+                <a href="sifu-sheets.html" class="btn-moomoo hero-cta" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border: 1px solid rgba(16, 185, 129, 0.4); color: white; font-weight: 800; font-size: 0.9rem; padding: 0.75rem 1.5rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2); transition: all 0.3s;">
+                    <i data-lucide="table" style="width: 14px;"></i> Buka Sifu Sheets
+                </a>
+            </div>
+        </div>
 
         <!-- PREMIUM SCALPING SOP QUICK ACCESS BANNER -->
         <div class="glass-card" style="margin-bottom: 2.5rem; padding: 1.5rem 2rem; border: 1px solid rgba(236, 72, 153, 0.3); background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(15, 23, 42, 0.4)); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15); border-radius: 1rem;">
