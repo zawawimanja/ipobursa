@@ -407,6 +407,18 @@
                     <input type="date" id="archive-date" onchange="loadArchiveDate()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
                 </div>
 
+                <!-- Strategy Filter -->
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                        <i data-lucide="compass" style="width: 14px; height: 14px;"></i> Strategi:
+                    </span>
+                    <select id="strategy-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
+                        <option value="all">Semua Strategi</option>
+                        <option value="swing">Hanya Swing / Hold (Akaun 1)</option>
+                        <option value="scalp">Hanya Scalp / Intraday (Akaun 2)</option>
+                    </select>
+                </div>
+
                 <!-- Trend Filter -->
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
@@ -647,7 +659,7 @@
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
             'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-            'solarvest', 'ctos', 'lgms', 'oppstar'
+            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip'
         ];
 
         const explicitSkips = ['adnex', 'ogx', 'mmcs', 'agmo'];
@@ -723,6 +735,27 @@
                 // Actions view scope filter
                 if (activeViewMode === 'actions' && scopeVal === 'portfolio') {
                     if (!sifuPortfolio.includes(ipo.id)) return false;
+                }
+
+                // Strategy Filter
+                const strategyFilter = document.getElementById('strategy-filter');
+                const selectedStrategy = strategyFilter ? strategyFilter.value : 'all';
+                if (selectedStrategy !== 'all') {
+                    const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
+                    let strategyText = ipo.strategy || '';
+                    if (!strategyText) {
+                        if (ipo.predictedGrade === 'C') {
+                            strategyText = 'Skip';
+                        } else if (dailyChange !== null && dailyChange >= 3.0) {
+                            strategyText = 'Scalp';
+                        } else if (ipo.stage === 4) {
+                            strategyText = 'Scalp';
+                        } else {
+                            strategyText = 'Swing';
+                        }
+                    }
+                    if (selectedStrategy === 'swing' && strategyText.toLowerCase() !== 'swing') return false;
+                    if (selectedStrategy === 'scalp' && strategyText.toLowerCase() !== 'scalp') return false;
                 }
 
                 if (selectedTrend === 'all') return true;
@@ -835,6 +868,30 @@
                     ? `<a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${cleanSymbol}" target="_blank" onclick="event.stopPropagation();" class="tv-badge" title="Buka carta TradingView"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>`
                     : '';
 
+                // Strategy determination
+                let strategyText = ipo.strategy || '';
+                if (!strategyText) {
+                    if (ipo.predictedGrade === 'C') {
+                        strategyText = 'Skip';
+                    } else if (dailyChange !== null && dailyChange >= 3.0) {
+                        strategyText = 'Scalp';
+                    } else if (ipo.stage === 4) {
+                        strategyText = 'Scalp';
+                    } else {
+                        strategyText = 'Swing';
+                    }
+                }
+
+                let strategyBadgeStyle = '';
+                if (strategyText.toLowerCase() === 'swing') {
+                    strategyBadgeStyle = 'background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;';
+                } else if (strategyText.toLowerCase() === 'scalp') {
+                    strategyBadgeStyle = 'background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;';
+                } else {
+                    strategyBadgeStyle = 'background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;';
+                }
+                const strategyHtml = `<span class="trend-badge" style="${strategyBadgeStyle} text-transform: uppercase; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.05em;"><i data-lucide="${strategyText.toLowerCase() === 'swing' ? 'anchor' : (strategyText.toLowerCase() === 'scalp' ? 'zap' : 'slash')}" style="width: 10px; height: 10px; display: inline;"></i> ${strategyText}</span>`;
+
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : (ipo.predictedGrade === 'B' ? 'grade-b' : 'grade-c');
                 const sectorDisplay = ipo.sector || 'N/A';
 
@@ -847,6 +904,7 @@
                                 <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                                     <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
                                     ${badgeHtml}
+                                    ${strategyHtml}
                                     ${trendHtml}
                                     ${tvBadgeHtml}
                                 </div>
@@ -878,6 +936,7 @@
                                 <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                                     <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
                                     ${badgeHtml}
+                                    ${strategyHtml}
                                     ${trendHtml}
                                     ${tvBadgeHtml}
                                 </div>

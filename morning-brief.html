@@ -351,7 +351,7 @@ No rating"></textarea>
                 <button class="f-btn buy" onclick="setFilter('buy', this)">✅ Beli</button>
                 <button class="f-btn wait" onclick="setFilter('wait', this)">⏳ Tunggu</button>
                 <button class="f-btn skip" onclick="setFilter('skip', this)">❌ Skip</button>
-                <button class="f-btn" onclick="setFilter('unknown', this)">❓ Tak Dalam DB</button>
+                <button class="f-btn" onclick="setFilter('not-in-db', this)">❓ Saham Luar DB</button>
             </div>
         </div>
 
@@ -379,6 +379,32 @@ No rating"></textarea>
             </div>
         </div>
 
+        <!-- Swing Pullback Suggestions -->
+        <div id="pullback-suggestions" class="glass-card" style="margin-top: 2rem; padding: 1.75rem 2rem; display: none;">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; color: #818cf8; margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem;">
+                <i data-lucide="anchor"></i> Kaunter Swing (Pullback) Pilihan Sifu
+            </h3>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0 0 1.25rem;">Saham Gred A/B dalam DB yang sedang pullback (di bawah TP Sifu) tetapi tiada dalam senarai breakout ATH/52W anda hari ini.</p>
+            
+            <div class="results-table-wrap">
+                <table class="brief-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Harga</th>
+                            <th>Sifu TP</th>
+                            <th>Upside</th>
+                            <th>Grade</th>
+                            <th>Strategi</th>
+                            <th>Verdict</th>
+                            <th>Komen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pullback-body"></tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
     <!-- Initial empty state -->
@@ -401,7 +427,12 @@ No rating"></textarea>
             return;
         }
 
-        const ipoDb = typeof IPO_DATA !== 'undefined' ? IPO_DATA : (typeof ipoData !== 'undefined' ? ipoData : []);
+        let ipoDb = typeof IPO_DATA !== 'undefined' ? [...IPO_DATA] : (typeof ipoData !== 'undefined' ? [...ipoData] : []);
+        
+        // Merge with custom stocks from localStorage
+        const customStocks = JSON.parse(localStorage.getItem('custom_stocks') || '[]');
+        ipoDb = [...ipoDb, ...customStocks];
+
         if (ipoDb.length === 0) {
             document.getElementById('parse-status').textContent = '❌ data.js tidak dimuatkan.';
             return;
@@ -413,6 +444,7 @@ No rating"></textarea>
         allRows = parsed.map(stock => analyzeStock(stock, ipoDb));
         renderTable(allRows);
         renderStats(allRows);
+        renderPullbackSuggestions(parsed, ipoDb);
 
         document.getElementById('initial-state').style.display = 'none';
         document.getElementById('results-section').style.display = 'block';
@@ -510,18 +542,33 @@ No rating"></textarea>
         }
 
         if (!dbEntry) {
+            const curPrice = stock.price;
+            const dailyChange = typeof stock.dailyChange === 'number' ? stock.dailyChange : 0;
+            const sifuTP = curPrice * 1.10; // Auto +10% target
+            const upside = 10.0;
+
+            let verdict = 'buy';
+            let reason = 'Teknikal Breakout (Auto +10% TP)';
+
+            if (dailyChange > 6.0) {
+                verdict = 'wait';
+                reason = `Naik +${dailyChange.toFixed(1)}% hari ini — tunggu pullback intraday`;
+            }
+
             return {
                 ...stock,
                 inDb: false,
-                verdict: 'unknown',
-                reason: 'Tiada dalam database',
-                upside: null,
-                grade: null,
-                kumpulan: null,
-                isAth: false,
-                isZonBeli: false,
-                sifuTP: null,
-                shariah: null,
+                verdict: verdict,
+                reason: reason,
+                upside: upside,
+                grade: 'N/A',
+                kumpulan: 'K3 Mapan',
+                isAth: true,
+                isZonBeli: verdict === 'buy',
+                sifuTP: sifuTP,
+                shariah: true,
+                dbSymbol: stock.symbol,
+                strategy: 'Scalp'
             };
         }
 
@@ -600,13 +647,13 @@ No rating"></textarea>
         const buy = rows.filter(r => r.verdict === 'buy').length;
         const wait = rows.filter(r => r.verdict === 'wait').length;
         const skip = rows.filter(r => r.verdict === 'skip').length;
-        const unknown = rows.filter(r => r.verdict === 'unknown').length;
+        const notInDb = rows.filter(r => !r.inDb).length;
 
         document.getElementById('stats-row').innerHTML = `
             <div class="stat-box green"><div class="num">${buy}</div><div class="lbl">✅ Beli</div></div>
             <div class="stat-box yellow"><div class="num">${wait}</div><div class="lbl">⏳ Tunggu</div></div>
             <div class="stat-box red"><div class="num">${skip}</div><div class="lbl">❌ Skip</div></div>
-            <div class="stat-box blue"><div class="num">${unknown}</div><div class="lbl">❓ Tak Dalam DB</div></div>
+            <div class="stat-box blue"><div class="num">${notInDb}</div><div class="lbl">❓ Luar DB</div></div>
             <div class="stat-box"><div class="num">${rows.length}</div><div class="lbl">Jumlah</div></div>
         `;
     }
@@ -619,7 +666,11 @@ No rating"></textarea>
     }
 
     function renderTable(rows) {
-        const filtered = currentFilter === 'all' ? rows : rows.filter(r => r.verdict === currentFilter);
+        const filtered = currentFilter === 'all' 
+            ? rows 
+            : currentFilter === 'not-in-db' 
+            ? rows.filter(r => !r.inDb) 
+            : rows.filter(r => r.verdict === currentFilter);
         const tbody = document.getElementById('results-body');
         const emptyEl = document.getElementById('empty-results');
 
@@ -681,6 +732,12 @@ No rating"></textarea>
 
             const rowClass = r.verdict === 'buy' ? 'row-buy' : r.verdict === 'wait' ? 'row-wait' : r.verdict === 'skip' ? 'row-skip' : '';
             const nameClass = r.inDb ? '' : 'not-in-db';
+            let registerBtn = '';
+            if (!r.inDb) {
+                registerBtn = `
+                    <button class="btn-register" onclick="openRegisterModal('${r.symbol}', '${(r.companyName || '').replace(/'/g, "\\'")}', ${r.price})" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #f59e0b; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.65rem; font-weight: 800; cursor: pointer; margin-top: 4px; display: inline-flex; align-items: center; gap: 0.2rem; outline: none; transition: all 0.2s;"><i data-lucide="plus" style="width: 10px; height: 10px;"></i> Daftar</button>
+                `;
+            }
 
             return `
                 <tr class="${rowClass}">
@@ -688,6 +745,7 @@ No rating"></textarea>
                         <div style="display:flex;flex-direction:column;gap:0.2rem;">
                             <span style="font-weight:700;color:white;font-size:0.9rem;">${r.symbol} ${tvLink}</span>
                             <span style="font-size:0.7rem;color:#64748b;" class="${nameClass}">${r.companyName || '—'}</span>
+                            ${registerBtn}
                         </div>
                     </td>
                     <td style="font-weight:700;font-family:monospace;">RM ${r.price.toFixed(3)}</td>
@@ -710,19 +768,200 @@ No rating"></textarea>
         document.getElementById('tv-paste').value = '';
         document.getElementById('parse-status').textContent = '';
         document.getElementById('results-section').style.display = 'none';
+        document.getElementById('pullback-suggestions').style.display = 'none';
         document.getElementById('initial-state').style.display = 'block';
         allRows = [];
+    }
+
+    function renderPullbackSuggestions(pastedStocks, db) {
+        const pastedSet = new Set(pastedStocks.map(s => s.symbol.toUpperCase()));
+        const sifuPortfolioSet = new Set(sifuPortfolio.map(s => s.toLowerCase()));
+        
+        const suggestions = db.filter(d => {
+            const symbol = (d.symbol || d.id || '').toUpperCase();
+            if (pastedSet.has(symbol)) return false;
+            if (!d.shariah) return false;
+            if (d.stage !== 5) return false; // Must be listed
+            
+            const isSifuPick = sifuPortfolioSet.has(d.id.toLowerCase()) || sifuPortfolioSet.has((d.symbol || '').toLowerCase());
+            const isHighGrade = d.predictedGrade === 'A' || d.predictedGrade === 'B';
+            
+            if (!isSifuPick && !isHighGrade) return false;
+            
+            const curPrice = d.currentPrice || d.price || 0;
+            const tp = d.sifuTargetPrice || d.avgTP || 0;
+            
+            return curPrice > 0 && tp > 0 && curPrice <= tp;
+        });
+
+        const tbody = document.getElementById('pullback-body');
+        const card = document.getElementById('pullback-suggestions');
+
+        if (suggestions.length === 0) {
+            card.style.display = 'none';
+            return;
+        }
+
+        // Sort by upside descending
+        suggestions.sort((a, b) => {
+            const priceA = a.currentPrice || a.price || 1;
+            const tpA = a.sifuTargetPrice || a.avgTP || 0;
+            const upsideA = ((tpA - priceA) / priceA) * 100;
+
+            const priceB = b.currentPrice || b.price || 1;
+            const tpB = b.sifuTargetPrice || b.avgTP || 0;
+            const upsideB = ((tpB - priceB) / priceB) * 100;
+
+            return upsideB - upsideA;
+        });
+
+        tbody.innerHTML = suggestions.map(d => {
+            const curPrice = d.currentPrice || d.price || 0;
+            const tp = d.sifuTargetPrice || d.avgTP || 0;
+            const upside = ((tp - curPrice) / curPrice) * 100;
+            
+            const gradeHtml = d.predictedGrade
+                ? `<span class="grade-badge grade-${d.predictedGrade.toLowerCase()}">${d.predictedGrade}</span>`
+                : `<span class="grade-badge grade-na">N/A</span>`;
+
+            const tvSymbol = (d.symbol || d.id || '').replace(/[^A-Z0-9]/gi, '');
+            const tvLink = tvSymbol
+                ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${tvSymbol}" target="_blank" class="tv-link" onclick="event.stopPropagation()"><i data-lucide="external-link" style="width:10px;height:10px;"></i></a>`
+                : '';
+
+            const verdictHtml = `<span class="verdict-buy">✅ BELI</span>`;
+            const strategyHtml = `<span style="background:rgba(99,102,241,0.15);color:#818cf8;border:1px solid rgba(99,102,241,0.3);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:bold;">⚓ SWING</span>`;
+
+            const cleanInsight = d.analystInsight 
+                ? d.analystInsight.replace(/<[^>]*>/g, ' ').substring(0, 100) + '...'
+                : 'Di bawah harga sasaran Sifu (Zon Beli Swing)';
+
+            return `
+                <tr>
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:0.2rem;">
+                            <span style="font-weight:700;color:white;font-size:0.9rem;">${d.symbol || d.id.toUpperCase()} ${tvLink}</span>
+                            <span style="font-size:0.7rem;color:#64748b;">${d.companyName || '—'}</span>
+                        </div>
+                    </td>
+                    <td style="font-weight:700;font-family:monospace;">RM ${curPrice.toFixed(3)}</td>
+                    <td style="font-family:monospace;color:#a5b4fc;">RM ${tp.toFixed(2)}</td>
+                    <td><span class="upside-pos">+${upside.toFixed(1)}%</span></td>
+                    <td>${gradeHtml}</td>
+                    <td>${strategyHtml}</td>
+                    <td>${verdictHtml}</td>
+                    <td><span class="reason-text" title="${d.analystInsight || ''}">${cleanInsight}</span></td>
+                </tr>
+            `;
+        }).join('');
+
+        card.style.display = 'block';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     // Auto-parse on paste
     document.addEventListener('DOMContentLoaded', () => {
         const ta = document.getElementById('tv-paste');
-        ta.addEventListener('paste', () => {
-            setTimeout(parseTradingView, 100);
-        });
+        if (ta) {
+            ta.addEventListener('paste', () => {
+                setTimeout(parseTradingView, 100);
+            });
+        }
         if (typeof lucide !== 'undefined') lucide.createIcons();
     });
+
+    function openRegisterModal(symbol, name, price) {
+        document.getElementById('modal-symbol').value = symbol;
+        document.getElementById('modal-price').value = price;
+        document.getElementById('modal-stock-display').innerText = `${symbol} - ${name || 'Saham Tanpa Nama'}`;
+        document.getElementById('modal-tp').value = '';
+        document.getElementById('modal-strategy').value = 'Swing';
+        document.getElementById('modal-grade').value = 'B';
+        document.getElementById('register-modal').style.display = 'flex';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function closeRegisterModal() {
+        document.getElementById('register-modal').style.display = 'none';
+    }
+
+    function saveRegisterModal() {
+        const symbol = document.getElementById('modal-symbol').value;
+        const price = parseFloat(document.getElementById('modal-price').value);
+        const tp = parseFloat(document.getElementById('modal-tp').value);
+        const strategy = document.getElementById('modal-strategy').value;
+        const grade = document.getElementById('modal-grade').value;
+
+        if (isNaN(tp) || tp <= 0) {
+            alert('Sila masukkan Target Price yang sah.');
+            return;
+        }
+
+        const customStocks = JSON.parse(localStorage.getItem('custom_stocks') || '[]');
+        const filtered = customStocks.filter(s => s.symbol.toUpperCase() !== symbol.toUpperCase());
+        
+        const newStock = {
+            id: symbol.toLowerCase(),
+            symbol: symbol.toUpperCase(),
+            companyName: symbol.toUpperCase() + ' (Custom)',
+            price: price,
+            sifuTargetPrice: tp,
+            strategy: strategy,
+            predictedGrade: grade,
+            shariah: true,
+            year: 2026,
+            stage: 5,
+            status: 'Listed',
+            highPrice: null
+        };
+
+        filtered.push(newStock);
+        localStorage.setItem('custom_stocks', JSON.stringify(filtered));
+
+        closeRegisterModal();
+        parseTradingView();
+    }
 </script>
+
+<!-- Modal Daftar Saham Custom -->
+<div id="register-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="glass-card" style="width: 90%; max-width: 400px; padding: 2rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(15, 23, 42, 0.95); box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-radius: 1rem;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; color: white; margin-top: 0; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i data-lucide="plus-circle" style="color: #f59e0b; width: 20px; height: 20px;"></i> Daftar Saham Baru
+        </h3>
+        <input type="hidden" id="modal-symbol">
+        <input type="hidden" id="modal-price">
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+                <label style="display: block; font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Nama Saham</label>
+                <div id="modal-stock-display" style="font-size: 1rem; font-weight: 700; color: white;"></div>
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Target Price Sifu (TP)</label>
+                <input type="number" step="0.005" id="modal-tp" placeholder="Contoh: 0.85" style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.6rem; color: white; outline: none; font-size: 0.9rem; box-sizing: border-box;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Strategi</label>
+                <select id="modal-strategy" style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.6rem; color: white; outline: none; font-size: 0.9rem; cursor: pointer; box-sizing: border-box;">
+                    <option value="Swing">Swing / Hold</option>
+                    <option value="Scalp">Scalp / Intraday</option>
+                </select>
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">Gred</label>
+                <select id="modal-grade" style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; padding: 0.6rem; color: white; outline: none; font-size: 0.9rem; cursor: pointer; box-sizing: border-box;">
+                    <option value="A">Gred A</option>
+                    <option value="B">Gred B</option>
+                    <option value="C">Gred C</option>
+                </select>
+            </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+            <button onclick="closeRegisterModal()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">Batal</button>
+            <button onclick="saveRegisterModal()" style="background: linear-gradient(135deg, #f59e0b, #f97316); border: none; color: white; padding: 0.5rem 1.25rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(245,158,11,0.2); transition: all 0.2s;">Simpan</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

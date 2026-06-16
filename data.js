@@ -812,7 +812,7 @@ const IPO_DATA = [
     "performance": "+229.55%",
     "symbol": "SKYECHIP",
     "strategy": "Swing",
-    "sifuTargetPrice": 0.88,
+    "sifuTargetPrice": 3.3,
     "dailyChange": 1.7
   },
   {
@@ -891,7 +891,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.245,
     "symbol": "A1AKK",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.196
   },
   {
     "id": "aquawalk",
@@ -937,7 +938,8 @@ const IPO_DATA = [
     "openPrice": 0.17,
     "closePrice": 0.165002,
     "symbol": "ASM",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.178
   },
   {
     "id": "bms",
@@ -1011,7 +1013,8 @@ const IPO_DATA = [
     "openPrice": 0.6999839999999999,
     "closePrice": 0.735012,
     "symbol": "HEGROUP",
-    "dailyChange": -0.8
+    "dailyChange": -0.8,
+    "sifuTargetPrice": 0.851
   },
   {
     "id": "cki",
@@ -1080,7 +1083,8 @@ const IPO_DATA = [
     "openPrice": 0.39999599999999996,
     "closePrice": 0.38998799999999995,
     "symbol": "COLFORM",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.299
   },
   {
     "id": "dengkil",
@@ -1103,7 +1107,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.23,
     "symbol": "DENGKIL",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.178
   },
   {
     "id": "ecoshop",
@@ -1126,7 +1131,8 @@ const IPO_DATA = [
     "openPrice": 1.250006,
     "closePrice": 1.1999469999999999,
     "symbol": "ECOSHOP",
-    "dailyChange": 0.3
+    "dailyChange": 0.3,
+    "sifuTargetPrice": 1.472
   },
   {
     "id": "enpro",
@@ -1149,7 +1155,8 @@ const IPO_DATA = [
     "openPrice": 0.259992,
     "closePrice": 0.265008,
     "symbol": "ENPRO",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.253
   },
   {
     "id": "famiera",
@@ -1389,7 +1396,8 @@ const IPO_DATA = [
     "openPrice": 0.399993,
     "closePrice": 0.399993,
     "symbol": "JSSOLAR",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.265
   },
   {
     "id": "kopi",
@@ -1414,7 +1422,8 @@ const IPO_DATA = [
     "openPrice": 0.74998,
     "closePrice": 0.874984,
     "symbol": "KOPI",
-    "dailyChange": 0.2
+    "dailyChange": 0.2,
+    "sifuTargetPrice": 1.265
   },
   {
     "id": "lacmed",
@@ -1598,7 +1607,8 @@ const IPO_DATA = [
     "openPrice": 0.92,
     "closePrice": 0.930028,
     "symbol": "ORKIM",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 1.098
   },
   {
     "id": "oxb",
@@ -1804,7 +1814,8 @@ const IPO_DATA = [
     "openPrice": 0.400015,
     "closePrice": 0.33001499999999995,
     "symbol": "POWER",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.178
   },
   {
     "id": "psp",
@@ -1873,7 +1884,8 @@ const IPO_DATA = [
     "openPrice": 0.75,
     "closePrice": 0.32,
     "symbol": "RTECH",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.207
   },
   {
     "id": "sag",
@@ -1896,7 +1908,8 @@ const IPO_DATA = [
     "openPrice": 0.680016,
     "closePrice": 0.69998,
     "symbol": "SAG",
-    "dailyChange": 0.8
+    "dailyChange": 0.8,
+    "sifuTargetPrice": 0.839
   },
   {
     "id": "set",
@@ -1919,7 +1932,8 @@ const IPO_DATA = [
     "openPrice": 0.35999600000000004,
     "closePrice": 0.39499600000000007,
     "symbol": "SET",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.201
   },
   {
     "id": "sumi",
@@ -1990,7 +2004,8 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "pe": 10.4,
     "symbol": "SUPREME",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.345
   },
   {
     "id": "techstore",
@@ -2013,7 +2028,8 @@ const IPO_DATA = [
     "openPrice": 0.255,
     "closePrice": 0.22000000000000003,
     "symbol": "TECHSTORE",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.287
   },
   {
     "id": "thmy",
@@ -2061,7 +2077,8 @@ const IPO_DATA = [
     "openPrice": 0.369985,
     "closePrice": 0.369985,
     "symbol": "VERDANT",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.236
   },
   {
     "id": "wawasan-dengkil",
@@ -2128,7 +2145,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.235,
     "symbol": "WTEC",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.138
   },
   {
     "id": "xpb",
@@ -2151,7 +2169,8 @@ const IPO_DATA = [
     "openPrice": 0.215,
     "closePrice": 0.225,
     "symbol": "XPB",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.161
   },
   {
     "id": "99-speedmart",
@@ -2196,7 +2215,8 @@ const IPO_DATA = [
     "openPrice": 0.79,
     "closePrice": 0.875,
     "symbol": "AGRICOR",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.448
   },
   {
     "id": "agx",
@@ -2219,7 +2239,8 @@ const IPO_DATA = [
     "openPrice": 0.40998999999999997,
     "closePrice": 0.36000999999999994,
     "symbol": "AGX",
-    "dailyChange": 0.7
+    "dailyChange": 0.7,
+    "sifuTargetPrice": 0.494
   },
   {
     "id": "alpha-ivf",
@@ -2268,7 +2289,8 @@ const IPO_DATA = [
     "strategy": "Swing",
     "pe": 16.5,
     "symbol": "AZAMJAYA",
-    "dailyChange": -1.6
+    "dailyChange": -1.6,
+    "sifuTargetPrice": 1.438
   },
   {
     "id": "bwys",
@@ -2291,7 +2313,8 @@ const IPO_DATA = [
     "openPrice": 0.31999,
     "closePrice": 0.349998,
     "symbol": "BWYS",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.201
   },
   {
     "id": "carlorino",
@@ -2337,7 +2360,8 @@ const IPO_DATA = [
     "openPrice": 0.39501,
     "closePrice": 0.35,
     "symbol": "CREST",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.23
   },
   {
     "id": "crpmate",
@@ -2360,7 +2384,8 @@ const IPO_DATA = [
     "openPrice": 0.24500000000000002,
     "closePrice": 0.21000000000000002,
     "symbol": "CRPMATE",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.218
   },
   {
     "id": "elridge",
@@ -2385,7 +2410,8 @@ const IPO_DATA = [
     "openPrice": 0.339996,
     "closePrice": 0.399997,
     "symbol": "ELRIDGE",
-    "dailyChange": -0.8
+    "dailyChange": -0.8,
+    "sifuTargetPrice": 1.041
   },
   {
     "id": "epb",
@@ -2408,7 +2434,8 @@ const IPO_DATA = [
     "openPrice": 0.6499920000000001,
     "closePrice": 0.6199760000000001,
     "symbol": "EPB",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.362
   },
   {
     "id": "farm-price",
@@ -2457,7 +2484,8 @@ const IPO_DATA = [
     "pe": 18.1,
     "highPrice": 0.25875,
     "symbol": "FEYTECH",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.259
   },
   {
     "id": "fphb",
@@ -2480,7 +2508,8 @@ const IPO_DATA = [
     "openPrice": 0.48,
     "closePrice": 0.40999199999999997,
     "symbol": "FPHB",
-    "dailyChange": -1
+    "dailyChange": -1,
+    "sifuTargetPrice": 0.38
   },
   {
     "id": "gohub",
@@ -2528,7 +2557,8 @@ const IPO_DATA = [
     "openPrice": 0.3,
     "closePrice": 0.345,
     "symbol": "HAWK",
-    "dailyChange": 0.1
+    "dailyChange": 0.1,
+    "sifuTargetPrice": 0.241
   },
   {
     "id": "johor-plantations",
@@ -2621,7 +2651,8 @@ const IPO_DATA = [
     "openPrice": 0.44999999999999996,
     "closePrice": 0.46499999999999997,
     "symbol": "KENERGY",
-    "dailyChange": 1.8
+    "dailyChange": 1.8,
+    "sifuTargetPrice": 0.598
   },
   {
     "id": "keyfield",
@@ -2648,7 +2679,8 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 2.0124999999999997,
     "symbol": "KEYFIELD",
-    "dailyChange": -0.3
+    "dailyChange": -0.3,
+    "sifuTargetPrice": 2.012
   },
   {
     "id": "kjts",
@@ -2673,7 +2705,8 @@ const IPO_DATA = [
     "openPrice": 0.439992,
     "closePrice": 0.500013,
     "symbol": "KJTS",
-    "dailyChange": 1.2
+    "dailyChange": 1.2,
+    "sifuTargetPrice": 0.989
   },
   {
     "id": "kti",
@@ -2861,7 +2894,8 @@ const IPO_DATA = [
     "dailyChange": -0.2,
     "openPrice": 0.39,
     "closePrice": 0.360009,
-    "symbol": "MTEC"
+    "symbol": "MTEC",
+    "sifuTargetPrice": 1.184
   },
   {
     "id": "obhb",
@@ -2931,7 +2965,8 @@ const IPO_DATA = [
     "openPrice": 0.8499960000000001,
     "closePrice": 0.77,
     "symbol": "OFB",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.184
   },
   {
     "id": "plintas",
@@ -2999,7 +3034,8 @@ const IPO_DATA = [
     "openPrice": 0.255002,
     "closePrice": 0.255002,
     "symbol": "SBH",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.178
   },
   {
     "id": "scb",
@@ -3022,7 +3058,8 @@ const IPO_DATA = [
     "openPrice": 0.500013,
     "closePrice": 0.359991,
     "symbol": "SCB",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.144
   },
   {
     "id": "sdcg",
@@ -3045,7 +3082,8 @@ const IPO_DATA = [
     "openPrice": 0.500004,
     "closePrice": 0.504982,
     "symbol": "SDCG",
-    "dailyChange": 0.8
+    "dailyChange": 0.8,
+    "sifuTargetPrice": 0.765
   },
   {
     "id": "sinkung",
@@ -3068,7 +3106,8 @@ const IPO_DATA = [
     "openPrice": 0.13,
     "closePrice": 0.139997,
     "symbol": "SINKUNG",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.092
   },
   {
     "id": "smart",
@@ -3091,7 +3130,8 @@ const IPO_DATA = [
     "openPrice": 0.5,
     "closePrice": 0.45999999999999996,
     "symbol": "SMART",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.172
   },
   {
     "id": "sorento",
@@ -3184,7 +3224,8 @@ const IPO_DATA = [
     "openPrice": 0.410006,
     "closePrice": 0.419988,
     "symbol": "TOPMIX",
-    "dailyChange": 2.6
+    "dailyChange": 2.6,
+    "sifuTargetPrice": 0.546
   },
   {
     "id": "topvisn",
@@ -3207,7 +3248,8 @@ const IPO_DATA = [
     "openPrice": 0.389994,
     "closePrice": 0.339999,
     "symbol": "TOPVISN",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.184
   },
   {
     "id": "tsa",
@@ -3230,7 +3272,8 @@ const IPO_DATA = [
     "openPrice": 0.579975,
     "closePrice": 0.5750250000000001,
     "symbol": "TSA",
-    "dailyChange": 0.3
+    "dailyChange": 0.3,
+    "sifuTargetPrice": 0.989
   },
   {
     "id": "uue-holdings",
@@ -3257,7 +3300,8 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "pe": 65,
     "symbol": "UUE",
-    "dailyChange": 2.2
+    "dailyChange": 2.2,
+    "sifuTargetPrice": 0.977
   },
   {
     "id": "vanzo",
@@ -3280,7 +3324,8 @@ const IPO_DATA = [
     "openPrice": 0.175005,
     "closePrice": 0.165,
     "symbol": "VANZO",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.144
   },
   {
     "id": "vtc",
@@ -3303,7 +3348,8 @@ const IPO_DATA = [
     "openPrice": 0.5,
     "closePrice": 0.405,
     "symbol": "VTC",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.265
   },
   {
     "id": "wentel-engineering",
@@ -3328,7 +3374,8 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "pe": 11.3,
     "symbol": "WENTEL",
-    "dailyChange": 1.2
+    "dailyChange": 1.2,
+    "sifuTargetPrice": 0.276
   },
   {
     "id": "winstar",
@@ -3351,7 +3398,8 @@ const IPO_DATA = [
     "openPrice": 0.48999999999999994,
     "closePrice": 0.509985,
     "symbol": "WINSTAR",
-    "dailyChange": 2.3
+    "dailyChange": 2.3,
+    "sifuTargetPrice": 0.632
   },
   {
     "id": "zantat",
@@ -3376,7 +3424,8 @@ const IPO_DATA = [
     "pe": 10.4,
     "highPrice": 0.20124999999999998,
     "symbol": "ZANTAT",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.201
   },
   {
     "id": "chb",
@@ -3424,7 +3473,8 @@ const IPO_DATA = [
     "openPrice": 0.7500060000000001,
     "closePrice": 0.515014,
     "symbol": "CLOUDPT",
-    "dailyChange": 0.5
+    "dailyChange": 0.5,
+    "sifuTargetPrice": 0.604
   },
   {
     "id": "cpetech",
@@ -3470,7 +3520,8 @@ const IPO_DATA = [
     "openPrice": 0.65001,
     "closePrice": 0.6249899999999999,
     "symbol": "DAY3",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.144
   },
   {
     "id": "dchcare",
@@ -3493,7 +3544,8 @@ const IPO_DATA = [
     "openPrice": 0.4,
     "closePrice": 0.45,
     "symbol": "DCHCARE",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.127
   },
   {
     "id": "dss",
@@ -3516,7 +3568,8 @@ const IPO_DATA = [
     "openPrice": 0.8099850000000002,
     "closePrice": 0.620015,
     "symbol": "DSS",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.293
   },
   {
     "id": "dxn",
@@ -3562,7 +3615,8 @@ const IPO_DATA = [
     "openPrice": 0.75,
     "closePrice": 0.730008,
     "symbol": "EDELTEQ",
-    "dailyChange": 0.4
+    "dailyChange": 0.4,
+    "sifuTargetPrice": 0.437
   },
   {
     "id": "glxt",
@@ -3585,7 +3639,8 @@ const IPO_DATA = [
     "openPrice": 0.6500090000000001,
     "closePrice": 0.25499900000000003,
     "symbol": "GLXT",
-    "dailyChange": 0.9
+    "dailyChange": 0.9,
+    "sifuTargetPrice": 0.241
   },
   {
     "id": "jtgroup",
@@ -3610,7 +3665,8 @@ const IPO_DATA = [
     "openPrice": 0.304992,
     "closePrice": 0.309987,
     "symbol": "JTGROUP",
-    "dailyChange": 0.8
+    "dailyChange": 0.8,
+    "sifuTargetPrice": 0.627
   },
   {
     "id": "kgw",
@@ -3633,7 +3689,8 @@ const IPO_DATA = [
     "openPrice": 0.22999199999999997,
     "closePrice": 0.22999199999999997,
     "symbol": "KGW",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.121
   },
   {
     "id": "kitacon",
@@ -3656,7 +3713,8 @@ const IPO_DATA = [
     "openPrice": 0.990012,
     "closePrice": 0.7499720000000001,
     "symbol": "KITACON",
-    "dailyChange": 0.7
+    "dailyChange": 0.7,
+    "sifuTargetPrice": 0.793
   },
   {
     "id": "lpbhd",
@@ -3702,7 +3760,8 @@ const IPO_DATA = [
     "openPrice": 0.315,
     "closePrice": 0.37,
     "symbol": "MINOX",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.218
   },
   {
     "id": "mstgolf",
@@ -3750,7 +3809,8 @@ const IPO_DATA = [
     "openPrice": 0.810008,
     "closePrice": 1.000008,
     "symbol": "NATGATE",
-    "dailyChange": 0.1
+    "dailyChange": 0.1,
+    "sifuTargetPrice": 0.851
   },
   {
     "id": "oppstar",
@@ -3892,7 +3952,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.265,
     "symbol": "SSF",
-    "dailyChange": 0.7
+    "dailyChange": 0.7,
+    "sifuTargetPrice": 0.443
   },
   {
     "id": "synergy",
@@ -3961,7 +4022,8 @@ const IPO_DATA = [
     "openPrice": 0.379995,
     "closePrice": 0.389994,
     "symbol": "VLB",
-    "dailyChange": 0.6
+    "dailyChange": 0.6,
+    "sifuTargetPrice": 0.673
   },
   {
     "id": "wells",
@@ -3986,7 +4048,8 @@ const IPO_DATA = [
     "openPrice": 0.330004,
     "closePrice": 0.430008,
     "symbol": "WELLS",
-    "dailyChange": 2.4
+    "dailyChange": 2.4,
+    "sifuTargetPrice": 0.759
   },
   {
     "id": "agmo",
@@ -4057,7 +4120,8 @@ const IPO_DATA = [
     "openPrice": 0.615,
     "closePrice": 0.71,
     "symbol": "BETA",
-    "dailyChange": -1.5
+    "dailyChange": -1.5,
+    "sifuTargetPrice": 0.661
   },
   {
     "id": "cengild",
@@ -4080,7 +4144,8 @@ const IPO_DATA = [
     "openPrice": 0.495,
     "closePrice": 0.46500300000000006,
     "symbol": "CENGILD",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.236
   },
   {
     "id": "cnergen",
@@ -4173,7 +4238,8 @@ const IPO_DATA = [
     "openPrice": 1.7000550000000003,
     "closePrice": 1.7200350000000002,
     "symbol": "FFB",
-    "dailyChange": -1
+    "dailyChange": -1,
+    "sifuTargetPrice": 2.921
   },
   {
     "id": "infom",
@@ -4198,7 +4264,8 @@ const IPO_DATA = [
     "openPrice": 0.6000000000000001,
     "closePrice": 0.535,
     "symbol": "INFOM",
-    "dailyChange": 0.4
+    "dailyChange": 0.4,
+    "sifuTargetPrice": 1.23
   },
   {
     "id": "infotec",
@@ -4246,7 +4313,8 @@ const IPO_DATA = [
     "openPrice": 1.5200420000000001,
     "closePrice": 1.379979,
     "symbol": "ITMAX",
-    "dailyChange": 1.5
+    "dailyChange": 1.5,
+    "sifuTargetPrice": 5.577
   },
   {
     "id": "leform",
@@ -4343,7 +4411,8 @@ const IPO_DATA = [
     "openPrice": 0.360003,
     "closePrice": 0.340008,
     "symbol": "ORGABIO",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.322
   },
   {
     "id": "ptrb",
@@ -4462,7 +4531,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.265,
     "symbol": "SNS",
-    "dailyChange": 2
+    "dailyChange": 2,
+    "sifuTargetPrice": 0.54
   },
   {
     "id": "sunview",
@@ -4485,7 +4555,8 @@ const IPO_DATA = [
     "openPrice": 0.6000099999999999,
     "closePrice": 0.4599979999999999,
     "symbol": "SUNVIEW",
-    "dailyChange": 2.4
+    "dailyChange": 2.4,
+    "sifuTargetPrice": 0.42
   },
   {
     "id": "taghill",
@@ -4531,7 +4602,8 @@ const IPO_DATA = [
     "openPrice": 0.5,
     "closePrice": 0.44,
     "symbol": "UMC",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.356
   },
   {
     "id": "unique",
@@ -4624,7 +4696,8 @@ const IPO_DATA = [
     "openPrice": 0.28,
     "closePrice": 0.270004,
     "symbol": "YXPM",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.241
   },
   {
     "id": "atech",
@@ -4670,7 +4743,8 @@ const IPO_DATA = [
     "openPrice": 0.6,
     "closePrice": 0.5449919999999999,
     "symbol": "CEKD",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.339
   },
   {
     "id": "ctos",
@@ -4720,7 +4794,8 @@ const IPO_DATA = [
     "openPrice": 0.679998,
     "closePrice": 0.485001,
     "symbol": "ECOMATE",
-    "dailyChange": -0.8
+    "dailyChange": -0.8,
+    "sifuTargetPrice": 0.977
   },
   {
     "id": "flexi",
@@ -4743,7 +4818,8 @@ const IPO_DATA = [
     "openPrice": 0.6900000000000001,
     "closePrice": 0.43,
     "symbol": "FLEXI",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.149
   },
   {
     "id": "haily",
@@ -4766,7 +4842,8 @@ const IPO_DATA = [
     "openPrice": 0.7900240000000001,
     "closePrice": 0.7399760000000001,
     "symbol": "HAILY",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.224
   },
   {
     "id": "hpphb",
@@ -4812,7 +4889,8 @@ const IPO_DATA = [
     "openPrice": 0.6500030000000001,
     "closePrice": 0.5549900000000001,
     "symbol": "MOBILIA",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.098
   },
   {
     "id": "nestcon",
@@ -4835,7 +4913,8 @@ const IPO_DATA = [
     "openPrice": 0.299992,
     "closePrice": 0.320012,
     "symbol": "NESTCON",
-    "dailyChange": 1
+    "dailyChange": 1,
+    "sifuTargetPrice": 0.397
   },
   {
     "id": "pekat",
@@ -4860,7 +4939,8 @@ const IPO_DATA = [
     "openPrice": 0.8499840000000001,
     "closePrice": 0.815008,
     "symbol": "PEKAT",
-    "dailyChange": 1.8
+    "dailyChange": 1.8,
+    "sifuTargetPrice": 1.84
   },
   {
     "id": "ramssol",
@@ -4883,7 +4963,8 @@ const IPO_DATA = [
     "openPrice": 0.7000200000000001,
     "closePrice": 0.509985,
     "symbol": "RAMSSOL",
-    "dailyChange": 1.2
+    "dailyChange": 1.2,
+    "sifuTargetPrice": 0.839
   },
   {
     "id": "swift-haulage",
@@ -4931,7 +5012,8 @@ const IPO_DATA = [
     "openPrice": 0.6,
     "closePrice": 0.57,
     "symbol": "TELADAN",
-    "dailyChange": 1.6
+    "dailyChange": 1.6,
+    "sifuTargetPrice": 0.908
   },
   {
     "id": "tjsetia",
@@ -4954,7 +5036,8 @@ const IPO_DATA = [
     "openPrice": 0.7849799999999999,
     "closePrice": 0.7399699999999999,
     "symbol": "TJSETIA",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.247
   },
   {
     "id": "volcano",
@@ -5023,7 +5106,8 @@ const IPO_DATA = [
     "dailyChange": null,
     "openPrice": 0.34999800000000003,
     "closePrice": 0.29000400000000004,
-    "symbol": "ANEKA"
+    "symbol": "ANEKA",
+    "sifuTargetPrice": 0.144
   },
   {
     "id": "eframe",
@@ -5046,7 +5130,8 @@ const IPO_DATA = [
     "openPrice": 0.344988,
     "closePrice": 0.3699920000000001,
     "symbol": "EFRAME",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.322
   },
   {
     "id": "mrdiy",
@@ -5094,7 +5179,8 @@ const IPO_DATA = [
     "openPrice": 0.7100099999999999,
     "closePrice": 0.68001,
     "symbol": "OPTIMAX",
-    "dailyChange": 2.1
+    "dailyChange": 2.1,
+    "sifuTargetPrice": 0.644
   },
   {
     "id": "pwrwell",
@@ -5144,7 +5230,8 @@ const IPO_DATA = [
     "openPrice": 0.999984,
     "closePrice": 0.8050079999999998,
     "symbol": "SAMAIDEN",
-    "dailyChange": 1.5
+    "dailyChange": 1.5,
+    "sifuTargetPrice": 1.472
   },
   {
     "id": "scgbhd",
@@ -5192,7 +5279,8 @@ const IPO_DATA = [
     "openPrice": 0.585005,
     "closePrice": 0.44999500000000003,
     "symbol": "TCS",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.103
   },
   {
     "id": "aimflex",
@@ -5215,7 +5303,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.24499200000000002,
     "symbol": "AIMFLEX",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.092
   },
   {
     "id": "ame",
@@ -5261,7 +5350,8 @@ const IPO_DATA = [
     "openPrice": 0.345,
     "closePrice": 0.27,
     "symbol": "DPIH",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.121
   },
   {
     "id": "greatec",
@@ -5332,7 +5422,8 @@ const IPO_DATA = [
     "openPrice": 0.2,
     "closePrice": 0.16500800000000002,
     "symbol": "MESTRON",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.155
   },
   {
     "id": "mtag",
@@ -5355,7 +5446,8 @@ const IPO_DATA = [
     "openPrice": 0.700024,
     "closePrice": 0.44000600000000006,
     "symbol": "MTAG",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.276
   },
   {
     "id": "nadibhd",
@@ -5378,7 +5470,8 @@ const IPO_DATA = [
     "openPrice": 0.39,
     "closePrice": 0.30500999999999995,
     "symbol": "NADIBHD",
-    "dailyChange": 0
+    "dailyChange": 0,
+    "sifuTargetPrice": 0.402
   },
   {
     "id": "sds",
@@ -5403,7 +5496,8 @@ const IPO_DATA = [
     "openPrice": 0.259992,
     "closePrice": 0.25500100000000003,
     "symbol": "SDS",
-    "dailyChange": 2
+    "dailyChange": 2,
+    "sifuTargetPrice": 0.552
   },
   {
     "id": "spring",
@@ -5426,7 +5520,8 @@ const IPO_DATA = [
     "openPrice": 0.25,
     "closePrice": 0.25,
     "symbol": "SPRING",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.138
   },
   {
     "id": "tashin",
@@ -5449,7 +5544,8 @@ const IPO_DATA = [
     "openPrice": 0.58,
     "closePrice": 0.484996,
     "symbol": "TASHIN",
-    "dailyChange": null
+    "dailyChange": null,
+    "sifuTargetPrice": 0.236
   },
   {
     "id": "uwc",
