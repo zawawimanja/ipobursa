@@ -433,6 +433,16 @@ No rating"></textarea>
         const customStocks = JSON.parse(localStorage.getItem('custom_stocks') || '[]');
         ipoDb = [...ipoDb, ...customStocks];
 
+        // Apply custom overrides (like user-adjusted TP or highPrice)
+        const overrides = JSON.parse(localStorage.getItem('custom_overrides') || '{}');
+        ipoDb = ipoDb.map(ipo => {
+            const key = ipo.symbol ? ipo.symbol.toUpperCase() : ipo.id.toUpperCase();
+            if (overrides[key]) {
+                return { ...ipo, ...overrides[key] };
+            }
+            return ipo;
+        });
+
         if (ipoDb.length === 0) {
             document.getElementById('parse-status').textContent = '❌ data.js tidak dimuatkan.';
             return;
@@ -539,6 +549,19 @@ No rating"></textarea>
         if (!dbEntry) {
             // Try ID match
             dbEntry = db.find(d => d.id && d.id.toUpperCase().replace(/[-_]/g,'') === stock.symbol.toUpperCase().replace(/[-_]/g,''));
+        }
+
+        if (dbEntry) {
+            const curPrice = stock.price;
+            const dbHigh = dbEntry.highPrice || 0;
+            if (curPrice > dbHigh) {
+                dbEntry.highPrice = curPrice;
+                const key = dbEntry.symbol ? dbEntry.symbol.toUpperCase() : dbEntry.id.toUpperCase();
+                const overrides = JSON.parse(localStorage.getItem('custom_overrides') || '{}');
+                overrides[key] = { ...overrides[key], highPrice: curPrice };
+                localStorage.setItem('custom_overrides', JSON.stringify(overrides));
+                console.log(`[Auto-Align] highPrice for ${key} updated to RM ${curPrice}`);
+            }
         }
 
         if (!dbEntry) {
@@ -715,7 +738,15 @@ No rating"></textarea>
                 ? `<span class="${r.upside >= 0 ? 'upside-pos' : 'upside-neg'}">${r.upside >= 0 ? '+' : ''}${r.upside.toFixed(1)}%</span>`
                 : `<span class="upside-na">—</span>`;
 
-            const tpHtml = r.sifuTP ? `RM ${r.sifuTP.toFixed(2)}` : `<span style="color:#475569">—</span>`;
+            let tpHtml = r.sifuTP ? `RM ${r.sifuTP.toFixed(2)}` : `<span style="color:#475569">—</span>`;
+            if (r.inDb && r.sifuTP && r.price >= r.sifuTP * 0.9) {
+                const suggestedTP = (r.price * 1.25).toFixed(3);
+                tpHtml += `
+                    <div style="margin-top:4px;">
+                        <button class="btn-register" onclick="updateStockTP('${r.symbol || r.dbSymbol}', ${suggestedTP})" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #10b981; padding: 0.1rem 0.25rem; border-radius: 3px; font-size: 0.55rem; font-weight: 800; cursor: pointer; outline: none; transition: all 0.2s;" title="Kemaskini TP ke +25% premium atas harga semasa">🔄 Kemaskini TP: RM ${parseFloat(suggestedTP).toFixed(2)}</button>
+                    </div>
+                `;
+            }
 
             const kumpHtml = r.kumpulan
                 ? `<span class="kump-badge ${r.kumpulan.toLowerCase()}">${r.kumpulan}</span>`
@@ -944,6 +975,15 @@ No rating"></textarea>
         localStorage.setItem('custom_stocks', JSON.stringify(filtered));
 
         closeRegisterModal();
+        parseTradingView();
+    }
+
+    function updateStockTP(symbol, newTP) {
+        const key = symbol.toUpperCase();
+        const overrides = JSON.parse(localStorage.getItem('custom_overrides') || '{}');
+        overrides[key] = { ...overrides[key], sifuTargetPrice: newTP };
+        localStorage.setItem('custom_overrides', JSON.stringify(overrides));
+        alert(`TP untuk ${key} berjaya dikemaskini ke RM ${parseFloat(newTP).toFixed(2)}!`);
         parseTradingView();
     }
 </script>

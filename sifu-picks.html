@@ -693,7 +693,21 @@
         }
 
         function renderTables(overrideData = null) {
-            const list = overrideData || (typeof ipoData !== 'undefined' ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []));
+            let rawList = overrideData || (typeof ipoData !== 'undefined' ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []));
+            
+            // Merge with custom stocks from localStorage
+            const customStocks = JSON.parse(localStorage.getItem('custom_stocks') || '[]');
+            let list = [...rawList, ...customStocks];
+
+            // Apply custom overrides (like user-adjusted TP or highPrice)
+            const overrides = JSON.parse(localStorage.getItem('custom_overrides') || '{}');
+            list = list.map(ipo => {
+                const key = ipo.symbol ? ipo.symbol.toUpperCase() : ipo.id.toUpperCase();
+                if (overrides[key]) {
+                    return { ...ipo, ...overrides[key] };
+                }
+                return ipo;
+            });
             
             // Group Views Bodies
             const g1Body = document.getElementById('group-1-body');
