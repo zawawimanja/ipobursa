@@ -643,8 +643,10 @@
                         g1Count++;
                     }
                 } else {
-                    g3Body.innerHTML += rowHtml;
-                    g3Count++;
+                    if (ipo.currentPrice < 3.0) {
+                        g3Body.innerHTML += rowHtml;
+                        g3Count++;
+                    }
                 }
             });
 
