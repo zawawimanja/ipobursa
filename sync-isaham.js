@@ -93,7 +93,7 @@ async function scrapeUpcomingIPOs(existingData) {
         $(el).find('span.font-weight-bold').each((_, span) => {
             const label = $(span).text().toLowerCase();
             const val = $(span).next('span').text().trim();
-            if (label.includes('market')) market = val;
+            if (label === 'market:') market = val;
             if (label.includes('listing price')) price = parseFloat(val.replace('RM', '').trim()) || 0;
             if (label.includes('closing date')) closingDate = val;
             if (label.includes('listing date')) listingDate = val;

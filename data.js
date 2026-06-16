@@ -31,7 +31,7 @@ const IPO_DATA = [
     "sector": "Technology (Hardware)",
     "stage": 4,
     "price": 0.28,
-    "market": "126.00 M",
+    "market": "ACE Market",
     "status": "Pre-Listing",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "04-Jun-2026",
@@ -46,14 +46,9 @@ const IPO_DATA = [
     "avgTP": 0.35,
     "pe": 14.2,
     "analystInsight": "⚠️ <b>WORTH IT</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>Sektor Tech Hardware adalah sektor terbaik 2026. Tiada OFS, Shariah-compliant. Tapi IB adalah Malacca Securities (mid-tier).",
-    "openPrice": 0.39,
-    "closePrice": 0.360009,
-    "currentPrice": 0.992,
-    "symbol": "MTEC",
+    "symbol": "SUM",
     "ofs": false,
-    "sifuTargetPrice": 0.39,
-    "performance": "+254.3%",
-    "dailyChange": 2.5
+    "sifuTargetPrice": 0.39
   },
   {
     "id": "elsa",
@@ -61,7 +56,7 @@ const IPO_DATA = [
     "sector": "Technology (Software)",
     "stage": 5,
     "price": 0.23,
-    "market": "123.83 M",
+    "market": "ACE Market",
     "status": "Listed",
     "openingDate": "2026-05-21T09:00:00",
     "closingDate": "03-Jun-2026",
@@ -72,16 +67,18 @@ const IPO_DATA = [
     "os": 26.92,
     "ib": "Malacca Securities",
     "fundUse": "Software Suite R&D, cloud infrastructure, and market expansion",
-    "predictedGrade": "C",
+    "predictedGrade": "B",
     "avgTP": 0.29,
     "pe": 15.6,
-    "analystInsight": "❌ <b>AVOID</b><br>Sektor O&G services sedang sejuk. Ada OFS yang menambah tekanan jual. Risiko tinggi untuk open below atau flat. Skip.",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Syarikat pembangunan perisian (Software Suite R&D). Dibantu oleh Malacca Securities (Momentum IB). PE 15.6x adalah berpatutan untuk sektor tech/software. Langganan (OS 26.92x) adalah baik. Sesuai untuk scalp.",
     "ofs": true,
     "sifuTargetPrice": 0.31,
     "symbol": "ELSA",
     "dailyChange": null,
     "currentPrice": 0.275,
-    "performance": "+19.57%"
+    "performance": "+19.57%",
+    "openPrice": 0.25001,
+    "closePrice": 0.275011
   },
   {
     "id": "pentech",
@@ -89,7 +86,7 @@ const IPO_DATA = [
     "sector": "Industrial Products",
     "stage": 5,
     "price": 0.2,
-    "market": "124.00 M",
+    "market": "ACE Market",
     "status": "Listed",
     "openingDate": "2026-05-20T09:00:00",
     "closingDate": "29-May-2026",
@@ -100,10 +97,10 @@ const IPO_DATA = [
     "os": 120.98,
     "ib": "Public Investment Bank",
     "fundUse": "Purchase of new machinery, facility upgrading, and business expansion",
-    "predictedGrade": "C",
+    "predictedGrade": "B",
     "avgTP": 0.25,
     "pe": 11.8,
-    "analystInsight": "⚠️ <b>AVOID</b><br>💡 Note: Low conviction, skip je.<br>ICT Infra adalah sektor boring. Tiada momentum tema besar. IB TBA.",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Syarikat pembekal jentera industri & peningkatan kemudahan. Dibantu oleh Public Investment Bank (Hero IB). PE 11.8x adalah sangat menarik vs peers. Langganan tinggi (OS 120.98x) menunjukkan permintaan runcit yang sangat luar biasa. Sesuai untuk apply/scalp.",
     "ofs": false,
     "sifuTargetPrice": 0.28,
     "symbol": "PENTECH",
@@ -344,7 +341,7 @@ const IPO_DATA = [
     "sector": "Factory Automation / Cleanroom Handling",
     "stage": 2,
     "price": 0.75,
-    "market": "937.50 M",
+    "market": "Main Market",
     "status": "MITI Allocation Phase",
     "closingDate": "2026-05-14T17:00:00",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
@@ -1655,7 +1652,7 @@ const IPO_DATA = [
     "listingDate": "20-May-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.225,
+    "currentPrice": 0.245,
     "performance": "-10.00%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2303,7 +2300,7 @@ const IPO_DATA = [
     "listingDate": "18-Dec-2024",
     "year": 2024,
     "price": 0.27,
-    "currentPrice": 0.19,
+    "currentPrice": 0.265,
     "performance": "-29.63%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2316,7 +2313,7 @@ const IPO_DATA = [
     "highPrice": 0.23574999999999996,
     "openPrice": 0.235008,
     "closePrice": 0.23001300000000002,
-    "symbol": "CARLO",
+    "symbol": "RL",
     "dailyChange": -0.5
   },
   {
@@ -2610,7 +2607,7 @@ const IPO_DATA = [
     "listingDate": "29-May-2024",
     "year": 2024,
     "price": 0.3,
-    "currentPrice": 0.515,
+    "currentPrice": 0.51,
     "performance": "+71.67%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2848,7 +2845,7 @@ const IPO_DATA = [
     "listingDate": "29-Jan-2024",
     "year": 2024,
     "price": 0.39,
-    "currentPrice": 1.03,
+    "currentPrice": 0.985,
     "performance": "+164.1%",
     "os": 20,
     "ib": "M&A Securities",
@@ -2861,7 +2858,10 @@ const IPO_DATA = [
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 1.1844999999999999,
-    "dailyChange": -0.2
+    "dailyChange": -0.2,
+    "openPrice": 0.39,
+    "closePrice": 0.360009,
+    "symbol": "MTEC"
   },
   {
     "id": "obhb",
@@ -3785,7 +3785,7 @@ const IPO_DATA = [
     "listingDate": "15-Nov-2023",
     "year": 2023,
     "price": 0.35,
-    "currentPrice": 0.17,
+    "currentPrice": 0.175,
     "performance": "-51.43%",
     "os": 20,
     "ib": "M&A Securities",
@@ -3947,7 +3947,7 @@ const IPO_DATA = [
     "listingDate": "31-Jan-2023",
     "year": 2023,
     "price": 0.33,
-    "currentPrice": 0.555,
+    "currentPrice": 0.56,
     "performance": "+68.18%",
     "os": 20,
     "ib": "M&A Securities",
@@ -4892,7 +4892,7 @@ const IPO_DATA = [
     "listingDate": "21-Dec-2021",
     "year": 2021,
     "price": 1.03,
-    "currentPrice": 0.39,
+    "currentPrice": 0.395,
     "performance": "-62.14%",
     "os": 18.85,
     "ib": "MIDF",
@@ -4940,7 +4940,7 @@ const IPO_DATA = [
     "listingDate": "19-May-2021",
     "year": 2021,
     "price": 0.7,
-    "currentPrice": 0.19,
+    "currentPrice": 0.21,
     "performance": "-72.86%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5435,7 +5435,7 @@ const IPO_DATA = [
     "listingDate": "1-Aug-2019",
     "year": 2019,
     "price": 0.58,
-    "currentPrice": 0.205,
+    "currentPrice": 0.2,
     "performance": "-64.66%",
     "os": 20,
     "ib": "M&A Securities",
@@ -5481,12 +5481,12 @@ const IPO_DATA = [
     "companyName": "RNG Tech Berhad",
     "symbol": "RNG Tech Berhad",
     "market": "ACE Market",
-    "price": 0.22,
-    "closingDate": "",
-    "listingDate": "",
+    "price": 0.13,
+    "closingDate": "24-Jun-2026",
+    "listingDate": "07-Jul-2026",
     "shariah": true,
-    "stage": 2,
-    "status": "MITI Allocation Phase",
+    "stage": 3,
+    "status": "Application Open",
     "year": 2026,
     "currentPrice": 0.22,
     "sifuTargetPrice": 0.33,
@@ -5500,7 +5500,7 @@ const IPO_DATA = [
     "id": "liftech-group-berhad",
     "companyName": "Liftech Group Berhad",
     "symbol": "Liftech Group Berhad",
-    "market": "91.33 M",
+    "market": "ACE Market",
     "price": 0.29,
     "closingDate": "16-Jun-2026",
     "listingDate": "30-Jun-2026",
@@ -5521,7 +5521,7 @@ const IPO_DATA = [
     "id": "hss-holdings-berhad",
     "companyName": "HSS Holdings Berhad",
     "symbol": "HSS Holdings Berhad",
-    "market": "90.00 M",
+    "market": "ACE Market",
     "price": 0.18,
     "closingDate": "09-Jun-2026",
     "listingDate": "23-Jun-2026",
@@ -5695,7 +5695,7 @@ const IPO_DATA = [
     "id": "evocom-berhad",
     "companyName": "Evocom Berhad",
     "symbol": "Evocom Berhad",
-    "market": "82.01 M",
+    "market": "ACE Market",
     "price": 0,
     "closingDate": "",
     "listingDate": "",
@@ -5837,7 +5837,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "access",
@@ -5846,7 +5847,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "seminars",
@@ -5855,7 +5857,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "recommended-amount-to-subscribe-",
@@ -5864,7 +5867,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "financing-details-",
@@ -5873,7 +5877,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "cost-breakdown-",
@@ -5882,7 +5887,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "filtered-statistics",
@@ -5891,7 +5897,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "select-stocks-",
@@ -5900,7 +5907,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "features",
@@ -5909,7 +5917,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "company",
@@ -5918,7 +5927,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "price": 0,
     "year": 2026,
-    "dailyChange": null
+    "dailyChange": null,
+    "market": "ACE Market"
   },
   {
     "id": "semico-ns-",
@@ -5932,7 +5942,8 @@ const IPO_DATA = [
     "currentPrice": 0.56,
     "year": 2026,
     "listingDate": "2026-01-13",
-    "performance": "+124.00%"
+    "performance": "+124.00%",
+    "market": "ACE Market"
   },
   {
     "id": "foodie-ns-",
@@ -5946,7 +5957,8 @@ const IPO_DATA = [
     "currentPrice": 0.315,
     "year": 2025,
     "listingDate": "2025-11-28",
-    "performance": "+5.00%"
+    "performance": "+5.00%",
+    "market": "ACE Market"
   },
   {
     "id": "camaroe--ns-",
@@ -5960,7 +5972,8 @@ const IPO_DATA = [
     "currentPrice": 0.075,
     "year": 2025,
     "listingDate": "2025-10-02",
-    "performance": "-46.43%"
+    "performance": "-46.43%",
+    "market": "ACE Market"
   },
   {
     "id": "paradigm--ns-",
@@ -5974,7 +5987,8 @@ const IPO_DATA = [
     "currentPrice": 0.94,
     "year": 2025,
     "listingDate": "2025-06-10",
-    "performance": "-6.00%"
+    "performance": "-6.00%",
+    "market": "ACE Market"
   },
   {
     "id": "saliran--ns-",
@@ -5988,7 +6002,8 @@ const IPO_DATA = [
     "currentPrice": 0.2,
     "year": 2025,
     "listingDate": "2025-03-13",
-    "performance": "-25.93%"
+    "performance": "-25.93%",
+    "market": "ACE Market"
   },
   {
     "id": "northern--ns-",
@@ -6002,7 +6017,8 @@ const IPO_DATA = [
     "currentPrice": 0.64,
     "year": 2025,
     "listingDate": "2025-02-06",
-    "performance": "+1.59%"
+    "performance": "+1.59%",
+    "market": "ACE Market"
   },
   {
     "id": "megafb",
@@ -6016,7 +6032,8 @@ const IPO_DATA = [
     "currentPrice": 1.68,
     "year": 2024,
     "listingDate": "2024-11-11",
-    "performance": "+150.75%"
+    "performance": "+150.75%",
+    "market": "ACE Market"
   },
   {
     "id": "3ren--ns-",
@@ -6030,7 +6047,8 @@ const IPO_DATA = [
     "currentPrice": 0.42,
     "year": 2024,
     "listingDate": "2024-11-06",
-    "performance": "+50.00%"
+    "performance": "+50.00%",
+    "market": "ACE Market"
   },
   {
     "id": "khb--ns-",
@@ -6044,7 +6062,8 @@ const IPO_DATA = [
     "currentPrice": 0.08,
     "year": 2024,
     "listingDate": "2024-10-08",
-    "performance": "-60.00%"
+    "performance": "-60.00%",
+    "market": "ACE Market"
   },
   {
     "id": "kucingko--ns-",
@@ -6058,7 +6077,8 @@ const IPO_DATA = [
     "currentPrice": 0.095,
     "year": 2024,
     "listingDate": "2024-07-26",
-    "performance": "-68.33%"
+    "performance": "-68.33%",
+    "market": "ACE Market"
   },
   {
     "id": "panda",
@@ -6088,7 +6108,8 @@ const IPO_DATA = [
     "currentPrice": 0.325,
     "year": 2023,
     "listingDate": "2023-09-26",
-    "performance": "+35.42%"
+    "performance": "+35.42%",
+    "market": "ACE Market"
   },
   {
     "id": "mersec--ns-",
@@ -6102,7 +6123,8 @@ const IPO_DATA = [
     "currentPrice": 0.265,
     "year": 2023,
     "listingDate": "2023-09-19",
-    "performance": "+6.00%"
+    "performance": "+6.00%",
+    "market": "ACE Market"
   },
   {
     "id": "mbn--ns-",
@@ -6116,7 +6138,8 @@ const IPO_DATA = [
     "currentPrice": 0.095,
     "year": 2023,
     "listingDate": "2023-07-25",
-    "performance": "-54.76%"
+    "performance": "-54.76%",
+    "market": "ACE Market"
   },
   {
     "id": "adb",
@@ -6130,7 +6153,8 @@ const IPO_DATA = [
     "currentPrice": 0.605,
     "year": 2023,
     "listingDate": "2023-05-09",
-    "performance": "+83.33%"
+    "performance": "+83.33%",
+    "market": "ACE Market"
   },
   {
     "id": "ceb--ns-",
@@ -6144,7 +6168,8 @@ const IPO_DATA = [
     "currentPrice": 0.265,
     "year": 2023,
     "listingDate": "2023-03-10",
-    "performance": "-70.56%"
+    "performance": "-70.56%",
+    "market": "ACE Market"
   },
   {
     "id": "eib--ns-",
@@ -6158,7 +6183,8 @@ const IPO_DATA = [
     "currentPrice": 0.15,
     "year": 2022,
     "listingDate": "2022-07-18",
-    "performance": "-50.00%"
+    "performance": "-50.00%",
+    "market": "ACE Market"
   },
   {
     "id": "unitrad--ns-",
@@ -6172,7 +6198,8 @@ const IPO_DATA = [
     "currentPrice": 0.24,
     "year": 2022,
     "listingDate": "2022-06-14",
-    "performance": "-25.00%"
+    "performance": "-25.00%",
+    "market": "ACE Market"
   },
   {
     "id": "ppjack--ns-",
@@ -6183,10 +6210,11 @@ const IPO_DATA = [
     "price": 0.3,
     "openPrice": 0.39,
     "closePrice": 0.39501,
-    "currentPrice": 0.915,
+    "currentPrice": 0.92,
     "year": 2022,
     "listingDate": "2022-04-01",
-    "performance": "+205.00%"
+    "performance": "+205.00%",
+    "market": "ACE Market"
   },
   {
     "id": "yenher--ns-",
@@ -6200,7 +6228,8 @@ const IPO_DATA = [
     "currentPrice": 0.79,
     "year": 2021,
     "listingDate": "2021-07-15",
-    "performance": "-16.84%"
+    "performance": "-16.84%",
+    "market": "ACE Market"
   },
   {
     "id": "ovh--ns-",
@@ -6214,7 +6243,8 @@ const IPO_DATA = [
     "currentPrice": 0.2,
     "year": 2020,
     "listingDate": "2020-07-22",
-    "performance": "-23.08%"
+    "performance": "-23.08%",
+    "market": "ACE Market"
   },
   {
     "id": "innature--ns-",
@@ -6228,7 +6258,8 @@ const IPO_DATA = [
     "currentPrice": 0.16,
     "year": 2020,
     "listingDate": "2020-02-20",
-    "performance": "-75.00%"
+    "performance": "-75.00%",
+    "market": "ACE Market"
   },
   {
     "id": "khjb--ns-",
@@ -6242,13 +6273,14 @@ const IPO_DATA = [
     "currentPrice": 0.095,
     "year": 2019,
     "listingDate": "2019-07-08",
-    "performance": "-77.91%"
+    "performance": "-77.91%",
+    "market": "ACE Market"
   },
   {
     "id": "rt-pastry-holdings-berhad",
     "companyName": "RT Pastry Holdings Berhad",
     "symbol": "RT",
-    "market": "61.03 M",
+    "market": "ACE Market",
     "price": 0.18,
     "closingDate": "15-Jun-2026",
     "listingDate": "29-Jun-2026",
@@ -6261,7 +6293,7 @@ const IPO_DATA = [
     "id": "eckem-holdings-berhad",
     "companyName": "Eckem Holdings Berhad",
     "symbol": "ECKEM",
-    "market": "75.00 M",
+    "market": "ACE Market",
     "price": 0.12,
     "closingDate": "19-Jun-2026",
     "listingDate": "03-Jul-2026",
@@ -6274,7 +6306,7 @@ const IPO_DATA = [
     "id": "enest-group-berhad",
     "companyName": "Enest Group Berhad",
     "symbol": "Enest Group Berhad",
-    "market": "81.38 M",
+    "market": "ACE Market",
     "price": 0,
     "closingDate": "",
     "listingDate": "",
@@ -6434,7 +6466,7 @@ const IPO_DATA = [
     "price": 0,
     "closingDate": "",
     "listingDate": "",
-    "shariah": false,
+    "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
     "year": 2026
@@ -6486,7 +6518,7 @@ const IPO_DATA = [
     "price": 0,
     "closingDate": "",
     "listingDate": "",
-    "shariah": false,
+    "shariah": true,
     "stage": 1,
     "status": "Draft / Exposure Phase",
     "year": 2026
@@ -6653,7 +6685,8 @@ const IPO_DATA = [
     "stage": 1,
     "status": "Draft / Exposure Phase",
     "price": 0,
-    "year": 2026
+    "year": 2026,
+    "market": "ACE Market"
   },
   {
     "id": "expansion",
@@ -9303,15 +9336,13 @@ const IPO_DATA = [
     "price": 0.45,
     "openPrice": 0.5,
     "closePrice": 0.52,
-    "currentPrice": 0.56,
+    "currentPrice": 0.2,
     "performance": "+24.4%",
     "strategy": "Swing",
     "market": "Main Market",
     "status": "Listed",
-    "year": 2025
+    "year": 2025,
+    "listingDate": "2025-03-13",
+    "symbol": "SALIRAN [NS]"
   }
 ];
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = IPO_DATA;
-}

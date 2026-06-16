@@ -137,7 +137,7 @@ async function fetchLiveUpdates() {
                 details.forEach(span => {
                     const label = span.innerText.toLowerCase();
                     const val = span.nextElementSibling?.innerText.trim() || '';
-                    if (label.includes('market')) market = val;
+                    if (label === 'market:') market = val;
                     if (label.includes('listing price')) price = parseFloat(val);
                     if (label.includes('closing date')) closingDate = val;
                     if (label.includes('listing date')) listingDate = val;
@@ -685,8 +685,8 @@ function getIpoGrade(ipo) {
     const os = ipo.os || 0;
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0; 
     
-    // PRIORITY 1: Respect manual Predicted Grade from data.js if it exists
-    if (ipo.predictedGrade && (ipo.stage < 5 || ipo.analystInsight)) {
+    // PRIORITY 1: Respect manual Predicted Grade from data.js if it exists (only pre-listing before subscription results)
+    if (ipo.predictedGrade && ipo.stage < 4) {
         return { 
             grade: ipo.predictedGrade, 
             reason: ipo.analystInsight || 'Manual rating applied.' 
@@ -720,6 +720,9 @@ function getIpoGrade(ipo) {
     const isAttractivePE = pe > 0 && pe < 12.0;
     const isRed = perf.includes('-');
 
+    const isMainMarket = ipo.market && ipo.market.toLowerCase().includes('main');
+    const isAceMarket = !isMainMarket;
+
     if (ipo.stage < 5 && os === 0) {
         // Calculate Pre-OS Grade
         let score = 0;
@@ -730,8 +733,20 @@ function getIpoGrade(ipo) {
         if (isTrendingSector) score += 30;
         if (isExpansionFund) score += 20;
         
-        if (ipo.market === 'Main Market') score += 10;
-        else if (ipo.market === 'ACE Market') score += 5;
+        if (isMainMarket) score += 10;
+        else if (isAceMarket) score += 5;
+
+        // OFS and PE Valuation Adjustments
+        if (ipo.ofs === true) {
+            score -= 15; // OFS risk penalty
+        }
+        if (pe > 0 && pe < 13.0) {
+            score += 15; // Cheap/Attractive valuation bonus
+        } else if (pe > 0 && pe < 18.0) {
+            score += 5;  // Reasonable valuation bonus
+        } else if (pe > 22.0) {
+            score -= 10; // Expensive valuation penalty
+        }
 
         let predGrade = 'C';
         if (score >= 70) predGrade = 'A';
@@ -753,7 +768,7 @@ function getIpoGrade(ipo) {
     
     // Stage 3 & 4 - Subscription Results In
     if ((ipo.stage === 3 || ipo.stage === 4) && os > 0) {
-        if (ipo.market === 'Main Market') {
+        if (isMainMarket) {
             const isTopIB = heroIBs.some(tier => ib.includes(tier));
             if (os >= 20 && isTopIB) return { grade: 'A', reason: '<b>Grade A (The Giants):</b><br>🚀 Institutional interest (OS > 20x)<br>🏛️ Top-tier IB backing' };
             if (os >= 20) return { grade: 'B', reason: '<b>Strong Demand:</b><br>✅ Institutional interest (OS > 20x)' };
@@ -761,7 +776,7 @@ function getIpoGrade(ipo) {
             return { grade: 'C', reason: '<b>Low Momentum:</b><br>⚠️ Low subscription interest' };
         }
 
-        if (ipo.market === 'ACE Market') {
+        if (isAceMarket) {
             const reasonParts = [];
             if (os >= 50) reasonParts.push(`🚀 Exceptional Demand (${os}x)`);
             else if (os >= 20) reasonParts.push(`✅ High Demand (${os}x)`);
@@ -777,7 +792,7 @@ function getIpoGrade(ipo) {
         }
     }
 
-    if (ipo.market === 'Main Market') {
+    if (isMainMarket) {
         if (isHero && (isStrongGreen || isFlat)) return { grade: 'A', reason: '<b>Elite Setup:</b><br>🏛️ Hero IB Support<br>✅ Positive Day 1 Debut' };
         
         if (ipo.stage === 5 && !hasOsData && isStrongGreen) {
@@ -801,7 +816,7 @@ function getIpoGrade(ipo) {
         return { grade: 'C', reason: '<b>Caution:</b><br>⚠️ Moderate demand/valuation' };
     }
 
-    if (ipo.market === 'ACE Market') {
+    if (isAceMarket) {
         // Downgrade if the stock is currently trading below its IPO price (negative return/underperforming)
         if (ipo.stage === 5) {
             const perfVal = getOpenPerformance(ipo) || 0;
@@ -1449,7 +1464,7 @@ function createIPOCard(ipo, index = 0) {
                 </span>
                 ${(function() {
                     const predGrade = getPredictedGrade(ipo);
-                    if (predGrade && ipo.stage === 5) {
+                    if (predGrade && (ipo.stage === 5 || (ipo.stage === 4 && predGrade !== grade))) {
                         return `
                         <div style="margin-top: 0.4rem; font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.2rem;">
                             Pred: <strong style="color: ${predGrade === grade ? '#10b981' : '#f59e0b'};">${predGrade}</strong>

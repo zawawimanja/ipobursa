@@ -92,15 +92,21 @@ function predictGrade(ipo) {
 
     // OFS (Offer for Sale) Penalties
     if (hasOFS) {
-        score -= 20;
-        reasons.push("Offer for Sale (OFS) component (-20)");
-        
-        // Extra penalty for ACE Market + OFS (potential OGX trap)
-        const isMain = market === 'Main Market' || (typeof market === 'string' && market.toLowerCase().includes('main'));
-        if (!isMain) {
-            score -= 10;
-            reasons.push("ACE Market OFS Risk (Potential OGX trap) (-10)");
-        }
+        score -= 15;
+        reasons.push("Offer for Sale (OFS) component (-15)");
+    }
+
+    // PE Valuation adjustments
+    const pe = ipo.pe || 0;
+    if (pe > 0 && pe < 13.0) {
+        score += 15;
+        reasons.push("Cheap/Attractive Valuation PE < 13x (+15)");
+    } else if (pe > 0 && pe < 18.0) {
+        score += 5;
+        reasons.push("Reasonable Valuation PE < 18x (+5)");
+    } else if (pe > 22.0) {
+        score -= 10;
+        reasons.push("Expensive Valuation PE > 22x (-10)");
     }
 
     // Grade Assignment
