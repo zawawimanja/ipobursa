@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Brief | Bursa IPO Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="data.js?v=1.3"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #0a0f1e; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+
+        .brief-hero {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+        }
+        .brief-hero h1 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin: 0 0 0.5rem; }
+        .brief-hero h1 span { background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brief-hero p { color: #94a3b8; font-size: 1rem; margin: 0; }
+
+        .paste-zone {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px dashed rgba(245, 158, 11, 0.4);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        .paste-zone:focus-within { border-color: #f59e0b; box-shadow: 0 0 20px rgba(245, 158, 11, 0.1); }
+        .paste-zone label { display: block; font-size: 0.8rem; color: #f59e0b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .paste-zone textarea {
+            width: 100%;
+            height: 180px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 0.5rem;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            padding: 1rem;
+            resize: vertical;
+            outline: none;
+            box-sizing: border-box;
+            line-height: 1.5;
+        }
+        .paste-zone textarea::placeholder { color: #475569; }
+        .paste-zone textarea:focus { border-color: rgba(245,158,11,0.5); }
+
+        .btn-parse {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        }
+        .btn-parse:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4); }
+
+        .btn-clear {
+            background: rgba(255,255,255,0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.9rem 1.5rem;
+            border-radius: 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-clear:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444; }
+
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            flex: 1;
+            min-width: 140px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            text-align: center;
+        }
+        .stat-box .num { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; }
+        .stat-box .lbl { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+        .stat-box.green .num { color: #10b981; }
+        .stat-box.yellow .num { color: #f59e0b; }
+        .stat-box.red .num { color: #ef4444; }
+        .stat-box.blue .num { color: #818cf8; }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-bar span { color: #64748b; font-size: 0.85rem; font-weight: 600; }
+        .f-btn {
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .f-btn.active, .f-btn:hover { background: rgba(99, 102, 241, 0.2); border-color: #6366f1; color: white; }
+        .f-btn.all.active { background: rgba(99, 102, 241, 0.3); border-color: #818cf8; }
+        .f-btn.buy.active { background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #10b981; }
+        .f-btn.wait.active { background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #f59e0b; }
+        .f-btn.skip.active { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; color: #ef4444; }
+
+        .results-table-wrap {
+            overflow-x: auto;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        table.brief-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .brief-table thead tr {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .brief-table th {
+            padding: 0.85rem 1rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            text-align: left;
+        }
+        .brief-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .brief-table tbody tr { transition: background 0.2s; }
+        .brief-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+        .brief-table tbody tr:last-child td { border-bottom: none; }
+
+        /* Verdict badges */
+        .verdict-buy {
+            background: rgba(16,185,129,0.15);
+            color: #10b981;
+            border: 1px solid rgba(16,185,129,0.4);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .verdict-wait {
+            background: rgba(245,158,11,0.12);
+            color: #f59e0b;
+            border: 1px solid rgba(245,158,11,0.35);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .verdict-skip {
+            background: rgba(239,68,68,0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239,68,68,0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .verdict-unknown {
+            background: rgba(100,116,139,0.1);
+            color: #64748b;
+            border: 1px solid rgba(100,116,139,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+
+        .grade-badge { padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        .grade-a { color: #10b981; border: 1px solid #10b981; background: rgba(16,185,129,0.1); }
+        .grade-b { color: #f59e0b; border: 1px solid #f59e0b; background: rgba(245,158,11,0.1); }
+        .grade-c { color: #ef4444; border: 1px solid #ef4444; background: rgba(239,68,68,0.1); }
+        .grade-na { color: #64748b; border: 1px solid #334155; background: rgba(100,116,139,0.08); }
+
+        .upside-pos { color: #10b981; font-weight: 700; }
+        .upside-neg { color: #ef4444; font-weight: 700; }
+        .upside-na { color: #64748b; }
+
+        .ath-badge {
+            background: linear-gradient(135deg, #f59e0b30, #ef444420);
+            color: #f59e0b;
+            border: 1px solid rgba(245,158,11,0.4);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            margin-left: 0.3rem;
+        }
+        .zon-beli-badge {
+            background: rgba(16,185,129,0.1);
+            color: #10b981;
+            border: 1px solid rgba(16,185,129,0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            margin-left: 0.3rem;
+        }
+
+        .daily-pos { color: #10b981; font-weight: 700; }
+        .daily-neg { color: #ef4444; font-weight: 700; }
+        .daily-zero { color: #64748b; }
+
+        .not-in-db { opacity: 0.5; font-style: italic; }
+        .row-buy td:first-child { border-left: 3px solid #10b981; }
+        .row-wait td:first-child { border-left: 3px solid #f59e0b; }
+        .row-skip td:first-child { border-left: 3px solid #ef4444; }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #475569;
+        }
+        .empty-state i { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.4; }
+        .empty-state p { font-size: 1rem; margin: 0; }
+
+        .kump-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+        .k1 { background: rgba(99,102,241,0.15); color: #818cf8; border: 1px solid rgba(99,102,241,0.3); }
+        .k2 { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .k3 { background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+        .k-na { background: rgba(100,116,139,0.1); color: #64748b; border: 1px solid rgba(100,116,139,0.2); }
+
+        .reason-text { font-size: 0.72rem; color: #64748b; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+
+        .tv-link { color: #818cf8; text-decoration: none; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 0.2rem; }
+        .tv-link:hover { color: #a5b4fc; }
+    </style>
+</head>
+<body>
+
+<div class="background-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+</div>
+
+<nav class="glass-header">
+    <div class="container">
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">
+            <i data-lucide="trending-up"></i>
+            <span class="logo-text"><span>Bursa</span>IPO</span>
+        </div>
+        <div class="nav-links" style="display:flex;align-items:center;gap:0.75rem;">
+            <a href="index.html" class="btn-moomoo" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);text-decoration:none;padding:0.5rem 1rem;border-radius:0.5rem;font-size:0.85rem;">
+                <i data-lucide="arrow-left"></i> <span class="nav-text">Back to Dashboard</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="container" style="margin-top:5.5rem;padding-bottom:4rem;">
+
+    <div class="brief-hero">
+        <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);padding:0.4rem 1rem;border-radius:2rem;margin-bottom:1rem;">
+            <div style="width:8px;height:8px;background:#f59e0b;border-radius:50%;box-shadow:0 0 8px #f59e0b;animation:pulse 2s infinite;"></div>
+            <span style="font-size:0.75rem;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:0.1em;">Pagi Routine</span>
+        </div>
+        <h1>Morning <span>Brief</span></h1>
+        <p>Paste senarai ATH / 52W High dari TradingView — system akan analisis mana yang layak dibeli berdasarkan formula Sifu.</p>
+    </div>
+
+    <div class="glass-card" style="margin-bottom:1.5rem;padding:1.75rem 2rem;">
+
+        <div class="paste-zone">
+            <label><i data-lucide="clipboard-paste" style="width:12px;height:12px;display:inline;margin-bottom:-1px;"></i> &nbsp;Paste TradingView Watchlist di sini</label>
+            <textarea id="tv-paste" placeholder="Contoh:
+PENTECH
+Pentech Holdings Berhad
+D
+0.310 MYR	+19.23%	93.89 M	...	Technology services	
+Strong buy
+
+AMS
+AMS Advanced Material Bhd.
+D
+0.410 MYR	+3.80%	12.12 M	...	Distribution services	
+No rating"></textarea>
+        </div>
+
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+            <button class="btn-parse" onclick="parseTradingView()">
+                <i data-lucide="zap" style="width:18px;"></i>
+                Analisis Sekarang
+            </button>
+            <button class="btn-clear" onclick="clearAll()">
+                <i data-lucide="trash-2" style="width:14px;display:inline;margin-bottom:-2px;"></i>
+                Clear
+            </button>
+            <span id="parse-status" style="font-size:0.8rem;color:#64748b;"></span>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results-section" style="display:none;">
+
+        <div class="stats-row" id="stats-row"></div>
+
+        <div class="glass-card" style="padding:1.25rem 1.5rem;margin-bottom:1rem;">
+            <div class="filter-bar">
+                <span>Tapis:</span>
+                <button class="f-btn all active" onclick="setFilter('all', this)">Semua</button>
+                <button class="f-btn buy" onclick="setFilter('buy', this)">✅ Beli</button>
+                <button class="f-btn wait" onclick="setFilter('wait', this)">⏳ Tunggu</button>
+                <button class="f-btn skip" onclick="setFilter('skip', this)">❌ Skip</button>
+                <button class="f-btn" onclick="setFilter('unknown', this)">❓ Tak Dalam DB</button>
+            </div>
+        </div>
+
+        <div class="results-table-wrap">
+            <table class="brief-table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Harga</th>
+                        <th>Daily %</th>
+                        <th>Grade</th>
+                        <th>Sifu TP</th>
+                        <th>Upside</th>
+                        <th>Kumpulan</th>
+                        <th>ATH / Zon</th>
+                        <th>Verdict</th>
+                        <th>Sebab</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body"></tbody>
+            </table>
+            <div id="empty-results" class="empty-state" style="display:none;">
+                <i data-lucide="search-x"></i>
+                <p>Tiada keputusan untuk filter ini.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Initial empty state -->
+    <div id="initial-state" class="glass-card" style="padding:4rem 2rem;text-align:center;">
+        <i data-lucide="clipboard-paste" style="width:56px;height:56px;color:#f59e0b;opacity:0.4;margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto;"></i>
+        <h3 style="color:#94a3b8;margin:0 0 0.5rem;font-size:1.1rem;">Belum ada data lagi</h3>
+        <p style="color:#475569;margin:0;font-size:0.9rem;">Paste senarai ATH atau 52W High dari TradingView di atas dan tekan "Analisis Sekarang".</p>
+    </div>
+
+</main>
+
+<script>
+    let allRows = [];
+    let currentFilter = 'all';
+
+    function parseTradingView() {
+        const raw = document.getElementById('tv-paste').value.trim();
+        if (!raw) {
+            document.getElementById('parse-status').textContent = '⚠️ Tiada data untuk dianalisis.';
+            return;
+        }
+
+        const ipoDb = typeof IPO_DATA !== 'undefined' ? IPO_DATA : (typeof ipoData !== 'undefined' ? ipoData : []);
+        if (ipoDb.length === 0) {
+            document.getElementById('parse-status').textContent = '❌ data.js tidak dimuatkan.';
+            return;
+        }
+
+        const parsed = parseTVText(raw);
+        document.getElementById('parse-status').textContent = `✅ ${parsed.length} saham dikesan.`;
+
+        allRows = parsed.map(stock => analyzeStock(stock, ipoDb));
+        renderTable(allRows);
+        renderStats(allRows);
+
+        document.getElementById('initial-state').style.display = 'none';
+        document.getElementById('results-section').style.display = 'block';
+
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function parseTVText(raw) {
+        const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        const stocks = [];
+
+        // Common single-letter section separators to skip
+        const singleLetters = new Set(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']);
+
+        let i = 0;
+        while (i < lines.length) {
+            const line = lines[i];
+
+            // Skip single letter separators
+            if (singleLetters.has(line)) { i++; continue; }
+            // Skip "D" market indicator standalone
+            if (line === 'D') { i++; continue; }
+
+            // Detect: symbol line (all caps, letters+numbers, 2-8 chars, no spaces usually)
+            if (/^[A-Z][A-Z0-9\-]{1,9}$/.test(line)) {
+                const symbol = line;
+                let companyName = '';
+                let price = null;
+                let dailyChange = null;
+                let sector = '';
+                let rating = '';
+
+                // Look ahead for data
+                let j = i + 1;
+
+                // Next non-empty, non-single-letter line is company name
+                while (j < lines.length && (singleLetters.has(lines[j]) || lines[j] === 'D')) j++;
+                if (j < lines.length && !/^[A-Z][A-Z0-9\-]{1,9}$/.test(lines[j]) && !lines[j].includes('MYR')) {
+                    companyName = lines[j];
+                    j++;
+                }
+
+                // Skip "D"
+                while (j < lines.length && lines[j] === 'D') j++;
+
+                // Price data line: contains "MYR"
+                while (j < lines.length) {
+                    if (lines[j].includes('MYR')) {
+                        const priceLine = lines[j];
+                        // Extract price: "0.410 MYR" pattern
+                        const priceMatch = priceLine.match(/^([\d.]+)\s+MYR/);
+                        if (priceMatch) price = parseFloat(priceMatch[1]);
+
+                        // Extract daily change: "+3.80%" or "-0.95%"
+                        const changeMatch = priceLine.match(/([+\-][\d.]+)%/);
+                        if (changeMatch) dailyChange = parseFloat(changeMatch[1]);
+
+                        // Extract sector (last tab-separated field before rating)
+                        const parts = priceLine.split('\t');
+                        if (parts.length >= 2) {
+                            // sector is usually the second to last before rating
+                            sector = parts[parts.length - 1].trim() || parts[parts.length - 2].trim();
+                        }
+                        j++;
+                        break;
+                    }
+                    j++;
+                }
+
+                // Rating line
+                if (j < lines.length && (lines[j].includes('buy') || lines[j].includes('rating') || lines[j].includes('sell') || lines[j] === 'Buy' || lines[j] === 'Strong buy' || lines[j] === 'No rating' || lines[j] === 'Sell')) {
+                    rating = lines[j];
+                    j++;
+                }
+
+                if (price !== null) {
+                    stocks.push({ symbol, companyName, price, dailyChange, sector, rating });
+                }
+
+                i = j;
+            } else {
+                i++;
+            }
+        }
+
+        return stocks;
+    }
+
+    function analyzeStock(stock, db) {
+        // Find in DB by symbol or partial name match
+        let dbEntry = db.find(d => d.symbol && d.symbol.toUpperCase() === stock.symbol.toUpperCase());
+        if (!dbEntry) {
+            // Try ID match
+            dbEntry = db.find(d => d.id && d.id.toUpperCase().replace(/[-_]/g,'') === stock.symbol.toUpperCase().replace(/[-_]/g,''));
+        }
+
+        if (!dbEntry) {
+            return {
+                ...stock,
+                inDb: false,
+                verdict: 'unknown',
+                reason: 'Tiada dalam database',
+                upside: null,
+                grade: null,
+                kumpulan: null,
+                isAth: false,
+                isZonBeli: false,
+                sifuTP: null,
+                shariah: null,
+            };
+        }
+
+        const curPrice = stock.price;
+        const sifuTP = dbEntry.sifuTargetPrice || dbEntry.avgTP || null;
+        const highPrice = dbEntry.highPrice || null;
+        const grade = dbEntry.predictedGrade || null;
+        const shariah = dbEntry.shariah;
+        const year = dbEntry.year;
+        const stage = dbEntry.stage;
+
+        // Upside calculation
+        let upside = null;
+        if (sifuTP && curPrice) upside = ((sifuTP - curPrice) / curPrice) * 100;
+
+        // ATH check: current price >= recorded high
+        const isAth = highPrice ? curPrice >= highPrice : false;
+
+        // Zon Beli: current price <= sifu TP
+        const isZonBeli = sifuTP ? curPrice <= sifuTP : false;
+
+        // Kumpulan logic
+        let kumpulan = null;
+        const hasHitTP = highPrice && sifuTP && highPrice >= sifuTP;
+        if (year === 2026 || stage < 5) {
+            kumpulan = hasHitTP ? 'K2' : 'K1';
+        } else {
+            kumpulan = curPrice < 3.0 ? 'K3' : null;
+        }
+
+        // Verdict logic
+        let verdict = 'skip';
+        let reason = '';
+
+        if (!shariah) {
+            verdict = 'skip';
+            reason = 'Bukan Shariah';
+        } else if (grade === 'C' && !isZonBeli) {
+            verdict = 'skip';
+            reason = 'Grade C + atas TP';
+        } else if (grade === 'C') {
+            verdict = 'skip';
+            reason = 'Grade C — AVOID';
+        } else if (isZonBeli && (grade === 'A' || grade === 'B')) {
+            verdict = 'buy';
+            reason = `Dalam Zon Beli, +${upside ? upside.toFixed(1) : '?'}% ke TP`;
+        } else if (isZonBeli && !grade) {
+            verdict = 'wait';
+            reason = 'Dalam Zon Beli tapi tiada grade';
+        } else if (!isZonBeli && sifuTP) {
+            const over = ((curPrice - sifuTP) / sifuTP * 100).toFixed(1);
+            verdict = 'wait';
+            reason = `${over}% atas TP — tunggu pullback`;
+        } else if (!sifuTP) {
+            verdict = 'wait';
+            reason = 'Tiada Sifu TP dalam DB';
+        }
+
+        return {
+            ...stock,
+            inDb: true,
+            verdict,
+            reason,
+            upside,
+            grade,
+            kumpulan,
+            isAth,
+            isZonBeli,
+            sifuTP,
+            shariah,
+            dbSymbol: dbEntry.symbol || dbEntry.id,
+        };
+    }
+
+    function renderStats(rows) {
+        const buy = rows.filter(r => r.verdict === 'buy').length;
+        const wait = rows.filter(r => r.verdict === 'wait').length;
+        const skip = rows.filter(r => r.verdict === 'skip').length;
+        const unknown = rows.filter(r => r.verdict === 'unknown').length;
+
+        document.getElementById('stats-row').innerHTML = `
+            <div class="stat-box green"><div class="num">${buy}</div><div class="lbl">✅ Beli</div></div>
+            <div class="stat-box yellow"><div class="num">${wait}</div><div class="lbl">⏳ Tunggu</div></div>
+            <div class="stat-box red"><div class="num">${skip}</div><div class="lbl">❌ Skip</div></div>
+            <div class="stat-box blue"><div class="num">${unknown}</div><div class="lbl">❓ Tak Dalam DB</div></div>
+            <div class="stat-box"><div class="num">${rows.length}</div><div class="lbl">Jumlah</div></div>
+        `;
+    }
+
+    function setFilter(f, btn) {
+        currentFilter = f;
+        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderTable(allRows);
+    }
+
+    function renderTable(rows) {
+        const filtered = currentFilter === 'all' ? rows : rows.filter(r => r.verdict === currentFilter);
+        const tbody = document.getElementById('results-body');
+        const emptyEl = document.getElementById('empty-results');
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.style.display = 'block';
+            return;
+        }
+        emptyEl.style.display = 'none';
+
+        // Sort: buy first, then wait, then skip, then unknown
+        const order = { buy: 0, wait: 1, skip: 2, unknown: 3 };
+        const sorted = [...filtered].sort((a, b) => {
+            if (order[a.verdict] !== order[b.verdict]) return order[a.verdict] - order[b.verdict];
+            // Within buy: sort by upside desc
+            if (a.verdict === 'buy' && a.upside !== null && b.upside !== null) return b.upside - a.upside;
+            // Within wait/others: sort by dailyChange desc
+            return (b.dailyChange || 0) - (a.dailyChange || 0);
+        });
+
+        tbody.innerHTML = sorted.map(r => {
+            const verdictHtml = r.verdict === 'buy'
+                ? `<span class="verdict-buy">✅ BELI</span>`
+                : r.verdict === 'wait'
+                ? `<span class="verdict-wait">⏳ Tunggu</span>`
+                : r.verdict === 'skip'
+                ? `<span class="verdict-skip">❌ Skip</span>`
+                : `<span class="verdict-unknown">❓ Tak Dalam DB</span>`;
+
+            const gradeHtml = r.grade
+                ? `<span class="grade-badge grade-${r.grade.toLowerCase()}">${r.grade}</span>`
+                : `<span class="grade-badge grade-na">N/A</span>`;
+
+            const upsideHtml = r.upside !== null
+                ? `<span class="${r.upside >= 0 ? 'upside-pos' : 'upside-neg'}">${r.upside >= 0 ? '+' : ''}${r.upside.toFixed(1)}%</span>`
+                : `<span class="upside-na">—</span>`;
+
+            const tpHtml = r.sifuTP ? `RM ${r.sifuTP.toFixed(2)}` : `<span style="color:#475569">—</span>`;
+
+            const kumpHtml = r.kumpulan
+                ? `<span class="kump-badge ${r.kumpulan.toLowerCase()}">${r.kumpulan}</span>`
+                : `<span class="kump-badge k-na">—</span>`;
+
+            const dailyHtml = r.dailyChange === null || r.dailyChange === undefined
+                ? `<span class="daily-zero">—</span>`
+                : r.dailyChange > 0
+                ? `<span class="daily-pos">+${r.dailyChange.toFixed(2)}%</span>`
+                : r.dailyChange < 0
+                ? `<span class="daily-neg">${r.dailyChange.toFixed(2)}%</span>`
+                : `<span class="daily-zero">0.00%</span>`;
+
+            const athBadge = r.isAth ? `<span class="ath-badge">🔥ATH</span>` : '';
+            const zonBadge = r.isZonBeli ? `<span class="zon-beli-badge">🎯Zon</span>` : '';
+
+            const tvSymbol = (r.dbSymbol || r.symbol || '').replace(/[^A-Z0-9]/gi, '');
+            const tvLink = r.inDb && tvSymbol
+                ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${tvSymbol}" target="_blank" class="tv-link" onclick="event.stopPropagation()"><i data-lucide="external-link" style="width:10px;height:10px;"></i></a>`
+                : '';
+
+            const rowClass = r.verdict === 'buy' ? 'row-buy' : r.verdict === 'wait' ? 'row-wait' : r.verdict === 'skip' ? 'row-skip' : '';
+            const nameClass = r.inDb ? '' : 'not-in-db';
+
+            return `
+                <tr class="${rowClass}">
+                    <td>
+                        <div style="display:flex;flex-direction:column;gap:0.2rem;">
+                            <span style="font-weight:700;color:white;font-size:0.9rem;">${r.symbol} ${tvLink}</span>
+                            <span style="font-size:0.7rem;color:#64748b;" class="${nameClass}">${r.companyName || '—'}</span>
+                        </div>
+                    </td>
+                    <td style="font-weight:700;font-family:monospace;">RM ${r.price.toFixed(3)}</td>
+                    <td>${dailyHtml}</td>
+                    <td>${gradeHtml}</td>
+                    <td style="font-family:monospace;color:#a5b4fc;">${tpHtml}</td>
+                    <td>${upsideHtml}</td>
+                    <td>${kumpHtml}</td>
+                    <td>${athBadge}${zonBadge}${!athBadge && !zonBadge ? '<span style="color:#334155;">—</span>' : ''}</td>
+                    <td>${verdictHtml}</td>
+                    <td><span class="reason-text" title="${r.reason}">${r.reason}</span></td>
+                </tr>
+            `;
+        }).join('');
+
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function clearAll() {
+        document.getElementById('tv-paste').value = '';
+        document.getElementById('parse-status').textContent = '';
+        document.getElementById('results-section').style.display = 'none';
+        document.getElementById('initial-state').style.display = 'block';
+        allRows = [];
+    }
+
+    // Auto-parse on paste
+    document.addEventListener('DOMContentLoaded', () => {
+        const ta = document.getElementById('tv-paste');
+        ta.addEventListener('paste', () => {
+            setTimeout(parseTradingView, 100);
+        });
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+</script>
+
+</body>
+</html>
