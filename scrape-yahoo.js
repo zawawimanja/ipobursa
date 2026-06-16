@@ -132,10 +132,15 @@ async function updateLivePricesYahoo() {
 
         await browser.close();
 
-        // Save data baru ke data.json
+        // Save data baru ke data.json dan data.js
         if (updatedCount > 0) {
             fs.writeFileSync(DATA_FILE, JSON.stringify(existingData, null, 4));
-            console.log(`\nSuccessfully updated ${updatedCount} records in ${DATA_FILE}.`);
+            
+            // Generate data.js
+            const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 4)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
+            fs.writeFileSync('./data.js', jsContent);
+            
+            console.log(`\nSuccessfully updated ${updatedCount} records in ${DATA_FILE} and ./data.js.`);
         } else {
             console.log('\nNo prices were updated.');
         }

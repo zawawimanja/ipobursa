@@ -359,7 +359,7 @@
                     <i data-lucide="folders"></i> Susunan Kumpulan
                 </button>
                 <button class="mode-btn" id="mode-actions" onclick="switchMode('actions')">
-                    <i data-lucide="clipboard-check"></i> Status Tindakan
+                    <i data-lucide="line-chart"></i> Status Tindakan
                 </button>
             </div>
         </div>
@@ -383,7 +383,7 @@
             </div>
             
             <div id="actions-tabs-placeholder" style="display: none; color: var(--text-dim); font-size: 0.85rem; font-weight: 500; align-items: center; gap: 0.3rem;">
-                <i data-lucide="clipboard-check" style="width: 14px; color: #10b981;"></i> Pandangan Susunan Tindakan
+                <i data-lucide="line-chart" style="width: 14px; color: #10b981;"></i> Pandangan Status Tindakan
             </div>
 
             <!-- Filters & Sort -->
@@ -562,7 +562,6 @@
                                 <th>Gred</th>
                                 <th>Kumpulan</th>
                                 <th>Tema / Sektor</th>
-                                <th>Chart</th>
                             </tr>
                         </thead>
                         <tbody id="action-buy-body">
@@ -596,7 +595,6 @@
                                 <th>Gred</th>
                                 <th>Kumpulan</th>
                                 <th>Tema / Sektor</th>
-                                <th>Chart</th>
                             </tr>
                         </thead>
                         <tbody id="action-wait-body">
@@ -630,7 +628,6 @@
                                 <th>Gred</th>
                                 <th>Kumpulan</th>
                                 <th>Tema / Sektor</th>
-                                <th>Chart</th>
                             </tr>
                         </thead>
                         <tbody id="action-skip-body">
@@ -650,10 +647,10 @@
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
             'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-            'solarvest', 'ctos', 'lgms', 'oppstar', 'agmo'
+            'solarvest', 'ctos', 'lgms', 'oppstar'
         ];
 
-        const explicitSkips = ['adnex', 'ogx', 'mmcs'];
+        const explicitSkips = ['adnex', 'ogx', 'mmcs', 'agmo'];
         let activeViewMode = 'groups';
 
         function switchMode(mode) {
@@ -881,6 +878,8 @@
                                 <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
                                     <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
                                     ${badgeHtml}
+                                    ${trendHtml}
+                                    ${tvBadgeHtml}
                                 </div>
                             </div>
                         </td>
@@ -891,7 +890,6 @@
                         <td><span class="grade-badge ${gradeClass}">Gred ${ipo.predictedGrade}</span></td>
                         <td><span class="kump-badge ${kumpulanClass}">${kumpulanLabel}</span></td>
                         <td style="color: var(--text-dim); font-size: 0.8rem;">${sectorDisplay}</td>
-                        <td>${tvBadgeHtml}</td>
                     </tr>
                 `;
 
