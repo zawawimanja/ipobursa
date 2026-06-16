@@ -585,7 +585,7 @@
 
     <script>
         // Map external IPO_DATA from data.js
-        const ipoData = typeof IPO_DATA !== 'undefined' ? IPO_DATA : [];
+        var localIpoData = typeof ipoData !== 'undefined' ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []);
 
         // Database of stock profiles (containing sifu's excel metrics & research insights)
         const stockProfiles = {
@@ -1661,8 +1661,8 @@
             }));
             
             // 2. Scan ipoData to find listed Shariah 2026 IPOs that are not in stockProfiles
-            if (typeof ipoData !== 'undefined') {
-                ipoData.forEach(ipo => {
+            if (typeof localIpoData !== 'undefined') {
+                localIpoData.forEach(ipo => {
                     if (ipo.year === 2026 && ipo.shariah === true && (ipo.status === 'Listed' || ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4)) {
                         const exists = profiles.some(p => p.id === ipo.id);
                         if (!exists) {
@@ -1693,8 +1693,8 @@
                 fillFormValues(data);
                 document.getElementById('sheet-target-pe').value = data.targetPe.toFixed(1);
                 updateNotes(data);
-            } else if (typeof ipoData !== 'undefined') {
-                const ipo = ipoData.find(x => x.id === id);
+            } else if (typeof localIpoData !== 'undefined') {
+                const ipo = localIpoData.find(x => x.id === id);
                 if (ipo) {
                     const price = ipo.currentPrice || ipo.price || 0.50;
                     const pe = ipo.pe || 15;
@@ -1871,7 +1871,7 @@
             
             if (!gradeEl || !shariahEl || !ofsEl || !osEl || !insightEl) return;
             
-            const ipo = ipoData.find(x => x.id === id);
+            const ipo = localIpoData.find(x => x.id === id);
             if (ipo) {
                 // Grade
                 const grade = ipo.predictedGrade || '--';
@@ -2257,7 +2257,7 @@
             const selectEl = document.getElementById('sheet-stock-select');
             let defaultStock = 'bus-cap';
             if (stockParam) {
-                const isValid = stockProfiles[stockParam] || (typeof ipoData !== 'undefined' && ipoData.some(x => x.id === stockParam));
+                const isValid = stockProfiles[stockParam] || (typeof localIpoData !== 'undefined' && localIpoData.some(x => x.id === stockParam));
                 if (isValid) {
                     defaultStock = stockParam;
                 }

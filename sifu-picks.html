@@ -335,6 +335,14 @@
 
             <!-- Filters & Sort -->
             <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <!-- Archive Date Picker -->
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                        <i data-lucide="calendar" style="width: 14px; height: 14px;"></i> Tarikh Data:
+                    </span>
+                    <input type="date" id="archive-date" onchange="loadArchiveDate()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
+                </div>
+
                 <!-- Trend Filter -->
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
@@ -474,8 +482,8 @@
             'solarvest', 'ctos', 'lgms', 'oppstar', 'agmo'
         ];
 
-        function renderTables() {
-            const list = typeof IPO_DATA !== 'undefined' ? IPO_DATA : [];
+        function renderTables(overrideData = null) {
+            const list = overrideData || (typeof ipoData !== 'undefined' ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []));
             
             const g1Body = document.getElementById('group-1-body');
             const g2Body = document.getElementById('group-2-body');
@@ -684,7 +692,50 @@
             }
         }
 
+        async function loadArchiveDate() {
+            const dateInput = document.getElementById('archive-date').value;
+            if (!dateInput) {
+                renderTables();
+                return;
+            }
+            try {
+                const res = await fetch(`archive/groups-${dateInput}.json`);
+                if (!res.ok) throw new Error('Not found');
+                const data = await res.json();
+                
+                // Reconstruct a flat list that tricks renderTables into grouping them exactly as the archive did
+                let flatList = [];
+                
+                if (data.kumpulan_1 && data.kumpulan_1.stocks) {
+                    data.kumpulan_1.stocks.forEach(s => {
+                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2026, highPrice: null, stage: 5});
+                    });
+                }
+                if (data.kumpulan_2 && data.kumpulan_2.stocks) {
+                    data.kumpulan_2.stocks.forEach(s => {
+                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2026, highPrice: 10, sifuTargetPrice: 5, stage: 5});
+                    });
+                }
+                if (data.kumpulan_3 && data.kumpulan_3.stocks) {
+                    data.kumpulan_3.stocks.forEach(s => {
+                        flatList.push({...s, shariah: true, currentPrice: 1, price: 0.5, year: 2024, highPrice: null, stage: 5});
+                    });
+                }
+                
+                renderTables(flatList);
+            } catch (err) {
+                alert(`Tiada rekod arkib untuk tarikh ${dateInput}. Sila pilih tarikh lain.`);
+                document.getElementById('archive-date').value = '';
+                renderTables();
+            }
+        }
+
         window.onload = function() {
+            // Set max date to today
+            const today = new Date().toISOString().split('T')[0];
+            const datePicker = document.getElementById('archive-date');
+            if (datePicker) datePicker.setAttribute('max', today);
+            
             renderTables();
         }
     </script>

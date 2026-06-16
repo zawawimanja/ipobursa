@@ -371,18 +371,20 @@
             let activeCount = 0;
             let mutedCount = 0;
             
-            if (typeof IPO_DATA === 'undefined') {
+            if (typeof IPO_DATA === 'undefined' && typeof ipoData === 'undefined') {
                 containerActive.style.display = 'none';
                 emptyActive.style.display = 'block';
                 emptyActive.innerText = 'Data tidak dapat dimuatkan. Sila semak fail data.js.';
+                console.error("Data IPO tidak ditemui! Sila pastikan data.js dimuatkan.");
                 return;
             }
+            const dataSource = typeof IPO_DATA !== 'undefined' ? IPO_DATA : ipoData;
 
             // Sync and clean up dismissed list if price has recovered above target
             const cleanedDismissed = [...dismissed];
             let cleanNeeded = false;
             
-            IPO_DATA.forEach(ipo => {
+            dataSource.forEach(ipo => {
                 if (ipo.stage === 5 && ipo.shariah === true) {
                     const curPrice = ipo.currentPrice || ipo.price || 0;
                     const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || ipo.price || 0;
@@ -401,7 +403,7 @@
             
             const currentDismissed = getDismissedAlerts();
 
-            IPO_DATA.forEach(ipo => {
+            dataSource.forEach(ipo => {
                 // We strictly focus on Shariah-compliant listed/open-public IPOs that have a target price
                 const isShariah = ipo.shariah === true;
                 
