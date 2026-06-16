@@ -732,6 +732,11 @@
                 
                 if (!isMatch) return false;
 
+                // Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
+                const isRecent = ipo.year >= 2024;
+                const isSifuPick = sifuPortfolio.includes(ipo.id) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
+                if (!isRecent && !isSifuPick) return false;
+
                 // Actions view scope filter
                 if (activeViewMode === 'actions' && scopeVal === 'portfolio') {
                     if (!sifuPortfolio.includes(ipo.id)) return false;
@@ -761,7 +766,8 @@
                 if (selectedTrend === 'all') return true;
 
                 const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
-                const isBearish = ipo.currentPrice < ipo.price;
+                const highPrice = ipo.highPrice || 0;
+                const isBearish = ipo.currentPrice < ipo.price || (highPrice > 0 && ipo.currentPrice <= highPrice * 0.75);
                 const isBreakout = !isBearish && dailyChange !== null && dailyChange >= 3.0;
                 const isSikat = !isBearish && dailyChange !== null && Math.abs(dailyChange) < 1.0;
                 const isUptrend = !isBearish && !isBreakout && !isSikat;
@@ -851,14 +857,20 @@
                 // Trend badge
                 let trendText = 'Uptrend';
                 let trendClass = 'trend-uptrend';
-                if (ipo.currentPrice < ipo.price) {
-                    trendText = 'Bearish';
+                const highPrice = ipo.highPrice || 0;
+                const isDowntrend = ipo.currentPrice < ipo.price || (highPrice > 0 && ipo.currentPrice <= highPrice * 0.75);
+                
+                if (isDowntrend) {
+                    trendText = 'Bearish/Downtrend';
                     trendClass = 'trend-bearish';
+                } else if (highPrice > 0 && ipo.currentPrice <= highPrice * 0.90) {
+                    trendText = 'Pullback';
+                    trendClass = 'trend-sikat';
                 } else if (dailyChange !== null && dailyChange >= 3.0) {
                     trendText = '⚡ Breakout';
                     trendClass = 'trend-breakout';
                 } else if (dailyChange !== null && Math.abs(dailyChange) < 1.0) {
-                    trendText = '💤 Sikat';
+                    trendText = 'Consolidate';
                     trendClass = 'trend-sikat';
                 }
                 const trendHtml = `<span class="trend-badge ${trendClass}">${trendText}</span>`;
@@ -869,17 +881,15 @@
                     : '';
 
                 // Strategy determination
-                let strategyText = ipo.strategy || '';
-                if (!strategyText) {
-                    if (ipo.predictedGrade === 'C') {
-                        strategyText = 'Skip';
-                    } else if (dailyChange !== null && dailyChange >= 3.0) {
-                        strategyText = 'Scalp';
-                    } else if (ipo.stage === 4) {
-                        strategyText = 'Scalp';
-                    } else {
-                        strategyText = 'Swing';
-                    }
+                let strategyText = '';
+                const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
+
+                if (ipo.predictedGrade === 'C') {
+                    strategyText = 'Skip';
+                } else if (isAthOrNear || (dailyChange !== null && dailyChange >= 3.0) || ipo.stage === 4) {
+                    strategyText = 'Scalp';
+                } else {
+                    strategyText = 'Swing';
                 }
 
                 let strategyBadgeStyle = '';
@@ -970,8 +980,12 @@
 
                 // Render into Actions bodies
                 let actionCategory = 'wait';
+                const isDowntrendAction = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+
                 if (ipo.predictedGrade === 'C' || explicitSkips.includes(ipo.id)) {
                     actionCategory = 'skip';
+                } else if (isDowntrendAction) {
+                    actionCategory = 'wait';
                 } else if (ipo.targetPrice > 0 && ipo.currentPrice <= ipo.targetPrice) {
                     actionCategory = 'buy';
                 }

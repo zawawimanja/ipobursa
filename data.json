@@ -73,6 +73,7 @@
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Syarikat pembangunan perisian (Software Suite R&D). Dibantu oleh Malacca Securities (Momentum IB). PE 15.6x adalah berpatutan untuk sektor tech/software. Langganan (OS 26.92x) adalah baik. Sesuai untuk scalp.",
     "ofs": true,
     "sifuTargetPrice": 0.31,
+    "highPrice": 0.275,
     "symbol": "ELSA",
     "dailyChange": null,
     "currentPrice": 0.275,
@@ -102,7 +103,8 @@
     "pe": 11.8,
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Syarikat pembekal jentera industri & peningkatan kemudahan. Dibantu oleh Public Investment Bank (Hero IB). PE 11.8x adalah sangat menarik vs peers. Langganan tinggi (OS 120.98x) menunjukkan permintaan runcit yang sangat luar biasa. Sesuai untuk apply/scalp.",
     "ofs": false,
-    "sifuTargetPrice": 0.28,
+    "sifuTargetPrice": 0.38,
+    "highPrice": 0.32,
     "symbol": "PENTECH",
     "currentPrice": 0.315,
     "performance": "+57.50%",
@@ -135,7 +137,7 @@
     "sifuTargetPrice": 0.32,
     "symbol": "MMCS",
     "openPrice": 0.22,
-    "highPrice": 0.225,
+    "highPrice": 0.25,
     "closePrice": 0.225,
     "currentPrice": 0.25,
     "performance": "+13.64%",
@@ -236,9 +238,9 @@
     "strategy": "Scalp",
     "outlier": true,
     "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +47.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
-    "highPrice": 0.335,
+    "highPrice": 1.04,
     "symbol": "NE",
-    "sifuTargetPrice": 0.2,
+    "sifuTargetPrice": 1.3,
     "dailyChange": 0.7
   },
   {
@@ -283,9 +285,9 @@
     "pe": 12.8,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.67,
+    "highPrice": 0.915,
     "symbol": "AMBEST",
-    "sifuTargetPrice": 0.45,
+    "sifuTargetPrice": 1.14,
     "dailyChange": 0.3
   },
   {
@@ -308,7 +310,7 @@
     "closePrice": 0.305,
     "currentPrice": 0.405,
     "performance": "+39.66%",
-    "highPrice": 0.35,
+    "highPrice": 0.405,
     "listingDate": "2026-04-23",
     "symbol": "AMS",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
@@ -417,7 +419,7 @@
     "performance": "+45.83%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.85,
     "dailyChange": 12.9
   },
   {
@@ -445,7 +447,7 @@
     "closePrice": 0.975,
     "symbol": "EMPIRE",
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Empire Premium Food mempamerkan prestasi pertumbuhan luar biasa dengan PAT CAGR 3 tahun cecah 61% menerusi model grab-and-go. Keputusan 3Q25 sangat mantap membuktikan keberkesanan fasa scale-up.<br><br>📊 <b>Kelebihan Utama:</b><br>• Margin kasar stabil sekitar 40% dengan CAGR PAT 61%.<br>• Model perniagaan grab-and-go berisiko rendah & kos cawangan rendah.<br>• Penyenaraian Main Market dengan sokongan Maybank IB.",
-    "sifuTargetPrice": 0.83,
+    "sifuTargetPrice": 1.4,
     "dailyChange": 0
   },
   {
@@ -589,7 +591,7 @@
     "highPrice": 0.575,
     "symbol": "ISF",
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-    "sifuTargetPrice": 0.36,
+    "sifuTargetPrice": 0.72,
     "dailyChange": -0.3
   },
   {
@@ -615,9 +617,9 @@
     "pe": 12.4,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.04,
+    "highPrice": 1.34,
     "symbol": "KEEMING",
-    "sifuTargetPrice": 0.38,
+    "sifuTargetPrice": 1.68,
     "dailyChange": 8
   },
   {
@@ -983,11 +985,11 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.6784999999999999,
+    "highPrice": 0.69,
     "openPrice": 0.33000799999999997,
     "closePrice": 0.33499200000000007,
     "symbol": "CBHB",
-    "sifuTargetPrice": 0.53,
+    "sifuTargetPrice": 0.86,
     "dailyChange": 4.5
   },
   {
@@ -1175,7 +1177,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.21849999999999997,
+    "highPrice": 0.22,
     "openPrice": 0.25,
     "closePrice": 0.255,
     "symbol": "FAMIERA",
@@ -1296,11 +1298,11 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.345,
+    "highPrice": 0.565,
     "openPrice": 0.16,
     "closePrice": 0.144992,
     "symbol": "HKB",
-    "sifuTargetPrice": 0.21,
+    "sifuTargetPrice": 0.71,
     "dailyChange": 2.34
   },
   {
@@ -1346,7 +1348,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.44275,
+    "highPrice": 0.49,
     "openPrice": 0.28999199999999997,
     "closePrice": 0.340008,
     "symbol": "ICENTS",
@@ -1627,7 +1629,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.368,
+    "highPrice": 0.37,
     "openPrice": 0.360006,
     "closePrice": 0.38500399999999996,
     "symbol": "OXB",
@@ -1857,7 +1859,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.4714999999999999,
+    "highPrice": 0.475,
     "openPrice": 0.52,
     "closePrice": 0.5400200000000001,
     "symbol": "REACHTEN",
@@ -2050,7 +2052,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.4949999999999999,
+    "highPrice": 1.92,
     "openPrice": 0.799986,
     "closePrice": 0.9100050000000001,
     "symbol": "THMY",
@@ -2333,7 +2335,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.23574999999999996,
+    "highPrice": 0.265,
     "openPrice": 0.235008,
     "closePrice": 0.23001300000000002,
     "symbol": "RL",
@@ -2530,7 +2532,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 1.1212499999999999,
+    "highPrice": 1.23,
     "openPrice": 0.7999949999999999,
     "closePrice": 0.950005,
     "symbol": "GOHUB",
@@ -3197,7 +3199,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 1.8859999999999997,
+    "highPrice": 2.48,
     "openPrice": 1.9699749999999998,
     "closePrice": 1.9199249999999999,
     "symbol": "TMK",
@@ -3446,7 +3448,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.9487499999999999,
+    "highPrice": 1.18,
     "openPrice": 0.50001,
     "closePrice": 0.57001,
     "symbol": "CHB",
@@ -3733,7 +3735,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.12074999999999998,
+    "highPrice": 0.245,
     "dailyChange": null,
     "openPrice": 0.32,
     "closePrice": 0.32,
@@ -3832,7 +3834,7 @@
     "outlier": true,
     "sifuTargetPrice": 0.85,
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Premium IC design house in Malaysia. Direct proxy to AI and semiconductor growth, highly attractive near IPO price.",
-    "highPrice": 0.368,
+    "highPrice": 0.535,
     "openPrice": 2.05002,
     "closePrice": 2.429973,
     "symbol": "OPPSTAR",
@@ -3995,7 +3997,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.22424999999999998,
+    "highPrice": 0.25,
     "openPrice": 1.4900160000000002,
     "closePrice": 1.2799980000000002,
     "symbol": "TTVHB",
@@ -4186,7 +4188,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.91425,
+    "highPrice": 1.03,
     "openPrice": 0.7000000000000001,
     "closePrice": 0.6450080000000001,
     "symbol": "CORAZA",
@@ -4209,7 +4211,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.1955,
+    "highPrice": 0.225,
     "openPrice": 0.6499950000000001,
     "closePrice": 0.7550040000000001,
     "symbol": "ECA",
@@ -4383,7 +4385,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.484,
+    "highPrice": 2.76,
     "openPrice": 0.260001,
     "closePrice": 0.23498999999999998,
     "symbol": "MNHLDG",
@@ -4502,7 +4504,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.15525,
+    "highPrice": 0.295,
     "openPrice": 0.6,
     "closePrice": 0.66999,
     "symbol": "SFPTECH",
@@ -4862,7 +4864,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.322,
+    "highPrice": 0.34,
     "openPrice": 0.5699879999999999,
     "closePrice": 0.709992,
     "symbol": "HPPHB",
@@ -5056,7 +5058,7 @@
     "stage": 5,
     "status": "Listed",
     "shariah": true,
-    "highPrice": 0.28175,
+    "highPrice": 0.295,
     "openPrice": 0.7,
     "closePrice": 0.48499499999999995,
     "symbol": "VOLCANO",
@@ -5201,7 +5203,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 0.8049999999999999,
+    "highPrice": 0.88,
     "openPrice": 0.255,
     "closePrice": 0.28500000000000003,
     "symbol": "PWRWELL",
@@ -5252,7 +5254,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 2.1734999999999998,
+    "highPrice": 2.25,
     "openPrice": 0.335002,
     "closePrice": 0.330004,
     "symbol": "SCGBHD",
@@ -5566,7 +5568,7 @@
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
-    "highPrice": 5.600499999999999,
+    "highPrice": 6.2,
     "openPrice": 1.1000299999999998,
     "closePrice": 1.399986,
     "symbol": "UWC",
@@ -5873,7 +5875,7 @@
     "highPrice": 0.9,
     "openPrice": 0.6,
     "closePrice": 0.58,
-    "sifuTargetPrice": 0.53,
+    "sifuTargetPrice": 0.8,
     "dailyChange": 2.59
   },
   {
@@ -6039,7 +6041,8 @@
     "year": 2026,
     "listingDate": "2026-01-13",
     "performance": "+124.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.56
   },
   {
     "id": "foodie-ns-",
@@ -6054,7 +6057,8 @@
     "year": 2025,
     "listingDate": "2025-11-28",
     "performance": "+5.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.315
   },
   {
     "id": "camaroe--ns-",
@@ -6069,7 +6073,8 @@
     "year": 2025,
     "listingDate": "2025-10-02",
     "performance": "-46.43%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.075
   },
   {
     "id": "paradigm--ns-",
@@ -6084,7 +6089,8 @@
     "year": 2025,
     "listingDate": "2025-06-10",
     "performance": "-6.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.94
   },
   {
     "id": "saliran--ns-",
@@ -6099,7 +6105,8 @@
     "year": 2025,
     "listingDate": "2025-03-13",
     "performance": "-25.93%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.2
   },
   {
     "id": "northern--ns-",
@@ -6114,7 +6121,8 @@
     "year": 2025,
     "listingDate": "2025-02-06",
     "performance": "+1.59%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.64
   },
   {
     "id": "megafb",
@@ -6129,7 +6137,8 @@
     "year": 2024,
     "listingDate": "2024-11-11",
     "performance": "+150.75%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 1.68
   },
   {
     "id": "3ren--ns-",
@@ -6144,7 +6153,8 @@
     "year": 2024,
     "listingDate": "2024-11-06",
     "performance": "+50.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.42
   },
   {
     "id": "khb--ns-",
@@ -6159,7 +6169,8 @@
     "year": 2024,
     "listingDate": "2024-10-08",
     "performance": "-60.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.08
   },
   {
     "id": "kucingko--ns-",
@@ -6174,7 +6185,8 @@
     "year": 2024,
     "listingDate": "2024-07-26",
     "performance": "-68.33%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.095
   },
   {
     "id": "panda",
@@ -6190,7 +6202,8 @@
     "listingDate": "2023-11-27",
     "market": "ACE Market",
     "shariah": false,
-    "performance": "+18.75%"
+    "performance": "+18.75%",
+    "highPrice": 0.19
   },
   {
     "id": "emcc--ns-",
@@ -6205,7 +6218,8 @@
     "year": 2023,
     "listingDate": "2023-09-26",
     "performance": "+35.42%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.325
   },
   {
     "id": "mersec--ns-",
@@ -6220,7 +6234,8 @@
     "year": 2023,
     "listingDate": "2023-09-19",
     "performance": "+6.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.265
   },
   {
     "id": "mbn--ns-",
@@ -6235,7 +6250,8 @@
     "year": 2023,
     "listingDate": "2023-07-25",
     "performance": "-54.76%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.095
   },
   {
     "id": "adb",
@@ -6250,7 +6266,8 @@
     "year": 2023,
     "listingDate": "2023-05-09",
     "performance": "+83.33%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.605
   },
   {
     "id": "ceb--ns-",
@@ -6265,7 +6282,8 @@
     "year": 2023,
     "listingDate": "2023-03-10",
     "performance": "-70.56%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.265
   },
   {
     "id": "eib--ns-",
@@ -6280,7 +6298,8 @@
     "year": 2022,
     "listingDate": "2022-07-18",
     "performance": "-50.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.15
   },
   {
     "id": "unitrad--ns-",
@@ -6295,7 +6314,8 @@
     "year": 2022,
     "listingDate": "2022-06-14",
     "performance": "-25.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.24
   },
   {
     "id": "ppjack--ns-",
@@ -6310,7 +6330,8 @@
     "year": 2022,
     "listingDate": "2022-04-01",
     "performance": "+205.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.92
   },
   {
     "id": "yenher--ns-",
@@ -6325,7 +6346,8 @@
     "year": 2021,
     "listingDate": "2021-07-15",
     "performance": "-16.84%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.79
   },
   {
     "id": "ovh--ns-",
@@ -6340,7 +6362,8 @@
     "year": 2020,
     "listingDate": "2020-07-22",
     "performance": "-23.08%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.2
   },
   {
     "id": "innature--ns-",
@@ -6355,7 +6378,8 @@
     "year": 2020,
     "listingDate": "2020-02-20",
     "performance": "-75.00%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.16
   },
   {
     "id": "khjb--ns-",
@@ -6370,7 +6394,8 @@
     "year": 2019,
     "listingDate": "2019-07-08",
     "performance": "-77.91%",
-    "market": "ACE Market"
+    "market": "ACE Market",
+    "highPrice": 0.095
   },
   {
     "id": "rt-pastry-holdings-berhad",
@@ -9400,7 +9425,7 @@
     "price": 0.05,
     "currentPrice": 0.1,
     "sifuTargetPrice": 0.1,
-    "highPrice": 0.08,
+    "highPrice": 0.1,
     "dailyChange": 0.5,
     "market": "ACE Market",
     "status": "Listed",
@@ -9422,7 +9447,8 @@
     "strategy": "Swing",
     "market": "Main Market",
     "status": "Listed",
-    "year": 2024
+    "year": 2024,
+    "highPrice": 1.05
   },
   {
     "id": "saliran-group",
@@ -9439,6 +9465,7 @@
     "status": "Listed",
     "year": 2025,
     "listingDate": "2025-03-13",
-    "symbol": "SALIRAN [NS]"
+    "symbol": "SALIRAN [NS]",
+    "highPrice": 0.2
   }
 ]

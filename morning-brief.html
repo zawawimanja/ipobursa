@@ -547,13 +547,8 @@ No rating"></textarea>
             const sifuTP = curPrice * 1.10; // Auto +10% target
             const upside = 10.0;
 
-            let verdict = 'buy';
-            let reason = 'Teknikal Breakout (Auto +10% TP)';
-
-            if (dailyChange > 6.0) {
-                verdict = 'wait';
-                reason = `Naik +${dailyChange.toFixed(1)}% hari ini — tunggu pullback intraday`;
-            }
+            let verdict = 'skip';
+            let reason = 'Luar DB (Risiko Pump & Dump) — Sila semak FA & daftar gred';
 
             return {
                 ...stock,
@@ -563,12 +558,12 @@ No rating"></textarea>
                 upside: upside,
                 grade: 'N/A',
                 kumpulan: 'K3 Mapan',
-                isAth: true,
-                isZonBeli: verdict === 'buy',
+                isAth: false,
+                isZonBeli: false,
                 sifuTP: sifuTP,
                 shariah: true,
                 dbSymbol: stock.symbol,
-                strategy: 'Scalp'
+                strategy: 'Skip'
             };
         }
 
@@ -599,6 +594,8 @@ No rating"></textarea>
             kumpulan = curPrice < 3.0 ? 'K3' : null;
         }
 
+        const isDowntrend = highPrice ? (curPrice <= highPrice * 0.75) : false;
+
         // Verdict logic
         let verdict = 'skip';
         let reason = '';
@@ -606,12 +603,12 @@ No rating"></textarea>
         if (!shariah) {
             verdict = 'skip';
             reason = 'Bukan Shariah';
-        } else if (grade === 'C' && !isZonBeli) {
-            verdict = 'skip';
-            reason = 'Grade C + atas TP';
         } else if (grade === 'C') {
             verdict = 'skip';
             reason = 'Grade C — AVOID';
+        } else if (isDowntrend) {
+            verdict = 'wait';
+            reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
         } else if (isZonBeli && (grade === 'A' || grade === 'B')) {
             verdict = 'buy';
             reason = `Dalam Zon Beli, +${upside ? upside.toFixed(1) : '?'}% ke TP`;
@@ -627,6 +624,14 @@ No rating"></textarea>
             reason = 'Tiada Sifu TP dalam DB';
         }
 
+        const isAthOrNear = highPrice ? (curPrice >= highPrice * 0.95) : false;
+        let strategy = 'Swing';
+        if (grade === 'C') {
+            strategy = 'Skip';
+        } else if (isAthOrNear || (stock.dailyChange !== null && stock.dailyChange >= 3.0) || stage === 4) {
+            strategy = 'Scalp';
+        }
+
         return {
             ...stock,
             inDb: true,
@@ -639,6 +644,8 @@ No rating"></textarea>
             isZonBeli,
             sifuTP,
             shariah,
+            isDowntrend,
+            strategy,
             dbSymbol: dbEntry.symbol || dbEntry.id,
         };
     }
@@ -730,6 +737,12 @@ No rating"></textarea>
                 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${tvSymbol}" target="_blank" class="tv-link" onclick="event.stopPropagation()"><i data-lucide="external-link" style="width:10px;height:10px;"></i></a>`
                 : '';
 
+            const strategyBadge = r.strategy === 'Scalp'
+                ? `<span style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-size:0.6rem;padding:0.1rem 0.3rem;border-radius:3px;font-weight:bold;margin-top:2px;display:inline-block;">⚡ SCALP</span>`
+                : r.strategy === 'Swing'
+                ? `<span style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:#10b981;font-size:0.6rem;padding:0.1rem 0.3rem;border-radius:3px;font-weight:bold;margin-top:2px;display:inline-block;">⚓ SWING</span>`
+                : '';
+
             const rowClass = r.verdict === 'buy' ? 'row-buy' : r.verdict === 'wait' ? 'row-wait' : r.verdict === 'skip' ? 'row-skip' : '';
             const nameClass = r.inDb ? '' : 'not-in-db';
             let registerBtn = '';
@@ -745,6 +758,9 @@ No rating"></textarea>
                         <div style="display:flex;flex-direction:column;gap:0.2rem;">
                             <span style="font-weight:700;color:white;font-size:0.9rem;">${r.symbol} ${tvLink}</span>
                             <span style="font-size:0.7rem;color:#64748b;" class="${nameClass}">${r.companyName || '—'}</span>
+                            <div style="display:flex;gap:0.3rem;align-items:center;">
+                                ${strategyBadge}
+                            </div>
                             ${registerBtn}
                         </div>
                     </td>
@@ -788,8 +804,17 @@ No rating"></textarea>
             
             if (!isSifuPick && !isHighGrade) return false;
             
+            // Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
+            const isRecent = d.year >= 2024;
+            if (!isRecent && !isSifuPick) return false;
+            
             const curPrice = d.currentPrice || d.price || 0;
             const tp = d.sifuTargetPrice || d.avgTP || 0;
+            const highPrice = d.highPrice || 0;
+            
+            // Downtrend Filter: skip if down >25% from peak (lacks momentum)
+            const isDowntrend = highPrice ? (curPrice <= highPrice * 0.75) : false;
+            if (isDowntrend) return false;
             
             return curPrice > 0 && tp > 0 && curPrice <= tp;
         });
