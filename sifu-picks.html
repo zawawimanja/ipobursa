@@ -394,8 +394,8 @@
                         <i data-lucide="filter" style="width: 14px; height: 14px;"></i> Liputan:
                     </span>
                     <select id="scope-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                        <option value="portfolio">Portfolio Sifu</option>
                         <option value="all">Semua Saham Aktif</option>
+                        <option value="portfolio">Portfolio Sifu</option>
                     </select>
                 </div>
 
@@ -747,17 +747,16 @@
                 const selectedStrategy = strategyFilter ? strategyFilter.value : 'all';
                 if (selectedStrategy !== 'all') {
                     const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
-                    let strategyText = ipo.strategy || '';
-                    if (!strategyText) {
-                        if (ipo.predictedGrade === 'C') {
-                            strategyText = 'Skip';
-                        } else if (dailyChange !== null && dailyChange >= 3.0) {
-                            strategyText = 'Scalp';
-                        } else if (ipo.stage === 4) {
-                            strategyText = 'Scalp';
-                        } else {
-                            strategyText = 'Swing';
-                        }
+                    const highPrice = ipo.highPrice || 0;
+                    const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
+
+                    let strategyText = '';
+                    if (ipo.predictedGrade === 'C') {
+                        strategyText = 'Skip';
+                    } else if (isAthOrNear || (dailyChange !== null && dailyChange >= 3.0) || ipo.stage === 4) {
+                        strategyText = 'Scalp';
+                    } else {
+                        strategyText = 'Swing';
                     }
                     if (selectedStrategy === 'swing' && strategyText.toLowerCase() !== 'swing') return false;
                     if (selectedStrategy === 'scalp' && strategyText.toLowerCase() !== 'scalp') return false;
