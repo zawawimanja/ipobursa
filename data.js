@@ -1,4 +1,26 @@
-const ipoData = [
+const IPO_DATA = [
+    {
+        "id": "dfb-berhad",
+        "companyName": "D FB Berhad (Butterfiel)",
+        "sector": "Consumer Products (F&B / Coffee)",
+        "stage": 2,
+        "price": 0.48,
+        "market": "ACE Market",
+        "status": "MITI Allocation Phase",
+        "closingDate": "23-Jun-2026",
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "year": 2026,
+        "shariah": true,
+        "os": 0,
+        "ib": "TBA",
+        "fundUse": "Perkilangan serbuk ekstrak kopi & produk berkaitan",
+        "predictedGrade": "C",
+        "analystInsight": "⚠️ <b>AVOID / RISK PLAY (GRADE C)</b><br>Walaupun PAT >RM30 juta nampak gah, tawaran IPO ini mempunyai komponen <b>Offer for Sale (OFS)</b> yang sangat besar berbanding public issue. Sektor F&B (kopi) juga kurang mendapat sambutan ('boring') untuk momentum pop hari pertama. Risiko tekanan jualan dari pemilik asal cash-out adalah tinggi.",
+        "symbol": "DFB",
+        "sifuTargetPrice": 0.60,
+        "dailyChange": null,
+        "currentPrice": 0.48
+    },
     {
         "id": "srkk-ai",
         "companyName": "SRKK AI Berhad",
