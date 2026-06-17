@@ -5787,7 +5787,9 @@ const IPO_DATA = [
     "status": "MITI Allocation Phase",
     "year": 2026,
     "sifuTargetPrice": 0.5,
-    "dailyChange": null
+    "dailyChange": null,
+    "predictedGrade": "C",
+    "analystInsight": "⚠️ <b>MITI ALLOCATION PHASE (GRADE C)</b><br>Syarikat sektor Consumer (Food & Beverage). Permohonan kuota Bumiputera kini dibuka melalui portal <b>saham.miti.gov.my</b>.<br><br>💡 <b>Analisis Sasaran Sifu:</b> Target harga RM0.50. Sebagai sektor F&B, tiada momentum tema semikonduktor/tech besar, sesuai sebagai nilai wajar jangka sederhana sahaja. Sila perhatikan tarikh tutup window MITI."
   },
   {
     "id": "evocom-berhad",
