@@ -682,11 +682,16 @@ function updateTabCounts() {
 
 function getIpoGrade(ipo) {
     if (!ipo.market || ipo.market === 'Unknown') return { grade: 'Unrated', reason: 'Market classification unknown.' };
+    
+    // If it's listed (Stage 5) but does not have an open price yet (still listing morning / data pending),
+    // treat its stage as Stage 4 (subscription results in, waiting for debut).
+    const effectiveStage = (ipo.stage === 5 && !ipo.openPrice) ? 4 : ipo.stage;
+    
     const os = ipo.os || 0;
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0; 
     
     // PRIORITY 1: Respect manual Predicted Grade from data.js if it exists (only pre-listing before subscription results)
-    if (ipo.predictedGrade && ipo.stage < 4) {
+    if (ipo.predictedGrade && effectiveStage < 4) {
         return { 
             grade: ipo.predictedGrade, 
             reason: ipo.analystInsight || 'Manual rating applied.' 
@@ -723,7 +728,7 @@ function getIpoGrade(ipo) {
     const isMainMarket = ipo.market && ipo.market.toLowerCase().includes('main');
     const isAceMarket = !isMainMarket;
 
-    if (ipo.stage < 5 && os === 0) {
+    if (effectiveStage < 5 && os === 0) {
         // Calculate Pre-OS Grade
         let score = 0;
         if (isHero) score += 40;
@@ -767,7 +772,7 @@ function getIpoGrade(ipo) {
     }
     
     // Stage 3 & 4 - Subscription Results In
-    if ((ipo.stage === 3 || ipo.stage === 4) && os > 0) {
+    if ((effectiveStage === 3 || effectiveStage === 4) && os > 0) {
         if (isMainMarket) {
             const isTopIB = heroIBs.some(tier => ib.includes(tier));
             if (os >= 20 && isTopIB) return { grade: 'A', reason: '<b>Grade A (The Giants):</b><br>🚀 Institutional interest (OS > 20x)<br>🏛️ Top-tier IB backing' };
@@ -795,7 +800,7 @@ function getIpoGrade(ipo) {
     if (isMainMarket) {
         if (isHero && (isStrongGreen || isFlat)) return { grade: 'A', reason: '<b>Elite Setup:</b><br>🏛️ Hero IB Support<br>✅ Positive Day 1 Debut' };
         
-        if (ipo.stage === 5 && !hasOsData && isStrongGreen) {
+        if (effectiveStage === 5 && !hasOsData && isStrongGreen) {
             if ((isTopTier || isMomentum) && !isHighPE) return { grade: 'A', reason: '<b>Momentum Setup:</b><br>✅ Strong Open<br>📊 Healthy Valuation' };
             if (pe > 0 && pe < 15 && isStrongGreen) return { grade: 'A', reason: '<b>Value Pick:</b><br>💎 Low PE (${pe}x)<br>🚀 Strong Momentum' };
         }
@@ -818,7 +823,7 @@ function getIpoGrade(ipo) {
 
     if (isAceMarket) {
         // Downgrade if the stock is currently trading below its IPO price (negative return/underperforming)
-        if (ipo.stage === 5) {
+        if (effectiveStage === 5) {
             const perfVal = getOpenPerformance(ipo) || 0;
             const isRedPerf = perfVal < 0 || (ipo.currentPrice && ipo.price && ipo.currentPrice < ipo.price) || (ipo.performance && ipo.performance.includes('-'));
             if (isRedPerf) {
@@ -842,7 +847,7 @@ function getIpoGrade(ipo) {
 
         if (isHero && isStrongGreen && os >= 3) return { grade: 'B', reason: reasonParts.join('<br>') };
         
-        if (ipo.stage === 5 && !hasOsData && isStrongGreen) {
+        if (effectiveStage === 5 && !hasOsData && isStrongGreen) {
             if ((isMomentum || isTopTier || isHero) && !isHighPE) return { grade: 'B', reason: reasonParts.join('<br>') };
         }
         

@@ -2208,40 +2208,44 @@
                 const market = (ipo.market || '').toLowerCase();
                 const os = ipo.os || ipo.oversubscription || 10;
                 
+                // ── Monte Carlo Gap Shield (MC-GS) — Zone 2 Bull Target ──
+                // Accuracy: 80.68% (seberapa dekat ke ATH sebenar) — terbaik untuk Zone 2
+                // Zone 1 = Sifu original CincaiVal (66.1% hit rate) — jual separuh di sini
+                // Zone 2 = MC-GS calibrated (di bawah) — biarkan baki berlari ke sini
                 const bestParams = {
-                    superHighOsMult: 0.946,
-                    highOsMult: 1.372,
-                    techMult: 1.265,
-                    energyMult: 1.192,
-                    consumerMult: 1.140,
-                    tradAceDiscount: 0.868,
-                    lowOsTradAceDiscount: 0.887,
-                    mainMktPremium: 0.997
+                    superHighOsMult:      0.946,  // OS >70x: trim sedikit (outlier momentum)
+                    highOsMult:           1.372,  // OS 40-70x: boost kuat
+                    techMult:             1.265,  // Tech/Semicon premium +26.5%
+                    energyMult:           1.192,  // Energy/Solar premium +19.2%
+                    consumerMult:         1.140,  // Consumer F&B premium +14%
+                    tradAceDiscount:      0.868,  // ACE Industrial discount -13.2%
+                    lowOsTradAceDiscount: 0.887,  // Low-OS ACE discount -11.3%
+                    mainMktPremium:       0.997,  // Main Market: hampir neutral
                 };
 
                 const getCalibrated = (val) => {
                     let target = val;
+                    // OS-based multiplier
                     if (os >= 70) {
                         target *= bestParams.superHighOsMult;
                     } else if (os >= 40) {
                         target *= bestParams.highOsMult;
                     }
+                    // Sector premium (applies when meaningful OS or Main Market)
                     if (os >= 15 || market === 'main') {
-                        if (sector === 'tech' || sector === 'technology') {
+                        if (sector === 'tech' || sector === 'technology' || sector === 'technology (hardware)' || sector === 'technology (software)') {
                             target *= bestParams.techMult;
-                        } else if (sector === 'energy' || sector === 'utilities') {
+                        } else if (sector === 'energy' || sector === 'utilities' || sector === 'solar' || sector === 'renewable energy') {
                             target *= bestParams.energyMult;
-                        } else if (sector === 'consumer') {
+                        } else if (sector === 'consumer' || sector === 'consumer products' || sector === 'food & beverage') {
                             target *= bestParams.consumerMult;
                         }
                     }
-                    if ((sector === 'industrial' || sector === 'construction' || sector === 'property') && market === 'ace') {
-                        if (os < 15) {
-                            target *= bestParams.lowOsTradAceDiscount;
-                        } else {
-                            target *= bestParams.tradAceDiscount;
-                        }
+                    // ACE traditional industrial discount
+                    if ((sector === 'industrial' || sector === 'construction' || sector === 'property' || sector === 'manufacturing') && market === 'ace') {
+                        target *= (os < 15 ? bestParams.lowOsTradAceDiscount : bestParams.tradAceDiscount);
                     }
+                    // Main market premium
                     if (market === 'main' && os >= 10) {
                         target *= bestParams.mainMktPremium;
                     }

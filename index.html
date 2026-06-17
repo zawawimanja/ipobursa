@@ -68,39 +68,22 @@
 
         <div id="reminder-banner-container"></div>
 
-        <!-- SIFU PREMIUM PORTAL CARDS (CENTER PAGE) -->
-        <div class="sifu-portal-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; margin-top: 0.75rem;">
-            <!-- Sifu Picks Card -->
-            <div class="glass-card" style="padding: 1.25rem 1.5rem; border: 1px solid rgba(99, 102, 241, 0.3); background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(15, 23, 42, 0.4)); border-radius: 0.75rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12); transition: all 0.3s; cursor: pointer;" onclick="location.href='sifu-picks.html'">
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(99, 102, 241, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #818cf8; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(99, 102, 241, 0.2); flex-shrink: 0;">
-                        <i data-lucide="folders" style="width: 20px; height: 20px;"></i>
-                    </div>
-                    <div>
-                        <h3 style="font-size: 1.2rem; margin: 0 0 0.25rem 0; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 700;">Sifu's Picks & Tindakan</h3>
-                        <p style="color: var(--text-dim); font-size: 0.85rem; margin: 0; line-height: 1.4;">Kajian fundamental unjuran saham Sifu. Ditapis secara automatik (Zero-Manual Audit) ke dalam strategi <b>Swing</b> dan <b>Scalp</b>.</p>
-                    </div>
-                </div>
-                <a href="sifu-picks.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #6366f1, #4f46e5); border: 1px solid rgba(99, 102, 241, 0.4); color: white; font-weight: 700; font-size: 0.8rem; padding: 0.45rem 1rem; border-radius: 0.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2); transition: all 0.3s; width: fit-content; margin-top: 0.5rem;">
-                    <i data-lucide="eye" style="width: 12px;"></i> Buka Sifu Picks & Tindakan
-                </a>
-            </div>
+        <!-- SIFU PREMIUM PORTAL BUTTONS (CENTER PAGE) -->
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; margin-top: 1rem;">
+            <!-- Sifu Picks Button -->
+            <a href="sifu-picks.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #6366f1, #4f46e5); border: 1px solid rgba(99, 102, 241, 0.4); color: white; font-weight: 700; font-size: 0.9rem; padding: 0.75rem 1.75rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="folders" style="width: 16px; height: 16px;"></i> Sifu Picks & Tindakan
+            </a>
 
-            <!-- Sifu Sheets Card -->
-            <div class="glass-card" style="padding: 1.25rem 1.5rem; border: 1px solid rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.4)); border-radius: 0.75rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12); transition: all 0.3s; cursor: pointer;" onclick="location.href='sifu-sheets.html'">
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(16, 185, 129, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #10b981; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); flex-shrink: 0;">
-                        <i data-lucide="table" style="width: 20px; height: 20px;"></i>
-                    </div>
-                    <div>
-                        <h3 style="font-size: 1.2rem; margin: 0 0 0.25rem 0; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 700;">Sifu's Projection Sheets</h3>
-                        <p style="color: var(--text-dim); font-size: 0.85rem; margin: 0; line-height: 1.4;">Helaian interaktif data modeling fundamental. Bandingkan hasil untung bersih (PAT), margin perniagaan, PE Premium, dan nilai wajar unjuran Sifu.</p>
-                    </div>
-                </div>
-                <a href="sifu-sheets.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border: 1px solid rgba(16, 185, 129, 0.4); color: white; font-weight: 700; font-size: 0.8rem; padding: 0.45rem 1rem; border-radius: 0.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2); transition: all 0.3s; width: fit-content; margin-top: 0.5rem;">
-                    <i data-lucide="table" style="width: 12px;"></i> Buka Sifu Sheets
-                </a>
-            </div>
+            <!-- Sifu Sheets Button -->
+            <a href="sifu-sheets.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border: 1px solid rgba(16, 185, 129, 0.4); color: white; font-weight: 700; font-size: 0.9rem; padding: 0.75rem 1.75rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="table" style="width: 16px; height: 16px;"></i> Sifu's Projection Sheets
+            </a>
+
+            <!-- Cincai2 Kira Analysis Button -->
+            <a href="cincai-analysis.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: 1px solid rgba(59, 130, 246, 0.4); color: white; font-weight: 700; font-size: 0.9rem; padding: 0.75rem 1.75rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="line-chart" style="width: 16px; height: 16px;"></i> Analisis Cincai2 Kira (60 IPO)
+            </a>
         </div>
 
         <!-- PREMIUM SCALPING SOP QUICK ACCESS BANNER -->
