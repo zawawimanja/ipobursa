@@ -417,6 +417,11 @@ No rating"></textarea>
 </main>
 
 <script>
+    const sifuPortfolio = [
+        'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
+        'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
+        'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
+    ];
     let allRows = [];
     let currentFilter = 'all';
 
@@ -619,6 +624,10 @@ No rating"></textarea>
 
         const isDowntrend = highPrice ? (curPrice <= highPrice * 0.75) : false;
 
+        const isSifuPick = sifuPortfolio.includes(dbEntry.id.toLowerCase()) || sifuPortfolio.includes((dbEntry.symbol || '').toLowerCase());
+        const ipoPrice = dbEntry.price || 0;
+        const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+
         // Verdict logic
         let verdict = 'skip';
         let reason = '';
@@ -626,13 +635,28 @@ No rating"></textarea>
         if (!shariah) {
             verdict = 'skip';
             reason = 'Bukan Shariah';
-        } else if (grade === 'C') {
+        } else if (grade === 'C' && !isSifuPick) {
             verdict = 'skip';
             reason = 'Grade C — AVOID';
+        } else if (dbEntry.outlier && !isSifuPick) {
+            verdict = 'skip';
+            reason = 'Outlier Spekulatif — tiada dalam Portfolio Sifu';
+        } else if (highPrice > 0 && Math.abs(sifuTP - highPrice) < 0.005) {
+            verdict = 'skip';
+            reason = 'Fake TP Placeholder (ATH Target)';
+        } else if (year < 2026 && highAboveIpo < 8.0) {
+            verdict = 'skip';
+            reason = 'Stagnant (Sikat/Dead) — pergerakan harga mati';
+        } else if (upside !== null && upside < 10.0) {
+            verdict = 'skip';
+            reason = `Upside terlalu rendah (${upside.toFixed(1)}% ke TP)`;
+        } else if (!isSifuPick && year >= 2024 && isDowntrend) {
+            verdict = 'skip';
+            reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
         } else if (isDowntrend) {
             verdict = 'wait';
             reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
-        } else if (isZonBeli && (grade === 'A' || grade === 'B')) {
+        } else if (isZonBeli && (grade === 'A' || grade === 'B' || isSifuPick)) {
             verdict = 'buy';
             reason = `Dalam Zon Beli, +${upside ? upside.toFixed(1) : '?'}% ke TP`;
         } else if (isZonBeli && !grade) {

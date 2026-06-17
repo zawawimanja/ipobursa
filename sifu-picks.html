@@ -348,57 +348,19 @@
                 <h1 style="margin: 0; font-size: 2.25rem;">Sifu's <span style="text-shadow: 0 0 10px rgba(99, 102, 241, 0.4); color: #818cf8;">Picks & Tindakan</span></h1>
             </div>
             <p style="color: var(--text-dim); max-width: 650px; margin: 0.5rem auto 0 auto;">
-                Kajian fundamental unjuran saham Sifu Picks. Susun mengikut Kumpulan Watchlist atau Status Tindakan semasa.
+                Senarai kaunter Swing & Scalp pilihan Sifu yang ditapis secara automatik (Zero-Manual Audit) berdasarkan logik target price fundamental.
             </p>
         </header>
 
-        <!-- View Mode Toggle -->
-        <div style="text-align: center;">
-            <div class="mode-container">
-                <button class="mode-btn active" id="mode-groups" onclick="switchMode('groups')">
-                    <i data-lucide="folders"></i> Susunan Kumpulan
-                </button>
-                <button class="mode-btn" id="mode-actions" onclick="switchMode('actions')">
-                    <i data-lucide="line-chart"></i> Status Tindakan
-                </button>
-            </div>
-        </div>
-
         <!-- Global Control Bar -->
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.75rem 1rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem; backdrop-filter: blur(10px); flex-wrap: wrap;">
-            <!-- Tab buttons (Visible in groups mode only) -->
-            <div class="tabs-container" id="group-tabs-wrap">
-                <button class="tab-btn active" id="btn-tab-all" onclick="filterGroup('all', this)">
-                    <i data-lucide="layout-grid" style="width: 14px; height: 14px;"></i> Semua
-                </button>
-                <button class="tab-btn" onclick="filterGroup('g1', this)">
-                    <i data-lucide="sparkles" style="width: 14px; height: 14px; color: #10b981;"></i> Kumpulan 1
-                </button>
-                <button class="tab-btn" onclick="filterGroup('g2', this)">
-                    <i data-lucide="refresh-cw" style="width: 14px; height: 14px; color: #f59e0b;"></i> Kumpulan 2
-                </button>
-                <button class="tab-btn" onclick="filterGroup('g3', this)">
-                    <i data-lucide="shield" style="width: 14px; height: 14px; color: #818cf8;"></i> Kumpulan 3
-                </button>
-            </div>
             
-            <div id="actions-tabs-placeholder" style="display: none; color: var(--text-dim); font-size: 0.85rem; font-weight: 500; align-items: center; gap: 0.3rem;">
-                <i data-lucide="line-chart" style="width: 14px; color: #10b981;"></i> Pandangan Status Tindakan
+            <div style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
+                <i data-lucide="check-square" style="width: 14px; color: #10b981;"></i> Senarai Kaunter Swing & Scalp Terpilih
             </div>
 
             <!-- Filters & Sort -->
             <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-                <!-- Scope selection (Visible in actions mode only) -->
-                <div id="scope-selector-wrap" style="display: none; align-items: center; gap: 0.5rem;">
-                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
-                        <i data-lucide="filter" style="width: 14px; height: 14px;"></i> Liputan:
-                    </span>
-                    <select id="scope-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                        <option value="all">Semua Saham Aktif</option>
-                        <option value="portfolio">Portfolio Sifu</option>
-                    </select>
-                </div>
-
                 <!-- Archive Date Picker -->
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
@@ -407,58 +369,31 @@
                     <input type="date" id="archive-date" onchange="loadArchiveDate()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
                 </div>
 
-                <!-- Strategy Filter -->
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
-                        <i data-lucide="compass" style="width: 14px; height: 14px;"></i> Strategi:
-                    </span>
-                    <select id="strategy-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                        <option value="all">Semua Strategi</option>
-                        <option value="swing">Hanya Swing / Hold (Akaun 1)</option>
-                        <option value="scalp">Hanya Scalp / Intraday (Akaun 2)</option>
-                    </select>
-                </div>
-
-                <!-- Trend Filter -->
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
-                        <i data-lucide="filter" style="width: 14px; height: 14px;"></i> Trend:
-                    </span>
-                    <select id="trend-filter" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                        <option value="all">Semua Trend</option>
-                        <option value="active">Aktif Sahaja (Breakout & Uptrend)</option>
-                        <option value="breakout">Hanya Breakout (⚡)</option>
-                        <option value="sikat">Hanya Sikat (💤)</option>
-                        <option value="ath">Hanya ATH Discovery (🚀)</option>
-                    </select>
-                </div>
-
                 <!-- Sort Controller -->
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--text-dim); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem;">
                         <i data-lucide="arrow-down-up" style="width: 14px; height: 14px;"></i> Urutkan:
                     </span>
                     <select id="sort-selector" onchange="renderTables()" style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 1.5rem 0.4rem 0.75rem; border-radius: 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer; font-weight: 600;">
-                        <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
                         <option value="upside">Potensi Upside</option>
+                        <option value="dailyGain">Kenaikan Harian (Daily Gain)</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- 1. GROUP MODE VIEW -->
-        <div class="groups-container" id="groups-view">
-            <!-- GROUP 1: FRESH IPO -->
-            <section class="group-card" id="group-1-card">
+        <div class="groups-container">
+            <!-- SECTION 1: SWING PICKS -->
+            <section class="group-card" id="swing-card">
                 <div class="group-header">
                     <div class="group-title-area">
-                        <i data-lucide="sparkles" style="color: #10b981; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title">KUMPULAN 1: Saham Fresh IPO (2026)</h2>
+                        <i data-lucide="anchor" style="color: #10b981; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #10b981;">⚓ 1. SWING PICKS (Akaun 1)</h2>
                     </div>
-                    <span class="group-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;">Breakout Run</span>
+                    <span class="group-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;" id="count-swing">0 Kaunter</span>
                 </div>
                 <div class="group-desc" style="border-left-color: #10b981;">
-                    <strong>Strategi Breakout & First-time Target:</strong> Saham baharu kitaran 2026 yang <strong>belum pernah</strong> menyentuh harga sasaran unjuran Sifu sepanjang sejarah listing. Sesuai untuk tangkap larian harga pertama kali ke paras ATH baharu.
+                    Pegangan jangka sederhana (Swing/Hold) berasaskan fundamental padu dan diskaun harga tinggi.
                 </div>
                 <div class="picks-table-wrapper">
                     <table class="picks-table">
@@ -474,24 +409,24 @@
                                 <th>Tema / Sektor</th>
                             </tr>
                         </thead>
-                        <tbody id="group-1-body">
+                        <tbody id="swing-body">
                             <!-- Dynamically populated -->
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- GROUP 2: DCA / SWING -->
-            <section class="group-card" id="group-2-card">
+            <!-- SECTION 2: SCALP PICKS -->
+            <section class="group-card" id="scalp-card">
                 <div class="group-header">
                     <div class="group-title-area">
-                        <i data-lucide="refresh-cw" style="color: #f59e0b; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title">KUMPULAN 2: Saham DCA / Swing (2026)</h2>
+                        <i data-lucide="zap" style="color: #f59e0b; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #f59e0b;">⚡ 2. SCALP PICKS (Akaun 2)</h2>
                     </div>
-                    <span class="group-badge" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;">Pullback Buy</span>
+                    <span class="group-badge" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;" id="count-scalp">0 Kaunter</span>
                 </div>
                 <div class="group-desc" style="border-left-color: #f59e0b;">
-                    <strong>Strategi Re-accumulation & DCA:</strong> Saham kitaran 2026 yang <strong>pernah hit target</strong> sebelum ini, tetapi kini mengalami pembetulan pasaran semula. Kumpulan terbukti kukuh yang menawarkan peluang kemasukan kedua pada harga diskaun.
+                    Dagangan jangka pendek/aktif (Scalp/Intraday) berdasarkan momentum harian dan breakout paras tinggi.
                 </div>
                 <div class="picks-table-wrapper">
                     <table class="picks-table">
@@ -507,142 +442,7 @@
                                 <th>Tema / Sektor</th>
                             </tr>
                         </thead>
-                        <tbody id="group-2-body">
-                            <!-- Dynamically populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- GROUP 3: ESTABLISHED TURNAROUNDS -->
-            <section class="group-card" id="group-3-card">
-                <div class="group-header">
-                    <div class="group-title-area">
-                        <i data-lucide="shield" style="color: #818cf8; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title">KUMPULAN 3: Saham Turnaround Mapan</h2>
-                    </div>
-                    <span class="group-badge" style="background: rgba(129, 140, 248, 0.15); border: 1px solid rgba(129, 140, 248, 0.3); color: #818cf8;">Turnaround Play</span>
-                </div>
-                <div class="group-desc" style="border-left-color: #818cf8;">
-                    <strong>Strategi Long-term Value:</strong> Saham syarikat mapan yang tersenarai sebelum tahun 2026. Memiliki perniagaan yang matang dengan pemangkin pemulihan untung yang sangat kuat dan di bawah radar pemantauan Sifu.
-                </div>
-                <div class="picks-table-wrapper">
-                    <table class="picks-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 280px;">Nama Saham (Kod)</th>
-                                <th>Harga Semasa</th>
-                                <th>Daily Gain</th>
-                                <th>Target Sifu (TP)</th>
-                                <th>ATH Sejarah</th>
-                                <th>Potensi Upside</th>
-                                <th>Gred</th>
-                                <th>Tema / Sektor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="group-3-body">
-                            <!-- Dynamically populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
-
-        <!-- 2. ACTION MODE VIEW -->
-        <div class="groups-container" id="actions-view" style="display: none;">
-            <!-- ACTION 1: BUY NOW -->
-            <section class="group-card" id="action-buy-card">
-                <div class="group-header">
-                    <div class="group-title-area">
-                        <i data-lucide="check-circle-2" style="color: #10b981; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title" style="color: #10b981;">1. BOLEH BELI SEKARANG</h2>
-                    </div>
-                    <span class="group-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;" id="count-buy">0 Kaunter</span>
-                </div>
-                <div class="group-desc" style="border-left-color: #10b981;">
-                    Harga pasaran semasa berada <strong>di bawah atau setara</strong> dengan target unjuran Sifu (Zon Beli). Sangat sesuai untuk entri segera.
-                </div>
-                <div class="picks-table-wrapper">
-                    <table class="picks-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 280px;">Nama Saham (Kod)</th>
-                                <th>Harga Semasa</th>
-                                <th>Daily Gain</th>
-                                <th>Target Sifu (TP)</th>
-                                <th>Potensi Upside</th>
-                                <th>Gred</th>
-                                <th>Kumpulan</th>
-                                <th>Tema / Sektor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="action-buy-body">
-                            <!-- Dynamically populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- ACTION 2: PULLBACK -->
-            <section class="group-card" id="action-wait-card">
-                <div class="group-header">
-                    <div class="group-title-area">
-                        <i data-lucide="clock" style="color: #f59e0b; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title" style="color: #f59e0b;">2. TUNGGU PULLBACK (Dah melepasi TP)</h2>
-                    </div>
-                    <span class="group-badge" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;" id="count-wait">0 Kaunter</span>
-                </div>
-                <div class="group-desc" style="border-left-color: #f59e0b;">
-                    Saham yang bagus tetapi harganya <strong>telah melepasi</strong> Target Price Sifu. Tunggu pembetulan harga ke zon entri.
-                </div>
-                <div class="picks-table-wrapper">
-                    <table class="picks-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 280px;">Nama Saham (Kod)</th>
-                                <th>Harga Semasa</th>
-                                <th>Daily Gain</th>
-                                <th>Target Sifu (TP)</th>
-                                <th>Potensi Upside / Kedudukan</th>
-                                <th>Gred</th>
-                                <th>Kumpulan</th>
-                                <th>Tema / Sektor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="action-wait-body">
-                            <!-- Dynamically populated -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- ACTION 3: SKIP -->
-            <section class="group-card" id="action-skip-card">
-                <div class="group-header">
-                    <div class="group-title-area">
-                        <i data-lucide="alert-octagon" style="color: #ef4444; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title" style="color: #ef4444;">3. ELAK / SKIP (Risiko / Terlampau Mahal)</h2>
-                    </div>
-                    <span class="group-badge" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;" id="count-skip">0 Kaunter</span>
-                </div>
-                <div class="group-desc" style="border-left-color: #ef4444;">
-                    Saham yang tidak sesuai dibeli kerana **Gred C** (berisiko tinggi) atau harganya **sudah melambung terlampau tinggi** melebihi nilai wajarnya.
-                </div>
-                <div class="picks-table-wrapper">
-                    <table class="picks-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 280px;">Nama Saham (Kod)</th>
-                                <th>Harga Semasa</th>
-                                <th>Daily Gain</th>
-                                <th>Target Sifu (TP)</th>
-                                <th>Potensi Upside / Kedudukan</th>
-                                <th>Gred</th>
-                                <th>Kumpulan</th>
-                                <th>Tema / Sektor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="action-skip-body">
+                        <tbody id="scalp-body">
                             <!-- Dynamically populated -->
                         </tbody>
                     </table>
@@ -659,10 +459,10 @@
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
             'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip'
+            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'ogx'
         ];
 
-        const explicitSkips = ['adnex', 'ogx', 'mmcs', 'agmo'];
+        const explicitSkips = ['adnex', 'mmcs', 'agmo', 'wentel-engineering', 'wentel'];
         let activeViewMode = 'groups';
 
         function switchMode(mode) {
@@ -709,38 +509,29 @@
                 return ipo;
             });
             
-            // Group Views Bodies
-            const g1Body = document.getElementById('group-1-body');
-            const g2Body = document.getElementById('group-2-body');
-            const g3Body = document.getElementById('group-3-body');
+            // Swing & Scalp Bodies
+            const swingBody = document.getElementById('swing-body');
+            const scalpBody = document.getElementById('scalp-body');
 
-            // Action Views Bodies
-            const actionBuyBody = document.getElementById('action-buy-body');
-            const actionWaitBody = document.getElementById('action-wait-body');
-            const actionSkipBody = document.getElementById('action-skip-body');
+            swingBody.innerHTML = '';
+            scalpBody.innerHTML = '';
 
-            g1Body.innerHTML = '';
-            g2Body.innerHTML = '';
-            g3Body.innerHTML = '';
-            actionBuyBody.innerHTML = '';
-            actionWaitBody.innerHTML = '';
-            actionSkipBody.innerHTML = '';
-
-            let g1Count = 0; let g2Count = 0; let g3Count = 0;
-            let buyCount = 0; let waitCount = 0; let skipCount = 0;
+            let swingCount = 0;
+            let scalpCount = 0;
 
             const sortSelector = document.getElementById('sort-selector');
-            const sortBy = sortSelector ? sortSelector.value : 'dailyGain';
-
-            const trendFilter = document.getElementById('trend-filter');
-            const selectedTrend = trendFilter ? trendFilter.value : 'all';
-
-            const scopeVal = document.getElementById('scope-filter').value;
+            const sortBy = sortSelector ? sortSelector.value : 'upside';
 
             // Sort & Filter logic
             const validPicks = list.filter(ipo => {
+                const idLower = ipo.id.toLowerCase();
+                const symbolLower = (ipo.symbol || '').toLowerCase();
+                const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
+
+                // Allow Grade A or B, or Sifu picks regardless of grade
+                if (ipo.predictedGrade !== 'A' && ipo.predictedGrade !== 'B' && !isSifuPick) return false;
+
                 const isMatch = ipo.shariah === true && 
-                    ['A', 'B', 'C'].includes(ipo.predictedGrade) && 
                     ipo.currentPrice > 0 && 
                     ipo.currentPrice >= ipo.price;
                 
@@ -748,53 +539,35 @@
 
                 // Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
                 const isRecent = ipo.year >= 2024;
-                const isSifuPick = sifuPortfolio.includes(ipo.id) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
                 if (!isRecent && !isSifuPick) return false;
 
-                // Actions view scope filter
-                if (activeViewMode === 'actions' && scopeVal === 'portfolio') {
-                    if (!sifuPortfolio.includes(ipo.id)) return false;
-                }
+                // Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio
+                if (ipo.outlier && !isSifuPick) return false;
 
-                // Strategy Filter
-                const strategyFilter = document.getElementById('strategy-filter');
-                const selectedStrategy = strategyFilter ? strategyFilter.value : 'all';
-                if (selectedStrategy !== 'all') {
-                    const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
-                    const highPrice = ipo.highPrice || 0;
-                    const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
+                // Explicit skips
+                if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
 
-                    let strategyText = '';
-                    if (ipo.predictedGrade === 'C') {
-                        strategyText = 'Skip';
-                    } else if (isAthOrNear || (dailyChange !== null && dailyChange >= 3.0) || ipo.stage === 4) {
-                        strategyText = 'Scalp';
-                    } else {
-                        strategyText = 'Swing';
-                    }
-                    if (selectedStrategy === 'swing' && strategyText.toLowerCase() !== 'swing') return false;
-                    if (selectedStrategy === 'scalp' && strategyText.toLowerCase() !== 'scalp') return false;
-                }
-
-                if (selectedTrend === 'all') return true;
-
-                const dailyChange = typeof ipo.dailyChange === 'number' ? ipo.dailyChange : null;
+                // 0. Fake TP Placeholder Filter:
                 const highPrice = ipo.highPrice || 0;
-                const isBearish = ipo.currentPrice < ipo.price || (highPrice > 0 && ipo.currentPrice <= highPrice * 0.75);
-                const isBreakout = !isBearish && dailyChange !== null && dailyChange >= 3.0;
-                const isSikat = !isBearish && dailyChange !== null && Math.abs(dailyChange) < 1.0;
-                const isUptrend = !isBearish && !isBreakout && !isSikat;
+                const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
+                if (highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
 
-                if (selectedTrend === 'breakout') return isBreakout;
-                if (selectedTrend === 'active') return isBreakout || isUptrend;
-                if (selectedTrend === 'sikat') return isSikat;
-                if (selectedTrend === 'ath') {
-                    const hasHitBefore = ipo.highPrice && ipo.highPrice >= (ipo.sifuTargetPrice || ipo.avgTP);
-                    const isAth = ipo.year === 2026 
-                        ? !hasHitBefore 
-                        : (ipo.highPrice && ipo.currentPrice >= ipo.highPrice);
-                    return isAth;
+                // 1. Minimum Upside Rule: Must have at least 10% upside to TP Sifu
+                if (targetPrice > 0) {
+                    const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
+                    if (upside < 10.0) return false;
+                } else {
+                    return false;
                 }
+
+                // 2. Anti-Stagnant (Sikat/Dead) Rule:
+                const ipoPrice = ipo.price || 0;
+                const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+                if (ipo.year < 2026 && highAboveIpo < 8.0) return false;
+
+                // 3. Downtrend Safety Check: completely exclude non-sifu recent IPOs if they are in a downtrend
+                const isDowntrend = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+                if (!isSifuPick && isRecent && isDowntrend) return false;
 
                 return true;
             }).map(ipo => {
@@ -858,7 +631,7 @@
                     ? !hasHitBefore 
                     : (ipo.highPrice && ipo.currentPrice >= ipo.highPrice);
 
-                const isPortfolio = sifuPortfolio.includes(ipo.id);
+                const isPortfolio = sifuPortfolio.includes(ipo.id.toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
                 let badgeHtml = isPortfolio 
                     ? `<span class="portfolio-badge"><i data-lucide="check-circle" style="width: 10px; height: 10px;"></i> Portfolio</span>` 
                     : `<span class="watchlist-badge"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> Watchlist</span>`;
@@ -894,32 +667,22 @@
                     : '';
 
                 // Strategy determination
-                let strategyText = '';
                 const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
-
-                if (ipo.predictedGrade === 'C') {
-                    strategyText = 'Skip';
-                } else if (isAthOrNear || (dailyChange !== null && dailyChange >= 3.0) || ipo.stage === 4) {
-                    strategyText = 'Scalp';
-                } else {
-                    strategyText = 'Swing';
-                }
+                const isScalpTrend = isAthOrNear || (dailyChange !== null && dailyChange >= 3.0);
+                const strategy = ipo.strategy || (isScalpTrend ? 'Scalp' : 'Swing');
 
                 let strategyBadgeStyle = '';
-                if (strategyText.toLowerCase() === 'swing') {
+                if (strategy.toLowerCase() === 'swing') {
                     strategyBadgeStyle = 'background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;';
-                } else if (strategyText.toLowerCase() === 'scalp') {
-                    strategyBadgeStyle = 'background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;';
                 } else {
-                    strategyBadgeStyle = 'background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444;';
+                    strategyBadgeStyle = 'background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;';
                 }
-                const strategyHtml = `<span class="trend-badge" style="${strategyBadgeStyle} text-transform: uppercase; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.05em;"><i data-lucide="${strategyText.toLowerCase() === 'swing' ? 'anchor' : (strategyText.toLowerCase() === 'scalp' ? 'zap' : 'slash')}" style="width: 10px; height: 10px; display: inline;"></i> ${strategyText}</span>`;
+                const strategyHtml = `<span class="trend-badge" style="${strategyBadgeStyle} text-transform: uppercase; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.05em;"><i data-lucide="${strategy.toLowerCase() === 'swing' ? 'anchor' : 'zap'}" style="width: 10px; height: 10px; display: inline;"></i> ${strategy}</span>`;
 
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : (ipo.predictedGrade === 'B' ? 'grade-b' : 'grade-c');
                 const sectorDisplay = ipo.sector || 'N/A';
 
-                // 1. Group Mode Row HTML
-                const rowHtmlGroups = `
+                const rowHtml = `
                     <tr class="clickable-row" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">
                         <td style="font-weight: 600;">
                             <div style="display: flex; flex-direction: column; gap: 0.25rem;">
@@ -943,122 +706,24 @@
                     </tr>
                 `;
 
-                // 2. Action Mode Row HTML
-                let kumpulanLabel = 'K3 Mapan';
-                let kumpulanClass = 'badge-k3';
-                if (ipo.year === 2026 || ipo.status === 'MITI Allocation Phase' || ipo.stage < 5) {
-                    kumpulanLabel = hasHitBefore ? 'K2 DCA' : 'K1 Fresh';
-                    kumpulanClass = hasHitBefore ? 'badge-k2' : 'badge-k1';
-                }
-
-                const rowHtmlActions = `
-                    <tr class="clickable-row" onclick="location.href='sifu-sheets.html?stock=${ipo.id}'">
-                        <td style="font-weight: 600;">
-                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                <span style="color: white; font-size: 0.9rem;">${nameDisplay}</span>
-                                <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
-                                    <span style="font-size: 0.72rem; color: var(--primary-light); font-weight: bold;">${symbolDisplay}</span>
-                                    ${badgeHtml}
-                                    ${strategyHtml}
-                                    ${trendHtml}
-                                    ${tvBadgeHtml}
-                                </div>
-                            </div>
-                        </td>
-                        <td style="font-weight: 700; color: #f8fafc;">${curDisplay}</td>
-                        <td style="font-weight: 700;">${dailyChangeHtml}</td>
-                        <td style="font-weight: 700; color: #a5b4fc;">${targetDisplay}</td>
-                        <td style="font-weight: 700; ${upsideStyle}">${upsideDisplay}</td>
-                        <td><span class="grade-badge ${gradeClass}">Gred ${ipo.predictedGrade}</span></td>
-                        <td><span class="kump-badge ${kumpulanClass}">${kumpulanLabel}</span></td>
-                        <td style="color: var(--text-dim); font-size: 0.8rem;">${sectorDisplay}</td>
-                    </tr>
-                `;
-
-                // Render into Groups bodies
-                if (ipo.year === 2026 || ipo.status === 'MITI Allocation Phase' || ipo.stage < 5) {
-                    if (hasHitBefore) {
-                        g2Body.innerHTML += rowHtmlGroups;
-                        g2Count++;
-                    } else {
-                        g1Body.innerHTML += rowHtmlGroups;
-                        g1Count++;
-                    }
+                if (strategy.toLowerCase() === 'scalp') {
+                    scalpBody.innerHTML += rowHtml;
+                    scalpCount++;
                 } else {
-                    if (ipo.currentPrice < 3.0) {
-                        g3Body.innerHTML += rowHtmlGroups;
-                        g3Count++;
-                    }
-                }
-
-                // Render into Actions bodies
-                let actionCategory = 'wait';
-                const isDowntrendAction = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
-
-                if (ipo.predictedGrade === 'C' || explicitSkips.includes(ipo.id)) {
-                    actionCategory = 'skip';
-                } else if (isDowntrendAction) {
-                    actionCategory = 'wait';
-                } else if (ipo.targetPrice > 0 && ipo.currentPrice <= ipo.targetPrice) {
-                    actionCategory = 'buy';
-                }
-
-                if (actionCategory === 'buy') {
-                    actionBuyBody.innerHTML += rowHtmlActions;
-                    buyCount++;
-                } else if (actionCategory === 'wait') {
-                    actionWaitBody.innerHTML += rowHtmlActions;
-                    waitCount++;
-                } else if (actionCategory === 'skip') {
-                    actionSkipBody.innerHTML += rowHtmlActions;
-                    skipCount++;
+                    swingBody.innerHTML += rowHtml;
+                    swingCount++;
                 }
             });
 
-            // Fallback for empty group tables
-            if (g1Count === 0) g1Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter fresh aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-            if (g2Count === 0) g2Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter DCA aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-            if (g3Count === 0) g3Body.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter mapan aktif di bawah harga sasaran Sifu pada masa ini.</td></tr>`;
-
-            // Fallback for empty action tables
-            if (buyCount === 0) actionBuyBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter dalam zon belian sekarang.</td></tr>`;
-            if (waitCount === 0) actionWaitBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter menunggu pullback.</td></tr>`;
-            if (skipCount === 0) actionSkipBody.innerHTML = `<tr class="empty-row"><td colspan="9">Tiada kaunter yang perlu diskip.</td></tr>`;
+            // Fallback for empty tables
+            if (swingCount === 0) swingBody.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter Swing aktif pada masa ini.</td></tr>`;
+            if (scalpCount === 0) scalpBody.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter Scalp aktif pada masa ini.</td></tr>`;
 
             // Update badge counters
-            document.getElementById('count-buy').innerText = buyCount + ' Kaunter';
-            document.getElementById('count-wait').innerText = waitCount + ' Kaunter';
-            document.getElementById('count-skip').innerText = skipCount + ' Kaunter';
+            document.getElementById('count-swing').innerText = swingCount + ' Kaunter';
+            document.getElementById('count-scalp').innerText = scalpCount + ' Kaunter';
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        function filterGroup(group, btn) {
-            const buttons = document.querySelectorAll('#group-tabs-wrap .tab-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const g1Card = document.getElementById('group-1-card');
-            const g2Card = document.getElementById('group-2-card');
-            const g3Card = document.getElementById('group-3-card');
-
-            if (group === 'all') {
-                g1Card.style.display = 'block';
-                g2Card.style.display = 'block';
-                g3Card.style.display = 'block';
-            } else if (group === 'g1') {
-                g1Card.style.display = 'block';
-                g2Card.style.display = 'none';
-                g3Card.style.display = 'none';
-            } else if (group === 'g2') {
-                g1Card.style.display = 'none';
-                g2Card.style.display = 'block';
-                g3Card.style.display = 'none';
-            } else if (group === 'g3') {
-                g1Card.style.display = 'none';
-                g2Card.style.display = 'none';
-                g3Card.style.display = 'block';
-            }
         }
 
         async function loadArchiveDate() {
