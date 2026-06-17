@@ -22,13 +22,69 @@ try {
         ipo.shariah === true
     );
     
+    const bestParams = {
+        superHighOsMult: 0.946,
+        highOsMult: 1.372,
+        techMult: 1.265,
+        energyMult: 1.192,
+        consumerMult: 1.140,
+        tradAceDiscount: 0.868,
+        lowOsTradAceDiscount: 0.887,
+        mainMktPremium: 0.997
+    };
+
+    function getCalibratedTarget(cincaiVal, sector, market, os) {
+        let target = cincaiVal;
+        
+        // 1. High OS retail pump (momentum play)
+        if (os >= 70) {
+            target *= bestParams.superHighOsMult;
+        } else if (os >= 40) {
+            target *= bestParams.highOsMult;
+        }
+        
+        // 2. High-Growth Sektor Theme calibration (only for active/visible stocks)
+        if (os >= 15 || market === 'main') {
+            if (sector === 'tech' || sector === 'technology') {
+                target *= bestParams.techMult;
+            } else if (sector === 'energy' || sector === 'utilities') {
+                target *= bestParams.energyMult;
+            } else if (sector === 'consumer') {
+                target *= bestParams.consumerMult;
+            }
+        }
+        
+        // 3. Traditional small-cap discount
+        if ((sector === 'industrial' || sector === 'construction' || sector === 'property') && market === 'ace') {
+            if (os < 15) {
+                target *= bestParams.lowOsTradAceDiscount;
+            } else {
+                target *= bestParams.tradAceDiscount;
+            }
+        }
+        
+        // 4. Main market premium
+        if (market === 'main' && os >= 10) {
+            target *= bestParams.mainMktPremium;
+        }
+        
+        return target;
+    }
+
     console.log('Calculating Sifu Study Target Prices (Valuation 1) for Shariah-Compliant IPOs:\n');
     
     const sifuTargets = {};
+    const calibratedTargets = {};
     
     targets.forEach(ipo => {
         let sifuTP = 0;
+        let calibratedTP = 0;
         let source = '';
+        
+        // Parse metadata for calibration
+        const sector = (ipo.sector || '').toLowerCase();
+        const market = (ipo.market || '').toLowerCase();
+        const os = ipo.oversubscription || ipo.os || 10;
         
         if (stockProfiles[ipo.id]) {
             const p = stockProfiles[ipo.id];
@@ -38,29 +94,33 @@ try {
             const epsF = (p.patF / p.totalShares) * 100;
             const valF = p.targetPe * epsF / 100;
             
-            // We take the primary valuation target (valF) as the Sifu target price
             sifuTP = valF;
+            calibratedTP = getCalibratedTarget(valF, sector, market, os);
             source = `stockProfiles (Projection F: RM ${valF.toFixed(2)})`;
         } else {
-            // Fallback for dynamic IPOs:
-            // Sifu's buy target is usually the average target price (avgTP) or IPO price
+            // Fallback for dynamic IPOs
             sifuTP = ipo.avgTP || ipo.price || 0.50;
+            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os);
             source = ipo.avgTP ? 'avgTP from database' : 'IPO Price (fallback)';
         }
         
         sifuTargets[ipo.id] = parseFloat(sifuTP.toFixed(2));
-        console.log(`- ${ipo.id} (${ipo.companyName}): target = RM ${sifuTargets[ipo.id].toFixed(2)} [Source: ${source}]`);
+        calibratedTargets[ipo.id] = parseFloat(calibratedTP.toFixed(2));
+        console.log(`- ${ipo.id} (${ipo.companyName}): target = RM ${sifuTargets[ipo.id].toFixed(2)} | Calibrated = RM ${calibratedTargets[ipo.id].toFixed(2)} [Source: ${source}]`);
     });
     
-    // Save these sifuTargetPrice fields into data.json
+    // Save both targets into data.json
     data.forEach(ipo => {
         if (sifuTargets[ipo.id] !== undefined) {
             ipo.sifuTargetPrice = sifuTargets[ipo.id];
         }
+        if (calibratedTargets[ipo.id] !== undefined) {
+            ipo.calibratedSifuTargetPrice = calibratedTargets[ipo.id];
+        }
     });
     
     fs.writeFileSync(jsonPath, JSON.stringify(data, null, 4));
-    console.log('\nSuccessfully saved sifuTargetPrice fields to data.json!');
+    console.log('\nSuccessfully saved target fields to data.json!');
     
     // Also save to data.js
     const jsPath = path.join(__dirname, '..', 'data.js');
