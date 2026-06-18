@@ -37,56 +37,42 @@ const corrections = {
     'PENTECH': 0.33,
 };
 
-const dataPath = path.join(__dirname, '..', 'data.js');
-let content = fs.readFileSync(dataPath, 'utf8');
-const data = require(dataPath);
+const jsonPath = path.join(__dirname, '..', 'data.json');
+const jsPath = path.join(__dirname, '..', 'data.js');
+
+let data = [];
+if (fs.existsSync(jsonPath)) {
+    data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+} else {
+    console.error('data.json not found!');
+    process.exit(1);
+}
 
 let fixed = 0;
 let log = [];
 
-data.forEach((ipo, idx) => {
+data.forEach((ipo) => {
     const sym = (ipo.symbol || '').toUpperCase();
     if (corrections[sym] !== undefined) {
         const oldTP = ipo.sifuTargetPrice;
         const newTP = corrections[sym];
         
-        if (Math.abs(oldTP - newTP) > 0.005) {
-            // Find and replace in the raw content
-            // We need to find this specific IPO's sifuTargetPrice line
-            // Strategy: find the id line, then find the next sifuTargetPrice line
-            const idStr = `"id": "${ipo.id}"`;
-            const idPos = content.indexOf(idStr);
-            
-            if (idPos !== -1) {
-                // Find sifuTargetPrice after this id
-                const searchStart = idPos;
-                const nextIdPos = content.indexOf('"id":', idPos + idStr.length);
-                const searchEnd = nextIdPos !== -1 ? nextIdPos : content.length;
-                
-                const block = content.substring(searchStart, searchEnd);
-                const tpRegex = /"sifuTargetPrice":\s*([0-9.]+)/;
-                const match = block.match(tpRegex);
-                
-                if (match) {
-                    const oldLine = match[0];
-                    const newLine = `"sifuTargetPrice": ${newTP}`;
-                    
-                    // Replace only within this block
-                    const newBlock = block.replace(oldLine, newLine);
-                    content = content.substring(0, searchStart) + newBlock + content.substring(searchEnd);
-                    
-                    fixed++;
-                    log.push(`✅ ${sym}: ${oldTP} → ${newTP}`);
-                }
-            }
+        if (oldTP === undefined || Math.abs(oldTP - newTP) > 0.005) {
+            ipo.sifuTargetPrice = newTP;
+            fixed++;
+            log.push(`✅ ${sym}: ${oldTP !== undefined ? oldTP : 'N/A'} → ${newTP}`);
         }
     }
 });
 
-fs.writeFileSync(dataPath, content, 'utf8');
+if (fixed > 0) {
+    fs.writeFileSync(jsonPath, JSON.stringify(data, null, 4), 'utf8');
+    const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
+    fs.writeFileSync(jsPath, jsContent, 'utf8');
+}
 
 console.log('═'.repeat(50));
 console.log(`FIXED ${fixed} sifuTargetPrice values:`);
 console.log('═'.repeat(50));
 log.forEach(l => console.log(l));
-console.log('\n✅ data.js updated successfully!');
+console.log('\n✅ data.json and data.js updated successfully!');

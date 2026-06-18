@@ -1,0 +1,114 @@
+{
+    "sum-technology": {
+        "predictedGrade": "B",
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Sektor Tech (Hardware) adalah sektor terbaik 2026 — SEMICO (+50%) dan SkyeChip (+151%) dah buktikan. Tiada OFS, Shariah-compliant. Tapi IB masih TBA — ini risiko utama. <b>Formula baru: apply kalau IB keluar Maybank/M&A/Alliance Islamic. Skip kalau IB Mercury/UOB/CIMB sole.</b> Harga RM0.28 berpatutan untuk entry."
+    },
+    "elsa": {
+        "predictedGrade": "C",
+        "analystInsight": "⚠️ <b>AVOID / HIGH RISK (GRADE C)</b><br>Sektor O&G services sedang sejuk — retail masih trauma dengan OGX dan OGM. Ada OFS (36.4M shares) yang menambah tekanan jual. IB belum disahkan. Walaupun ada elemen robotik dan digital, market 2026 tidak hargai O&G-adjacent dengan baik. Risiko tinggi untuk open below atau flat. <b>Skip kecuali IB Maybank/M&A dan OS cecah 80x+.</b>"
+    },
+    "pentech": {
+        "sifuTargetPrice": 0.33,
+        "predictedGrade": "C",
+        "analystInsight": "⚠️ <b>NEUTRAL / LOW PRIORITY (GRADE C)</b><br>ICT infrastructure adalah sektor \"boring\" — tiada momentum tema besar seperti AI, semiconductor, atau data center. Tiada OFS, Shariah OK, harga murah RM0.20. Tapi IB TBA dan sektor ini jarang deliver listing day pop yang besar. Based on 2026 data, Industrial/ICT tanpa strong IB = avg +3-5% je. <b>Boleh apply tapi jangan harap besar. Low conviction.</b>"
+    },
+    "mm-computer": {
+        "sifuTargetPrice": 0.24,
+        "predictedGrade": "C",
+        "analystInsight": "❌ <b>AVOID (GRADE C — SEPERTI DIJANGKA)</b><br>💡 Walaupun OS runcit mencecah 42.12x, kaunter ini dibuka flat (0.00%) dan ditutup di bawah harga IPO pada RM0.215 (-2.27%) disebabkan oleh tekanan jualan OFS yang besar (47.34M unit) dan tiada momentum sektor. Elakkan."
+    },
+    "ambest": {
+        "sifuTargetPrice": 0.34
+    },
+    "ams-material": {
+        "sifuTargetPrice": 0.33
+    },
+    "ei-power": {
+        "sifuTargetPrice": 0.61
+    },
+    "hocksoon": {
+        "sifuTargetPrice": 0.63
+    },
+    "isf": {
+        "sifuTargetPrice": 0.69
+    },
+    "keeming": {
+        "sifuTargetPrice": 0.68
+    },
+    "ogm": {
+        "sifuTargetPrice": 0.3
+    },
+    "skyechip": {
+        "sifuTargetPrice": 1.58
+    },
+    "teamstr": {
+        "sifuTargetPrice": 0.32
+    },
+    "cbhb": {
+        "sifuTargetPrice": 0.38
+    },
+    "ecoshop": {
+        "sifuTargetPrice": 1.31
+    },
+    "iab": {
+        "sifuTargetPrice": 0.71
+    },
+    "kopi": {
+        "sifuTargetPrice": 0.55
+    },
+    "power": {
+        "sifuTargetPrice": 0.41
+    },
+    "sag": {
+        "sifuTargetPrice": 1.29
+    },
+    "supreme-consolidated": {
+        "sifuTargetPrice": 0.29
+    },
+    "techstore": {
+        "sifuTargetPrice": 0.28
+    },
+    "verdant": {
+        "sifuTargetPrice": 0.38
+    },
+    "xpb": {
+        "sifuTargetPrice": 0.25
+    },
+    "azam-jaya": {
+        "sifuTargetPrice": 1.04
+    },
+    "bwys": {
+        "sifuTargetPrice": 0.31
+    },
+    "crest": {
+        "sifuTargetPrice": 0.32
+    },
+    "crpmate": {
+        "sifuTargetPrice": 0.23
+    },
+    "elridge": {
+        "sifuTargetPrice": 0.55
+    },
+    "epb": {
+        "sifuTargetPrice": 0.71
+    },
+    "keyfield": {
+        "sifuTargetPrice": 2.14
+    },
+    "lwsabah": {
+        "sifuTargetPrice": 0.8
+    },
+    "sdcg": {
+        "sifuTargetPrice": 0.54
+    },
+    "topvisn": {
+        "sifuTargetPrice": 0.41
+    },
+    "winstar": {
+        "sifuTargetPrice": 0.51
+    },
+    "eckem-holdings-berhad": {
+        "predictedGrade": "D",
+        "analystInsight": "🚫 <b>TIDAK SESUAI — BUKAN SHARIAH</b><br>Eckem Holdings tidak patuh Syariah. Walaupun IB M&A Securities (rekod bagus) dan ada ekspansi kilang yang menarik, <b>skip terus bagi pelabur Shariah.</b> Untuk pelabur konvensional: Grade B kerana M&A IB + industrial expansion focus."
+    }
+}

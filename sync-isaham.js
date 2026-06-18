@@ -482,6 +482,25 @@ async function main() {
 
     await deepHuntData(existingData);
 
+    // Apply overrides if overrides.json exists
+    const overridesPath = path.join(__dirname, 'overrides.json');
+    if (fs.existsSync(overridesPath)) {
+        try {
+            const overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
+            let appliedCount = 0;
+            existingData.forEach(ipo => {
+                const override = overrides[ipo.id];
+                if (override) {
+                    Object.assign(ipo, override);
+                    appliedCount++;
+                }
+            });
+            console.log(`  [Overrides] Applied overrides to ${appliedCount} IPOs from overrides.json.`);
+        } catch (e) {
+            console.error('  [Overrides] Error applying overrides:', e.message);
+        }
+    }
+
     // Save back to data.json
     fs.writeFileSync(DATA_JSON_FILE, JSON.stringify(existingData, null, 2));
     
