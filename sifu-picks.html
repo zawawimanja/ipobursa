@@ -609,7 +609,7 @@
                 if (targetPrice > 0) {
                     const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
                     if (upside < 10.0 && !isActualAth) return false;
-                } else if (!isActualAth) {
+                } else {
                     return false;
                 }
 
