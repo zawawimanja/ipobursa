@@ -37,9 +37,20 @@ const validPicks = list.filter(ipo => {
 
     if (!isActualAth && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
 
+    // 1. Minimum Upside Rule & Pullback Accumulation Rule:
+    let isPullbackAccumulation = false;
     if (targetPrice > 0) {
         const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
-        if (upside < 10.0 && !isActualAth) return false;
+        const highPriceVal = ipo.highPrice || 0;
+        const isDowntrendVal = highPriceVal ? (ipo.currentPrice <= highPriceVal * 0.75) : false;
+        
+        if (upside < 10.0 && !isActualAth) {
+            if (!isDowntrendVal) {
+                isPullbackAccumulation = true;
+            } else {
+                return false;
+            }
+        }
     } else {
         return false;
     }
@@ -62,7 +73,19 @@ const validPicks = list.filter(ipo => {
     const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
     const dailyChange = ipo.dailyChange || null;
     const isScalpTrend = isAthOrNear || (dailyChange !== null && dailyChange >= 3.0);
-    const strategy = ipo.strategy || (isScalpTrend ? 'Scalp' : 'Swing');
+    
+    // Determine strategy: Swing, Scalp, or Pullback
+    let strategy = 'Swing';
+    const isDowntrendVal = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+    const isPullback = (upside < 10.0 && !isAthOrNear && !isDowntrendVal);
+    
+    if (isPullback) {
+        strategy = 'Pullback';
+    } else if (isScalpTrend || ipo.strategy === 'Scalp') {
+        strategy = 'Scalp';
+    } else {
+        strategy = ipo.strategy || 'Swing';
+    }
 
     return {
         id: ipo.id,
@@ -80,3 +103,6 @@ validPicks.filter(p => p.strategy.toLowerCase() === 'swing').forEach(p => consol
 
 console.log('\nSCALP PICKS:');
 validPicks.filter(p => p.strategy.toLowerCase() === 'scalp').forEach(p => console.log(p));
+
+console.log('\nPULLBACK PICKS:');
+validPicks.filter(p => p.strategy.toLowerCase() === 'pullback').forEach(p => console.log(p));

@@ -425,6 +425,7 @@
                         <option value="all">Semua Kategori</option>
                         <option value="swing">Swing Picks (Akaun 1)</option>
                         <option value="scalp">Scalp Picks (Akaun 2)</option>
+                        <option value="pullback">Pullback Accumulation (Zon Beli Support)</option>
                     </select>
                 </div>
             </div>
@@ -496,6 +497,39 @@
                     </table>
                 </div>
             </section>
+
+            <!-- SECTION 3: PULLBACK ACCUMULATION (Zon Beli Support) -->
+            <section class="group-card" id="pullback-card">
+                <div class="group-header">
+                    <div class="group-title-area">
+                        <i data-lucide="compass" style="color: #818cf8; width: 24px; height: 24px;"></i>
+                        <h2 class="group-title" style="color: #818cf8;">🔍 3. PULLBACK ACCUMULATION (Zon Beli Support)</h2>
+                    </div>
+                    <span class="group-badge" style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #818cf8;" id="count-pullback">0 Kaunter</span>
+                </div>
+                <div class="group-desc" style="border-left-color: #818cf8;">
+                    Saham yang sudah melepasi TP unjuran awal tetapi kini sedang pullback/konsolidasi secara sihat di atas zon sokongan (support).
+                </div>
+                <div class="picks-table-wrapper">
+                    <table class="picks-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 280px;">Nama Saham (Kod)</th>
+                                <th>Harga Semasa</th>
+                                <th>Daily Gain</th>
+                                <th>Target Sifu (TP)</th>
+                                <th>ATH Sejarah</th>
+                                <th>Potensi Upside</th>
+                                <th>Gred</th>
+                                <th>Tema / Sektor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pullback-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -557,15 +591,18 @@
                 return ipo;
             });
             
-            // Swing & Scalp Bodies
+            // Swing, Scalp & Pullback Bodies
             const swingBody = document.getElementById('swing-body');
             const scalpBody = document.getElementById('scalp-body');
+            const pullbackBody = document.getElementById('pullback-body');
 
             swingBody.innerHTML = '';
             scalpBody.innerHTML = '';
+            if (pullbackBody) pullbackBody.innerHTML = '';
 
             let swingCount = 0;
             let scalpCount = 0;
+            let pullbackCount = 0;
 
             const strategySelector = document.getElementById('strategy-selector');
             const selectedStrategy = strategySelector ? strategySelector.value : 'all';
@@ -606,10 +643,16 @@
                 // 0. Fake TP Placeholder Filter (unless in active breakout)
                 if (!isActualAth && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
 
-                // 1. Minimum Upside Rule: Must have at least 10% upside (unless it is a breakout making new ATH)
+                // 1. Minimum Upside Rule & Pullback Accumulation Rule:
                 if (targetPrice > 0) {
                     const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
-                    if (upside < 10.0 && !isActualAth) return false;
+                    const highPriceVal = ipo.highPrice || 0;
+                    const isDowntrendVal = highPriceVal ? (ipo.currentPrice <= highPriceVal * 0.75) : false;
+                    
+                    if (upside < 10.0 && !isActualAth) {
+                        // If it has low/negative upside and is not at ATH, it can ONLY be included if it is in pullback accumulation (not in a downtrend)
+                        if (isDowntrendVal) return false;
+                    }
                 } else {
                     return false;
                 }
@@ -723,15 +766,33 @@
                 // Strategy determination
                 const isAthOrNear = highPrice ? (ipo.currentPrice >= highPrice * 0.95) : false;
                 const isScalpTrend = isAthOrNear || (dailyChange !== null && dailyChange >= 3.0);
-                const strategy = ipo.strategy || (isScalpTrend ? 'Scalp' : 'Swing');
+                
+                let strategy = 'Swing';
+                const hasIpoUpside = ipo.targetPrice > 0 ? (((ipo.targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100) : 0;
+                const isDowntrendVal = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+                const isPullback = (hasIpoUpside < 10.0 && !isAthOrNear && !isDowntrendVal);
+                
+                if (isPullback) {
+                    strategy = 'Pullback';
+                } else if (isScalpTrend || ipo.strategy === 'Scalp') {
+                    strategy = 'Scalp';
+                } else {
+                    strategy = ipo.strategy || 'Swing';
+                }
 
                 let strategyBadgeStyle = '';
+                let strategyIcon = 'anchor';
                 if (strategy.toLowerCase() === 'swing') {
                     strategyBadgeStyle = 'background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981;';
+                    strategyIcon = 'anchor';
+                } else if (strategy.toLowerCase() === 'pullback') {
+                    strategyBadgeStyle = 'background: rgba(129, 140, 248, 0.12); border: 1px solid rgba(129, 140, 248, 0.3); color: #818cf8;';
+                    strategyIcon = 'compass';
                 } else {
                     strategyBadgeStyle = 'background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b;';
+                    strategyIcon = 'zap';
                 }
-                const strategyHtml = `<span class="trend-badge" style="${strategyBadgeStyle} text-transform: uppercase; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.05em;"><i data-lucide="${strategy.toLowerCase() === 'swing' ? 'anchor' : 'zap'}" style="width: 10px; height: 10px; display: inline;"></i> ${strategy}</span>`;
+                const strategyHtml = `<span class="trend-badge" style="${strategyBadgeStyle} text-transform: uppercase; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 0.25rem; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.05em;"><i data-lucide="${strategyIcon}" style="width: 10px; height: 10px; display: inline;"></i> ${strategy}</span>`;
 
                 const gradeClass = ipo.predictedGrade === 'A' ? 'grade-a' : (ipo.predictedGrade === 'B' ? 'grade-b' : 'grade-c');
                 const sectorDisplay = ipo.sector || 'N/A';
@@ -763,6 +824,9 @@
                 if (strategy.toLowerCase() === 'scalp') {
                     scalpBody.innerHTML += rowHtml;
                     scalpCount++;
+                } else if (strategy.toLowerCase() === 'pullback') {
+                    if (pullbackBody) pullbackBody.innerHTML += rowHtml;
+                    pullbackCount++;
                 } else {
                     swingBody.innerHTML += rowHtml;
                     swingCount++;
@@ -772,24 +836,36 @@
             // Fallback for empty tables
             if (swingCount === 0) swingBody.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter Swing aktif pada masa ini.</td></tr>`;
             if (scalpCount === 0) scalpBody.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter Scalp aktif pada masa ini.</td></tr>`;
+            if (pullbackCount === 0 && pullbackBody) pullbackBody.innerHTML = `<tr class="empty-row"><td colspan="8">Tiada kaunter Pullback Accumulation aktif pada masa ini.</td></tr>`;
 
             // Update badge counters
             document.getElementById('count-swing').innerText = swingCount + ' Kaunter';
             document.getElementById('count-scalp').innerText = scalpCount + ' Kaunter';
+            const countPullbackEl = document.getElementById('count-pullback');
+            if (countPullbackEl) countPullbackEl.innerText = pullbackCount + ' Kaunter';
 
             // Toggle Card/Section visibility
             const swingCard = document.getElementById('swing-card');
             const scalpCard = document.getElementById('scalp-card');
+            const pullbackCard = document.getElementById('pullback-card');
+            
             if (swingCard && scalpCard) {
                 if (selectedStrategy === 'swing') {
                     swingCard.style.display = 'block';
                     scalpCard.style.display = 'none';
+                    if (pullbackCard) pullbackCard.style.display = 'none';
                 } else if (selectedStrategy === 'scalp') {
                     swingCard.style.display = 'none';
                     scalpCard.style.display = 'block';
+                    if (pullbackCard) pullbackCard.style.display = 'none';
+                } else if (selectedStrategy === 'pullback') {
+                    swingCard.style.display = 'none';
+                    scalpCard.style.display = 'none';
+                    if (pullbackCard) pullbackCard.style.display = 'block';
                 } else {
                     swingCard.style.display = 'block';
                     scalpCard.style.display = 'block';
+                    if (pullbackCard) pullbackCard.style.display = 'block';
                 }
             }
 
