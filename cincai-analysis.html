@@ -3,136 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisis Cincai2 Kira V3 | Head-to-Head Audit Performance</title>
-    <meta name="description" content="Statistik penuh Head-to-Head Cincai2 Kira: Sifu Original vs Model V3 (89.1% LOOCV). Audit 60 IPO Bursa Malaysia 2024-2026.">
+    <title>Analisis Cincai2 Kira | Audit 60 IPO Bursa Malaysia</title>
+    <meta name="description" content="Audit lengkap Cincai2 Kira: 60 IPO Bursa Malaysia 2024-2026. Sifu proven 70.9% hit rate. Gap-down filter, sector bias, dan kesimpulan jujur.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        .v3-badge {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(59, 130, 246, 0.25));
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            color: #a78bfa;
-            padding: 0.25rem 0.75rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 8px rgba(139, 92, 246, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-        }
         .metric-card {
-            padding: 1.25rem;
-            background: rgba(0,0,0,0.25);
-            border-radius: 1rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
+            padding: 1.25rem; background: rgba(0,0,0,0.25); border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.05); text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .metric-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        .metric-value {
-            font-size: 2.25rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-        .metric-label {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
-        .comparison-table thead tr {
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-            color: var(--text-main);
-        }
-        .comparison-table th, .comparison-table td {
-            padding: 0.7rem 0.5rem;
-        }
-        .comparison-table th {
-            font-weight: bold;
-            text-align: center;
-        }
-        .comparison-table th:first-child {
-            text-align: left;
-        }
-        .comparison-table td {
-            text-align: center;
-        }
-        .comparison-table td:first-child {
-            text-align: left;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-        .comparison-table tbody tr {
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-        .comparison-table tbody tr:nth-child(even) {
-            background: rgba(255,255,255,0.015);
-        }
-        .winner-cell {
-            color: #10b981;
-            font-weight: bold;
-        }
-        .crown { font-size: 1.1em; }
+        .metric-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .metric-value { font-size: 2.25rem; font-weight: 800; display: block; margin-bottom: 0.25rem; }
+        .metric-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+        .comparison-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.82rem; line-height: 1.6; }
+        .comparison-table thead tr { border-bottom: 2px solid rgba(255,255,255,0.1); color: var(--text-main); }
+        .comparison-table th, .comparison-table td { padding: 0.7rem 0.5rem; }
+        .comparison-table th { font-weight: bold; text-align: center; }
+        .comparison-table th:first-child { text-align: left; }
+        .comparison-table td { text-align: center; }
+        .comparison-table td:first-child { text-align: left; font-weight: 500; color: var(--text-main); }
+        .comparison-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .comparison-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+        .winner-cell { color: #10b981; font-weight: bold; }
         .insight-card {
-            padding: 1.5rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 0.75rem;
+            padding: 1.25rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem;
             border: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
         }
-        .param-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 0.85rem;
-        }
-        .param-row:last-child { border-bottom: none; }
-        .param-name { color: var(--text-dim); }
-        .param-val { font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-        .loocv-bar {
-            height: 8px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.08);
-            overflow: hidden;
-            margin-top: 0.3rem;
-        }
-        .loocv-bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 1s ease-out;
+        .verdict-box {
+            padding: 1.5rem; border-radius: 1rem; margin-top: 1.5rem;
+            font-size: 0.9rem; line-height: 1.7;
         }
     </style>
 </head>
 <body>
     <div class="background-blobs">
-        <div class="blob blob-1" style="background: rgba(139, 92, 246, 0.2);"></div>
-        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.15);"></div>
+        <div class="blob blob-1" style="background: rgba(16, 185, 129, 0.2);"></div>
+        <div class="blob blob-2" style="background: rgba(245, 158, 11, 0.15);"></div>
         <div class="blob blob-3" style="background: rgba(59, 130, 246, 0.15);"></div>
     </div>
 
@@ -146,11 +56,11 @@
                 <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
                     <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
                 </a>
+                <a href="ipo-decision.html" class="btn-moomoo" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); color: #a78bfa; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="zap"></i> <span class="nav-text">Decision Engine</span>
+                </a>
                 <a href="sifu-sheets.html" class="btn-moomoo" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: #10b981; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
                     <i data-lucide="table"></i> <span class="nav-text">Sifu Sheets</span>
-                </a>
-                <a href="tips.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="sparkles"></i> <span class="nav-text">Tips</span>
                 </a>
             </div>
         </div>
@@ -159,295 +69,98 @@
     <main class="container">
         <header class="hero" style="text-align: center; margin-bottom: 3.5rem;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
-                <i data-lucide="brain" style="color: #a78bfa;"></i>
-                <span class="v3-badge">⚡ Model V3 — LOOCV Verified</span>
+                <i data-lucide="bar-chart-3" style="color: #10b981;"></i>
+                <span style="font-weight: 800; font-size: 0.8rem; color: #10b981; text-transform: uppercase; letter-spacing: 0.15em;">Audit Lengkap &mdash; 60 IPO</span>
             </div>
             <h1>Analisis <span>Cincai2 Kira</span></h1>
-            <p>Head-to-Head: Sifu Original vs Model V3 &mdash; 60 IPO Bursa Malaysia (2024–2026)</p>
+            <p>Kajian Prestasi Sifu CK Formula &mdash; Bursa Malaysia (2024–2026)</p>
         </header>
 
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <!-- V3 CHAMPION METRICS -->
+        <!-- KESIMPULAN UTAMA -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <section class="glass-card" style="margin-bottom: 3rem; border-top: 4px solid #a78bfa; background: linear-gradient(180deg, rgba(139, 92, 246, 0.04), transparent);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="background: rgba(139, 92, 246, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #a78bfa; display: flex; align-items: center; justify-content: center;">
-                        <i data-lucide="trophy" style="width: 20px; height: 20px;"></i>
-                    </div>
-                    <h2 style="margin: 0; font-size: 1.35rem;">Model V3: Clean Calibration Engine</h2>
+        <section class="glass-card" style="margin-bottom: 3rem; border-top: 4px solid #10b981; background: linear-gradient(180deg, rgba(16,185,129,0.04), transparent);">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
+                <div style="background: rgba(16, 185, 129, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #10b981;">
+                    <i data-lucide="trophy" style="width: 20px; height: 20px;"></i>
                 </div>
-                <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 0.35rem 0.85rem; border-radius: 2rem; font-size: 0.72rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">60 IPO | 55 Active (5 Gap-Down Skipped)</span>
+                <h2 style="margin: 0; font-size: 1.35rem;">Kesimpulan: Sifu CK Formula Proven</h2>
             </div>
 
-            <p style="color: var(--text-main); line-height: 1.6; margin-bottom: 2rem; font-size: 0.95rem;">
-                Model V3 menggunakan <b>6 parameter bersih</b> tanpa data leakage (hanya guna data pre-listing: sektor, market, OS, harga IPO). Disahkan melalui <b>Leave-One-Out Cross-Validation (LOOCV)</b> — setiap kaunter diuji secara berasingan untuk memastikan tiada overfitting.
+            <p style="color: var(--text-main); line-height: 1.7; margin-bottom: 2rem; font-size: 0.95rem;">
+                Selepas audit 60 IPO, bina 3 model AI (MC-GS, V2, V3), dan cross-validate semua data — kesimpulan akhir: <b>Formula Sifu sudah cukup baik untuk trading.</b> AI model boleh "menang" hit rate pada kertas, tapi target terlalu rendah untuk untung sebenar. Sifu punya edge = judgment PE &amp; PAT projection dari pengalaman 3 tahun.
             </p>
 
             <!-- Metrics Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
-                <div class="metric-card" style="border-color: rgba(139, 92, 246, 0.2);">
-                    <span class="metric-value" style="color: #a78bfa;">89.1%</span>
-                    <span class="metric-label">LOOCV Hit-Rate (V3)</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div class="metric-card" style="border-color: rgba(16,185,129,0.2);">
+                    <span class="metric-value" style="color: #10b981;">70.9%</span>
+                    <span class="metric-label">Sifu Hit Rate (Proven)</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-value" style="color: #10b981;">100%</span>
-                    <span class="metric-label">In-Sample Hit-Rate</span>
+                    <span class="metric-value" style="color: #f59e0b;">39/55</span>
+                    <span class="metric-label">Kaunter Capai Target</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-value" style="color: #f59e0b;">70.9%</span>
-                    <span class="metric-label">Sifu Asal Hit-Rate</span>
+                    <span class="metric-value" style="color: #3b82f6;">60</span>
+                    <span class="metric-label">IPO Diaudit</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-value" style="color: #3b82f6;">+18.2%</span>
-                    <span class="metric-label">V3 vs Sifu (LOOCV)</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-value" style="color: #10b981;">49/55</span>
-                    <span class="metric-label">LOOCV Kaunter Betul</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-value" style="color: #ef4444;">0</span>
-                    <span class="metric-label">Kaunter Jadi Teruk</span>
+                    <span class="metric-value" style="color: #ef4444;">5</span>
+                    <span class="metric-label">Gap-Down (Auto Skip)</span>
                 </div>
             </div>
 
-            <!-- LOOCV Progress Bars -->
-            <div style="background: rgba(0,0,0,0.3); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                <h3 style="margin: 0 0 1rem 0; font-size: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
-                    <i data-lucide="shield-check" style="width: 18px; color: #a78bfa;"></i> LOOCV Hit Rate Comparison
-                </h3>
-                <div style="display: flex; flex-direction: column; gap: 0.85rem;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.2rem;">
-                            <span style="color: var(--text-dim);">📌 Sifu Original</span>
-                            <span style="color: #f59e0b; font-weight: 700;">70.9% (39/55)</span>
-                        </div>
-                        <div class="loocv-bar"><div class="loocv-bar-fill" style="width: 70.9%; background: linear-gradient(90deg, #f59e0b, #f97316);"></div></div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.2rem;">
-                            <span style="color: var(--text-dim);">⚡ MC-GS Calibration (V1)</span>
-                            <span style="color: #3b82f6; font-weight: 700;">63.3% (38/60)</span>
-                        </div>
-                        <div class="loocv-bar"><div class="loocv-bar-fill" style="width: 63.3%; background: linear-gradient(90deg, #3b82f6, #6366f1);"></div></div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.2rem;">
-                            <span style="color: var(--text-dim);">🛡️ V2 Clean (LOOCV)</span>
-                            <span style="color: #06b6d4; font-weight: 700;">85.5% (47/55)</span>
-                        </div>
-                        <div class="loocv-bar"><div class="loocv-bar-fill" style="width: 85.5%; background: linear-gradient(90deg, #06b6d4, #0ea5e9);"></div></div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.2rem;">
-                            <span style="color: var(--text-dim);">🏆 V3 Final (LOOCV)</span>
-                            <span style="color: #a78bfa; font-weight: 700;">89.1% (49/55)</span>
-                        </div>
-                        <div class="loocv-bar"><div class="loocv-bar-fill" style="width: 89.1%; background: linear-gradient(90deg, #a78bfa, #8b5cf6);"></div></div>
-                    </div>
-                </div>
+            <!-- Verdict Box -->
+            <div class="verdict-box" style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); color: #cbd5e1;">
+                <strong style="color: #10b981; font-size: 1rem;">💡 Apa Yang Kita Belajar:</strong><br><br>
+                <b>1. AI tak boleh beat sifu punya TP.</b> Sebab perbezaan cuma pada PE & PAT projection — itu judgment call, bukan matematik.<br>
+                <b>2. AI boleh bantu execute.</b> Decision engine, gap-down filter, upside check — ini yang sifu takde.<br>
+                <b>3. Hit rate tinggi ≠ untung banyak.</b> V3 89.1% hit rate tapi target bawah open price = tak boleh trade.<br>
+                <b>4. Simple is better.</b> Sifu CK + 3 rules (skip &lt;10%, avoid gap-down, trail stop) = sudah cukup.
             </div>
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <!-- 4-WAY COMPARISON TABLE -->
+        <!-- SIFU STATS -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <section class="glass-card" style="margin-bottom: 3rem;">
             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-                <div style="background: rgba(59, 130, 246, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #3b82f6;">
-                    <i data-lucide="scale" style="width: 20px; height: 20px;"></i>
+                <div style="background: rgba(245, 158, 11, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #f59e0b;">
+                    <i data-lucide="crown" style="width: 20px; height: 20px;"></i>
                 </div>
-                <h2 style="margin: 0; font-size: 1.25rem;">Perbandingan Head-to-Head: 4 Model</h2>
+                <h2 style="margin: 0; font-size: 1.25rem;">Prestasi Sifu CK (55 IPO Aktif)</h2>
             </div>
 
             <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); padding: 1.25rem;">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th style="min-width: 180px;">Metrik Penilaian</th>
-                            <th style="color: #f59e0b;">📌 Sifu Asal</th>
-                            <th style="color: #3b82f6;">⚡ MC-GS (V1)</th>
-                            <th style="color: #06b6d4;">🛡️ V2 Clean</th>
-                            <th style="color: #a78bfa;">🏆 V3 Final</th>
+                            <th style="min-width: 200px;">Metrik</th>
+                            <th style="color: #f59e0b;">📊 Nilai</th>
+                            <th style="color: var(--text-dim);">Nota</th>
                         </tr>
                     </thead>
                     <tbody style="color: var(--text-dim);">
-                        <tr>
-                            <td>Jumlah IPO Dianalisis</td>
-                            <td>60</td>
-                            <td>60</td>
-                            <td>55 (skip 5 GD)</td>
-                            <td>55 (skip 5 GD)</td>
-                        </tr>
-                        <tr>
-                            <td>Kadar Ketepatan Puncak (Hit Rate)</td>
-                            <td>70.9%</td>
-                            <td>63.3%</td>
-                            <td>85.5% <span style="font-size:0.7rem;">(LOOCV)</span></td>
-                            <td class="winner-cell">89.1% <span class="crown">👑</span> <span style="font-size:0.7rem;">(LOOCV)</span></td>
-                        </tr>
-                        <tr>
-                            <td>Bilangan IPO Capai Target</td>
-                            <td>39/55</td>
-                            <td>38/60</td>
-                            <td>47/55 <span style="font-size:0.7rem;">(LOOCV)</span></td>
-                            <td class="winner-cell">49/55 <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Bilangan IPO Gagal Target</td>
-                            <td>16/55</td>
-                            <td>22/60</td>
-                            <td>8/55</td>
-                            <td class="winner-cell">6/55 <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Overall Accuracy Score</td>
-                            <td>76.39%</td>
-                            <td class="winner-cell">80.68% <span class="crown">👑</span></td>
-                            <td>73.01%</td>
-                            <td>70.11%</td>
-                        </tr>
-                        <tr>
-                            <td>Purata Upside Missed</td>
-                            <td>50.6%</td>
-                            <td class="winner-cell">41.9%</td>
-                            <td>52.8%</td>
-                            <td>59.2%</td>
-                        </tr>
-                        <tr>
-                            <td>Purata Ralat Gagal (Downside)</td>
-                            <td>13.0%</td>
-                            <td>12.0%</td>
-                            <td class="winner-cell">0.0% <span class="crown">👑</span></td>
-                            <td class="winner-cell">0.0% <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Melebihi Target &gt;20%</td>
-                            <td>50.9%</td>
-                            <td>36.7%</td>
-                            <td>65.5%</td>
-                            <td class="winner-cell">74.5% <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Melebihi Target &gt;50%</td>
-                            <td>21.8%</td>
-                            <td>20.0%</td>
-                            <td>34.5%</td>
-                            <td class="winner-cell">40.0% <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Kaunter Improved vs Sifu</td>
-                            <td>—</td>
-                            <td style="color: #ef4444;">-1</td>
-                            <td style="color: #10b981;">+16</td>
-                            <td class="winner-cell">+16, 0 worsened <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Bilangan Parameter</td>
-                            <td>0</td>
-                            <td>8</td>
-                            <td>10</td>
-                            <td class="winner-cell">6 <span class="crown">👑</span></td>
-                        </tr>
-                        <tr>
-                            <td>Cross-Validation</td>
-                            <td style="color: #ef4444;">❌ Tiada</td>
-                            <td style="color: #ef4444;">❌ Tiada</td>
-                            <td style="color: #10b981;">✅ LOOCV</td>
-                            <td class="winner-cell">✅ LOOCV 55-fold</td>
-                        </tr>
-                        <tr>
-                            <td>Data Leakage</td>
-                            <td style="color: #10b981;">✅ Bersih</td>
-                            <td style="color: #ef4444;">⚠️ ATH-based</td>
-                            <td style="color: #10b981;">✅ Bersih</td>
-                            <td class="winner-cell">✅ Bersih</td>
-                        </tr>
+                        <tr><td>Jumlah IPO Dianalisis</td><td><b>60</b></td><td>2024–2026</td></tr>
+                        <tr><td>IPO Aktif (Tak Gap-Down)</td><td><b>55</b></td><td>5 kaunter gap-down dikeluarkan</td></tr>
+                        <tr><td>Hit Rate (ATH ≥ Target)</td><td class="winner-cell"><b>70.9%</b></td><td>39/55 kaunter capai CK target</td></tr>
+                        <tr><td>Gagal Capai Target</td><td style="color: #ef4444;">29.1%</td><td>16/55 kaunter</td></tr>
+                        <tr><td>Overall Accuracy Score</td><td><b>76.4%</b></td><td>Purata jarak target vs ATH</td></tr>
+                        <tr><td>Kaunter Exceed Target &gt;20%</td><td><b>50.9%</b></td><td>28/55 kaunter lebihi target 20%+</td></tr>
+                        <tr><td>Kaunter Exceed Target &gt;50%</td><td><b>21.8%</b></td><td>12/55 kaunter lebihi target 50%+</td></tr>
+                        <tr><td>Gap-Down IPO (Semua Gagal)</td><td style="color: #ef4444;">5/60</td><td>HOCKSOON, MSB, OGM, PGLOBAL, SUMI</td></tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div style="margin-top: 1.25rem; padding: 1rem; background: rgba(139, 92, 246, 0.06); border-radius: 0.75rem; border: 1px solid rgba(139, 92, 246, 0.15); font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;">
-                <strong style="color: #a78bfa;">📝 Nota:</strong> Accuracy Score mengukur purata ralat dari ATH (lebih tinggi = target lebih dekat ATH). Hit Rate mengukur berapa banyak kaunter ATH mencecah target (lebih tinggi = lebih ramai capai). <b>V3 mengorbankan sedikit accuracy untuk memastikan hit rate tertinggi</b> — ini strategi lebih selamat kerana ia bermaksud target kita jarang gagal.
             </div>
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <!-- KEY INSIGHTS + V3 PARAMS + TRADING RULES -->
+        <!-- SIFU RULES + GAP DOWN + SECTOR -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
 
-            <!-- V3 Parameters -->
-            <div class="glass-card" style="border-top: 3px solid #a78bfa;">
-                <h3 style="color: #a78bfa; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-                    <i data-lucide="sliders" style="width: 18px;"></i> V3 Parameter Engine (6 Params)
-                </h3>
-                <div>
-                    <div class="param-row">
-                        <span class="param-name">Theme (Tech/Energy/Consumer)</span>
-                        <span class="param-val" style="color: #f59e0b;">×0.976 <span style="font-size:0.7rem; color: var(--text-dim);">(-2.5%)</span></span>
-                    </div>
-                    <div class="param-row">
-                        <span class="param-name">Healthcare</span>
-                        <span class="param-val" style="color: #f59e0b;">×0.967 <span style="font-size:0.7rem; color: var(--text-dim);">(-3.4%)</span></span>
-                    </div>
-                    <div class="param-row">
-                        <span class="param-name">Trad ACE (Industrial/Const)</span>
-                        <span class="param-val" style="color: #ef4444;">×0.756 <span style="font-size:0.7rem; color: var(--text-dim);">(-24.4%)</span></span>
-                    </div>
-                    <div class="param-row">
-                        <span class="param-name">Main Market Premium</span>
-                        <span class="param-val" style="color: #10b981;">×1.012 <span style="font-size:0.7rem; color: var(--text-dim);">(+1.2%)</span></span>
-                    </div>
-                    <div class="param-row">
-                        <span class="param-name">OS Log-Scale Factor</span>
-                        <span class="param-val" style="color: #3b82f6;">-0.081</span>
-                    </div>
-                    <div class="param-row">
-                        <span class="param-name">Upside Ratio Factor</span>
-                        <span class="param-val" style="color: var(--text-dim);">-0.007 <span style="font-size:0.7rem;">(negligible)</span></span>
-                    </div>
-                </div>
-                <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(139, 92, 246, 0.08); border-radius: 0.5rem; font-size: 0.78rem; color: #cbd5e1; line-height: 1.5;">
-                    <strong>Insight:</strong> Trad ACE kaunter (industrial, construction) memerlukan <b>diskaun besar -24.4%</b> kerana CK formula kerap overvalue kaunter ini. Theme stocks hanya perlu diskaun kecil -2.5%.
-                </div>
-            </div>
-
-            <!-- Key Findings -->
-            <div class="glass-card" style="border-top: 3px solid #10b981;">
-                <h3 style="color: #10b981; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-                    <i data-lucide="lightbulb" style="width: 18px;"></i> Penemuan Utama
-                </h3>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <div class="insight-card">
-                        <strong style="color: #ef4444; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;">
-                            <i data-lucide="shield-alert" style="width: 16px;"></i> CK Overvalue Industrial
-                        </strong>
-                        <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                            Formula Cincai2 Kira <b>terlalu tinggi sebanyak ~24%</b> untuk kaunter ACE tradisional (keluli, pembinaan, hartanah). Sentiasa potong sasaran sebanyak ¼ untuk kaunter ini.
-                        </p>
-                    </div>
-                    <div class="insight-card">
-                        <strong style="color: #10b981; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;">
-                            <i data-lucide="trending-up" style="width: 16px;"></i> Theme Stocks On Target
-                        </strong>
-                        <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                            Kaunter bertema (Tech, Energy, Consumer) hanya perlu sedikit pelarasan (-2.5%). CK formula <b>sudah cukup tepat</b> untuk sektor ini.
-                        </p>
-                    </div>
-                    <div class="insight-card">
-                        <strong style="color: #3b82f6; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;">
-                            <i data-lucide="ban" style="width: 16px;"></i> Gap-Down = Auto Skip
-                        </strong>
-                        <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                            5 kaunter gap-down (HOCKSOON, MSB, OGM, PGLOBAL, SUMI) — <b>semua gagal capai target</b>. V3 skip auto untuk elak kerugian.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sifu's Trading Rules (from his post) -->
+            <!-- Sifu's Trading Rules -->
             <div class="glass-card" style="border-top: 3px solid #f59e0b;">
                 <h3 style="color: #f59e0b; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
                     <i data-lucide="scroll-text" style="width: 18px;"></i> Peraturan Dagangan Sifu
@@ -455,7 +168,7 @@
                 <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.82rem; color: var(--text-dim); line-height: 1.6;">
                     <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; border-left: 3px solid #ef4444;">
                         <strong style="color: var(--text-main);">🚫 Upside &lt;10% = AVOID</strong><br>
-                        "Jika upside potential Cincai2 Kira &lt;10%, biasanya better avoid. Risk-reward kurang menarik." — Sifu
+                        "Jika upside potential CK &lt;10%, biasanya better avoid. Risk-reward kurang menarik." — Sifu
                     </div>
                     <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; border-left: 3px solid #10b981;">
                         <strong style="color: var(--text-main);">💎 Upside &gt;50% = HOLD</strong><br>
@@ -463,106 +176,181 @@
                     </div>
                     <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; border-left: 3px solid #f59e0b;">
                         <strong style="color: var(--text-main);">📊 CK = Practical, Not Perfect</strong><br>
-                        "Cincai2 Kira bukanlah perfect valuation method, tetapi cukup practical untuk IPO trading. Tiada DCF. Tiada model berpuluh page." — Sifu
-                    </div>
-                    <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; border-left: 3px solid #a78bfa;">
-                        <strong style="color: var(--text-main);">🎯 V3 Complement</strong><br>
-                        V3 calibration melengkapkan CK dengan diskaun sektor + skip gap-down, meningkatkan hit rate dari 70.9% → 89.1% tanpa mengubah formula asal.
+                        "Cincai2 Kira bukanlah perfect valuation method, tetapi cukup practical untuk IPO trading." — Sifu
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- ═══════════════════════════════════════════════════════════════ -->
-        <!-- OUTLIERS & SECTOR BIASES -->
-        <!-- ═══════════════════════════════════════════════════════════════ -->
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-            <!-- Sector Biases -->
-            <div class="glass-card">
+            <!-- Gap-Down Filter -->
+            <div class="glass-card" style="border-top: 3px solid #ef4444;">
+                <h3 style="color: #ef4444; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <i data-lucide="shield-alert" style="width: 18px;"></i> Gap-Down Filter (100% Accurate)
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1rem;">
+                    Dari 60 IPO, <b>5 kaunter gap-down</b> — dan <b>SEMUA 5 gagal capai target CK.</b> Ciri-ciri gap-down:
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem;">
+                    <div style="padding: 0.6rem; background: rgba(239,68,68,0.08); border-radius: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--text-dim);">🔴 OS &lt; 20x (demand lemah)</span>
+                        <span style="color: #ef4444; font-weight: 700;">AUTO SKIP</span>
+                    </div>
+                    <div style="padding: 0.6rem; background: rgba(239,68,68,0.08); border-radius: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--text-dim);">🔴 OFS ≥ 20% (insiders jual)</span>
+                        <span style="color: #ef4444; font-weight: 700;">AUTO SKIP</span>
+                    </div>
+                    <div style="padding: 0.6rem; background: rgba(239,68,68,0.08); border-radius: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--text-dim);">⛔ OS rendah + OFS tinggi</span>
+                        <span style="color: #ef4444; font-weight: 700;">PASTI GAP-DOWN</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem; font-size: 0.78rem; color: #fca5a5; line-height: 1.5;">
+                    <b>Kaunter gap-down:</b> HOCKSOON (OS 12.5x), MSB (OS 15x), OGM (OS 20x), PGLOBAL (OS 20x), SUMI (OS 20x) — <b>semua 5/5 gagal.</b>
+                </div>
+            </div>
+
+            <!-- Sector Bias -->
+            <div class="glass-card" style="border-top: 3px solid #3b82f6;">
                 <h3 style="color: #3b82f6; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-                    <i data-lucide="pie-chart" style="color: #3b82f6; width: 18px;"></i> Bias Ralat Mengikut Sektor
+                    <i data-lucide="pie-chart" style="width: 18px;"></i> Bias CK Mengikut Sektor
                 </h3>
+                <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1rem;">
+                    CK formula <b>under-estimate</b> sektor hot (consumer, tech) dan <b>over-estimate</b> sektor tradisional (pembinaan, keluli).
+                </p>
                 <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.82rem; color: var(--text-dim); line-height: 1.9;">
-                    <li><b style="color: #10b981;">Consumer / F&B (n=5):</b> -46.0% <span style="color: #10b981; font-size: 0.72rem; font-weight: bold;">(Kronik Under-estimate)</span></li>
-                    <li><b style="color: #10b981;">DataCtr / M&E (n=2):</b> -34.0%</li>
-                    <li><b style="color: #10b981;">Semicon / Tech (n=9):</b> -24.0%</li>
-                    <li><b style="color: #10b981;">O&G / Energy (n=12):</b> -12.0%</li>
-                    <li><b style="color: #10b981;">Healthcare (n=4):</b> -7.0%</li>
-                    <li><b style="color: #ef4444;">Pembinaan (n=4):</b> +5.0% <span style="color: #ef4444; font-size: 0.72rem; font-weight: bold;">(Over-estimate)</span></li>
-                    <li><b style="color: #ef4444;">Keluli / Industri (n=14):</b> +7.0% <span style="color: #ef4444; font-size: 0.72rem; font-weight: bold;">(Over-estimate)</span></li>
+                    <li><b style="color: #10b981;">Consumer / F&B:</b> -46% <span style="color: #10b981; font-size: 0.72rem; font-weight: bold;">(Kronik Under-estimate)</span></li>
+                    <li><b style="color: #10b981;">DataCtr / M&E:</b> -34%</li>
+                    <li><b style="color: #10b981;">Semicon / Tech:</b> -24%</li>
+                    <li><b style="color: #10b981;">O&G / Energy:</b> -12%</li>
+                    <li><b style="color: #ef4444;">Pembinaan:</b> +5% <span style="color: #ef4444; font-size: 0.72rem; font-weight: bold;">(Over-estimate)</span></li>
+                    <li><b style="color: #ef4444;">Keluli / Industri:</b> +7% <span style="color: #ef4444; font-size: 0.72rem; font-weight: bold;">(Over-estimate)</span></li>
                 </ul>
-            </div>
-
-            <!-- Outliers -->
-            <div class="glass-card">
-                <h3 style="color: #f59e0b; margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
-                    <i data-lucide="alert-triangle" style="color: #f59e0b; width: 18px;"></i> Ralat Luar Biasa (Outliers)
-                </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.82rem; line-height: 1.7;">
-                    <div>
-                        <strong style="color: #10b981; display: block; margin-bottom: 0.5rem; font-size: 0.88rem;">CK Terlalu Rendah:</strong>
-                        • KOPI: -65%<br>
-                        • ELRIDGE: -62%<br>
-                        • AMBEST: -61%<br>
-                        • LSH: -59%<br>
-                        • SKYECHIP: -58%
-                    </div>
-                    <div>
-                        <strong style="color: #ef4444; display: block; margin-bottom: 0.5rem; font-size: 0.88rem;">CK Terlalu Tinggi:</strong>
-                        • SAG: +40%<br>
-                        • SUMI: +39%<br>
-                        • PMW: +38%<br>
-                        • GEOHAN: +37%<br>
-                        • PGLOBAL: +23%
-                    </div>
+                <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(59,130,246,0.06); border-radius: 0.5rem; font-size: 0.78rem; color: #93c5fd; line-height: 1.5;">
+                    <b>Takeaway:</b> Kalau kaunter tech/consumer — CK target mungkin rendah dari ATH sebenar. Boleh trail stop lebih lama.
                 </div>
             </div>
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <!-- V3 METHODOLOGY -->
+        <!-- AI vs SIFU — HONEST COMPARISON -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <section class="glass-card" style="margin-bottom: 3rem; border-top: 3px solid #06b6d4;">
+        <section class="glass-card" style="margin-bottom: 3rem;">
             <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-                <div style="background: rgba(6, 182, 212, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #06b6d4;">
+                <div style="background: rgba(139, 92, 246, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #a78bfa;">
                     <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
                 </div>
-                <h2 style="margin: 0; font-size: 1.25rem;">Metodologi V3: Differential Evolution + Nelder-Mead</h2>
+                <h2 style="margin: 0; font-size: 1.25rem;">AI vs Sifu — Perbandingan Jujur</h2>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem;">
-                <div style="padding: 1.25rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05);">
-                    <strong style="color: #06b6d4; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-                        <i data-lucide="database" style="width: 16px;"></i> 1. Data Bersih
-                    </strong>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                        60 IPO sebenar dari spreadsheet Sifu. Hanya guna data <b>sebelum listing</b> (sektor, market, OS, harga IPO). Tiada ATH/momentum sebagai input — elak data leakage.
-                    </p>
+            <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); padding: 1.25rem;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 180px;">Aspek</th>
+                            <th style="color: #f59e0b;">📌 Sifu CK</th>
+                            <th style="color: #a78bfa;">🤖 AI Models (V1-V3)</th>
+                            <th style="color: var(--text-dim);">Siapa Menang?</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-dim);">
+                        <tr>
+                            <td>Target Price</td>
+                            <td>Realistik (di atas open price)</td>
+                            <td>Terlalu rendah (bawah open price)</td>
+                            <td class="winner-cell">Sifu 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Hit Rate</td>
+                            <td>70.9%</td>
+                            <td>89.1% (V3 LOOCV)</td>
+                            <td style="color: #a78bfa;">AI 👑 (tapi…)</td>
+                        </tr>
+                        <tr>
+                            <td>Boleh Buat Duit?</td>
+                            <td style="color: #10b981;">✅ Ya — target achievable</td>
+                            <td style="color: #ef4444;">❌ Tidak — target terlalu rendah</td>
+                            <td class="winner-cell">Sifu 👑</td>
+                        </tr>
+                        <tr>
+                            <td>PE & PAT Projection</td>
+                            <td style="color: #10b981;">✅ 3 tahun pengalaman</td>
+                            <td style="color: #ef4444;">❌ Tak boleh replicate</td>
+                            <td class="winner-cell">Sifu 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Gap-Down Filter</td>
+                            <td style="color: #ef4444;">❌ Manual</td>
+                            <td style="color: #10b981;">✅ Auto (OS + OFS check)</td>
+                            <td style="color: #a78bfa;">AI 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Decision Engine</td>
+                            <td style="color: #ef4444;">❌ Takde</td>
+                            <td style="color: #10b981;">✅ Auto subscribe/avoid</td>
+                            <td style="color: #a78bfa;">AI 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Backtest & Audit</td>
+                            <td style="color: #ef4444;">❌ Takde statistik</td>
+                            <td style="color: #10b981;">✅ 60 IPO, LOOCV, sector bias</td>
+                            <td style="color: #a78bfa;">AI 👑</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1.25rem; background: rgba(139,92,246,0.06); border-radius: 0.75rem; border: 1px solid rgba(139,92,246,0.15); font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
+                <strong style="color: #a78bfa;">🎯 Verdict:</strong> Sifu menang di <b>Target Price</b> (sebab itu judgment call, bukan matematik). AI menang di <b>Execution</b> (filter, decision, audit). Flow terbaik: <b>Sifu bagi TP → masuk Decision Engine → auto decide → execute dengan disiplin.</b>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- FLOW TERBAIK -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <section class="glass-card" style="margin-bottom: 3rem; border-top: 3px solid #10b981;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <div style="background: rgba(16,185,129,0.15); padding: 0.6rem; border-radius: 0.5rem; color: #10b981;">
+                    <i data-lucide="workflow" style="width: 20px; height: 20px;"></i>
                 </div>
-                <div style="padding: 1.25rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05);">
-                    <strong style="color: #06b6d4; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-                        <i data-lucide="target" style="width: 16px;"></i> 2. Objektif: Hit Rate
-                    </strong>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                        Fungsi objektif diberi berat <b>65% kepada hit rate</b>, 25% accuracy score, 10% penalti overestimate. Ini memastikan target yang boleh dicapai.
-                    </p>
+                <h2 style="margin: 0; font-size: 1.25rem;">Flow Terbaik: Sifu + Decision Engine</h2>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="background: rgba(16,185,129,0.2); color: #10b981; min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">1</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: var(--text-main);">Sifu Share CK Target</strong><br>Masukkan harga IPO + Sifu TP ke dalam <a href="ipo-decision.html" style="color: #a78bfa;">Decision Engine</a>
+                    </div>
                 </div>
-                <div style="padding: 1.25rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05);">
-                    <strong style="color: #06b6d4; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-                        <i data-lucide="shuffle" style="width: 16px;"></i> 3. DE + NM Hybrid
-                    </strong>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                        Differential Evolution (120 pop × 4000 gen) untuk carian global, diikuti Nelder-Mead Simplex (300K iter) untuk penalaan halus. 3 restarts untuk elak local optima.
-                    </p>
+                <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="background: rgba(16,185,129,0.2); color: #10b981; min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">2</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: var(--text-main);">Auto Check: Upside + OS + OFS</strong><br>Upside &lt;10% → SKIP | OS &lt;20x → AVOID | OFS &gt;20% → AVOID
+                    </div>
                 </div>
-                <div style="padding: 1.25rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05);">
-                    <strong style="color: #06b6d4; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-                        <i data-lucide="shield-check" style="width: 16px;"></i> 4. LOOCV (55-Fold)
-                    </strong>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0;">
-                        Leave-One-Out Cross-Validation: setiap kaunter diuji secara berasingan dengan model dilatih pada 54 kaunter lain. <b>89.1% hit rate</b> adalah skor jujur tanpa overfitting.
-                    </p>
+                <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="background: rgba(16,185,129,0.2); color: #10b981; min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">3</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: var(--text-main);">Listing Day</strong><br>Open gap-down → CUT terus. Open naik → hold.
+                    </div>
                 </div>
+                <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="background: rgba(16,185,129,0.2); color: #10b981; min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">4</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: var(--text-main);">Zone 1: Jual 50%</strong><br>Bila harga cecah Sifu CK target → jual separuh, lock profit.
+                    </div>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.03);">
+                    <span style="background: rgba(16,185,129,0.2); color: #10b981; min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0;">5</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+                        <strong style="color: var(--text-main);">Zone 2: Trail Baki</strong><br>Set trailing stop 5-8% untuk baki 50%. Biar lari kalau momentum kuat.
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="ipo-decision.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: linear-gradient(135deg, #10b981, #059669); border: none; border-radius: 2rem; color: white; font-weight: 700; text-decoration: none; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(16,185,129,0.3); transition: all 0.3s;">
+                    <i data-lucide="zap" style="width: 18px;"></i> Buka Decision Engine
+                </a>
             </div>
         </section>
 
@@ -571,7 +359,7 @@
     <footer class="glass-footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2026 Bursa IPO Hunter Dashboard. Trading involves risk. Model V3 verified via 55-fold LOOCV. Data sourced from Sifu's Cincai2 Kira spreadsheet.</p>
+                <p>&copy; 2026 Bursa IPO Hunter Dashboard. Audit berdasarkan 60 IPO sebenar. Trading involves risk.</p>
             </div>
         </div>
     </footer>
