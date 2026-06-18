@@ -486,7 +486,7 @@ async function main() {
     fs.writeFileSync(DATA_JSON_FILE, JSON.stringify(existingData, null, 2));
     
     // Generate data.js
-    const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n`;
+    const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
     fs.writeFileSync(DATA_JS_FILE, jsContent);
 
     console.log(`\n--- Sync Complete ---`);

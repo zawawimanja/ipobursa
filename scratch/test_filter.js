@@ -17,6 +17,7 @@ const validPicks = list.filter(ipo => {
     if (ipo.predictedGrade !== 'A' && ipo.predictedGrade !== 'B' && !isSifuPick) return false;
 
     const isMatch = ipo.shariah === true && 
+        (ipo.stage === 5 || ipo.status === 'Listed') &&
         ipo.currentPrice > 0 && 
         ipo.currentPrice >= ipo.price;
     

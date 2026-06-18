@@ -38,7 +38,7 @@ if (count > 0) {
     fs.writeFileSync(DATA_JSON_FILE, JSON.stringify(data, null, 2), 'utf8');
     
     // Also update data.js to sync with frontend
-    const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n`;
+    const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
     fs.writeFileSync(DATA_JS_FILE, jsContent, 'utf8');
     
     console.log(`\nSuccessfully fixed ${count} anomalies in data.json and data.js.`);
