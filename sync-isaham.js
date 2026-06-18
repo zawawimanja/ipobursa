@@ -37,7 +37,9 @@ function findExistingIPO(name, existingData) {
         'MFGROUP': 'manforce-group',
         'ADNEX': 'adnex',
         'NE': 'adnex',
-        '5ER': '5e-resources'
+        '5ER': '5e-resources',
+        'SRKK': 'srkk-ai',
+        'SRKK AI BERHAD': 'srkk-ai'
     };
 
     if (idMap[cleanName]) {
