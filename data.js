@@ -106,7 +106,7 @@ const IPO_DATA = [
     "pe": 11.8,
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>Syarikat pembekal jentera industri & peningkatan kemudahan. Dibantu oleh Public Investment Bank (Hero IB). PE 11.8x adalah sangat menarik vs peers. Langganan tinggi (OS 120.98x) menunjukkan permintaan runcit yang sangat luar biasa. Sesuai untuk apply/scalp.",
     "ofs": false,
-    "sifuTargetPrice": 0.28,
+    "sifuTargetPrice": 0.33,
     "highPrice": 0.32,
     "symbol": "PENTECH",
     "currentPrice": 0.315,
@@ -138,7 +138,7 @@ const IPO_DATA = [
     "pe": 13.4,
     "ofs": true,
     "analystInsight": "❌ <b>AVOID (GRADE C — SEPERTI DIJANGKA)</b><br>💡 Walaupun OS runcit mencecah 42.12x, kaunter ini dibuka flat (0.00%) dan ditutup di bawah harga IPO pada RM0.215 (-2.27%) disebabkan oleh tekanan jualan OFS yang besar (47.34M unit) dan tiada momentum sektor. Elakkan.",
-    "sifuTargetPrice": 0.32,
+    "sifuTargetPrice": 0.24,
     "symbol": "MMCS",
     "openPrice": 0.22,
     "highPrice": 0.25,
@@ -297,7 +297,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 0.915,
     "symbol": "AMBEST",
-    "sifuTargetPrice": 0.45,
+    "sifuTargetPrice": 0.34,
     "dailyChange": 0.3,
     "calibratedSifuTargetPrice": 0.61
   },
@@ -326,7 +326,7 @@ const IPO_DATA = [
     "symbol": "AMS",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.49,
+    "sifuTargetPrice": 0.33,
     "dailyChange": 3.9,
     "calibratedSifuTargetPrice": 0.49
   },
@@ -433,7 +433,7 @@ const IPO_DATA = [
     "performance": "+45.83%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.61,
     "dailyChange": 12.9,
     "calibratedSifuTargetPrice": 0.65
   },
@@ -547,7 +547,7 @@ const IPO_DATA = [
     "highPrice": 0.63,
     "symbol": "HOCKSOON",
     "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.63,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.69
   },
@@ -611,7 +611,7 @@ const IPO_DATA = [
     "highPrice": 0.575,
     "symbol": "ISF",
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-    "sifuTargetPrice": 0.36,
+    "sifuTargetPrice": 0.69,
     "dailyChange": -0.3,
     "calibratedSifuTargetPrice": 0.36
   },
@@ -640,7 +640,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 1.34,
     "symbol": "KEEMING",
-    "sifuTargetPrice": 0.38,
+    "sifuTargetPrice": 0.68,
     "dailyChange": 8,
     "calibratedSifuTargetPrice": 0.36
   },
@@ -727,7 +727,7 @@ const IPO_DATA = [
     "highPrice": 0.265,
     "symbol": "OGM",
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
-    "sifuTargetPrice": 0.25,
+    "sifuTargetPrice": 0.3,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.25
   },
@@ -841,7 +841,7 @@ const IPO_DATA = [
     "performance": "+229.55%",
     "symbol": "SKYECHIP",
     "strategy": "Swing",
-    "sifuTargetPrice": 0.88,
+    "sifuTargetPrice": 1.58,
     "dailyChange": 1.7,
     "calibratedSifuTargetPrice": 0.83
   },
@@ -898,7 +898,7 @@ const IPO_DATA = [
     "highPrice": 0.28175,
     "symbol": "TEAMSTR",
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
-    "sifuTargetPrice": 0.26,
+    "sifuTargetPrice": 0.32,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.26
   },
@@ -1019,7 +1019,7 @@ const IPO_DATA = [
     "openPrice": 0.33000799999999997,
     "closePrice": 0.33499200000000007,
     "symbol": "CBHB",
-    "sifuTargetPrice": 0.53,
+    "sifuTargetPrice": 0.38,
     "dailyChange": 4.5,
     "calibratedSifuTargetPrice": 0.53
   },
@@ -1165,7 +1165,7 @@ const IPO_DATA = [
     "closePrice": 1.1999469999999999,
     "symbol": "ECOSHOP",
     "dailyChange": 0.3,
-    "sifuTargetPrice": 1.472
+    "sifuTargetPrice": 1.31
   },
   {
     "id": "enpro",
@@ -1360,7 +1360,7 @@ const IPO_DATA = [
     "openPrice": 0.619992,
     "closePrice": 0.6549839999999999,
     "symbol": "IAB",
-    "sifuTargetPrice": 1.53,
+    "sifuTargetPrice": 0.71,
     "dailyChange": 3.82,
     "calibratedSifuTargetPrice": 1.53
   },
@@ -1458,7 +1458,7 @@ const IPO_DATA = [
     "closePrice": 0.874984,
     "symbol": "KOPI",
     "dailyChange": 0.2,
-    "sifuTargetPrice": 1.265
+    "sifuTargetPrice": 0.55
   },
   {
     "id": "lacmed",
@@ -1850,7 +1850,7 @@ const IPO_DATA = [
     "closePrice": 0.33001499999999995,
     "symbol": "POWER",
     "dailyChange": null,
-    "sifuTargetPrice": 0.178
+    "sifuTargetPrice": 0.41
   },
   {
     "id": "psp",
@@ -1944,7 +1944,7 @@ const IPO_DATA = [
     "closePrice": 0.69998,
     "symbol": "SAG",
     "dailyChange": 0.8,
-    "sifuTargetPrice": 0.839
+    "sifuTargetPrice": 1.29
   },
   {
     "id": "set",
@@ -2040,7 +2040,7 @@ const IPO_DATA = [
     "pe": 10.4,
     "symbol": "SUPREME",
     "dailyChange": null,
-    "sifuTargetPrice": 0.345
+    "sifuTargetPrice": 0.29
   },
   {
     "id": "techstore",
@@ -2064,7 +2064,7 @@ const IPO_DATA = [
     "closePrice": 0.22000000000000003,
     "symbol": "TECHSTORE",
     "dailyChange": null,
-    "sifuTargetPrice": 0.287
+    "sifuTargetPrice": 0.28
   },
   {
     "id": "thmy",
@@ -2113,7 +2113,7 @@ const IPO_DATA = [
     "closePrice": 0.369985,
     "symbol": "VERDANT",
     "dailyChange": null,
-    "sifuTargetPrice": 0.236
+    "sifuTargetPrice": 0.38
   },
   {
     "id": "wawasan-dengkil",
@@ -2205,7 +2205,7 @@ const IPO_DATA = [
     "closePrice": 0.225,
     "symbol": "XPB",
     "dailyChange": null,
-    "sifuTargetPrice": 0.161
+    "sifuTargetPrice": 0.25
   },
   {
     "id": "99-speedmart",
@@ -2325,7 +2325,7 @@ const IPO_DATA = [
     "pe": 16.5,
     "symbol": "AZAMJAYA",
     "dailyChange": -1.6,
-    "sifuTargetPrice": 1.438
+    "sifuTargetPrice": 1.04
   },
   {
     "id": "bwys",
@@ -2349,7 +2349,7 @@ const IPO_DATA = [
     "closePrice": 0.349998,
     "symbol": "BWYS",
     "dailyChange": null,
-    "sifuTargetPrice": 0.201
+    "sifuTargetPrice": 0.31
   },
   {
     "id": "carlorino",
@@ -2396,7 +2396,7 @@ const IPO_DATA = [
     "closePrice": 0.35,
     "symbol": "CREST",
     "dailyChange": null,
-    "sifuTargetPrice": 0.23
+    "sifuTargetPrice": 0.32
   },
   {
     "id": "crpmate",
@@ -2420,7 +2420,7 @@ const IPO_DATA = [
     "closePrice": 0.21000000000000002,
     "symbol": "CRPMATE",
     "dailyChange": null,
-    "sifuTargetPrice": 0.218
+    "sifuTargetPrice": 0.23
   },
   {
     "id": "elridge",
@@ -2446,7 +2446,7 @@ const IPO_DATA = [
     "closePrice": 0.399997,
     "symbol": "ELRIDGE",
     "dailyChange": -0.8,
-    "sifuTargetPrice": 1.041
+    "sifuTargetPrice": 0.55
   },
   {
     "id": "epb",
@@ -2470,7 +2470,7 @@ const IPO_DATA = [
     "closePrice": 0.6199760000000001,
     "symbol": "EPB",
     "dailyChange": null,
-    "sifuTargetPrice": 0.362
+    "sifuTargetPrice": 0.71
   },
   {
     "id": "farm-price",
@@ -2715,7 +2715,7 @@ const IPO_DATA = [
     "highPrice": 2.0124999999999997,
     "symbol": "KEYFIELD",
     "dailyChange": -0.3,
-    "sifuTargetPrice": 2.012
+    "sifuTargetPrice": 2.14
   },
   {
     "id": "kjts",
@@ -2791,7 +2791,7 @@ const IPO_DATA = [
     "openPrice": 0.7699900000000001,
     "closePrice": 0.94003,
     "symbol": "LWSABAH",
-    "sifuTargetPrice": 1.6,
+    "sifuTargetPrice": 0.8,
     "dailyChange": 10.08
   },
   {
@@ -3118,7 +3118,7 @@ const IPO_DATA = [
     "closePrice": 0.504982,
     "symbol": "SDCG",
     "dailyChange": 0.8,
-    "sifuTargetPrice": 0.765
+    "sifuTargetPrice": 0.54
   },
   {
     "id": "sinkung",
@@ -3284,7 +3284,7 @@ const IPO_DATA = [
     "closePrice": 0.339999,
     "symbol": "TOPVISN",
     "dailyChange": null,
-    "sifuTargetPrice": 0.184
+    "sifuTargetPrice": 0.41
   },
   {
     "id": "tsa",
@@ -3434,7 +3434,7 @@ const IPO_DATA = [
     "closePrice": 0.509985,
     "symbol": "WINSTAR",
     "dailyChange": 2.3,
-    "sifuTargetPrice": 0.632
+    "sifuTargetPrice": 0.51
   },
   {
     "id": "zantat",
