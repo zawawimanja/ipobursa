@@ -596,16 +596,20 @@
                 // Explicit skips
                 if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
 
-                // 0. Fake TP Placeholder Filter:
                 const highPrice = ipo.highPrice || 0;
                 const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
-                if (highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
+                
+                // Breakout Check: If the stock is making a new ATH (or within 0.5 sen of it), it is a momentum play
+                const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
 
-                // 1. Minimum Upside Rule: Must have at least 10% upside to TP Sifu
+                // 0. Fake TP Placeholder Filter (unless in active breakout)
+                if (!isActualAth && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
+
+                // 1. Minimum Upside Rule: Must have at least 10% upside (unless it is a breakout making new ATH)
                 if (targetPrice > 0) {
                     const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
-                    if (upside < 10.0) return false;
-                } else {
+                    if (upside < 10.0 && !isActualAth) return false;
+                } else if (!isActualAth) {
                     return false;
                 }
 

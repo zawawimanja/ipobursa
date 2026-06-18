@@ -607,8 +607,8 @@ No rating"></textarea>
         let upside = null;
         if (sifuTP && curPrice) upside = ((sifuTP - curPrice) / curPrice) * 100;
 
-        // ATH check: current price >= recorded high
-        const isAth = highPrice ? curPrice >= highPrice : false;
+        // ATH check: current price >= recorded high (with 0.5 sen tolerance)
+        const isAth = highPrice ? curPrice >= (highPrice - 0.005) : false;
 
         // Zon Beli: current price <= sifu TP
         const isZonBeli = sifuTP ? curPrice <= sifuTP : false;
@@ -641,13 +641,13 @@ No rating"></textarea>
         } else if (dbEntry.outlier && !isSifuPick) {
             verdict = 'skip';
             reason = 'Outlier Spekulatif — tiada dalam Portfolio Sifu';
-        } else if (highPrice > 0 && Math.abs(sifuTP - highPrice) < 0.005) {
+        } else if (!isAth && highPrice > 0 && Math.abs(sifuTP - highPrice) < 0.005) {
             verdict = 'skip';
             reason = 'Fake TP Placeholder (ATH Target)';
         } else if (year < 2026 && highAboveIpo < 8.0) {
             verdict = 'skip';
             reason = 'Stagnant (Sikat/Dead) — pergerakan harga mati';
-        } else if (upside !== null && upside < 10.0) {
+        } else if (upside !== null && upside < 10.0 && !isAth) {
             verdict = 'skip';
             reason = `Upside terlalu rendah (${upside.toFixed(1)}% ke TP)`;
         } else if (!isSifuPick && year >= 2024 && isDowntrend) {
@@ -656,6 +656,9 @@ No rating"></textarea>
         } else if (isDowntrend) {
             verdict = 'wait';
             reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
+        } else if (isAth && (grade === 'A' || grade === 'B' || isSifuPick)) {
+            verdict = 'buy';
+            reason = 'Breakout ATH / 52W High (Momentum Buy)';
         } else if (isZonBeli && (grade === 'A' || grade === 'B' || isSifuPick)) {
             verdict = 'buy';
             reason = `Dalam Zon Beli, +${upside ? upside.toFixed(1) : '?'}% ke TP`;
