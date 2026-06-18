@@ -32,6 +32,15 @@ if (appliedCount > 0) {
     const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
     fs.writeFileSync(jsPath, jsContent, 'utf8');
     console.log(`✅ Applied ${appliedCount} overrides from overrides.json to data.json and data.js.`);
+    
+    // Automatically trigger Sifu target price recalculation to align with sifu-sheets.html
+    try {
+        const { execSync } = require('child_process');
+        console.log('🔄 Recalculating Sifu study target prices to align with sifu-sheets.html...');
+        execSync('node scratch/calc_sifu_targets.js', { stdio: 'inherit' });
+    } catch (e) {
+        console.error('⚠️ Failed to automatically run calc_sifu_targets.js:', e.message);
+    }
 } else {
     console.log('No matching overrides found to apply.');
 }

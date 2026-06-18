@@ -24,10 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm install
           
-      - name: Run Scrapers (iSaham + i3investor) and Archive Daily Groups
+      - name: Run Scrapers (iSaham + i3investor), Recalculate Targets, and Archive Daily Groups
         run: |
           node sync-isaham.js
           node scrape-i3.js
+          node scratch/calc_sifu_targets.js
           node archive-groups.js
         
       - name: Commit and Push Changes
