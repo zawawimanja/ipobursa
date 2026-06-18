@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO Decision Engine | Bursa IPO</title>
+    <meta name="description" content="Simple IPO decision engine. Masukkan Sifu TP, auto-decide subscribe atau avoid.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="data.js"></script>
+    <style>
+        .decision-container { max-width: 600px; margin: 0 auto; }
+        .input-group { margin-bottom: 1.25rem; }
+        .input-group label {
+            display: block; font-size: 0.8rem; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .input-group input {
+            width: 100%; padding: 0.85rem 1rem; background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.75rem;
+            font-size: 1.3rem; font-weight: 700; font-family: 'Outfit', sans-serif;
+            text-align: center; outline: none; transition: all 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #a78bfa; box-shadow: 0 0 15px rgba(139,92,246,0.2);
+        }
+        .input-group input::placeholder { color: rgba(255,255,255,0.2); font-weight: 400; font-size: 1rem; }
+        .result-card {
+            padding: 2rem; border-radius: 1.25rem; margin-top: 2rem;
+            text-align: center; transition: all 0.4s ease; opacity: 0; transform: translateY(10px);
+            border: 2px solid transparent;
+        }
+        .result-card.visible { opacity: 1; transform: translateY(0); }
+        .result-card.subscribe {
+            background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(16,185,129,0.02));
+            border-color: rgba(16,185,129,0.3);
+        }
+        .result-card.avoid {
+            background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
+            border-color: rgba(239,68,68,0.3);
+        }
+        .result-card.watchlist {
+            background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.02));
+            border-color: rgba(245,158,11,0.3);
+        }
+        .verdict-emoji { font-size: 3.5rem; margin-bottom: 0.75rem; display: block; }
+        .verdict-text { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .verdict-sub { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+        .strategy-box {
+            margin-top: 1.5rem; padding: 1.25rem; background: rgba(0,0,0,0.3);
+            border-radius: 0.75rem; text-align: left; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .strategy-box h4 { color: var(--text-main); margin: 0 0 0.75rem 0; font-size: 0.9rem; }
+        .strat-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.82rem;
+        }
+        .strat-row:last-child { border-bottom: none; }
+        .strat-label { color: var(--text-dim); }
+        .strat-val { font-weight: 700; }
+        .upside-bar-bg {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.06);
+            border-radius: 6px; overflow: hidden; margin-top: 0.75rem;
+        }
+        .upside-bar-fill {
+            height: 100%; border-radius: 6px; transition: width 0.5s ease-out;
+        }
+        .flow-steps {
+            margin-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .flow-step {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 0.5rem;
+            font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .flow-step-num {
+            background: rgba(139,92,246,0.2); color: #a78bfa;
+            min-width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.75rem; flex-shrink: 0;
+        }
+        .quick-pick { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .quick-btn {
+            padding: 0.45rem 0.85rem; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);
+            border-radius: 2rem; font-size: 0.75rem; cursor: pointer;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .quick-btn:hover { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.3); color: #a78bfa; }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1" style="background: rgba(139, 92, 246, 0.2);"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.15);"></div>
+        <div class="blob blob-3" style="background: rgba(59, 130, 246, 0.15);"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="sifu-sheets.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="table"></i> <span class="nav-text">Sheets</span>
+                </a>
+                <a href="cincai-analysis.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="bar-chart-3"></i> <span class="nav-text">Audit</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero" style="text-align: center; margin-bottom: 2.5rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <i data-lucide="zap" style="color: #a78bfa;"></i>
+                <span style="background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(59,130,246,0.25)); border: 1px solid rgba(139,92,246,0.4); color: #a78bfa; padding: 0.25rem 0.75rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">Simple Decision Engine</span>
+            </div>
+            <h1 style="font-size: 2rem;">Subscribe <span>atau</span> Skip?</h1>
+            <p>Masukkan Harga IPO & Sifu TP → Auto decide dalam 1 saat</p>
+        </header>
+
+        <div class="decision-container">
+            <div class="glass-card" style="border-top: 3px solid #a78bfa;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="input-group">
+                        <label>Harga IPO (RM)</label>
+                        <input type="number" id="inp-ipo" step="0.01" placeholder="0.28" oninput="decide()">
+                    </div>
+                    <div class="input-group">
+                        <label>Sifu CK Target (RM)</label>
+                        <input type="number" id="inp-tp" step="0.01" placeholder="0.42" oninput="decide()">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+                    <div class="input-group" style="margin-bottom: 0.5rem;">
+                        <label>OS (Oversubscription) <span style="opacity:0.5;">optional</span></label>
+                        <input type="number" id="inp-os" step="0.1" placeholder="110.54" oninput="decide()" style="font-size: 1rem;">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 0.5rem;">
+                        <label>OFS % <span style="opacity:0.5;">optional</span></label>
+                        <input type="number" id="inp-ofs" step="1" placeholder="0" oninput="decide()" style="font-size: 1rem;">
+                    </div>
+                </div>
+
+                <div class="quick-pick" id="quick-pick-container">
+                    <span style="font-size: 0.72rem; color: var(--text-dim); align-self: center; margin-right: 0.25rem;">Quick:</span>
+                    <span style="font-size: 0.72rem; color: var(--text-dim);">Loading...</span>
+                </div>
+
+                <!-- Result -->
+                <div id="result-card" class="result-card"></div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 style="color: #a78bfa; margin-top: 0; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    <i data-lucide="workflow" style="width: 18px;"></i> Flow Sifu (5 Langkah)
+                </h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <span class="flow-step-num">1</span>
+                        <div><strong style="color: var(--text-main);">Sifu Share TP</strong><br>Masukkan Sifu CK target price & harga IPO</div>
+                    </div>
+                    <div class="flow-step">
+                        <span class="flow-step-num">2</span>
+                        <div><strong style="color: var(--text-main);">Auto Check Upside</strong><br>Upside &lt;10% → ❌ SKIP &nbsp;|&nbsp; 10-30% → ⚠️ Scalp &nbsp;|&nbsp; &gt;30% → ✅ Subscribe</div>
+                    </div>
+                    <div class="flow-step">
+                        <span class="flow-step-num">3</span>
+                        <div><strong style="color: var(--text-main);">Listing Day</strong><br>Open gap-down bawah IPO? → CUT terus. Open naik? → Hold.</div>
+                    </div>
+                    <div class="flow-step">
+                        <span class="flow-step-num">4</span>
+                        <div><strong style="color: var(--text-main);">Zone 1: Jual 50%</strong><br>Bila harga cecah Sifu TP → jual separuh, lock profit</div>
+                    </div>
+                    <div class="flow-step">
+                        <span class="flow-step-num">5</span>
+                        <div><strong style="color: var(--text-main);">Zone 2: Trail Baki</strong><br>Set trailing stop 5-8% untuk baki 50%. Biar lari kalau momentum kuat.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Bursa IPO Hunter Dashboard. Trading involves risk. Sifu CK target proven 70.9% hit rate over 60 IPOs.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Auto-generate quick-pick buttons from data.js
+        function initQuickPicks() {
+            const container = document.getElementById('quick-pick-container');
+            if (typeof IPO_DATA === 'undefined') return;
+
+            // Filter: upcoming IPOs (stage 2-4) + recently listed (stage 5, last 30 days)
+            const now = new Date();
+            const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+            const ipos = IPO_DATA.filter(d => {
+                    if (!d.sifuTargetPrice || !d.price || d.price <= 0) return false;
+                    
+                    const stage = d.stage || 0;
+                    
+                    // Upcoming IPOs (MITI, Application, Pre-Listing)
+                    if (stage >= 2 && stage <= 4) return true;
+                    
+                    // Recently listed (within last 30 days)
+                    if (stage === 5 && d.listingDate) {
+                        const listDate = new Date(d.listingDate);
+                        return listDate >= thirtyDaysAgo;
+                    }
+                    
+                    return false;
+                })
+                .sort((a, b) => {
+                    // Sort: highest stage first (listed → pre-listing → application → MITI)
+                    const stageOrder = (b.stage || 0) - (a.stage || 0);
+                    if (stageOrder !== 0) return stageOrder;
+                    return (b.listingDate || '').localeCompare(a.listingDate || '');
+                });
+
+            container.innerHTML = '<span style="font-size: 0.72rem; color: var(--text-dim); align-self: center; margin-right: 0.25rem;">Quick:</span>';
+
+            ipos.forEach(d => {
+                const name = (d.symbol || d.companyName || d.id).replace(/ Berhad/gi, '').replace(/ Holdings/gi, '').trim();
+                const shortName = name.length > 10 ? name.substring(0, 10) : name;
+                const ipo = d.price;
+                const tp = d.sifuTargetPrice;
+                const os = d.os || 0;
+                const ofs = d.ofsPercentage || 0;
+                const upside = ((tp - ipo) / ipo) * 100;
+                const lowOS = os > 0 && os < 20;
+                const highOFS = ofs >= 20;
+                const isRisky = lowOS || highOFS;
+                const isAvoid = upside < 10 || (isRisky && upside < 40);
+
+                const btn = document.createElement('button');
+                btn.className = 'quick-btn';
+                btn.textContent = `${shortName} (${ipo.toFixed(2)}→${tp.toFixed(2)})`;
+                btn.onclick = () => quickLoad(ipo, tp, os || '', ofs || '');
+
+                if (isAvoid) {
+                    btn.style.borderColor = 'rgba(239,68,68,0.3)';
+                    btn.style.color = '#f87171';
+                    btn.textContent += ' ⚠️';
+                } else if (upside >= 50) {
+                    btn.style.borderColor = 'rgba(16,185,129,0.3)';
+                    btn.style.color = '#10b981';
+                    btn.textContent += ' 🔥';
+                }
+
+                container.appendChild(btn);
+            });
+        }
+
+        initQuickPicks();
+
+        function quickLoad(ipo, tp, os, ofs) {
+            document.getElementById('inp-ipo').value = ipo;
+            document.getElementById('inp-tp').value = tp;
+            document.getElementById('inp-os').value = os !== undefined ? os : '';
+            document.getElementById('inp-ofs').value = ofs !== undefined ? ofs : '';
+            decide();
+        }
+
+        function decide() {
+            const ipo = parseFloat(document.getElementById('inp-ipo').value);
+            const tp = parseFloat(document.getElementById('inp-tp').value);
+            const os = parseFloat(document.getElementById('inp-os').value) || 0;
+            const ofs = parseFloat(document.getElementById('inp-ofs').value) || 0;
+            const card = document.getElementById('result-card');
+
+            if (!ipo || !tp || ipo <= 0 || tp <= 0) {
+                card.classList.remove('visible');
+                return;
+            }
+
+            const upside = ((tp - ipo) / ipo) * 100;
+            const zone2 = tp * 1.15;
+            const cutLoss = ipo * 0.95;
+
+            // Red flag checks
+            const lowOS = os > 0 && os < 20;
+            const highOFS = ofs >= 20;
+            const gapDownRisk = lowOS || highOFS;
+
+            let verdict, emoji, color, className, strategy;
+            let warnings = [];
+
+            // Build warnings
+            if (lowOS) warnings.push(`🔴 <b>OS rendah (${os}x)</b> — demand lemah, risiko flat/gap-down tinggi`);
+            if (highOFS) warnings.push(`🔴 <b>OFS ${ofs}%</b> — insiders jual saham, tekanan jualan besar`);
+            if (lowOS && highOFS) warnings.push(`⛔ <b>DOUBLE RED FLAG</b> — OS lemah + OFS tinggi = hampir pasti gap-down`);
+
+            if (upside < 0) {
+                emoji = '🚫'; verdict = 'JANGAN SUBSCRIBE'; color = '#ef4444'; className = 'avoid';
+                strategy = `CK target (RM ${tp.toFixed(2)}) <b>bawah harga IPO</b> (RM ${ipo.toFixed(2)}). Overvalued.`;
+            } else if (gapDownRisk && upside < 40) {
+                // Gap-down risk overrides upside if upside is moderate
+                emoji = '🚫'; verdict = 'AVOID — Gap-Down Risk Tinggi'; color = '#ef4444'; className = 'avoid';
+                strategy = `Walaupun upside <b>${upside.toFixed(1)}%</b>, red flags terlalu kuat. Kaunter gap-down dari backtest 60 IPO — <b>semua gagal capai target.</b> Jangan subscribe.`;
+            } else if (upside < 10) {
+                emoji = '⚠️'; verdict = 'SKIP — Risk Tak Berbaloi'; color = '#ef4444'; className = 'avoid';
+                strategy = `Upside hanya <b>${upside.toFixed(1)}%</b> — terlalu rendah. <b>Sifu kata: upside bawah 10% = better avoid.</b>`;
+            } else if (upside < 30) {
+                emoji = '⚡'; verdict = 'BOLEH — Tapi Scalp Sahaja'; color = '#f59e0b'; className = 'watchlist';
+                strategy = `Upside <b>${upside.toFixed(1)}%</b> — sederhana. Boleh subscribe tapi <b>jangan hold lama</b>. Scalp on listing day.`;
+            } else if (upside < 50) {
+                emoji = '✅'; verdict = 'SUBSCRIBE — Good Setup'; color = '#10b981'; className = 'subscribe';
+                strategy = `Upside <b>${upside.toFixed(1)}%</b> — baik. Subscribe dan follow <b>Dual-Zone exit</b>: jual 50% di RM ${tp.toFixed(2)}, trail baki 50%.`;
+            } else {
+                emoji = '🔥'; verdict = 'STRONG SUBSCRIBE — Hold Longer!'; color = '#10b981'; className = 'subscribe';
+                strategy = `Upside <b>${upside.toFixed(1)}%</b> — sangat kuat! <b>Sifu kata: upside >50% boleh hold lebih lama.</b> Trailing stop 8%.`;
+            }
+
+            // If subscribe but has warnings, add caution
+            if (warnings.length > 0 && className === 'subscribe') {
+                className = 'watchlist'; color = '#f59e0b';
+                verdict += ' ⚠️';
+            }
+
+            const warningHTML = warnings.length > 0 ? `
+                <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 0.5rem; text-align: left; font-size: 0.8rem; color: #fca5a5; line-height: 1.6;">
+                    ${warnings.join('<br>')}
+                </div>
+            ` : '';
+
+            // OS/OFS status badges
+            let badges = '';
+            if (os > 0) {
+                const osColor = os >= 40 ? '#10b981' : os >= 20 ? '#f59e0b' : '#ef4444';
+                const osLabel = os >= 40 ? 'HOT 🔥' : os >= 20 ? 'OK' : 'LEMAH ⚠️';
+                badges += `<span style="background: ${osColor}22; color: ${osColor}; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700; border: 1px solid ${osColor}33;">OS: ${os}x ${osLabel}</span> `;
+            }
+            if (ofs > 0) {
+                const ofsColor = ofs >= 30 ? '#ef4444' : ofs >= 15 ? '#f59e0b' : '#10b981';
+                badges += `<span style="background: ${ofsColor}22; color: ${ofsColor}; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700; border: 1px solid ${ofsColor}33;">OFS: ${ofs}% ${ofs >= 30 ? '🔴' : ofs >= 15 ? '⚠️' : '✅'}</span>`;
+            } else if (os > 0) {
+                badges += `<span style="background: #10b98122; color: #10b981; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700; border: 1px solid #10b98133;">No OFS ✅</span>`;
+            }
+
+            card.className = `result-card ${className}`;
+            card.innerHTML = `
+                <span class="verdict-emoji">${emoji}</span>
+                <div class="verdict-text" style="color: ${color};">${verdict}</div>
+                ${badges ? `<div style="margin-bottom: 0.75rem;">${badges}</div>` : ''}
+                <div class="verdict-sub">${strategy}</div>
+                ${warningHTML}
+
+                <div class="upside-bar-bg">
+                    <div class="upside-bar-fill" style="width: ${Math.min(Math.max(upside, 0), 100)}%; background: linear-gradient(90deg, ${color}, ${color}88);"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); margin-top: 0.3rem;">
+                    <span>0%</span>
+                    <span style="color: #ef4444;">10% (Min)</span>
+                    <span style="color: #f59e0b;">30%</span>
+                    <span style="color: #10b981;">50%+</span>
+                    <span>100%</span>
+                </div>
+
+                ${upside >= 10 && !gapDownRisk ? `
+                <div class="strategy-box">
+                    <h4>📋 Exit Strategy</h4>
+                    <div class="strat-row">
+                        <span class="strat-label">Harga IPO</span>
+                        <span class="strat-val">RM ${ipo.toFixed(2)}</span>
+                    </div>
+                    <div class="strat-row">
+                        <span class="strat-label">Zone 1 — Jual 50%</span>
+                        <span class="strat-val" style="color: #10b981;">RM ${tp.toFixed(2)}</span>
+                    </div>
+                    <div class="strat-row">
+                        <span class="strat-label">Zone 2 — Trail Baki (+15%)</span>
+                        <span class="strat-val" style="color: #3b82f6;">RM ${zone2.toFixed(2)}</span>
+                    </div>
+                    <div class="strat-row">
+                        <span class="strat-label">Cut Loss (Gap-Down -5%)</span>
+                        <span class="strat-val" style="color: #ef4444;">RM ${cutLoss.toFixed(2)}</span>
+                    </div>
+                    <div class="strat-row">
+                        <span class="strat-label">Upside Potential</span>
+                        <span class="strat-val" style="color: ${color};">+${upside.toFixed(1)}%</span>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            setTimeout(() => card.classList.add('visible'), 50);
+        }
+    </script>
+</body>
+</html>
