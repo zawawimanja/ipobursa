@@ -45,17 +45,17 @@ try {
         
         // 2. High-Growth Sektor Theme calibration (only for active/visible stocks)
         if (os >= 15 || market === 'main') {
-            if (sector === 'tech' || sector === 'technology') {
+            if (sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor')) {
                 target *= bestParams.techMult;
-            } else if (sector === 'energy' || sector === 'utilities') {
+            } else if (sector.includes('energy') || sector.includes('utilities') || sector.includes('solar') || sector.includes('renewable')) {
                 target *= bestParams.energyMult;
-            } else if (sector === 'consumer') {
+            } else if (sector.includes('consumer') || sector.includes('food') || sector.includes('beverage')) {
                 target *= bestParams.consumerMult;
             }
         }
         
         // 3. Traditional small-cap discount
-        if ((sector === 'industrial' || sector === 'construction' || sector === 'property') && market === 'ace') {
+        if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market === 'ace') {
             if (os < 15) {
                 target *= bestParams.lowOsTradAceDiscount;
             } else {

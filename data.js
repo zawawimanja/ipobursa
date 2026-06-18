@@ -18,13 +18,13 @@ const IPO_DATA = [
     "fundUse": "Modal kerja, penyelidikan & pembangunan (R&D), serta pengembangan pasaran.",
     "predictedGrade": "B",
     "avgTP": 0.39,
-    "sifuTargetPrice": 0.39,
+    "sifuTargetPrice": 0.66,
     "pe": 18.15,
     "analystInsight": "⚠️ <b>WORTH IT (GRADE B)</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>SRKK AI Berhad merupakan penyedia transformasi digital & rakan kongsi Microsoft (Microsoft Managed Partner pertama di Malaysia dengan kesemua kompetensi AI Cloud).<br><br>📊 <b>Valuation & Fundamental:</b><br>• Harga IPO RM0.32 memberikan PE 18.15x berdasarkan PAT FY24 (RM5.01 juta). Ini adalah wajar (Fair Value RM0.39 berdasarkan 22x PE).<br>• Sekitar 50% hasil adalah pendapatan berulang (recurring revenue).<br><br>⚠️ <b>Risiko:</b> Terdapat komponen Offer for Sale (OFS) sebanyak 13 juta unit saham sedia ada & ditaja jamin oleh TA Securities (mid-tier IB).",
     "ofs": true,
     "symbol": "SRKK",
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.39
+    "calibratedSifuTargetPrice": 0.66
   },
   {
     "id": "sum-technology",
@@ -50,7 +50,7 @@ const IPO_DATA = [
     "symbol": "SUM",
     "ofs": false,
     "sifuTargetPrice": 0.39,
-    "calibratedSifuTargetPrice": 0.37,
+    "calibratedSifuTargetPrice": 0.46,
     "openPrice": 0.395,
     "highPrice": 0.525,
     "closePrice": 0.505,
@@ -88,7 +88,7 @@ const IPO_DATA = [
     "performance": "+10.87%",
     "openPrice": 0.25001,
     "closePrice": 0.26,
-    "calibratedSifuTargetPrice": 0.31
+    "calibratedSifuTargetPrice": 0.39
   },
   {
     "id": "pentech",
@@ -112,7 +112,7 @@ const IPO_DATA = [
     "pe": 11.8,
     "analystInsight": "⚠️ <b>NEUTRAL / LOW PRIORITY (GRADE C)</b><br>ICT infrastructure adalah sektor \"boring\" — tiada momentum tema besar seperti AI, semiconductor, atau data center. Tiada OFS, Shariah OK, harga murah RM0.20. Tapi IB TBA dan sektor ini jarang deliver listing day pop yang besar. Based on 2026 data, Industrial/ICT tanpa strong IB = avg +3-5% je. <b>Boleh apply tapi jangan harap besar. Low conviction.</b>",
     "ofs": false,
-    "sifuTargetPrice": 0.33,
+    "sifuTargetPrice": 0.28,
     "highPrice": 0.33,
     "symbol": "PENTECH",
     "currentPrice": 0.31,
@@ -144,7 +144,7 @@ const IPO_DATA = [
     "pe": 13.4,
     "ofs": true,
     "analystInsight": "❌ <b>AVOID (GRADE C — SEPERTI DIJANGKA)</b><br>💡 Walaupun OS runcit mencecah 42.12x, kaunter ini dibuka flat (0.00%) dan ditutup di bawah harga IPO pada RM0.215 (-2.27%) disebabkan oleh tekanan jualan OFS yang besar (47.34M unit) dan tiada momentum sektor. Elakkan.",
-    "sifuTargetPrice": 0.24,
+    "sifuTargetPrice": 0.32,
     "symbol": "MMCS",
     "openPrice": 0.22,
     "highPrice": 0.25,
@@ -152,7 +152,7 @@ const IPO_DATA = [
     "currentPrice": 0.245,
     "performance": "+11.36%",
     "dailyChange": 2.27,
-    "calibratedSifuTargetPrice": 0.44
+    "calibratedSifuTargetPrice": 0.55
   },
   {
     "id": "1doc",
@@ -303,7 +303,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 0.915,
     "symbol": "AMBEST",
-    "sifuTargetPrice": 0.34,
+    "sifuTargetPrice": 0.45,
     "dailyChange": 0.3,
     "calibratedSifuTargetPrice": 0.61
   },
@@ -332,7 +332,7 @@ const IPO_DATA = [
     "symbol": "AMS",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.33,
+    "sifuTargetPrice": 0.49,
     "dailyChange": 3.9,
     "calibratedSifuTargetPrice": 0.49
   },
@@ -439,9 +439,9 @@ const IPO_DATA = [
     "performance": "+39.58%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
-    "sifuTargetPrice": 0.61,
+    "sifuTargetPrice": 0.69,
     "dailyChange": 12.9,
-    "calibratedSifuTargetPrice": 0.65
+    "calibratedSifuTargetPrice": 0.78
   },
   {
     "id": "empire-premium",
@@ -470,7 +470,7 @@ const IPO_DATA = [
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Empire Premium Food mempamerkan prestasi pertumbuhan luar biasa dengan PAT CAGR 3 tahun cecah 61% menerusi model grab-and-go. Keputusan 3Q25 sangat mantap membuktikan keberkesanan fasa scale-up.<br><br>📊 <b>Kelebihan Utama:</b><br>• Margin kasar stabil sekitar 40% dengan CAGR PAT 61%.<br>• Model perniagaan grab-and-go berisiko rendah & kos cawangan rendah.<br>• Penyenaraian Main Market dengan sokongan Maybank IB.",
     "sifuTargetPrice": 0.83,
     "dailyChange": 0,
-    "calibratedSifuTargetPrice": 0.83
+    "calibratedSifuTargetPrice": 0.95
   },
   {
     "id": "gdgroup",
@@ -553,7 +553,7 @@ const IPO_DATA = [
     "highPrice": 0.63,
     "symbol": "HOCKSOON",
     "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
-    "sifuTargetPrice": 0.63,
+    "sifuTargetPrice": 0.69,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.69
   },
@@ -591,7 +591,7 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "sifuTargetPrice": 0.32,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.31
+    "calibratedSifuTargetPrice": 0.35
   },
   {
     "id": "isf",
@@ -617,7 +617,7 @@ const IPO_DATA = [
     "highPrice": 0.575,
     "symbol": "ISF",
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.36,
     "dailyChange": -0.3,
     "calibratedSifuTargetPrice": 0.36
   },
@@ -646,7 +646,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 1.34,
     "symbol": "KEEMING",
-    "sifuTargetPrice": 0.68,
+    "sifuTargetPrice": 0.38,
     "dailyChange": 8,
     "calibratedSifuTargetPrice": 0.36
   },
@@ -733,7 +733,7 @@ const IPO_DATA = [
     "highPrice": 0.265,
     "symbol": "OGM",
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
-    "sifuTargetPrice": 0.3,
+    "sifuTargetPrice": 0.25,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.25
   },
@@ -847,9 +847,9 @@ const IPO_DATA = [
     "performance": "+225.00%",
     "symbol": "SKYECHIP",
     "strategy": "Scalp",
-    "sifuTargetPrice": 1.58,
+    "sifuTargetPrice": 0.88,
     "dailyChange": 1.7,
-    "calibratedSifuTargetPrice": 0.83
+    "calibratedSifuTargetPrice": 1.05
   },
   {
     "id": "sunmed",
@@ -904,7 +904,7 @@ const IPO_DATA = [
     "highPrice": 0.28175,
     "symbol": "TEAMSTR",
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
-    "sifuTargetPrice": 0.32,
+    "sifuTargetPrice": 0.26,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.26
   },
@@ -1025,9 +1025,9 @@ const IPO_DATA = [
     "openPrice": 0.33000799999999997,
     "closePrice": 0.33499200000000007,
     "symbol": "CBHB",
-    "sifuTargetPrice": 0.38,
+    "sifuTargetPrice": 0.53,
     "dailyChange": 4.5,
-    "calibratedSifuTargetPrice": 0.53
+    "calibratedSifuTargetPrice": 0.61
   },
   {
     "id": "cheeding",
@@ -1341,7 +1341,7 @@ const IPO_DATA = [
     "symbol": "HKB",
     "sifuTargetPrice": 0.21,
     "dailyChange": 2.34,
-    "calibratedSifuTargetPrice": 0.21
+    "calibratedSifuTargetPrice": 0.24
   },
   {
     "id": "iab",
@@ -1366,7 +1366,7 @@ const IPO_DATA = [
     "openPrice": 0.619992,
     "closePrice": 0.6549839999999999,
     "symbol": "IAB",
-    "sifuTargetPrice": 0.71,
+    "sifuTargetPrice": 1.53,
     "dailyChange": 3.82,
     "calibratedSifuTargetPrice": 1.53
   },
@@ -4430,7 +4430,7 @@ const IPO_DATA = [
     "symbol": "MNHLDG",
     "sifuTargetPrice": 2.99,
     "dailyChange": 6.2,
-    "calibratedSifuTargetPrice": 2.99
+    "calibratedSifuTargetPrice": 3.41
   },
   {
     "id": "orgabio",
@@ -5920,7 +5920,7 @@ const IPO_DATA = [
     "closePrice": 0.58,
     "sifuTargetPrice": 0.53,
     "dailyChange": 2.59,
-    "calibratedSifuTargetPrice": 0.73
+    "calibratedSifuTargetPrice": 0.92
   },
   {
     "id": "destini",
@@ -5972,7 +5972,7 @@ const IPO_DATA = [
     "closePrice": 2.91,
     "sifuTargetPrice": 3.1,
     "dailyChange": 2.1,
-    "calibratedSifuTargetPrice": 3.1
+    "calibratedSifuTargetPrice": 3.7
   },
   {
     "id": "register",

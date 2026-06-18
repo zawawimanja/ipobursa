@@ -2221,7 +2221,9 @@
             document.getElementById('td-roe-24').innerText = roe24.toFixed(2) + '%';
             document.getElementById('td-roe-25').innerText = roe25.toFixed(2) + '%';
             document.getElementById('td-roe-fye-f').innerText = roeF.toFixed(2) + '%';
-            document.getE            // Valuations
+            document.getElementById('td-roe-fye-f1').innerText = roeF1.toFixed(2) + '%';
+            
+            // Valuations
             const targetPe = parseFloat(document.getElementById('sheet-target-pe').value) || 10;
             const valF = (epsF * targetPe) / 100;
             const valF1 = (epsF1 * targetPe) / 100;
@@ -2267,16 +2269,16 @@
                     }
                     // Sector premium (applies when meaningful OS or Main Market)
                     if (os >= 15 || market === 'main') {
-                        if (sector === 'tech' || sector === 'technology' || sector === 'technology (hardware)' || sector === 'technology (software)') {
+                        if (sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor')) {
                             target *= bestParams.techMult;
-                        } else if (sector === 'energy' || sector === 'utilities' || sector === 'solar' || sector === 'renewable energy') {
+                        } else if (sector.includes('energy') || sector.includes('utilities') || sector.includes('solar') || sector.includes('renewable')) {
                             target *= bestParams.energyMult;
-                        } else if (sector === 'consumer' || sector === 'consumer products' || sector === 'food & beverage') {
+                        } else if (sector.includes('consumer') || sector.includes('food') || sector.includes('beverage')) {
                             target *= bestParams.consumerMult;
                         }
                     }
                     // ACE traditional industrial discount
-                    if ((sector === 'industrial' || sector === 'construction' || sector === 'property' || sector === 'manufacturing') && market === 'ace') {
+                    if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market === 'ace') {
                         target *= (os < 15 ? bestParams.lowOsTradAceDiscount : bestParams.tradAceDiscount);
                     }
                     // Main market premium
