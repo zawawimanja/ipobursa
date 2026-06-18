@@ -27,24 +27,45 @@ const results = db.filter(ipo => {
     const symbolLower = (ipo.symbol || '').toLowerCase();
     const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
 
-    // Only Grade A, B or Sifu Picks
+    // 1. Only Grade A, B or Sifu Picks
     if (ipo.predictedGrade !== 'A' && ipo.predictedGrade !== 'B' && !isSifuPick) return false;
 
-    // Filter listed and Syariah-compliant stocks
+    // 2. Filter listed and Syariah-compliant stocks
     const isMatch = ipo.shariah === true && 
         (ipo.stage === 5 || ipo.status === 'Listed') &&
         ipo.currentPrice > 0;
     
     if (!isMatch) return false;
 
-    // Exclude explicit skips
+    // 3. Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
+    const isRecent = ipo.year >= 2024;
+    if (!isRecent && !isSifuPick) return false;
+
+    // 4. Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio
+    if (ipo.outlier && !isSifuPick) return false;
+
+    // 5. Exclude explicit skips
     if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
 
-    // Must be under RM 3.00
+    // 6. Must be under RM 3.00
     if (ipo.currentPrice >= 3.00) return false;
 
     const highPrice = ipo.highPrice || 0;
-    
+    const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
+    const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
+
+    // 7. Anti-Fake TP Placeholder Filter (unless in active breakout)
+    if (!isActualAth && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
+
+    // 8. Anti-Stagnant (Sikat/Dead) Rule:
+    const ipoPrice = ipo.price || 0;
+    const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+    if (ipo.year < 2026 && highAboveIpo < 8.0) return false;
+
+    // 9. Downtrend Safety Check
+    const isDowntrend = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+    if (!isSifuPick && isRecent && isDowntrend) return false;
+
     // Check if hitting ATH (or within 0.5 sen) or near breakout (within 5% of ATH)
     const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
     const isNearAth = highPrice > 0 && ipo.currentPrice >= (highPrice * 0.95);
