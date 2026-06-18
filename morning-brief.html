@@ -310,6 +310,38 @@
 
     <div class="glass-card" style="margin-bottom:1.5rem;padding:1.75rem 2rem;">
 
+        <!-- Panduan Penggunaan Morning Brief -->
+        <div style="margin-bottom: 1.25rem; background: rgba(245, 158, 11, 0.03); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 0.5rem; padding: 0.75rem; backdrop-filter: blur(10px);">
+            <details style="outline: none;">
+                <summary style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 700; color: #f59e0b; font-size: 0.85rem; list-style: none; user-select: none;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="help-circle" style="width: 14px; height: 14px; color: #f59e0b;"></i>
+                        <span>📖 PANDUAN PENGGUNAAN MORNING BRIEF (Klik untuk baca)</span>
+                    </div>
+                    <span style="font-size: 0.7rem; background: rgba(245, 158, 11, 0.15); padding: 0.15rem 0.40rem; border-radius: 0.25rem; color: #f59e0b;">Lihat Cara</span>
+                </summary>
+                <div style="margin-top: 0.75rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.78rem; color: var(--text-dim); line-height: 1.4;">
+                    <div>
+                        <strong style="color: #f59e0b; display: block; margin-bottom: 0.25rem;">1. Salin (Copy) dari TradingView</strong>
+                        Buka watchlist atau screener saham di TradingView bagi kaunter yang mencatatkan <b>ATH</b> atau <b>52W High</b>. Tekan <kbd style="background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">Ctrl + A</kbd> dan <kbd style="background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">Ctrl + C</kbd> untuk salin senarai tersebut.
+                    </div>
+                    <div>
+                        <strong style="color: #f59e0b; display: block; margin-bottom: 0.25rem;">2. Tampal (Paste) & Analisis</strong>
+                        Tampal (<kbd style="background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">Ctrl + V</kbd>) ke dalam kotak input di bawah. Sistem akan secara automatik membaca Symbol, Harga Semasa, dan Peratusan Harian.
+                    </div>
+                    <div>
+                        <strong style="color: #f59e0b; display: block; margin-bottom: 0.25rem;">3. Semak Keputusan Verdict</strong>
+                        Sistem akan membandingkan data dengan <b>data.js</b> (Sifu database) dan mengeluarkan verdict:
+                        <div style="margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.2rem; padding-left: 0.5rem; border-left: 2px solid #f59e0b;">
+                            <span>• <b>✅ BELI:</b> Breakout ATH (Scalp) / Masih bawah TP (Swing).</span>
+                            <span>• <b>⏳ Tunggu:</b> Harga melebihi TP (Tunggu pullback).</span>
+                            <span>• <b>❌ Skip:</b> Bukan Syariah, Gred C, atau Downtrend.</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
         <div class="paste-zone">
             <label><i data-lucide="clipboard-paste" style="width:12px;height:12px;display:inline;margin-bottom:-1px;"></i> &nbsp;Paste TradingView Watchlist di sini</label>
             <textarea id="tv-paste" placeholder="Contoh:
