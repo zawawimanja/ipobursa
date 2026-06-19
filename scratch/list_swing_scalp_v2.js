@@ -1,15 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_FILE = path.join(__dirname, '..', 'data.json');
-const db = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+const DATA_JSON_FILE = path.join(__dirname, '../data.json');
+const data = JSON.parse(fs.readFileSync(DATA_JSON_FILE, 'utf8'));
 
 const sifuPortfolio = [
     'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
     'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
     'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
 ];
+const sifuPortfolioSet = new Set(sifuPortfolio.map(s => s.toLowerCase()));
 
+// We keep explicitSkips for junk/unwanted but NOT for mmcs, adnex which are active!
 const explicitSkips = ['wentel-engineering', 'wentel', 'agmo'];
 
 function floatEquals(a, b, tolerance = 0.005) {
@@ -23,7 +25,6 @@ function getIpoGrade(ipo) {
     const os = ipo.os || 0;
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0;
     
-    // Respect manual predicted grade if pre-listing
     if (ipo.predictedGrade && effectiveStage < 4) {
         return { grade: ipo.predictedGrade };
     }
@@ -131,112 +132,131 @@ function getIpoGrade(ipo) {
     return { grade: 'Unrated' };
 }
 
-console.log('========================================================================');
-console.log('🔍 SCANNING IPO STOCKS FOR DYNAMIC BREAKOUTS (PRICE < RM 3.00)');
-console.log('========================================================================');
-
-const results = db.filter(ipo => {
-    const idLower = ipo.id.toLowerCase();
-    const symbolLower = (ipo.symbol || '').toLowerCase();
-    const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
-    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
-
-    const grade = getIpoGrade(ipo).grade;
-
-    // 1. Only Grade A, B or Sifu Picks or Momentum Rebound
+const activeStocks = data.filter(d => {
+    if (d.stage !== 5 && d.status !== 'Listed') return false;
+    if (!d.shariah) return false;
+    
+    const idLower = d.id.toLowerCase();
+    const symbolLower = (d.symbol || '').toLowerCase();
+    const isSifuPick = sifuPortfolioSet.has(idLower) || sifuPortfolioSet.has(symbolLower);
+    
+    // 1. Dynamic Grade Filter
+    const grade = getIpoGrade(d).grade;
+    const isMomentumRebound = typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
+    
     if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
-
-    // 2. Filter listed and Syariah-compliant stocks
-    const isMatch = ipo.shariah === true && 
-        (ipo.stage === 5 || ipo.status === 'Listed') &&
-        ipo.currentPrice > 0;
+    if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
     
-    if (!isMatch) return false;
-
-    // 3. Age & Trend Filter
-    let isRecent = false;
-    const highPriceVal = ipo.highPrice || 0;
-    const isNearAthCheck = highPriceVal ? (ipo.currentPrice >= highPriceVal * 0.95) : false;
+    const curPrice = d.currentPrice || d.price || 0;
+    const tp = d.calibratedSifuTargetPrice || d.sifuTargetPrice || d.avgTP || 0;
+    const highPrice = d.highPrice || 0;
+    const ipoPrice = d.price || 0;
     
-    if (!isMomentumRebound) {
-        if (ipo.listingDate) {
-            const listDate = new Date(ipo.listingDate);
-            const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
-            isRecent = ageInDays <= 365;
-        } else {
-            isRecent = ipo.year >= 2024;
-        }
-        if (!isRecent && !isSifuPick && !isNearAthCheck) return false;
-    }
+    if (curPrice <= 0 || tp <= 0) return false;
 
-    const highPrice = ipo.highPrice || 0;
-    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
-    const isRecentListing = ipo.year >= 2025;
-    const isDowntrend = (highPrice && isRecentListing) ? (ipo.currentPrice <= highPrice * 0.75) : false;
+    const upside = ((tp - curPrice) / curPrice) * 100;
+    const isRecentListing = d.year >= 2025;
+    const isDowntrend = (highPrice && isRecentListing) ? (curPrice <= highPrice * 0.75) : false;
 
-    if (ipo.outlier && !isSifuPick && !isMomentumRebound) {
+    // Outliers check
+    if (d.outlier && !isSifuPick && !isMomentumRebound) {
         if (upside < 10.0) return false;
     }
-    if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
-    if (ipo.currentPrice >= 3.00) return false;
-
-    const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-
-    if (!isActualAth && !isMomentumRebound && !isSifuPick && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
-
-    const ipoPrice = ipo.price || 0;
-    const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
-
-    // Above IPO price check:
+    
+    // In Buy Zone? (Exempt if it is a major momentum rebound or Sifu pick!)
+    if (curPrice > tp && !isMomentumRebound && !isSifuPick) return false;
+    
+    // Above IPO price?
     // - For recent listings (year >= 2025), always filter out if below IPO (unless momentum rebound).
     // - For older listings, exempt from IPO floor if they are Sifu picks.
-    if (ipo.currentPrice < ipoPrice && !isMomentumRebound) {
+    if (curPrice < ipoPrice && !isMomentumRebound) {
         if (isRecentListing || !isSifuPick) return false;
     }
-
-    if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
-
+    
+    // Anti-Fake TP Placeholder
+    if (highPrice > 0 && Math.abs(tp - highPrice) < 0.005 && !isMomentumRebound && !isSifuPick) return false;
+    
+    // Minimum Upside (Exempt if it is a momentum rebound, near ATH, or Sifu pick!)
+    const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+    if (upside < 10.0 && !isActualAth && !isMomentumRebound && !isSifuPick) return false;
+    
+    // Anti-Stagnant (Exempt if it is a momentum rebound!)
+    const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+    if (d.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
+    
+    // Downtrend Safety Check (Exempt if it is a momentum rebound!)
     if (isDowntrend && !isMomentumRebound) return false;
-
-    const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-    const isNearAth = highPrice > 0 && ipo.currentPrice >= (highPrice * 0.95);
-
-    return isAth || isNearAth || isMomentumRebound;
-}).map(ipo => {
-    const highPrice = ipo.highPrice || 0;
-    const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0
-        ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
-        : null;
-
-    const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
-
-    let status = '📈 NEAR ATH (Consolidation)';
-    if (isAth) {
-        status = '🔥 BREAKOUT ATH';
-    } else if (isMomentumRebound) {
-        status = `⚡ MOMENTUM REBOUND (+${ipo.dailyChange.toFixed(1)}%)`;
+    
+    let isRecent = false;
+    const isNearAth = highPrice ? (curPrice >= highPrice * 0.95) : false;
+    if (d.listingDate) {
+        const listDate = new Date(d.listingDate);
+        const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+        isRecent = ageInDays <= 365;
+    } else {
+        isRecent = d.year >= 2024;
     }
-
-    const grade = getIpoGrade(ipo).grade;
-
-    return {
-        symbol: ipo.symbol || ipo.id.toUpperCase(),
-        companyName: ipo.companyName,
-        currentPrice: `RM ${ipo.currentPrice.toFixed(3)}`,
-        highPrice: `RM ${highPrice.toFixed(3)}`,
-        targetPrice: targetPrice > 0 ? `RM ${targetPrice.toFixed(2)}` : 'N/A',
-        upside: upside ? `${upside.toFixed(1)}%` : 'N/A',
-        status: status,
-        grade: `Gred ${grade}`
-    };
+    
+    return isRecent || isSifuPick || isNearAth || isMomentumRebound;
 });
 
-if (results.length === 0) {
-    console.log('❌ Tiada kaunter yang memenuhi kriteria pada masa ini.');
-} else {
-    console.table(results);
-}
-console.log('========================================================================\n');
+const swingPicks = [];
+const scalpPicks = [];
+
+activeStocks.forEach(d => {
+    const curPrice = d.currentPrice || d.price || 0;
+    const tp = d.calibratedSifuTargetPrice || d.sifuTargetPrice || d.avgTP || 0;
+    const highPrice = d.highPrice || 0;
+    const dailyChange = d.dailyChange || 0;
+    
+    const upside = ((tp - curPrice) / curPrice) * 100;
+    
+    let trend = 'Uptrend';
+    if (highPrice > 0 && curPrice <= highPrice * 0.90) {
+        trend = 'Pullback (Healthy)';
+    } else if (dailyChange >= 10.0) {
+        trend = 'Momentum Rebound';
+    } else if (dailyChange >= 3.0) {
+        trend = 'Breakout';
+    } else if (Math.abs(dailyChange) < 1.0) {
+        trend = 'Consolidating';
+    }
+    
+    const grade = getIpoGrade(d).grade;
+    
+    const stockInfo = {
+        symbol: d.symbol || d.id.toUpperCase(),
+        companyName: d.companyName,
+        grade: grade,
+        currentPrice: curPrice,
+        sifuTP: tp,
+        upside: parseFloat(upside.toFixed(1)),
+        trend: trend,
+        year: d.year,
+        os: d.os || 'N/A'
+    };
+
+    const isAthOrNear = highPrice ? (curPrice >= highPrice * 0.95) : false;
+    const isScalpTrend = isAthOrNear || dailyChange >= 3.0;
+    
+    const strategy = d.strategy || (isScalpTrend ? 'Scalp' : 'Swing');
+    
+    if (strategy.toLowerCase() === 'scalp') {
+        scalpPicks.push(stockInfo);
+    } else {
+        swingPicks.push(stockInfo);
+    }
+});
+
+swingPicks.sort((a, b) => b.upside - a.upside);
+scalpPicks.sort((a, b) => b.upside - a.upside);
+
+console.log('--- ACTIVE SWING PICKS V2 ---');
+swingPicks.forEach(p => {
+    console.log(`SWING|${p.symbol}|${p.companyName}|${p.grade}|RM ${p.currentPrice.toFixed(3)}|RM ${p.sifuTP.toFixed(2)}|Upside: ${p.upside}%|${p.trend}|${p.year}|${p.os}x`);
+});
+
+console.log('\n--- ACTIVE SCALP PICKS V2 ---');
+scalpPicks.forEach(p => {
+    console.log(`SCALP|${p.symbol}|${p.companyName}|${p.grade}|RM ${p.currentPrice.toFixed(3)}|RM ${p.sifuTP.toFixed(2)}|Upside: ${p.upside}%|${p.trend}|${p.year}|${p.os}x`);
+});

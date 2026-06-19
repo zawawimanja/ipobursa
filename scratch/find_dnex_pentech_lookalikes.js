@@ -7,10 +7,8 @@ const db = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 const sifuPortfolio = [
     'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
     'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-    'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
+    'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'ogx'
 ];
-
-const explicitSkips = ['wentel-engineering', 'wentel', 'agmo'];
 
 function floatEquals(a, b, tolerance = 0.005) {
     return Math.abs(a - b) < tolerance;
@@ -23,7 +21,6 @@ function getIpoGrade(ipo) {
     const os = ipo.os || 0;
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0;
     
-    // Respect manual predicted grade if pre-listing
     if (ipo.predictedGrade && effectiveStage < 4) {
         return { grade: ipo.predictedGrade };
     }
@@ -131,112 +128,68 @@ function getIpoGrade(ipo) {
     return { grade: 'Unrated' };
 }
 
-console.log('========================================================================');
-console.log('🔍 SCANNING IPO STOCKS FOR DYNAMIC BREAKOUTS (PRICE < RM 3.00)');
-console.log('========================================================================');
+const lookalikes = [];
 
-const results = db.filter(ipo => {
+db.forEach(ipo => {
+    const isMatch = ipo.shariah === true && 
+        (ipo.stage === 5 || ipo.status === 'Listed') &&
+        ipo.currentPrice > 0 &&
+        ipo.currentPrice < 3.00;
+    
+    if (!isMatch) return;
+
+    const high = ipo.highPrice || 0;
+    if (high === 0) return;
+
+    const current = ipo.currentPrice;
+    const distToAth = ((high - current) / current) * 100;
+    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+    
+    // Allow if within 5% of ATH OR if it is a major momentum rebound (>10% daily change)
+    if (distToAth > 5.0 && !isMomentumRebound) return;
+
     const idLower = ipo.id.toLowerCase();
     const symbolLower = (ipo.symbol || '').toLowerCase();
     const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
-    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
-
     const grade = getIpoGrade(ipo).grade;
 
-    // 1. Only Grade A, B or Sifu Picks or Momentum Rebound
-    if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
+    if (grade !== 'A' && grade !== 'B' && !isSifuPick) return;
+    if (idLower === 'adnex' || idLower === 'dnex') return;
 
-    // 2. Filter listed and Syariah-compliant stocks
-    const isMatch = ipo.shariah === true && 
-        (ipo.stage === 5 || ipo.status === 'Listed') &&
-        ipo.currentPrice > 0;
+    let setupType = '';
+    let description = '';
     
-    if (!isMatch) return false;
-
-    // 3. Age & Trend Filter
-    let isRecent = false;
-    const highPriceVal = ipo.highPrice || 0;
-    const isNearAthCheck = highPriceVal ? (ipo.currentPrice >= highPriceVal * 0.95) : false;
-    
-    if (!isMomentumRebound) {
-        if (ipo.listingDate) {
-            const listDate = new Date(ipo.listingDate);
-            const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
-            isRecent = ageInDays <= 365;
-        } else {
-            isRecent = ipo.year >= 2024;
-        }
-        if (!isRecent && !isSifuPick && !isNearAthCheck) return false;
+    if (isMomentumRebound && distToAth > 5.0) {
+        setupType = `⚡ MOMENTUM REBOUND (+${ipo.dailyChange}%)`;
+        description = `Kaunter sedang membuat lantunan kuat dari paras bawah (Deep Pullback). Jarak ke ATH masih jauh (${distToAth.toFixed(1)}%), peluang upside besar.`;
+    } else if (distToAth === 0) {
+        setupType = '🚀 BREAKOUT ATH (Hari Pertama)';
+        description = 'Harga ditutup tepat pada paras tertinggi sejarah. Momentum belian sangat kuat, sedia untuk meletup.';
+    } else if (distToAth <= 1.5) {
+        setupType = '🔥 TESTING RESISTANCE (Sangat Hampir)';
+        description = 'Hanya kurang dari 1.5% di bawah ATH. Sedang menguji pintu breakout, boleh mula bertindak.';
+    } else {
+        setupType = '📈 CONSOLIDATION (Pembinaan Tapak)';
+        description = 'Sedang berehat dan membina base yang kukuh 1.5% - 5% di bawah ATH sebelum percubaan memecah keluar.';
     }
 
-    const highPrice = ipo.highPrice || 0;
-    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
-    const isRecentListing = ipo.year >= 2025;
-    const isDowntrend = (highPrice && isRecentListing) ? (ipo.currentPrice <= highPrice * 0.75) : false;
-
-    if (ipo.outlier && !isSifuPick && !isMomentumRebound) {
-        if (upside < 10.0) return false;
-    }
-    if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
-    if (ipo.currentPrice >= 3.00) return false;
-
-    const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-
-    if (!isActualAth && !isMomentumRebound && !isSifuPick && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
-
-    const ipoPrice = ipo.price || 0;
-    const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
-
-    // Above IPO price check:
-    // - For recent listings (year >= 2025), always filter out if below IPO (unless momentum rebound).
-    // - For older listings, exempt from IPO floor if they are Sifu picks.
-    if (ipo.currentPrice < ipoPrice && !isMomentumRebound) {
-        if (isRecentListing || !isSifuPick) return false;
-    }
-
-    if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
-
-    if (isDowntrend && !isMomentumRebound) return false;
-
-    const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-    const isNearAth = highPrice > 0 && ipo.currentPrice >= (highPrice * 0.95);
-
-    return isAth || isNearAth || isMomentumRebound;
-}).map(ipo => {
-    const highPrice = ipo.highPrice || 0;
-    const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0
-        ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
-        : null;
-
-    const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
-
-    let status = '📈 NEAR ATH (Consolidation)';
-    if (isAth) {
-        status = '🔥 BREAKOUT ATH';
-    } else if (isMomentumRebound) {
-        status = `⚡ MOMENTUM REBOUND (+${ipo.dailyChange.toFixed(1)}%)`;
-    }
-
-    const grade = getIpoGrade(ipo).grade;
-
-    return {
-        symbol: ipo.symbol || ipo.id.toUpperCase(),
-        companyName: ipo.companyName,
-        currentPrice: `RM ${ipo.currentPrice.toFixed(3)}`,
-        highPrice: `RM ${highPrice.toFixed(3)}`,
-        targetPrice: targetPrice > 0 ? `RM ${targetPrice.toFixed(2)}` : 'N/A',
-        upside: upside ? `${upside.toFixed(1)}%` : 'N/A',
-        status: status,
-        grade: `Gred ${grade}`
-    };
+    lookalikes.push({
+        id: ipo.id,
+        symbol: ipo.symbol || idLower.toUpperCase(),
+        company: ipo.companyName,
+        currentPrice: current,
+        highPrice: high,
+        distToAth: distToAth,
+        grade: grade,
+        setupType: setupType,
+        description: description,
+        year: ipo.year,
+        os: ipo.os || 'N/A',
+        ib: ipo.ib || 'N/A',
+        dailyChange: ipo.dailyChange || 0
+    });
 });
 
-if (results.length === 0) {
-    console.log('❌ Tiada kaunter yang memenuhi kriteria pada masa ini.');
-} else {
-    console.table(results);
-}
-console.log('========================================================================\n');
+lookalikes.sort((a, b) => a.distToAth - b.distToAth);
+
+console.log(JSON.stringify(lookalikes, null, 2));

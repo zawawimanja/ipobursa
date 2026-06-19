@@ -635,10 +635,10 @@
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
             'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'ogx'
+            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
         ];
 
-        const explicitSkips = ['adnex', 'mmcs', 'agmo', 'wentel-engineering', 'wentel'];
+        const explicitSkips = ['agmo', 'wentel-engineering', 'wentel'];
         let activeViewMode = 'groups';
 
         function getOpenPerformance(ipo) {
@@ -841,10 +841,14 @@
                 const grade = getIpoGrade(ipo).grade;
                 if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
 
+                const curPrice = ipo.currentPrice || 0;
+                const ipoPrice = ipo.price || 0;
+                const passesIpoPriceCheck = curPrice >= ipoPrice || isMomentumRebound;
+
                 const isMatch = ipo.shariah === true && 
                     (ipo.stage === 5 || ipo.status === 'Listed') &&
-                    ipo.currentPrice > 0 && 
-                    (ipo.currentPrice >= ipo.price || isMomentumRebound);
+                    curPrice > 0 && 
+                    passesIpoPriceCheck;
                 
                 if (!isMatch) return false;
 
@@ -861,15 +865,22 @@
                     }
                 }
 
-                // Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio OR momentum rebound (+10%)
-                if (ipo.outlier && !isSifuPick && !isMomentumRebound) return false;
+                const highPrice = ipo.highPrice || 0;
+                const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
+                const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
+
+                // For new IPOs (listed 2025 or 2026), check if they are in a deep downtrend (down >= 25% from debut/historical peak)
+                const isRecentListing = ipo.year >= 2025;
+                const isDowntrend = (highPrice && isRecentListing) ? (ipo.currentPrice <= highPrice * 0.75) : false;
+
+                // Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio OR momentum rebound (+10%) OR have corrected with decent upside (> 10%)
+                if (ipo.outlier && !isSifuPick && !isMomentumRebound) {
+                    if (upside < 10.0) return false;
+                }
 
                 // Explicit skips
                 if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
 
-                const highPrice = ipo.highPrice || 0;
-                const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
-                
                 // Breakout Check: If the stock is making a new ATH (or within 0.5 sen of it), it is a momentum play
                 const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
 
@@ -878,30 +889,25 @@
 
                 // 1. Minimum Upside Rule & Pullback Accumulation Rule:
                 if (targetPrice > 0) {
-                    const upside = ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100;
-                    const highPriceVal = ipo.highPrice || 0;
-                    const isDowntrendVal = highPriceVal ? (ipo.currentPrice <= highPriceVal * 0.75) : false;
-                    
                     if (upside < 10.0 && !isActualAth && !isMomentumRebound) {
                         // If it has low/negative upside and is not at ATH, it can ONLY be included if it is in pullback accumulation (not in a downtrend)
-                        if (isDowntrendVal) return false;
+                        if (isDowntrend) return false;
                     }
                 } else {
                     return false;
                 }
 
                 // 2. Anti-Stagnant (Sikat/Dead) Rule:
-                const ipoPrice = ipo.price || 0;
-                const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+                const ipoPriceVal = ipo.price || 0;
+                const highAboveIpo = highPrice ? ((highPrice - ipoPriceVal) / ipoPriceVal) * 100 : 0;
                 if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
 
-                // 3. Downtrend Safety Check: completely exclude any stock in a downtrend (down >= 25% from ATH) unless it has a momentum rebound (+10% gain)
-                const isDowntrend = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+                // 3. Downtrend Safety Check
                 if (isDowntrend && !isMomentumRebound) return false;
 
                 return true;
             }).map(ipo => {
-                const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
+                const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
                 const upside = targetPrice > 0
                     ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100
                     : null;
@@ -974,8 +980,8 @@
                 // Trend badge
                 let trendText = 'Uptrend';
                 let trendClass = 'trend-uptrend';
-                const highPrice = ipo.highPrice || 0;
-                const isDowntrend = ipo.currentPrice < ipo.price || (highPrice > 0 && ipo.currentPrice <= highPrice * 0.75);
+                const isRecentListing = ipo.year >= 2025;
+                const isDowntrend = ipo.currentPrice < ipo.price || (highPrice > 0 && isRecentListing && ipo.currentPrice <= highPrice * 0.75);
                 
                 if (isDowntrend) {
                     trendText = 'Bearish/Downtrend';
@@ -1003,7 +1009,8 @@
                 
                 let strategy = 'Swing';
                 const hasIpoUpside = ipo.targetPrice > 0 ? (((ipo.targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100) : 0;
-                const isDowntrendVal = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
+                const isRecentListingVal = ipo.year >= 2025;
+                const isDowntrendVal = (highPrice && isRecentListingVal) ? (ipo.currentPrice <= highPrice * 0.75) : false;
                 const isPullback = (hasIpoUpside < 10.0 && !isAthOrNear && !isDowntrendVal);
                 
                 if (isPullback) {
