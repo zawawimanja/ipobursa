@@ -723,7 +723,7 @@ function getIpoGrade(ipo) {
     const isFlat = ipo.openPrice && ipo.price && floatEquals(ipo.openPrice, ipo.price);
     const isHighPE = pe > 18.0;
     const isAttractivePE = pe > 0 && pe < 12.0;
-    const isRed = perf.includes('-');
+    const isRed = (ipo.openPrice && ipo.price) ? (ipo.openPrice < ipo.price) : false;
 
     const isMainMarket = ipo.market && ipo.market.toLowerCase().includes('main');
     const isAceMarket = !isMainMarket;
@@ -822,18 +822,6 @@ function getIpoGrade(ipo) {
     }
 
     if (isAceMarket) {
-        // Downgrade if the stock is currently trading below its IPO price (negative return/underperforming)
-        if (effectiveStage === 5) {
-            const perfVal = getOpenPerformance(ipo) || 0;
-            const isRedPerf = perfVal < 0 || (ipo.currentPrice && ipo.price && ipo.currentPrice < ipo.price) || (ipo.performance && ipo.performance.includes('-'));
-            if (isRedPerf) {
-                const holdPerf = (ipo.currentPrice && ipo.price) ? ((ipo.currentPrice - ipo.price) / ipo.price) * 100 : perfVal;
-                return { 
-                    grade: 'C', 
-                    reason: `<b>Sentiment Risk:</b><br>📉 Underperforming IPO price (${holdPerf.toFixed(1)}%)` 
-                };
-            }
-        }
 
         const reasonParts = [];
         if (os >= 50) reasonParts.push(`🚀 Exceptional Demand (${os}x)`);
@@ -845,6 +833,7 @@ function getIpoGrade(ipo) {
         if (isExpansionFund) reasonParts.push(`📈 Expansion Fund Use`);
         if (isStrongGreen) reasonParts.push(`🚀 Strong Opening`);
 
+        if (os >= 50 && isStrongGreen) return { grade: 'A', reason: '<b>Grade A (Exceptional Demand):</b><br>' + reasonParts.join('<br>') };
         if (isHero && isStrongGreen && os >= 3) return { grade: 'B', reason: reasonParts.join('<br>') };
         
         if (effectiveStage === 5 && !hasOsData && isStrongGreen) {

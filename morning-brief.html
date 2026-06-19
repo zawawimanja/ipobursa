@@ -664,9 +664,14 @@ No rating"></textarea>
         let verdict = 'skip';
         let reason = '';
 
+        const isMomentumRebound = typeof stock.dailyChange === 'number' && stock.dailyChange >= 10.0;
+
         if (!shariah) {
             verdict = 'skip';
             reason = 'Bukan Shariah';
+        } else if (isMomentumRebound) {
+            verdict = 'buy';
+            reason = `Lonjakan Momentum (Reversal +${stock.dailyChange.toFixed(1)}% Harian)`;
         } else if (grade === 'C' && !isSifuPick) {
             verdict = 'skip';
             reason = 'Grade C — AVOID';
@@ -708,9 +713,9 @@ No rating"></textarea>
 
         const isAthOrNear = highPrice ? (curPrice >= highPrice * 0.95) : false;
         let strategy = 'Swing';
-        if (grade === 'C') {
+        if (grade === 'C' && !isMomentumRebound) {
             strategy = 'Skip';
-        } else if (isAthOrNear || (stock.dailyChange !== null && stock.dailyChange >= 3.0) || stage === 4) {
+        } else if (isAthOrNear || (stock.dailyChange !== null && stock.dailyChange >= 3.0) || stage === 4 || isMomentumRebound) {
             strategy = 'Scalp';
         }
 
@@ -890,12 +895,13 @@ No rating"></textarea>
             if (d.stage !== 5) return false; // Must be listed
             
             const isSifuPick = sifuPortfolioSet.has(d.id.toLowerCase()) || sifuPortfolioSet.has((d.symbol || '').toLowerCase());
+            const isMomentumRebound = typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
             const isHighGrade = d.predictedGrade === 'A' || d.predictedGrade === 'B';
             
-            if (!isSifuPick && !isHighGrade) return false;
+            if (!isSifuPick && !isHighGrade && !isMomentumRebound) return false;
             
-            // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%)
-            if (!isSifuPick) {
+            // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%) OR momentum rebound (+10% gain)
+            if (!isSifuPick && !isMomentumRebound) {
                 const curPriceVal = d.currentPrice || d.price || 0;
                 const highPriceVal = d.highPrice || 0;
                 const isNearAth = highPriceVal ? (curPriceVal >= highPriceVal * 0.95) : false;
@@ -913,9 +919,9 @@ No rating"></textarea>
             const tp = d.sifuTargetPrice || d.avgTP || 0;
             const highPrice = d.highPrice || 0;
             
-            // Downtrend Filter: skip if down >25% from peak (lacks momentum)
+            // Downtrend Filter: skip if down >25% from peak (lacks momentum) unless it has momentum rebound
             const isDowntrend = highPrice ? (curPrice <= highPrice * 0.75) : false;
-            if (isDowntrend) return false;
+            if (isDowntrend && !isMomentumRebound) return false;
             
             return curPrice > 0 && tp > 0 && curPrice <= tp;
         });

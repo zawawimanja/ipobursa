@@ -25,29 +25,30 @@ const athPicks = [];
 data.forEach(d => {
     if (d.stage !== 5) return;
     if (!d.shariah) return;
-    if (d.predictedGrade !== 'A' && d.predictedGrade !== 'B') return;
     
     const idLower = d.id.toLowerCase();
     const symbolLower = (d.symbol || '').toLowerCase();
     const isSifuPick = sifuPortfolioSet.has(idLower) || sifuPortfolioSet.has(symbolLower);
-    
+    const isMomentumRebound = typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
+
+    if (d.predictedGrade !== 'A' && d.predictedGrade !== 'B' && !isSifuPick && !isMomentumRebound) return;
     if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return;
-    if (d.outlier && !isSifuPick) return;
+    if (d.outlier && !isSifuPick && !isMomentumRebound) return;
     
     const curPrice = d.currentPrice || d.price || 0;
     const highPrice = d.highPrice || 0;
     const ipoPrice = d.price || 0;
     const dailyChange = d.dailyChange || 0;
     
-    if (curPrice <= 0 || highPrice <= 0) return;
+    if (curPrice <= 0) return;
     
-    // Quality check: must not be below IPO price
-    if (curPrice < ipoPrice) return;
+    // Quality check: must not be below IPO price (unless momentum rebound)
+    if (curPrice < ipoPrice && !isMomentumRebound) return;
     
-    const distanceToHigh = ((highPrice - curPrice) / highPrice) * 100;
+    const distanceToHigh = highPrice > 0 ? (((highPrice - curPrice) / highPrice) * 100) : 0;
     
-    // Within 5% of high? (meaning it's either breaking out or extremely close)
-    if (curPrice >= highPrice * 0.95) {
+    // Within 5% of high? (meaning it's either breaking out or extremely close) OR is momentum rebound
+    if ((highPrice > 0 && curPrice >= highPrice * 0.95) || isMomentumRebound) {
         let isRecent = false;
         if (d.listingDate) {
             const listDate = new Date(d.listingDate);
@@ -57,11 +58,11 @@ data.forEach(d => {
             isRecent = d.year >= 2024;
         }
         
-        if (isRecent || isSifuPick) {
+        if (isRecent || isSifuPick || isMomentumRebound) {
             athPicks.push({
                 symbol: d.symbol || d.id.toUpperCase(),
                 companyName: d.companyName,
-                grade: d.predictedGrade,
+                grade: d.predictedGrade || 'N/A',
                 currentPrice: curPrice,
                 highPrice: highPrice,
                 distance: parseFloat(distanceToHigh.toFixed(1)),

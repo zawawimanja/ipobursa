@@ -26,9 +26,10 @@ const results = db.filter(ipo => {
     const idLower = ipo.id.toLowerCase();
     const symbolLower = (ipo.symbol || '').toLowerCase();
     const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
+    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
 
-    // 1. Only Grade A, B or Sifu Picks
-    if (ipo.predictedGrade !== 'A' && ipo.predictedGrade !== 'B' && !isSifuPick) return false;
+    // 1. Only Grade A, B or Sifu Picks or Momentum Rebound
+    if (ipo.predictedGrade !== 'A' && ipo.predictedGrade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
 
     // 2. Filter listed and Syariah-compliant stocks
     const isMatch = ipo.shariah === true && 
@@ -37,22 +38,24 @@ const results = db.filter(ipo => {
     
     if (!isMatch) return false;
 
-    // 3. Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%)
+    // 3. Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%) OR momentum rebound
     let isRecent = false;
     const highPriceVal = ipo.highPrice || 0;
     const isNearAthCheck = highPriceVal ? (ipo.currentPrice >= highPriceVal * 0.95) : false;
     
-    if (ipo.listingDate) {
-        const listDate = new Date(ipo.listingDate);
-        const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
-        isRecent = ageInDays <= 365;
-    } else {
-        isRecent = ipo.year >= 2024;
+    if (!isMomentumRebound) {
+        if (ipo.listingDate) {
+            const listDate = new Date(ipo.listingDate);
+            const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+            isRecent = ageInDays <= 365;
+        } else {
+            isRecent = ipo.year >= 2024;
+        }
+        if (!isRecent && !isSifuPick && !isNearAthCheck) return false;
     }
-    if (!isRecent && !isSifuPick && !isNearAthCheck) return false;
 
-    // 4. Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio
-    if (ipo.outlier && !isSifuPick) return false;
+    // 4. Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio OR momentum rebound
+    if (ipo.outlier && !isSifuPick && !isMomentumRebound) return false;
 
     // 5. Exclude explicit skips
     if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
@@ -64,23 +67,23 @@ const results = db.filter(ipo => {
     const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
     const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
 
-    // 7. Anti-Fake TP Placeholder Filter (unless in active breakout)
-    if (!isActualAth && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
+    // 7. Anti-Fake TP Placeholder Filter (unless in active breakout or momentum rebound)
+    if (!isActualAth && !isMomentumRebound && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
 
     // 8. Anti-Stagnant (Sikat/Dead) Rule:
     const ipoPrice = ipo.price || 0;
     const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
-    if (ipo.year < 2026 && highAboveIpo < 8.0) return false;
+    if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
 
     // 9. Downtrend Safety Check
     const isDowntrend = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
-    if (isDowntrend) return false;
+    if (isDowntrend && !isMomentumRebound) return false;
 
-    // Check if hitting ATH (or within 0.5 sen) or near breakout (within 5% of ATH)
+    // Check if hitting ATH (or within 0.5 sen) or near breakout (within 5% of ATH) or momentum rebound (+10% gain)
     const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
     const isNearAth = highPrice > 0 && ipo.currentPrice >= (highPrice * 0.95);
 
-    return isAth || isNearAth;
+    return isAth || isNearAth || isMomentumRebound;
 }).map(ipo => {
     const highPrice = ipo.highPrice || 0;
     const targetPrice = ipo.sifuTargetPrice || ipo.avgTP || 0;
@@ -89,6 +92,14 @@ const results = db.filter(ipo => {
         : null;
 
     const isAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
+    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+
+    let status = '📈 NEAR ATH (Consolidation)';
+    if (isAth) {
+        status = '🔥 BREAKOUT ATH';
+    } else if (isMomentumRebound) {
+        status = `⚡ MOMENTUM REBOUND (+${ipo.dailyChange.toFixed(1)}%)`;
+    }
 
     return {
         symbol: ipo.symbol || ipo.id.toUpperCase(),
@@ -97,7 +108,7 @@ const results = db.filter(ipo => {
         highPrice: `RM ${highPrice.toFixed(3)}`,
         targetPrice: targetPrice > 0 ? `RM ${targetPrice.toFixed(2)}` : 'N/A',
         upside: upside ? `${upside.toFixed(1)}%` : 'N/A',
-        status: isAth ? '🔥 BREAKOUT ATH' : '📈 NEAR ATH (Consolidation)',
+        status: status,
         grade: `Gred ${ipo.predictedGrade || 'N/A'}`
     };
 });

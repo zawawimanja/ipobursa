@@ -42,7 +42,7 @@ function getIpoGrade(ipo) {
     const isFlat = ipo.openPrice && ipo.price && floatEquals(ipo.openPrice, ipo.price);
     const isHighPE = pe > 18.0;
     const isAttractivePE = pe > 0 && pe < 12.0;
-    const isRed = perf.includes('-');
+    const isRed = (ipo.openPrice && ipo.price) ? (ipo.openPrice < ipo.price) : false;
 
     if (ipo.stage < 4 && os === 0) return { grade: 'Pending' };
     
@@ -83,6 +83,7 @@ function getIpoGrade(ipo) {
     }
 
     if (ipo.market === 'ACE Market') {
+        if (os >= 50 && isStrongGreen) return { grade: 'A' };
         if (isHero && isStrongGreen && os >= 3) return { grade: 'B' };
         if (ipo.stage === 4 && !hasOsData && isStrongGreen) {
             if ((isMomentum || isTopTier || isHero) && !isHighPE) return { grade: 'B' };
