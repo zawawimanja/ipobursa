@@ -718,9 +718,18 @@
                 
                 if (!isMatch) return false;
 
-                // Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
-                const isRecent = ipo.year >= 2024;
-                if (!isRecent && !isSifuPick) return false;
+                // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%)
+                if (!isSifuPick) {
+                    const isNearAth = ipo.highPrice ? (ipo.currentPrice >= ipo.highPrice * 0.95) : false;
+                    if (ipo.listingDate) {
+                        const listDate = new Date(ipo.listingDate);
+                        const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+                        if (ageInDays > 365 && !isNearAth) return false;
+                    } else {
+                        const isRecent = ipo.year >= 2024;
+                        if (!isRecent && !isNearAth) return false;
+                    }
+                }
 
                 // Exclude outlier stocks unless they are explicitly handpicked in Sifu's Portfolio
                 if (ipo.outlier && !isSifuPick) return false;
@@ -756,9 +765,9 @@
                 const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
                 if (ipo.year < 2026 && highAboveIpo < 8.0) return false;
 
-                // 3. Downtrend Safety Check: completely exclude non-sifu recent IPOs if they are in a downtrend
+                // 3. Downtrend Safety Check: completely exclude any stock in a downtrend (down >= 25% from ATH)
                 const isDowntrend = highPrice ? (ipo.currentPrice <= highPrice * 0.75) : false;
-                if (!isSifuPick && isRecent && isDowntrend) return false;
+                if (isDowntrend) return false;
 
                 return true;
             }).map(ipo => {

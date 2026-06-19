@@ -47,7 +47,7 @@ const ipoDataset = [
     { name: "KTI Landmark", symbol: "KTI", ipo: 0.300, cincai: 0.360, ath: 0.580, sector: "property", market: "ace", os: 8.73 },
     { name: "PMW International", symbol: "PMW", ipo: 0.340, cincai: 0.490, ath: 0.355, sector: "industrial", market: "ace", os: 9.8 },
     { name: "Sumi", symbol: "SUMI", ipo: 0.240, cincai: 0.250, ath: 0.180, sector: "industrial", market: "ace", os: 20 },
-    { name: "Signature Alliance", symbol: "SAG", ipo: 0.620, cincai: 1.290, ath: 0.920, sector: "industrial", market: "ace", os: 20 },
+    { name: "Signature Alliance", symbol: "SAG", ipo: 0.620, cincai: 0.880, ath: 0.920, sector: "industrial", market: "ace", os: 20 },
     { name: "Keeming", symbol: "KEEMING", ipo: 0.380, cincai: 0.680, ath: 1.250, sector: "industrial", market: "ace", os: 85.4 },
     { name: "CBH Engineering", symbol: "CBHB", ipo: 0.280, cincai: 0.380, ath: 0.700, sector: "tech", market: "ace", os: 20 },
     { name: "Insights Analytics", symbol: "IAB", ipo: 0.360, cincai: 0.710, ath: 1.310, sector: "tech", market: "ace", os: 11.5 },

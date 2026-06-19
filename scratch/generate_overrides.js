@@ -25,7 +25,7 @@ const corrections = {
     'KEYFIELD': 2.14,
     'WINSTAR': 0.51,
     'SUPREME': 0.29,
-    'SAG': 1.29,
+    'SAG': 0.88,
     'KEEMING': 0.68,
     'CBHB': 0.38,
     'IAB': 0.71,
@@ -75,7 +75,11 @@ data.forEach(ipo => {
     
     // Check if there is a Sifu TP correction
     if (corrections[sym] !== undefined) {
-        ipoOverride.sifuTargetPrice = corrections[sym];
+        if (sym === 'SAG') {
+            ipoOverride.avgTP = corrections[sym];
+        } else {
+            ipoOverride.sifuTargetPrice = corrections[sym];
+        }
         hasOverride = true;
     }
     

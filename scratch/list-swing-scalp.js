@@ -74,11 +74,20 @@ const activeStocks = data.filter(d => {
     // Downtrend Safety Check
     const isDowntrend = highPrice ? (curPrice <= highPrice * 0.75) : false;
     // Exempt Sifu portfolio picks from strict downtrend filter since they are fundamentally vetted
-    const isRecent = d.year >= 2024;
+    // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%)
+    let isRecent = false;
+    const isNearAth = highPrice ? (curPrice >= highPrice * 0.95) : false;
+    if (d.listingDate) {
+        const listDate = new Date(d.listingDate);
+        const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+        isRecent = ageInDays <= 365;
+    } else {
+        isRecent = d.year >= 2024;
+    }
     
-    if (!isSifuPick && isRecent && isDowntrend) return false;
+    if (isDowntrend) return false;
     
-    return isRecent || isSifuPick;
+    return isRecent || isSifuPick || isNearAth;
 });
 
 const swingPicks = [];

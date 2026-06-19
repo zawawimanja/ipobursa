@@ -74,7 +74,7 @@ const dataset = [
     { name: "KTI Landmark",          sym: "KTI",       ipo: 0.300, cincai: 0.360, ath: 0.580, sg: "trad_ace",       mkt: "ace",  os: 8.73,  gapDown: false },
     { name: "PMW International",     sym: "PMW",       ipo: 0.340, cincai: 0.490, ath: 0.355, sg: "trad_ace",       mkt: "ace",  os: 9.8,   gapDown: false },
     { name: "Sumi",                  sym: "SUMI",      ipo: 0.240, cincai: 0.250, ath: 0.180, sg: "trad_ace",       mkt: "ace",  os: 20,    gapDown: true  },
-    { name: "Signature Alliance",    sym: "SAG",       ipo: 0.620, cincai: 1.290, ath: 0.920, sg: "trad_ace",       mkt: "ace",  os: 20,    gapDown: false },
+    { name: "Signature Alliance",    sym: "SAG",       ipo: 0.620, cincai: 0.880, ath: 0.920, sg: "trad_ace",       mkt: "ace",  os: 20,    gapDown: false },
     { name: "Keeming",               sym: "KEEMING",   ipo: 0.380, cincai: 0.680, ath: 1.250, sg: "trad_ace",       mkt: "ace",  os: 85.4,  gapDown: false },
     { name: "CBH Engineering",       sym: "CBHB",      ipo: 0.280, cincai: 0.380, ath: 0.700, sg: "theme_tech",    mkt: "ace",  os: 20,    gapDown: false },
     { name: "Insights Analytics",    sym: "IAB",       ipo: 0.360, cincai: 0.710, ath: 1.310, sg: "theme_tech",    mkt: "ace",  os: 11.5,  gapDown: false },

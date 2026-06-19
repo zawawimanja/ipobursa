@@ -60,7 +60,7 @@
         "sifuTargetPrice": 0.41
     },
     "sag": {
-        "sifuTargetPrice": 1.29
+        "avgTP": 0.88
     },
     "supreme-consolidated": {
         "sifuTargetPrice": 0.29
@@ -106,17 +106,5 @@
     },
     "winstar": {
         "sifuTargetPrice": 0.51
-    },
-    "eckem-holdings-berhad": {
-        "predictedGrade": "D",
-        "analystInsight": "🚫 <b>TIDAK SESUAI — BUKAN SHARIAH</b><br>Eckem Holdings tidak patuh Syariah. Walaupun IB M&A Securities (rekod bagus) dan ada ekspansi kilang yang menarik, <b>skip terus bagi pelabur Shariah.</b> Untuk pelabur konvensional: Grade B kerana M&A IB + industrial expansion focus."
-    },
-    "aerodyne": {
-        "stage": 1,
-        "status": "Draft / Rumored"
-    },
-    "carsome": {
-        "stage": 1,
-        "status": "Draft / Rumored"
     }
 }

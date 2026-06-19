@@ -894,9 +894,20 @@ No rating"></textarea>
             
             if (!isSifuPick && !isHighGrade) return false;
             
-            // Age Filter: Only show recent IPOs (2024-2026) unless explicitly handpicked by Sifu
-            const isRecent = d.year >= 2024;
-            if (!isRecent && !isSifuPick) return false;
+            // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%)
+            if (!isSifuPick) {
+                const curPriceVal = d.currentPrice || d.price || 0;
+                const highPriceVal = d.highPrice || 0;
+                const isNearAth = highPriceVal ? (curPriceVal >= highPriceVal * 0.95) : false;
+                if (d.listingDate) {
+                    const listDate = new Date(d.listingDate);
+                    const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+                    if (ageInDays > 365 && !isNearAth) return false;
+                } else {
+                    const isRecent = d.year >= 2024;
+                    if (!isRecent && !isNearAth) return false;
+                }
+            }
             
             const curPrice = d.currentPrice || d.price || 0;
             const tp = d.sifuTargetPrice || d.avgTP || 0;

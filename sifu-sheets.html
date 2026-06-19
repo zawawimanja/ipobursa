@@ -2268,7 +2268,7 @@
                         target *= bestParams.highOsMult;
                     }
                     // Sector premium (applies when meaningful OS or Main Market)
-                    if (os >= 15 || market === 'main') {
+                    if (os >= 15 || market.includes('main')) {
                         if (sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor')) {
                             target *= bestParams.techMult;
                         } else if (sector.includes('energy') || sector.includes('utilities') || sector.includes('solar') || sector.includes('renewable')) {
@@ -2278,11 +2278,11 @@
                         }
                     }
                     // ACE traditional industrial discount
-                    if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market === 'ace') {
+                    if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market.includes('ace')) {
                         target *= (os < 15 ? bestParams.lowOsTradAceDiscount : bestParams.tradAceDiscount);
                     }
                     // Main market premium
-                    if (market === 'main' && os >= 10) {
+                    if (market.includes('main') && os >= 10) {
                         target *= bestParams.mainMktPremium;
                     }
                     return target;

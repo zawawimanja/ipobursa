@@ -37,7 +37,7 @@ const ipoDataset = [
     { name: 'HEALTH4',   sector: 'healthcare', market: 'ace',  os: 18,  ipoPrice: 0.45, atH: 0.55,  cincai: 0.51 },
 
     // INDUSTRIAL / KELULI / CONSTRUCTION (n=7) — avg bias +5 to +7% (CK terlalu tinggi)
-    { name: 'SAG',       sector: 'industrial', market: 'ace',  os: 8,   ipoPrice: 0.50, atH: 0.92,  cincai: 1.29 },
+    { name: 'SAG',       sector: 'industrial', market: 'ace',  os: 8,   ipoPrice: 0.50, atH: 0.92,  cincai: 0.88 },
     { name: 'SUMI',      sector: 'industrial', market: 'ace',  os: 6,   ipoPrice: 0.17, atH: 0.18,  cincai: 0.25 },
     { name: 'PMW',       sector: 'industrial', market: 'ace',  os: 12,  ipoPrice: 0.28, atH: 0.35,  cincai: 0.48 },
     { name: 'GEOHAN',    sector: 'industrial', market: 'ace',  os: 9,   ipoPrice: 0.35, atH: 0.45,  cincai: 0.62 },

@@ -18,7 +18,7 @@ try {
     eval('var stockProfiles = {' + stockProfilesMatch[1] + '};');
     
     const targets = data.filter(ipo => 
-        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad', 'solarvest'].includes(ipo.id)) && 
+        (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad', 'solarvest', 'sag'].includes(ipo.id)) && 
         ipo.shariah === true
     );
     
@@ -44,7 +44,7 @@ try {
         }
         
         // 2. High-Growth Sektor Theme calibration (only for active/visible stocks)
-        if (os >= 15 || market === 'main') {
+        if (os >= 15 || market.includes('main')) {
             if (sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor')) {
                 target *= bestParams.techMult;
             } else if (sector.includes('energy') || sector.includes('utilities') || sector.includes('solar') || sector.includes('renewable')) {
@@ -55,7 +55,7 @@ try {
         }
         
         // 3. Traditional small-cap discount
-        if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market === 'ace') {
+        if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market.includes('ace')) {
             if (os < 15) {
                 target *= bestParams.lowOsTradAceDiscount;
             } else {
@@ -64,7 +64,7 @@ try {
         }
         
         // 4. Main market premium
-        if (market === 'main' && os >= 10) {
+        if (market.includes('main') && os >= 10) {
             target *= bestParams.mainMktPremium;
         }
         

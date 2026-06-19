@@ -48,8 +48,14 @@ data.forEach(d => {
     
     // Within 5% of high? (meaning it's either breaking out or extremely close)
     if (curPrice >= highPrice * 0.95) {
-        const isRecent = d.year >= 2024;
-        const isSifuPick = sifuPortfolioSet.has(idLower) || sifuPortfolioSet.has(symbolLower);
+        let isRecent = false;
+        if (d.listingDate) {
+            const listDate = new Date(d.listingDate);
+            const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
+            isRecent = ageInDays <= 365;
+        } else {
+            isRecent = d.year >= 2024;
+        }
         
         if (isRecent || isSifuPick) {
             athPicks.push({

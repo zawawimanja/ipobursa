@@ -64,7 +64,7 @@ const realIpoData = [
     { name:'KTI Landmark',             sym:'KTI',       ipoP:0.300, cincai:0.360, atH:0.580, sector:'other',      market:'ace'  },
     { name:'PMW International',        sym:'PMW',       ipoP:0.340, cincai:0.490, atH:0.355, sector:'industrial', market:'ace'  },
     { name:'Sumi',                     sym:'SUMI',      ipoP:0.240, cincai:0.250, atH:0.180, sector:'industrial', market:'ace'  },
-    { name:'Signature Alliance',       sym:'SAG',       ipoP:0.620, cincai:1.290, atH:0.920, sector:'industrial', market:'ace'  },
+    { name:'Signature Alliance',       sym:'SAG',       ipoP:0.620, cincai:0.880, atH:0.920, sector:'industrial', market:'ace'  },
     { name:'Keeming',                  sym:'KEEMING',   ipoP:0.380, cincai:0.680, atH:1.250, sector:'other',      market:'ace'  },
     // Rank 51-59
     { name:'CBH Engineering',          sym:'CBHB',      ipoP:0.280, cincai:0.380, atH:0.700, sector:'tech',       market:'ace'  },
