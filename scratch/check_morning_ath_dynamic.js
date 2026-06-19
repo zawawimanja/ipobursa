@@ -183,17 +183,13 @@ const results = db.filter(ipo => {
 
     const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
 
-    if (!isActualAth && !isMomentumRebound && !isSifuPick && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
+    if (!isActualAth && !isMomentumRebound && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
 
     const ipoPrice = ipo.price || 0;
     const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
 
-    // Above IPO price check:
-    // - For recent listings (year >= 2025), always filter out if below IPO (unless momentum rebound).
-    // - For older listings, exempt from IPO floor if they are Sifu picks.
-    if (ipo.currentPrice < ipoPrice && !isMomentumRebound) {
-        if (isRecentListing || !isSifuPick) return false;
-    }
+    // Above IPO price check
+    if (ipo.currentPrice < ipoPrice && !isMomentumRebound) return false;
 
     if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
 

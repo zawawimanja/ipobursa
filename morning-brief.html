@@ -681,20 +681,20 @@ No rating"></textarea>
                 verdict = 'skip';
                 reason = 'Outlier Spekulatif — tiada dalam Portfolio Sifu';
             }
-        } else if (!isAth && !isSifuPick && highPrice > 0 && Math.abs(sifuTP - highPrice) < 0.005) {
+        } else if (!isAth && highPrice > 0 && Math.abs(sifuTP - highPrice) < 0.005) {
             verdict = 'skip';
             reason = 'Fake TP Placeholder (ATH Target)';
         } else if (year < 2026 && highAboveIpo < 8.0) {
             verdict = 'skip';
             reason = 'Stagnant (Sikat/Dead) — pergerakan harga mati';
+        } else if (curPrice < ipoPrice) {
+            verdict = 'skip';
+            reason = 'Di bawah Harga IPO (Broken IPO)';
         } else if (upside !== null && upside < 10.0 && !isAth && !isSifuPick) {
             verdict = 'skip';
             reason = `Upside terlalu rendah (${upside.toFixed(1)}% ke TP)`;
-        } else if (isDowntrend && !isSifuPick) {
-            verdict = 'skip';
-            reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
         } else if (isDowntrend) {
-            verdict = 'wait';
+            verdict = 'skip';
             reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
         } else if (isAth && (grade === 'A' || grade === 'B' || isSifuPick)) {
             verdict = 'buy';
@@ -928,12 +928,8 @@ No rating"></textarea>
             if (isDowntrend && !isMomentumRebound) return false;
             
             // Above IPO price check:
-            // - For recent listings (year >= 2025), always filter out if below IPO (unless momentum rebound).
-            // - For older listings, exempt from IPO floor if they are Sifu picks.
             const ipoPrice = d.price || 0;
-            if (curPrice < ipoPrice && !isMomentumRebound) {
-                if (isRecentListing || !isSifuPick) return false;
-            }
+            if (curPrice < ipoPrice && !isMomentumRebound) return false;
             
             return curPrice > 0 && tp > 0 && curPrice <= tp;
         });

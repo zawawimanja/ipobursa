@@ -167,14 +167,10 @@ const activeStocks = data.filter(d => {
     if (curPrice > tp && !isMomentumRebound && !isSifuPick) return false;
     
     // Above IPO price?
-    // - For recent listings (year >= 2025), always filter out if below IPO (unless momentum rebound).
-    // - For older listings, exempt from IPO floor if they are Sifu picks.
-    if (curPrice < ipoPrice && !isMomentumRebound) {
-        if (isRecentListing || !isSifuPick) return false;
-    }
+    if (curPrice < ipoPrice && !isMomentumRebound) return false;
     
     // Anti-Fake TP Placeholder
-    if (highPrice > 0 && Math.abs(tp - highPrice) < 0.005 && !isMomentumRebound && !isSifuPick) return false;
+    if (highPrice > 0 && Math.abs(tp - highPrice) < 0.005 && !isMomentumRebound) return false;
     
     // Minimum Upside (Exempt if it is a momentum rebound, near ATH, or Sifu pick!)
     const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
