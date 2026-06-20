@@ -603,6 +603,23 @@
                         Membaca rekod database sedia ada sahaja untuk menjana brief secara serta-merta tanpa sambungan internet.
                     </span>
                 </div>
+
+                <!-- Formula Pullback Terkini -->
+                <div
+                    style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 0.5rem; padding: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem;">
+                        <i data-lucide="filter" style="color: #10b981; width: 18px; height: 18px;"></i>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #10b981; font-weight: 700;">Formula Pullback Terkini (Isnin)</h4>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0 0 0.5rem 0;">
+                        Pengiraan automatik untuk menapis kaunter pullback/dip sihat dari peak:
+                    </p>
+                    <ul style="margin: 0 0 0.5rem 0; padding-left: 1.1rem; font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; list-style-type: disc;">
+                        <li style="margin-bottom: 0.25rem;"><b>IPO Baharu (2024+):</b> Maksimum jatuh 20% dari ATH. Jatuh >20% (cth: Keyfield) ditapis keluar.</li>
+                        <li style="margin-bottom: 0.25rem;"><b>Kaunter Lama (&lt;2024):</b> Tiada had kejatuhan ATH (skip limit) asalkan tersenarai dalam Sifu Portfolio (cth: DNEX, CNERGEN).</li>
+                        <li><b>Syarat Harga IPO:</b> Harga semasa wajib melebihi harga IPO asal (kecuali rebound harian >= 10%).</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -776,7 +793,7 @@
         const sifuPortfolio = [
             'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf',
             'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad',
-            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
+            'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx', 'adnex', 'dnex'
         ];
 
         const explicitSkips = ['agmo', 'wentel-engineering', 'wentel'];
@@ -994,6 +1011,14 @@
 
                     if (!isMatch) return false;
 
+                    const highPrice = ipo.highPrice || 0;
+                    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
+                    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
+                    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+                    const isUnderIpo = curPrice < ipoPrice;
+                    const isRbsRetest = distToAth > 1.0 && distToAth <= 5.0;
+                    const isDeepRebound = distToAth > 5.0 && typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+                    const isHealthyDip = curPrice >= highPrice * 0.80 && !isUnderIpo && upside >= 10.0 && distToAth > 5.0;
                     // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%) OR it's a momentum rebound (+10% gain)
                     if (!isSifuPick && !isMomentumRebound) {
                         const isNearAth = ipo.highPrice ? (ipo.currentPrice >= ipo.highPrice * 0.95) : false;
@@ -1007,9 +1032,7 @@
                         }
                     }
 
-                    const highPrice = ipo.highPrice || 0;
-                    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
-                    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
+
 
                     // For new IPOs (listed 2025 or 2026), check if they are in a deep downtrend (down >= 25% from debut/historical peak)
                     const isRecentListing = ipo.year >= 2025;
@@ -1046,6 +1069,11 @@
 
                     // 3. Downtrend Safety Check
                     if (isDowntrend && !isMomentumRebound) return false;
+
+                    // 4. Healthy Pullback Safety Check (Max 20% drop from ATH) for recent IPOs (2024+)
+                    const isRecentIpo = ipo.year >= 2024;
+                    const isHealthyPullback = highPrice ? (curPrice >= highPrice * 0.80) : true;
+                    if (isRecentIpo && !isHealthyPullback && !isMomentumRebound) return false;
 
                     return true;
                 }).map(ipo => {

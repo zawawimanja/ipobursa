@@ -1,0 +1,99 @@
+========================================================================
+🚀 LAPORAN PAGI HARIAN (MORNING BRIEF & SCANS) — BURSA IPO TRACKER
+========================================================================
+
+🔍 JADUAL 1: SAHAM BREAKOUT & MOMENTUM HAMPIR ATH (PRICE < RM 3.00)
+------------------------------------------------------------------------
+┌─────────┬───────────┬────────────────────────┬────────────┬──────────┬───────────┬──────────┬────────────────────────────────┬──────────┐
+│ (index) │ Symbol    │ Name                   │ Price (RM) │ ATH (RM) │ Sifu TP   │ Upside   │ Status                         │ Grade    │
+├─────────┼───────────┼────────────────────────┼────────────┼──────────┼───────────┼──────────┼────────────────────────────────┼──────────┤
+│ 0       │ 'SUM'     │ 'Sum Technology Berha' │ '0.515'    │ '0.525'  │ 'RM 0.46' │ '-10.7%' │ '📈 NEAR ATH (Consolidation)'  │ 'Gred A' │
+│ 1       │ 'PENTECH' │ 'Pentech Holdings Ber' │ '0.325'    │ '0.330'  │ 'RM 0.23' │ '-29.2%' │ '🔥 BREAKOUT ATH'              │ 'Gred A' │
+│ 2       │ 'MMCS'    │ 'MM Computer Systems ' │ '0.265'    │ '0.265'  │ 'RM 0.55' │ '107.5%' │ '🔥 BREAKOUT ATH'              │ 'Gred B' │
+│ 3       │ 'ADNEX'   │ 'ADNEX'                │ '0.370'    │ '0.370'  │ 'RM 0.18' │ '-51.4%' │ '🔥 BREAKOUT ATH'              │ 'Gred B' │
+│ 4       │ 'AMBEST'  │ 'AMBEST'               │ '0.880'    │ '0.915'  │ 'RM 0.53' │ '-39.8%' │ '📈 NEAR ATH (Consolidation)'  │ 'Gred B' │
+│ 5       │ 'AMS'     │ 'AMS Advanced Materia' │ '0.400'    │ '0.405'  │ 'RM 0.43' │ '7.5%'   │ '🔥 BREAKOUT ATH'              │ 'Gred C' │
+│ 6       │ 'EIPOWER' │ 'EI Power Berhad [S]'  │ '0.660'    │ '0.735'  │ 'RM 0.68' │ '3.0%'   │ '⚡ MOMENTUM REBOUND (+12.9%)' │ 'Gred A' │
+│ 7       │ 'KEEMING' │ 'KEEMING'              │ '1.350'    │ '1.350'  │ 'RM 0.31' │ '-77.0%' │ '🔥 BREAKOUT ATH'              │ 'Gred A' │
+│ 8       │ 'CBHB'    │ 'CBHB'                 │ '0.675'    │ '0.690'  │ 'RM 0.53' │ '-21.5%' │ '📈 NEAR ATH (Consolidation)'  │ 'Gred B' │
+│ 9       │ 'HKB'     │ 'HKB'                  │ '0.630'    │ '0.635'  │ 'RM 0.21' │ '-66.7%' │ '🔥 BREAKOUT ATH'              │ 'Gred B' │
+│ 10      │ 'ICENTS'  │ 'ICENTS'               │ '0.475'    │ '0.490'  │ 'N/A'     │ 'N/A'    │ '📈 NEAR ATH (Consolidation)'  │ 'Gred B' │
+│ 11      │ 'LWSABAH' │ 'LWSABAH'              │ '1.440'    │ '1.518'  │ 'RM 0.80' │ '-44.4%' │ '⚡ MOMENTUM REBOUND (+10.1%)' │ 'Gred B' │
+│ 12      │ 'TMK'     │ 'TMK'                  │ '2.540'    │ '2.540'  │ 'N/A'     │ 'N/A'    │ '🔥 BREAKOUT ATH'              │ 'Gred B' │
+│ 13      │ 'MNHLDG'  │ 'MNHLDG'               │ '2.720'    │ '2.760'  │ 'RM 2.96' │ '8.8%'   │ '📈 NEAR ATH (Consolidation)'  │ 'Gred B' │
+│ 14      │ 'NE'      │ 'Northeast Group Berh' │ '1.060'    │ '1.090'  │ 'RM 1.30' │ '22.6%'  │ '📈 NEAR ATH (Consolidation)'  │ 'Gred A' │
+└─────────┴───────────┴────────────────────────┴────────────┴──────────┴───────────┴──────────┴────────────────────────────────┴──────────┘
+
+📈 JADUAL 2: SENARAI PRO AKTIF (SWING vs SCALP PORTFOLIO)
+------------------------------------------------------------------------
+
+⚓ KUMPULAN 1: SWING WATCHLIST (Akaun Pelaburan CDS 1)
+┌─────────┬───────────┬──────────────────────┬──────────┬────────────┬───────────┬─────────┬──────────────────────┐
+│ (index) │ Symbol    │ Name                 │ Grade    │ Price (RM) │ Sifu TP   │ Upside  │ Trend                │
+├─────────┼───────────┼──────────────────────┼──────────┼────────────┼───────────┼─────────┼──────────────────────┤
+│ 0       │ 'DNEX'    │ 'Dagang NeXchange B' │ 'Gred C' │ '0.450'    │ 'RM 0.70' │ '55.6%' │ 'Pullback (Healthy)' │
+│ 1       │ 'ELSA'    │ 'Elsa Berhad'        │ 'Gred B' │ '0.255'    │ 'RM 0.39' │ '52.9%' │ 'Pullback (Healthy)' │
+│ 2       │ 'CNERGEN' │ 'Cnergenz Berhad'    │ 'Gred C' │ '0.610'    │ 'RM 0.92' │ '50.8%' │ 'Pullback (Healthy)' │
+│ 3       │ 'SLVEST'  │ 'Solarvest Holdings' │ 'Gred C' │ '3.030'    │ 'RM 3.68' │ '21.5%' │ 'Pullback (Healthy)' │
+│ 4       │ 'SUNMED'  │ 'SUNMED'             │ 'Gred A' │ '1.800'    │ 'RM 1.84' │ '2.2%'  │ 'Pullback (Healthy)' │
+│ 5       │ 'ECOSHOP' │ 'ECOSHOP'            │ 'Gred B' │ '1.320'    │ 'RM 1.31' │ '-0.8%' │ 'Pullback (Healthy)' │
+└─────────┴───────────┴──────────────────────┴──────────┴────────────┴───────────┴─────────┴──────────────────────┘
+
+⚡ KUMPULAN 2: SCALP WATCHLIST (Akaun Trading CDS 2)
+┌─────────┬────────────┬──────────────────────┬──────────┬────────────┬───────────┬──────────┬──────────────────────┐
+│ (index) │ Symbol     │ Name                 │ Grade    │ Price (RM) │ Sifu TP   │ Upside   │ Trend                │
+├─────────┼────────────┼──────────────────────┼──────────┼────────────┼───────────┼──────────┼──────────────────────┤
+│ 0       │ 'MMCS'     │ 'MM Computer System' │ 'Gred B' │ '0.265'    │ 'RM 0.55' │ '107.5%' │ 'Uptrend'            │
+│ 1       │ 'NE'       │ 'Northeast Group Be' │ 'Gred A' │ '1.060'    │ 'RM 1.30' │ '22.6%'  │ 'Consolidating'      │
+│ 2       │ 'MNHLDG'   │ 'MNHLDG'             │ 'Gred B' │ '2.720'    │ 'RM 2.96' │ '8.8%'   │ 'Breakout'           │
+│ 3       │ 'AMS'      │ 'AMS Advanced Mater' │ 'Gred C' │ '0.400'    │ 'RM 0.43' │ '7.5%'   │ 'Breakout'           │
+│ 4       │ 'EIPOWER'  │ 'EI Power Berhad [S' │ 'Gred A' │ '0.660'    │ 'RM 0.68' │ '3.0%'   │ 'Pullback (Healthy)' │
+│ 5       │ 'IAB'      │ 'IAB'                │ 'Gred B' │ '1.390'    │ 'RM 1.35' │ '-2.9%'  │ 'Pullback (Healthy)' │
+│ 6       │ 'OGX'      │ 'OGX'                │ 'Gred C' │ '0.485'    │ 'RM 0.40' │ '-17.5%' │ 'Pullback (Healthy)' │
+│ 7       │ 'CBHB'     │ 'CBHB'               │ 'Gred B' │ '0.675'    │ 'RM 0.53' │ '-21.5%' │ 'Breakout'           │
+│ 8       │ 'PENTECH'  │ 'Pentech Holdings B' │ 'Gred A' │ '0.325'    │ 'RM 0.23' │ '-29.2%' │ 'Momentum Rebound'   │
+│ 9       │ 'AMBEST'   │ 'AMBEST'             │ 'Gred B' │ '0.880'    │ 'RM 0.53' │ '-39.8%' │ 'Consolidating'      │
+│ 10      │ 'ISF'      │ 'ISF'                │ 'Gred B' │ '0.525'    │ 'RM 0.31' │ '-41.0%' │ 'Consolidating'      │
+│ 11      │ 'LWSABAH'  │ 'LWSABAH'            │ 'Gred B' │ '1.440'    │ 'RM 0.80' │ '-44.4%' │ 'Momentum Rebound'   │
+│ 12      │ 'ADNEX'    │ 'ADNEX'              │ 'Gred B' │ '0.370'    │ 'RM 0.18' │ '-51.4%' │ 'Consolidating'      │
+│ 13      │ 'SKYECHIP' │ 'SkyeChip Berhad'    │ 'Gred A' │ '3.090'    │ 'RM 1.05' │ '-66.0%' │ 'Pullback (Healthy)' │
+│ 14      │ 'HKB'      │ 'HKB'                │ 'Gred B' │ '0.630'    │ 'RM 0.21' │ '-66.7%' │ 'Uptrend'            │
+│ 15      │ 'KEEMING'  │ 'KEEMING'            │ 'Gred A' │ '1.350'    │ 'RM 0.31' │ '-77.0%' │ 'Breakout'           │
+└─────────┴────────────┴──────────────────────┴──────────┴────────────┴───────────┴──────────┴──────────────────────┘
+
+🔍 JADUAL 3: DIAGNOSTIK 4 FOMULA PULLBACK / DIP KITA (ZON BELI SUPPORT)
+------------------------------------------------------------------------
+📂 1. RBS Retest / Consolidation (1% hingga 5% bawah ATH):
+┌─────────┬───────────┬────────────┬──────────┬─────────────┬──────────┐
+│ (index) │ Symbol    │ Price (RM) │ ATH (RM) │ Dist to ATH │ Upside   │
+├─────────┼───────────┼────────────┼──────────┼─────────────┼──────────┤
+│ 0       │ 'PENTECH' │ '0.325'    │ '0.330'  │ '1.5%'      │ '-29.2%' │
+│ 1       │ 'AMBEST'  │ '0.880'    │ '0.915'  │ '4.0%'      │ '-39.8%' │
+│ 2       │ 'AMS'     │ '0.400'    │ '0.405'  │ '1.3%'      │ '7.5%'   │
+│ 3       │ 'CBHB'    │ '0.675'    │ '0.690'  │ '2.2%'      │ '-21.5%' │
+│ 4       │ 'MNHLDG'  │ '2.720'    │ '2.760'  │ '1.5%'      │ '8.8%'   │
+│ 5       │ 'NE'      │ '1.060'    │ '1.090'  │ '2.8%'      │ '22.6%'  │
+└─────────┴───────────┴────────────┴──────────┴─────────────┴──────────┘
+
+📂 2. Deep Pullback Rebound (Kejatuhan dalam + Lantunan harian >= 10%):
+┌─────────┬───────────┬────────────┬──────────┬─────────────┬──────────┬──────────┐
+│ (index) │ Symbol    │ Price (RM) │ ATH (RM) │ Dist to ATH │ Upside   │ Rebound  │
+├─────────┼───────────┼────────────┼──────────┼─────────────┼──────────┼──────────┤
+│ 0       │ 'EIPOWER' │ '0.660'    │ '0.735'  │ '11.4%'     │ '3.0%'   │ '+12.9%' │
+│ 1       │ 'LWSABAH' │ '1.440'    │ '1.518'  │ '5.4%'      │ '-44.4%' │ '+10.1%' │
+└─────────┴───────────┴────────────┴──────────┴─────────────┴──────────┴──────────┘
+
+📂 3. Healthy Dip Swing (Turun 5%-20% dari ATH, Atas Harga IPO, Upside Sifu >= 10%):
+┌─────────┬──────────┬────────────┬──────────┬─────────────┬─────────┐
+│ (index) │ Symbol   │ Price (RM) │ ATH (RM) │ Dist to ATH │ Upside  │
+├─────────┼──────────┼────────────┼──────────┼─────────────┼─────────┤
+│ 0       │ 'ELSA'   │ '0.255'    │ '0.285'  │ '11.8%'     │ '52.9%' │
+│ 1       │ 'SLVEST' │ '3.030'    │ '3.440'  │ '13.5%'     │ '21.5%' │
+└─────────┴──────────┴────────────┴──────────┴─────────────┴─────────┘
+
+📂 4. Underwater Turnaround (Bawah Harga IPO + Lantunan harian >= 5%):
+   - Tiada kaunter.
+========================================================================
+💡 TIP: Gunakan data di atas untuk merancang sesi belian / jualan pagi.
+========================================================================
+

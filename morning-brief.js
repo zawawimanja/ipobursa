@@ -13,7 +13,7 @@ const db = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 const sifuPortfolio = [
     'cbhb', 'keeming', 'hkb', 'ams-material', 'mnhldg', 'ambest', 'isf', 
     'iab', 'lwsabah', 'cnergenz', 'destini', 'sunmed', 'hss-holdings-berhad', 
-    'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx'
+    'solarvest', 'ctos', 'lgms', 'oppstar', 'skyechip', 'tanco', 'ecoshop', 'keyfield', 'pentech', 'elsa', 'orkim', 'ogx', 'adnex', 'dnex'
 ];
 const sifuPortfolioSet = new Set(sifuPortfolio.map(s => s.toLowerCase()));
 const explicitSkips = ['wentel-engineering', 'wentel', 'agmo'];
@@ -280,6 +280,20 @@ const activeStocks = db.filter(d => {
     if (d.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
     if (isDowntrend && !isMomentumRebound) return false;
     
+    // Filter out recent IPOs (2024+) that have dropped more than 20% from ATH (unhealthy pullback), unless they are a momentum rebound.
+    // For older IPOs (before 2024), their ATH is historical, so we don't apply the 20% ATH-drop rule.
+    const isRecentIpo = d.year >= 2024;
+    const isHealthyPullback = highPrice ? (curPrice >= highPrice * 0.80) : true;
+    if (isRecentIpo && !isHealthyPullback && !isMomentumRebound) return false;
+    
+    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+    const isUnderIpo = curPrice < ipoPrice;
+    const isRbsRetest = distToAth > 1.0 && distToAth <= 5.0;
+    const isDeepRebound = distToAth > 5.0 && typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
+    const isHealthyDip = curPrice >= highPrice * 0.80 && !isUnderIpo && upside >= 10.0 && distToAth > 5.0;
+    const isUnderwaterRebound = isUnderIpo && typeof d.dailyChange === 'number' && d.dailyChange >= 5.0;
+    const isPullbackSetup = isRbsRetest || isDeepRebound || isHealthyDip || isUnderwaterRebound;
+
     let isRecent = false;
     const isNearAth = highPrice ? (curPrice >= highPrice * 0.95) : false;
     if (d.listingDate) {
@@ -367,7 +381,7 @@ const pullbackSetups = {
     underwaterTurnaround: []
 };
 
-db.forEach(ipo => {
+activeStocks.forEach(ipo => {
     if (ipo.stage !== 5 && ipo.status !== 'Listed') return;
     if (!ipo.shariah) return;
 
@@ -406,7 +420,7 @@ db.forEach(ipo => {
     } else if (distToAth > 5.0 && dailyChange >= 10.0) {
         stockInfo.Rebound = `+${dailyChange.toFixed(1)}%`;
         pullbackSetups.deepPullbackRebound.push(stockInfo);
-    } else if (curPrice >= highPrice * 0.75 && !isUnderIpo && upside >= 10.0 && distToAth > 5.0) {
+    } else if (curPrice >= highPrice * 0.80 && !isUnderIpo && upside >= 10.0 && distToAth > 5.0) {
         pullbackSetups.healthyDipSwing.push(stockInfo);
     } else if (isUnderIpo && dailyChange >= 5.0) {
         stockInfo.Rebound = `+${dailyChange.toFixed(1)}%`;
@@ -422,7 +436,7 @@ console.log('\n📂 2. Deep Pullback Rebound (Kejatuhan dalam + Lantunan harian 
 if (pullbackSetups.deepPullbackRebound.length === 0) console.log('   - Tiada kaunter.');
 else console.table(pullbackSetups.deepPullbackRebound);
 
-console.log('\n📂 3. Healthy Dip Swing (Turun 5%-25% dari ATH, Atas Harga IPO, Upside Sifu >= 10%):');
+console.log('\n📂 3. Healthy Dip Swing (Turun 5%-20% dari ATH, Atas Harga IPO, Upside Sifu >= 10%):');
 if (pullbackSetups.healthyDipSwing.length === 0) console.log('   - Tiada kaunter.');
 else console.table(pullbackSetups.healthyDipSwing);
 
