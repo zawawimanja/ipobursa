@@ -478,6 +478,21 @@
             </details>
         </div>
 
+        <!-- 🔥 4 Saham Pilihan Utama Hari Ini (High Win-Rate & Reward) -->
+        <div id="top-4-picks-container"
+            style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);">
+            <div
+                style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 0.5rem;">
+                <i data-lucide="flame" style="color: #f59e0b; width: 22px; height: 22px; animation: pulse 1.5s infinite;"></i>
+                <h3
+                    style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #f8fafc; font-weight: 800; letter-spacing: 0.03em;">
+                    🔥 PILIHAN UTAMA: 4 SAHAM KUALITI TERTINGGI HARI INI (High Win-Rate)</h3>
+            </div>
+            <div id="top-4-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+                <!-- Diisi secara dinamik menerusi JavaScript -->
+            </div>
+        </div>
+
         <!-- Strategi Pengurusan Portfolio 2 Akaun CDS -->
         <div
             style="margin-bottom: 1.5rem; background: rgba(30, 41, 59, 0.4); border: 1px solid var(--glass-border); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);">
@@ -1097,6 +1112,127 @@
                         const changeB = typeof b.dailyChange === 'number' ? b.dailyChange : -999;
                         return changeB - changeA;
                     });
+                }
+
+                // Calculate and Render Top 4 Picks of the Day Dynamically!
+                const top4Grid = document.getElementById('top-4-grid');
+                if (top4Grid) {
+                    top4Grid.innerHTML = '';
+                    
+                    // Score each stock in validPicks
+                    const scoredPicks = [...validPicks].map(ipo => {
+                        const curPrice = ipo.currentPrice || 0;
+                        const highPrice = ipo.highPrice || 0;
+                        const tp = ipo.targetPrice || 0;
+                        const upside = ipo.upside || 0;
+                        const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+                        const grade = getIpoGrade(ipo).grade;
+                        
+                        let score = 0;
+                        // 1. Grade score
+                        if (grade === 'A') score += 100;
+                        else if (grade === 'B') score += 80;
+                        else if (grade === 'C') score += 40;
+                        
+                        // 2. Setup score
+                        const isNearAth = distToAth <= 5.0 && distToAth >= 0;
+                        const isHealthyDip = distToAth > 5.0 && distToAth <= 20.0;
+                        
+                        if (isNearAth) {
+                            score += 50; // RBS Retest is highly preferred for winrate
+                        } else if (isHealthyDip) {
+                            score += 30; // Healthy Dip swing is second preferred
+                        } else {
+                            score += 10; // Other dips
+                        }
+                        
+                        // 3. Upside score (prefer higher positive upside)
+                        if (upside > 0) {
+                            score += Math.min(30, upside * 0.5); // Add up to 30 points for upside
+                        } else {
+                            score -= 100; // Penalize negative/zero upside heavily (we don't want target hit/overvalued stocks)
+                        }
+                        
+                        // 4. Sifu Handpicked bonus
+                        const isPortfolio = sifuPortfolio.includes((ipo.id || '').toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
+                        if (isPortfolio) {
+                            score += 20; // Handpicked stocks get extra priority
+                        }
+                        
+                        return { ipo, score, distToAth, grade, isNearAth, isHealthyDip };
+                    });
+                    
+                    // Sort by score descending
+                    scoredPicks.sort((a, b) => b.score - a.score);
+                    
+                    // Take top 4
+                    const top4 = scoredPicks.slice(0, 4);
+                    
+                    if (top4.length === 0) {
+                        top4Grid.innerHTML = '<div style="color: var(--text-dim); text-align: center; grid-column: 1/-1; font-size: 0.85rem; padding: 1rem;">Tiada kaunter bersesuaian untuk Pilihan Utama hari ini.</div>';
+                    } else {
+                        top4.forEach((item, index) => {
+                            const ipo = item.ipo;
+                            const symbol = ipo.symbol || (ipo.id || '').toUpperCase();
+                            const curPrice = Number(ipo.currentPrice || 0).toFixed(3);
+                            const tp = ipo.targetPrice > 0 ? 'RM ' + Number(ipo.targetPrice).toFixed(2) : 'N/A';
+                            const distText = item.distToAth ? item.distToAth.toFixed(1) + '%' : '0.0%';
+                            const upsideText = ipo.upside ? (ipo.upside > 0 ? '+' + ipo.upside.toFixed(1) + '%' : ipo.upside.toFixed(1) + '%') : 'N/A';
+                            const grade = item.grade;
+                            
+                            let setupBadge = '';
+                            if (item.isNearAth) {
+                                setupBadge = '<span style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase;">🔥 RBS Retest</span>';
+                            } else if (item.isHealthyDip) {
+                                setupBadge = '<span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase;">🟢 Healthy Dip</span>';
+                            } else {
+                                setupBadge = '<span style="background: rgba(129, 140, 248, 0.15); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase;">📈 Pullback</span>';
+                            }
+                            
+                            let styleBadge = '';
+                            if (item.isNearAth) {
+                                if (ipo.upside >= 15.0) {
+                                    styleBadge = '<span style="background: rgba(167, 139, 250, 0.12); color: #c084fc; border: 1px solid rgba(167, 139, 250, 0.25); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.2rem;"><i data-lucide="shuffle" style="width: 10px; height: 10px; display: inline;"></i> Swing/Scalp</span>';
+                                } else {
+                                    styleBadge = '<span style="background: rgba(245, 158, 11, 0.12); color: #fb923c; border: 1px solid rgba(245, 158, 11, 0.25); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.2rem;"><i data-lucide="zap" style="width: 10px; height: 10px; display: inline;"></i> Scalp</span>';
+                                }
+                            } else {
+                                styleBadge = '<span style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.2rem;"><i data-lucide="anchor" style="width: 10px; height: 10px; display: inline;"></i> Swing</span>';
+                            }
+                            
+                            const tvLink = symbol.replace(/\[NS\]/gi, '').replace(/\s+/g, '').trim().toUpperCase();
+                            
+                            const cardHtml = `
+                                <div class="top-4-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.5rem; padding: 0.75rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s; position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, #f59e0b, #ef4444);"></div>
+                                    <div>
+                                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem;">
+                                            <span style="font-size: 0.7rem; font-weight: 800; color: #f59e0b; text-transform: uppercase; background: rgba(245, 158, 11, 0.1); padding: 2px 6px; border-radius: 4px;">Top #${index + 1}</span>
+                                            <span style="font-size: 0.7rem; font-weight: bold; color: #fff; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05);">Gred ${grade}</span>
+                                        </div>
+                                        <h4 style="margin: 0 0 0.15rem 0; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: #fff; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${ipo.companyName}">${ipo.companyName}</h4>
+                                        <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
+                                            <span style="font-size: 0.8rem; color: #f59e0b; font-weight: 800;">${symbol}</span>
+                                            ${setupBadge}
+                                            ${styleBadge}
+                                        </div>
+                                        
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.6rem; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 0.4rem; font-size: 0.72rem; color: var(--text-dim);">
+                                            <div>Price: <b style="color: #fff;">RM ${curPrice}</b></div>
+                                            <div>Jarak ATH: <b style="color: #fff;">${distText}</b></div>
+                                            <div>Sifu TP: <b style="color: #fff;">${tp}</b></div>
+                                            <div>Upside: <b style="color: #10b981;">${upsideText}</b></div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 0.4rem; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 0.4rem;">
+                                        <a href="sifu-sheets.html?stock=${ipo.id || ''}" style="flex: 1; text-align: center; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 4px; padding: 0.3rem; color: #818cf8; font-size: 0.7rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.2rem;"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> Details</a>
+                                        <a href="https://www.tradingview.com/chart/M24dCuYz/?symbol=MYX%3A${tvLink}" target="_blank" style="flex: 1; text-align: center; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 4px; padding: 0.3rem; color: #f59e0b; font-size: 0.7rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.2rem;"><i data-lucide="line-chart" style="width: 10px; height: 10px;"></i> Chart</a>
+                                    </div>
+                                </div>
+                            `;
+                            top4Grid.innerHTML += cardHtml;
+                        });
+                    }
                 }
 
                 validPicks.forEach(ipo => {
