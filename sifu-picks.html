@@ -564,57 +564,44 @@
                 <i data-lucide="refresh-cw" style="color: #a78bfa; width: 22px; height: 22px;"></i>
                 <h3
                     style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #f8fafc; font-weight: 700;">
-                    🔄 Rutin Harian: Cara Tahu Saham "OK" Selepas Jam 5:00 Petang</h3>
+                    🔄 Rutin Harian: 1 Skrip Utama Untuk Sync & Laporan Harian</h3>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-                <!-- Langkah 1: Sync -->
+                <!-- Langkah Utama -->
                 <div
                     style="background: rgba(167, 139, 250, 0.04); border: 1px solid rgba(167, 139, 250, 0.25); border-radius: 0.5rem; padding: 1rem;">
                     <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem;">
-                        <i data-lucide="terminal" style="color: #a78bfa; width: 18px; height: 18px;"></i>
-                        <h4 style="margin: 0; font-size: 0.95rem; color: #a78bfa; font-weight: 700;">Langkah 1: Kemas
-                            Kini Data (Sync)</h4>
+                        <i data-lucide="play" style="color: #a78bfa; width: 18px; height: 18px;"></i>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #a78bfa; font-weight: 700;">Rutin Automatik Penuh (Pagi/Petang)</h4>
                     </div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0 0 0.5rem 0;">
-                        Jalankan skrip penyelarasan harga untuk memuat turun harga penutup pasaran hari ini secara
-                        automatik di terminal anda:
+                        Jalankan skrip penyelarasan tunggal ini di terminal anda. Ia akan memuat turun harga, melaraskan ATH, dan mencetak laporan secara serentak:
                     </p>
                     <code
-                        style="display: block; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem; color: #f8fafc; margin-bottom: 0.5rem; border: 1px solid rgba(255,255,255,0.05);">node sync-isaham.js</code>
+                        style="display: block; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem; color: #f8fafc; margin-bottom: 0.5rem; border: 1px solid rgba(255,255,255,0.05); text-align: center;">node bursa.js</code>
                     <span
-                        style="display: block; font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.75rem; padding-left: 0.5rem; border-left: 2px solid #a78bfa;">Mengemas
-                        kini harga penutup semasa & peratusan harian.</span>
-
-                    <code
-                        style="display: block; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem; color: #f8fafc; margin-bottom: 0.5rem; border: 1px solid rgba(255,255,255,0.05);">node scratch/fix-high-anomalies.js</code>
-                    <span
-                        style="display: block; font-size: 0.72rem; color: var(--text-dim); padding-left: 0.5rem; border-left: 2px solid #a78bfa;">Menyelaraskan
-                        harga tertinggi sejarah (ATH) sekiranya ada kaunter membuat puncak tertinggi baharu hari
-                        ini.</span>
+                        style="display: block; font-size: 0.72rem; color: var(--text-dim); padding-left: 0.5rem; border-left: 2px solid #a78bfa;">
+                        Mengemas kini harga penutup (sync), memperbaiki anomali ATH secara automatik, dan menjana laporan pagi/petang terus di terminal.
+                    </span>
                 </div>
 
-                <!-- Langkah 2: Laporan Pagi Automatik (Minta AI Agent) -->
+                <!-- Mod Pantas -->
                 <div
                     style="background: rgba(56, 189, 248, 0.04); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 0.5rem; padding: 1rem;">
                     <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem;">
-                        <i data-lucide="cpu" style="color: #38bdf8; width: 18px; height: 18px;"></i>
-                        <h4 style="margin: 0; font-size: 0.95rem; color: #38bdf8; font-weight: 700;">Langkah 2: Laporan
-                            Pagi Automatik (Minta AI Agent)</h4>
+                        <i data-lucide="zap" style="color: #38bdf8; width: 18px; height: 18px;"></i>
+                        <h4 style="margin: 0; font-size: 0.95rem; color: #38bdf8; font-weight: 700;">Mod Laporan Pantas (Offline Brief)</h4>
                     </div>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0 0 0.75rem 0;">
-                        Anda tidak perlu lagi menyalin-tampal senarai TradingView secara manual. Setiap pagi selepas jam
-                        9:00 pagi, beritahu sahaja AI Agent:
+                    <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin: 0 0 0.5rem 0;">
+                        Sekiranya anda sudah melakukan sync dan hanya mahu menjana laporan brief semula tanpa menunggu muat turun data (offline):
                     </p>
-                    <div
-                        style="background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem; color: #38bdf8; margin-bottom: 0.75rem; border: 1px solid rgba(56, 189, 248, 0.15); text-align: center; font-weight: bold;">
-                        "Run skrip morning brief" atau "Cek saham ATH bawah 3"
-                    </div>
-                    <p style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.4; margin: 0;">
-                        Sistem akan menyelaraskan harga secara live dan memaparkan jadual saringan bersih (Swing, Scalp
-                        & Pullback) terus dalam ruang sembang anda. Anda juga boleh memantau kategori secara langsung di
-                        dashboard ini pada bila-bila masa.
-                    </p>
+                    <code
+                        style="display: block; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem; color: #f8fafc; margin-bottom: 0.5rem; border: 1px solid rgba(255,255,255,0.05); text-align: center;">node bursa.js --quick</code>
+                    <span
+                        style="display: block; font-size: 0.72rem; color: var(--text-dim); padding-left: 0.5rem; border-left: 2px solid #38bdf8;">
+                        Membaca rekod database sedia ada sahaja untuk menjana brief secara serta-merta tanpa sambungan internet.
+                    </span>
                 </div>
             </div>
         </div>
@@ -734,16 +721,28 @@
                 <div class="group-header">
                     <div class="group-title-area">
                         <i data-lucide="compass" style="color: #818cf8; width: 24px; height: 24px;"></i>
-                        <h2 class="group-title" style="color: #818cf8;">🔍 3. PULLBACK ACCUMULATION (Zon Beli Support)
-                        </h2>
+                        <h2 class="group-title" style="color: #818cf8;">🔍 3. PULLBACK ACCUMULATION (Zon Beli Support)</h2>
                     </div>
                     <span class="group-badge"
                         style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #818cf8;"
                         id="count-pullback">0 Kaunter</span>
                 </div>
-                <div class="group-desc" style="border-left-color: #818cf8;">
-                    Saham yang sudah melepasi TP unjuran awal tetapi kini sedang pullback/konsolidasi secara sihat di
-                    atas zon sokongan (support).
+                <div class="group-desc" style="border-left-color: #818cf8; margin-bottom: 1rem;">
+                    Saham berkualiti (Gred A/B atau Portfolio Sifu) yang sedang rehat di support atau membuat pembetulan sihat. Dibahagikan kepada 4 formula custom:
+                    <div style="margin-top: 0.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.5rem; font-size: 0.72rem; color: var(--text-dim);">
+                        <div style="background: rgba(0, 0, 0, 0.25); padding: 0.4rem 0.6rem; border-radius: 0.25rem; border-left: 2px solid #818cf8;">
+                            <strong>1. RBS Retest:</strong> 1% - 5% bawah ATH (Rehat dekat siling).
+                        </div>
+                        <div style="background: rgba(0, 0, 0, 0.25); padding: 0.4rem 0.6rem; border-radius: 0.25rem; border-left: 2px solid #818cf8;">
+                            <strong>2. Deep Pullback:</strong> Jatuh > 5% dari ATH + Lantunan harian &ge; 10%.
+                        </div>
+                        <div style="background: rgba(0, 0, 0, 0.25); padding: 0.4rem 0.6rem; border-radius: 0.25rem; border-left: 2px solid #818cf8;">
+                            <strong>3. Healthy Dip:</strong> Turun 5%-25% dari ATH, atas IPO + Upside &ge; 10%.
+                        </div>
+                        <div style="background: rgba(0, 0, 0, 0.25); padding: 0.4rem 0.6rem; border-radius: 0.25rem; border-left: 2px solid #818cf8;">
+                            <strong>4. Underwater Turnaround:</strong> Bawah harga IPO + Lantunan harian &ge; 5%.
+                        </div>
+                    </div>
                 </div>
                 <div class="picks-table-wrapper">
                     <table class="picks-table">
