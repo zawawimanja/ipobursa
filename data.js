@@ -112,7 +112,7 @@ const IPO_DATA = [
     "pe": 11.8,
     "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>ICT/Industrial Products supplier dengan sokongan Public Investment Bank (Hero IB). Langganan runcit yang sangat luar biasa (OS 120.98x) membuktikan keyakinan tinggi pasaran. Dibuka dengan premium +45% pada RM0.29 dan meneruskan kenaikan (ATH RM0.355). Sangat relevan untuk intraday scalp & swing momentum.",
     "ofs": false,
-    "sifuTargetPrice": 0.28,
+    "sifuTargetPrice": 0.33,
     "highPrice": 0.33,
     "symbol": "PENTECH",
     "currentPrice": 0.325,
@@ -144,7 +144,7 @@ const IPO_DATA = [
     "pe": 13.4,
     "ofs": true,
     "analystInsight": "❌ <b>AVOID (GRADE C — SEPERTI DIJANGKA)</b><br>💡 Walaupun OS runcit mencecah 42.12x, kaunter ini dibuka flat (0.00%) dan ditutup di bawah harga IPO pada RM0.215 (-2.27%) disebabkan oleh tekanan jualan OFS yang besar (47.34M unit) dan tiada momentum sektor. Elakkan.",
-    "sifuTargetPrice": 0.32,
+    "sifuTargetPrice": 0.24,
     "symbol": "MMCS",
     "openPrice": 0.22,
     "highPrice": 0.265,
@@ -303,7 +303,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 0.915,
     "symbol": "AMBEST",
-    "sifuTargetPrice": 0.45,
+    "sifuTargetPrice": 0.34,
     "dailyChange": 0.3,
     "calibratedSifuTargetPrice": 0.53
   },
@@ -332,7 +332,7 @@ const IPO_DATA = [
     "symbol": "AMS",
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>AMS Advanced Material menyediakan pemprosesan aluminium dan tembaga bagi sektor aeroangkasa dan sokongan semikonduktor. Menunjukkan lonjakan hasil ketara pada FPE 25.<br><br>📊 <b>Kelebihan Utama:</b><br>• Hasil FPE 25 melonjak ke RM64.9M vs RM43.2M FPE 24.<br>• Sokongan penaja jamin utama Maybank IB & M&A Securities.<br>• PE Terbitan menawarkan diskaun berbanding gergasi papan utama.",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.49,
+    "sifuTargetPrice": 0.33,
     "dailyChange": 3.9,
     "calibratedSifuTargetPrice": 0.43
   },
@@ -439,7 +439,7 @@ const IPO_DATA = [
     "performance": "+37.50%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.61,
     "dailyChange": 12.9,
     "calibratedSifuTargetPrice": 0.68
   },
@@ -553,7 +553,7 @@ const IPO_DATA = [
     "highPrice": 0.63,
     "symbol": "HOCKSOON",
     "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
-    "sifuTargetPrice": 0.69,
+    "sifuTargetPrice": 0.63,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.69
   },
@@ -617,7 +617,7 @@ const IPO_DATA = [
     "highPrice": 0.575,
     "symbol": "ISF",
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
-    "sifuTargetPrice": 0.36,
+    "sifuTargetPrice": 0.69,
     "dailyChange": -0.3,
     "calibratedSifuTargetPrice": 0.31
   },
@@ -646,7 +646,7 @@ const IPO_DATA = [
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
     "highPrice": 1.35,
     "symbol": "KEEMING",
-    "sifuTargetPrice": 0.38,
+    "sifuTargetPrice": 0.68,
     "dailyChange": 8,
     "calibratedSifuTargetPrice": 0.31
   },
@@ -733,7 +733,7 @@ const IPO_DATA = [
     "highPrice": 0.265,
     "symbol": "OGM",
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
-    "sifuTargetPrice": 0.25,
+    "sifuTargetPrice": 0.3,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.22
   },
@@ -847,7 +847,7 @@ const IPO_DATA = [
     "performance": "+251.14%",
     "symbol": "SKYECHIP",
     "strategy": "Scalp",
-    "sifuTargetPrice": 0.88,
+    "sifuTargetPrice": 1.58,
     "dailyChange": 1.7,
     "calibratedSifuTargetPrice": 1.05
   },
@@ -904,7 +904,7 @@ const IPO_DATA = [
     "highPrice": 0.28175,
     "symbol": "TEAMSTR",
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
-    "sifuTargetPrice": 0.26,
+    "sifuTargetPrice": 0.32,
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.23
   },
@@ -1025,7 +1025,7 @@ const IPO_DATA = [
     "openPrice": 0.33000799999999997,
     "closePrice": 0.33499200000000007,
     "symbol": "CBHB",
-    "sifuTargetPrice": 0.53,
+    "sifuTargetPrice": 0.38,
     "dailyChange": 4.5,
     "calibratedSifuTargetPrice": 0.53
   },
@@ -1366,7 +1366,7 @@ const IPO_DATA = [
     "openPrice": 0.619992,
     "closePrice": 0.6549839999999999,
     "symbol": "IAB",
-    "sifuTargetPrice": 1.53,
+    "sifuTargetPrice": 0.71,
     "dailyChange": 3.82,
     "calibratedSifuTargetPrice": 1.35
   },
