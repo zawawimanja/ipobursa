@@ -36,7 +36,7 @@ function findExistingIPO(name, existingData) {
         'KUCINGKO [NS]': 'kucingko',
         'MFGROUP': 'manforce-group',
         'ADNEX': 'adnex',
-        'NE': 'adnex',
+        'NE': 'northeast',
         '5ER': '5e-resources',
         'SRKK': 'srkk-ai',
         'SRKK AI BERHAD': 'srkk-ai'
