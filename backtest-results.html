@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestasi Backtest | Bursa IPO Tracker</title>
+    <meta name="description" content="Prestasi saringan Top 5 pilihan utama kita dari 16 Jun hingga 19 Jun.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .stat-val {
+            font-size: 2.25rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(to right, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-lbl {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .daily-section {
+            margin-bottom: 2.5rem;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: 1.35rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .backtest-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            text-align: left;
+            min-width: 900px;
+        }
+
+        .backtest-table th {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 0.75rem 1rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .backtest-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        .backtest-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .gain-badge {
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .gain-positive {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .gain-negative {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .gain-flat {
+            color: #94a3b8;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .explanation-card {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .explanation-card h3 {
+            margin-top: 0;
+            color: var(--primary-light);
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="glass-header">
+        <div class="container">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="morning-brief.html" class="btn-moomoo"
+                    style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.15); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="sun" style="width: 14px; height: 14px;"></i> <span class="nav-text">Morning Brief</span>
+                </a>
+                <a href="sifu-picks.html" class="btn-moomoo"
+                    style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.15); color: #818cf8; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="award" style="width: 14px; height: 14px;"></i> <span class="nav-text">Sifu Picks</span>
+                </a>
+                <a href="index.html" class="btn-moomoo"
+                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 1.5rem;">
+        <header style="text-align: center; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                <i data-lucide="database" style="color: #6366f1; width: 24px; height: 24px;"></i>
+                <h1 style="margin: 0; font-size: 1.75rem;">Prestasi <span style="text-shadow: 0 0 10px rgba(99, 102, 241, 0.4); color: #818cf8;">Backtest Top 5</span></h1>
+            </div>
+            <p style="color: var(--text-dim); max-width: 650px; margin: 0.25rem auto 0 auto; font-size: 0.85rem;">
+                Kajian prestasi saringan Top 5 pilihan utama kita dari 16 Jun hingga 19 Jun berdasarkan formula locked-in terbaru.
+            </p>
+        </header>
+
+        <!-- Stats Overview -->
+        <div class="stats-container">
+            <div class="glass-card stat-card">
+                <div class="stat-val">20</div>
+                <div class="stat-lbl">Saham Diuji</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-val">+1.86%</div>
+                <div class="stat-lbl">Purata Max Gain</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-val">+0.66%</div>
+                <div class="stat-lbl">Purata Current Gain</div>
+            </div>
+            <div class="glass-card stat-card">
+                <div class="stat-val">80.0%</div>
+                <div class="stat-lbl">Kadar Kejayaan</div>
+            </div>
+        </div>
+
+        <!-- 16 JUN -->
+        <div class="daily-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="calendar" style="color: #6366f1; width: 18px; height: 18px;"></i>
+                    📅 16 Jun 2026 (Selasa)
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Purata Max Gain: <strong style="color: #10b981;">+1.58%</strong></span>
+            </div>
+            <div class="table-wrapper">
+                <table class="backtest-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Kaunter</th>
+                            <th>Gred</th>
+                            <th>Setup</th>
+                            <th>Style</th>
+                            <th>Beli (RM)</th>
+                            <th>Sifu TP</th>
+                            <th>Harga Puncak</th>
+                            <th>Max Gain</th>
+                            <th>Harga Semasa</th>
+                            <th>Current Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td><strong style="color: #fff;">Pentech Holdings Berhad (PENTECH)</strong></td>
+                            <td>Gred A</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 0.315</td>
+                            <td>RM 0.33</td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+3.2%</span></td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+3.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td><strong style="color: #fff;">Elsa Berhad (ELSA)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 0.275</td>
+                            <td>RM 0.31</td>
+                            <td>RM 0.275</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.255</td>
+                            <td><span class="gain-badge gain-negative">-7.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#3</strong></td>
+                            <td><strong style="color: #fff;">ECOSHOP (ECOSHOP)</strong></td>
+                            <td>Gred A</td>
+                            <td>Healthy Dip</td>
+                            <td>Swing</td>
+                            <td>RM 1.270</td>
+                            <td>RM 1.31</td>
+                            <td>RM 1.330</td>
+                            <td><span class="gain-badge gain-positive">+4.7%</span></td>
+                            <td>RM 1.320</td>
+                            <td><span class="gain-badge gain-positive">+3.9%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#4</strong></td>
+                            <td><strong style="color: #fff;">KEYFIELD (KEYFIELD)</strong></td>
+                            <td>Gred A</td>
+                            <td>Pullback</td>
+                            <td>Swing</td>
+                            <td>RM 1.560</td>
+                            <td>RM 2.14</td>
+                            <td>RM 1.560</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 1.520</td>
+                            <td><span class="gain-badge gain-negative">-2.6%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#5</strong></td>
+                            <td><strong style="color: #fff;">SLGC Berhad (SLGC)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Swing/Scalp</td>
+                            <td>RM 0.280</td>
+                            <td>RM 0.36</td>
+                            <td>RM 0.280</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.280</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 17 JUN -->
+        <div class="daily-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="calendar" style="color: #6366f1; width: 18px; height: 18px;"></i>
+                    📅 17 Jun 2026 (Rabu)
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Purata Max Gain: <strong style="color: #10b981;">+4.08%</strong></span>
+            </div>
+            <div class="table-wrapper">
+                <table class="backtest-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Kaunter</th>
+                            <th>Gred</th>
+                            <th>Setup</th>
+                            <th>Style</th>
+                            <th>Beli (RM)</th>
+                            <th>Sifu TP</th>
+                            <th>Harga Puncak</th>
+                            <th>Max Gain</th>
+                            <th>Harga Semasa</th>
+                            <th>Current Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td><strong style="color: #fff;">Pentech Holdings Berhad (PENTECH)</strong></td>
+                            <td>Gred A</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 0.315</td>
+                            <td>RM 0.33</td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+3.2%</span></td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+3.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td><strong style="color: #fff;">HKB (HKB)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Swing/Scalp</td>
+                            <td>RM 0.565</td>
+                            <td>RM 0.71</td>
+                            <td>RM 0.635</td>
+                            <td><span class="gain-badge gain-positive">+12.4%</span></td>
+                            <td>RM 0.630</td>
+                            <td><span class="gain-badge gain-positive">+11.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#3</strong></td>
+                            <td><strong style="color: #fff;">Northeast Group Berhad (NE)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Swing/Scalp</td>
+                            <td>RM 1.040</td>
+                            <td>RM 1.30</td>
+                            <td>RM 1.090</td>
+                            <td><span class="gain-badge gain-positive">+4.8%</span></td>
+                            <td>RM 1.060</td>
+                            <td><span class="gain-badge gain-positive">+1.9%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#4</strong></td>
+                            <td><strong style="color: #fff;">Elsa Berhad (ELSA)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 0.275</td>
+                            <td>RM 0.31</td>
+                            <td>RM 0.275</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.255</td>
+                            <td><span class="gain-badge gain-negative">-7.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#5</strong></td>
+                            <td><strong style="color: #fff;">MNHLDG (MNHLDG)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 2.760</td>
+                            <td>RM 2.99</td>
+                            <td>RM 2.760</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 2.720</td>
+                            <td><span class="gain-badge gain-negative">-1.4%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 18 JUN -->
+        <div class="daily-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="calendar" style="color: #6366f1; width: 18px; height: 18px;"></i>
+                    📅 18 Jun 2026 (Khamis)
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Purata Max Gain: <strong style="color: #10b981;">+1.48%</strong></span>
+            </div>
+            <div class="table-wrapper">
+                <table class="backtest-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Kaunter</th>
+                            <th>Gred</th>
+                            <th>Setup</th>
+                            <th>Style</th>
+                            <th>Beli (RM)</th>
+                            <th>Sifu TP</th>
+                            <th>Harga Puncak</th>
+                            <th>Max Gain</th>
+                            <th>Harga Semasa</th>
+                            <th>Current Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td><strong style="color: #fff;">MNHLDG (MNHLDG)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 2.670</td>
+                            <td>RM 2.99</td>
+                            <td>RM 2.720</td>
+                            <td><span class="gain-badge gain-positive">+1.9%</span></td>
+                            <td>RM 2.720</td>
+                            <td><span class="gain-badge gain-positive">+1.9%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td><strong style="color: #fff;">Pentech Holdings Berhad (PENTECH)</strong></td>
+                            <td>Gred A</td>
+                            <td>Healthy Dip</td>
+                            <td>Swing</td>
+                            <td>RM 0.310</td>
+                            <td>RM 0.33</td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+4.8%</span></td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-positive">+4.8%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#3</strong></td>
+                            <td><strong style="color: #fff;">KEYFIELD (KEYFIELD)</strong></td>
+                            <td>Gred A</td>
+                            <td>Pullback</td>
+                            <td>Swing</td>
+                            <td>RM 1.510</td>
+                            <td>RM 2.14</td>
+                            <td>RM 1.520</td>
+                            <td><span class="gain-badge gain-positive">+0.7%</span></td>
+                            <td>RM 1.520</td>
+                            <td><span class="gain-badge gain-positive">+0.7%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#4</strong></td>
+                            <td><strong style="color: #fff;">ISF (ISF)</strong></td>
+                            <td>Gred B</td>
+                            <td>Healthy Dip</td>
+                            <td>Swing</td>
+                            <td>RM 0.530</td>
+                            <td>RM 0.69</td>
+                            <td>RM 0.530</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.525</td>
+                            <td><span class="gain-badge gain-negative">-0.9%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#5</strong></td>
+                            <td><strong style="color: #fff;">SLGC Berhad (SLGC)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Swing/Scalp</td>
+                            <td>RM 0.280</td>
+                            <td>RM 0.36</td>
+                            <td>RM 0.280</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.280</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 19 JUN -->
+        <div class="daily-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="calendar" style="color: #6366f1; width: 18px; height: 18px;"></i>
+                    📅 19 Jun 2026 (Jumaat)
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-dim);">Purata Max Gain: <strong style="color: #10b981;">+0.30%</strong></span>
+            </div>
+            <div class="table-wrapper">
+                <table class="backtest-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Kaunter</th>
+                            <th>Gred</th>
+                            <th>Setup</th>
+                            <th>Style</th>
+                            <th>Beli (RM)</th>
+                            <th>Sifu TP</th>
+                            <th>Harga Puncak</th>
+                            <th>Max Gain</th>
+                            <th>Harga Semasa</th>
+                            <th>Current Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td><strong style="color: #fff;">Pentech Holdings Berhad (PENTECH)</strong></td>
+                            <td>Gred A</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 0.325</td>
+                            <td>RM 0.33</td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.325</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td><strong style="color: #fff;">MNHLDG (MNHLDG)</strong></td>
+                            <td>Gred B</td>
+                            <td>RBS Retest</td>
+                            <td>Scalp</td>
+                            <td>RM 2.720</td>
+                            <td>RM 2.99</td>
+                            <td>RM 2.720</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 2.720</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#3</strong></td>
+                            <td><strong style="color: #fff;">KEYFIELD (KEYFIELD)</strong></td>
+                            <td>Gred A</td>
+                            <td>Pullback</td>
+                            <td>Swing</td>
+                            <td>RM 1.520</td>
+                            <td>RM 2.14</td>
+                            <td>RM 1.520</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 1.520</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#4</strong></td>
+                            <td><strong style="color: #fff;">ECOSHOP (ECOSHOP)</strong></td>
+                            <td>Gred A</td>
+                            <td>Healthy Dip</td>
+                            <td>Swing</td>
+                            <td>RM 1.300</td>
+                            <td>RM 1.31</td>
+                            <td>RM 1.320</td>
+                            <td><span class="gain-badge gain-positive">+1.5%</span></td>
+                            <td>RM 1.320</td>
+                            <td><span class="gain-badge gain-positive">+1.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#5</strong></td>
+                            <td><strong style="color: #fff;">ISF (ISF)</strong></td>
+                            <td>Gred B</td>
+                            <td>Healthy Dip</td>
+                            <td>Swing</td>
+                            <td>RM 0.525</td>
+                            <td>RM 0.69</td>
+                            <td>RM 0.525</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                            <td>RM 0.525</td>
+                            <td><span class="gain-badge gain-flat">0.0%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Explanation Card / Why DNEX is missing -->
+        <div class="explanation-card">
+            <h3><i data-lucide="info"></i> Kenapa DNEX (Dagang NeXchange Berhad) tiada dalam Top 5?</h3>
+            <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 0;">
+                Dagang NeXchange Berhad (DNEX) adalah kaunter berkualiti tinggi (Gred B) yang merupakan Sifu Pick lama (senarai tahun 2000). Walaupun ia mendapat markah penuh untuk <strong>Grade Score (+80)</strong>, <strong>Upside Score (+30)</strong> dari TP Sifu RM 0.70 (upside +55.6%), dan <strong>Portfolio Bonus (+20)</strong>, ia tidak terpilih ke dalam Top 5 kerana perbezaan <strong>Setup Score</strong>:<br><br>
+                • Jarak harga semasa DNEX (RM 0.45) dari paras ATH (RM 0.60) adalah sebanyak <strong>33.3%</strong> (kategori <em>Deep Dip</em>). Kaunter kategori ini hanya mendapat setup score sebanyak <strong>+10 mata</strong>.<br>
+                • Berbanding kaunter ranking ke-5 kita (<strong>ISF</strong>), ia hanya membetul sebanyak <strong>9.5%</strong> dari paras ATH (kategori <em>Healthy Dip</em>) yang memberikan setup score sebanyak <strong>+30 mata</strong>.<br><br>
+                Oleh itu, skor keseluruhan DNEX adalah <strong>137.8 mata</strong> (Ranking #8), tewas sedikit di belakang ISF (<strong>145.7 mata</strong>, Ranking #5). Sistem mengkelaskan DNEX sebagai simpanan swing jangka lebih panjang, bukannya pilihan breakout/pullback segera.
+            </p>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); font-size: 0.8rem;">
+        <p>© 2026 Bursa IPO Tracker. Kajian unjuran berdasarkan model simulasi backtest dengan formula terkunci.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

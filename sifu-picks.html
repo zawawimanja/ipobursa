@@ -375,13 +375,15 @@
             <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
                 <a href="morning-brief.html" class="btn-moomoo"
                     style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
-                    <i data-lucide="sun" style="width: 14px; height: 14px;"></i> <span class="nav-text">Morning
-                        Brief</span>
+                    <i data-lucide="sun" style="width: 14px; height: 14px;"></i> <span class="nav-text">Morning Brief</span>
+                </a>
+                <a href="backtest-results.html" class="btn-moomoo"
+                    style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="database" style="width: 14px; height: 14px;"></i> <span class="nav-text">Backtest</span>
                 </a>
                 <a href="index.html" class="btn-moomoo"
-                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
-                    <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> <span
-                        class="nav-text">Dashboard</span>
+                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> <span class="nav-text">Dashboard</span>
                 </a>
             </div>
         </div>
@@ -478,15 +480,23 @@
             </details>
         </div>
 
-        <!-- 🔥 4 Saham Pilihan Utama Hari Ini (High Win-Rate & Reward) -->
+        <!-- 🔥 5 Saham Pilihan Utama Hari Ini (High Win-Rate & Reward) -->
         <div id="top-4-picks-container"
             style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08)); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);">
             <div
-                style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 0.5rem;">
-                <i data-lucide="flame" style="color: #f59e0b; width: 22px; height: 22px; animation: pulse 1.5s infinite;"></i>
-                <h3
-                    style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #f8fafc; font-weight: 800; letter-spacing: 0.03em;">
-                    🔥 PILIHAN UTAMA: 4 SAHAM KUALITI TERTINGGI HARI INI (High Win-Rate)</h3>
+                style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 0.5rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="flame" style="color: #f59e0b; width: 22px; height: 22px; animation: pulse 1.5s infinite;"></i>
+                    <h3
+                        style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #f8fafc; font-weight: 800; letter-spacing: 0.03em;">
+                        🔥 PILIHAN UTAMA: SAHAM KUALITI TERTINGGI HARI INI</h3>
+                </div>
+                <!-- Filter Fokus -->
+                <div style="display: flex; gap: 0.35rem; background: rgba(0,0,0,0.3); padding: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                    <button class="top-pick-filter-btn active" onclick="filterTopPicks('all')" style="background: var(--primary); border: none; color: #fff; padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s;">Semua</button>
+                    <button class="top-pick-filter-btn" onclick="filterTopPicks('swing')" style="background: transparent; border: none; color: var(--text-dim); padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s;">⚓ Swing</button>
+                    <button class="top-pick-filter-btn" onclick="filterTopPicks('scalp')" style="background: transparent; border: none; color: var(--text-dim); padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.2s;">⚡ Scalp</button>
+                </div>
             </div>
             <div id="top-4-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
                 <!-- Diisi secara dinamik menerusi JavaScript -->
@@ -813,6 +823,24 @@
 
         const explicitSkips = ['agmo', 'wentel-engineering', 'wentel'];
         let activeViewMode = 'groups';
+        window.selectedTopFilter = 'all';
+
+        function filterTopPicks(filterType) {
+            window.selectedTopFilter = filterType;
+            const btns = document.querySelectorAll('.top-pick-filter-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = 'var(--text-dim)';
+                btn.style.background = 'transparent';
+            });
+            const targetBtn = Array.from(btns).find(btn => btn.getAttribute('onclick').includes(filterType));
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                targetBtn.style.color = '#fff';
+                targetBtn.style.background = 'var(--primary)';
+            }
+            renderTables();
+        }
 
         function getOpenPerformance(ipo) {
             if (!ipo.openPrice || !ipo.price || ipo.price === 0) return 0;
@@ -1120,7 +1148,20 @@
                     top4Grid.innerHTML = '';
                     
                     // Score each stock in validPicks
-                    const scoredPicks = [...validPicks].map(ipo => {
+                    let scoredPicks = [...validPicks].filter(ipo => {
+                        const upside = ipo.upside || 0;
+                        const grade = getIpoGrade(ipo).grade;
+                        const curPrice = ipo.currentPrice || 0;
+                        const highPrice = ipo.highPrice || 0;
+                        const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+                        const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+                        
+                        // Tighten rules for Top Picks Grid: Discard if upside is less than 10%
+                        if (upside < 10.0) return false;
+                        // Discard if Grade is C, UNLESS it is at ATH breakout or a momentum rebound
+                        if (grade === 'C' && !isActualAth && !isMomentumRebound) return false;
+                        return true;
+                    }).map(ipo => {
                         const curPrice = ipo.currentPrice || 0;
                         const highPrice = ipo.highPrice || 0;
                         const tp = ipo.targetPrice || 0;
@@ -1159,19 +1200,28 @@
                             score += 20; // Handpicked stocks get extra priority
                         }
                         
-                        return { ipo, score, distToAth, grade, isNearAth, isHealthyDip };
+                        const styleName = isNearAth ? (upside >= 15.0 ? 'Swing/Scalp' : 'Scalp') : 'Swing';
+                        
+                        return { ipo, score, distToAth, grade, isNearAth, isHealthyDip, styleName };
                     });
+                    
+                    // Apply window.selectedTopFilter
+                    if (window.selectedTopFilter === 'swing') {
+                        scoredPicks = scoredPicks.filter(x => x.styleName.includes('Swing'));
+                    } else if (window.selectedTopFilter === 'scalp') {
+                        scoredPicks = scoredPicks.filter(x => x.styleName.includes('Scalp'));
+                    }
                     
                     // Sort by score descending
                     scoredPicks.sort((a, b) => b.score - a.score);
                     
-                    // Take top 4
-                    const top4 = scoredPicks.slice(0, 4);
+                    // Take top 5
+                    const top5 = scoredPicks.slice(0, 5);
                     
-                    if (top4.length === 0) {
+                    if (top5.length === 0) {
                         top4Grid.innerHTML = '<div style="color: var(--text-dim); text-align: center; grid-column: 1/-1; font-size: 0.85rem; padding: 1rem;">Tiada kaunter bersesuaian untuk Pilihan Utama hari ini.</div>';
                     } else {
-                        top4.forEach((item, index) => {
+                        top5.forEach((item, index) => {
                             const ipo = item.ipo;
                             const symbol = ipo.symbol || (ipo.id || '').toUpperCase();
                             const curPrice = Number(ipo.currentPrice || 0).toFixed(3);

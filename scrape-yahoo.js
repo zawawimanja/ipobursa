@@ -73,29 +73,43 @@ async function updateLivePricesYahoo() {
             let url = `https://finance.yahoo.com/quote/${yahooSymbol}`;
             
             try {
-                console.log(`Fetching price for ${ipo.companyName} (${yahooSymbol})...`);
+                console.log(`Fetching price and change for ${ipo.companyName} (${yahooSymbol})...`);
                 await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
                 
-                // Cari harga guna selector Yahoo Finance terkini
-                const currentPriceStr = await page.evaluate((sym) => {
-                    // Try data-field regularMarketPrice for this specific symbol
+                // Cari harga & peratusan perubahan guna selector Yahoo Finance terkini
+                const results = await page.evaluate((sym) => {
                     let priceElement = document.querySelector(`fin-streamer[data-symbol="${sym}"][data-field="regularMarketPrice"]`)
                                     || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"][data-field="regularMarketPrice"]`);
-                    if (priceElement) return priceElement.getAttribute('value') || priceElement.innerText;
+                    let price = priceElement ? (priceElement.getAttribute('value') || priceElement.innerText) : null;
                     
-                    // Fallback to any streamer for this symbol
-                    let fallback = document.querySelector(`fin-streamer[data-symbol="${sym}"]`)
-                                || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"]`);
-                    if (fallback) return fallback.getAttribute('value') || fallback.innerText;
+                    let changeElement = document.querySelector(`fin-streamer[data-symbol="${sym}"][data-field="regularMarketChangePercent"]`)
+                                     || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"][data-field="regularMarketChangePercent"]`);
+                    let change = changeElement ? (changeElement.getAttribute('value') || changeElement.innerText) : null;
                     
-                    return null;
+                    if (!price) {
+                        let fallback = document.querySelector(`fin-streamer[data-symbol="${sym}"]`)
+                                    || document.querySelector(`fin-streamer[data-symbol="${sym.toUpperCase()}"]`);
+                        if (fallback) price = fallback.getAttribute('value') || fallback.innerText;
+                    }
+                    
+                    return { price, change };
                 }, yahooSymbol);
 
-                if (currentPriceStr) {
-                    const currentPrice = parseFloat(currentPriceStr.replace(/,/g, ''));
+                if (results.price) {
+                    const currentPrice = parseFloat(results.price.replace(/,/g, ''));
                     if (!isNaN(currentPrice)) {
                         ipo.currentPrice = currentPrice;
                         console.log(`   -> Updated ${yahooSymbol} price to RM ${currentPrice}`);
+                        
+                        if (results.change) {
+                            const cleanChange = results.change.replace(/[()%+]/g, '').trim();
+                            const dailyChange = parseFloat(cleanChange);
+                            if (!isNaN(dailyChange)) {
+                                const isNegative = results.change.includes('-');
+                                ipo.dailyChange = isNegative ? -Math.abs(dailyChange) : Math.abs(dailyChange);
+                                console.log(`   -> Updated ${yahooSymbol} daily change to ${ipo.dailyChange.toFixed(2)}%`);
+                            }
+                        }
                         
                         // Recalculate performance
                         if (ipo.price > 0) {

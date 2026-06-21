@@ -8,6 +8,12 @@ try {
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     
+    const overridesPath = path.join(__dirname, '..', 'overrides.json');
+    let overrides = {};
+    if (fs.existsSync(overridesPath)) {
+        overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
+    }
+    
     // Extract stockProfiles
     const stockProfilesMatch = htmlContent.match(/const stockProfiles = \{([\s\S]*?)\n        \};/);
     if (!stockProfilesMatch) {
@@ -86,7 +92,14 @@ try {
         const market = (ipo.market || '').toLowerCase();
         const os = ipo.oversubscription || ipo.os || 10;
         
-        if (stockProfiles[ipo.id]) {
+        const override = overrides[ipo.id];
+        
+        if (override && override.sifuTargetPrice !== undefined) {
+            sifuTP = override.sifuTargetPrice;
+            // Respect manual target price without applying discounts, unless user provided calibratedSifuTargetPrice explicitly
+            calibratedTP = override.calibratedSifuTargetPrice !== undefined ? override.calibratedSifuTargetPrice : override.sifuTargetPrice;
+            source = `overrides.json (Manual Override)`;
+        } else if (stockProfiles[ipo.id]) {
             const p = stockProfiles[ipo.id];
             // Calculate Valuation 1 for Projection F (first projection column)
             // Sifu Sheets calculates EPS = (patF / totalShares) * 100

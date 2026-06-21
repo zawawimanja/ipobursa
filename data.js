@@ -120,7 +120,7 @@ const IPO_DATA = [
     "dailyChange": 30,
     "openPrice": 0.29,
     "closePrice": 0.26,
-    "calibratedSifuTargetPrice": 0.23
+    "calibratedSifuTargetPrice": 0.33
   },
   {
     "id": "mm-computer",
@@ -152,7 +152,7 @@ const IPO_DATA = [
     "currentPrice": 0.265,
     "performance": "+20.45%",
     "dailyChange": 2.27,
-    "calibratedSifuTargetPrice": 0.55
+    "calibratedSifuTargetPrice": 0.24
   },
   {
     "id": "1doc",
@@ -254,9 +254,9 @@ const IPO_DATA = [
     "analystInsight": "OUTLIER PERFORMANCE: Despite a very low oversubscription of 3.23x (Grade C risk), the stock has defied expectations with a +47.5% surge. Likely driven by Public Bank's strong backing and low entry price.",
     "highPrice": 0.37,
     "symbol": "ADNEX",
-    "sifuTargetPrice": 0.2,
+    "sifuTargetPrice": 0.18,
     "dailyChange": 0,
-    "calibratedSifuTargetPrice": 0.18,
+    "calibratedSifuTargetPrice": 0.16,
     "avgTP": 0.18
   },
   {
@@ -306,7 +306,7 @@ const IPO_DATA = [
     "symbol": "AMBEST",
     "sifuTargetPrice": 0.34,
     "dailyChange": 0.3,
-    "calibratedSifuTargetPrice": 0.53
+    "calibratedSifuTargetPrice": 0.34
   },
   {
     "id": "ams-material",
@@ -335,7 +335,7 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "sifuTargetPrice": 0.33,
     "dailyChange": 3.9,
-    "calibratedSifuTargetPrice": 0.43
+    "calibratedSifuTargetPrice": 0.33
   },
   {
     "id": "carsome",
@@ -442,7 +442,7 @@ const IPO_DATA = [
     "symbol": "EIPOWER",
     "sifuTargetPrice": 0.61,
     "dailyChange": 12.9,
-    "calibratedSifuTargetPrice": 0.68
+    "calibratedSifuTargetPrice": 0.61
   },
   {
     "id": "empire-premium",
@@ -556,7 +556,7 @@ const IPO_DATA = [
     "analystInsight": "⚠️ <b>AVOID / NOT FOR SCALPING (GRADE C)</b><br>Hock Soon Capital mencatatkan ketahanan kos yang luar biasa selepas penyingkiran subsidi ayam (poultry) dengan margin kekal pada 17.6%. Walau bagaimanapun, harga tawaran memberi potensi peningkatan (upside) yang amat rendah (3% hingga 5%) untuk scalp.<br><br>📊 <b>Kelebihan Utama:</b><br>• PE Terbitan sangat murah (6.2x - 6.9x) vs poultry peers.<br>• Margin kekal stabil pada 17.6% pasca pemotongan subsidi.",
     "sifuTargetPrice": 0.63,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.69
+    "calibratedSifuTargetPrice": 0.63
   },
   {
     "id": "inspace-creation",
@@ -620,7 +620,7 @@ const IPO_DATA = [
     "analystInsight": "🚀 <b>SOLID FUNDAMENTAL & 1ST SOLID STORY IPO (2026)</b><br>ISF menunjukkan fundamental yang sangat kukuh dengan ROE 68%, PAT Margin 25%, dan CAGR Hasil 25%. Kadar Gearing rendah (GR 0.3) dengan nisbah semasa selesa (CR 1.5) serta perlindungan buku pesanan (OB) sebanyak 3x. Walaupun kelihatan premium pada harga IPO (PE 34.5x), unjuran Fwd PE adalah sangat murah sekitar 12.7x berdasarkan PAT FYE26 unjuran RM25.9 juta. Sifu mengambil pendekatan mengambil sebahagian untung (partial TP) awal dan mengekalkan baki pegangan 40% (~820,000 unit) di bawah strategi <i>let profits grow</i>. Nasihat beliau: disiplin, kawalan risiko, dan patuhi pelan pelaburan tersendiri kerana <i>no one size fits all</i>.",
     "sifuTargetPrice": 0.69,
     "dailyChange": -0.3,
-    "calibratedSifuTargetPrice": 0.31
+    "calibratedSifuTargetPrice": 0.69
   },
   {
     "id": "keeming",
@@ -649,7 +649,7 @@ const IPO_DATA = [
     "symbol": "KEEMING",
     "sifuTargetPrice": 0.68,
     "dailyChange": 8,
-    "calibratedSifuTargetPrice": 0.31
+    "calibratedSifuTargetPrice": 0.68
   },
   {
     "id": "manforce-group",
@@ -736,7 +736,7 @@ const IPO_DATA = [
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGM (One Gasmaster) merosot -12% pada hari pertama penyenaraian (tutup RM0.22). Sektor pemantauan alam sekitar (Environmental Monitoring) mempunyai profil pertumbuhan yang perlahan, dan walaupun disokong oleh Malacca Securities, langganan runcit 20x tidak cukup kuat untuk mengatasi tekanan jualan.",
     "sifuTargetPrice": 0.3,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.22
+    "calibratedSifuTargetPrice": 0.3
   },
   {
     "id": "ogx",
@@ -850,7 +850,7 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "sifuTargetPrice": 1.58,
     "dailyChange": 1.7,
-    "calibratedSifuTargetPrice": 1.05
+    "calibratedSifuTargetPrice": 1.58
   },
   {
     "id": "sunmed",
@@ -907,7 +907,7 @@ const IPO_DATA = [
     "analystInsight": "📊 <b>NEUTRAL SWING PLAY (GRADE B)</b><br>Teamstar Berhad didagangkan sedikit di bawah harga IPO (-5.77%) walaupun mendapat langganan runcit sebanyak 35.2x. Sektor pembuatan aluminium mempunyai potensi industri tetapi margin terkesan oleh kenaikan kos bahan mentah global. Menarik untuk dipantau jika harga stabil di bawah PE 10.5x.",
     "sifuTargetPrice": 0.32,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.23
+    "calibratedSifuTargetPrice": 0.32
   },
   {
     "id": "a1akk",
@@ -1028,7 +1028,7 @@ const IPO_DATA = [
     "symbol": "CBHB",
     "sifuTargetPrice": 0.38,
     "dailyChange": 4.5,
-    "calibratedSifuTargetPrice": 0.53
+    "calibratedSifuTargetPrice": 0.38
   },
   {
     "id": "cheeding",
@@ -1369,7 +1369,7 @@ const IPO_DATA = [
     "symbol": "IAB",
     "sifuTargetPrice": 0.71,
     "dailyChange": 3.82,
-    "calibratedSifuTargetPrice": 1.35
+    "calibratedSifuTargetPrice": 0.71
   },
   {
     "id": "icents",
@@ -9555,6 +9555,29 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 1.3,
     "avgTP": 1.3,
     "dailyChange": 0
+  },
+  {
+    "id": "dnex",
+    "companyName": "Dagang NeXchange Berhad",
+    "market": "Main Market",
+    "listingDate": "01-Jan-2000",
+    "year": 2000,
+    "price": 0.2,
+    "currentPrice": 0.45,
+    "highPrice": 0.6,
+    "performance": "+125.00%",
+    "os": 10,
+    "ib": "N/A",
+    "sector": "Technology",
+    "predictedGrade": "B",
+    "stage": 5,
+    "status": "Listed",
+    "shariah": true,
+    "openPrice": 0.2,
+    "closePrice": 0.45,
+    "strategy": "Swing",
+    "symbol": "DNEX",
+    "sifuTargetPrice": 0.7
   }
 ];
 
