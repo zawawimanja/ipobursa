@@ -1,6 +1,4 @@
 const fs = require('fs');
-const path = require('path');
-
 const db = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
 const sifuPortfolio = [
@@ -10,10 +8,6 @@ const sifuPortfolio = [
 ];
 const sifuPortfolioSet = new Set(sifuPortfolio.map(s => s.toLowerCase()));
 const explicitSkips = ['agmo', 'wentel-engineering', 'wentel'];
-
-function floatEquals(a, b, tolerance = 0.005) {
-    return Math.abs(a - b) < tolerance;
-}
 
 function getIpoGrade(ipo) {
     if (!ipo.market || ipo.market === 'Unknown') return { grade: 'Unrated' };
@@ -44,7 +38,7 @@ function getIpoGrade(ipo) {
 
     const openPremium = (ipo.openPrice && ipo.price) ? ((ipo.openPrice - ipo.price) / ipo.price) * 100 : 0;
     const isStrongGreen = openPremium >= 5.0;
-    const isFlat = ipo.openPrice && ipo.price && floatEquals(ipo.openPrice, ipo.price);
+    const isFlat = ipo.openPrice && ipo.price && Math.abs(ipo.openPrice - ipo.price) < 0.005;
     const isPositiveOpen = ipo.openPrice && ipo.price && ipo.openPrice > ipo.price;
     const isHighPE = pe > 18.0;
     const isRed = (ipo.openPrice && ipo.price) ? (ipo.openPrice < ipo.price) : false;
@@ -129,144 +123,112 @@ function getIpoGrade(ipo) {
     return { grade: 'Unrated' };
 }
 
-// ---------------------------
-// FILTER & SCORE LOGIC
-// ---------------------------
-const validPicks = db.filter(ipo => {
-    const idLower = ipo.id ? ipo.id.toLowerCase() : '';
-    const symbolLower = (ipo.symbol || '').toLowerCase();
-    const isSifuPick = sifuPortfolioSet.has(idLower) || sifuPortfolioSet.has(symbolLower);
-    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+console.log("Analyzing why other stocks were excluded from Top Picks:\n");
 
+db.forEach(ipo => {
+    const id = ipo.id || ipo.symbol || '';
+    const symbol = ipo.symbol || ipo.id || '';
+    const name = ipo.companyName || '';
+    
+    // Only look at listed/listed-stage stocks
+    if (ipo.status !== 'Listed' && ipo.stage !== 5) return;
+    
+    const reasons = [];
+    
+    // 1. Shariah check
+    if (ipo.shariah !== true) {
+        reasons.push("Bukan Shariah");
+    }
+    
+    // 2. Grade check
     const grade = getIpoGrade(ipo).grade;
-    if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
-
+    const isSifuPick = sifuPortfolioSet.has(id.toLowerCase()) || sifuPortfolioSet.has(symbol.toLowerCase());
+    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+    
+    if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) {
+        reasons.push(`Gred (${grade}) bukan A/B (bukan Sifu Pick / Momentum Rebound)`);
+    }
+    
+    // 3. Price check
     const curPrice = ipo.currentPrice || 0;
     const ipoPrice = ipo.price || 0;
-    const passesIpoPriceCheck = curPrice >= ipoPrice || isMomentumRebound;
-
-    const isMatch = ipo.shariah === true &&
-        (ipo.stage === 5 || ipo.status === 'Listed') &&
-        curPrice > 0 &&
-        passesIpoPriceCheck;
-
-    if (!isMatch) return false;
-
+    if (curPrice <= 0) {
+        reasons.push("Tiada harga semasa");
+    } else if (curPrice < ipoPrice && !isMomentumRebound) {
+        reasons.push(`Harga semasa (RM ${curPrice.toFixed(3)}) bawah harga IPO (RM ${ipoPrice.toFixed(2)})`);
+    }
+    
+    // 4. Age and ATH check
     const highPrice = ipo.highPrice || 0;
-    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
-    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
-    const isUnderIpo = curPrice < ipoPrice;
-
     if (!isSifuPick && !isMomentumRebound) {
         const isNearAth = ipo.highPrice ? (ipo.currentPrice >= ipo.highPrice * 0.95) : false;
         if (ipo.listingDate) {
             const listDate = new Date(ipo.listingDate);
             const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
-            if (ageInDays > 365 && !isNearAth) return false;
+            if (ageInDays > 365 && !isNearAth) {
+                reasons.push(`Umur > 365 hari dan bukan berdekatan ATH`);
+            }
         } else {
             const isRecent = ipo.year >= 2024;
-            if (!isRecent && !isNearAth) return false;
+            if (!isRecent && !isNearAth) {
+                reasons.push(`IPO lama (< 2024) dan bukan berdekatan ATH`);
+            }
         }
     }
-
+    
+    // 5. Downtrend check
     const isRecentListing = ipo.year >= 2025;
     const isDowntrend = (highPrice && isRecentListing) ? (ipo.currentPrice <= highPrice * 0.75) : false;
-
-    if (ipo.outlier && !isSifuPick && !isMomentumRebound) {
-        if (upside < 10.0) return false;
+    if (isDowntrend && !isMomentumRebound) {
+        reasons.push(`Downtrend / Kejatuhan dalam dari ATH (> 25% drop dari ATH)`);
     }
-
-    if (explicitSkips.includes(idLower) || explicitSkips.includes(symbolLower)) return false;
-
-    const isActualAth = highPrice > 0 && ipo.currentPrice >= (highPrice - 0.005);
-    if (!isActualAth && !isMomentumRebound && highPrice > 0 && Math.abs(targetPrice - highPrice) < 0.005) return false;
-
-    if (targetPrice > 0) {
-        if (upside < 10.0 && !isActualAth && !isMomentumRebound) {
-            if (isDowntrend) return false;
+    
+    // 6. Target Price & Upside check
+    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
+    const upside = targetPrice > 0 ? ((targetPrice - curPrice) / curPrice) * 100 : 0;
+    if (targetPrice <= 0) {
+        reasons.push("Tiada Target Price (TP)");
+    } else if (upside < 10.0) {
+        const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+        if (!isActualAth && !isMomentumRebound) {
+            reasons.push(`Upside rendah (+${upside.toFixed(1)}% < 10%) dan bukan breakout/rebound`);
         }
-    } else {
-        return false;
     }
-
-    const ipoPriceVal = ipo.price || 0;
-    const highAboveIpo = highPrice ? ((highPrice - ipoPriceVal) / ipoPriceVal) * 100 : 0;
-    if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) return false;
-    if (isDowntrend && !isMomentumRebound) return false;
-
+    
+    // 7. Anti-stagnant check
+    const highAboveIpo = highPrice ? ((highPrice - ipoPrice) / ipoPrice) * 100 : 0;
+    if (ipo.year < 2026 && highAboveIpo < 8.0 && !isMomentumRebound) {
+        reasons.push(`Saham mati/stagnant (kenaikan ATH atas IPO < 8%)`);
+    }
+    
+    // 8. Healthy pullback check
     const isRecentIpo = ipo.year >= 2024;
     const isHealthyPullback = highPrice ? (curPrice >= highPrice * 0.80) : true;
-    if (isRecentIpo && !isHealthyPullback && !isMomentumRebound) return false;
-
-    return true;
-}).map(ipo => {
-    const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
-    const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : null;
-    return { ...ipo, targetPrice, upside };
-});
-
-// Scoring Top 4 Grid logic
-let scoredPicks = validPicks.map(ipo => {
-    const curPrice = ipo.currentPrice || 0;
-    const highPrice = ipo.highPrice || 0;
-    const tp = ipo.targetPrice || 0;
-    const upside = ipo.upside || 0;
-    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
-    const grade = getIpoGrade(ipo).grade;
-
-    let score = 0;
-    if (grade === 'A') score += 100;
-    else if (grade === 'B') score += 80;
-    else if (grade === 'C') score += 40;
-
-    const isNearAth = distToAth <= 5.0 && distToAth >= 0;
-    const isHealthyDip = distToAth > 5.0 && distToAth <= 20.0;
-
-    if (isNearAth) score += 50;
-    else if (isHealthyDip) score += 30;
-    else score += 10;
-
-    if (upside > 0) {
-        score += Math.min(30, upside * 0.5);
-    } else {
-        score -= 100;
+    if (isRecentIpo && !isHealthyPullback && !isMomentumRebound) {
+        reasons.push(`Deep Pullback (> 20% drop dari ATH)`);
+    }
+    
+    // 9. Skip List
+    if (explicitSkips.includes(id.toLowerCase()) || explicitSkips.includes(symbol.toLowerCase())) {
+        reasons.push("Ada dalam senarai Skip");
     }
 
-    const isPortfolio = sifuPortfolioSet.has((ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((ipo.symbol || '').toLowerCase());
-    if (isPortfolio) score += 20;
+    if (grade === 'C' && reasons.length === 0) {
+        const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+        if (!isActualAth && !isMomentumRebound) {
+            reasons.push("Gred C (bukan breakout ATH atau momentum rebound)");
+        }
+    }
 
-    const styleName = isNearAth ? (upside >= 15.0 ? 'Swing/Scalp' : 'Scalp') : 'Swing';
-
-    return { ipo, score, distToAth, grade, isNearAth, isHealthyDip, styleName, upside };
-});
-
-// Apply our tightened filter overrides!
-scoredPicks = scoredPicks.filter(x => {
-    if (x.upside < 10.0) return false;
-    
-    // Discard if Grade is C, UNLESS it is at ATH breakout, a momentum rebound, a Sifu Portfolio stock, or in a Healthy Dip/RBS Retest (distToAth <= 20%) to ride strong trends Sifu might have missed
-    const isActualAth = x.ipo.highPrice > 0 && x.ipo.currentPrice >= (x.ipo.highPrice - 0.005);
-    const isMomentumRebound = typeof x.ipo.dailyChange === 'number' && x.ipo.dailyChange >= 10.0;
-    const isSifuPick = sifuPortfolioSet.has((x.ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((x.ipo.symbol || '').toLowerCase());
-    
-    if (x.grade === 'C' && !isActualAth && !isMomentumRebound && !isSifuPick && x.distToAth > 20.0) return false;
-    return true;
-});
-
-// Filter by Swing style
-const swingPicks = scoredPicks.filter(x => x.styleName.includes('Swing'));
-swingPicks.sort((a, b) => b.score - a.score);
-
-console.log('\n--- NEW TOP SWING PICKS ---');
-swingPicks.slice(0, 5).forEach((item, index) => {
-    console.log(`Top #${index+1}: ${item.ipo.companyName} (${item.ipo.symbol || item.ipo.id})`);
-    console.log(`  Grade: Gred ${item.grade}`);
-    console.log(`  Price: RM ${item.ipo.currentPrice.toFixed(3)}`);
-    console.log(`  Sifu TP: RM ${Number(item.ipo.targetPrice || 0).toFixed(2)}`);
-    console.log(`  Upside: +${item.upside.toFixed(1)}%`);
-    console.log(`  Distance to ATH: ${item.distToAth.toFixed(1)}%`);
-    console.log(`  Setup: ${item.isNearAth ? 'RBS Retest' : (item.isHealthyDip ? 'Healthy Dip' : 'Pullback')}`);
-    console.log(`  Score: ${item.score.toFixed(1)}`);
-    console.log('-----------------------------');
+    if (reasons.length > 0) {
+        console.log(`❌ ${name} (${symbol.toUpperCase()})`);
+        console.log(`   Gred: Gred ${grade} | Harga: RM ${curPrice.toFixed(3)} | TP: RM ${targetPrice.toFixed(2)} (Upside: ${upside.toFixed(1)}%)`);
+        console.log(`   Sebab Disingkirkan:`);
+        reasons.forEach(r => console.log(`     - ${r}`));
+        console.log();
+    } else {
+        console.log(`✅ ${name} (${symbol.toUpperCase()}) - PASSED`);
+        console.log(`   Gred: Gred ${grade} | Harga: RM ${curPrice.toFixed(3)} | TP: RM ${targetPrice.toFixed(2)} (Upside: ${upside.toFixed(1)}%)`);
+        console.log();
+    }
 });

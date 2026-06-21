@@ -5421,7 +5421,10 @@ const IPO_DATA = [
     "openPrice": 0.6400119999999999,
     "closePrice": 0.7399910000000001,
     "symbol": "GREATEC",
-    "dailyChange": -0.8
+    "dailyChange": -0.8,
+    "sifuTargetPrice": 3.12,
+    "calibratedSifuTargetPrice": 3.12,
+    "targetPrice": 3.12
   },
   {
     "id": "hpmt",

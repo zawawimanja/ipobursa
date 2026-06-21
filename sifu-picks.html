@@ -1039,11 +1039,14 @@
                     const isSifuPick = sifuPortfolio.includes(idLower) || sifuPortfolio.includes(symbolLower);
                     const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
 
-                    // Allow Grade A or B, or Sifu picks regardless of grade, or momentum rebound (+10% gain)
-                    const grade = getIpoGrade(ipo).grade;
-                    if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
-
                     const curPrice = ipo.currentPrice || 0;
+                    const highPrice = ipo.highPrice || 0;
+                    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+
+                    // Allow Grade A or B, or Sifu picks, or momentum rebound (+10% gain), or Grade C with trend setup (distToAth <= 20%)
+                    const grade = getIpoGrade(ipo).grade;
+                    const isTrendingGradeC = grade === 'C' && (distToAth <= 20.0 || isMomentumRebound || isSifuPick);
+                    if (grade !== 'A' && grade !== 'B' && !isTrendingGradeC) return false;
                     const ipoPrice = ipo.price || 0;
                     const passesIpoPriceCheck = curPrice >= ipoPrice || isMomentumRebound;
 
@@ -1158,8 +1161,11 @@
                         
                         // Tighten rules for Top Picks Grid: Discard if upside is less than 10%
                         if (upside < 10.0) return false;
-                        // Discard if Grade is C, UNLESS it is at ATH breakout or a momentum rebound
-                        if (grade === 'C' && !isActualAth && !isMomentumRebound) return false;
+                        
+                        // Discard if Grade is C, UNLESS it is at ATH breakout, a momentum rebound, a Sifu Portfolio stock, or in a Healthy Dip/RBS Retest (distToAth <= 20%) to ride strong trends Sifu might have missed
+                        const isSifuPick = sifuPortfolio.includes((ipo.id || '').toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
+                        const distToAthVal = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+                        if (grade === 'C' && !isActualAth && !isMomentumRebound && !isSifuPick && distToAthVal > 20.0) return false;
                         return true;
                     }).map(ipo => {
                         const curPrice = ipo.currentPrice || 0;

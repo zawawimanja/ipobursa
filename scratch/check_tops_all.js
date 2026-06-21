@@ -1,6 +1,4 @@
 const fs = require('fs');
-const path = require('path');
-
 const db = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
 const sifuPortfolio = [
@@ -129,19 +127,21 @@ function getIpoGrade(ipo) {
     return { grade: 'Unrated' };
 }
 
-// ---------------------------
-// FILTER & SCORE LOGIC
-// ---------------------------
 const validPicks = db.filter(ipo => {
     const idLower = ipo.id ? ipo.id.toLowerCase() : '';
     const symbolLower = (ipo.symbol || '').toLowerCase();
     const isSifuPick = sifuPortfolioSet.has(idLower) || sifuPortfolioSet.has(symbolLower);
     const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
 
-    const grade = getIpoGrade(ipo).grade;
-    if (grade !== 'A' && grade !== 'B' && !isSifuPick && !isMomentumRebound) return false;
-
     const curPrice = ipo.currentPrice || 0;
+    const highPrice = ipo.highPrice || 0;
+    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+
+    // Allow Grade A or B, or Sifu picks, or momentum rebound (+10% gain), or Grade C with trend setup (distToAth <= 20%)
+    const grade = getIpoGrade(ipo).grade;
+    const isTrendingGradeC = grade === 'C' && (distToAth <= 20.0 || isMomentumRebound || isSifuPick);
+    if (grade !== 'A' && grade !== 'B' && !isTrendingGradeC) return false;
+
     const ipoPrice = ipo.price || 0;
     const passesIpoPriceCheck = curPrice >= ipoPrice || isMomentumRebound;
 
@@ -152,11 +152,8 @@ const validPicks = db.filter(ipo => {
 
     if (!isMatch) return false;
 
-    const highPrice = ipo.highPrice || 0;
     const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
     const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
-    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
-    const isUnderIpo = curPrice < ipoPrice;
 
     if (!isSifuPick && !isMomentumRebound) {
         const isNearAth = ipo.highPrice ? (ipo.currentPrice >= ipo.highPrice * 0.95) : false;
@@ -206,67 +203,69 @@ const validPicks = db.filter(ipo => {
     return { ...ipo, targetPrice, upside };
 });
 
-// Scoring Top 4 Grid logic
-let scoredPicks = validPicks.map(ipo => {
+const scoredPicks = validPicks.filter(ipo => {
+    const upside = ipo.upside || 0;
+    const grade = getIpoGrade(ipo).grade;
+    const curPrice = ipo.currentPrice || 0;
+    const highPrice = ipo.highPrice || 0;
+    const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+    const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+    
+    if (upside < 10.0) return false;
+    
+    // Discard if Grade is C, UNLESS it is at ATH breakout, a momentum rebound, a Sifu Portfolio stock, or in a Healthy Dip/RBS Retest (distToAth <= 20%) to ride strong trends Sifu might have missed
+    const isSifuPick = sifuPortfolioSet.has((ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((ipo.symbol || '').toLowerCase());
+    const distToAthVal = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+    if (grade === 'C' && !isActualAth && !isMomentumRebound && !isSifuPick && distToAthVal > 20.0) return false;
+    return true;
+}).map(ipo => {
     const curPrice = ipo.currentPrice || 0;
     const highPrice = ipo.highPrice || 0;
     const tp = ipo.targetPrice || 0;
     const upside = ipo.upside || 0;
     const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
     const grade = getIpoGrade(ipo).grade;
-
+    
     let score = 0;
     if (grade === 'A') score += 100;
     else if (grade === 'B') score += 80;
     else if (grade === 'C') score += 40;
-
+    
     const isNearAth = distToAth <= 5.0 && distToAth >= 0;
     const isHealthyDip = distToAth > 5.0 && distToAth <= 20.0;
-
-    if (isNearAth) score += 50;
-    else if (isHealthyDip) score += 30;
-    else score += 10;
-
+    
+    if (isNearAth) {
+        score += 50;
+    } else if (isHealthyDip) {
+        score += 30;
+    } else {
+        score += 10;
+    }
+    
     if (upside > 0) {
         score += Math.min(30, upside * 0.5);
     } else {
         score -= 100;
     }
-
+    
     const isPortfolio = sifuPortfolioSet.has((ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((ipo.symbol || '').toLowerCase());
-    if (isPortfolio) score += 20;
-
+    if (isPortfolio) {
+        score += 20;
+    }
+    
     const styleName = isNearAth ? (upside >= 15.0 ? 'Swing/Scalp' : 'Scalp') : 'Swing';
-
+    
     return { ipo, score, distToAth, grade, isNearAth, isHealthyDip, styleName, upside };
 });
 
-// Apply our tightened filter overrides!
-scoredPicks = scoredPicks.filter(x => {
-    if (x.upside < 10.0) return false;
-    
-    // Discard if Grade is C, UNLESS it is at ATH breakout, a momentum rebound, a Sifu Portfolio stock, or in a Healthy Dip/RBS Retest (distToAth <= 20%) to ride strong trends Sifu might have missed
-    const isActualAth = x.ipo.highPrice > 0 && x.ipo.currentPrice >= (x.ipo.highPrice - 0.005);
-    const isMomentumRebound = typeof x.ipo.dailyChange === 'number' && x.ipo.dailyChange >= 10.0;
-    const isSifuPick = sifuPortfolioSet.has((x.ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((x.ipo.symbol || '').toLowerCase());
-    
-    if (x.grade === 'C' && !isActualAth && !isMomentumRebound && !isSifuPick && x.distToAth > 20.0) return false;
-    return true;
-});
-
-// Filter by Swing style
-const swingPicks = scoredPicks.filter(x => x.styleName.includes('Swing'));
-swingPicks.sort((a, b) => b.score - a.score);
-
-console.log('\n--- NEW TOP SWING PICKS ---');
-swingPicks.slice(0, 5).forEach((item, index) => {
-    console.log(`Top #${index+1}: ${item.ipo.companyName} (${item.ipo.symbol || item.ipo.id})`);
-    console.log(`  Grade: Gred ${item.grade}`);
-    console.log(`  Price: RM ${item.ipo.currentPrice.toFixed(3)}`);
-    console.log(`  Sifu TP: RM ${Number(item.ipo.targetPrice || 0).toFixed(2)}`);
-    console.log(`  Upside: +${item.upside.toFixed(1)}%`);
-    console.log(`  Distance to ATH: ${item.distToAth.toFixed(1)}%`);
-    console.log(`  Setup: ${item.isNearAth ? 'RBS Retest' : (item.isHealthyDip ? 'Healthy Dip' : 'Pullback')}`);
-    console.log(`  Score: ${item.score.toFixed(1)}`);
-    console.log('-----------------------------');
-});
+console.log(JSON.stringify(scoredPicks.map(x => ({
+    symbol: x.ipo.symbol || x.ipo.id,
+    companyName: x.ipo.companyName,
+    grade: x.grade,
+    score: x.score,
+    styleName: x.styleName,
+    upside: x.upside,
+    price: x.ipo.currentPrice,
+    tp: x.targetPrice,
+    distToAth: x.distToAth
+})), null, 2));

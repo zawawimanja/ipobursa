@@ -667,13 +667,16 @@ No rating"></textarea>
 
         const isMomentumRebound = typeof stock.dailyChange === 'number' && stock.dailyChange >= 10.0;
 
+        const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+        const isAllowedGrade = grade === 'A' || grade === 'B' || isSifuPick || distToAth <= 20.0;
+
         if (!shariah) {
             verdict = 'skip';
             reason = 'Bukan Shariah';
         } else if (isMomentumRebound) {
             verdict = 'buy';
             reason = `Lonjakan Momentum (Reversal +${stock.dailyChange.toFixed(1)}% Harian)`;
-        } else if (grade === 'C' && !isSifuPick) {
+        } else if (grade === 'C' && !isAllowedGrade) {
             verdict = 'skip';
             reason = 'Grade C — AVOID';
         } else if (dbEntry.outlier && !isSifuPick) {
@@ -696,10 +699,10 @@ No rating"></textarea>
         } else if (isDowntrend) {
             verdict = 'skip';
             reason = 'Downtrend (Jatuh >25% dari puncak) — tiada momentum';
-        } else if (isAth && (grade === 'A' || grade === 'B' || isSifuPick)) {
+        } else if (isAth && isAllowedGrade) {
             verdict = 'buy';
             reason = 'Breakout ATH / 52W High (Momentum Buy)';
-        } else if (isZonBeli && (grade === 'A' || grade === 'B' || isSifuPick)) {
+        } else if (isZonBeli && isAllowedGrade) {
             verdict = 'buy';
             reason = `Dalam Zon Beli, +${upside ? upside.toFixed(1) : '?'}% ke TP`;
         } else if (isZonBeli && !grade) {
@@ -716,7 +719,7 @@ No rating"></textarea>
 
         const isAthOrNear = highPrice ? (curPrice >= highPrice * 0.95) : false;
         let strategy = 'Swing';
-        if (grade === 'C' && !isMomentumRebound) {
+        if (grade === 'C' && !isMomentumRebound && !isAllowedGrade) {
             strategy = 'Skip';
         } else if (isAthOrNear || (stock.dailyChange !== null && stock.dailyChange >= 3.0) || stage === 4 || isMomentumRebound) {
             strategy = 'Scalp';
@@ -897,17 +900,20 @@ No rating"></textarea>
             if (!d.shariah) return false;
             if (d.stage !== 5) return false; // Must be listed
             
+            const curPrice = d.currentPrice || d.price || 0;
+            const highPrice = d.highPrice || 0;
+            const tp = d.sifuTargetPrice || d.avgTP || 0;
+            
             const isSifuPick = sifuPortfolioSet.has(d.id.toLowerCase()) || sifuPortfolioSet.has((d.symbol || '').toLowerCase());
             const isMomentumRebound = typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
-            const isHighGrade = d.predictedGrade === 'A' || d.predictedGrade === 'B';
+            const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
+            const isAllowedGrade = d.predictedGrade === 'A' || d.predictedGrade === 'B' || isSifuPick || distToAth <= 20.0 || isMomentumRebound;
             
-            if (!isSifuPick && !isHighGrade && !isMomentumRebound) return false;
+            if (!isAllowedGrade) return false;
             
             // Age & Trend Filter: Only show recent IPOs (listed within 365 days) unless explicitly handpicked by Sifu OR currently near ATH (within 5%) OR momentum rebound (+10% gain)
             if (!isSifuPick && !isMomentumRebound) {
-                const curPriceVal = d.currentPrice || d.price || 0;
-                const highPriceVal = d.highPrice || 0;
-                const isNearAth = highPriceVal ? (curPriceVal >= highPriceVal * 0.95) : false;
+                const isNearAth = highPrice ? (curPrice >= highPrice * 0.95) : false;
                 if (d.listingDate) {
                     const listDate = new Date(d.listingDate);
                     const ageInDays = (new Date() - listDate) / (1000 * 60 * 60 * 24);
@@ -917,10 +923,6 @@ No rating"></textarea>
                     if (!isRecent && !isNearAth) return false;
                 }
             }
-            
-            const curPrice = d.currentPrice || d.price || 0;
-            const tp = d.sifuTargetPrice || d.avgTP || 0;
-            const highPrice = d.highPrice || 0;
             
             // Downtrend Filter: skip if down >25% from peak (lacks momentum) unless it has momentum rebound
             const isRecentListing = d.year >= 2025;
