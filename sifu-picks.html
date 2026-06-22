@@ -1155,7 +1155,8 @@
                         const curPrice = ipo.currentPrice || 0;
                         const highPrice = ipo.highPrice || 0;
                         const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
-                        const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
+                        const momentumThreshold = curPrice >= 1.00 ? 5.0 : 10.0;
+                        const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= momentumThreshold;
                         
                         const isSifuPick = sifuPortfolio.includes((ipo.id || '').toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
                         
@@ -1193,15 +1194,16 @@
                         }
                         
                         // 3. Upside score (prefer higher positive upside)
+                        const momentumThreshold = curPrice >= 1.00 ? 5.0 : 10.0;
                         if (upside > 0) {
                             score += Math.min(30, upside * 0.5); // Add up to 30 points for upside
-                        } else if (!isNearAth && (typeof ipo.dailyChange !== 'number' || ipo.dailyChange < 10.0)) {
+                        } else if (!isNearAth && (typeof ipo.dailyChange !== 'number' || ipo.dailyChange < momentumThreshold)) {
                             score -= 100; // Penalize negative/zero upside heavily ONLY IF it is not a momentum play
                         }
                         
                         // Add momentum breakout bonus
                         const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
-                        if (isActualAth || (typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0)) {
+                        if (isActualAth || (typeof ipo.dailyChange === 'number' && ipo.dailyChange >= momentumThreshold)) {
                             score += 80; // Give ATH breakouts & strong momentum a huge boost so they appear at the very top!
                         }
                         

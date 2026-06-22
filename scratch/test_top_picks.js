@@ -227,10 +227,16 @@ let scoredPicks = validPicks.map(ipo => {
     else if (isHealthyDip) score += 30;
     else score += 10;
 
+    const momentumThreshold = curPrice >= 1.00 ? 5.0 : 10.0;
     if (upside > 0) {
         score += Math.min(30, upside * 0.5);
-    } else {
+    } else if (!isNearAth && (typeof ipo.dailyChange !== 'number' || ipo.dailyChange < momentumThreshold)) {
         score -= 100;
+    }
+
+    const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+    if (isActualAth || (typeof ipo.dailyChange === 'number' && ipo.dailyChange >= momentumThreshold)) {
+        score += 80;
     }
 
     const isPortfolio = sifuPortfolioSet.has((ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((ipo.symbol || '').toLowerCase());
@@ -244,7 +250,8 @@ let scoredPicks = validPicks.map(ipo => {
 // Apply our tightened filter overrides!
 scoredPicks = scoredPicks.filter(x => {
     const isActualAth = x.ipo.highPrice > 0 && x.ipo.currentPrice >= (x.ipo.highPrice - 0.005);
-    const isMomentumRebound = typeof x.ipo.dailyChange === 'number' && x.ipo.dailyChange >= 10.0;
+    const momentumThreshold = x.ipo.currentPrice >= 1.00 ? 5.0 : 10.0;
+    const isMomentumRebound = typeof x.ipo.dailyChange === 'number' && x.ipo.dailyChange >= momentumThreshold;
     const isSifuPick = sifuPortfolioSet.has((x.ipo.id || '').toLowerCase()) || sifuPortfolioSet.has((x.ipo.symbol || '').toLowerCase());
 
     if (x.upside < 10.0 && !isActualAth && !isMomentumRebound && !isSifuPick) return false;
