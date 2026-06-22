@@ -1157,11 +1157,12 @@
                         const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
                         const isMomentumRebound = typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
                         
-                        // Tighten rules for Top Picks Grid: Discard if upside is less than 10%
-                        if (upside < 10.0) return false;
+                        const isSifuPick = sifuPortfolio.includes((ipo.id || '').toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
+                        
+                        // Tighten rules for Top Picks Grid: Discard if upside is less than 10%, UNLESS it's an ATH breakout, momentum rebound, or Sifu Portfolio
+                        if (upside < 10.0 && !isActualAth && !isMomentumRebound && !isSifuPick) return false;
                         
                         // Discard if Grade is C, UNLESS it is at ATH breakout, a momentum rebound, a Sifu Portfolio stock, or in a Healthy Dip/RBS Retest (distToAth <= 20%) to ride strong trends Sifu might have missed
-                        const isSifuPick = sifuPortfolio.includes((ipo.id || '').toLowerCase()) || sifuPortfolio.includes((ipo.symbol || '').toLowerCase());
                         const distToAthVal = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
                         if (grade === 'C' && !isActualAth && !isMomentumRebound && !isSifuPick && distToAthVal > 20.0) return false;
                         return true;
@@ -1194,8 +1195,14 @@
                         // 3. Upside score (prefer higher positive upside)
                         if (upside > 0) {
                             score += Math.min(30, upside * 0.5); // Add up to 30 points for upside
-                        } else {
-                            score -= 100; // Penalize negative/zero upside heavily (we don't want target hit/overvalued stocks)
+                        } else if (!isNearAth && (typeof ipo.dailyChange !== 'number' || ipo.dailyChange < 10.0)) {
+                            score -= 100; // Penalize negative/zero upside heavily ONLY IF it is not a momentum play
+                        }
+                        
+                        // Add momentum breakout bonus
+                        const isActualAth = highPrice > 0 && curPrice >= (highPrice - 0.005);
+                        if (isActualAth || (typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0)) {
+                            score += 80; // Give ATH breakouts & strong momentum a huge boost so they appear at the very top!
                         }
                         
                         // 4. Sifu Handpicked bonus
