@@ -1057,10 +1057,8 @@
 
                     if (!isMatch) return false;
 
-                    const highPrice = ipo.highPrice || 0;
                     const targetPrice = ipo.calibratedSifuTargetPrice || ipo.sifuTargetPrice || ipo.avgTP || 0;
                     const upside = targetPrice > 0 ? ((targetPrice - ipo.currentPrice) / ipo.currentPrice) * 100 : 0;
-                    const distToAth = highPrice ? ((highPrice - curPrice) / curPrice) * 100 : 0;
                     const isUnderIpo = curPrice < ipoPrice;
                     const isRbsRetest = distToAth > 1.0 && distToAth <= 5.0;
                     const isDeepRebound = distToAth > 5.0 && typeof ipo.dailyChange === 'number' && ipo.dailyChange >= 10.0;
