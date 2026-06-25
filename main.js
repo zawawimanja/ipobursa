@@ -951,6 +951,10 @@ function checkMissingListings() {
     const bannerContainer = document.getElementById('reminder-banner-container');
     if (!bannerContainer) return;
     
+    // Disabled per user request: user prefers not to do manual entry for scalping
+    bannerContainer.innerHTML = '';
+    return;
+    
     const now = new Date();
     // Look for Stage 4 IPOs with a listing date that is <= today, but no openPrice
     const missing = ipoData.filter(ipo => {

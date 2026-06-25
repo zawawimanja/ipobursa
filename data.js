@@ -5676,6 +5676,8 @@ const IPO_DATA = [
     "status": "Listed",
     "year": 2026,
     "currentPrice": 0.176,
+    "openPrice": 0.176,
+    "closePrice": 0.176,
     "predictedGrade": "C",
     "analystInsight": "⚠️ <b>AVOID / RISK PLAY (GRADE C — OS LEMAH)</b><br>💡 Keputusan oversubscription (OS) adalah sangat lemah pada <b>10.56x</b>. Dengan permintaan retail yang sangat rendah bagi ACE Market (< 20x) berserta dengan komponen OFS yang agak besar (40%), kaunter ini berisiko tinggi untuk dibuka flat atau jatuh di bawah harga IPO (junam) pada hari penyenaraian 23 Jun. Elakkan.",
     "sifuTargetPrice": 0.24,
