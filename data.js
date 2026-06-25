@@ -5686,7 +5686,9 @@ const IPO_DATA = [
     "os": 10.56,
     "performance": "-2.2%",
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.24
+    "calibratedSifuTargetPrice": 0.24,
+    "sector": "Consumer (Food & Beverage)",
+    "ib": "M&A Securities"
   },
   {
     "id": "spb-development-berhad",
@@ -9583,7 +9585,3 @@ const IPO_DATA = [
     "sifuTargetPrice": 0.7
   }
 ];
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = IPO_DATA;
-}

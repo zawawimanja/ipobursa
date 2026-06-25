@@ -5686,7 +5686,9 @@
         "os": 10.56,
         "performance": "-2.2%",
         "dailyChange": null,
-        "calibratedSifuTargetPrice": 0.24
+        "calibratedSifuTargetPrice": 0.24,
+        "sector": "Consumer (Food & Beverage)",
+        "ib": "M&A Securities"
     },
     {
         "id": "spb-development-berhad",
