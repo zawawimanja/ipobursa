@@ -19,6 +19,8 @@ module.exports = [
     "predictedGrade": "B",
     "avgTP": 0.39,
     "sifuTargetPrice": 0.66,
+    "v3TargetPrice": 0.36,
+    "zone2TargetPrice": 0.66,
     "pe": 18.15,
     "analystInsight": "⚠️ <b>WORTH IT (GRADE B)</b><br>💡 Note: Boleh apply, tapi jangan harap pop besar.<br>SRKK AI Berhad merupakan penyedia transformasi digital & rakan kongsi Microsoft (Microsoft Managed Partner pertama di Malaysia dengan kesemua kompetensi AI Cloud).<br><br>📊 <b>Valuation & Fundamental:</b><br>• Harga IPO RM0.32 memberikan PE 18.15x berdasarkan PAT FY24 (RM5.01 juta). Ini adalah wajar (Fair Value RM0.39 berdasarkan 22x PE).<br>• Sekitar 50% hasil adalah pendapatan berulang (recurring revenue).<br><br>⚠️ <b>Risiko:</b> Terdapat komponen Offer for Sale (OFS) sebanyak 13 juta unit saham sedia ada & ditaja jamin oleh TA Securities (mid-tier IB).",
     "ofs": true,

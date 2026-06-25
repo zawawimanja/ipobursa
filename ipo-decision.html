@@ -142,6 +142,7 @@
                     <div class="input-group">
                         <label>Sifu CK Target (RM)</label>
                         <input type="number" id="inp-tp" step="0.01" placeholder="0.42" oninput="decide()">
+                        <input type="hidden" id="inp-tp2" value="">
                         <a href="javascript:void(0)" id="btn-toggle-diy" onclick="toggleDiyCalc()" style="font-size: 0.72rem; color: #a78bfa; text-decoration: none; display: block; margin-top: 0.3rem; text-align: right;">🔍 Tiada Sifu TP? Kira DIY</a>
                     </div>
                 </div>
@@ -277,7 +278,8 @@
                 const name = (d.symbol || d.companyName || d.id).replace(/ Berhad/gi, '').replace(/ Holdings/gi, '').trim();
                 const shortName = name.length > 10 ? name.substring(0, 10) : name;
                 const ipo = d.price;
-                const tp = d.sifuTargetPrice;
+                const tp = d.v3TargetPrice || d.sifuTargetPrice;
+                const tp2 = d.zone2TargetPrice || d.sifuTargetPrice;
                 const os = d.os || 0;
                 const ofs = d.ofsPercentage || 0;
                 const upside = ((tp - ipo) / ipo) * 100;
@@ -289,7 +291,7 @@
                 const btn = document.createElement('button');
                 btn.className = 'quick-btn';
                 btn.textContent = `${shortName} (${ipo.toFixed(2)}→${tp.toFixed(2)})`;
-                btn.onclick = () => quickLoad(ipo, tp, os || '', ofs || '');
+                btn.onclick = () => quickLoad(ipo, tp, os || '', ofs || '', tp2);
 
                 if (isAvoid) {
                     btn.style.borderColor = 'rgba(239,68,68,0.3)';
@@ -307,7 +309,7 @@
 
         initQuickPicks();
 
-        function quickLoad(ipo, tp, os, ofs) {
+        function quickLoad(ipo, tp, os, ofs, tp2 = '') {
             document.getElementById('inp-ipo').value = ipo;
             document.getElementById('inp-tp').value = tp;
             document.getElementById('inp-os').value = os !== undefined ? os : '';
@@ -372,7 +374,8 @@
             }
 
             const upside = ((tp - ipo) / ipo) * 100;
-            const zone2 = tp * 1.15;
+            const tp2Input = document.getElementById('inp-tp2') ? parseFloat(document.getElementById('inp-tp2').value) : NaN;
+            const zone2 = (!isNaN(tp2Input) && tp2Input > tp) ? tp2Input : tp * 1.15;
             const cutLoss = ipo * 0.95;
 
             // Red flag checks

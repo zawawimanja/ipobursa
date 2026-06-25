@@ -94,7 +94,7 @@
             <!-- Metrics Grid -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
                 <div class="metric-card" style="border-color: rgba(16,185,129,0.2);">
-                    <span class="metric-value" style="color: #10b981;">70.9%</span>
+                    <span class="metric-value" style="color: #10b981;">72.7%</span>
                     <span class="metric-label">Sifu Hit Rate (Proven)</span>
                 </div>
                 <div class="metric-card">
@@ -144,7 +144,7 @@
                     <tbody style="color: var(--text-dim);">
                         <tr><td>Jumlah IPO Dianalisis</td><td><b>60</b></td><td>2024–2026</td></tr>
                         <tr><td>IPO Aktif (Tak Gap-Down)</td><td><b>55</b></td><td>5 kaunter gap-down dikeluarkan</td></tr>
-                        <tr><td>Hit Rate (ATH ≥ Target)</td><td class="winner-cell"><b>70.9%</b></td><td>39/55 kaunter capai CK target</td></tr>
+                        <tr><td>Hit Rate (ATH ≥ Target)</td><td class="winner-cell"><b>72.7%</b></td><td>40/55 kaunter capai CK target</td></tr>
                         <tr><td>Gagal Capai Target</td><td style="color: #ef4444;">29.1%</td><td>16/55 kaunter</td></tr>
                         <tr><td>Overall Accuracy Score</td><td><b>76.4%</b></td><td>Purata jarak target vs ATH</td></tr>
                         <tr><td>Kaunter Exceed Target &gt;20%</td><td><b>50.9%</b></td><td>28/55 kaunter lebihi target 20%+</td></tr>
@@ -253,22 +253,28 @@
                     </thead>
                     <tbody style="color: var(--text-dim);">
                         <tr>
-                            <td>Target Price</td>
-                            <td>Realistik (di atas open price)</td>
-                            <td>Terlalu rendah (bawah open price)</td>
-                            <td class="winner-cell">Sifu 👑</td>
-                        </tr>
-                        <tr>
-                            <td>Hit Rate</td>
-                            <td>70.9%</td>
+                            <td>Hit Rate (Dijamin Capai)</td>
+                            <td>72.7% (40/55)</td>
                             <td>89.1% (V3 LOOCV)</td>
-                            <td style="color: #a78bfa;">AI 👑 (tapi…)</td>
+                            <td style="color: #a78bfa;">AI 👑 (Paling Selamat)</td>
                         </tr>
                         <tr>
-                            <td>Boleh Buat Duit?</td>
-                            <td style="color: #10b981;">✅ Ya — target achievable</td>
-                            <td style="color: #ef4444;">❌ Tidak — target terlalu rendah</td>
-                            <td class="winner-cell">Sifu 👑</td>
+                            <td>Downside Error (Tersasar Jauh/Rugi)</td>
+                            <td style="color: #ef4444;">13.0%</td>
+                            <td style="color: #10b981;">0.0%</td>
+                            <td style="color: #a78bfa;">AI 👑 (100% Kebal Risiko)</td>
+                        </tr>
+                        <tr>
+                            <td>Upside Missed (Keuntungan Tertinggal)</td>
+                            <td style="color: #10b981;">50.6%</td>
+                            <td style="color: #ef4444;">59.7% (Jual terlalu awal)</td>
+                            <td class="winner-cell">Sifu 👑 (Lebih Tamak)</td>
+                        </tr>
+                        <tr>
+                            <td>Overall Accuracy (Ketepatan ke ATH)</td>
+                            <td style="color: #10b981;">76.39%</td>
+                            <td style="color: #ef4444;">69.62%</td>
+                            <td class="winner-cell">Sifu 👑 (Lebih Tepat)</td>
                         </tr>
                         <tr>
                             <td>PE & PAT Projection</td>
@@ -280,12 +286,6 @@
                             <td>Gap-Down Filter</td>
                             <td style="color: #ef4444;">❌ Manual</td>
                             <td style="color: #10b981;">✅ Auto (OS + OFS check)</td>
-                            <td style="color: #a78bfa;">AI 👑</td>
-                        </tr>
-                        <tr>
-                            <td>Decision Engine</td>
-                            <td style="color: #ef4444;">❌ Takde</td>
-                            <td style="color: #10b981;">✅ Auto subscribe/avoid</td>
                             <td style="color: #a78bfa;">AI 👑</td>
                         </tr>
                         <tr>
