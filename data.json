@@ -50,7 +50,7 @@
         "ofs": true,
         "symbol": "SRKK",
         "dailyChange": null,
-        "calibratedSifuTargetPrice": 0.78,
+        "calibratedSifuTargetPrice": 0.82,
         "v3TargetPrice": 0.36,
         "zone2TargetPrice": 0.66,
         "geography": "Kuala Lumpur"
@@ -324,7 +324,7 @@
         "sifuTargetPrice": 0.85,
         "dailyChange": null,
         "calibratedSifuTargetPrice": 1.18,
-        "v3TargetPrice": 0.795,
+        "v3TargetPrice": 0.661,
         "zone2TargetPrice": 0.85
     },
     {
@@ -408,7 +408,7 @@
         "sifuTargetPrice": 1.2,
         "dailyChange": null,
         "calibratedSifuTargetPrice": 1.23,
-        "v3TargetPrice": 1.122,
+        "v3TargetPrice": 0.933,
         "zone2TargetPrice": 1.2
     },
     {
@@ -432,7 +432,7 @@
         "sifuTargetPrice": 1.04,
         "dailyChange": null,
         "calibratedSifuTargetPrice": 1.13,
-        "v3TargetPrice": 1.038,
+        "v3TargetPrice": 0.863,
         "zone2TargetPrice": 1.04
     },
     {
@@ -782,8 +782,8 @@
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>MTT Shipping and Logistics merupakan peneraju pasaran (market leader) kapal kargo domestik di semenanjung dan Sabah/Sarawak. Mempunyai baki lembaran yang mantap dengan gearing rendah 0.5x.<br><br>📊 <b>Kelebihan Utama:</b><br>• Peneraju pasaran domestic shipping dengan fleet moden.<br>• Polisi dividen tinggi (50% payout ratio) & gearing 0.5x.<br>• PE Terbitan munasabah di paras 9.18x - 10.04x.",
         "sifuTargetPrice": 1.16,
         "dailyChange": null,
-        "calibratedSifuTargetPrice": 1.04,
-        "v3TargetPrice": 1.168,
+        "calibratedSifuTargetPrice": 0.88,
+        "v3TargetPrice": 0.972,
         "zone2TargetPrice": 1.16
     },
     {
@@ -933,7 +933,7 @@
         "sifuTargetPrice": 1.58,
         "dailyChange": 1.7,
         "calibratedSifuTargetPrice": 1.58,
-        "v3TargetPrice": 1.728,
+        "v3TargetPrice": 2.029,
         "zone2TargetPrice": 1.58,
         "geography": "Penang"
     },
@@ -964,8 +964,8 @@
         "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Sunway Healthcare (SUNMED) merekodkan permohonan runcit tertinggi dengan tarikan jenama Sunway yang sangat kuat. Merupakan hospital pertahanan bertaraf mega dengan profil pertumbuhan jangka panjang yang mantap.<br><br>📊 <b>Kelebihan Utama:</b><br>• Rekod jumlah permohonan runcit tertinggi (hype amat besar).<br>• Hospital defensif bertaraf mega dengan kualiti aset gred-A.<br>• Potensi sasaran Fair Value RM1.84 (+26.9% upside).",
         "sifuTargetPrice": 1.84,
         "dailyChange": 0.5,
-        "calibratedSifuTargetPrice": 1.66,
-        "v3TargetPrice": 1.771,
+        "calibratedSifuTargetPrice": 1.41,
+        "v3TargetPrice": 1.473,
         "zone2TargetPrice": 1.84
     },
     {
@@ -1764,7 +1764,7 @@
         "symbol": "ORKIM",
         "dailyChange": null,
         "sifuTargetPrice": 1.098,
-        "v3TargetPrice": 0.898,
+        "v3TargetPrice": 0.747,
         "zone2TargetPrice": 1.098
     },
     {
@@ -6239,8 +6239,8 @@
         "closePrice": 0.58,
         "sifuTargetPrice": 0.53,
         "dailyChange": 2.59,
-        "calibratedSifuTargetPrice": 0.92,
-        "v3TargetPrice": 0.484,
+        "calibratedSifuTargetPrice": 1.1,
+        "v3TargetPrice": 0.569,
         "zone2TargetPrice": 0.53
     },
     {

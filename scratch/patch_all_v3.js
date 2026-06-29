@@ -16,7 +16,15 @@ function calcV3(ipo, cincai, sector, market, os, geography, ofs) {
     if (sg === 'health') t *= p.healthMult;
     if (sg === 'trad') t *= p.tradDisc;
 
-    if ((market || '').toLowerCase().includes('main')) t *= p.mainMult;
+    if ((market || '').toLowerCase().includes('main')) {
+        if (os >= 40) {
+            t *= 1.20; // Outlier boost for high demand MAIN listings
+        } else if (os < 10) {
+            t *= 0.85; // Weak demand penalty
+        } else {
+            t *= p.mainMult;
+        }
+    }
     
     // Fallback if OS is extremely small or missing
     if (os && os > 0) {
@@ -35,11 +43,13 @@ function calcV3(ipo, cincai, sector, market, os, geography, ofs) {
         t *= 0.85;
     }
 
-    // Apply the newly discovered Penang Tech Premium (15%) and Geography penalties (5%)
+    // Apply Geography Premium (Penang, KL/Perak, Johor/Melaka)
     const geo = (geography || '').toLowerCase();
     const isTech = secStr.includes('tech') || secStr.includes('technology') || secStr.includes('semiconductor');
     if (geo === 'penang' && isTech) {
         t *= 1.15;
+    } else if (geo === 'kuala lumpur' || geo === 'perak' || geo === 'kl') {
+        t *= 1.05;
     } else if (geo === 'johor' || geo === 'melaka') {
         t *= 0.95;
     }

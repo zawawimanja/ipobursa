@@ -74,9 +74,15 @@ try {
             }
         }
         
-        // 4. Main market premium
-        if (market.includes('main') && os >= 10) {
-            target *= bestParams.mainMktPremium;
+        // 4. Main market dynamic adjustments
+        if (market.includes('main')) {
+            if (os >= 40) {
+                target *= 1.20; // Outlier boost for high demand MAIN listings (up to 300% potential)
+            } else if (os < 10) {
+                target *= 0.85; // Weak demand penalty (median near baseline)
+            } else {
+                target *= bestParams.mainMktPremium;
+            }
         }
 
         // 5. Price Sweet Spot and Penny/High-Ticket penalties
@@ -90,10 +96,12 @@ try {
             target *= 0.90; // High ticket drag
         }
 
-        // 6. Geography Premium (Penang Tech/Semicon Premium)
+        // 6. Geography Premium (Penang, KL/Perak, Johor/Melaka)
         const geo = (geography || '').toLowerCase();
         if (geo === 'penang' && isTech) {
             target *= 1.15; // Penang Silicon Valley Premium
+        } else if (geo === 'kuala lumpur' || geo === 'perak' || geo === 'kl') {
+            target *= 1.05; // KL & Perak healthy secondary cluster boost
         } else if (geo === 'johor' || geo === 'melaka') {
             target *= 0.95; // Johor/Melaka quiet box penalty
         }
