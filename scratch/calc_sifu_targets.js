@@ -39,7 +39,7 @@ try {
         mainMktPremium: 0.997
     };
 
-    function getCalibratedTarget(cincaiVal, sector, market, os, price, geography, ofs) {
+    function getCalibratedTarget(cincaiVal, sector, market, os, price, geography, ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality) {
         let target = cincaiVal;
         
         // 1. High OS retail pump (momentum play)
@@ -110,6 +110,36 @@ try {
         if (ofs === true) {
             target *= 0.90;
         }
+
+        // 8. V5 — Anchor Investor Signal
+        if (anchorInvestors === true) {
+            target *= 1.12; // EPF/KWAP/cornerstone named = high institutional confidence
+        }
+
+        // 9. V5 — Free Float Sweet Spot (15-25% = tightest supply, highest pump potential)
+        if (freeFloat > 0) {
+            if (freeFloat >= 0.15 && freeFloat <= 0.25) {
+                target *= 1.10; // Sweet spot: limited supply = easy pump
+            } else if (freeFloat > 0.40) {
+                target *= 0.90; // Oversupply: too many shares, selling pressure
+            }
+        }
+
+        // 10. V5 — Lock-Up Period Pressure
+        if (lockupMonths > 0) {
+            if (lockupMonths <= 6) {
+                target *= 0.92; // Short lock-up: insiders may dump soon after listing
+            }
+            // 12-month lock-up is neutral — no adjustment needed
+        }
+
+        // 11. V5 — Promoter Quality Score
+        if (promoterQuality === 'conglomerate_spinoff') {
+            target *= 1.08; // Parent company track record reduces risk
+        } else if (promoterQuality === 'first_timer') {
+            target *= 0.93; // First-time listing = execution risk premium
+        }
+        // 'experienced_founder' is neutral
         
         return target;
     }
@@ -128,6 +158,10 @@ try {
         const sector = (ipo.sector || '').toLowerCase();
         const market = (ipo.market || '').toLowerCase();
         const os = ipo.oversubscription || ipo.os || 10;
+        const freeFloat = ipo.freeFloat || 0;
+        const anchorInvestors = ipo.anchorInvestors || false;
+        const lockupMonths = ipo.lockupMonths || 12;
+        const promoterQuality = ipo.promoterQuality || 'experienced_founder';
         
         const override = overrides[ipo.id];
         
@@ -145,12 +179,12 @@ try {
             const valF = p.targetPe * epsF / 100;
             
             sifuTP = valF;
-            calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs);
+            calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality);
             source = `stockProfiles (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs
             sifuTP = ipo.avgTP || ipo.price || 0.50;
-            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs);
+            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality);
             source = ipo.avgTP ? 'avgTP from database' : 'IPO Price (fallback)';
         }
 

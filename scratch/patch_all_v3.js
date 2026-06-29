@@ -4,7 +4,7 @@ const p = { themeMult: 0.9602, healthMult: 0.9565, tradDisc: 0.7343, mainMult: 1
 let jsonData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 let count = 0;
 
-function calcV3(ipo, cincai, sector, market, os, geography, ofs) {
+function calcV3(ipo, cincai, sector, market, os, geography, ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality) {
     let t = cincai;
     let sg = 'other';
     const secStr = (sector || '').toLowerCase();
@@ -58,13 +58,39 @@ function calcV3(ipo, cincai, sector, market, os, geography, ofs) {
     if (ofs === true) {
         t *= 0.90;
     }
+
+    // V5 — Anchor Investor Signal
+    if (anchorInvestors === true) {
+        t *= 1.12;
+    }
+
+    // V5 — Free Float Sweet Spot
+    if (freeFloat > 0) {
+        if (freeFloat >= 0.15 && freeFloat <= 0.25) {
+            t *= 1.10;
+        } else if (freeFloat > 0.40) {
+            t *= 0.90;
+        }
+    }
+
+    // V5 — Lock-Up Period Pressure
+    if (lockupMonths > 0 && lockupMonths <= 6) {
+        t *= 0.92;
+    }
+
+    // V5 — Promoter Quality Score
+    if (promoterQuality === 'conglomerate_spinoff') {
+        t *= 1.08;
+    } else if (promoterQuality === 'first_timer') {
+        t *= 0.93;
+    }
     
     return t;
 }
 
 jsonData.forEach(d => {
     if (d.sifuTargetPrice && d.price && d.id !== 'srkk-ai') {
-        let v3 = calcV3(d.price, d.sifuTargetPrice, d.sector, d.market, d.os, d.geography, d.ofs);
+        let v3 = calcV3(d.price, d.sifuTargetPrice, d.sector, d.market, d.os, d.geography, d.ofs, d.anchorInvestors, d.freeFloat, d.lockupMonths, d.promoterQuality);
         // Apply MITI 50% target price cap (for Stage 2 IPOs)
         if (d.stage === 2 && d.price > 0 && v3 > d.price * 1.5) {
             v3 = d.price * 1.5;
