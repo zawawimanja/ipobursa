@@ -39,7 +39,7 @@ try {
         mainMktPremium: 0.997
     };
 
-    function getCalibratedTarget(cincaiVal, sector, market, os) {
+    function getCalibratedTarget(cincaiVal, sector, market, os, price, geography, ofs) {
         let target = cincaiVal;
         
         // 1. High OS retail pump (momentum play)
@@ -50,8 +50,9 @@ try {
         }
         
         // 2. High-Growth Sektor Theme calibration (only for active/visible stocks)
+        const isTech = sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor');
         if (os >= 15 || market.includes('main')) {
-            if (sector.includes('tech') || sector.includes('technology') || sector.includes('semiconductor')) {
+            if (isTech) {
                 target *= bestParams.techMult;
             } else if (sector.includes('energy') || sector.includes('utilities') || sector.includes('solar') || sector.includes('renewable')) {
                 target *= bestParams.energyMult;
@@ -60,8 +61,12 @@ try {
             }
         }
         
-        // 3. Traditional small-cap discount
-        if ((sector.includes('industrial') || sector.includes('construction') || sector.includes('property') || sector.includes('manufacturing')) && market.includes('ace')) {
+        // 3. Flat Sector Discount (applied across both markets)
+        const isFlatSector = sector.includes('construction') || sector.includes('property') || sector.includes('energy') || sector.includes('utilities') || sector.includes('infrastructure');
+        if (isFlatSector) {
+            target *= 0.85; // General flat sector discount based on statistics
+        } else if ((sector.includes('industrial') || sector.includes('manufacturing')) && market.includes('ace')) {
+            // Traditional small-cap industrial discount on ACE
             if (os < 15) {
                 target *= bestParams.lowOsTradAceDiscount;
             } else {
@@ -72,6 +77,30 @@ try {
         // 4. Main market premium
         if (market.includes('main') && os >= 10) {
             target *= bestParams.mainMktPremium;
+        }
+
+        // 5. Price Sweet Spot and Penny/High-Ticket penalties
+        if (price >= 0.30 && price <= 0.50) {
+            target *= 1.10; // Retail sweet spot pump
+        } else if (price >= 0.75 && price <= 1.00) {
+            target *= 1.10; // Growth sweet spot pump
+        } else if (price > 0 && price < 0.20) {
+            target *= 0.85; // Penny stock penalty (compressed returns)
+        } else if (price > 1.00) {
+            target *= 0.90; // High ticket drag
+        }
+
+        // 6. Geography Premium (Penang Tech/Semicon Premium)
+        const geo = (geography || '').toLowerCase();
+        if (geo === 'penang' && isTech) {
+            target *= 1.15; // Penang Silicon Valley Premium
+        } else if (geo === 'johor' || geo === 'melaka') {
+            target *= 0.95; // Johor/Melaka quiet box penalty
+        }
+
+        // 7. OFS Drag (10% discount for day-1 dumping pressure)
+        if (ofs === true) {
+            target *= 0.90;
         }
         
         return target;
@@ -108,13 +137,19 @@ try {
             const valF = p.targetPe * epsF / 100;
             
             sifuTP = valF;
-            calibratedTP = getCalibratedTarget(valF, sector, market, os);
+            calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs);
             source = `stockProfiles (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs
             sifuTP = ipo.avgTP || ipo.price || 0.50;
-            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os);
+            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs);
             source = ipo.avgTP ? 'avgTP from database' : 'IPO Price (fallback)';
+        }
+
+        // Apply MITI 50% target price cap (for Stage 2 IPOs)
+        if (ipo.stage === 2 && ipo.price > 0 && calibratedTP > ipo.price * 1.5) {
+            calibratedTP = ipo.price * 1.5;
+            source += ' | [MITI 50% Cap]';
         }
         
         sifuTargets[ipo.id] = parseFloat(sifuTP.toFixed(2));

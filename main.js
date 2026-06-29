@@ -704,16 +704,20 @@ function getIpoGrade(ipo) {
     const sector = (ipo.sector || '').toLowerCase();
     const fundUse = (ipo.fundUse || '').toLowerCase();
 
-    const heroIBs = ["maybank", "public", "kaf", "alliance", "cimb"];
-    const topTierIBs = ["maybank", "cimb", "rhb", "public", "aminvestment", "alliance", "affin hwang", "kaf"];
-    const momentumIBs = ["m&a", "malacca", "kenanga", "ta securities", "uob kay hian", "mercury", "apex", "sj securities"];
+    const superHeroIBs = ["maybank"];
+    const heroIBs = ["public", "kaf", "alliance"];
+    const topTierIBs = ["rhb", "aminvestment", "alliance", "affin hwang", "kaf", "public"];
+    const momentumIBs = ["m&a", "malacca", "ta securities", "kenanga", "apex", "sj securities"];
+    const flatSkews = ["uob", "cimb", "mercury"];
     
     const trendingSectors = ["data centre", "solar", "ai", "technology", "renewable energy", "ev", "semiconductor", "digital", "cybersecurity"];
     const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
 
-    const isHero = heroIBs.some(tier => ib.includes(tier));
-    const isTopTier = topTierIBs.some(tier => ib.includes(tier));
+    const isSuperHero = superHeroIBs.some(tier => ib.includes(tier));
+    const isHero = heroIBs.some(tier => ib.includes(tier)) || isSuperHero;
+    const isTopTier = topTierIBs.some(tier => ib.includes(tier)) || isSuperHero;
     const isMomentum = momentumIBs.some(tier => ib.includes(tier));
+    const isFlatSkew = flatSkews.some(tier => ib.includes(tier));
     const isTrendingSector = trendingSectors.some(s => sector.includes(s));
     const isExpansionFund = expansionKeywords.some(k => fundUse.includes(k));
     
@@ -731,15 +735,37 @@ function getIpoGrade(ipo) {
     if (effectiveStage < 5 && os === 0) {
         // Calculate Pre-OS Grade
         let score = 0;
-        if (isHero) score += 40;
+        if (isSuperHero) score += 50;
+        else if (isHero) score += 40;
         else if (isTopTier) score += 30;
         else if (isMomentum) score += 20;
+        
+        if (isFlatSkew) score -= 15;
         
         if (isTrendingSector) score += 30;
         if (isExpansionFund) score += 20;
         
         if (isMainMarket) score += 10;
         else if (isAceMarket) score += 5;
+
+        // Price sweet spot scoring
+        if (ipo.price >= 0.30 && ipo.price <= 0.50) {
+            score += 15; // Retail sweet spot
+        } else if (ipo.price >= 0.75 && ipo.price <= 1.00) {
+            score += 15; // Growth sweet spot
+        } else if (ipo.price > 0 && ipo.price < 0.20) {
+            score -= 15; // Penny stock penalty
+        } else if (ipo.price > 1.00) {
+            score -= 15; // High-ticket stock penalty
+        }
+
+        // Geography premium scoring
+        const geo = (ipo.geography || '').toLowerCase();
+        if (geo === 'penang' && isTrendingSector) {
+            score += 20; // Penang Silicon Valley Premium for Tech/Semicon
+        } else if (geo === 'johor' || geo === 'melaka') {
+            score -= 5; // Dorman geography penalty
+        }
 
         // OFS and PE Valuation Adjustments
         if (ipo.ofs === true) {

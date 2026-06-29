@@ -4,7 +4,7 @@ const p = { themeMult: 0.9602, healthMult: 0.9565, tradDisc: 0.7343, mainMult: 1
 let jsonData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 let count = 0;
 
-function calcV3(ipo, cincai, sector, market, os) {
+function calcV3(ipo, cincai, sector, market, os, geography, ofs) {
     let t = cincai;
     let sg = 'other';
     const secStr = (sector || '').toLowerCase();
@@ -28,13 +28,37 @@ function calcV3(ipo, cincai, sector, market, os) {
     
     const upsideRatio = (cincai - ipo) / ipo;
     t *= (1 + p.upsideScale * upsideRatio);
+
+    // Apply Flat Sector Discount across both markets
+    const isFlatSector = secStr.includes('construction') || secStr.includes('property') || secStr.includes('energy') || secStr.includes('utilities') || secStr.includes('infrastructure');
+    if (isFlatSector) {
+        t *= 0.85;
+    }
+
+    // Apply the newly discovered Penang Tech Premium (15%) and Geography penalties (5%)
+    const geo = (geography || '').toLowerCase();
+    const isTech = secStr.includes('tech') || secStr.includes('technology') || secStr.includes('semiconductor');
+    if (geo === 'penang' && isTech) {
+        t *= 1.15;
+    } else if (geo === 'johor' || geo === 'melaka') {
+        t *= 0.95;
+    }
+
+    // Apply OFS Drag (10% penalty)
+    if (ofs === true) {
+        t *= 0.90;
+    }
     
     return t;
 }
 
 jsonData.forEach(d => {
     if (d.sifuTargetPrice && d.price && d.id !== 'srkk-ai') {
-        const v3 = calcV3(d.price, d.sifuTargetPrice, d.sector, d.market, d.os);
+        let v3 = calcV3(d.price, d.sifuTargetPrice, d.sector, d.market, d.os, d.geography, d.ofs);
+        // Apply MITI 50% target price cap (for Stage 2 IPOs)
+        if (d.stage === 2 && d.price > 0 && v3 > d.price * 1.5) {
+            v3 = d.price * 1.5;
+        }
         d.v3TargetPrice = parseFloat(v3.toFixed(3));
         d.zone2TargetPrice = d.sifuTargetPrice; // preserve the original Sifu Target for Zone 2
         count++;
