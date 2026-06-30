@@ -628,7 +628,7 @@ No rating"></textarea>
         }
 
         const curPrice = stock.price;
-        const sifuTP = dbEntry.sifuTargetPrice || dbEntry.avgTP || null;
+        const sifuTP = dbEntry.calibratedSifuTargetPrice || dbEntry.sifuTargetPrice || dbEntry.avgTP || null;
         const highPrice = dbEntry.highPrice || null;
         const grade = dbEntry.predictedGrade || null;
         const shariah = dbEntry.shariah;
@@ -902,7 +902,7 @@ No rating"></textarea>
             
             const curPrice = d.currentPrice || d.price || 0;
             const highPrice = d.highPrice || 0;
-            const tp = d.sifuTargetPrice || d.avgTP || 0;
+            const tp = d.calibratedSifuTargetPrice || d.sifuTargetPrice || d.avgTP || 0;
             
             const isSifuPick = sifuPortfolioSet.has(d.id.toLowerCase()) || sifuPortfolioSet.has((d.symbol || '').toLowerCase());
             const isMomentumRebound = typeof d.dailyChange === 'number' && d.dailyChange >= 10.0;
@@ -947,11 +947,11 @@ No rating"></textarea>
         // Sort by upside descending
         suggestions.sort((a, b) => {
             const priceA = a.currentPrice || a.price || 1;
-            const tpA = a.sifuTargetPrice || a.avgTP || 0;
+            const tpA = a.calibratedSifuTargetPrice || a.sifuTargetPrice || a.avgTP || 0;
             const upsideA = ((tpA - priceA) / priceA) * 100;
 
             const priceB = b.currentPrice || b.price || 1;
-            const tpB = b.sifuTargetPrice || b.avgTP || 0;
+            const tpB = b.calibratedSifuTargetPrice || b.sifuTargetPrice || b.avgTP || 0;
             const upsideB = ((tpB - priceB) / priceB) * 100;
 
             return upsideB - upsideA;
@@ -959,7 +959,7 @@ No rating"></textarea>
 
         tbody.innerHTML = suggestions.map(d => {
             const curPrice = d.currentPrice || d.price || 0;
-            const tp = d.sifuTargetPrice || d.avgTP || 0;
+            const tp = d.calibratedSifuTargetPrice || d.sifuTargetPrice || d.avgTP || 0;
             const upside = ((tp - curPrice) / curPrice) * 100;
             
             const gradeHtml = d.predictedGrade
