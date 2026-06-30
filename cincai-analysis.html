@@ -238,76 +238,121 @@
                 <div style="background: rgba(139, 92, 246, 0.15); padding: 0.6rem; border-radius: 0.5rem; color: #a78bfa;">
                     <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
                 </div>
-                <h2 style="margin: 0; font-size: 1.25rem;">AI vs Sifu — Perbandingan Jujur</h2>
+                <h2 style="margin: 0; font-size: 1.25rem;">AI vs Sifu — Perbandingan Model Merentasi Dataset</h2>
             </div>
 
-            <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); padding: 1.25rem;">
+            <!-- TABLE 1: 137 IPOs -->
+            <h3 style="font-size: 1rem; color: #a78bfa; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="database" style="width: 16px;"></i> Ujian 1: Dataset Penuh (137 IPO Aktif &mdash; Lebih Jujur)
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;">
+                Ujian komprehensif pada dataset penuh tanpa mengira tarikh penyenaraian. Ujian ini menguji daya tahan model terhadap data sebenar di pasaran.
+            </p>
+            <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); padding: 1.25rem; margin-bottom: 2rem;">
                 <table class="comparison-table">
                     <thead>
                         <tr>
                             <th style="min-width: 150px;">Aspek</th>
                             <th style="color: #f59e0b;">📌 Sifu CK</th>
-                            <th style="color: #60a5fa;">🤖 AI Lama (V1-V3)</th>
-                            <th style="color: #a78bfa;">🚀 AI Calibrated (V4)</th>
-                            <th style="color: var(--text-dim);">Siapa Menang?</th>
+                            <th style="color: #60a5fa;">🤖 AI V3 (Zone 1)</th>
+                            <th style="color: #ef4444;">🚀 AI V5 (Zone 2)</th>
+                            <th style="color: #a78bfa;">⚡ AI V6 (Zone 2)</th>
+                            <th style="color: var(--text-dim);">Pemenang</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-dim);">
+                        <tr>
+                            <td>Hit Rate (Dijamin Capai)</td>
+                            <td>80.3% (110/137)</td>
+                            <td style="color: #10b981; font-weight: bold;">86.9%</td>
+                            <td>48.2%</td>
+                            <td style="color: #10b981; font-weight: bold;">86.9%</td>
+                            <td style="color: #a78bfa; font-weight: bold;">AI V3 / V6 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Downside Error (Tersasar/Rugi)</td>
+                            <td>19.7%</td>
+                            <td style="color: #10b981; font-weight: bold;">13.1%</td>
+                            <td style="color: #ef4444;">51.8%</td>
+                            <td style="color: #10b981; font-weight: bold;">13.1%</td>
+                            <td style="color: #a78bfa; font-weight: bold;">AI V3 / V6 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Upside Missed (Terlepas)</td>
+                            <td style="color: #10b981; font-weight: bold;">30.7%</td>
+                            <td>35.9%</td>
+                            <td>33.5%</td>
+                            <td>32.1%</td>
+                            <td style="color: #f59e0b; font-weight: bold;">Sifu CK 👑</td>
+                        </tr>
+                        <tr>
+                            <td>Overall Accuracy (ke ATH)</td>
+                            <td style="color: #10b981; font-weight: bold;">74.11%</td>
+                            <td>67.47%</td>
+                            <td>71.95%</td>
+                            <td>71.79%</td>
+                            <td style="color: #f59e0b; font-weight: bold;">Sifu CK 👑</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TABLE 2: 55 IPOs -->
+            <h3 style="font-size: 1rem; color: #60a5fa; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="filter" style="width: 16px;"></i> Ujian 2: Apple-to-Apple (Subset 55 IPO yang Sama)
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;">
+                Ujian adil menggunakan subset data yang sama yang digunakan untuk melatih model V4 (tanpa kaunter-kaunter baru 2026).
+            </p>
+            <div style="overflow-x: auto; background: rgba(0,0,0,0.2); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.05); padding: 1.25rem; margin-bottom: 1.5rem;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 150px;">Aspek</th>
+                            <th style="color: #f59e0b;">📌 Sifu CK</th>
+                            <th style="color: #60a5fa;">🚀 AI V4 (Lama)</th>
+                            <th style="color: #a78bfa;">⚡ AI V6 (Baru)</th>
+                            <th style="color: var(--text-dim);">Pemenang</th>
                         </tr>
                     </thead>
                     <tbody style="color: var(--text-dim);">
                         <tr>
                             <td>Hit Rate (Dijamin Capai)</td>
                             <td>72.7% (40/55)</td>
-                            <td>89.1% (V3)</td>
-                            <td style="color: #10b981; font-weight: bold;">88.2%</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑 (Optimum)</td>
+                            <td>88.2%</td>
+                            <td style="color: #10b981; font-weight: bold;">89.1%</td>
+                            <td style="color: #a78bfa; font-weight: bold;">AI V6 👑</td>
                         </tr>
                         <tr>
-                            <td>Downside Error (Tersasar Jauh/Rugi)</td>
-                            <td style="color: #ef4444;">13.0%</td>
-                            <td style="color: #10b981;">0.0%</td>
+                            <td>Downside Error (Tersasar)</td>
+                            <td>27.3%</td>
                             <td style="color: #10b981; font-weight: bold;">0.0%</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑 (100% Kebal)</td>
+                            <td>10.9%</td>
+                            <td style="color: #60a5fa; font-weight: bold;">AI V4 👑</td>
                         </tr>
                         <tr>
-                            <td>Upside Missed (Terlepas Untung)</td>
-                            <td style="color: #10b981;">50.6%</td>
-                            <td style="color: #ef4444;">59.7%</td>
-                            <td style="color: #10b981; font-weight: bold;">39.5%</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑 (NEW WIN!)</td>
+                            <td>Upside Missed (Terlepas)</td>
+                            <td style="color: #10b981; font-weight: bold;">27.4%</td>
+                            <td>39.5%</td>
+                            <td>36.3%</td>
+                            <td style="color: #f59e0b; font-weight: bold;">Sifu CK 👑</td>
                         </tr>
                         <tr>
-                            <td>Overall Accuracy (Ketepatan ke ATH)</td>
-                            <td style="color: #10b981;">76.39%</td>
-                            <td style="color: #ef4444;">69.62%</td>
+                            <td>Overall Accuracy (ke ATH)</td>
+                            <td>77.57%</td>
                             <td style="color: #10b981; font-weight: bold;">83.15%</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑 (NEW WIN!)</td>
-                        </tr>
-                        <tr>
-                            <td>PE & PAT Projection</td>
-                            <td style="color: #10b981;">✅ 3 tahun pengalaman</td>
-                            <td style="color: #ef4444;">❌ Tak boleh replicate</td>
-                            <td style="color: #10b981; font-weight: bold;">✅ Sifu + AI Rules</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑</td>
-                        </tr>
-                        <tr>
-                            <td>Gap-Down Filter</td>
-                            <td style="color: #ef4444;">❌ Manual</td>
-                            <td style="color: #10b981;">✅ Auto</td>
-                            <td style="color: #10b981; font-weight: bold;">✅ Auto (OFS/MITI)</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑</td>
-                        </tr>
-                        <tr>
-                            <td>Backtest & Audit</td>
-                            <td style="color: #ef4444;">❌ Takde statistik</td>
-                            <td style="color: #10b981;">✅ 60 IPO</td>
-                            <td style="color: #10b981; font-weight: bold;">✅ 145+ IPO Terkini</td>
-                            <td style="color: #a78bfa; font-weight: bold;">AI V4 👑</td>
+                            <td>66.24%</td>
+                            <td style="color: #60a5fa; font-weight: bold;">AI V4 👑</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div style="margin-top: 1.5rem; padding: 1.25rem; background: rgba(139,92,246,0.06); border-radius: 0.75rem; border: 1px solid rgba(139,92,246,0.15); font-size: 0.85rem; color: #cbd5e1; line-height: 1.7;">
-                <strong style="color: #a78bfa;">🎯 Verdict Terbaharu (Model Calibrated & V3):</strong> Sifu membekalkan anggaran unjuran PE/EPS kasar, tetapi **Model Calibrated AI kita kini menang secara keseluruhan** kerana ia menyepadukan metrik statistik (Penang Premium, Had Siling MITI, dan OFS Drag) secara automatik bagi menyelesaikan isu unjuran Sifu yang tidak konsisten!
+                <strong style="color: #a78bfa;">🎯 Analisis Rumusan:</strong><br>
+                - **V4 (0% Downside Error)** adalah model *overfitted* pada 55 IPO latihan. Bila dataset berkembang ke 137, ia mula terjejas. V6 dibina dengan ketahanan lebih tinggi untuk mengendali data luar latihan.<br>
+                - **V6 (Max Target)** dibina bagi mengurangkan untung terlepas (*upside missed* 32.1% vs V3 35.9%) dengan Hit Rate kekal selamat pada **86.9%**.<br>
+                - **Sifu CK** masih mengekalkan ketepatan ke ATH paling tepat (74.11%) kerana target manualnya yang agresif, namun mempunyai risiko kegagalan target sebanyak 19.7%.
             </div>
         </section>
 

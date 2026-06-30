@@ -1,0 +1,18 @@
+{
+  "osLinear": -0.062118,
+  "osQuadratic": -0.094923,
+  "techMult": 0.757103,
+  "consumerMult": 0.923936,
+  "energyMult": 0.955618,
+  "healthMult": 1.091094,
+  "industrialMult": 0.836895,
+  "constructionMult": 1.05285,
+  "mainMult": 1.061522,
+  "ibInfluence": 0.074801,
+  "ofsMult": 1.219244,
+  "priceGaussian": 0.125707,
+  "freeFloatDev": -0.747504,
+  "qualInfluence": -0.000803,
+  "_loocvHitRate": "121/137",
+  "_loocvAccuracy": "70.31%"
+}
