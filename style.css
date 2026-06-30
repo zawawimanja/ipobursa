@@ -1746,4 +1746,81 @@ h3,
     background: #1e293b !important;
 }
 
+/* Premium Mobile & Web Responsiveness Optimization */
+@media (max-width: 768px) {
+    /* Hide navigation text labels, making them beautiful compact icon-only buttons on mobile */
+    .nav-links a span, .nav-text {
+        display: none !important;
+    }
+    .nav-links a i {
+        margin: 0 !important;
+    }
+    .btn-moomoo {
+        padding: 0.5rem 0.75rem !important;
+        height: 38px;
+        width: 38px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .glass-header .container {
+        padding: 0 1rem !important;
+    }
+    .logo-text {
+        font-size: 1.25rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Sifu Sheets Mobile Layout Optimization */
+    .excel-table td, .excel-table th {
+        padding: 0.4rem 0.5rem !important;
+        font-size: 0.75rem !important;
+    }
+    .excel-table input {
+        font-size: 0.75rem !important;
+        padding: 0.2rem !important;
+    }
+    .sheet-card {
+        padding: 1rem !important;
+    }
+    .verdict-banner {
+        padding: 0.75rem !important;
+        font-size: 0.78rem !important;
+    }
+    .sheet-container {
+        gap: 1rem !important;
+        margin-top: 1rem !important;
+    }
+    
+    /* Picks Table & Card Spacing Adjustments */
+    .picks-table td, .picks-table th {
+        padding: 0.45rem 0.5rem !important;
+        font-size: 0.72rem !important;
+    }
+    .picks-table-wrapper {
+        margin: 0 -0.5rem;
+        border-radius: 0.5rem;
+    }
+    .group-card {
+        padding: 0.75rem !important;
+    }
+    .group-title {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Global Typography adjustments for readability */
+    h1 {
+        font-size: 1.8rem !important;
+    }
+    h2 {
+        font-size: 1.4rem !important;
+    }
+    
+    /* Enable smooth touch scrolling on tables */
+    .excel-table-wrapper, .picks-table-wrapper, .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 

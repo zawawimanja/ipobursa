@@ -286,7 +286,7 @@
                 const lowOS = os > 0 && os < 20;
                 const highOFS = ofs >= 20;
                 const isRisky = lowOS || highOFS;
-                const isAvoid = upside < 10 || (isRisky && upside < 40);
+                const isAvoid = upside < 10 || (isRisky && upside < 40) || lowOS;
 
                 const btn = document.createElement('button');
                 btn.className = 'quick-btn';
@@ -394,6 +394,9 @@
             if (upside < 0) {
                 emoji = '🚫'; verdict = 'JANGAN SUBSCRIBE'; color = '#ef4444'; className = 'avoid';
                 strategy = `CK target (RM ${tp.toFixed(2)}) <b>bawah harga IPO</b> (RM ${ipo.toFixed(2)}). Overvalued.`;
+            } else if (lowOS) {
+                emoji = '🚫'; verdict = 'AVOID — Demand Lemah (OS Rendah)'; color = '#ef4444'; className = 'avoid';
+                strategy = `Kadar oversubscription sangat lemah (<b>${os}x < 20x</b>). Walaupun unjuran upside tinggi (<b>${upside.toFixed(1)}%</b>), tiada minat belian pasaran untuk menolak harga naik. Risiko flat atau gap-down sangat tinggi — <b>SKIP TERUS</b>.`;
             } else if (gapDownRisk && upside < 40) {
                 // Gap-down risk overrides upside if upside is moderate
                 emoji = '🚫'; verdict = 'AVOID — Gap-Down Risk Tinggi'; color = '#ef4444'; className = 'avoid';
