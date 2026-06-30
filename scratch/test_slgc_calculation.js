@@ -1,16 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-const htmlPath = path.join(__dirname, '..', 'sifu-sheets.html');
-
 try {
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-    const stockProfilesMatch = htmlContent.match(/const stockProfiles = \{([\s\S]*?)\n        \};/);
+    // Load data.json
+    const dataJsonPath = path.join(__dirname, '..', 'data.json');
+    const ipoData = JSON.parse(fs.readFileSync(dataJsonPath, 'utf8'));
     
-    eval('var stockProfiles = {' + stockProfilesMatch[1] + '};');
-    const data = stockProfiles['slgc-berhad'];
+    const data = ipoData.find(x => x.id === 'slgc-berhad');
+    if (!data) {
+        console.error('SLGC Berhad profile not found in data.json');
+        process.exit(1);
+    }
     
-    console.log('SLGC Berhad Profile in HTML:');
+    console.log('SLGC Berhad Profile in data.json:');
     console.log(data);
     
     // Test the sifu calculation formula

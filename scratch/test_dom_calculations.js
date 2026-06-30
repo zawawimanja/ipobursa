@@ -32,21 +32,24 @@ try {
     
     global.window = {};
     
+    // Load data.json into global scope
+    const dataJsonPath = path.join(__dirname, '..', 'data.json');
+    const ipoData = JSON.parse(fs.readFileSync(dataJsonPath, 'utf8'));
+    global.IPO_DATA = ipoData;
+    global.ipoData = ipoData;
+    
     // 2. Extract script block from HTML
     const scriptMatches = htmlContent.match(/<script>([\s\S]*?)<\/script>/g);
-    // Find the last script block which contains the logic
     const mainScript = scriptMatches[scriptMatches.length - 1]
         .replace('<script>', '')
-        .replace('</script>', '')
-        .replace('const stockProfiles =', 'global.stockProfiles =')
-        .replace('const ipoData =', 'global.ipoData =');
+        .replace('</script>', '');
     
     // Evaluate mainScript in this context
     eval(mainScript);
     
     // 3. Test calculation for SLGC Berhad
     console.log('Testing calculation engine for SLGC Berhad...');
-    const slgcData = global.stockProfiles['slgc-berhad'];
+    const slgcData = global.IPO_DATA.find(x => x.id === 'slgc-berhad');
     
     // Convert inputs to text/readonly and load profile
     document.querySelectorAll('.excel-table input').forEach(input => {

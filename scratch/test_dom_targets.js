@@ -32,20 +32,24 @@ try {
     
     global.window = {};
     
+    // Load data.json into global scope
+    const dataJsonPath = path.join(__dirname, '..', 'data.json');
+    const ipoData = JSON.parse(fs.readFileSync(dataJsonPath, 'utf8'));
+    global.IPO_DATA = ipoData;
+    global.ipoData = ipoData;
+    
     // 2. Extract script block from HTML
     const scriptMatches = htmlContent.match(/<script>([\s\S]*?)<\/script>/g);
     const mainScript = scriptMatches[scriptMatches.length - 1]
         .replace('<script>', '')
-        .replace('</script>', '')
-        .replace('const stockProfiles =', 'global.stockProfiles =')
-        .replace('const ipoData =', 'global.ipoData =');
+        .replace('</script>', '');
     
     // Evaluate mainScript
     eval(mainScript);
     
     // 3. Test calculation for Solarvest
     console.log('Testing calculation engine for Solarvest...');
-    const solarvestData = global.stockProfiles['solarvest'];
+    const solarvestData = global.IPO_DATA.find(x => x.id === 'solarvest');
     fillFormValues(solarvestData);
     document.getElementById('sheet-target-pe').value = solarvestData.targetPe.toString();
     document.getElementById('sheet-mos-slider').value = '20'; // 20% MoS
@@ -60,7 +64,7 @@ try {
     
     // 4. Test calculation for AMBEST
     console.log('\nTesting calculation engine for AMBEST...');
-    const ambestData = global.stockProfiles['ambest'];
+    const ambestData = global.IPO_DATA.find(x => x.id === 'ambest');
     fillFormValues(ambestData);
     document.getElementById('sheet-target-pe').value = ambestData.targetPe.toString();
     document.getElementById('sheet-mos-slider').value = '20'; // 20% MoS

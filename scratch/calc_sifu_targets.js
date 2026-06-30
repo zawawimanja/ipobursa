@@ -1,11 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const htmlPath = path.join(__dirname, '..', 'sifu-sheets.html');
 const jsonPath = path.join(__dirname, '..', 'data.json');
 
 try {
-    const htmlContent = fs.readFileSync(htmlPath, 'utf8');
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     
     const overridesPath = path.join(__dirname, '..', 'overrides.json');
@@ -13,15 +11,6 @@ try {
     if (fs.existsSync(overridesPath)) {
         overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
     }
-    
-    // Extract stockProfiles
-    const stockProfilesMatch = htmlContent.match(/const stockProfiles = \{([\s\S]*?)\n        \};/);
-    if (!stockProfilesMatch) {
-        console.error('FAIL: Could not locate stockProfiles in HTML.');
-        process.exit(1);
-    }
-    
-    eval('var stockProfiles = {' + stockProfilesMatch[1] + '};');
     
     const targets = data.filter(ipo => 
         (ipo.year === 2026 || ['mnhldg', 'cnergenz', 'destini', 'cbhb', 'hkb', 'iab', 'hss-holdings-berhad', 'liftech-group-berhad', 'solarvest', 'sag'].includes(ipo.id)) && 
@@ -143,17 +132,16 @@ try {
             // Respect manual target price without applying discounts, unless user provided calibratedSifuTargetPrice explicitly
             calibratedTP = override.calibratedSifuTargetPrice !== undefined ? override.calibratedSifuTargetPrice : override.sifuTargetPrice;
             source = `overrides.json (Manual Override)`;
-        } else if (stockProfiles[ipo.id]) {
-            const p = stockProfiles[ipo.id];
+        } else if (ipo.headers !== undefined && ipo.patF !== undefined && ipo.totalShares !== undefined && ipo.targetPe !== undefined) {
             // Calculate Valuation 1 for Projection F (first projection column)
             // Sifu Sheets calculates EPS = (patF / totalShares) * 100
             // Valuation 1 = targetPe * EPS / 100
-            const epsF = (p.patF / p.totalShares) * 100;
-            const valF = p.targetPe * epsF / 100;
+            const epsF = (ipo.patF / ipo.totalShares) * 100;
+            const valF = ipo.targetPe * epsF / 100;
             
             sifuTP = valF;
             calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib);
-            source = `stockProfiles (Projection F: RM ${valF.toFixed(2)})`;
+            source = `data.json profile (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs
             sifuTP = ipo.avgTP || ipo.price || 0.50;

@@ -64,24 +64,31 @@ async function scrapeI3PricesAxios() {
         console.log('Reading data.json...');
         let existingData = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
         
-        // Filter listed IPOs (stage 5) with a valid symbol
-        const listedIpos = existingData.filter(ipo => ipo.stage === 5 && ipo.symbol);
+        // Filter listed IPOs:
+        // - Must have stage 5 and a valid symbol
+        // - Keep all recent IPOs (2025 and 2026)
+        // - Randomly sample 10% of older IPOs (< 2025) per run to stagger updates and avoid i3investor rate limits
+        const listedIpos = existingData.filter(ipo => {
+            if (ipo.stage !== 5 || !ipo.symbol) return false;
+            if (ipo.year >= 2025) return true;
+            return Math.random() < 0.1;
+        });
         
         if (listedIpos.length === 0) {
-            console.log('No listed IPOs with symbols found.');
+            console.log('No listed IPOs to update.');
             return;
         }
 
         console.log(`Found ${listedIpos.length} listed IPOs to update from i3investor using Axios.`);
         
         let updatedCount = 0;
+        let pendingSave = false;
 
         for (let i = 0; i < listedIpos.length; i++) {
             let ipo = listedIpos[i];
             let symbolClean = ipo.symbol.replace(/\[.*?\]/g, '').trim();
             if (!symbolClean) continue;
             
-            // i3investor URL using symbol
             let url = `https://klse.i3investor.com/web/stock/overview/${symbolClean}`;
             
             try {
@@ -90,7 +97,7 @@ async function scrapeI3PricesAxios() {
                 const $ = cheerio.load(res.data);
                 
                 let priceText = null;
-                $('p').each((i, el) => {
+                $('p').each((idx, el) => {
                     if ($(el).text().trim() === 'Last Price') {
                         const nextP = $(el).next('p');
                         if (nextP.length > 0) {
@@ -112,10 +119,14 @@ async function scrapeI3PricesAxios() {
                         }
                         
                         console.log(`   -> Updated: RM ${oldPrice} -> RM ${currentPrice} (Perf: ${ipo.performance})`);
-                        
-                        // Save immediately
-                        saveDatabase(existingData);
                         updatedCount++;
+                        pendingSave = true;
+                        
+                        // Batch writes: Save database every 10 updates to reduce file I/O overhead
+                        if (updatedCount % 10 === 0) {
+                            saveDatabase(existingData);
+                            pendingSave = false;
+                        }
                     } else {
                         console.log(`   -> Invalid price format: ${priceText}`);
                     }
@@ -123,12 +134,17 @@ async function scrapeI3PricesAxios() {
                     console.log(`   -> Price element not found for ${symbolClean}`);
                 }
                 
-                // Polite delay: 1.0 to 1.5 seconds
+                // Polite delay: 1.0 to 1.5 seconds to avoid rate limiting
                 await new Promise(r => setTimeout(r, 1000 + Math.random() * 500));
                 
             } catch (err) {
                 console.error(`❌ Error fetching ${symbolClean}: ${err.message}`);
             }
+        }
+
+        // Final save for any remaining updates
+        if (pendingSave) {
+            saveDatabase(existingData);
         }
 
         console.log(`\nScraping finished. Successfully updated ${updatedCount} stock prices.`);
