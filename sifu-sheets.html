@@ -509,7 +509,7 @@
                                 <td class="calculated" id="td-roe-fye-f1">60.37%</td>
                             </tr>
                             <tr style="border-top: 2px dashed rgba(255,255,255,0.1);">
-                                <td class="label-cell" style="color: #f59e0b;">Sifu Valuation 1 (Target PE basis)</td>
+                                <td class="label-cell" style="color: #f59e0b;">Sifu Base Valuation (Target PE basis)</td>
                                 <td>RM</td>
                                 <td>-</td>
                                 <td>-</td>
@@ -517,14 +517,24 @@
                                 <td class="calculated-highlight" id="td-val1-fye-f">RM 0.320</td>
                                 <td class="calculated-highlight" id="td-val1-fye-f1">RM 0.380</td>
                             </tr>
+
                             <tr style="border-top: 1px dashed rgba(255,255,255,0.05);">
-                                <td class="label-cell" style="color: #3b82f6;">Sifu Valuation 2 (Calibrated Bull Target)</td>
+                                <td class="label-cell" style="color: #10b981;">Zone 1 Safe Target (DB - Sell 50%)</td>
                                 <td>RM</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
-                                <td class="calculated-highlight" id="td-val2-fye-f" style="font-weight: bold; color: #3b82f6;">-</td>
-                                <td class="calculated-highlight" id="td-val2-fye-f1" style="font-weight: bold; color: #3b82f6;">-</td>
+                                <td class="calculated-highlight" id="td-v3-db" style="font-weight: bold; color: #10b981;">-</td>
+                                <td class="calculated-highlight" id="td-v3-db-f1" style="font-weight: bold; color: #10b981;">-</td>
+                            </tr>
+                            <tr style="border-top: 1px dashed rgba(255,255,255,0.05);">
+                                <td class="label-cell" style="color: #a78bfa;">Zone 2 Max Target (DB - Trail 50%)</td>
+                                <td>RM</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td class="calculated-highlight" id="td-v5-db" style="font-weight: bold; color: #a78bfa;">-</td>
+                                <td class="calculated-highlight" id="td-v5-db-f1" style="font-weight: bold; color: #a78bfa;">-</td>
                             </tr>
                             <tr>
                                 <td class="label-cell" style="color: #f59e0b;">Buy Zone Limit (After MOS Discount)</td>
@@ -2311,8 +2321,46 @@
                 calibratedValF1 = getCalibrated(valF1);
             }
             
-            document.getElementById('td-val2-fye-f').innerText = 'RM ' + calibratedValF.toFixed(2);
-            document.getElementById('td-val2-fye-f1').innerText = 'RM ' + calibratedValF1.toFixed(2);
+            const tdVal2 = document.getElementById('td-val2-fye-f');
+            const tdVal2F1 = document.getElementById('td-val2-fye-f1');
+            if (tdVal2) tdVal2.innerText = 'RM ' + calibratedValF.toFixed(2);
+            if (tdVal2F1) tdVal2F1.innerText = 'RM ' + calibratedValF1.toFixed(2);
+
+            // Display V5 database target if available
+            const tdV5Db = document.getElementById('td-v5-db');
+            const tdV5DbF1 = document.getElementById('td-v5-db-f1');
+            if (tdV5Db && tdV5DbF1) {
+                if (ipo && ipo.calibratedSifuTargetPrice) {
+                    tdV5Db.innerText = 'RM ' + ipo.calibratedSifuTargetPrice.toFixed(2);
+                    if (valF > 0) {
+                        const ratio = valF1 / valF;
+                        tdV5DbF1.innerText = 'RM ' + (ipo.calibratedSifuTargetPrice * ratio).toFixed(2);
+                    } else {
+                        tdV5DbF1.innerText = '-';
+                    }
+                } else {
+                    tdV5Db.innerText = '-';
+                    tdV5DbF1.innerText = '-';
+                }
+            }
+
+            // Display V3/V4 database safe target if available
+            const tdV3Db = document.getElementById('td-v3-db');
+            const tdV3DbF1 = document.getElementById('td-v3-db-f1');
+            if (tdV3Db && tdV3DbF1) {
+                if (ipo && ipo.v3TargetPrice) {
+                    tdV3Db.innerText = 'RM ' + ipo.v3TargetPrice.toFixed(2);
+                    if (valF > 0) {
+                        const ratio = valF1 / valF;
+                        tdV3DbF1.innerText = 'RM ' + (ipo.v3TargetPrice * ratio).toFixed(2);
+                    } else {
+                        tdV3DbF1.innerText = '-';
+                    }
+                } else {
+                    tdV3Db.innerText = '-';
+                    tdV3DbF1.innerText = '-';
+                }
+            }
             
             // Buy limits with MOS
             const mos = parseInt(document.getElementById('sheet-mos-slider').value) || 0;
@@ -2325,19 +2373,22 @@
             // Verdict logic and dynamic coloring (Green = OK, Orange = Watchlist, Red = Avoid/Not OK)
             const verdictBox = document.getElementById('sheet-verdict-box');
             
+            const displayZone1 = (ipo && ipo.v3TargetPrice) ? ipo.v3TargetPrice : calibratedValF;
+            const displayZone2 = (ipo && ipo.calibratedSifuTargetPrice) ? ipo.calibratedSifuTargetPrice : valF;
+            
             let colorF = '#10b981'; // Green (OK)
             if (price <= buyF) {
                 colorF = '#10b981';
                 verdictBox.className = 'verdict-banner buy';
-                verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(2)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(2)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar! <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat V3 (Zone 1) = <b>RM ${calibratedValF.toFixed(2)}</b> | Sasaran Bull Sifu (Zone 2) = <b>RM ${valF.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
+                verdictBox.innerHTML = `<strong>ZON BELI (BUY ZONE) 🟢:</strong> Harga pasaran semasa (RM ${price.toFixed(2)}) berada di bawah paras harga diskaun sifu (RM ${buyF.toFixed(2)}). Syarikat ini mempunyai fundamental kukuh dengan P/E unjuran serendah ${perF.toFixed(1)}x dan PEG ${pegF.toFixed(2)}x. Sesuai untuk beli & hold secara sabar! <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat (Zone 1) = <b>RM ${displayZone1.toFixed(2)}</b> | Sasaran Bull (Zone 2) = <b>RM ${displayZone2.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
             } else if (price <= valF) {
                 colorF = '#f59e0b'; // Orange (Watchlist)
                 verdictBox.className = 'verdict-banner hold';
-                verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(2)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(2)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(2)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran. <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat V3 (Zone 1) = <b>RM ${calibratedValF.toFixed(2)}</b> | Sasaran Bull Sifu (Zone 2) = <b>RM ${valF.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
+                verdictBox.innerHTML = `<strong>ZON WATCHLIST (FAIR VALUE) 🟡:</strong> Harga semasa (RM ${price.toFixed(2)}) berada di bawah Nilai Intrinsik (RM ${valF.toFixed(2)}) tetapi melebihi had diskaun Margin of Safety sifu (RM ${buyF.toFixed(2)}). Boleh kumpul unit secara perlahan-lahan atau tunggu pembetulan harga pasaran. <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat (Zone 1) = <b>RM ${displayZone1.toFixed(2)}</b> | Sasaran Bull (Zone 2) = <b>RM ${displayZone2.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
             } else {
                 colorF = '#ef4444'; // Red (Not OK)
                 verdictBox.className = 'verdict-banner avoid';
-                verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(2)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(2)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula. <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat V3 (Zone 1) = <b>RM ${calibratedValF.toFixed(2)}</b> | Sasaran Bull Sifu (Zone 2) = <b>RM ${valF.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
+                verdictBox.innerHTML = `<strong>ZON TINGGI / OVERVALUED 🔴:</strong> Harga semasa (RM ${price.toFixed(2)}) didagangkan pada harga premium melebihi Nilai Intrinsik (RM ${valF.toFixed(2)}). P/E sudah meningkat tinggi. Sifu menasihatkan agar bersabar, jangan FOMO, dan tunggu harga turun semula. <br><small style="display:block; margin-top:0.35rem; opacity:0.85; border-top: 1px dashed rgba(255,255,255,0.15); padding-top:0.35rem;"><b>Dual-Target Sifu:</b> Sasaran Selamat (Zone 1) = <b>RM ${displayZone1.toFixed(2)}</b> | Sasaran Bull (Zone 2) = <b>RM ${displayZone2.toFixed(2)}</b> (Gunakan Trailing Stop!).</small>`;
             }
 
             let colorF1 = '#10b981';
@@ -2352,13 +2403,15 @@
             // Apply dynamic colors to input and projected cells
             document.getElementById('inp-price').style.color = colorF;
             document.getElementById('td-val1-fye-f').style.color = colorF;
-            document.getElementById('td-val2-fye-f').style.color = '#3b82f6';
+            const elVal2 = document.getElementById('td-val2-fye-f');
+            if (elVal2) elVal2.style.color = '#3b82f6';
             document.getElementById('td-buy1-fye-f').style.color = colorF;
             document.getElementById('td-per-fye-f').style.color = colorF;
             document.getElementById('td-peg-fye-f').style.color = colorF;
 
             document.getElementById('td-val1-fye-f1').style.color = colorF1;
-            document.getElementById('td-val2-fye-f1').style.color = '#3b82f6';
+            const elVal2F1 = document.getElementById('td-val2-fye-f1');
+            if (elVal2F1) elVal2F1.style.color = '#3b82f6';
             document.getElementById('td-buy1-fye-f1').style.color = colorF1;
             document.getElementById('td-per-fye-f1').style.color = colorF1;
             document.getElementById('td-peg-fye-f1').style.color = colorF1;
