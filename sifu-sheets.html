@@ -244,9 +244,12 @@
                 <i data-lucide="table" style="color: #10b981; width: 32px; height: 32px;"></i>
                 <h1 style="margin: 0; font-size: 2.25rem;">Sifu's <span class="sheet-title-glow">Valuation Sheets</span></h1>
             </div>
-            <p style="color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0 auto;">
+            <p style="color: var(--text-dim); max-width: 600px; margin: 0.5rem auto 0 auto; font-size: 0.9rem;">
                 Replicate your Sifu's exact Excel financial modeling workspace. Pick a stock, customize projections, and calculate target valuations instantly.
             </p>
+            <div style="max-width: 750px; margin: 1rem auto 0 auto; padding: 0.6rem 1rem; background: rgba(16, 185, 129, 0.08); border: 1px dashed rgba(16, 185, 129, 0.3); border-radius: 6px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.4; text-align: left; display: inline-block;">
+                📢 <strong>Info Rujukan PE:</strong> Halaman ini adalah <strong>dinamik</strong>. Apabila memuatkan saham, sistem akan mengira dan menetapkan nilai <strong>Target PE Pintar</strong> yang tepat bagi menyamai harga target asal Sifu (bukan memilih had paling tinggi atau terendah secara rawak). Anda bebas melaraskan PE ini secara manual mengikut sentimen pasaran!
+            </div>
         </header>
 
         <div class="sheet-container">
@@ -298,10 +301,19 @@
                     </div>
                     
                     <div class="calc-form-group" style="margin-bottom: 0;">
-                        <label>Target PE Multiple (Valuation 1)</label>
-                        <input type="number" id="sheet-target-pe" value="9.0" step="0.5" oninput="calculateSheet()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem; text-align: left;">
-                        <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.35rem;">
-                            PE multiplier target used to determine Valuation 1.
+                        <label style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Target PE Multiple (Valuation 1)</span>
+                            <span style="font-size: 0.65rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">🔄 Autoloaded</span>
+                        </label>
+                        <input type="number" id="sheet-target-pe" value="9.0" step="0.5" oninput="calculateSheet()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem; text-align: left; font-weight: bold; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);">
+                        <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.4; padding: 0.6rem 0.75rem; background: rgba(99, 102, 241, 0.06); border-radius: 0.4rem; border: 1px solid rgba(99, 102, 241, 0.15);">
+                            <span style="color: #a78bfa; font-weight: bold; display: block; margin-bottom: 0.2rem;">⚡ Helaian Dinamik (Real-Time Recalibration):</span>
+                            Laras kotak PE di atas untuk menguji pelbagai senario target harga (Zone 1 & Zone 2) secara automatik.<br>
+                            <span style="color: #cbd5e1; display: block; margin-top: 0.3rem;"><strong>💡 Panduan Anggaran PE Sektor:</strong></span>
+                            • 🤖 <strong>AI & High-Tech (Gred A):</strong> 35x - 50x PE<br>
+                            • 💻 <strong>Teknologi Am / Hardware:</strong> 20x - 30x PE<br>
+                            • 🏭 <strong>Pembuatan & Industri:</strong> 12x - 18x PE<br>
+                            • 📦 <strong>Tradisional / Utiliti:</strong> 8x - 12x PE
                         </div>
                     </div>
                 </div>
@@ -1507,7 +1519,7 @@
                 liab23: 15000000, liab24: 18000000, liab25: 20000000,
                 liabF: 22000000, liabF1: 25000000,
                 
-                targetPe: 26.73,
+                targetPe: 48.0,
                 catalysts: [
                     "<strong>Spectacular Listing Hype:</strong> Dibuka pada paras RM3.50 (+297.7% premium) pada hari debut dengan langganan awam 95.03x menunjukkan tarikan runcit dan institusi yang luar biasa.",
                     "<strong>Sektor IC Design Premium:</strong> Pembuat cip rekaan litar bersepadu (IC Design) Penang berasaskan AI dan HPC (High Performance Computing) dengan pertumbuhan kukuh.",
@@ -1806,10 +1818,14 @@
                 if (ipo) {
                     const price = ipo.currentPrice || ipo.price || 0.50;
                     const pe = ipo.pe || 15;
-                    const eps = price > 0 ? (price / pe) * 100 : 4.5;
                     const totalShares = ipo.marketCap ? Math.round(ipo.marketCap / price) : 250000000;
                     const revenue = ipo.revenue || 80000000;
                     const pat = ipo.pat || (revenue * 0.12);
+                    
+                    const sifuTarget = ipo.sifuTargetPrice || ipo.avgTP || price;
+                    const patF = pat;
+                    const epsF = (patF / totalShares) * 100;
+                    const targetPe = epsF > 0 ? (sifuTarget / epsF) * 100 : pe;
                     
                     data = {
                         id: ipo.id,
@@ -1839,7 +1855,7 @@
                         liab23: revenue * 0.15, liab24: revenue * 0.2, liab25: revenue * 0.22,
                         liabF: revenue * 0.22, liabF1: revenue * 0.25,
                         
-                        targetPe: pe,
+                        targetPe: targetPe,
                         catalysts: [
                             `Syarikat IPO sektor ${ipo.sector || 'N/A'}.`,
                             `Harga IPO ditawarkan pada RM ${price.toFixed(2)}.`,
@@ -1848,7 +1864,7 @@
                         peers: `<strong>Peer Comparison:</strong> Implied PE owner: ${pe}x. Sila masukkan data kewangan sasaran untuk melihat unjuran perbandingan.`
                     };
                     fillFormValues(data);
-                    document.getElementById('sheet-target-pe').value = pe;
+                    document.getElementById('sheet-target-pe').value = targetPe.toFixed(1);
                     updateNotes(data);
                 }
             }
