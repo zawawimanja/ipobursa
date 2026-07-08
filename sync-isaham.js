@@ -152,26 +152,31 @@ async function scrapeMitiAndDraftIPOs(existingData) {
     
     // The structure typically has headings like "MITI IPO" and "Future IPO", followed by elements
     // Let's find h5 tags that typically hold the company names.
-    // Based on the structure, h4 separates sections, h5 are company names.
+    // Based on the structure, h3/h4 separates sections, h5 are company names.
     let currentSection = '';
     
-    $('h4, h5').each((i, el) => {
+    $('h3, h4, h5').each((i, el) => {
         const text = $(el).text().trim();
+        const tagName = el.tagName.toLowerCase();
         
-        if (el.tagName.toLowerCase() === 'h4') {
+        if (tagName === 'h4' || tagName === 'h3') {
             if (text.includes('MITI IPO') || text.includes('Upcoming Listing')) {
                 currentSection = 'MITI';
             } else if (text.includes('Future IPO')) {
                 currentSection = 'Future';
+            } else {
+                currentSection = '';
             }
-        } else if (el.tagName.toLowerCase() === 'h5') {
+        } else if (tagName === 'h5') {
+            if (!currentSection) return; // Ignore h5s outside the IPO sections
+
             // It's a company name
             const companyName = text;
             
             // Look ahead for details
             let nextElem = $(el).next();
             let detailsText = '';
-            while(nextElem.length && nextElem[0].tagName.toLowerCase() !== 'h5' && nextElem[0].tagName.toLowerCase() !== 'h4') {
+            while(nextElem.length && nextElem[0].tagName.toLowerCase() !== 'h5' && nextElem[0].tagName.toLowerCase() !== 'h4' && nextElem[0].tagName.toLowerCase() !== 'h3') {
                 detailsText += nextElem.text() + ' ';
                 nextElem = nextElem.next();
             }

@@ -3,8 +3,24 @@ const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 const before = data.length;
 
+const junkIds = new Set([
+    'register',
+    'access',
+    'seminars',
+    'recommended-amount-to-subscribe-',
+    'financing-details-',
+    'cost-breakdown-',
+    'filtered-statistics',
+    'select-stocks-',
+    'features',
+    'others',
+    'company'
+]);
+
 // Remove junk entries: id looks like a date, companyName == id, price == 0
 const cleaned = data.filter(d => {
+    if (junkIds.has(d.id)) return false;
+    
     const isDateId = /^\d{4}-\d{2}-\d{2}$/.test(d.id);
     const nameEqualsId = d.companyName === d.id;
     const noPrice = !d.price || d.price === 0;
