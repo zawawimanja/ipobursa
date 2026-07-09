@@ -151,7 +151,13 @@
             "<strong>Microsoft Managed Partner:</strong> Rakan kongsi Microsoft Managed Partner pertama di Malaysia dengan kesemua kompetensi AI Cloud, memberikan kelebihan persaingan yang unik.",
             "<strong>Prestasi Kewangan Teguh:</strong> PAT meningkat dari RM4.36 juta (FY23) kepada RM6.81 juta (FY25), disokong oleh hasil recurring bernilai tinggi."
         ],
-        "peers": "<strong>Peer Comparison:</strong> Implied PE terbitan FY25 sekitar 13.3x, didagangkan pada diskaun ketara berbanding peers teknologi ACE Market (purata 20x-25x PE). Nilai wajar Sifu dianggarkan sekitar **RM 0.39** berdasarkan PE 22x (FY24 PAT), menawarkan potensi upside sekitar +22%."
+        "peers": "<strong>Peer Comparison:</strong> Implied PE terbitan FY25 sekitar 13.3x, didagangkan pada diskaun ketara berbanding peers teknologi ACE Market (purata 20x-25x PE). Nilai wajar Sifu dianggarkan sekitar **RM 0.39** berdasarkan PE 22x (FY24 PAT), menawarkan potensi upside sekitar +22%.",
+        "openPrice": 0.6,
+        "highPrice": 0.615,
+        "closePrice": 0.61,
+        "currentPrice": 0.61,
+        "performance": "+90.62%",
+        "strategy": "Scalp"
     },
     {
         "id": "sum-technology",
