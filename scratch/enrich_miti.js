@@ -22,7 +22,7 @@ const enrichData = {
     'qube-international-berhad':    { sector: 'Technology (IT Services)', geography: 'Kuala Lumpur', price: 0.30 },
     'pioneer-heat-holdings-berhad': { sector: 'Industrial (Heat Treatment Manufacturing)', geography: 'Selangor', price: 0.26 },
     'jrk-holdings-berhad':          { sector: 'Consumer (Retail / Services)', geography: 'Kuala Lumpur', price: 0.28 },
-    'gb-bond-holdings-berhad':      { sector: 'Finance (Capital Markets)', geography: 'Kuala Lumpur', price: 0.25 },
+    'gb-bond-holdings-berhad':      { sector: 'Industrial Products & Services (Chemicals)', geography: 'Kuala Lumpur', price: 0.25 },
     'redplanet-berhad':             { sector: 'Technology (Digital / E-Commerce)', geography: 'Kuala Lumpur', price: 0.30 },
     'empg-group-berhad':            { sector: 'Consumer (Events & Media)', geography: 'Kuala Lumpur', price: 0.28 },
     'gta-holdings-berhad':          { sector: 'Industrial (Automotive Parts)', geography: 'Selangor', price: 0.30 },
@@ -39,7 +39,7 @@ const enrichData = {
     'likei-logistic-services-berhad': { sector: 'Industrial (Logistics & Transportation)', geography: 'Selangor', price: 0.30 },
     'butterfield-fb-berhad':        { sector: 'Consumer (Food & Beverage)', geography: 'Selangor', price: 0.32 },
     'evocom-berhad':                { sector: 'Technology (Digital Transformation & IT)', geography: 'Kuala Lumpur', price: 0.33 },
-    'keb-berhad':                   { sector: 'Industrial (Engineering & Construction)', geography: 'Selangor', price: 0.28 },
+    'keb-berhad':                   { sector: 'Property', geography: 'Selangor', price: 0.28 },
     'impact-capital-holdings-berhad': { sector: 'Finance (Investment Holding)', geography: 'Kuala Lumpur', price: 0.25 },
 };
 

@@ -1,4 +1,4 @@
-module.exports = [
+const IPO_DATA = [
   {
     "id": "srkk-ai",
     "companyName": "SRKK AI Berhad",
@@ -5881,12 +5881,17 @@ module.exports = [
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026,
-    "sifuTargetPrice": 0.5,
+    "sifuTargetPrice": 0.34,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.5
+    "calibratedSifuTargetPrice": 0.34,
+    "sector": "Property",
+    "predictedGrade": "B",
+    "v3TargetPrice": 0.34,
+    "zone2TargetPrice": 0.34,
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pemaju hartanah dengan pertumbuhan PAT kukuh (+23% CAGR FY25) dan margin PAT yang sihat (16.2%).<br><br>📊 <b>Valuation & Advisor:</b><br>• Ditaja oleh <b>M&A Securities</b> (IB terkemuka dengan rekod prestasi cemerlang untuk premium hari pertama).<br>• Gandaan PE Terbitan dianggarkan sekitar <b>9.9x PE</b> (berdasarkan PAT FY25 RM24.88M), menawarkan diskaun berbanding purata industri (12x-15x PE).<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 22 Julai 2026."
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -6718,10 +6723,17 @@ module.exports = [
     "price": 0,
     "closingDate": "",
     "listingDate": "",
-    "shariah": false,
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
-    "year": 2026
+    "shariah": true,
+    "stage": 2,
+    "status": "MITI Allocation Phase",
+    "year": 2026,
+    "sector": "Industrial Products & Services (Chemicals)",
+    "predictedGrade": "B",
+    "sifuTargetPrice": 0.3,
+    "calibratedSifuTargetPrice": 0.3,
+    "v3TargetPrice": 0.3,
+    "zone2TargetPrice": 0.3,
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC."
   },
   {
     "id": "redplanet-berhad",

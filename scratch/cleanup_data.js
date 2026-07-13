@@ -179,11 +179,11 @@ const enrichData = {
         notes: 'Retail services, ACE Market'
     },
     'gb-bond-holdings-berhad': {
-        sector: 'Finance (Bond / Investment)',
+        sector: 'Industrial Products & Services (Chemicals)',
         geography: 'Kuala Lumpur',
         market: 'ACE Market',
         price: 0.25,
-        notes: 'Investment holding'
+        notes: 'Adhesives & sealants manufacturer'
     },
     'redplanet-berhad': {
         sector: 'Technology (Digital / E-Commerce)',
