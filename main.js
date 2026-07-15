@@ -1,5 +1,15 @@
 let ipoData = [];
 let currentStage = 1;
+
+function getGroqKey() {
+    const params = new URLSearchParams(window.location.search);
+    const urlKey = params.get('groq');
+    if (urlKey) {
+        localStorage.setItem('gadisai_groq_key', urlKey);
+        return urlKey;
+    }
+    return localStorage.getItem('gadisai_groq_key') || '';
+}
 let selectedGrades = ['A', 'B', 'C', 'Pending'];
 let currentYear = 'all';
 let currentSearch = '';
@@ -1800,16 +1810,15 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 - Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
 - Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}`;
 
-        const isLocal = location.protocol === 'file:';
+        const savedKey = getGroqKey();
         let responseText = '';
 
-        if (isLocal) {
-            // Local mode fallback
-            const GROQ_KEY = 'YOUR_GROQ_API_KEY_HERE';
+        if (savedKey) {
+            // Direct browser call with manual key
             const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${GROQ_KEY}`,
+                    'Authorization': `Bearer ${savedKey}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -2199,17 +2208,15 @@ CURRENT IPO DATABASE:
 ${compactIpoData}
 Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
 
-        // Use server proxy on Vercel (production), direct Groq call when running locally
-        const isLocal = location.protocol === 'file:';
+        const savedKey = getGroqKey();
         let response;
 
-        if (isLocal) {
-            // Local fallback — Groq works in Malaysia, rate-limited per key
-            const GROQ_KEY = 'YOUR_GROQ_API_KEY_HERE';
+        if (savedKey) {
+            // Direct browser call with manual key
             response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${GROQ_KEY}`,
+                    'Authorization': `Bearer ${savedKey}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({

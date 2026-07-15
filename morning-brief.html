@@ -1090,6 +1090,16 @@ No rating"></textarea>
         parseTradingView();
     }
 
+    function getGroqKey() {
+        const params = new URLSearchParams(window.location.search);
+        const urlKey = params.get('groq');
+        if (urlKey) {
+            localStorage.setItem('gadisai_groq_key', urlKey);
+            return urlKey;
+        }
+        return localStorage.getItem('gadisai_groq_key') || '';
+    }
+
     async function generateAIMarketCommentary() {
         const btn = document.getElementById('ai-generate-btn');
         const box = document.getElementById('ai-commentary-content');
@@ -1174,15 +1184,14 @@ Keep it professional, informative, and formatted with markdown (use bullet point
 - WAIT / TARGET EXCEEDED: ${JSON.stringify(waitStocks.slice(0, 5))}
 - SWING PULLBACK RECOMMENDATIONS: ${JSON.stringify(pullbackStocks.slice(0, 10))}`;
 
-            const isLocal = location.protocol === 'file:';
+            const savedKey = getGroqKey();
             let responseText = '';
 
-            if (isLocal) {
-                const GROQ_KEY = 'YOUR_GROQ_API_KEY_HERE';
+            if (savedKey) {
                 const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${GROQ_KEY}`,
+                        'Authorization': `Bearer ${savedKey}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
