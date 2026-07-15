@@ -1697,13 +1697,190 @@ window.showDetails = function(id) {
                 <span class="value">${ipo.price > 0 ? 'RM ' + ipo.price.toFixed(2) : 'TBA'}</span>
             </div>
         </div>
-        <p style="font-size: 0.9rem; margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 0.5rem; border: 1px dashed var(--primary-light);">
+        
+        <div class="ai-analysis-container" style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.4rem; font-family: 'Outfit', sans-serif; color: #a78bfa; font-size: 0.9rem;">
+                <i data-lucide="sparkles" style="width: 14px; height: 14px; color: #a78bfa;"></i>
+                <span>Groq AI Smart Analysis</span>
+            </h4>
+            <div id="ai-verdict-box" style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.85rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
+                    <i data-lucide="zap" style="width: 13px; height: 13px;"></i> Generate AI Verdict
+                </button>
+                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Menggunakan Llama-3.3-70b-versatile untuk ulasan fundamental & valuation segera.</div>
+            </div>
+        </div>
+
+        <p style="font-size: 0.8rem; margin-top: 1.25rem; padding: 0.75rem; background: rgba(99, 102, 241, 0.08); border-radius: 0.5rem; border: 1px dashed rgba(165, 180, 252, 0.3); color: var(--text-dim);">
             <strong>Notice:</strong> This is a Draft Prospectus phase. Information is for reference only and not an offer to buy shares.
         </p>
     `;
     
     modal.style.display = 'flex';
     if(typeof lucide !== 'undefined') lucide.createIcons();
+};
+
+window.generateModalAIAnalysis = async function(id) {
+    const ipo = ipoData.find(item => item.id === id);
+    if (!ipo) return;
+
+    const verdictBox = document.getElementById('ai-verdict-box');
+    if (!verdictBox) return;
+
+    // Rate Limit Cooldown (client-side check to prevent rapid clicking)
+    const now = Date.now();
+    const lastClick = window._lastAnalysisClick || 0;
+    const cooldownMs = 15000; // 15 seconds cooldown
+    if (now - lastClick < cooldownMs) {
+        const remaining = Math.ceil((cooldownMs - (now - lastClick)) / 1000);
+        alert(`Sila tunggu ${remaining} saat sebelum membuat analisis baru.`);
+        return;
+    }
+    window._lastAnalysisClick = now;
+
+    // Show loading state
+    verdictBox.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.75rem;">
+            <div class="spinner" style="width: 22px; height: 22px; border: 2px solid rgba(167, 139, 250, 0.2); border-top-color: #a78bfa; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <span style="font-size: 0.8rem; color: #a78bfa; font-weight: 600;">Menganalisis Prospektus & Sektor...</span>
+        </div>
+    `;
+
+    try {
+        const systemPrompt = `You are "Hunter AI Verdict", a professional stock analyst specializing in Malaysian IPOs on Bursa Malaysia.
+You evaluate IPOs across 4 pillars:
+1. Valuation (P/E ratio compared to peer averages of ~20x-25x for tech, ~12x-15x for industrial, cash flow, and market cap).
+2. Sponsor/Investment Bank (IB) quality (Maybank/M&A/KAF are elite Tier 1, TA/Kenanga/Malacca/UOB are mid Tier 2, others are Tier 3).
+3. Sector Momentum (High-growth tech, solar, AI, semiconductors, cleanroom are super hot; standard fabrication, trading, services are neutral/boring).
+4. Structure & Risks (OFS components decrease retail listing performance, lock-up terms, utilization of funds like debt paying vs R&D/Expansion).
+
+Format your response in professional Malay/Manglish mixed style, using the following exact structure:
+### 🌟 AI VERDICT: [MUST BUY / WORTH IT / SCALP / AVOID / PENDING]
+Provide a concise 1-sentence verdict on whether to subscribe or skip.
+
+### 📊 Valuation & Financial Health
+Give a brief critique of the valuation (is it cheap, fair, or overpriced? PE value) and fund utilization.
+
+### ⚡ Catalysts (Pemangkin)
+List 2-3 positive catalysts (e.g. sponsor record, industry trends, orderbook, growth strategy) as bullet points.
+
+### ⚠️ Risk Factors (Faktor Risiko)
+List 1-2 major risks (e.g. OFS percentage, customer concentration, competitor pricing, shariah status if non-shariah) as bullet points.
+
+### ⚓ Action Strategy
+Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target price", "Apply for listing day scalp", "Skip completely").`;
+
+        const prompt = `Please evaluate the following IPO detail:
+- Company Name: ${ipo.companyName}
+- Sector: ${ipo.sector}
+- Market: ${ipo.market}
+- Price: RM ${ipo.price ? ipo.price.toFixed(3) : 'TBA'}
+- PE Ratio: ${ipo.pe || 'TBA'}
+- Investment Bank / Sponsor: ${ipo.ib || 'TBA'}
+- Use of Funds: ${ipo.fundUse || 'TBA'}
+- Oversubscription Rate: ${ipo.os || 'TBA'}
+- Offer For Sale (OFS): ${ipo.ofs === true ? 'Yes (Has existing shares sold by promoters)' : 'No (Pure public issue)'}
+- Sifu Target Price: RM ${ipo.sifuTargetPrice ? ipo.sifuTargetPrice.toFixed(3) : 'TBA'}
+- Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
+- Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}`;
+
+        const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
+        let responseText = '';
+
+        if (isLocal) {
+            // Local mode fallback
+            const GROQ_KEY = 'YOUR_GROQ_API_KEY_HERE';
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${GROQ_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: prompt }
+                    ],
+                    max_tokens: 1024,
+                    temperature: 0.5
+                })
+            });
+            const groqData = await response.json();
+            responseText = groqData?.choices?.[0]?.message?.content || '';
+        } else {
+            // Production Vercel mode
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    systemPrompt: systemPrompt,
+                    model: 'llama-3.3-70b-versatile',
+                    max_tokens: 1024,
+                    temperature: 0.5
+                })
+            });
+            const data = await response.json();
+            responseText = data.text || '';
+        }
+
+        if (!responseText) {
+            throw new Error('No analysis generated.');
+        }
+
+        // Format markdown to HTML
+        let formattedHtml = responseText
+            .replace(/\n/g, '<br>')
+            .replace(/### (.*?)(<br>|$)/g, '<h5 style="color:#a78bfa; font-family:\'Outfit\',sans-serif; font-size:0.9rem; margin: 0.8rem 0 0.35rem 0;">$1</h5>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<i>$1</i>')
+            .replace(/- (.*?)(<br>|$)/g, '<div style="display:flex; align-items:flex-start; gap:0.4rem; font-size:0.78rem; margin-bottom:0.25rem;"><span style="color:#a78bfa;">•</span><span>$1</span></div>');
+
+        // Style the top level verdict headers nicely
+        formattedHtml = formattedHtml.replace(/🌟 AI VERDICT: (.*?)(<\/h5>|<br>|$)/gi, (match, p1) => {
+            let color = '#818cf8';
+            let bg = 'rgba(99, 102, 241, 0.1)';
+            const verdictUpper = p1.toUpperCase();
+            if (verdictUpper.includes('MUST BUY') || verdictUpper.includes('MUST APPLY')) {
+                color = '#c084fc';
+                bg = 'rgba(139, 92, 246, 0.15)';
+            } else if (verdictUpper.includes('WORTH IT')) {
+                color = '#34d399';
+                bg = 'rgba(16, 185, 129, 0.15)';
+            } else if (verdictUpper.includes('AVOID')) {
+                color = '#f87171';
+                bg = 'rgba(239, 68, 68, 0.15)';
+            } else if (verdictUpper.includes('SCALP')) {
+                color = '#38bdf8';
+                bg = 'rgba(56, 189, 248, 0.15)';
+            }
+            return `🌟 AI VERDICT: <span style="background:${bg}; color:${color}; font-weight:800; padding:0.2rem 0.6rem; border-radius:4px; border:1px solid ${color}40; font-size:0.75rem;">${p1}</span>`;
+        });
+
+        verdictBox.style.alignItems = 'stretch';
+        verdictBox.style.textAlign = 'left';
+        verdictBox.innerHTML = `
+            <div style="font-size:0.78rem; color:var(--text-main); line-height:1.5; padding: 0.1rem;">
+                ${formattedHtml}
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:0.6rem; padding-top:0.4rem; text-align:right;">
+                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">
+                    <i data-lucide="refresh-cw" style="width: 9px; height: 9px; display:inline-block; margin-bottom:-1px;"></i> Recalculate
+                </button>
+            </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    } catch (err) {
+        console.error('AI Analysis failed:', err);
+        verdictBox.innerHTML = `
+            <div style="color:#ef4444; font-size:0.75rem; text-align:center; padding: 0.75rem;">
+                ⚠️ Gagal menjana analisis. Sila semak sambungan internet atau tetapan API Key anda.
+                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-primary" style="margin-top:0.5rem; padding:0.35rem 0.75rem; font-size:0.75rem; cursor:pointer; border:none;">Retry</button>
+            </div>
+        `;
+    }
 };
 
 function showResearch(ipoId) {
@@ -1991,14 +2168,25 @@ async function sendAIMessage() {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 
     try {
+        const compactIpoData = ipoData.map(i => {
+            const gradeObj = getIpoGrade(i);
+            return {
+                symbol: i.symbol || i.id.toUpperCase(),
+                name: i.companyName,
+                market: i.market,
+                status: i.status,
+                price: i.price,
+                os: i.os,
+                pe: i.pe,
+                grade: gradeObj ? gradeObj.grade : 'Unrated',
+                sector: i.sector
+            };
+        });
+
         const systemPrompt = `You are "Hunter AI", a professional Malaysian IPO assistant for the IPO Hunter website.
 You help users understand IPOs listed on Bursa Malaysia.
-CURRENT IPO DATA: ${JSON.stringify(ipoData.slice(0, 15).map(i => ({
-    name: i.companyName, status: i.status, price: i.price,
-    os: i.os, market: i.market, sector: i.sector, pe: i.pe,
-    insight: i.analystInsight
-})))}
-Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant.`;
+CURRENT IPO DATABASE: ${JSON.stringify(compactIpoData)}
+Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
 
         // Use server proxy on Vercel (production), direct Groq call when running locally
         const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
@@ -2031,7 +2219,13 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
             response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: systemPrompt + '\n\nUser question: ' + text })
+                body: JSON.stringify({
+                    prompt: 'User question: ' + text,
+                    systemPrompt: systemPrompt,
+                    model: 'llama-3.1-8b-instant',
+                    max_tokens: 512,
+                    temperature: 0.7
+                })
             });
         }
 

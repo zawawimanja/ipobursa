@@ -630,6 +630,48 @@
 
 
 
+    <!-- Hunter AI Chat Bubble & Window -->
+    <div class="ai-chat-wrapper" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: 'Inter', sans-serif;">
+        <!-- Chat Bubble Button -->
+        <button id="ai-chat-btn" onclick="toggleChat()" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; width: 50px; height: 50px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); position: relative; transition: transform 0.3s; padding: 0;">
+            <i id="toggle-icon-open" data-lucide="message-square" style="width: 22px; height: 22px; display: block; margin: auto;"></i>
+            <i id="toggle-icon-close" data-lucide="x" style="width: 22px; height: 22px; display: none; margin: auto;"></i>
+            <span class="notification-badge" style="position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; background: #ef4444; border-radius: 50%; border: 2px solid #0f172a; display: block;"></span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="ai-window" style="display: none; flex-direction: column; position: absolute; bottom: 65px; right: 0; width: 330px; height: 430px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(167, 139, 250, 0.25); border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; backdrop-filter: blur(16px); transition: all 0.3s;">
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(139, 92, 246, 0.05)); padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 0.60rem; text-align: left;">
+                <div style="background: rgba(167, 139, 250, 0.15); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #a78bfa; flex-shrink: 0;">
+                    <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0; font-family: 'Outfit', sans-serif; color: white; font-size: 0.95rem; font-weight: 700;">Hunter AI Assistant</h4>
+                    <span style="font-size: 0.68rem; color: #34d399; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                        <span style="width: 5px; height: 5px; background: #34d399; border-radius: 50%; display: inline-block;"></span> Online (Llama-3.1-8b)
+                    </span>
+                </div>
+            </div>
+
+            <!-- Messages List -->
+            <div id="ai-messages" style="flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; text-align: left;">
+                <!-- Initial message -->
+                <div class="message ai-message">
+                    👋 Hai! Saya Hunter AI. Tanya saya apa sahaja tentang kaunter IPO Bursa Malaysia di dalam senarai dashboard kita.
+                </div>
+            </div>
+
+            <!-- Footer Input -->
+            <div style="padding: 0.75rem 1rem; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.2); display: flex; gap: 0.5rem; align-items: center;">
+                <input type="text" id="ai-input" placeholder="Tanya sesuatu..." onkeydown="if(event.key === 'Enter') sendAIMessage()" style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; padding: 0.5rem 1rem; color: white; font-size: 0.82rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='rgba(167, 139, 250, 0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+                <button onclick="sendAIMessage()" style="background: rgba(167, 139, 250, 0.15); border: none; width: 32px; height: 32px; border-radius: 50%; color: #a78bfa; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; flex-shrink: 0;" onmouseover="this.style.background='rgba(167, 139, 250, 0.25)'" onmouseout="this.style.background='rgba(167, 139, 250, 0.15)'">
+                    <i data-lucide="send" style="width: 14px; height: 14px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="main.js?v=1.2"></script>
     <script>
         lucide.createIcons();

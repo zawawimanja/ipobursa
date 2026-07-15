@@ -374,6 +374,21 @@ No rating"></textarea>
     <!-- Results -->
     <div id="results-section" style="display:none;">
 
+        <!-- AI Commentary Box -->
+        <div class="glass-card" id="ai-brief-card" style="padding:1.25rem 1.5rem; margin-bottom:1rem; border: 1px solid rgba(167, 139, 250, 0.25); background: linear-gradient(135deg, rgba(167, 139, 250, 0.05), rgba(15, 23, 42, 0.4));">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.15rem; color: #a78bfa; margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                <span style="display:flex; align-items:center; gap:0.4rem;">
+                    <i data-lucide="sparkles" style="width: 16px; height: 16px; color:#a78bfa;"></i> AI Morning Market Commentary
+                </span>
+                <button onclick="generateAIMarketCommentary()" class="btn-moomoo" id="ai-generate-btn" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.15); transition: 0.3s;">
+                    <i data-lucide="zap" style="width: 12px; height: 12px;"></i> Generate AI Commentary
+                </button>
+            </h3>
+            <div id="ai-commentary-content" style="font-size:0.8rem; line-height:1.5; color: var(--text-main); margin-top: 0.6rem;">
+                <p style="color:var(--text-dim); margin:0;">Tekan butang di sebelah kanan untuk menjana ulasan pasaran GenAI Bursa Malaysia berdasarkan senarai kaunter aktif hari ini.</p>
+            </div>
+        </div>
+
         <div class="stats-row" id="stats-row"></div>
 
         <div class="glass-card" style="padding:1.25rem 1.5rem;margin-bottom:1rem;">
@@ -495,6 +510,7 @@ No rating"></textarea>
 
         document.getElementById('initial-state').style.display = 'none';
         document.getElementById('results-section').style.display = 'block';
+        document.getElementById('ai-commentary-content').innerHTML = '<p style="color:var(--text-dim); margin:0;">Tekan butang di sebelah kanan untuk menjana ulasan pasaran GenAI Bursa Malaysia berdasarkan senarai kaunter aktif hari ini.</p>';
 
         if (typeof lucide !== 'undefined') lucide.createIcons();
     }
@@ -887,6 +903,7 @@ No rating"></textarea>
         document.getElementById('results-section').style.display = 'none';
         document.getElementById('pullback-suggestions').style.display = 'none';
         document.getElementById('initial-state').style.display = 'block';
+        document.getElementById('ai-commentary-content').innerHTML = '<p style="color:var(--text-dim); margin:0;">Tekan butang di sebelah kanan untuk menjana ulasan pasaran GenAI Bursa Malaysia berdasarkan senarai kaunter aktif hari ini.</p>';
         allRows = [];
     }
 
@@ -1071,6 +1088,151 @@ No rating"></textarea>
         localStorage.setItem('custom_overrides', JSON.stringify(overrides));
         alert(`TP untuk ${key} berjaya dikemaskini ke RM ${parseFloat(newTP).toFixed(2)}!`);
         parseTradingView();
+    }
+
+    async function generateAIMarketCommentary() {
+        const btn = document.getElementById('ai-generate-btn');
+        const box = document.getElementById('ai-commentary-content');
+        if (!btn || !box) return;
+
+        // Rate Limit check (client-side check to prevent rapid clicking)
+        const now = Date.now();
+        const lastClick = window._lastCommentaryClick || 0;
+        const cooldownMs = 25000; // 25 seconds cooldown
+        if (now - lastClick < cooldownMs) {
+            const remaining = Math.ceil((cooldownMs - (now - lastClick)) / 1000);
+            alert(`Sila tunggu ${remaining} saat sebelum menjana ulasan pasaran yang baharu.`);
+            return;
+        }
+        window._lastCommentaryClick = now;
+
+        // Compile data from allRows & suggestions to send to LLM
+        const buyStocks = allRows.filter(r => r.verdict === 'buy').map(r => ({
+            symbol: r.symbol,
+            price: r.price,
+            daily: r.dailyChange,
+            grade: r.grade,
+            tp: r.sifuTP,
+            strategy: r.strategy,
+            reason: r.reason
+        }));
+
+        const waitStocks = allRows.filter(r => r.verdict === 'wait').map(r => ({
+            symbol: r.symbol,
+            price: r.price,
+            daily: r.dailyChange,
+            tp: r.sifuTP
+        }));
+
+        // Get suggestion element details
+        let pullbackStocks = [];
+        const pullbackRows = document.querySelectorAll('#pullback-body tr');
+        pullbackRows.forEach(row => {
+            const cols = row.querySelectorAll('td');
+            if (cols.length >= 4) {
+                pullbackStocks.push({
+                    symbol: cols[0].innerText.split(' ')[0],
+                    price: cols[1].innerText,
+                    tp: cols[2].innerText,
+                    upside: cols[3].innerText,
+                    grade: cols[4].innerText
+                });
+            }
+        });
+
+        // Set loading state
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="refresh-cw" class="spin" style="width:12px;height:12px;display:inline-block;animation:spin 1s linear infinite;"></i> Menjana...`;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        box.innerHTML = `
+            <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0;color:#a78bfa;">
+                <div class="spinner" style="width:16px;height:16px;border:2px solid rgba(167, 139, 250, 0.2);border-top-color:#a78bfa;border-radius:50%;animation:spin 1s linear infinite;"></div>
+                <span>Menghadam kaunter aktif & merumuskan ulasan pagi...</span>
+            </div>
+        `;
+
+        try {
+            const systemPrompt = `You are "Bursa AI Market Brief", a professional financial writer and stock market analyst.
+You write daily morning briefs for retail traders in Malaysia.
+Your writing style is highly engaging, sharp, clear, and uses standard Malaysian investment terms (such as breakout, pullback, support, profit-taking, upside, valuation, target price).
+
+Create a structured report in professional Malay/Manglish mixed style using the following structure:
+### 📈 Ringkasan Pasaran & Sentimen Pagi
+Give a 2-3 sentence overview of today's market opening. Mention general trends based on the counters provided.
+
+### ⚓ Analisis Kaunter Fokus Swing (Zon Beli)
+Highlight 1-2 top swing counters from the Buy list or Pullback list. Discuss why they are attractive (PE valuation, target price gap, or sector momentum).
+
+### ⚡ Strategi Dagangan Hari Ini
+Discuss day-trading or scalp recommendations (e.g. quick profits on ATH breakouts, waiting for dips, or avoiding high-risk counters).
+
+Keep it professional, informative, and formatted with markdown (use bullet points where appropriate).`;
+
+            const prompt = `Here is today's stock data:
+- BUY WATCHLIST: ${JSON.stringify(buyStocks.slice(0, 10))}
+- WAIT / TARGET EXCEEDED: ${JSON.stringify(waitStocks.slice(0, 5))}
+- SWING PULLBACK RECOMMENDATIONS: ${JSON.stringify(pullbackStocks.slice(0, 10))}`;
+
+            const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
+            let responseText = '';
+
+            if (isLocal) {
+                const GROQ_KEY = 'YOUR_GROQ_API_KEY_HERE';
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${GROQ_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.3-70b-versatile',
+                        messages: [
+                            { role: 'system', content: systemPrompt },
+                            { role: 'user', content: prompt }
+                        ],
+                        max_tokens: 1024,
+                        temperature: 0.6
+                    })
+                });
+                const groqData = await response.json();
+                responseText = groqData?.choices?.[0]?.message?.content || '';
+            } else {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        systemPrompt: systemPrompt,
+                        model: 'llama-3.3-70b-versatile',
+                        max_tokens: 1024,
+                        temperature: 0.6
+                    })
+                });
+                const data = await response.json();
+                responseText = data.text || '';
+            }
+
+            if (!responseText) throw new Error('No commentary generated.');
+
+            // Parse markdown to HTML
+            let formattedHtml = responseText
+                .replace(/\n/g, '<br>')
+                .replace(/### (.*?)(<br>|$)/g, '<h4 style="color:#a78bfa; font-family:\'Outfit\',sans-serif; font-size:0.95rem; margin:0.8rem 0 0.35rem 0;">$1</h4>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<i>$1</i>')
+                .replace(/- (.*?)(<br>|$)/g, '<div style="display:flex; align-items:flex-start; gap:0.4rem; font-size:0.8rem; margin-bottom:0.25rem;"><span style="color:#a78bfa;">•</span><span>$1</span></div>');
+
+            box.innerHTML = `<div style="color:var(--text-main); font-size:0.82rem; line-height:1.5;">${formattedHtml}</div>`;
+
+        } catch (err) {
+            console.error('Commentary generation failed:', err);
+            box.innerHTML = `<span style="color:#ef4444;">⚠️ Gagal menjana ulasan pasaran. Ralat: ${err.message}. Sila cuba sebentar lagi.</span>`;
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="sparkles" style="width:12px;height:12px;"></i> Generate AI Commentary`;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
     }
 </script>
 
