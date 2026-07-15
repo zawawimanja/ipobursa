@@ -1117,15 +1117,15 @@ function renderIPOs(stage) {
                 <div class="table-responsive" style="width: 100%; overflow-x: auto; overflow-y: auto; max-height: 70vh; grid-column: 1 / -1; border-radius: 1rem; border: 1px solid var(--glass-border); background: var(--card-bg); backdrop-filter: blur(16px);">
                     <table class="ipo-table" style="width: 100%; border-collapse: collapse; text-align: left;">
                         <thead style="position: sticky; top: 0; z-index: 10; background: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-                            <tr>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Symbol & Market</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Date</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Demand (OS)</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Price Info</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Perf. (IPO to Now)</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Open to Now</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Score</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Verdict & Action</th>
+                            <tr style="font-size: 0.72rem; white-space: nowrap;">
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Company</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Date</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">OS</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Price</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">IPO Perf.</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Open Perf.</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Grade</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Verdict</th>
                             </tr>
                         </thead>
                         <tbody>
