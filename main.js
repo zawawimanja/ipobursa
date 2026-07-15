@@ -1685,7 +1685,7 @@ window.showDetails = function(id) {
                 <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
                     <i data-lucide="zap" style="width: 13px; height: 13px;"></i> Generate AI Verdict
                 </button>
-                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Menggunakan Llama-3.1-8b-instant untuk ulasan fundamental & valuation segera.</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Menggunakan Llama-3.3-70b-versatile untuk ulasan fundamental & valuation segera.</div>
             </div>
         </div>
 
@@ -1774,7 +1774,7 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: prompt }
@@ -1793,7 +1793,7 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
                 body: JSON.stringify({
                     prompt: prompt,
                     systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     max_tokens: 1024,
                     temperature: 0.5
                 })
@@ -2191,7 +2191,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: text }
@@ -2216,7 +2216,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                 body: JSON.stringify({
                     prompt: 'User question: ' + text,
                     systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     max_tokens: 512,
                     temperature: 0.7
                 })
