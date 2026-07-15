@@ -1125,8 +1125,7 @@ function renderIPOs(stage) {
                                 <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Perf. (IPO to Now)</th>
                                 <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Open to Now</th>
                                 <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Score</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Verdict</th>
-                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Action</th>
+                                <th style="padding: 0.75rem; font-weight: 600; color: var(--text-dim); white-space: nowrap;">Verdict & Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1536,10 +1535,10 @@ function createIPOCard(ipo, index = 0) {
                 </div>
                 ` : ''}
             </td>
-            <td style="padding: 0.75rem 0.6rem; min-width: 200px; max-width: 300px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
+            <td style="padding: 0.75rem 0.6rem; min-width: 180px; max-width: 280px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
                 ${renderStyledVerdict(gradeObj.reason, grade, ipo)}
+                <div style="margin-top: 0.5rem; padding-top: 0.4rem; border-top: 1px solid rgba(255,255,255,0.06);">${finalActionCol}</div>
             </td>
-            <td style="padding: 0.75rem 0.6rem; white-space: nowrap;">${finalActionCol}</td>
         </tr>
     `;
 }
