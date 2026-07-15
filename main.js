@@ -2193,7 +2193,18 @@ async function sendAIMessage() {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 
     try {
-        const compactIpoData = ipoData.map(i => {
+        // Keep only active IPOs (Stage 1-4) + 15 most recent listed IPOs (Stage 5) to save tokens
+        const activeIpos = ipoData.filter(i => i.stage < 5);
+        const listedIpos = ipoData.filter(i => i.stage === 5)
+            .sort((a, b) => {
+                const dateA = a.listingDate ? new Date(a.listingDate) : new Date(0);
+                const dateB = b.listingDate ? new Date(b.listingDate) : new Date(0);
+                return dateB - dateA; // newest first
+            })
+            .slice(0, 15);
+        const filteredIpos = [...activeIpos, ...listedIpos];
+
+        const compactIpoData = filteredIpos.map(i => {
             const gradeObj = getIpoGrade(i);
             const grade = gradeObj ? gradeObj.grade : 'Unrated';
             const symb = i.symbol || i.id.toUpperCase();

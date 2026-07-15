@@ -8353,10 +8353,18 @@ const IPO_DATA = [
     "year": 2026,
     "sifuTargetPrice": 0.13,
     "calibratedSifuTargetPrice": 0.1,
-    "sector": "Technology (Electronic Manufacturing Services)",
+    "sector": "Consumer Products (Edible Bird's Nest)",
     "geography": "Selangor",
-    "v3TargetPrice": 0.229,
-    "zone2TargetPrice": 0.25
+    "v3TargetPrice": 0.13,
+    "zone2TargetPrice": 0.13,
+    "openPrice": 0.13,
+    "currentPrice": 0.13,
+    "closePrice": 0.13,
+    "performance": "+0.00%",
+    "os": 1.94,
+    "ib": "M&A Securities",
+    "fundUse": "Debt repayment & working capital",
+    "analystInsight": "✅ <b>LEAP-to-ACE Transfer Play</b><br>Enest Berhad has officially listed today on the ACE Market. Processing edible bird's nest. Fundraising is mostly for loan repayment.<br>• <b>Valuation:</b> Low issue price of RM0.13, PE ~15.5x.<br>• <b>Demand:</b> Oversubscribed by 1.94x for the public portion."
   },
   {
     "id": "tuc-holdings-berhad",
