@@ -41,6 +41,14 @@ function isRateLimited(ip) {
 }
 
 module.exports = async (req, res) => {
+    // Handle CORS preflight
+    if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        return res.status(200).end();
+    }
+
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -51,14 +59,21 @@ module.exports = async (req, res) => {
     }
 
     // IP-based Rate Limiter (Max 10 requests per 5 minutes)
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'anonymous';
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'anonymous';
     if (isRateLimited(ip)) {
         console.warn(`Rate limit triggered for IP: ${ip}`);
         return res.status(429).json({ error: 'Too many requests. Please wait 5 minutes.' });
     }
 
     try {
-        const { prompt, systemPrompt, model, temperature, max_tokens } = req.body;
+        // Manually parse body if needed (some Vercel runtimes don't auto-parse)
+        let body = req.body;
+        if (typeof body === 'string') {
+            try { body = JSON.parse(body); } catch (e) { body = {}; }
+        }
+        if (!body || typeof body !== 'object') body = {};
+
+        const { prompt, systemPrompt, model, temperature, max_tokens } = body;
         if (!prompt) return res.status(400).json({ error: 'No prompt provided.' });
 
         const selectedModel = model || 'llama-3.3-70b-versatile';
