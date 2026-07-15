@@ -2193,7 +2193,7 @@ async function sendAIMessage() {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 
     try {
-        // Keep only active IPOs (Stage 1-4) + 15 most recent listed IPOs (Stage 5) to save tokens
+        // Keep only active IPOs (Stage 1-4) + 10 most recent listed IPOs (Stage 5) to save tokens
         const activeIpos = ipoData.filter(i => i.stage < 5);
         const listedIpos = ipoData.filter(i => i.stage === 5)
             .sort((a, b) => {
@@ -2201,7 +2201,7 @@ async function sendAIMessage() {
                 const dateB = b.listingDate ? new Date(b.listingDate) : new Date(0);
                 return dateB - dateA; // newest first
             })
-            .slice(0, 15);
+            .slice(0, 10);
         const filteredIpos = [...activeIpos, ...listedIpos];
 
         const compactIpoData = filteredIpos.map(i => {
@@ -2210,14 +2210,17 @@ async function sendAIMessage() {
             const symb = i.symbol || i.id.toUpperCase();
             const priceVal = i.price ? `RM${i.price.toFixed(3)}` : 'TBA';
             const osVal = i.os ? `${i.os}x` : 'TBA';
-            return `${i.companyName} (${symb}) - Market:${i.market}, Status:${i.status}, Price:${priceVal}, OS:${osVal}, PE:${i.pe || 'TBA'}, Grade:${grade}, Sector:${i.sector}`;
+            const mkt = i.market && i.market.toLowerCase().includes('main') ? 'Main' : 'ACE';
+            return `${i.companyName.substring(0, 30)} (${symb})|${mkt}|Stage ${i.stage}|${priceVal}|OS:${osVal}|PE:${i.pe || 'TBA'}|Grade:${grade}|${i.sector.substring(0, 25)}`;
         }).join('\n');
 
         const systemPrompt = `You are "Hunter AI", a professional Malaysian IPO assistant for the IPO Hunter website.
 You help users understand IPOs listed on Bursa Malaysia.
-CURRENT IPO DATABASE:
+CURRENT IPO DATABASE (Format: Name (Symbol)|Market|Stage|Price|OS|PE|Grade|Sector):
 ${compactIpoData}
 Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
+
+
 
         const savedKey = getGroqKey();
         let response;
