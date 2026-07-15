@@ -2230,8 +2230,13 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                 })
             });
             const groqData = await response.json();
-            const groqText = groqData?.choices?.[0]?.message?.content || '';
-            response = { ok: true, _groqText: groqText };
+            if (!response.ok) {
+                const errMsg = groqData?.error?.message || 'Groq API returned an error.';
+                response = { ok: false, _groqText: `⚠️ Error: ${errMsg}` };
+            } else {
+                const groqText = groqData?.choices?.[0]?.message?.content || '';
+                response = { ok: true, _groqText: groqText };
+            }
         } else {
             // Production: secure proxy on Vercel (key hidden in env vars)
             response = await fetch('/api/chat', {
