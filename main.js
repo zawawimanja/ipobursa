@@ -1748,6 +1748,10 @@ List 1-2 major risks (e.g. OFS percentage, customer concentration, competitor pr
 ### ⚓ Action Strategy
 Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target price", "Apply for listing day scalp", "Skip completely").`;
 
+        const _hunterGradeObj = getIpoGrade(ipo);
+        const hunterGrade = _hunterGradeObj ? _hunterGradeObj.grade : 'N/A';
+        const hunterReason = _hunterGradeObj ? (_hunterGradeObj.reason || '').replace(/<[^>]*>/g, '') : 'N/A';
+
         const prompt = `Please evaluate the following IPO detail:
 - Company Name: ${ipo.companyName}
 - Sector: ${ipo.sector}
@@ -1761,10 +1765,10 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 - Sifu Target Price: RM ${ipo.sifuTargetPrice ? ipo.sifuTargetPrice.toFixed(3) : 'TBA'}
 - Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
 - Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}
-- **HUNTER SYSTEM GRADE: ${(()=>{ const g = getIpoGrade(ipo); return g ? g.grade : 'N/A'; })()}** (A=Strong Buy, B=Scalp Only, C=AVOID — this is the official Hunter algorithm verdict)
-- Hunter Grade Reason: ${(()=>{ const g = getIpoGrade(ipo); return g ? g.reason.replace(/<[^>]*>/g,'') : 'N/A'; })()}
+- HUNTER SYSTEM GRADE: ${hunterGrade} (A=Strong Buy, B=Scalp Only, C=AVOID — official Hunter algorithm verdict)
+- Hunter Grade Reason: ${hunterReason}
 
-IMPORTANT: Your verdict MUST be consistent with the Hunter System Grade above. If Grade is C, your verdict MUST be AVOID or maximum SCALP. Do NOT recommend buying a Grade C IPO. If Grade is A, you may recommend MUST BUY or WORTH IT. If Grade is B, recommend SCALP only.`;
+IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID only. Grade B = SCALP only. Grade A = MUST BUY or WORTH IT. Never contradict the Hunter Grade.`;
 
         const savedKey = getGroqKey();
         let responseText = '';
