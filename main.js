@@ -465,13 +465,21 @@ async function autoHuntData(ipo) {
     if (!ipo.companyName) return;
     
     const proxy = 'https://api.allorigins.win/get?url=';
+    const fullSlug = ipo.companyName.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
     const stem = ipo.companyName.toLowerCase().replace(/berhad|bhd|group|holdings/g, '').trim().replace(/\s+/g, '-');
     const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
     
     const urls = [
+        `https://www.isaham.my/ipo/insights/${fullSlug}`,
+        `https://www.isaham.my/ipo-insights/${fullSlug}`,
+        `https://www.isaham.my/ipo/insights/${fullSlug.replace(/-berhad|-bhd|-group|-holdings|-corp/g, '')}`,
         `https://www.isaham.my/ipo/${stem}`,
         `https://www.isaham.my/ipo-insights/${stem}`,
-        `https://www.isaham.my/stock/${ticker}/insights`
+        `https://www.isaham.my/stock/${ticker}/insights`,
+        `https://www.isaham.my/ipo/${ticker}`
     ];
     
     console.log(`🚀 Deep Hunter probing for ${ipo.companyName}...`);

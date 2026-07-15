@@ -302,12 +302,20 @@ async function deepHuntData(existingData) {
     let huntedCount = 0;
 
     for (let ipo of existingData) {
-        if ((ipo.stage === 3 || ipo.stage === 4) && (!ipo.os || !ipo.avgTP || !ipo.pe)) {
+        if (ipo.stage >= 3 && (!ipo.os || !ipo.avgTP || !ipo.pe)) {
             const stem = normalizeName(ipo.companyName).replace(/\s+/g, '-');
             const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
             
+            const fullSlug = ipo.companyName.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .trim()
+                .replace(/\s+/g, '-');
+            
             const urls = [
                 ipo.insightUrl, // Try saved URL first
+                `https://www.isaham.my/ipo/insights/${fullSlug}`,
+                `https://www.isaham.my/ipo-insights/${fullSlug}`,
+                `https://www.isaham.my/ipo/insights/${fullSlug.replace(/-berhad|-bhd|-group|-holdings|-corp/g, '')}`,
                 `https://www.isaham.my/ipo/${stem}`,
                 `https://www.isaham.my/ipo-insights/${stem}`,
                 `https://www.isaham.my/stock/${ticker}/insights`,
