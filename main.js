@@ -1888,6 +1888,9 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
             <div style="font-size:0.78rem; color:var(--text-main); line-height:1.5; padding: 0.1rem;">
                 ${formattedHtml}
             </div>
+            <div style="margin-top:0.5rem; padding:0.35rem 0.5rem; background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.18); border-radius:5px; font-size:0.65rem; color:#f59e0b; line-height:1.4;">
+                ⚠️ AI verdict adalah panduan sahaja — bukan nasihat kewangan. Semak prospektus & Bursa rasmi sebelum buat keputusan.
+            </div>
             <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:0.6rem; padding-top:0.4rem; text-align:right;">
                 <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">
                     <i data-lucide="refresh-cw" style="width: 9px; height: 9px; display:inline-block; margin-bottom:-1px;"></i> Recalculate
