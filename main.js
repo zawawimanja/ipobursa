@@ -2213,7 +2213,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: text }
@@ -2233,7 +2233,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                 body: JSON.stringify({
                     prompt: 'User question: ' + text,
                     systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama-3.3-70b-versatile',
                     max_tokens: 512,
                     temperature: 0.7
                 })
