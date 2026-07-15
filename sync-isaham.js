@@ -298,12 +298,25 @@ async function scrapeListedStatistics(existingData) {
 }
 
 async function deepHuntData(existingData) {
-    console.log('Running Deep Hunt for OS and TP/FV...');
+    console.log('Running Deep Hunt for OS and TP/FV (Shariah only)...');
     let huntedCount = 0;
 
-    for (let ipo of existingData) {
-        if (ipo.stage >= 3 && (!ipo.os || !ipo.avgTP || !ipo.pe)) {
-            const stem = normalizeName(ipo.companyName).replace(/\s+/g, '-');
+    // Only hunt Shariah-compliant IPOs:
+    // 1. Stage 3 & 4 (pre-listing) - always hunt if missing OS
+    // 2. Stage 5 (listed 2024+) - hunt if missing OS
+    // Skip non-Shariah, [NS] placeholders, and old entries
+    const targets = existingData.filter(ipo => {
+        if (!ipo.companyName || ipo.companyName.includes('[NS]')) return false;
+        if (ipo.shariah !== true) return false; // Shariah only
+        if (ipo.stage === 3 || ipo.stage === 4) return !ipo.os;
+        if (ipo.stage === 5) return !ipo.os && (ipo.year >= 2024 || !ipo.year);
+        return false;
+    });
+
+    console.log(`  Targeting ${targets.length} IPO(s) for OS/TP hunt...`);
+
+    for (let ipo of targets) {
+        const stem = normalizeName(ipo.companyName).replace(/\s+/g, '-');
             const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
             
             const fullSlug = ipo.companyName.toLowerCase()
@@ -401,7 +414,6 @@ async function deepHuntData(existingData) {
                 }
             }
             if (foundInfo) huntedCount++;
-        }
     }
     return huntedCount;
 }

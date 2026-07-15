@@ -67,9 +67,11 @@ async function main() {
 
     const data = JSON.parse(fs.readFileSync(DATA_JSON_FILE, 'utf8'));
     
-    // Target: Stage 3 & 4 only (ballot closed / pre-listing) without OS
+    // Target: Stage 3 & 4 only (ballot closed / pre-listing) WITHOUT OS, Shariah only
     const targets = data.filter(ipo => 
-        (ipo.stage === 3 || ipo.stage === 4) && (!ipo.os || ipo.os === 0)
+        ipo.shariah === true &&
+        (ipo.stage === 3 || ipo.stage === 4) && 
+        (!ipo.os || ipo.os === 0)
     );
 
     if (targets.length === 0) {
