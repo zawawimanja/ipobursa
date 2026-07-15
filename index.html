@@ -16,6 +16,33 @@
     <script src="sync-status.js?v=1.1"></script>
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
     <script type="module" src="analytics.js"></script>
+    <style>
+        .academy-tab-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .academy-tab-btn:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .academy-tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+        }
+    </style>
 </head>
 
 <body>
@@ -198,264 +225,271 @@
                 </div>
             </div>
 
-            <section class="grade-guide glass-card" style="margin-bottom: 2rem; padding: 2.5rem; border: 1px solid rgba(99, 102, 241, 0.3);">
-                <div style="text-align: center; margin-bottom: 2.5rem;">
-                    <h2 style="margin-bottom: 0.5rem;">The Hunter <span>Strategy Guide</span></h2>
-                    <p style="color: var(--text-dim);">A unified look at our grading system and execution rules.</p>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                    <!-- Grade A -->
-                    <div style="background: rgba(16, 185, 129, 0.05); padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(16, 185, 129, 0.2);">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i data-lucide="shield-check" style="color: #10b981; width: 24px;"></i>
-                                <h3 style="color: #10b981; margin: 0;">Grade A</h3>
-                            </div>
-                            <span class="badge" style="background: rgba(16,185,129,0.2); color: #10b981; border: 1px solid #10b981;">SWING</span>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;">
-                            Main Market / GLC giants. High institutional support. <b>The Goal:</b> Hold for institutional accumulation throughout Day 1.
-                        </p>
-                        <ul style="font-size: 0.8rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 1rem;">
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="check" style="width: 14px; color: #10b981;"></i> <b>OS:</b> > 20x</li>
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="check" style="width: 14px; color: #10b981;"></i> <b>PE:</b> Stable (< 15x)</li>
-                        </ul>
-                        <div style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #10b981;">
-                            <strong style="color: #10b981;">Pro Tip:</strong> Look for Tech/AI sectors. If OS is high, hold until 5:00 PM close for maximum gain.
-                        </div>
-                    </div>
-
-                    <!-- Grade B -->
-                    <div style="background: rgba(245, 158, 11, 0.05); padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(245, 158, 11, 0.2);">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i data-lucide="zap" style="color: #f59e0b; width: 24px;"></i>
-                                <h3 style="color: #f59e0b; margin: 0;">Grade B</h3>
-                            </div>
-                            <span class="badge" style="background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid #f59e0b;">SCALP</span>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;">
-                            ACE Market growth plays. High retail hype. <b>The Goal:</b> Capture the initial morning spike and exit within 30 mins.
-                        </p>
-                        <ul style="font-size: 0.8rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 1rem;">
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="check" style="width: 14px; color: #f59e0b;"></i> <b>OS:</b> > 50x (Required)</li>
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="check" style="width: 14px; color: #f59e0b;"></i> <b>Sector:</b> Data Centers / Solar</li>
-                        </ul>
-                        <div style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #f59e0b;">
-                            <strong style="color: #f59e0b;">Rule:</strong> Sell between 9:00 AM – 9:05 AM. Don't be greedy; the hype often fades by lunch.
-                        </div>
-                    </div>
-
-                    <!-- Grade C -->
-                    <div style="background: rgba(239, 68, 68, 0.05); padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(239, 68, 68, 0.2);">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <i data-lucide="alert-triangle" style="color: #ef4444; width: 24px;"></i>
-                                <h3 style="color: #ef4444; margin: 0;">Grade C</h3>
-                            </div>
-                            <span class="badge" style="background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444;">AVOID</span>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;">
-                            Low interest or high valuation. <b>Warning:</b> High risk of "Full Allocation" where you get 100% of requested shares.
-                        </p>
-                        <ul style="font-size: 0.8rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 1rem;">
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="x" style="width: 14px; color: #ef4444;"></i> <b>OS:</b> < 10x</li>
-                            <li style="margin-bottom: 0.4rem;"><i data-lucide="x" style="width: 14px; color: #ef4444;"></i> <b>PE:</b> Overpriced (> 20x)</li>
-                        </ul>
-                        <div style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 0.5rem; border-left: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Danger:</strong> If you get everything you applied for, sell immediately at the open.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="automation-status glass-card" style="margin-bottom: 2rem; border-color: rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent);">
-                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                    <div style="background: #10b981; padding: 0.75rem; border-radius: 0.75rem; color: white;">
-                        <i data-lucide="cpu" style="width: 24px;"></i>
-                    </div>
+            <!-- Unified Hunter Portal & Resource Hub -->
+            <section class="glass-card" style="margin-bottom: 4rem; padding: 2rem; border: 1px solid rgba(99, 102, 241, 0.25); background: rgba(15, 23, 42, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-radius: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.25rem; margin-bottom: 2rem;">
                     <div>
-                        <h2 style="margin: 0;">Hunter <span>Automation Engine</span></h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;" id="automation-sync-desc">The following systems are currently running in the background:</p>
+                        <h2 style="margin: 0; font-size: 1.5rem; font-family: 'Outfit', sans-serif;">Hunter <span style="background: linear-gradient(to right, #a78bfa, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Resource Portal</span></h2>
+                        <p style="color: var(--text-dim); font-size: 0.8rem; margin: 0.25rem 0 0 0;">Unified access to strategy guides, live automation status, and educational modules.</p>
                     </div>
-                    <button onclick="openSyncHub()" class="btn-moomoo" style="margin-left: auto; background: #10b981; border: none;">
-                        <i data-lucide="settings"></i> Manage Sync
-                    </button>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="academy-tab-btn active" data-tab="strategy" onclick="switchAcademyTab('strategy')">
+                            <i data-lucide="trending-up" style="width: 14px;"></i> Strategy & Grades
+                        </button>
+                        <button class="academy-tab-btn" data-tab="automation" onclick="switchAcademyTab('automation')">
+                            <i data-lucide="cpu" style="width: 14px;"></i> Automation Engine
+                        </button>
+                        <button class="academy-tab-btn" data-tab="academy" onclick="switchAcademyTab('academy')">
+                            <i data-lucide="graduation-cap" style="width: 14px;"></i> IPO Academy
+                        </button>
+                        <button class="academy-tab-btn" data-tab="broker" onclick="switchAcademyTab('broker')">
+                            <i data-lucide="shield" style="width: 14px;"></i> Preferred Broker
+                        </button>
+                    </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                    <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02);">
-                        <strong style="color: #10b981; display: block; margin-bottom: 0.5rem;">📡 Live Scraper</strong>
-                        <p style="font-size: 0.8rem; color: var(--text-dim); margin: 0;">Syncs with Bursa & iSaham every 10 minutes to fetch latest prices and status changes.</p>
+
+                <!-- Tab 1: Strategy & Grades -->
+                <div id="academy-tab-strategy" class="academy-tab-content" style="display: block;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <!-- Grade A -->
+                        <div style="background: rgba(16, 185, 129, 0.03); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid rgba(16, 185, 129, 0.15);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-lucide="shield-check" style="color: #10b981; width: 20px;"></i>
+                                    <h3 style="color: #10b981; margin: 0; font-size: 1.05rem;">Grade A</h3>
+                                </div>
+                                <span class="badge" style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); font-size: 0.65rem;">SWING</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.75rem; line-height: 1.4;">
+                                Main Market / GLC giants. High institutional support. <b>Goal:</b> Hold for institutional accumulation throughout Day 1.
+                            </p>
+                            <ul style="font-size: 0.75rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 0.75rem;">
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="check" style="width: 12px; color: #10b981;"></i> <b>OS:</b> > 20x</li>
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="check" style="width: 12px; color: #10b981;"></i> <b>PE:</b> Stable (&lt; 15x)</li>
+                            </ul>
+                            <div style="font-size: 0.7rem; background: rgba(0,0,0,0.15); padding: 0.5rem; border-radius: 0.35rem; border-left: 2px solid #10b981; color: #cbd5e1;">
+                                <strong style="color: #10b981;">Pro Tip:</strong> Tech/AI sectors. If OS is high, hold until 5:00 PM close.
+                            </div>
+                        </div>
+
+                        <!-- Grade B -->
+                        <div style="background: rgba(245, 158, 11, 0.03); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid rgba(245, 158, 11, 0.15);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-lucide="zap" style="color: #f59e0b; width: 20px;"></i>
+                                    <h3 style="color: #f59e0b; margin: 0; font-size: 1.05rem;">Grade B</h3>
+                                </div>
+                                <span class="badge" style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); font-size: 0.65rem;">SCALP</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.75rem; line-height: 1.4;">
+                                ACE Market growth plays. High retail hype. <b>Goal:</b> Capture the initial morning spike and exit within 30 mins.
+                            </p>
+                            <ul style="font-size: 0.75rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 0.75rem;">
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="check" style="width: 12px; color: #f59e0b;"></i> <b>OS:</b> > 50x (Required)</li>
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="check" style="width: 12px; color: #f59e0b;"></i> <b>Sector:</b> DC / Solar / Technology</li>
+                            </ul>
+                            <div style="font-size: 0.7rem; background: rgba(0,0,0,0.15); padding: 0.5rem; border-radius: 0.35rem; border-left: 2px solid #f59e0b; color: #cbd5e1;">
+                                <strong style="color: #f59e0b;">Rule:</strong> Sell between 9:00 AM – 9:05 AM. Hype fades quickly.
+                            </div>
+                        </div>
+
+                        <!-- Grade C -->
+                        <div style="background: rgba(239, 68, 68, 0.03); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid rgba(239, 68, 68, 0.15);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-lucide="alert-triangle" style="color: #ef4444; width: 20px;"></i>
+                                    <h3 style="color: #ef4444; margin: 0; font-size: 1.05rem;">Grade C</h3>
+                                </div>
+                                <span class="badge" style="background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); font-size: 0.65rem;">AVOID</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.75rem; line-height: 1.4;">
+                                Low interest/high valuation. <b>Warning:</b> High risk of "Full Allocation" where you get 100% of requested shares.
+                            </p>
+                            <ul style="font-size: 0.75rem; color: var(--text-main); list-style: none; padding: 0; margin-bottom: 0.75rem;">
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="x" style="width: 12px; color: #ef4444;"></i> <b>OS:</b> &lt; 10x</li>
+                                <li style="margin-bottom: 0.25rem;"><i data-lucide="x" style="width: 12px; color: #ef4444;"></i> <b>PE:</b> Overpriced (&gt; 20x)</li>
+                            </ul>
+                            <div style="font-size: 0.7rem; background: rgba(0,0,0,0.15); padding: 0.5rem; border-radius: 0.35rem; border-left: 2px solid #ef4444; color: #cbd5e1;">
+                                <strong style="color: #ef4444;">Danger:</strong> If full allocation happens, sell immediately at opening.
+                            </div>
+                        </div>
                     </div>
-                    <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02);">
-                        <strong style="color: #10b981; display: block; margin-bottom: 0.5rem;">🎯 Deep Hunter</strong>
-                        <p style="font-size: 0.8rem; color: var(--text-dim); margin: 0;">AI agents probing for missing OS, Target Prices, and Broker reports automatically.</p>
+
+                    <!-- Market Comparison Inside strategy -->
+                    <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 1rem;">
+                        <h4 style="margin: 0; font-size: 1rem; color: white;">Main Market vs ACE Market Comparison</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="academy-details-split">
+                            <div>
+                                <strong style="color: #60a5fa; font-size: 0.85rem; display: block; margin-bottom: 0.4rem;">🏛️ Main Market (MM)</strong>
+                                <ul style="font-size: 0.75rem; color: var(--text-dim); padding-left: 1rem; margin: 0; line-height: 1.5;">
+                                    <li>Established, big companies</li>
+                                    <li>High profit track record required</li>
+                                    <li>Generally safer for long-term holds</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong style="color: #ec4899; font-size: 0.85rem; display: block; margin-bottom: 0.4rem;">⚡ ACE Market</strong>
+                                <ul style="font-size: 0.75rem; color: var(--text-dim); padding-left: 1rem; margin: 0; line-height: 1.5;">
+                                    <li>Fast-growing, smaller companies</li>
+                                    <li>High growth & scalability potential</li>
+                                    <li>Higher volatility & retail hype</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02);">
-                        <strong style="color: #10b981; display: block; margin-bottom: 0.5rem;">⚡ Performance Sync</strong>
-                        <p style="font-size: 0.8rem; color: var(--text-dim); margin: 0;">Real-time calculation of Day 1 and Current performance for listed IPOs.</p>
+                </div>
+
+                <!-- Tab 2: Automation Engine -->
+                <div id="academy-tab-automation" class="academy-tab-content" style="display: none;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="background: rgba(16, 185, 129, 0.15); padding: 0.5rem; border-radius: 0.5rem; color: #10b981; display: inline-flex;">
+                                <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.15rem; color: white;">Hunter Automation Systems</h3>
+                                <p style="color: var(--text-dim); font-size: 0.75rem; margin: 0;" id="automation-sync-desc">The following systems are currently running in the background:</p>
+                            </div>
+                        </div>
+                        <button onclick="openSyncHub()" class="btn-moomoo" style="background: #10b981; border: none; font-size: 0.8rem; padding: 0.5rem 1rem;">
+                            <i data-lucide="settings" style="width: 14px;"></i> Manage Sync
+                        </button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+                        <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0;">
+                            <strong style="color: #10b981; display: block; margin-bottom: 0.25rem; font-size: 0.85rem;">📡 Live Scraper</strong>
+                            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; line-height: 1.4;">Syncs with Bursa & iSaham every 10 minutes to fetch latest prices and status changes.</p>
+                        </div>
+                        <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0;">
+                            <strong style="color: #10b981; display: block; margin-bottom: 0.25rem; font-size: 0.85rem;">🎯 Deep Hunter</strong>
+                            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; line-height: 1.4;">AI agents probing for missing OS, Target Prices, and Broker reports automatically.</p>
+                        </div>
+                        <div style="padding: 1rem; border-left: 3px solid #10b981; background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0;">
+                            <strong style="color: #10b981; display: block; margin-bottom: 0.25rem; font-size: 0.85rem;">⚡ Performance Sync</strong>
+                            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; line-height: 1.4;">Real-time calculation of Day 1 and Current performance for listed IPOs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: IPO Academy -->
+                <div id="academy-tab-academy" class="academy-tab-content" style="display: none;">
+                    <!-- 5-Step Journey -->
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin: 0 0 1rem 0; font-size: 1rem; color: white;">The 5-Step IPO Journey</h4>
+                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem;" class="academy-journey-grid">
+                            <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                                <span style="font-size: 0.65rem; color: #a78bfa; font-weight: 700; display: block; text-transform: uppercase;">Step 1</span>
+                                <strong style="font-size: 0.8rem; color: white; display: block; margin-top: 2px;">Draft Stage</strong>
+                                <p style="font-size: 0.7rem; color: var(--text-dim); margin: 4px 0 0 0; line-height: 1.3;">Prospectus review by SC.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                                <span style="font-size: 0.65rem; color: #a78bfa; font-weight: 700; display: block; text-transform: uppercase;">Step 2</span>
+                                <strong style="font-size: 0.8rem; color: white; display: block; margin-top: 2px;">MITI Stage</strong>
+                                <p style="font-size: 0.7rem; color: var(--text-dim); margin: 4px 0 0 0; line-height: 1.3;">Special Bumi VIP allocation.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                                <span style="font-size: 0.65rem; color: #a78bfa; font-weight: 700; display: block; text-transform: uppercase;">Step 3</span>
+                                <strong style="font-size: 0.8rem; color: white; display: block; margin-top: 2px;">Public Open</strong>
+                                <p style="font-size: 0.7rem; color: var(--text-dim); margin: 4px 0 0 0; line-height: 1.3;">Apply via e-banking/e-IPO.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                                <span style="font-size: 0.65rem; color: #a78bfa; font-weight: 700; display: block; text-transform: uppercase;">Step 4</span>
+                                <strong style="font-size: 0.8rem; color: white; display: block; margin-top: 2px;">Balloting</strong>
+                                <p style="font-size: 0.7rem; color: var(--text-dim); margin: 4px 0 0 0; line-height: 1.3;">Results & shares credited.</p>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                                <span style="font-size: 0.65rem; color: #a78bfa; font-weight: 700; display: block; text-transform: uppercase;">Step 5</span>
+                                <strong style="font-size: 0.8rem; color: white; display: block; margin-top: 2px;">Listed</strong>
+                                <p style="font-size: 0.7rem; color: var(--text-dim); margin: 4px 0 0 0; line-height: 1.3;">Trades live on Bursa.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cheat Sheet & Checklist Grid -->
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;" class="academy-details-split">
+                        <div>
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: white;">The "Cheat Sheet" to IPO Metrics</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;">
+                                    <strong style="font-size: 0.8rem; color: #a5b4fc; display: block;">Fair Value (FV)</strong>
+                                    <p style="font-size: 0.7rem; color: var(--text-dim); margin: 3px 0 0 0; line-height: 1.3;">Analysts' estimated actual worth. Look for FV &gt; Offer Price.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;">
+                                    <strong style="font-size: 0.8rem; color: #a5b4fc; display: block;">P/E Ratio</strong>
+                                    <p style="font-size: 0.7rem; color: var(--text-dim); margin: 3px 0 0 0; line-height: 1.3;">The price tag per profit. Lower P/E than sector is attractive.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;">
+                                    <strong style="font-size: 0.8rem; color: #a5b4fc; display: block;">Oversubscription (OS)</strong>
+                                    <p style="font-size: 0.7rem; color: var(--text-dim); margin: 3px 0 0 0; line-height: 1.3;">Retail demand multiplier. Higher OS indicates high retail demand.</p>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 0.75rem; border-radius: 0.5rem;">
+                                    <strong style="font-size: 0.8rem; color: #a5b4fc; display: block;">Market Capitalization</strong>
+                                    <p style="font-size: 0.7rem; color: var(--text-dim); margin: 3px 0 0 0; line-height: 1.3;">Total company value. Large caps are stable; small caps grow faster.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: white;">Hunter Checklist</h4>
+                            <div style="background: rgba(16, 185, 129, 0.02); border: 1px dashed rgba(16, 185, 129, 0.2); padding: 0.75rem; border-radius: 0.5rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                                <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                                    <i data-lucide="check-circle" style="color: #10b981; width: 14px; margin-top: 2px;"></i>
+                                    <div>
+                                        <strong style="font-size: 0.75rem; color: white; display: block;">CDS Account</strong>
+                                        <p style="font-size: 0.65rem; color: var(--text-dim); margin: 2px 0 0 0; line-height: 1.2;">Open via Bursa Anywhere app.</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+                                    <i data-lucide="check-circle" style="color: #10b981; width: 14px; margin-top: 2px;"></i>
+                                    <div>
+                                        <strong style="font-size: 0.75rem; color: white; display: block;">e-Banking / CDS</strong>
+                                        <p style="font-size: 0.65rem; color: var(--text-dim); margin: 2px 0 0 0; line-height: 1.2;">Apply online under e-IPO menu.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Preferred Broker -->
+                <div id="academy-tab-broker" class="academy-tab-content" style="display: none;">
+                    <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 1.5rem; align-items: center;" class="academy-broker-grid">
+                        <div>
+                            <span style="font-size: 0.7rem; color: #10b981; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem;">Hunter's Preferred Partner Broker</span>
+                            <h3 style="font-size: 1.5rem; margin: 0 0 0.75rem 0; color: white; font-family: 'Outfit', sans-serif;">Moomoo Securities Malaysia</h3>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8rem; color: var(--text-dim); display: flex; flex-direction: column; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check" style="width: 16px; height: 16px; color: #10b981; flex-shrink: 0;"></i> Pro-Level Charting & Research Tools</li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check" style="width: 16px; height: 16px; color: #10b981; flex-shrink: 0;"></i> Free Level 2 Market Data for Bursa Malaysia</li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check" style="width: 16px; height: 16px; color: #10b981; flex-shrink: 0;"></i> 0* Brokerage Fee for first 180 Days</li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check" style="width: 16px; height: 16px; color: #10b981; flex-shrink: 0;"></i> Direct Digital IPO Subscriptions</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 1.25rem; border-radius: 0.75rem; border: 1px dashed rgba(16, 185, 129, 0.3); text-align: center;">
+                            <span style="font-size: 0.7rem; color: #10b981; display: block; margin-bottom: 0.25rem; font-weight: 700; letter-spacing: 0.05em;">EXCLUSIVE WELCOME REWARD</span>
+                            <strong style="font-size: 1.15rem; color: white; display: block; margin-bottom: 1rem;">Free Shares & Cash Coupons</strong>
+                            <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-primary" style="display: block; text-align: center; padding: 0.75rem; text-decoration: none; border-radius: 0.5rem; font-weight: 700; background: #10b981; font-size: 0.9rem; border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.3s; cursor: pointer;">Register Moomoo Account</a>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="broker-choice glass-card" style="margin-bottom: 4rem; border: 1px solid rgba(16, 185, 129, 0.3); background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), transparent); padding: 2.5rem;">
-                <h2 style="text-align: center; margin-bottom: 2rem;">Hunter's <span>Preferred Broker</span></h2>
-                
-                <div style="display: flex; justify-content: center;">
-                    <!-- Moomoo Card -->
-                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), transparent); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 1.5rem; padding: 2.5rem; position: relative; overflow: hidden; max-width: 600px; width: 100%; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);">
-                        <div style="font-size: 0.8rem; color: #10b981; text-transform: uppercase; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: 0.15em; text-align: center;">Best Pro-Level Platform</div>
-                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: white; text-align: center;">Moomoo MY</h3>
-                        <ul style="list-style: none; padding: 0; margin: 0 0 2.5rem 0; font-size: 1rem; color: var(--text-dim);">
-                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Pro-Level Charting & Research Tools</li>
-                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Free Level 2 Market Data for Bursa Malaysia</li>
-                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> 0* Brokerage Fee for first 180 Days</li>
-                            <li style="margin-bottom: 1rem; display: flex; align-items: center;"><i data-lucide="check" style="width: 20px; height: 20px; color: #10b981; margin-right: 12px; flex-shrink: 0;"></i> Direct Digital IPO Subscriptions</li>
-                        </ul>
-                        <div style="background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 0.75rem; margin-bottom: 2rem; text-align: center; border: 1px dashed rgba(16, 185, 129, 0.4);">
-                            <span style="font-size: 0.75rem; color: #10b981; display: block; margin-bottom: 0.4rem; font-weight: 600; letter-spacing: 0.05em;">EXCLUSIVE NEW USER REWARD</span>
-                            <span style="font-size: 1.2rem; font-weight: 800; color: white;">Free Shares & Cash Coupons</span>
-                        </div>
-                        <a href="https://www.moomoo.com/my/promotion/2511-referree?global_content=%7B%22promote_id%22%3A15066%2C%22invite%22%3A104903369%7D" target="_blank" class="btn-primary" style="display: block; text-align: center; padding: 1.2rem; text-decoration: none; border-radius: 0.75rem; font-weight: 800; background: #10b981; font-size: 1.1rem; border: none; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); transition: all 0.3s;">Open Moomoo Account</a>
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="market-guide glass-card">
-                <h2>Main Market vs <span>ACE Market</span></h2>
-                <p>Which one should you choose? Here is the simple difference:</p>
-                <div class="market-comparison">
-                    <div class="market-type main">
-                        <div class="market-header">
-                            <span class="badge main-market">MM</span>
-                            <h3>Main Market</h3>
-                        </div>
-                        <ul>
-                            <li><i data-lucide="check-circle"></i> Established, big companies</li>
-                            <li><i data-lucide="check-circle"></i> High profit track record required</li>
-                            <li><i data-lucide="shield-check"></i> Generally considered "safer" for beginners</li>
-                        </ul>
-                    </div>
-                    <div class="market-type ace">
-                        <div class="market-header">
-                            <span class="badge ace-market">ACE</span>
-                            <h3>ACE Market</h3>
-                        </div>
-                        <ul>
-                            <li><i data-lucide="zap"></i> Fast-growing, smaller companies</li>
-                            <li><i data-lucide="zap"></i> High growth potential</li>
-                            <li><i data-lucide="alert-triangle"></i> Higher risk, higher volatility</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pro-tip">
-                    <i data-lucide="lightbulb"></i>
-                    <p><strong>Beginner Tip:</strong> Start with <strong>Main Market (MM)</strong> IPOs first as they
-                        are usually more stable!</p>
-                </div>
-            </section>
-
-            <section class="beginner-guide glass-card">
-                <h2>The 5-Step <span>IPO Journey</span></h2>
-                <p>New to IPOs? Here is how a company goes public in Malaysia:</p>
-
-                <div class="guide-grid">
-                    <div class="guide-item">
-                        <div class="guide-icon"><i data-lucide="file-search"></i></div>
-                        <h3>1. Draft Stage</h3>
-                        <p>The company shares its "plan" (Prospectus) with the authorities. No buying yet—this is for
-                            checking and feedback.</p>
-                    </div>
-                    <div class="guide-item">
-                        <div class="guide-icon"><i data-lucide="users"></i></div>
-                        <h3>2. MITI Stage</h3>
-                        <p>A "special invite" phase. Before everyone else, a portion is offered to Bumiputera investors
-                            through MITI.</p>
-                    </div>
-                    <div class="guide-item">
-                        <div class="guide-icon"><i data-lucide="shopping-cart"></i></div>
-                        <h3>3. Public Stage</h3>
-                        <p>Go time! Normal investors can apply for shares through their online bank (e-IPO).</p>
-                    </div>
-                    <div class="guide-item">
-                        <div class="guide-icon"><i data-lucide="clock"></i></div>
-                        <h3>4. Pre-Listing Stage</h3>
-                        <p>Balloting results are announced. The shares are credited to your CDS account if you win.</p>
-                    </div>
-                    <div class="guide-item">
-                        <div class="guide-icon"><i data-lucide="bar-chart-3"></i></div>
-                        <h3>5. Listed Stage</h3>
-                        <p>The finish line. The company starts trading on Bursa Malaysia, and the price starts moving!
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="financial-guide glass-card">
-                <h2>The <span>"Cheat Sheet"</span> to IPO Data</h2>
-                <p>Confused by all the numbers? Here is what you should focus on as a beginner:</p>
-                <div class="financial-grid">
-                    <div class="finance-item">
-                        <div class="finance-header">
-                            <i data-lucide="target"></i>
-                            <h3>Fair Value (FV)</h3>
-                        </div>
-                        <p><strong>The "Expert's Guess."</strong> Analysts calculate what the share is *actually* worth.
-                            If the <strong>FV is higher</strong> than the IPO price, it's considered "undervalued" (a
-                            good deal!).</p>
-                    </div>
-                    <div class="finance-item">
-                        <div class="finance-header">
-                            <i data-lucide="scale"></i>
-                            <h3>P/E Ratio</h3>
-                        </div>
-                        <p><strong>The "Price Tag."</strong> It tells you how much you are paying for every RM1 of
-                            profit. Usually, you want this to be <strong>lower</strong> than the sector average.</p>
-                    </div>
-                    <div class="finance-item">
-                        <div class="finance-header">
-                            <i data-lucide="users-2"></i>
-                            <h3>Oversubscription</h3>
-                        </div>
-                        <p><strong>The "Popularity Test."</strong> If it's 10x, it means 10 people want every 1 share.
-                            Higher usually means people are very confident.</p>
-                    </div>
-                    <div class="finance-item">
-                        <div class="finance-header">
-                            <i data-lucide="briefcase"></i>
-                            <h3>Market Cap</h3>
-                        </div>
-                        <p><strong>The "Size."</strong> Total value of the company. Big ones (Sunway) are safer; small
-                            ones (OGX) grow faster but are riskier.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="hunter-checklist glass-card">
-                <div class="checklist-info">
-                    <h2>Hunter's <span>Checklist</span></h2>
-                    <p>Before you can buy any IPO, you MUST have these two things ready:</p>
-                </div>
-                <div class="checklist-grid">
-                    <div class="check-item">
-                        <i data-lucide="contact"></i>
-                        <div class="check-text">
-                            <h3>1. CDS Account</h3>
-                            <p>An account to hold your shares. You can open one via the <strong>Bursa Anywhere</strong>
-                                app or your broker.</p>
-                        </div>
-                    </div>
-                    <div class="check-item">
-                        <i data-lucide="banknote"></i>
-                        <div class="check-text">
-                            <h3>2. e-Banking Account</h3>
-                            <p>Most Malaysian banks (Maybank, CIMB, Public Bank, etc.) allow you to apply for IPOs via
-                                their "e-IPO" menu.</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- Responsive Academy Layout Styles -->
+            <style>
+                @media (max-width: 768px) {
+                    .academy-journey-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 0.5rem !important;
+                    }
+                    .academy-details-split {
+                        grid-template-columns: 1fr !important;
+                        gap: 1.5rem !important;
+                    }
+                    .academy-broker-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 1.25rem !important;
+                    }
+                }
+            </style>
         <!-- Legend & Education -->
     </main>
 
@@ -684,6 +718,26 @@
             const descEl = document.getElementById('automation-sync-desc');
             if (descEl) {
                 descEl.innerHTML = `The following systems are currently running in the background. <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 9999px; font-size: 0.72rem; color: #10b981; margin-left: 0.5rem; font-weight: 600; vertical-align: middle;"><span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;"></span> Last Sync: ${SYNC_STATUS.lastSync}</span>`;
+            }
+        }
+        
+        function switchAcademyTab(tabId) {
+            document.querySelectorAll('.academy-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.academy-tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            const activeBtn = document.querySelector(`.academy-tab-btn[data-tab="${tabId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            const activeContent = document.getElementById(`academy-tab-${tabId}`);
+            if (activeContent) activeContent.style.display = 'block';
+            
+            // Re-render icons for dynamic tab content if necessary
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
         }
     </script>
