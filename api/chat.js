@@ -86,6 +86,7 @@ module.exports = async (req, res) => {
 
     } catch (err) {
         console.error('Proxy error:', err);
-        return res.status(500).json({ error: 'Internal server error.' });
+        const errMsg = err.response?.data?.error?.message || err.message || err;
+        return res.status(500).json({ error: `Internal server error: ${errMsg}` });
     }
 };
