@@ -2271,10 +2271,17 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
         if (response._groqText !== undefined) {
             rawText = response._groqText; // local mode — already extracted
         } else {
-            const data = await response.json();
-            rawText = data.text || '';
-            if (!rawText && data.error) {
-                rawText = `⚠️ Error: ${data.error}`;
+            let data;
+            try {
+                data = await response.json();
+            } catch (jsonErr) {
+                rawText = `⚠️ Proxy parse error: ${response.status} ${response.statusText}`;
+            }
+            if (data) {
+                rawText = data.text || '';
+                if (!rawText && data.error) {
+                    rawText = `⚠️ Error: ${data.error}`;
+                }
             }
         }
 
@@ -2297,7 +2304,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
         messageContainer.removeChild(typingMsg);
         const errorMsg = document.createElement('div');
         errorMsg.className = 'message ai-message';
-        errorMsg.textContent = "Oops! Something went wrong. Check your internet connection and try again.";
+        errorMsg.textContent = `⚠️ Error: ${err.message || err}`;
         messageContainer.appendChild(errorMsg);
     }
     
