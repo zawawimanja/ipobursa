@@ -1366,15 +1366,31 @@ function createIPOCard(ipo, index = 0) {
         }
     }
 
+    const detailsBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.borderColor='rgba(99, 102, 241, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Details</button>`;
+
     let actionBtn = '';
     if (ipo.stage === 3) {
-        actionBtn = `<button onclick="alert('Apply via your Online Banking (e-IPO) menu e.g. Maybank2u, CIMB Clicks, etc.')" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; border: none;">Apply Now</button>`;
+        actionBtn = `
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <button onclick="alert('Apply via your Online Banking (e-IPO) menu e.g. Maybank2u, CIMB Clicks, etc.')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: none; background: var(--primary);">Apply</button>
+                ${detailsBtn}
+            </div>`;
     } else if (ipo.stage === 2) {
-        actionBtn = `<a href="https://sahamonline.miti.gov.my/" target="_blank" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; text-decoration: none; display: inline-block;">MITI</a>`;
+        actionBtn = `
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <a href="https://sahamonline.miti.gov.my/" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; text-decoration: none; display: inline-block; background: #059669; border: none;">MITI</a>
+                ${detailsBtn}
+            </div>`;
     } else if (ipo.stage === 1) {
-        actionBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; border: none;">Details</button>`;
+        actionBtn = detailsBtn;
+    } else if (ipo.stage === 4) {
+        actionBtn = detailsBtn;
     } else {
-        actionBtn = `<span style="font-size: 0.8rem; color: var(--text-dim);">${getIpoStrategy(ipo)}</span>`;
+        actionBtn = `
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.75rem; color: var(--text-dim); margin-right: 0.25rem;">${getIpoStrategy(ipo)}</span>
+                ${detailsBtn}
+            </div>`;
     }
 
     // Wrap in a flex container with the price alert button for listed stocks (stage 5)
@@ -2170,22 +2186,17 @@ async function sendAIMessage() {
     try {
         const compactIpoData = ipoData.map(i => {
             const gradeObj = getIpoGrade(i);
-            return {
-                symbol: i.symbol || i.id.toUpperCase(),
-                name: i.companyName,
-                market: i.market,
-                status: i.status,
-                price: i.price,
-                os: i.os,
-                pe: i.pe,
-                grade: gradeObj ? gradeObj.grade : 'Unrated',
-                sector: i.sector
-            };
-        });
+            const grade = gradeObj ? gradeObj.grade : 'Unrated';
+            const symb = i.symbol || i.id.toUpperCase();
+            const priceVal = i.price ? `RM${i.price.toFixed(3)}` : 'TBA';
+            const osVal = i.os ? `${i.os}x` : 'TBA';
+            return `${i.companyName} (${symb}) - Market:${i.market}, Status:${i.status}, Price:${priceVal}, OS:${osVal}, PE:${i.pe || 'TBA'}, Grade:${grade}, Sector:${i.sector}`;
+        }).join('\n');
 
         const systemPrompt = `You are "Hunter AI", a professional Malaysian IPO assistant for the IPO Hunter website.
 You help users understand IPOs listed on Bursa Malaysia.
-CURRENT IPO DATABASE: ${JSON.stringify(compactIpoData)}
+CURRENT IPO DATABASE:
+${compactIpoData}
 Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
 
         // Use server proxy on Vercel (production), direct Groq call when running locally
