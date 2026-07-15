@@ -1425,6 +1425,7 @@ function createIPOCard(ipo, index = 0) {
                     <div style="font-weight: 600; font-size: 0.9rem;">
                         ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Buka chart TradingView (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName} 
                         ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
+                        ${ipo.enrichedBy === 'AI' ? `<span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; font-size: 0.58rem; padding: 0.1rem 0.35rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; margin-left: 0.4rem; vertical-align: middle; box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);"><i data-lucide="sparkles" style="width: 10px; height: 10px;"></i> AI</span>` : ''}
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.3rem; color: var(--text-dim); padding-left: 2.8rem;">

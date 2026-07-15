@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="data.js?v=1.4"></script>
+    <script src="sync-status.js?v=1.1"></script>
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
     <script type="module" src="analytics.js"></script>
 </head>
@@ -276,7 +277,7 @@
                     </div>
                     <div>
                         <h2 style="margin: 0;">Hunter <span>Automation Engine</span></h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;">The following systems are currently running in the background:</p>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; margin: 0;" id="automation-sync-desc">The following systems are currently running in the background:</p>
                     </div>
                     <button onclick="openSyncHub()" class="btn-moomoo" style="margin-left: auto; background: #10b981; border: none;">
                         <i data-lucide="settings"></i> Manage Sync
@@ -679,6 +680,12 @@
     <script>
         lucide.createIcons();
         initializeData();
+        if (typeof SYNC_STATUS !== 'undefined') {
+            const descEl = document.getElementById('automation-sync-desc');
+            if (descEl) {
+                descEl.innerHTML = `The following systems are currently running in the background. <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 9999px; font-size: 0.72rem; color: #10b981; margin-left: 0.5rem; font-weight: 600; vertical-align: middle;"><span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;"></span> Last Sync: ${SYNC_STATUS.lastSync}</span>`;
+            }
+        }
     </script>
 </body>
 

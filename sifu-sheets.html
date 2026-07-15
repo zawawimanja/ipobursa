@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="data.js?v=1.1"></script>
+    <script src="sync-status.js?v=1.1"></script>
     <style>
         #sheet-stock-select {
             width: 100%;
@@ -211,6 +212,37 @@
         .catalyst-list li {
             margin-bottom: 0.5rem;
         }
+
+        .ai-badge {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse-glow 2s infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
+            }
+        }
+        @keyframes status-pulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 
@@ -253,6 +285,18 @@
                 📢 <strong>Info Rujukan PE:</strong> Halaman ini adalah <strong>dinamik</strong>. Apabila memuatkan saham, sistem akan mengira dan menetapkan nilai <strong>Target PE Pintar</strong> yang tepat bagi menyamai harga target asal Sifu (bukan memilih had paling tinggi atau terendah secara rawak). Anda bebas melaraskan PE ini secara manual mengikut sentimen pasaran!
             </div>
         </header>
+
+        <!-- Sync Status Widget -->
+        <div id="sync-status-container" style="display: none; max-width: 100%; margin: 0 auto 1.5rem auto; padding: 0.75rem 1.25rem; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; font-size: 0.8rem; color: #cbd5e1; align-items: center; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); backdrop-filter: blur(12px);">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #10b981; animation: status-pulse 1.5s infinite alternate;"></span>
+                <span id="sync-status-text">Background Sync Active</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.75rem;">
+                <span id="sync-status-enriched"></span>
+                <span id="sync-status-total"></span>
+            </div>
+        </div>
 
         <div class="sheet-container">
             <!-- Left Panel: Controls & Guides -->
@@ -827,7 +871,14 @@
         }
 
         function fillFormValues(data) {
-            document.getElementById('td-stock-name').innerText = data.companyName.toUpperCase();
+            const nameEl = document.getElementById('td-stock-name');
+            nameEl.innerHTML = data.companyName.toUpperCase();
+            if (data.enrichedBy === 'AI') {
+                nameEl.innerHTML += ` <span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus"><i data-lucide="sparkles" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> AI-Enriched</span>`;
+                if (typeof lucide !== 'undefined') {
+                    setTimeout(() => lucide.createIcons(), 50);
+                }
+            }
             document.getElementById('inp-price').value = formatNumber(data.price, 2);
             document.getElementById('inp-total-shares').value = formatNumber(data.totalShares, 0);
             
@@ -1442,6 +1493,27 @@
             }
             
             loadSelectedStock();
+            
+            // Populate Sync Status if available
+            if (typeof SYNC_STATUS !== 'undefined') {
+                const container = document.getElementById('sync-status-container');
+                if (container) {
+                    container.style.display = 'flex';
+                    const textEl = document.getElementById('sync-status-text');
+                    if (textEl) {
+                        textEl.innerHTML = `<span><strong>System Status:</strong> Active</span> <span style="color: var(--text-dim); margin-left: 0.5rem;">(Last Checked: ${SYNC_STATUS.lastSync})</span>`;
+                    }
+                    const enrichedEl = document.getElementById('sync-status-enriched');
+                    if (enrichedEl) {
+                        enrichedEl.innerHTML = `<span style="color: #cbd5e1;">Enriched:</span> <strong style="color: #a855f7;">${SYNC_STATUS.enrichedCount}</strong>`;
+                    }
+                    const totalEl = document.getElementById('sync-status-total');
+                    if (totalEl) {
+                        totalEl.innerHTML = `<span style="color: #cbd5e1;">Total:</span> <strong style="color: #10b981;">${SYNC_STATUS.totalIpos} IPOs</strong>`;
+                    }
+                }
+            }
+
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
     </script>

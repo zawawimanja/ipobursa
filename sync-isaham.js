@@ -601,7 +601,7 @@ async function autoEnrichFinancials(existingData) {
     const GROQ_KEY = process.env.GROQ_API_KEY;
     if (!GROQ_KEY) {
         console.warn('⚠️ [Financial Enrichment] GROQ_API_KEY not found. Skipping auto-financial enrichment.');
-        return;
+        return 0;
     }
 
     console.log('\n=== Starting Auto Financial Enrichment (Shariah 2026+ IPOs) ===');
@@ -614,7 +614,7 @@ async function autoEnrichFinancials(existingData) {
     );
 
     console.log(`  Found ${targets.length} IPO(s) needing financial profile enrichment.`);
-    if (targets.length === 0) return;
+    if (targets.length === 0) return 0;
 
         let enrichedCount = 0;
         const maxExtractions = 2;
@@ -771,6 +771,7 @@ Return ONLY a valid JSON object matching this structure:
 
                 // Merge into ipo object
                 Object.assign(ipo, parsedJson);
+                ipo.enrichedBy = "AI";
 
                 // Re-predict Grade
                 const gradeResult = predictGrade(ipo);
@@ -791,7 +792,7 @@ Return ONLY a valid JSON object matching this structure:
             // Polite delay
             await new Promise(r => setTimeout(r, 3000));
         }
-
+        return enrichedCount;
 }
 
 
@@ -822,7 +823,7 @@ async function main() {
     await deepHuntData(existingData);
 
     // Automatically crawl and enrich financial profiles using Groq
-    await autoEnrichFinancials(existingData);
+    const enrichedCount = await autoEnrichFinancials(existingData);
 
     // Apply overrides if overrides.json exists
     const overridesPath = path.join(__dirname, 'overrides.json');
@@ -850,9 +851,20 @@ async function main() {
     const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
     fs.writeFileSync(DATA_JS_FILE, jsContent);
 
+    // Generate sync-status.js
+    const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+    const syncStatus = {
+        lastSync: stamp,
+        status: "Success",
+        enrichedCount: enrichedCount || 0,
+        totalIpos: existingData.length
+    };
+    const statusJsContent = `const SYNC_STATUS = ${JSON.stringify(syncStatus, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = SYNC_STATUS;\n}`;
+    fs.writeFileSync(path.join(__dirname, 'sync-status.js'), statusJsContent);
+
     console.log(`\n--- Sync Complete ---`);
     console.log(`Total IPOs: ${existingData.length} (Added ${existingData.length - initialCount} new)`);
-    console.log(`Files updated: data.json, data.js`);
+    console.log(`Files updated: data.json, data.js, sync-status.js`);
 
     // Auto git push to update live dashboard
     await gitPush();
@@ -861,13 +873,13 @@ async function main() {
 async function gitPush() {
     const { execSync } = require('child_process');
     try {
-        const status = execSync('git status --porcelain data.json data.js', { cwd: __dirname }).toString().trim();
+        const status = execSync('git status --porcelain data.json data.js sync-status.js', { cwd: __dirname }).toString().trim();
         if (!status) {
             console.log('\n[Git] No changes to push.');
             return;
         }
         const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-        execSync('git add data.json data.js', { cwd: __dirname });
+        execSync('git add data.json data.js sync-status.js', { cwd: __dirname });
         execSync(`git commit -m "Auto sync: ${stamp}"`, { cwd: __dirname });
         execSync('git push', { cwd: __dirname });
         console.log(`\n[Git] ✅ Pushed to GitHub successfully.`);

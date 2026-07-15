@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const axios = require('axios');
 
 const DATA_FILE = './data.json';
 
@@ -68,8 +69,62 @@ async function updateLivePricesYahoo() {
             let symbolClean = ipo.symbol.replace(/\[.*?\]/g, '').trim();
             if (!symbolClean) continue;
             
-            // Code bursa di Yahoo Finance biasanya diakhiri dengan .KL
-            let yahooSymbol = `${symbolClean}.KL`;
+            let yahooSymbol = null;
+            
+            // 1. If we already saved stockCode, use it
+            if (ipo.stockCode) {
+                yahooSymbol = `${ipo.stockCode}.KL`;
+            } else {
+                // 2. Query Yahoo Autocomplete API
+                try {
+                    const searchUrl = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(symbolClean)}&lang=en-US&quotesCount=6`;
+                    const res = await axios.get(searchUrl, {
+                        headers: {
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+                        },
+                        timeout: 5000
+                    });
+                    const quotes = res.data.quotes || [];
+                    const klsQuote = quotes.find(q => q.exchange === 'KLS' || q.symbol.endsWith('.KL'));
+                    if (klsQuote) {
+                        yahooSymbol = klsQuote.symbol;
+                        const code = klsQuote.symbol.split('.')[0];
+                        if (/^\d{4}$/.test(code)) {
+                            ipo.stockCode = code;
+                            console.log(`      Found Yahoo symbol ${yahooSymbol} for ${symbolClean}`);
+                        }
+                    }
+                } catch (e) {
+                    console.log(`      Yahoo autocomplete lookup failed for ${symbolClean}: ${e.message}`);
+                }
+                
+                // 3. If Yahoo Autocomplete returned nothing (e.g. brand new listing like ENEST), fetch from iSaham stock page
+                if (!yahooSymbol) {
+                    try {
+                        console.log(`      No direct Yahoo match for ${symbolClean}. Attempting iSaham title extraction...`);
+                        const isahamUrl = `https://www.isaham.my/stock/${encodeURIComponent(symbolClean)}`;
+                        const res = await axios.get(isahamUrl, {
+                            headers: { "User-Agent": "Mozilla/5.0" },
+                            timeout: 5000
+                        });
+                        const match = res.data.match(/<title>.*?\s*\((\d{4})\)\s*Share Price/i);
+                        if (match && match[1]) {
+                            const code = match[1];
+                            ipo.stockCode = code;
+                            yahooSymbol = `${code}.KL`;
+                            console.log(`      -> Extracted stock code ${code} from iSaham for ${symbolClean}`);
+                        }
+                    } catch (e) {
+                        console.log(`      iSaham title extraction failed for ${symbolClean}: ${e.message}`);
+                    }
+                }
+                
+                // 4. Ultimate fallback to alphabetical symbol
+                if (!yahooSymbol) {
+                    yahooSymbol = `${symbolClean}.KL`;
+                }
+            }
+            
             let url = `https://finance.yahoo.com/quote/${yahooSymbol}`;
             
             try {
