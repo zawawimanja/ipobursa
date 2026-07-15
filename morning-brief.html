@@ -1174,7 +1174,7 @@ Keep it professional, informative, and formatted with markdown (use bullet point
 - WAIT / TARGET EXCEEDED: ${JSON.stringify(waitStocks.slice(0, 5))}
 - SWING PULLBACK RECOMMENDATIONS: ${JSON.stringify(pullbackStocks.slice(0, 10))}`;
 
-            const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
+            const isLocal = location.protocol === 'file:';
             let responseText = '';
 
             if (isLocal) {

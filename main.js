@@ -1784,7 +1784,7 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 - Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
 - Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}`;
 
-        const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
+        const isLocal = location.protocol === 'file:';
         let responseText = '';
 
         if (isLocal) {
@@ -2189,7 +2189,7 @@ CURRENT IPO DATABASE: ${JSON.stringify(compactIpoData)}
 Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
 
         // Use server proxy on Vercel (production), direct Groq call when running locally
-        const isLocal = location.protocol === 'file:' || location.hostname === 'localhost';
+        const isLocal = location.protocol === 'file:';
         let response;
 
         if (isLocal) {
