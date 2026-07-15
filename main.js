@@ -2207,11 +2207,13 @@ async function sendAIMessage() {
         const compactIpoData = filteredIpos.map(i => {
             const gradeObj = getIpoGrade(i);
             const grade = gradeObj ? gradeObj.grade : 'Unrated';
-            const symb = i.symbol || i.id.toUpperCase();
+            const symb = i.symbol || i.id || 'N/A';
             const priceVal = i.price ? `RM${i.price.toFixed(3)}` : 'TBA';
             const osVal = i.os ? `${i.os}x` : 'TBA';
             const mkt = i.market && i.market.toLowerCase().includes('main') ? 'Main' : 'ACE';
-            return `${i.companyName.substring(0, 30)} (${symb})|${mkt}|Stage ${i.stage}|${priceVal}|OS:${osVal}|PE:${i.pe || 'TBA'}|Grade:${grade}|${i.sector.substring(0, 25)}`;
+            const name = (i.companyName || i.id || 'Unknown').substring(0, 30);
+            const sect = (i.sector || 'N/A').substring(0, 25);
+            return `${name} (${symb})|${mkt}|Stage ${i.stage}|${priceVal}|OS:${osVal}|PE:${i.pe || 'TBA'}|Grade:${grade}|${sect}`;
         }).join('\n');
 
         const systemPrompt = `You are "Hunter AI", a professional Malaysian IPO assistant for the IPO Hunter website.
