@@ -1760,7 +1760,11 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 - Offer For Sale (OFS): ${ipo.ofs === true ? 'Yes (Has existing shares sold by promoters)' : 'No (Pure public issue)'}
 - Sifu Target Price: RM ${ipo.sifuTargetPrice ? ipo.sifuTargetPrice.toFixed(3) : 'TBA'}
 - Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
-- Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}`;
+- Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}
+- **HUNTER SYSTEM GRADE: ${(()=>{ const g = getIpoGrade(ipo); return g ? g.grade : 'N/A'; })()}** (A=Strong Buy, B=Scalp Only, C=AVOID — this is the official Hunter algorithm verdict)
+- Hunter Grade Reason: ${(()=>{ const g = getIpoGrade(ipo); return g ? g.reason.replace(/<[^>]*>/g,'') : 'N/A'; })()}
+
+IMPORTANT: Your verdict MUST be consistent with the Hunter System Grade above. If Grade is C, your verdict MUST be AVOID or maximum SCALP. Do NOT recommend buying a Grade C IPO. If Grade is A, you may recommend MUST BUY or WORTH IT. If Grade is B, recommend SCALP only.`;
 
         const savedKey = getGroqKey();
         let responseText = '';
