@@ -1375,7 +1375,7 @@ function createIPOCard(ipo, index = 0) {
         }
     }
 
-    const detailsBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.borderColor='rgba(99, 102, 241, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Details</button>`;
+    const detailsBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.borderColor='rgba(99, 102, 241, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Details AI</button>`;
 
     let actionBtn = '';
     if (ipo.stage === 3) {
