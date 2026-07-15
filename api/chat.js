@@ -1,6 +1,7 @@
 // Vercel Serverless Function — Groq API Proxy
 // Key lives in Vercel Environment Variables, NEVER in the browser.
 
+const axios = require('axios');
 const ipRequests = new Map(); // Store: IP -> { count, resetTime }
 
 function isRateLimited(ip) {
@@ -65,31 +66,22 @@ module.exports = async (req, res) => {
         const maxTokens = max_tokens || 1024;
         const temp = typeof temperature === 'number' ? temperature : 0.7;
 
-        const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
+        const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+            model: selectedModel,
+            messages: [
+                { role: 'system', content: systemInstruction },
+                { role: 'user', content: prompt }
+            ],
+            max_tokens: maxTokens,
+            temperature: temp
+        }, {
             headers: {
                 'Authorization': `Bearer ${GROQ_KEY}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: selectedModel,
-                messages: [
-                    { role: 'system', content: systemInstruction },
-                    { role: 'user', content: prompt }
-                ],
-                max_tokens: maxTokens,
-                temperature: temp
-            })
+            }
         });
 
-        const data = await groqRes.json();
-        
-        if (!groqRes.ok) {
-            console.error('Groq API Error details:', data);
-            return res.status(groqRes.status).json({ error: data?.error?.message || 'Groq API returned an error.' });
-        }
-
-        const text = data?.choices?.[0]?.message?.content || '';
+        const text = response.data?.choices?.[0]?.message?.content || '';
         return res.status(200).json({ text });
 
     } catch (err) {
