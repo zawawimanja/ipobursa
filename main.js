@@ -1773,42 +1773,44 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
         const savedKey = getGroqKey();
         let responseText = '';
 
-        if (savedKey) {
-            // Direct browser call with manual key
-            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${savedKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        { role: 'user', content: prompt }
-                    ],
-                    max_tokens: 1024,
-                    temperature: 0.5
-                })
-            });
-            const groqData = await response.json();
-            responseText = groqData?.choices?.[0]?.message?.content || '';
-        } else {
-            // Production Vercel mode
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    systemPrompt: systemPrompt,
-                    model: 'llama-3.3-70b-versatile',
-                    max_tokens: 1024,
-                    temperature: 0.5
-                })
-            });
-            const data = await response.json();
-            responseText = data.text || '';
-        }
+        // Helper: call Groq with auto-fallback (70b → 8b-instant)
+        const callGroqWithFallback = async (primaryModel, fallbackModel) => {
+            const tryModel = async (model) => {
+                if (savedKey) {
+                    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${savedKey}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }], max_tokens: 1024, temperature: 0.5 })
+                    });
+                    const d = await res.json();
+                    if (!res.ok) throw new Error(d?.error?.message || 'Groq error');
+                    return d?.choices?.[0]?.message?.content || '';
+                } else {
+                    const res = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ prompt, systemPrompt, model, max_tokens: 1024, temperature: 0.5 })
+                    });
+                    const d = await res.json();
+                    if (!res.ok || d.error) throw new Error(d?.error || 'Proxy error');
+                    return d.text || '';
+                }
+            };
+
+            try {
+                const result = await tryModel(primaryModel);
+                if (result) return { text: result, model: primaryModel };
+                throw new Error('Empty response');
+            } catch (e) {
+                console.warn(`[AI Verdict] ${primaryModel} failed: ${e.message}. Falling back to ${fallbackModel}...`);
+                const result = await tryModel(fallbackModel);
+                return { text: result, model: fallbackModel };
+            }
+        };
+
+        const { text: aiText, model: usedModel } = await callGroqWithFallback('llama-3.3-70b-versatile', 'llama-3.1-8b-instant');
+        responseText = aiText;
+        console.log(`[AI Verdict] Used model: ${usedModel}`);
 
         if (!responseText) {
             throw new Error('No analysis generated.');
