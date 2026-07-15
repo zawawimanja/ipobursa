@@ -609,7 +609,7 @@ async function autoEnrichFinancials(existingData) {
     const targets = existingData.filter(ipo => 
         ipo.shariah === true && 
         (ipo.year === 2026 || ipo.year === 2027 || !ipo.year) &&
-        (ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4) &&
+        (ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5) &&
         (!ipo.headers || ipo.headers.length === 0)
     );
 
