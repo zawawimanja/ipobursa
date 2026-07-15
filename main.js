@@ -1404,53 +1404,6 @@ function createIPOCard(ipo, index = 0) {
 
     // Wrap in a flex container with the price alert button for listed stocks (stage 5)
     let finalActionCol = actionBtn;
-    if (ipo.stage === 5) {
-        if (typeof ipo.sifuTargetPrice === 'number') {
-            const curPrice = ipo.currentPrice || ipo.price || 0;
-            const targetPrice = ipo.sifuTargetPrice;
-            const isTriggered = curPrice > 0 && curPrice <= targetPrice;
-            
-            const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
-            const isDismissed = dismissed.includes(ipo.id);
-            
-            let bellColor = 'rgba(255,255,255,0.25)';
-            let alertIcon = 'bell';
-            let alertTitle = `Sifu Buy Target: RM ${targetPrice.toFixed(2)} (Semasa: RM ${curPrice.toFixed(2)})`;
-            let extraStyles = '';
-            
-            if (isTriggered) {
-                if (isDismissed) {
-                    bellColor = '#ef4444'; // Red-ish/Dimmed to indicate dismissed but triggered
-                    alertIcon = 'bell-off';
-                    alertTitle = `Triggered (Muted): RM ${curPrice.toFixed(2)} <= RM ${targetPrice.toFixed(2)}. Click to unmute alert banner.`;
-                    extraStyles = 'opacity: 0.6;';
-                } else {
-                    bellColor = '#10b981'; // Bright green for active trigger!
-                    alertIcon = 'bell-ring';
-                    alertTitle = `TRIGGERED BUY ALERT! Harga RM ${curPrice.toFixed(2)} <= RM ${targetPrice.toFixed(2)}. Click to mute alert banner.`;
-                    extraStyles = 'box-shadow: 0 0 10px rgba(16,185,129,0.5); animation: pulse-green 1.5s infinite; border-color: rgba(16,185,129,0.4);';
-                }
-            } else {
-                bellColor = 'var(--text-dim)';
-                alertIcon = 'bell';
-                alertTitle = `Alert Beli Sifu Aktif: RM ${targetPrice.toFixed(2)}. Klik untuk semak.`;
-            }
-            
-            finalActionCol = `
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    ${actionBtn}
-                    <button onclick="promptPriceAlert('${ipo.id}', '${ipo.companyName}', ${curPrice})" 
-                            class="btn-moomoo" 
-                            style="padding: 0.35rem; font-size: 0.8rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: ${bellColor}; transition: all 0.3s; ${extraStyles}" 
-                            title="${alertTitle}">
-                        <i data-lucide="${alertIcon}" style="width: 13px; height: 13px;"></i>
-                    </button>
-                </div>
-            `;
-        } else {
-            finalActionCol = actionBtn;
-        }
-    }
 
     const isSurging = ipo.price > 0 && ipo.avgTP > (ipo.price * 1.5);
 
