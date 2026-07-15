@@ -119,6 +119,17 @@ async function main() {
         fs.writeFileSync(DATA_JS_FILE, jsContent);
 
         console.log(`\n✅ Updated ${updatedCount} IPO(s). data.json & data.js saved.`);
+
+        // Auto git push
+        try {
+            const { execSync } = require('child_process');
+            execSync('git add data.json data.js', { cwd: __dirname });
+            execSync(`git commit -m "Auto OS update: ${stamp}"`, { cwd: __dirname });
+            execSync('git push', { cwd: __dirname });
+            console.log(`[Git] ✅ Pushed to GitHub.`);
+        } catch (e) {
+            console.error(`[Git] ❌ Push failed:`, e.message);
+        }
     } else {
         console.log(`\n⏳ No OS data found yet. Will retry next scheduled run.`);
     }

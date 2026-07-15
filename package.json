@@ -22,5 +22,8 @@
     "axios": "^1.16.0",
     "cheerio": "^1.2.0",
     "puppeteer": "^25.0.4"
+  },
+  "devDependencies": {
+    "pdf-parse": "^2.4.5"
   }
 }

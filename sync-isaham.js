@@ -3,6 +3,20 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 
+// Load .env manually if exists to protect credentials
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+    const envLines = fs.readFileSync(envPath, 'utf8').split('\n');
+    envLines.forEach(line => {
+        const parts = line.split('=');
+        if (parts.length >= 2) {
+            const key = parts[0].trim();
+            const val = parts.slice(1).join('=').trim().replace(/^['"]|['"]$/g, '');
+            process.env[key] = val;
+        }
+    });
+}
+
 const DATA_JSON_FILE = path.join(__dirname, 'data.json');
 const DATA_JS_FILE = path.join(__dirname, 'data.js');
 
@@ -268,8 +282,13 @@ async function scrapeListedStatistics(existingData) {
                 if (!existing.openPrice || existing.openPrice === 0) {
                     existing.openPrice = openPrice;
                 }
-                existing.closePrice = existing.closePrice || closePrice || currentPrice;
-                existing.currentPrice = currentPrice || existing.currentPrice || closePrice;
+                // Always update to the latest scraped prices
+                existing.closePrice = closePrice || currentPrice || existing.closePrice;
+                existing.currentPrice = currentPrice || closePrice || existing.currentPrice;
+                if (existing.price > 0 && existing.currentPrice > 0) {
+                    const perf = ((existing.currentPrice - existing.price) / existing.price) * 100;
+                    existing.performance = (perf >= 0 ? '+' : '') + perf.toFixed(2) + '%';
+                }
                 existing.year = existing.year || year;
                 if (!existing.listingDate || existing.listingDate === 'TBA') {
                     existing.listingDate = formatListingDate(listingDate) || date;
@@ -277,16 +296,24 @@ async function scrapeListedStatistics(existingData) {
                 existing.symbol = symbol;
             } else {
                 const cleanId = symbol.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                const finalPrice = ipoPrice;
+                const finalCurrent = currentPrice || closePrice;
+                let performance = '+0.00%';
+                if (finalPrice > 0 && finalCurrent > 0) {
+                    const perf = ((finalCurrent - finalPrice) / finalPrice) * 100;
+                    performance = (perf >= 0 ? '+' : '') + perf.toFixed(2) + '%';
+                }
                 existingData.push({
                     id: cleanId,
                     companyName: symbol,
                     symbol: symbol,
                     stage: 5,
                     status: 'Listed',
-                    price: ipoPrice,
+                    price: finalPrice,
                     openPrice,
                     closePrice: closePrice || currentPrice,
-                    currentPrice: currentPrice || closePrice,
+                    currentPrice: finalCurrent,
+                    performance,
                     year,
                     listingDate: formatListingDate(listingDate) || date
                 });
@@ -483,6 +510,291 @@ function autoPromoteIPOs(finalData) {
     return promotedCount;
 }
 
+function predictGrade(ipo) {
+    const heroIBs = ["maybank", "public", "kaf", "alliance", "cimb"];
+    const topTierIBs = ["maybank", "cimb", "rhb", "public", "aminvestment", "alliance", "affin hwang", "kaf"];
+    const momentumIBs = ["m&a", "malacca", "kenanga", "ta securities", "uob kay hian", "mercury", "apex", "sj securities"];
+    
+    const highMomentumSectors = ["data centre", "solar", "ai", "semiconductor", "cleanroom", "hardware", "renewable energy", "ev", "cybersecurity"];
+    const lowMomentumSectors = ["it services", "software", "infrastructure", "services", "digital"];
+    const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
+
+    const ib = (ipo.ib || '').toLowerCase();
+    const sector = (ipo.sector || '').toLowerCase();
+    const fundUse = (ipo.fundUse || '').toLowerCase();
+    const market = ipo.market;
+    const hasOFS = ipo.ofs === true || ipo.hasOFS === true;
+
+    const isHero = heroIBs.some(tier => ib.includes(tier));
+    const isTopTier = topTierIBs.some(tier => ib.includes(tier));
+    const isMomentum = momentumIBs.some(tier => ib.includes(tier));
+    
+    const isHighMomentum = highMomentumSectors.some(s => sector.includes(s));
+    const isLowMomentum = lowMomentumSectors.some(s => sector.includes(s));
+    const isGeneralTech = sector.includes("technology") || sector.includes("tech");
+    
+    const isExpansionFund = expansionKeywords.some(k => fundUse.includes(k));
+
+    let score = 0;
+    let reasons = [];
+    
+    if (isHero) {
+        score += 40;
+        reasons.push("Hero IB (+40)");
+    } else if (isTopTier) {
+        score += 30;
+        reasons.push("Top Tier IB (+30)");
+    } else if (isMomentum) {
+        score += 20;
+        reasons.push("Momentum IB (+20)");
+    }
+    
+    if (isHighMomentum) {
+        score += 30;
+        reasons.push("High Momentum Tech Sector (+30)");
+    } else if (isLowMomentum) {
+        score += 10;
+        reasons.push("Low Momentum IT/Tech Services Sector (+10)");
+    } else if (isGeneralTech) {
+        score += 15;
+        reasons.push("General Technology Sector (+15)");
+    }
+    
+    if (isExpansionFund) {
+        score += 20;
+        reasons.push("Expansion/R&D Fund Use (+20)");
+    }
+    
+    if (market === 'Main Market') {
+        score += 10;
+        reasons.push("Main Market (+10)");
+    } else if (market === 'ACE Market') {
+        score += 5;
+        reasons.push("ACE Market (+5)");
+    }
+
+    if (hasOFS) {
+        score -= 15;
+        reasons.push("Offer for Sale (OFS) component (-15)");
+    }
+
+    const pe = ipo.pe || 0;
+    if (pe > 0 && pe < 13.0) {
+        score += 15;
+        reasons.push("Cheap/Attractive Valuation PE < 13x (+15)");
+    } else if (pe > 0 && pe < 18.0) {
+        score += 5;
+        reasons.push("Reasonable Valuation PE < 18x (+5)");
+    } else if (pe > 22.0) {
+        score -= 10;
+        reasons.push("Expensive Valuation PE > 22x (-10)");
+    }
+
+    let grade = 'C';
+    if (score >= 70) grade = 'A';
+    else if (score >= 40) grade = 'B';
+    
+    return { grade, score, reasons };
+}
+
+async function autoEnrichFinancials(existingData) {
+    const GROQ_KEY = process.env.GROQ_API_KEY;
+    if (!GROQ_KEY) {
+        console.warn('⚠️ [Financial Enrichment] GROQ_API_KEY not found. Skipping auto-financial enrichment.');
+        return;
+    }
+
+    console.log('\n=== Starting Auto Financial Enrichment (Shariah 2026+ IPOs) ===');
+    
+    const targets = existingData.filter(ipo => 
+        ipo.shariah === true && 
+        (ipo.year === 2026 || ipo.year === 2027 || !ipo.year) &&
+        (ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4) &&
+        (!ipo.headers || ipo.headers.length === 0)
+    );
+
+    console.log(`  Found ${targets.length} IPO(s) needing financial profile enrichment.`);
+    if (targets.length === 0) return;
+
+        let enrichedCount = 0;
+        const maxExtractions = 2;
+
+        for (let ipo of targets) {
+            if (enrichedCount >= maxExtractions) {
+                console.log(`\n  [Financial Enrichment] Reached limit of ${maxExtractions} extractions per run. Skipping remaining targets.`);
+                break;
+            }
+
+            console.log(`\n  Processing: ${ipo.companyName}...`);
+            
+            const stem = normalizeName(ipo.companyName).replace(/\s+/g, '-');
+            const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
+            
+            const fullSlug = ipo.companyName.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .trim()
+                .replace(/\s+/g, '-');
+            
+            const urls = [
+                ipo.insightUrl,
+                `https://www.isaham.my/ipo/insights/${fullSlug}`,
+                `https://www.isaham.my/ipo-insights/${fullSlug}`,
+                `https://www.isaham.my/ipo/insights/${fullSlug.replace(/-berhad|-bhd|-group|-holdings|-corp/g, '')}`,
+                `https://www.isaham.my/ipo/${stem}`,
+                `https://www.isaham.my/ipo-insights/${stem}`,
+                `https://www.isaham.my/stock/${ticker}/insights`,
+                `https://www.isaham.my/ipo/${ticker}`
+            ].filter(Boolean);
+
+            let htmlData = null;
+            let matchedUrl = null;
+            for (const url of urls) {
+                try {
+                    const response = await axios.get(url, { headers: HEADERS });
+                    if (response.data && response.data.includes('revenueFyeBarChart')) {
+                        htmlData = response.data;
+                        matchedUrl = url;
+                        break;
+                    }
+                } catch (e) {
+                    // Ignore probing errors
+                }
+            }
+
+            if (!htmlData) {
+                console.log(`    ✗ Could not find a valid iSaham Insights page for ${ipo.companyName}`);
+                continue;
+            }
+
+            console.log(`    ✓ Found Insights page: ${matchedUrl}`);
+            ipo.insightUrl = matchedUrl;
+
+            const $ = cheerio.load(htmlData);
+            
+            let revenueData = null;
+            let patData = null;
+            let proceedDataRaw = null;
+            
+            $('script').each((i, el) => {
+                const js = $(el).html();
+                if (!js) return;
+                
+                const revMatch = js.match(/var\s+revenueFYE\s*=\s*({[^}]+});?/);
+                if (revMatch) {
+                    try {
+                        revenueData = JSON.parse(revMatch[1].replace(/'/g, '"'));
+                    } catch (e) {}
+                }
+                
+                const patMatch = js.match(/var\s+patFYE\s*=\s*({[^}]+});?/);
+                if (patMatch) {
+                    try {
+                        patData = JSON.parse(patMatch[1].replace(/'/g, '"'));
+                    } catch (e) {}
+                }
+                
+                const proceedMatch = js.match(/var\s+proceedData\s*=\s*({[^;]+});?/);
+                if (proceedMatch) {
+                    proceedDataRaw = proceedMatch[1].trim();
+                }
+            });
+
+            let swotText = '';
+            $('.card-body').each((i, el) => {
+                const text = $(el).text().replace(/\s+/g, ' ').trim();
+                if (text.includes('Superior Profit Margins') || text.includes('Customer Concentration') || text.includes('SWOT Analysis')) {
+                    swotText += text + '\n';
+                }
+            });
+            swotText = swotText.substring(0, 3000);
+
+            const ipoDetailsText = $('.card-body').eq(1).text().replace(/\s+/g, ' ').trim();
+
+            const promptContext = {
+                ipoDetails: ipoDetailsText,
+                revenueFYE: revenueData,
+                patFYE: patData,
+                proceedsSummary: proceedDataRaw,
+                qualitativeInsights: swotText
+            };
+
+            const systemPrompt = `You are "Prospectus Extractor AI", a professional Malaysian stock analyst.
+Your task is to analyze the provided IPO details and financial variables, and generate a structured JSON object conforming to the schema below.
+
+Requirements:
+1. Identify the 3 most recent historical years (e.g. FYE 23, FYE 24, FYE 25) and map their keys using the 2-digit year suffix (e.g., rev23, gp23, pat23, assets23, liab23).
+2. For the 2 projected/future years (e.g., FYE 26 and FYE 27), you MUST map them to the keys ending with 'F' and 'F1' (i.e. revF, gpF, patF, assetsF, liabF for FYE F; and revF1, gpF1, patF1, assetsF1, liabF1 for FYE F+1).
+3. Do NOT output keys like rev26 or pat27 for projections. Use 'F' and 'F1' keys instead.
+4. Convert all revenue, gp, pat, assets, liab numbers to actual RM values (multiply by 1,000 if they are in RM'000, or leave if already in RM).
+5. If assets and liabilities are not mentioned, estimate them based on the context (e.g., assets = revenue * 1.5, liabilities = assets * 0.4).
+6. Calculate GP based on GP margin if mentioned, or default to a reasonable industry margin.
+7. Generate targetPe (e.g. 15-25 based on sector), catalysts (list of 3 key strings), and peers.
+8. Output a professional 3-4 sentence analystInsight in Malay/English.
+
+Return ONLY a valid JSON object matching this structure:
+{
+  "totalShares": 1250000000,
+  "headers": ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
+  "rev23": 145920000, "rev24": 158877000, "rev25": 220275000, "revF": 197063000, "revF1": 217000000,
+  "gp23": 75158000, "gp24": 81480000, "gp25": 113517000, "gpF": 102212000, "gpF1": 112000000,
+  "pat23": 42866000, "pat24": 28945000, "pat25": 66162000, "patF": 51086000, "patF1": 56000000,
+  "assets23": 20000000, "assets24": 25000000, "assets25": 35000000, "assetsF": 40000000, "assetsF1": 45000000,
+  "liab23": 5000000, "liab24": 6000000, "liab25": 7000000, "liabF": 8000000, "liabF1": 9000000,
+  "targetPe": 20,
+  "catalysts": [
+    "Catalyst 1...",
+    "Catalyst 2..."
+  ],
+  "peers": "Peer comparison details..."
+}`;
+
+            try {
+                console.log('      Sending request to Groq...');
+                const groqResponse = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+                    model: 'llama-3.1-8b-instant',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: JSON.stringify(promptContext, null, 2) }
+                    ],
+                    max_tokens: 1500,
+                    temperature: 0.1,
+                    response_format: { type: "json_object" }
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${GROQ_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const parsedJson = JSON.parse(groqResponse.data.choices[0].message.content);
+                console.log('      ✓ Successfully parsed financial data!');
+
+                // Merge into ipo object
+                Object.assign(ipo, parsedJson);
+
+                // Re-predict Grade
+                const gradeResult = predictGrade(ipo);
+                ipo.predictedGrade = gradeResult.grade;
+                ipo.analystInsight = parsedJson.analystInsight;
+                
+                console.log(`      ✓ Predicted Grade: [${gradeResult.grade}] (Score: ${gradeResult.score}/100)`);
+                enrichedCount++;
+                
+            } catch (err) {
+                console.error('      ✗ Error extracting financials via Groq:', err.message);
+                if (err.response && err.response.status === 429) {
+                    console.log('      ⚠️ Rate limit (429) hit. Stopping AI enrichment for this run to prevent blocking.');
+                    break;
+                }
+            }
+
+            // Polite delay
+            await new Promise(r => setTimeout(r, 3000));
+        }
+
+}
+
+
 async function main() {
     console.log('--- Starting IPO Hunter Sync ---');
     
@@ -508,6 +820,9 @@ async function main() {
     }
 
     await deepHuntData(existingData);
+
+    // Automatically crawl and enrich financial profiles using Groq
+    await autoEnrichFinancials(existingData);
 
     // Apply overrides if overrides.json exists
     const overridesPath = path.join(__dirname, 'overrides.json');
@@ -538,6 +853,27 @@ async function main() {
     console.log(`\n--- Sync Complete ---`);
     console.log(`Total IPOs: ${existingData.length} (Added ${existingData.length - initialCount} new)`);
     console.log(`Files updated: data.json, data.js`);
+
+    // Auto git push to update live dashboard
+    await gitPush();
+}
+
+async function gitPush() {
+    const { execSync } = require('child_process');
+    try {
+        const status = execSync('git status --porcelain data.json data.js', { cwd: __dirname }).toString().trim();
+        if (!status) {
+            console.log('\n[Git] No changes to push.');
+            return;
+        }
+        const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+        execSync('git add data.json data.js', { cwd: __dirname });
+        execSync(`git commit -m "Auto sync: ${stamp}"`, { cwd: __dirname });
+        execSync('git push', { cwd: __dirname });
+        console.log(`\n[Git] ✅ Pushed to GitHub successfully.`);
+    } catch (e) {
+        console.error('\n[Git] ❌ Push failed:', e.message);
+    }
 }
 
 main().catch(console.error);
