@@ -1774,7 +1774,7 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama3-8b-8192',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: prompt }
@@ -1793,7 +1793,7 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
                 body: JSON.stringify({
                     prompt: prompt,
                     systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama3-8b-8192',
                     max_tokens: 1024,
                     temperature: 0.5
                 })
@@ -2191,7 +2191,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama3-8b-8192',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: text }
@@ -2216,7 +2216,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
                 body: JSON.stringify({
                     prompt: 'User question: ' + text,
                     systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
+                    model: 'llama3-8b-8192',
                     max_tokens: 512,
                     temperature: 0.7
                 })
