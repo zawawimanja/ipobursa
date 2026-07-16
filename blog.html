@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO Analysis & Blog | Bursa IPO Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            height: 100%;
+        }
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.4;
+            transition: var(--transition);
+        }
+        .blog-card:hover .blog-title {
+            color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.2);"></div>
+        <div class="blob blob-3" style="background: rgba(245, 158, 11, 0.2);"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="strategy.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="line-chart"></i> <span class="nav-text">Strategy</span>
+                </a>
+                <a href="tips.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="sparkles"></i> <span class="nav-text">Tips</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 3rem; margin-bottom: 5rem;">
+        <header class="hero" style="text-align: center; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <i data-lucide="book-open" style="color: var(--primary-light);"></i>
+                <span style="font-weight: 800; font-size: 0.8rem; color: var(--primary-light); text-transform: uppercase; letter-spacing: 0.15em;">Expert Market Commentary</span>
+            </div>
+            <h1>IPO <span>Analysis & Blog</span></h1>
+            <p>Read in-depth financial analysis, valuation studies, and strategic playbooks for upcoming and listed IPOs on Bursa Malaysia.</p>
+        </header>
+
+        <div class="blog-grid">
+            <!-- Article 1: SRKK AI -->
+            <article class="glass-card blog-card" onclick="location.href='blog-srkk-ai.html'" style="cursor: pointer;">
+                <div class="blog-meta">
+                    <span><i data-lucide="calendar" style="width: 12px; height: 12px; vertical-align: middle;"></i> Jul 12, 2026</span>
+                    <span><i data-lucide="tag" style="width: 12px; height: 12px; vertical-align: middle;"></i> Technology (AI)</span>
+                </div>
+                <h3 class="blog-title">Analisis Mendalam IPO SRKK AI Berhad: Mengapa Langganan Runcit Meletup 312.3x Ganda?</h3>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                    SRKK AI Berhad menjadi IPO paling mendapat sambutan hangat pada Julai 2026 dengan oversubscription 312.3x. Kami membedah rahsia pertumbuhan syarikat Microsoft Managed Partner pertama dengan keupayaan AI Cloud ini.
+                </p>
+                <div style="margin-top: auto; color: var(--primary-light); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                    <span>Read Article</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </div>
+            </article>
+
+            <!-- Article 2: Stratus Global -->
+            <article class="glass-card blog-card" onclick="location.href='blog-stratus-global.html'" style="cursor: pointer;">
+                <div class="blog-meta">
+                    <span><i data-lucide="calendar" style="width: 12px; height: 12px; vertical-align: middle;"></i> Jul 10, 2026</span>
+                    <span><i data-lucide="tag" style="width: 12px; height: 12px; vertical-align: middle;"></i> Semiconductors</span>
+                </div>
+                <h3 class="blog-title">Analisis Prospektus Stratus Global Holdings Berhad: Rebutan Institusi & Pasaran AMHS Dunia</h3>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                    Stratus Global bersedia melangkah ke Papan Utama pada 21 Julai 2026. Adakah premium harga RM0.80 berbaloi dengan kedudukan mereka sebagai penyedia sistem automasi material semikonduktor (AMHS)?
+                </p>
+                <div style="margin-top: auto; color: var(--primary-light); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                    <span>Read Article</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </div>
+            </article>
+
+            <!-- Article 3: Aerodyne Group -->
+            <article class="glass-card blog-card" onclick="location.href='blog-aerodyne.html'" style="cursor: pointer;">
+                <div class="blog-meta">
+                    <span><i data-lucide="calendar" style="width: 12px; height: 12px; vertical-align: middle;"></i> Jul 15, 2026</span>
+                    <span><i data-lucide="tag" style="width: 12px; height: 12px; vertical-align: middle;"></i> Technology (Autonomous)</span>
+                </div>
+                <h3 class="blog-title">Analisis Bakal Unicorn Aerodyne Group Berhad: Peneraju Teknologi Drone Global ke Papan Utama</h3>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                    Permohonan draf prospektus Aerodyne Group Berhad di Papan Utama (Main Market) memicu kehangatan institusi. Terokai parit ekonomi penyedia drone global nombor satu dunia ini.
+                </p>
+                <div style="margin-top: auto; color: var(--primary-light); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                    <span>Read Article</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </div>
+            </article>
+
+            <!-- Article 4: Sum Tech -->
+            <article class="glass-card blog-card" onclick="location.href='blog-sum-tech.html'" style="cursor: pointer;">
+                <div class="blog-meta">
+                    <span><i data-lucide="calendar" style="width: 12px; height: 12px; vertical-align: middle;"></i> Jun 20, 2026</span>
+                    <span><i data-lucide="tag" style="width: 12px; height: 12px; vertical-align: middle;"></i> Tech (Hardware)</span>
+                </div>
+                <h3 class="blog-title">Bedah Fundamental Sum Technology Berhad: Kenaikan +78.57% Day 1 & Potensi Pertumbuhan Kilang Pulau Pinang</h3>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                    Sum Technology (SUM) menunjukkan prestasi cemerlang pasca penyenaraian Jun lepas. Ikuti kajian kes bagaimana formula saringan penaja jamin (IB underwriter) berjaya menyelamatkan modal pelabur.
+                </p>
+                <div style="margin-top: auto; color: var(--primary-light); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                    <span>Read Article</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </div>
+            </article>
+
+            <!-- Article 5: SkyeChip -->
+            <article class="glass-card blog-card" onclick="location.href='blog-skyechip.html'" style="cursor: pointer;">
+                <div class="blog-meta">
+                    <span><i data-lucide="calendar" style="width: 12px; height: 12px; vertical-align: middle;"></i> May 25, 2026</span>
+                    <span><i data-lucide="tag" style="width: 12px; height: 12px; vertical-align: middle;"></i> Technology (IC Design)</span>
+                </div>
+                <h3 class="blog-title">Bedah Kemenangan Mega SkyeChip Berhad: Dari RM0.88 ke Pembukaan RM3.50 di Papan Utama</h3>
+                <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem;">
+                    Penyenaraian SkyeChip dengan premium pembukaan +297.7% mengejutkan pasaran. Ketahui faktor model perniagaan fabless IC reka bentuk cip ini berjaya menarik perhatian antarabangsa.
+                </p>
+                <div style="margin-top: auto; color: var(--primary-light); font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">
+                    <span>Read Article</span> <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container" style="text-align: center; padding: 2rem 0;">
+            <p>&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; font-size: 0.85rem;">
+                <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
+                <a href="about.html" style="color: var(--text-dim); text-decoration: none;">About Us</a>
+                <a href="contact.html" style="color: var(--text-dim); text-decoration: none;">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

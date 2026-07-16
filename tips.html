@@ -23,12 +23,15 @@
                 <i data-lucide="trending-up"></i>
                 <span class="logo-text"><span>Bursa</span>IPO</span>
             </div>
-            <div class="nav-links">
-                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+            <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
                     <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="strategy.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                <a href="strategy.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
                     <i data-lucide="line-chart"></i> <span class="nav-text">Strategy</span>
+                </a>
+                <a href="blog.html" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); color: #818cf8; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> <span class="nav-text">IPO Analysis</span>
                 </a>
             </div>
         </div>
@@ -458,10 +461,19 @@
         </section>
     </main>
 
-    <footer class="glass-footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2026 IPO Hunter Dashboard. Trading involves risk.</p>
+    <footer class="glass-footer" style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(255,255,255,0.08); padding: 3rem 0 2rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center;">
+            <div style="max-width: 800px; margin: 0 auto 2rem auto; font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.5rem;">
+                <p>⚠️ <strong>Penafian Kewangan (Financial Disclaimer):</strong> Semua maklumat, analisis, gred, unjuran harga, dan pengiraan kalkulator yang dipaparkan di laman web ini adalah bertujuan untuk rujukan pembelajaran dan pendidikan sahaja. Ia tidak boleh dianggap sebagai nasihat pelaburan, syor membeli atau menjual mana-mana sekuriti. Pelaburan pasaran saham terutamanya langganan IPO membawa risiko kerugian modal yang tinggi. Kami tidak menjamin ketepatan maklumat yang dikumpul. Anda dinasihatkan untuk berunding dengan penasihat kewangan berlesen sebelum membuat sebarang keputusan pelaburan.</p>
+            </div>
+            <div class="footer-content" style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+                <p style="font-size: 0.85rem; color: var(--text-dim);">&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem;">
+                    <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Privacy Policy</a>
+                    <a href="terms.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Terms of Service</a>
+                    <a href="about.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">About Us</a>
+                    <a href="contact.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Contact Us</a>
+                </div>
             </div>
         </div>
     </footer>

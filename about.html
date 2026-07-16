@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Bursa IPO Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.2);"></div>
+        <div class="blob blob-3" style="background: rgba(245, 158, 11, 0.2);"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 3rem; margin-bottom: 5rem;">
+        <header class="hero" style="text-align: center; margin-bottom: 3rem;">
+            <h1>About <span>Bursa IPO Tracker</span></h1>
+            <p>Empowering retail investors with transparent, data-driven, and mathematical analysis of Bursa Malaysia IPOs.</p>
+        </header>
+
+        <section class="glass-card" style="padding: 2.5rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+            <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: white;">Our Mission</h2>
+            <p style="color: var(--text-main); margin-bottom: 1.5rem;">
+                Bursa Malaysia's Initial Public Offering (IPO) market is dynamic, yet retail investors often struggle with complex prospectuses, biased broker reports, and emotional listing day hype. Our mission is to democratize institutional-grade market data, providing clear, unbiased mathematical filters to separate high-conviction plays from high-risk ventures.
+            </p>
+
+            <h2 style="font-size: 1.6rem; margin-top: 2rem; margin-bottom: 1rem; color: white;">What We Do</h2>
+            <p style="color: var(--text-main); margin-bottom: 1.5rem;">
+                We compile and enrich real-time and historical IPO listings across five stages—from exposure (draft prospectus) to listing and secondary market trading. Through our unique, mathematical valuation matrix (often called **Cincai2 Kira**), we calculate conservative target prices, historical oversubscription trends, and sector comparisons.
+            </p>
+
+            <div style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); padding: 1.5rem; border-radius: 1rem; margin-top: 2rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--primary-light); margin-bottom: 0.5rem; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="shield-check"></i> Mathematical Rigor Over Hype
+                </h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0;">
+                    We believe in strict discipline. We grade IPOs (Grade A, B, C) based on objective metrics: retail demand (Oversubscription ratio), valuation (Price-to-Earnings compared to sector peers), financial health (operating cash flows), and underwriter track records. We help retail players avoid "full allocation" traps and protect their capital.
+                </p>
+            </div>
+
+            <h2 style="font-size: 1.6rem; margin-top: 2rem; margin-bottom: 1rem; color: white;">Our Expertise (E-E-A-T)</h2>
+            <p style="color: var(--text-main); margin-bottom: 1.5rem;">
+                Bursa IPO Tracker is developed and maintained by a group of retail market analysts and quantitative finance enthusiasts. Collectively, we have tracked and participated in over 100+ listings in Bursa Malaysia. 
+            </p>
+            <p style="color: var(--text-main); margin-bottom: 1.5rem;">
+                Please note that we are not registered investment advisers (Ria) or licensed brokers. All analysis presented here is strictly for research and mathematical modeling purposes.
+            </p>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container" style="text-align: center; padding: 2rem 0;">
+            <p>&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; font-size: 0.85rem;">
+                <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
+                <a href="about.html" style="color: var(--primary-light); text-decoration: none;">About Us</a>
+                <a href="contact.html" style="color: var(--text-dim); text-decoration: none;">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
