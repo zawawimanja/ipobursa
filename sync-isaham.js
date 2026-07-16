@@ -731,16 +731,24 @@ Requirements:
 7. Generate targetPe (e.g. 15-25 based on sector), catalysts (list of 3 key strings), and peers.
 8. Output a professional 3-4 sentence analystInsight in Malay/English.
 
-Return ONLY a valid JSON object matching this structure:
+⚠️ CRITICAL PROJECTION RULES (DO NOT VIOLATE):
+A. revF MUST be GREATER than rev25 (the latest historical year). Projections must show GROWTH, not decline.
+B. patF MUST be GREATER than pat25. Never project profit to fall below the latest actual year.
+C. gpF MUST be GREATER than gp25.
+D. revF1 must be GREATER than revF. patF1 must be GREATER than patF.
+E. Minimum growth rate for projections: at least 5-10% per year. Use higher for high-growth sectors (tech/semiconductor: 15-25%).
+F. The targetPe you choose MUST result in a fair value close to the IPO price × expected upside. Formula: fairValue = (patF / totalShares) × targetPe. This must be ABOVE the IPO price to justify investment.
+
+Return ONLY a valid JSON object matching this structure (these are EXAMPLE numbers only — replace with actual data):
 {
-  "totalShares": 1250000000,
+  "totalShares": 500000000,
   "headers": ["FYE 23", "FYE 24", "FYE 25", "Projection (FYE F)", "Projection (FYE F+1)"],
-  "rev23": 145920000, "rev24": 158877000, "rev25": 220275000, "revF": 197063000, "revF1": 217000000,
-  "gp23": 75158000, "gp24": 81480000, "gp25": 113517000, "gpF": 102212000, "gpF1": 112000000,
-  "pat23": 42866000, "pat24": 28945000, "pat25": 66162000, "patF": 51086000, "patF1": 56000000,
-  "assets23": 20000000, "assets24": 25000000, "assets25": 35000000, "assetsF": 40000000, "assetsF1": 45000000,
-  "liab23": 5000000, "liab24": 6000000, "liab25": 7000000, "liabF": 8000000, "liabF1": 9000000,
-  "targetPe": 20,
+  "rev23": 80000000, "rev24": 95000000, "rev25": 115000000, "revF": 135000000, "revF1": 158000000,
+  "gp23": 20000000, "gp24": 25000000, "gp25": 32000000, "gpF": 38000000, "gpF1": 45000000,
+  "pat23": 8000000, "pat24": 10000000, "pat25": 13000000, "patF": 16000000, "patF1": 19000000,
+  "assets23": 50000000, "assets24": 60000000, "assets25": 75000000, "assetsF": 90000000, "assetsF1": 105000000,
+  "liab23": 20000000, "liab24": 24000000, "liab25": 30000000, "liabF": 36000000, "liabF1": 42000000,
+  "targetPe": 18,
   "catalysts": [
     "Catalyst 1...",
     "Catalyst 2..."
