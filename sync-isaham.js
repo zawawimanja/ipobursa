@@ -645,7 +645,7 @@ async function autoEnrichFinancials(existingData) {
     if (targets.length === 0) return 0;
 
         let enrichedCount = 0;
-        const maxExtractions = 2;
+        const maxExtractions = 10;
 
         for (let ipo of targets) {
             if (enrichedCount >= maxExtractions) {
