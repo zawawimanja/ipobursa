@@ -1386,11 +1386,35 @@
                     return target;
                 };
 
-                zone1ValF = getCalibratedV3(valF);
-                zone1ValF1 = getCalibratedV3(valF1);
+                const initialSifuTarget = ipo.sifuTargetPrice || valF;
+                const ratio = initialSifuTarget > 0 ? (valF / initialSifuTarget) : 1.0;
                 
-                zone2ValF = getCalibratedV6(valF);
-                zone2ValF1 = getCalibratedV6(valF1);
+                if (typeof ipo.v3TargetPrice === 'number') {
+                    zone1ValF = ipo.v3TargetPrice * ratio;
+                } else {
+                    zone1ValF = getCalibratedV3(valF);
+                }
+
+                if (typeof ipo.v3TargetPrice === 'number') {
+                    // Scale F1 proportionally to the growth from F to F1
+                    const f1Ratio = valF > 0 ? (valF1 / valF) : 1.13;
+                    zone1ValF1 = zone1ValF * f1Ratio;
+                } else {
+                    zone1ValF1 = getCalibratedV3(valF1);
+                }
+
+                if (typeof ipo.zone2TargetPrice === 'number') {
+                    zone2ValF = ipo.zone2TargetPrice * ratio;
+                } else {
+                    zone2ValF = getCalibratedV6(valF);
+                }
+
+                if (typeof ipo.zone2TargetPrice === 'number') {
+                    const f1Ratio = valF > 0 ? (valF1 / valF) : 1.13;
+                    zone2ValF1 = zone2ValF * f1Ratio;
+                } else {
+                    zone2ValF1 = getCalibratedV6(valF1);
+                }
             }
             
             // Display Zone 1 Dynamic Target

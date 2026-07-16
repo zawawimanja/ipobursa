@@ -1459,10 +1459,15 @@ function createIPOCard(ipo, index = 0) {
                         const passesTapis1 = currentVal <= ipo.sifuTargetPrice;
                         const passesTapis2 = (cleanGrade === 'A' || cleanGrade === 'B');
                         
+                        let zoneText = '';
+                        if (typeof ipo.v3TargetPrice === 'number' && typeof ipo.zone2TargetPrice === 'number') {
+                            zoneText = `<div style="font-size: 0.6rem; color: var(--text-dim); margin-top: 1px;">Z1: RM ${ipo.v3TargetPrice.toFixed(2)} | Z2: RM ${ipo.zone2TargetPrice.toFixed(2)}</div>`;
+                        }
+
                         if (passesTapis1 && passesTapis2) {
-                            return `<div class="pulse-green-text" style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 800;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)} ✅</div>`;
+                            return `<div class="pulse-green-text" style="font-size: 0.65rem; color: #10b981; margin-top: 2px; font-weight: 800;">Sifu Buy: RM ${ipo.sifuTargetPrice.toFixed(2)} ✅</div>${zoneText}`;
                         } else {
-                            return `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Target: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>`;
+                            return `<div style="font-size: 0.65rem; color: #a5b4fc; margin-top: 2px; font-weight: 600;">Sifu Target: RM ${ipo.sifuTargetPrice.toFixed(2)}</div>${zoneText}`;
                         }
                     })()
                 ) : ''}
