@@ -663,23 +663,37 @@ async function autoEnrichFinancials(existingData) {
                 .trim()
                 .replace(/\s+/g, '-');
             
-            const urls = [
-                ipo.insightUrl,
-                `https://www.isaham.my/ipo/insights/${fullSlug}`,
-                `https://www.isaham.my/ipo-insights/${fullSlug}`,
-                `https://www.isaham.my/ipo/insights/${fullSlug.replace(/-berhad|-bhd|-group|-holdings|-corp/g, '')}`,
-                `https://www.isaham.my/ipo/${stem}`,
-                `https://www.isaham.my/ipo-insights/${stem}`,
-                `https://www.isaham.my/stock/${ticker}/insights`,
-                `https://www.isaham.my/ipo/${ticker}`
-            ].filter(Boolean);
+            // Build candidates with suffixes for short acronyms
+            const slugCandidates = [fullSlug];
+            if (fullSlug.length < 12) {
+                slugCandidates.push(`${fullSlug}-berhad`);
+                slugCandidates.push(`${fullSlug}-group-berhad`);
+                slugCandidates.push(`${fullSlug}-holdings-berhad`);
+                slugCandidates.push(`${fullSlug}-group`);
+                slugCandidates.push(`${fullSlug}-holdings`);
+            }
+
+            const urls = [ipo.insightUrl];
+            slugCandidates.forEach(slug => {
+                urls.push(`https://www.isaham.my/ipo/insights/${slug}`);
+                urls.push(`https://www.isaham.my/ipo-insights/${slug}`);
+                urls.push(`https://www.isaham.my/ipo/insights/${slug.replace(/-berhad|-bhd|-group|-holdings|-corp/g, '')}`);
+                urls.push(`https://www.isaham.my/ipo/${slug}`);
+            });
+            urls.push(`https://www.isaham.my/ipo/${stem}`);
+            urls.push(`https://www.isaham.my/ipo-insights/${stem}`);
+            urls.push(`https://www.isaham.my/stock/${ticker}/insights`);
+            urls.push(`https://www.isaham.my/ipo/${ticker}`);
+
+            const uniqueUrls = [...new Set(urls.filter(Boolean))];
 
             let htmlData = null;
             let matchedUrl = null;
-            for (const url of urls) {
+            for (const url of uniqueUrls) {
                 try {
                     const response = await axios.get(url, { headers: HEADERS });
-                    if (response.data && response.data.includes('revenueFyeBarChart')) {
+                    // Accept any page containing standard layout or insights cards
+                    if (response.data && (response.data.includes('revenueFyeBarChart') || response.data.includes('SWOT Analysis') || response.data.includes('Analyst Highlights') || response.data.includes('card-body'))) {
                         htmlData = response.data;
                         matchedUrl = url;
                         break;
