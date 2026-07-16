@@ -1167,8 +1167,18 @@
             const patF = parseInputValue('inp-pat-fye-f');
             const patF1 = parseInputValue('inp-pat-fye-f1');
             
-            const epsGrowthF = parseInputValue('inp-eps-growth-f');
-            const epsGrowthF1 = parseInputValue('inp-eps-growth-f1');
+            // Calculate EPS Growth Rate dynamically from EPS to ensure mathematical consistency
+            const epsGrowthF = eps25 > 0 ? ((epsF - eps25) / eps25) * 100 : 0;
+            const epsGrowthF1 = epsF > 0 ? ((epsF1 - epsF) / epsF) * 100 : 0;
+            
+            document.getElementById('inp-eps-growth-f').value = epsGrowthF.toFixed(1);
+            document.getElementById('inp-eps-growth-f1').value = epsGrowthF1.toFixed(1);
+            document.getElementById('inp-eps-growth-f').readOnly = true;
+            document.getElementById('inp-eps-growth-f1').readOnly = true;
+            document.getElementById('inp-eps-growth-f').style.background = 'rgba(255,255,255,0.05)';
+            document.getElementById('inp-eps-growth-f1').style.background = 'rgba(255,255,255,0.05)';
+            document.getElementById('inp-eps-growth-f').style.cursor = 'not-allowed';
+            document.getElementById('inp-eps-growth-f1').style.cursor = 'not-allowed';
             
             // Calculate EPS (sen) = (PAT / shares) * 100
             const eps23 = (pat23 / totalShares) * 100;

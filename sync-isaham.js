@@ -511,34 +511,38 @@ function autoPromoteIPOs(finalData) {
 }
 
 function predictGrade(ipo) {
-    const heroIBs = ["maybank", "public", "kaf", "alliance", "cimb"];
-    const topTierIBs = ["maybank", "cimb", "rhb", "public", "aminvestment", "alliance", "affin hwang", "kaf"];
-    const momentumIBs = ["m&a", "malacca", "kenanga", "ta securities", "uob kay hian", "mercury", "apex", "sj securities"];
-    
-    const highMomentumSectors = ["data centre", "solar", "ai", "semiconductor", "cleanroom", "hardware", "renewable energy", "ev", "cybersecurity"];
-    const lowMomentumSectors = ["it services", "software", "infrastructure", "services", "digital"];
-    const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
-
     const ib = (ipo.ib || '').toLowerCase();
+    const pe = ipo.pe || 0;
     const sector = (ipo.sector || '').toLowerCase();
     const fundUse = (ipo.fundUse || '').toLowerCase();
-    const market = ipo.market;
-    const hasOFS = ipo.ofs === true || ipo.hasOFS === true;
 
-    const isHero = heroIBs.some(tier => ib.includes(tier));
-    const isTopTier = topTierIBs.some(tier => ib.includes(tier));
+    const superHeroIBs = ["maybank"];
+    const heroIBs = ["public", "kaf", "alliance"];
+    const topTierIBs = ["rhb", "aminvestment", "alliance", "affin hwang", "kaf", "public"];
+    const momentumIBs = ["m&a", "malacca", "ta securities", "kenanga", "apex", "sj securities"];
+    const flatSkews = ["uob", "cimb", "mercury"];
+    
+    const trendingSectors = ["data centre", "solar", "ai", "technology", "renewable energy", "ev", "semiconductor", "digital", "cybersecurity"];
+    const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
+
+    const isSuperHero = superHeroIBs.some(tier => ib.includes(tier));
+    const isHero = heroIBs.some(tier => ib.includes(tier)) || isSuperHero;
+    const isTopTier = topTierIBs.some(tier => ib.includes(tier)) || isSuperHero;
     const isMomentum = momentumIBs.some(tier => ib.includes(tier));
-    
-    const isHighMomentum = highMomentumSectors.some(s => sector.includes(s));
-    const isLowMomentum = lowMomentumSectors.some(s => sector.includes(s));
-    const isGeneralTech = sector.includes("technology") || sector.includes("tech");
-    
+    const isFlatSkew = flatSkews.some(tier => ib.includes(tier));
+    const isTrendingSector = trendingSectors.some(s => sector.includes(s));
     const isExpansionFund = expansionKeywords.some(k => fundUse.includes(k));
+    
+    const isMainMarket = ipo.market && ipo.market.toLowerCase().includes('main');
+    const isAceMarket = !isMainMarket;
 
     let score = 0;
     let reasons = [];
     
-    if (isHero) {
+    if (isSuperHero) {
+        score += 50;
+        reasons.push("SuperHero IB (+50)");
+    } else if (isHero) {
         score += 40;
         reasons.push("Hero IB (+40)");
     } else if (isTopTier) {
@@ -549,45 +553,69 @@ function predictGrade(ipo) {
         reasons.push("Momentum IB (+20)");
     }
     
-    if (isHighMomentum) {
-        score += 30;
-        reasons.push("High Momentum Tech Sector (+30)");
-    } else if (isLowMomentum) {
-        score += 10;
-        reasons.push("Low Momentum IT/Tech Services Sector (+10)");
-    } else if (isGeneralTech) {
-        score += 15;
-        reasons.push("General Technology Sector (+15)");
+    if (isFlatSkew) {
+        score -= 15;
+        reasons.push("Flat Skew IB (-15)");
     }
     
+    if (isTrendingSector) {
+        score += 30;
+        reasons.push("Trending Sector (+30)");
+    }
     if (isExpansionFund) {
         score += 20;
         reasons.push("Expansion/R&D Fund Use (+20)");
     }
     
-    if (market === 'Main Market') {
+    if (isMainMarket) {
         score += 10;
         reasons.push("Main Market (+10)");
-    } else if (market === 'ACE Market') {
+    } else if (isAceMarket) {
         score += 5;
         reasons.push("ACE Market (+5)");
     }
 
+    // Price sweet spot scoring
+    const price = ipo.price || 0;
+    if (price >= 0.30 && price <= 0.50) {
+        score += 15;
+        reasons.push("Retail sweet spot price (+15)");
+    } else if (price >= 0.75 && price <= 1.00) {
+        score += 15;
+        reasons.push("Growth sweet spot price (+15)");
+    } else if (price > 0 && price < 0.20) {
+        score -= 15;
+        reasons.push("Penny stock penalty (-15)");
+    } else if (price > 1.00) {
+        score -= 15;
+        reasons.push("High-ticket stock penalty (-15)");
+    }
+
+    // Geography premium scoring
+    const geo = (ipo.geography || '').toLowerCase();
+    if (geo === 'penang' && isTrendingSector) {
+        score += 20;
+        reasons.push("Penang Silicon Valley Premium (+20)");
+    } else if (geo === 'johor' || geo === 'melaka') {
+        score -= 5;
+        reasons.push("Geography penalty (-5)");
+    }
+
+    // OFS and PE Valuation Adjustments
+    const hasOFS = ipo.ofs === true || ipo.hasOFS === true;
     if (hasOFS) {
         score -= 15;
         reasons.push("Offer for Sale (OFS) component (-15)");
     }
-
-    const pe = ipo.pe || 0;
     if (pe > 0 && pe < 13.0) {
         score += 15;
-        reasons.push("Cheap/Attractive Valuation PE < 13x (+15)");
+        reasons.push("Cheap/Attractive valuation PE < 13x (+15)");
     } else if (pe > 0 && pe < 18.0) {
         score += 5;
-        reasons.push("Reasonable Valuation PE < 18x (+5)");
+        reasons.push("Reasonable valuation PE < 18x (+5)");
     } else if (pe > 22.0) {
         score -= 10;
-        reasons.push("Expensive Valuation PE > 22x (-10)");
+        reasons.push("Expensive valuation PE > 22x (-10)");
     }
 
     let grade = 'C';
