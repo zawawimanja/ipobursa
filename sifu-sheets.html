@@ -867,7 +867,19 @@
         function parseInputValue(id) {
             const el = document.getElementById(id);
             if (!el) return 0;
+            // Clean replace commas to support parsing if input format got overridden
             return parseFloat(el.value.replace(/,/g, '')) || 0;
+        }
+
+        // Helper to set number input values directly (without formatted commas which HTML5 <input type="number"> rejects)
+        function setInputNumber(id, val, decimals = 0) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (val === undefined || val === null || isNaN(val)) {
+                el.value = (0).toFixed(decimals);
+            } else {
+                el.value = Number(val).toFixed(decimals);
+            }
         }
 
         function fillFormValues(data) {
@@ -879,8 +891,8 @@
                     setTimeout(() => lucide.createIcons(), 50);
                 }
             }
-            document.getElementById('inp-price').value = formatNumber(data.price, 2);
-            document.getElementById('inp-total-shares').value = formatNumber(data.totalShares, 0);
+            setInputNumber('inp-price', data.price, 2);
+            setInputNumber('inp-total-shares', data.totalShares, 0);
             
             // Get the 3 historical suffixes
             const suffixes = getHistoricalSuffixes(data);
@@ -889,43 +901,43 @@
             const s3 = suffixes[2];
             
             // Revenues
-            document.getElementById('inp-rev-23').value = formatNumber(data[`rev${s1}`], 0);
-            document.getElementById('inp-rev-24').value = formatNumber(data[`rev${s2}`], 0);
-            document.getElementById('inp-rev-25').value = formatNumber(data[`rev${s3}`], 0);
-            document.getElementById('inp-rev-fye-f').value = formatNumber(data.revF, 0);
-            document.getElementById('inp-rev-fye-f1').value = formatNumber(data.revF1, 0);
+            setInputNumber('inp-rev-23', data[`rev${s1}`], 0);
+            setInputNumber('inp-rev-24', data[`rev${s2}`], 0);
+            setInputNumber('inp-rev-25', data[`rev${s3}`], 0);
+            setInputNumber('inp-rev-fye-f', data.revF, 0);
+            setInputNumber('inp-rev-fye-f1', data.revF1, 0);
             
             // GPs
-            document.getElementById('inp-gp-23').value = formatNumber(data[`gp${s1}`], 0);
-            document.getElementById('inp-gp-24').value = formatNumber(data[`gp${s2}`], 0);
-            document.getElementById('inp-gp-25').value = formatNumber(data[`gp${s3}`], 0);
-            document.getElementById('inp-gp-fye-f').value = formatNumber(data.gpF, 0);
-            document.getElementById('inp-gp-fye-f1').value = formatNumber(data.gpF1, 0);
+            setInputNumber('inp-gp-23', data[`gp${s1}`], 0);
+            setInputNumber('inp-gp-24', data[`gp${s2}`], 0);
+            setInputNumber('inp-gp-25', data[`gp${s3}`], 0);
+            setInputNumber('inp-gp-fye-f', data.gpF, 0);
+            setInputNumber('inp-gp-fye-f1', data.gpF1, 0);
             
             // PATs
-            document.getElementById('inp-pat-23').value = formatNumber(data[`pat${s1}`], 0);
-            document.getElementById('inp-pat-24').value = formatNumber(data[`pat${s2}`], 0);
-            document.getElementById('inp-pat-25').value = formatNumber(data[`pat${s3}`], 0);
-            document.getElementById('inp-pat-fye-f').value = formatNumber(data.patF, 0);
-            document.getElementById('inp-pat-fye-f1').value = formatNumber(data.patF1, 0);
+            setInputNumber('inp-pat-23', data[`pat${s1}`], 0);
+            setInputNumber('inp-pat-24', data[`pat${s2}`], 0);
+            setInputNumber('inp-pat-25', data[`pat${s3}`], 0);
+            setInputNumber('inp-pat-fye-f', data.patF, 0);
+            setInputNumber('inp-pat-fye-f1', data.patF1, 0);
             
             // Growth
-            document.getElementById('inp-eps-growth-f').value = formatNumber(data.epsGrowthF, 1);
-            document.getElementById('inp-eps-growth-f1').value = formatNumber(data.epsGrowthF1, 1);
+            setInputNumber('inp-eps-growth-f', data.epsGrowthF, 1);
+            setInputNumber('inp-eps-growth-f1', data.epsGrowthF1, 1);
             
             // Assets
-            document.getElementById('inp-assets-23').value = formatNumber(data[`assets${s1}`], 0);
-            document.getElementById('inp-assets-24').value = formatNumber(data[`assets${s2}`], 0);
-            document.getElementById('inp-assets-25').value = formatNumber(data[`assets${s3}`], 0);
-            document.getElementById('inp-assets-fye-f').value = formatNumber(data.assetsF, 0);
-            document.getElementById('inp-assets-fye-f1').value = formatNumber(data.assetsF1, 0);
+            setInputNumber('inp-assets-23', data[`assets${s1}`], 0);
+            setInputNumber('inp-assets-24', data[`assets${s2}`], 0);
+            setInputNumber('inp-assets-25', data[`assets${s3}`], 0);
+            setInputNumber('inp-assets-fye-f', data.assetsF, 0);
+            setInputNumber('inp-assets-fye-f1', data.assetsF1, 0);
             
             // Liab
-            document.getElementById('inp-liab-23').value = formatNumber(data[`liab${s1}`], 0);
-            document.getElementById('inp-liab-24').value = formatNumber(data[`liab${s2}`], 0);
-            document.getElementById('inp-liab-25').value = formatNumber(data[`liab${s3}`], 0);
-            document.getElementById('inp-liab-fye-f').value = formatNumber(data.liabF, 0);
-            document.getElementById('inp-liab-fye-f1').value = formatNumber(data.liabF1, 0);
+            setInputNumber('inp-liab-23', data[`liab${s1}`], 0);
+            setInputNumber('inp-liab-24', data[`liab${s2}`], 0);
+            setInputNumber('inp-liab-25', data[`liab${s3}`], 0);
+            setInputNumber('inp-liab-fye-f', data.liabF, 0);
+            setInputNumber('inp-liab-fye-f1', data.liabF1, 0);
         }
 
         function updateNotes(data) {
@@ -1167,6 +1179,13 @@
             const patF = parseInputValue('inp-pat-fye-f');
             const patF1 = parseInputValue('inp-pat-fye-f1');
             
+            // Calculate EPS (sen) = (PAT / shares) * 100
+            const eps23 = (pat23 / totalShares) * 100;
+            const eps24 = (pat24 / totalShares) * 100;
+            const eps25 = (pat25 / totalShares) * 100;
+            const epsF = (patF / totalShares) * 100;
+            const epsF1 = (patF1 / totalShares) * 100;
+            
             // Calculate EPS Growth Rate dynamically from EPS to ensure mathematical consistency
             const epsGrowthF = eps25 > 0 ? ((epsF - eps25) / eps25) * 100 : 0;
             const epsGrowthF1 = epsF > 0 ? ((epsF1 - epsF) / epsF) * 100 : 0;
@@ -1179,13 +1198,6 @@
             document.getElementById('inp-eps-growth-f1').style.background = 'rgba(255,255,255,0.05)';
             document.getElementById('inp-eps-growth-f').style.cursor = 'not-allowed';
             document.getElementById('inp-eps-growth-f1').style.cursor = 'not-allowed';
-            
-            // Calculate EPS (sen) = (PAT / shares) * 100
-            const eps23 = (pat23 / totalShares) * 100;
-            const eps24 = (pat24 / totalShares) * 100;
-            const eps25 = (pat25 / totalShares) * 100;
-            const epsF = (patF / totalShares) * 100;
-            const epsF1 = (patF1 / totalShares) * 100;
             
             document.getElementById('td-eps-23').innerText = eps23.toFixed(2);
             document.getElementById('td-eps-24').innerText = eps24.toFixed(2);
