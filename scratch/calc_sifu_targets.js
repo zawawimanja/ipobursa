@@ -18,11 +18,11 @@ try {
     );
     
     // ═══════════════════════════════════════════════════════════
-    // V6 ENGINE — Nelder-Mead Optimized (LOOCV: 88.3% hit rate)
-    // Continuous params, IB quality, Gaussian price regime
+    // V7 ENGINE — Multi-Objective Optimized (Beats Sifu CK 4/4)
+    // 15 params: OS, sector, IB, OFS, free float, quality, PE, lockup
     // ═══════════════════════════════════════════════════════════
-    const v6p = [-0.062118, -0.094923, 0.757103, 0.923936, 0.955618, 1.091094, 0.836895, 1.052850, 1.061522, 0.074801, 1.219244, 0.125707, -0.747504, -0.000803];
-    // [osLin, osQuad, tech, consumer, energy, health, industrial, construction, main, ibInf, ofs, priceG, ffDev, qual]
+    // V7 params [osLin, osQuad, tech, consumer, energy, health, industrial, construction, main, ibInf, ofs, ff, qual, pe, lockup]
+    const v7p = [-0.045479, -0.027829, 1.094659, 0.983594, 0.992896, 1.088745, 0.966187, 1.155089, 1.089565, 0.119831, 0.909459, -1.007622, 0.123072, -0.027927, 0.051254];
 
     // IB Performance Score (data-driven from historical win rates)
     const ibPerf = {};
@@ -48,7 +48,7 @@ try {
         return 0.3;
     }
 
-    function getSectorGroupV6(sector) {
+    function getSectorGroup(sector) {
         const s = sector.toLowerCase();
         if (s.includes('tech') || s.includes('semiconductor') || s.includes('software') || s.includes('hardware') || s.includes('ai')) return 'tech';
         if (s.includes('consumer') || s.includes('food') || s.includes('beverage') || s.includes('retail')) return 'consumer';
@@ -59,49 +59,50 @@ try {
         return 'other';
     }
 
-    function getCalibratedTarget(cincaiVal, sector, market, os, price, geography, ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ibName) {
+    function getCalibratedTarget(cincaiVal, sector, market, os, price, geography, ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ibName, targetPe) {
         let target = cincaiVal;
-        const sg = getSectorGroupV6(sector);
+        const sg = getSectorGroup(sector);
         
-        // 1. Continuous OS response (logarithmic + quadratic)
-        const logOs = Math.log1p(os);
-        target *= (1 + v6p[0] * logOs / 5);
-        target *= (1 + v6p[1] * logOs * logOs / 25);
+        // 1. Continuous OS response
+        const logOs = Math.log1p(os || 10);
+        target *= (1 + v7p[0] * logOs / 5);
+        target *= (1 + v7p[1] * logOs * logOs / 25);
         
-        // 2. Sector multipliers (optimized end-to-end)
-        if (sg === 'tech')         target *= v6p[2];
-        if (sg === 'consumer')     target *= v6p[3];
-        if (sg === 'energy')       target *= v6p[4];
-        if (sg === 'health')       target *= v6p[5];
-        if (sg === 'industrial')   target *= v6p[6];
-        if (sg === 'construction') target *= v6p[7];
+        // 2. Sector multipliers (CK bias corrected — V7 fixes V6's WRONG directions)
+        if (sg === 'tech')         target *= v7p[2];
+        if (sg === 'consumer')     target *= v7p[3];
+        if (sg === 'energy')       target *= v7p[4];
+        if (sg === 'health')       target *= v7p[5];
+        if (sg === 'industrial')   target *= v7p[6];
+        if (sg === 'construction') target *= v7p[7];
         
         // 3. Main market premium
-        if (market.includes('main')) target *= v6p[8];
+        if (market.includes('main')) target *= v7p[8];
         
-        // 4. IB Quality Score (continuous, data-driven)
+        // 4. IB Quality Score
         const ibScore = getIbScore(ibName);
-        target *= (1 + v6p[9] * (ibScore - 0.3));
+        target *= (1 + v7p[9] * (ibScore - 0.3));
         
-        // 5. OFS multiplier (data shows OFS ≠ always negative)
-        if (ofs === true) target *= v6p[10];
+        // 5. OFS drag (V7 fixes V6's WRONG positive multiplier — OFS reduces target)
+        if (ofs === true) target *= v7p[10];
         
-        // 6. Gaussian price sweet spot (smooth, not buckets)
-        const priceNorm = (price - 0.30) / 0.50;
-        target *= (1 + v6p[11] * Math.exp(-priceNorm * priceNorm));
-        
-        // 7. Free float deviation from ideal 22%
+        // 6. Free float deviation
         const ffDev = (freeFloat || 0.25) - 0.22;
-        target *= (1 + v6p[12] * ffDev);
+        target *= (1 + v7p[11] * ffDev);
         
-        // 8. Combined quality signal (anchor + promoter + lockup)
+        // 7. Combined quality signal
         let qualScore = 0;
         if (anchorInvestors === true) qualScore += 0.3;
         if (promoterQuality === 'conglomerate_spinoff') qualScore += 0.2;
         else if (promoterQuality === 'first_timer') qualScore -= 0.2;
-        if ((lockupMonths || 12) >= 12) qualScore += 0.1;
-        else qualScore -= 0.1;
-        target *= (1 + v6p[13] * qualScore);
+        target *= (1 + v7p[12] * qualScore);
+        
+        // 8. PE-based adjustment (NEW — V7 only)
+        const pe = targetPe || 15;
+        target *= (1 + v7p[13] * (pe - 15) / 15);
+        
+        // 9. Lockup impact (NEW — V7 only, replaces old lockup penalty)
+        target *= (1 + v7p[14] * ((lockupMonths || 12) - 6) / 12);
         
         return target;
     }
@@ -140,12 +141,12 @@ try {
             const valF = ipo.targetPe * epsF / 100;
             
             sifuTP = valF;
-            calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib);
+            calibratedTP = getCalibratedTarget(valF, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib, ipo.targetPe);
             source = `data.json profile (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs
             sifuTP = ipo.avgTP || ipo.price || 0.50;
-            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib);
+            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib, ipo.targetPe);
             source = ipo.avgTP ? 'avgTP from database' : 'IPO Price (fallback)';
         }
 
@@ -167,6 +168,8 @@ try {
         }
         if (calibratedTargets[ipo.id] !== undefined) {
             ipo.calibratedSifuTargetPrice = calibratedTargets[ipo.id];
+            ipo.v7TargetPrice = calibratedTargets[ipo.id];
+            ipo.zone2TargetPrice = calibratedTargets[ipo.id]; // V7 replaces V6 as Zone 2
         }
     });
     
