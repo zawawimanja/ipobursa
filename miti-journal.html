@@ -266,14 +266,14 @@
             </div>
 
             <!-- Why Focus Main Market Info -->
-            <div class="alert-moratorium" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-left: 4px solid #6366f1; margin-top: -0.4rem; margin-bottom: 0;">
+            <div class="alert-moratorium" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-left: 4px solid #6366f1; margin-top: -0.25rem; margin-bottom: 1rem;">
                 <i data-lucide="info" style="color: #a5b4fc; width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.1rem;"></i>
                 <div>
                     <p style="color: #e2e8f0; font-size: 0.85rem; line-height: 1.5; margin: 0;">
-                        <strong style="color: #a5b4fc;">Kenapa Jurnal Ini Hanya Fokus Pasaran Utama (Main Market)?</strong><br>
-                        • <strong>Kuota Wajib:</strong> Syarikat Main Market wajib memperuntukkan 12.5% saham khas Bumiputera (MITI). Syarikat ACE Market tidak diwajibkan (hanya sukarela).<br>
-                        • <strong>Saiz Alokasi Besar:</strong> Permohonan MITI Main Market memberikan agihan unit yang besar per pemohon (biasanya 3,000 - 20,000 unit). Bagi ACE Market, alokasi per individu sangat sedikit (biasanya 1,000 unit sahaja).<br>
-                        • <strong>Keuntungan RM Kasar Lebih Berbaloi:</strong> Dengan alokasi unit yang besar, kenaikan sederhana (+30% hingga +50%) pada Main Market menjana keuntungan Ringgit (RM) bersih yang jauh lebih bernilai berbanding kenaikan +100% pada unit ACE yang kecil.
+                        <strong style="color: #a5b4fc;">Info Strategi MITI: Pasaran Utama (Main) vs Pasaran ACE</strong><br>
+                        • <strong>Kuota Wajib:</strong> Syarikat Main Market wajib memperuntukkan 12.5% saham khas Bumiputera (MITI). Syarikat ACE Market pula hanya secara sukarela.<br>
+                        • <strong>Kebarangkalian Alokasi Unit:</strong> Main Market menawarkan kebarangkalian agihan unit besar (3,000 - 20,000 unit) secara konsisten. Walau bagaimanapun, bagi kaunter ACE Market yang kurang persaingan, anda **masih boleh mendapat alokasi yang sangat besar** jika memohon jumlah yang tinggi (contohnya Ramssol Group Berhad di mana pemohon mendapat alokasi penuh 40,000 unit!).<br>
+                        • <strong>Kira-kira Untung Kasar (RM):</strong> Menggabungkan alokasi unit yang besar dan premium pembukaan yang sihat akan menjana keuntungan Ringgit Malaysia (RM) bersih yang paling lumayan bagi modal anda.
                     </p>
                 </div>
             </div>
@@ -344,9 +344,16 @@
                 <div class="journal-card-header" onclick="toggleCard('card-historical')">
                     <h2 class="journal-card-title">
                         <i data-lucide="history" style="color: #fbbf24; width: 20px; height: 20px;"></i> 
-                        Rekod Sejarah Penyenaraian (Main Market MITI)
+                        Rekod Sejarah Penyenaraian (MITI)
                     </h2>
-                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;" onclick="event.stopPropagation()">
+                        <select id="market-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer;">
+                            <option value="all">Semua Pasaran</option>
+                            <option value="main" selected>Pasaran Utama (Main)</option>
+                            <option value="ace">Pasaran ACE</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </div>
                 </div>
                 <div class="collapsible-content">
                     <div class="table-responsive">
@@ -354,6 +361,7 @@
                             <thead>
                                 <tr>
                                     <th>Syarikat</th>
+                                    <th>Pasaran</th>
                                     <th>Sektor</th>
                                     <th>Harga IPO</th>
                                     <th>Harga Buka</th>
@@ -524,9 +532,9 @@
                 }
             ];
 
-            // Append any other Stage 1 items from data.js (Filter Main Market only)
+            // Append any other Stage 1 items from data.js (Include both Main & ACE)
             ipoData.forEach(item => {
-                if (item.stage === 1 && item.market && item.market.toLowerCase().includes('main') && !futurePipeline.some(f => item.companyName.toLowerCase().includes(f.name.toLowerCase().substring(0, 10)))) {
+                if (item.stage === 1 && !futurePipeline.some(f => item.companyName.toLowerCase().includes(f.name.toLowerCase().substring(0, 10)))) {
                     futurePipeline.push({
                         name: item.companyName,
                         market: item.market,
@@ -555,18 +563,26 @@
             }).join('');
         }
 
-        // Render Historical Listed Main Market Table
+        // Render Historical Listed Table with Market Filter
         function renderHistorical() {
             const tableBody = document.querySelector('#historical-table tbody');
+            const filterVal = document.getElementById('market-filter').value;
             
-            // Filter listed Main Market with prices, exclude skyechip (no miti)
-            const listData = ipoData.filter(x => 
-                x.status === 'Listed' && 
-                x.market === 'Main Market' && 
-                x.openPrice != null && 
-                x.price != null &&
-                x.id !== 'skyechip'
-            );
+            // Filter listed with prices, exclude skyechip (no miti)
+            const listData = ipoData.filter(x => {
+                const isListed = x.status === 'Listed';
+                const hasPrices = x.openPrice != null && x.price != null;
+                const notSkyechip = x.id !== 'skyechip';
+                
+                let matchesMarket = true;
+                if (filterVal === 'main') {
+                    matchesMarket = x.market === 'Main Market';
+                } else if (filterVal === 'ace') {
+                    matchesMarket = x.market && x.market.toLowerCase().includes('ace');
+                }
+                
+                return isListed && hasPrices && notSkyechip && matchesMarket;
+            });
 
             // Sort by opening premium desc
             listData.sort((a, b) => {
@@ -576,7 +592,7 @@
             });
 
             if (listData.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-dim);">Tiada rekod penyenaraian ditemui.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-dim);">Tiada rekod penyenaraian ditemui untuk pasaran yang dipilih.</td></tr>`;
                 return;
             }
 
@@ -603,9 +619,14 @@
                     strategyBadge = `<span class="badge-strategy swing"><i data-lucide="line-chart" style="width:10px;height:10px;"></i> SWING PLAY</span>`;
                 }
 
+                const marketBadge = ipo.market && ipo.market.toLowerCase().includes('main') 
+                    ? `<span style="font-size:0.7rem; color: #a5b4fc; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">MAIN</span>`
+                    : `<span style="font-size:0.7rem; color: #f472b6; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.2); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">ACE</span>`;
+
                 return `
                     <tr>
                         <td><strong>${ipo.companyName}</strong></td>
+                        <td>${marketBadge}</td>
                         <td>${(ipo.sector || 'N/A').split('(')[0]}</td>
                         <td>RM ${ipo.price.toFixed(3)}</td>
                         <td>RM ${ipo.openPrice.toFixed(3)}</td>
