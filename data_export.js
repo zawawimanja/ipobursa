@@ -7885,8 +7885,8 @@ const IPO_DATA = [
     "year": 2026,
     "sifuTargetPrice": 0,
     "dailyChange": null,
-    "predictedGrade": "C",
-    "analystInsight": "Analisis SWOT tidak tersedia. Kami tidak dapat memberikan analisis yang lebih lanjut berdasarkan data yang tersedia.",
+    "predictedGrade": "B",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar serbuk kopi/teh pracampuran (seperti 3-in-1) dan bahan makanan bermargin tinggi.<br><br>📊 <b>Kekuatan Pemangkin Sifu:</b><br>• <b>Tajaan Legenda:</b> Ditaja oleh <b>M&A Securities</b> (penaja elite dengan rekod 100% hijau).<br>• <b>Lonjakan Untung Gila-Gila:</b> Keuntungan bersih PAT melonjak <b>+166.3%</b> (dari RM11.43M FY24 kepada RM30.41M FY25).<br>• <b>Hype Jenama F&B:</b> Mempunyai tarikan jenama barangan pengguna harian yang tinggi di kalangan runcit awam.<br><br>⚠️ Status: Sesuai untuk permohonan MITI bertaktik Swing Play (Sasaran jualan awal).",
     "calibratedSifuTargetPrice": 0,
     "sector": "Consumer (Food & Beverage)",
     "geography": "Selangor",
@@ -7932,7 +7932,8 @@ const IPO_DATA = [
       "Catalyst 2: Working capital",
       "Catalyst 3: Estimated listing expenses"
     ],
-    "peers": "Consumer Products & Services (11.7)"
+    "peers": "Consumer Products & Services (11.7)",
+    "ib": "M&A Securities"
   },
   {
     "id": "evocom-berhad",
