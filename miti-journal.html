@@ -435,42 +435,67 @@
 
             tableBody.innerHTML = stage2Data.map(ipo => {
                 const isKeb = ipo.id === 'keb-berhad';
-                const isGb = ipo.id === 'gb-bond-holdings-berhad';
                 
                 let dateDisplay = '';
                 let statusLabel = '';
                 
                 if (isKeb) {
                     dateDisplay = `<span style="color: #10b981; font-weight:600;">13 Jul - 22 Jul</span>`;
-                    statusLabel = `<span style="color: #10b981; font-weight:700; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2);">ACTIVE OPEN</span>`;
+                    statusLabel = `<span style="color: #10b981; font-weight:700; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2); font-size: 0.7rem;">ACTIVE OPEN</span>`;
                 } else {
                     dateDisplay = `<span style="color: var(--text-dim);">Closed</span>`;
-                    statusLabel = `<span style="color: #f87171; font-weight:700; background: rgba(239, 68, 68, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(239,68,68,0.2);">ALREADY CLOSED</span>`;
+                    statusLabel = `<span style="color: #f87171; font-weight:700; background: rgba(239, 68, 68, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(239,68,68,0.2); font-size: 0.7rem;">ALREADY CLOSED</span>`;
                 }
 
                 const grade = ipo.predictedGrade || 'B';
                 const sector = ipo.sector || 'N/A';
                 
-                let verdict = '';
-                if (isKeb) {
-                    verdict = `<span style="color:#fbbf24; font-weight:600;">Sederhana Hartanah</span>`;
-                } else if (ipo.id.includes('ecosys')) {
-                    verdict = `<span style="color:#10b981; font-weight:700;">🔥 Gred A (Strong)</span>`;
-                } else if (grade === 'C') {
-                    verdict = `<span style="color:var(--text-dim);">Skip / Elak (Risiko)</span>`;
-                } else {
-                    verdict = `<span style="color:#fbbf24; font-weight:600;">Swing Sederhana</span>`;
+                // Detailed analysis and verdict
+                let verdictBadge = '';
+                let rawInsight = ipo.analystInsight || '';
+                
+                if (!rawInsight) {
+                    if (ipo.id === 'spb-development-berhad') {
+                        rawInsight = 'Syarikat pemaju hartanah perumahan di utara Semenanjung. Kunci kira-kira kukuh, penaja M&A Securities.';
+                    } else if (grade === 'C') {
+                        rawInsight = 'Syarikat berkualiti rendah / tiada SWOT. Risiko fluktuasi harga bahan mentah dan persaingan pasaran sengit. Disarankan Skip.';
+                    } else {
+                        rawInsight = 'Syarikat draft prospektus dalam fasa kelulusan. Fundamental stabil dengan prospek pertumbuhan sederhana.';
+                    }
                 }
+
+                // Clean tags for preview
+                let cleanUlasan = rawInsight.replace(/<br>/gi, ' ').replace(/<\/?[^>]+(>|$)/g, "");
+
+                if (grade === 'A') {
+                    verdictBadge = `<span style="color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">WORTH IT (GRADE A)</span>`;
+                } else if (grade === 'B') {
+                    verdictBadge = `<span style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">SWING (GRADE B)</span>`;
+                } else {
+                    verdictBadge = `<span style="color: #f87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">AVOID (GRADE C)</span>`;
+                }
+
+                const marketLabel = ipo.market && ipo.market.toLowerCase().includes('main')
+                    ? `<span style="font-size:0.7rem; color: #a5b4fc; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">MAIN</span>`
+                    : `<span style="font-size:0.7rem; color: #f472b6; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.2); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">ACE</span>`;
 
                 return `
                     <tr>
                         <td><strong>${ipo.companyName}</strong></td>
-                        <td>${ipo.market}</td>
-                        <td>${sector}</td>
+                        <td>${marketLabel}</td>
+                        <td>${(ipo.sector || 'N/A').split('(')[0]}</td>
                         <td>RM ${ipo.price ? ipo.price.toFixed(3) : 'TBA'}</td>
                         <td>${dateDisplay}</td>
-                        <td><span style="font-weight: 700; color: #fbbf24;">${grade}</span></td>
-                        <td>${statusLabel} • ${verdict}</td>
+                        <td><span style="font-weight: 700; color: #a78bfa;">${grade}</span></td>
+                        <td>
+                            <div style="display: flex; gap: 0.35rem; margin-bottom: 0.25rem; align-items: center; flex-wrap: wrap;">
+                                ${statusLabel}
+                                ${verdictBadge}
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-dim); max-width: 320px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" title="${cleanUlasan}">
+                                ${cleanUlasan}
+                            </div>
+                        </td>
                     </tr>
                 `;
             }).join('');
@@ -535,13 +560,27 @@
             // Append any other Stage 1 items from data.js (Include both Main & ACE)
             ipoData.forEach(item => {
                 if (item.stage === 1 && !futurePipeline.some(f => item.companyName.toLowerCase().includes(f.name.toLowerCase().substring(0, 10)))) {
+                    const grade = item.predictedGrade || 'Pending';
+                    const sector = item.sector || 'N/A';
+                    
+                    let noteText = item.analystInsight || '';
+                    if (!noteText) {
+                        if (sector.toLowerCase().includes('semicon') || sector.toLowerCase().includes('test') || sector.toLowerCase().includes('assembly')) {
+                            noteText = '<b>🔌 Rantaian Bekalan Semikonduktor:</b> Berkaitan segmen test/assembly atau pembuatan bahan logam perkakasan. Pemangkin pertumbuhan dipengaruhi oleh pemulihan sektor teknologi global.';
+                        } else if (sector.toLowerCase().includes('solar') || sector.toLowerCase().includes('renewable') || sector.toLowerCase().includes('energy')) {
+                            noteText = '<b>☀️ ESG & Tenaga Solar:</b> Loji solar janakuasa atau kawalan sisa industri. Pelaburan mampan bertemakan ESG, namun pergerakan harga biasanya lebih defensif.';
+                        } else {
+                            noteText = 'Syarikat draft prospektus dalam fasa semakan awal oleh Suruhanjaya Sekuriti / MITI.';
+                        }
+                    }
+
                     futurePipeline.push({
                         name: item.companyName,
                         market: item.market,
-                        sector: item.sector || 'N/A',
-                        grade: item.predictedGrade || 'Pending',
-                        fires: (item.sector && (item.sector.toLowerCase().includes('semicon') || item.sector.toLowerCase().includes('automation'))) ? 3 : 1,
-                        note: item.analystInsight ? item.analystInsight.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 120) + '...' : 'Syarikat draft prospektus.'
+                        sector: sector,
+                        grade: grade,
+                        fires: (sector && (sector.toLowerCase().includes('semicon') || sector.toLowerCase().includes('automation') || sector.toLowerCase().includes('drone') || sector.toLowerCase().includes('datacenter') || sector.toLowerCase().includes('data centre'))) ? 3 : ((sector && (sector.toLowerCase().includes('consumer') || sector.toLowerCase().includes('brand') || sector.toLowerCase().includes('food') || sector.toLowerCase().includes('health'))) ? 2 : 1),
+                        note: noteText
                     });
                 }
             });
@@ -550,14 +589,18 @@
                 let fireStr = '';
                 for (let i = 0; i < item.fires; i++) fireStr += '🔥';
                 
+                const marketBadge = item.market && item.market.toLowerCase().includes('main') 
+                    ? `<span style="font-size:0.7rem; color: #a5b4fc; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">MAIN</span>`
+                    : `<span style="font-size:0.7rem; color: #f472b6; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.2); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">ACE</span>`;
+
                 return `
                     <tr>
                         <td><strong>${item.name}</strong></td>
-                        <td><span style="font-size:0.75rem; color: #a5b4fc; background: rgba(99,102,241,0.1); padding: 0.1rem 0.35rem; border-radius: 4px;">${item.market}</span></td>
-                        <td>${item.sector}</td>
+                        <td>${marketBadge}</td>
+                        <td>${(item.sector || 'N/A').split('(')[0]}</td>
                         <td><span style="font-weight:700; color: #a78bfa;">${item.grade}</span></td>
                         <td><div class="fire-rating">${fireStr}</div></td>
-                        <td style="font-size:0.8rem; color: var(--text-dim);">${item.note}</td>
+                        <td style="font-size:0.8rem; color: var(--text-dim); max-width: 380px; line-height: 1.4;">${item.note}</td>
                     </tr>
                 `;
             }).join('');
