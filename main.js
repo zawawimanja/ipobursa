@@ -947,6 +947,28 @@ function getIpoGrade(ipo) {
 }
 
 function getIpoStrategy(ipo) {
+    // If listed (Stage 5), apply the MITI Game Plan Rules
+    if (ipo.stage === 5 && ipo.openPrice && ipo.price) {
+        const openPrem = ((ipo.openPrice - ipo.price) / ipo.price) * 100;
+        const gradeObj = getIpoGrade(ipo);
+        const grade = gradeObj.grade.replace('Pred: ', '').trim();
+        
+        // If current price is crashing, alert to exit
+        const holdPerf = ipo.currentPrice ? ((ipo.currentPrice - ipo.price) / ipo.price * 100) : 0;
+        if (holdPerf < -10) return 'Exit (Crashing)';
+
+        if (openPrem >= 40) {
+            return 'Jual Hari 1 (Open >40%)';
+        }
+        if (openPrem < 20) {
+            if (grade === 'A' || grade === 'B') {
+                return 'Hold untuk ATH (Fund OK)';
+            }
+            return 'Jual / Exit (Fund Lemah)';
+        }
+        return 'Swing Play (20-40%)';
+    }
+
     // Dynamic Strategy Update: If the stock is currently crashing, override the initial strategy
     const holdPerf = (ipo.currentPrice && ipo.price) ? ((ipo.currentPrice - ipo.price) / ipo.price) * 100 : 0;
     if (ipo.stage === 5 && holdPerf < -10) return 'Wait / Exit (Risk)';

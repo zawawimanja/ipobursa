@@ -524,14 +524,20 @@
                 const openStr = (openPrem >= 0 ? '+' : '') + openPrem.toFixed(1) + '%';
                 const highStr = highPrem != null ? (highPrem >= 0 ? '+' : '') + highPrem.toFixed(1) + '%' : 'TBA';
 
-                // Strategy Verdict
+                // Strategy Verdict based on MITI Game Plan Rules
                 let strategyBadge = '';
+                const grade = ipo.predictedGrade || 'B';
+                
                 if (openPrem >= 40) {
                     strategyBadge = `<span class="badge-strategy sell"><i data-lucide="zap" style="width:10px;height:10px;"></i> JUAL HARI 1</span>`;
-                } else if (highPrem && (highPrem > openPrem + 15)) {
-                    strategyBadge = `<span class="badge-strategy hold"><i data-lucide="trending-up" style="width:10px;height:10px;"></i> HOLD UNTUK ATH</span>`;
+                } else if (openPrem < 20) {
+                    if (grade === 'A' || grade === 'B') {
+                        strategyBadge = `<span class="badge-strategy hold"><i data-lucide="trending-up" style="width:10px;height:10px;"></i> HOLD UNTUK ATH</span>`;
+                    } else {
+                        strategyBadge = `<span class="badge-strategy sell"><i data-lucide="alert-circle" style="width:10px;height:10px;"></i> JUAL / EXIT</span>`;
+                    }
                 } else {
-                    strategyBadge = `<span class="badge-strategy swing"><i data-lucide="line-chart" style="width:10px;height:10px;"></i> SWING/HOLD</span>`;
+                    strategyBadge = `<span class="badge-strategy swing"><i data-lucide="line-chart" style="width:10px;height:10px;"></i> SWING PLAY</span>`;
                 }
 
                 return `
