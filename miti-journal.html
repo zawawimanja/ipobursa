@@ -416,8 +416,8 @@
         // Render Stage 2 Active/Recently Closed
         function renderStage2() {
             const tableBody = document.querySelector('#stage2-table tbody');
-            // Filter Stage 2 IPOs that are Main Market only
-            const stage2Data = ipoData.filter(ipo => ipo.stage === 2 && ipo.market && ipo.market.toLowerCase().includes('main'));
+            // Show all Stage 2 IPOs (both Main and ACE) so we don't miss active applications like KEB Berhad
+            const stage2Data = ipoData.filter(ipo => ipo.stage === 2);
             
             // Sort active open (keb) first
             stage2Data.sort((a, b) => {
