@@ -1,4 +1,4 @@
-var ipoData = [
+const IPO_DATA = [
   {
     "id": "ecosys--malaysia--berhad",
     "companyName": "EcoSys (Malaysia) Berhad",
@@ -8,11 +8,11 @@ var ipoData = [
     "closingDate": "06-Jul-2026",
     "listingDate": "",
     "shariah": true,
-    "stage": 2,
-    "status": "MITI Allocation Phase",
+    "stage": 4,
+    "status": "Pre-Listing",
     "year": 2026,
     "sifuTargetPrice": 0.41,
-    "calibratedSifuTargetPrice": 0.34,
+    "calibratedSifuTargetPrice": 0.45,
     "sector": "Technology",
     "os": 0,
     "ib": "M & A Securities",
@@ -22,7 +22,7 @@ var ipoData = [
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "dailyChange": null,
     "v3TargetPrice": 0.405,
-    "zone2TargetPrice": 0.41,
+    "zone2TargetPrice": 0.45,
     "geography": "Penang",
     "freeFloat": 0.2,
     "anchorInvestors": false,
@@ -77,7 +77,8 @@ var ipoData = [
     "industryMargin": 0.15,
     "growthRate": 0.15,
     "fairValue": 0.35,
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.45
   },
   {
     "id": "srkk-ai",
@@ -104,9 +105,9 @@ var ipoData = [
     "ofs": true,
     "symbol": "SRKKAI",
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.56,
+    "calibratedSifuTargetPrice": 0.6,
     "v3TargetPrice": 0.36,
-    "zone2TargetPrice": 0.66,
+    "zone2TargetPrice": 0.6,
     "geography": "Kuala Lumpur",
     "freeFloat": 0.25,
     "anchorInvestors": false,
@@ -160,10 +161,11 @@ var ipoData = [
     "openPrice": 0.6,
     "highPrice": 0.615,
     "closePrice": 0.6099840000000001,
-    "currentPrice": 0.52,
-    "performance": "+62.50%",
+    "currentPrice": 0.51,
+    "performance": "+59.38%",
     "strategy": "Scalp",
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.6
   },
   {
     "id": "sum-technology",
@@ -189,15 +191,15 @@ var ipoData = [
     "symbol": "SUM",
     "ofs": false,
     "sifuTargetPrice": 0.39,
-    "calibratedSifuTargetPrice": 0.3,
+    "calibratedSifuTargetPrice": 0.43,
     "openPrice": 0.395,
     "highPrice": 0.525,
     "closePrice": 0.525,
-    "currentPrice": 0.51,
-    "performance": "+82.14%",
+    "currentPrice": 0.52,
+    "performance": "+85.71%",
     "strategy": "Scalp",
     "v3TargetPrice": 0.447,
-    "zone2TargetPrice": 0.39,
+    "zone2TargetPrice": 0.43,
     "geography": "Penang",
     "freeFloat": 0.22,
     "anchorInvestors": false,
@@ -246,7 +248,8 @@ var ipoData = [
       "<strong>Cleanroom & MEPF Services Boom:</strong> Penerima manfaat langsung daripada limpahan pembangunan Pusat Data (Data Center) dan kilang semikonduktor berteknologi tinggi di Malaysia.",
       "<strong>Solid Retail Demand (110.54x OS):</strong> Tiada tawaran jualan (OFS) bersama permintaan runcit yang sangat kuat (110.54 kali ganda oversubscription) memberikan pemangkin kecairan pasca-listing."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 20.7x. Didagangkan hampir setaraf dengan purata peers kejuruteraan industri (18x-22x), tetapi disokong oleh kitaran pertumbuhan bilik bersih yang agresif. Nilai wajar Sifu dianggarkan sekitar **RM 0.39** (+39.3% upside)."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 20.7x. Didagangkan hampir setaraf dengan purata peers kejuruteraan industri (18x-22x), tetapi disokong oleh kitaran pertumbuhan bilik bersih yang agresif. Nilai wajar Sifu dianggarkan sekitar **RM 0.39** (+39.3% upside).",
+    "v7TargetPrice": 0.43
   },
   {
     "id": "elsa",
@@ -274,13 +277,13 @@ var ipoData = [
     "highPrice": 0.285,
     "symbol": "ELSA",
     "dailyChange": null,
-    "currentPrice": 0.23,
-    "performance": "+0.00%",
+    "currentPrice": 0.235,
+    "performance": "+2.17%",
     "openPrice": 0.25001,
     "closePrice": 0.275011,
-    "calibratedSifuTargetPrice": 0.29,
+    "calibratedSifuTargetPrice": 0.28,
     "v3TargetPrice": 0.21,
-    "zone2TargetPrice": 0.31,
+    "zone2TargetPrice": 0.28,
     "geography": "Johor",
     "freeFloat": 0.3,
     "anchorInvestors": false,
@@ -329,7 +332,8 @@ var ipoData = [
       "<strong>Asset-Light OGSE Solutions:</strong> Penyedia khidmat minyak & gas bersepadu tanpa pemilikan aset berat (kapal/pelantar), mengehadkan perbelanjaan capex.",
       "<strong>Risiko Tekanan Jualan (OFS):</strong> Tawaran jualan (Offer for Sale) sebanyak RM8.37 juta daripada pemegang saham sedia ada boleh mewujudkan tekanan jualan pasca-listing."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 11.5x. Ditawarkan pada diskaun berbanding peers OGSE Main Market (14x-18x), tetapi sektor ini kurang momentum semasa. Nilai wajar Sifu dianggarkan sekitar **RM 0.305** (+32.6% upside)."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 11.5x. Ditawarkan pada diskaun berbanding peers OGSE Main Market (14x-18x), tetapi sektor ini kurang momentum semasa. Nilai wajar Sifu dianggarkan sekitar **RM 0.305** (+32.6% upside).",
+    "v7TargetPrice": 0.28
   },
   {
     "id": "pentech",
@@ -356,8 +360,8 @@ var ipoData = [
     "sifuTargetPrice": 0.33,
     "highPrice": 0.33,
     "symbol": "PENTECH",
-    "currentPrice": 0.28,
-    "performance": "+40.00%",
+    "currentPrice": 0.285,
+    "performance": "+42.50%",
     "dailyChange": 30,
     "openPrice": 0.29,
     "closePrice": 0.26,
@@ -413,7 +417,8 @@ var ipoData = [
       "<strong>Catalyst Utama:</strong> Pentech berjaya pelbagaikan perniagaan ke sektor bermargin tinggi (menyumbang dari 9% meningkat ke 30% hasil melalui cloud/managed services).",
       "<strong>Wow Factor:</strong> Sektor ICT infra mungkin hambar tetapi peningkatan margin cloud menaikkan profitability syarikat secara ketara."
     ],
-    "peers": "<strong>Peer Comparison:</strong> ICT peers average PE ~8x, CP PE ~12x, manakala Infotec PE ~118x (disebabkan loss making tahun lepas). Valuation owner PE 11x, tapi forward PE sifu hanyalah <strong>6.50x</strong>!"
+    "peers": "<strong>Peer Comparison:</strong> ICT peers average PE ~8x, CP PE ~12x, manakala Infotec PE ~118x (disebabkan loss making tahun lepas). Valuation owner PE 11x, tapi forward PE sifu hanyalah <strong>6.50x</strong>!",
+    "v7TargetPrice": 0.33
   },
   {
     "id": "mm-computer",
@@ -442,8 +447,8 @@ var ipoData = [
     "openPrice": 0.22,
     "highPrice": 0.355,
     "closePrice": 0.224994,
-    "currentPrice": 0.395,
-    "performance": "+79.55%",
+    "currentPrice": 0.4,
+    "performance": "+81.82%",
     "dailyChange": 2.27,
     "calibratedSifuTargetPrice": 0.24,
     "v3TargetPrice": 0.167,
@@ -496,7 +501,8 @@ var ipoData = [
       "<strong>Tekanan Jualan Tinggi:</strong> Penawaran OFS yang besar (47.34M unit) memberi risiko tekanan jualan tinggi di hari penyenaraian.",
       "<strong>Sektor Biasa:</strong> IT Services biasa tanpa momentum tema besar (AI/Data Center) untuk menarik minat institusi."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Profil hampir sama dengan OGX. Walaupun PE munasabah (12.3x), disyorkan AVOID kerana risiko OFS besar."
+    "peers": "<strong>Peer Comparison:</strong> Profil hampir sama dengan OGX. Walaupun PE munasabah (12.3x), disyorkan AVOID kerana risiko OFS besar.",
+    "v7TargetPrice": 0.24
   },
   {
     "id": "1doc",
@@ -516,7 +522,7 @@ var ipoData = [
     "symbol": "1 Doc International Berhad",
     "sifuTargetPrice": 0.5,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.48,
+    "calibratedSifuTargetPrice": 0.5,
     "insightUrl": "https://www.isaham.my/ipo/insights/1-doc-international-berhad",
     "totalShares": 2276000000,
     "headers": [
@@ -557,7 +563,9 @@ var ipoData = [
       "Purchase of machineries",
       "Acquisition of business"
     ],
-    "peers": "Consumer Products & Services (11.7) Consumer Services (40.1)"
+    "peers": "Consumer Products & Services (11.7) Consumer Services (40.1)",
+    "v7TargetPrice": 0.5,
+    "zone2TargetPrice": 0.5
   },
   {
     "id": "bus-cap",
@@ -586,9 +594,9 @@ var ipoData = [
     "analystInsight": "⚠️ <b>AVOID / RENDAH KEYAKINAN (GRADE C)</b><br>Industrial fabrication (bus body) — sektor tiada momentum tema besar. IB TA Securities rekod moderate. Harga RM0.23 murah tapi sektor membosankan.<br><br>Risiko: Mirip Inspace pattern — OS mungkin tinggi tapi sektor tak sexy = listing day flat atau negatif. <b>Skip kecuali OS cecah 150x+.</b>",
     "sifuTargetPrice": 0.32,
     "dailyChange": 0,
-    "calibratedSifuTargetPrice": 0.26,
+    "calibratedSifuTargetPrice": 0.29,
     "v3TargetPrice": 0.208,
-    "zone2TargetPrice": 0.32,
+    "zone2TargetPrice": 0.29,
     "freeFloat": 0.28,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -637,7 +645,8 @@ var ipoData = [
       "<strong>Forward PE Sifu:</strong> Selepas unjuran sifu dibuat, PER jatuh ke paras super-cheap iaitu <strong>6.41x</strong> pada harga IPO RM0.23.",
       "<strong>Wow Factor:</strong> Margin kasar unjuran meningkat disebabkan skala ekonomi baru."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 12x - 15x PE. Bus Cap adalah industri tradisional tetapi dijamin murah."
+    "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 12x - 15x PE. Bus Cap adalah industri tradisional tetapi dijamin murah.",
+    "v7TargetPrice": 0.29
   },
   {
     "id": "5e-resources",
@@ -647,8 +656,8 @@ var ipoData = [
     "price": 0.26,
     "openPrice": 0.285,
     "closePrice": 0.27001000000000003,
-    "currentPrice": 0.225,
-    "performance": "-13.46%",
+    "currentPrice": 0.22,
+    "performance": "-15.38%",
     "strategy": "Scalp",
     "market": "ACE Market",
     "status": "Listed",
@@ -664,7 +673,7 @@ var ipoData = [
     "predictedGrade": "B",
     "sifuTargetPrice": 0.29,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.27,
+    "calibratedSifuTargetPrice": 0.29,
     "v3TargetPrice": 0.212,
     "zone2TargetPrice": 0.29,
     "freeFloat": 0.2,
@@ -722,7 +731,8 @@ var ipoData = [
       "<strong>Katalis Pengembangan & Semicon/ESG:</strong> Rangkaian pengembangan fasiliti dari Johor ke Perak serta peningkatan permintaan hasil daripada sektor semikonduktor & pusat data (Data Center).",
       "<strong>Kekuatan Aliran Tunai (Net Cash):</strong> Memiliki ROE >20%, profit margin >25% dan posisi tunai bersih +RM49.3M yang memberikan perlindungan kuat semasa ketidaktentuan pasaran."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 15.55x - 16.77x. Sangat munasabah untuk syarikat niche pengurusan sisa scheduled waste dengan profit margin melebihi 25%."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 15.55x - 16.77x. Sangat munasabah untuk syarikat niche pengurusan sisa scheduled waste dengan profit margin melebihi 25%.",
+    "v7TargetPrice": 0.29
   },
   {
     "id": "adnex",
@@ -731,8 +741,8 @@ var ipoData = [
     "listingDate": "17-Mar-2026",
     "year": 2026,
     "price": 0.2,
-    "currentPrice": 1.01,
-    "performance": "+405.00%",
+    "currentPrice": 1.06,
+    "performance": "+430.00%",
     "os": 3.23,
     "ib": "Public Investment Bank",
     "sector": "Construction (Interior Fit-out)",
@@ -753,7 +763,7 @@ var ipoData = [
     "calibratedSifuTargetPrice": 0.21,
     "avgTP": 0.18,
     "v3TargetPrice": 0.111,
-    "zone2TargetPrice": 0.18,
+    "zone2TargetPrice": 0.21,
     "freeFloat": 0.25,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -799,7 +809,8 @@ var ipoData = [
       "Green Building Demand"
     ],
     "peers": "Median Sectors PE: N/A Median Peers PE",
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.21
   },
   {
     "id": "aerodyne",
@@ -819,9 +830,10 @@ var ipoData = [
     "analystInsight": "🌟 <b>MUST APPLY (GRADE A)</b><br>Global drone tech leader listing di Main Market dengan Maybank IB — kombinasi terbaik berdasarkan formula 2026.<br><br>✅ IB Maybank (rekod terbaik 2026)<br>✅ Sektor Tech + Defence/Drone = tema AI & autonomy<br>✅ Main Market = institutional heavy<br>✅ Shariah<br><br>Aerodyne adalah drone unicorn Malaysia dengan operasi global (30+ negara). Ini bukan ACE Market biasa — ini caliber SkyeChip. <b>Apply maximum allocation.</b>",
     "sifuTargetPrice": 0.85,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.69,
+    "calibratedSifuTargetPrice": 1.05,
     "v3TargetPrice": 0.661,
-    "zone2TargetPrice": 0.85
+    "zone2TargetPrice": 1.05,
+    "v7TargetPrice": 1.05
   },
   {
     "id": "ambest",
@@ -830,8 +842,8 @@ var ipoData = [
     "listingDate": "06-Feb-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.845,
-    "performance": "+238.00%",
+    "currentPrice": 0.85,
+    "performance": "+240.00%",
     "os": 46.07,
     "ib": "Malacca Securities",
     "sector": "Industrial (Precision Engineering)",
@@ -901,7 +913,8 @@ var ipoData = [
       "<strong>Upside Potential Tinggi:</strong> Pengiraan 'Cincai-Cincai' Sifu mengunjurkan target PE 18.0x dengan nilai wajar **RM 0.45** (+80% upside potential dari harga IPO RM0.25).",
       "<strong>Katalis vs Angka Kewangan:</strong> Ambest dan AMS membuktikan bahawa kajian IPO bukan sahaja melihat angka, tetapi melihat tema pemangkin yang besar."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 10.05x. Sangat murah berbanding peers industri yang biasanya berdagang sekitar 15.5x PE."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 10.05x. Sangat murah berbanding peers industri yang biasanya berdagang sekitar 15.5x PE.",
+    "v7TargetPrice": 0.34
   },
   {
     "id": "ams-material",
@@ -921,8 +934,8 @@ var ipoData = [
     "pe": 15.85,
     "openPrice": 0.29,
     "closePrice": 0.304993,
-    "currentPrice": 0.42,
-    "performance": "+44.83%",
+    "currentPrice": 0.435,
+    "performance": "+50.00%",
     "highPrice": 0.45,
     "listingDate": "2026-04-23",
     "symbol": "AMS",
@@ -989,7 +1002,8 @@ var ipoData = [
       "<strong>Hasil dan Keuntungan FPE 25 Meningkat Kuat:</strong> Angka FPE 25 menunjukkan lonjakan hasil kepada RM64.9M berbanding RM43.2M FPE 24, menunjukkan aktiviti pemprosesan bahan industri yang rancak.",
       "<strong>Maybank IB dan M&A Securities Backing:</strong> Sokongan padu penaja jamin dengan rekod langganan awam yang baik memberikan sokongan premium yang sihat semasa listing day."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 17.03x - 21.77x, menawarkan nilai diskaun ketara berbanding dengan gergasi industrial material yang tersenarai di papan utama. Nilai wajar dianggarkan di paras **RM 0.38 - RM 0.49**."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 17.03x - 21.77x, menawarkan nilai diskaun ketara berbanding dengan gergasi industrial material yang tersenarai di papan utama. Nilai wajar dianggarkan di paras **RM 0.38 - RM 0.49**.",
+    "v7TargetPrice": 0.33
   },
   {
     "id": "carsome",
@@ -1009,9 +1023,10 @@ var ipoData = [
     "analystInsight": "✅ <b>MUST APPLY (GRADE A — MITI)</b><br>Regional used-car unicorn listing di Main Market dengan CIMB. Brand awareness tinggi, operasi Malaysia + Singapura + Indonesia + Thailand.<br><br>✅ IB CIMB (tier 1 untuk Main Market)<br>✅ Harga RM1.20 = Main Market premium<br>✅ Regional exposure = institutional magnet<br>✅ Consumer brand yang dikenali ramai<br><br>⚠️ MITI phase — pastikan apply melalui saham.miti.gov.my. Jangan tertinggal allocation window.",
     "sifuTargetPrice": 1.2,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 1.13,
+    "calibratedSifuTargetPrice": 1.31,
     "v3TargetPrice": 0.933,
-    "zone2TargetPrice": 1.2
+    "zone2TargetPrice": 1.31,
+    "v7TargetPrice": 1.31
   },
   {
     "id": "stratus-global",
@@ -1033,9 +1048,9 @@ var ipoData = [
     "symbol": "STRATUS",
     "sifuTargetPrice": 1.04,
     "dailyChange": 145,
-    "calibratedSifuTargetPrice": 1.02,
+    "calibratedSifuTargetPrice": 1.14,
     "v3TargetPrice": 0.949,
-    "zone2TargetPrice": 1.04,
+    "zone2TargetPrice": 1.14,
     "freeFloat": 0.22,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -1089,11 +1104,12 @@ var ipoData = [
     "insightUrl": "https://www.isaham.my/ipo/insights/stratus-global-holdings-berhad",
     "stockCode": "5356",
     "openPrice": 1.96,
-    "currentPrice": 1.96,
+    "currentPrice": 2.01,
     "closePrice": 1.96,
     "highPrice": 2.03,
-    "performance": "+145.00%",
-    "strategy": "Swing"
+    "performance": "+151.25%",
+    "strategy": "Swing",
+    "v7TargetPrice": 1.14
   },
   {
     "id": "ei-power",
@@ -1152,8 +1168,8 @@ var ipoData = [
     "openPrice": 0.575,
     "highPrice": 0.735,
     "closePrice": 0.5499839999999999,
-    "currentPrice": 0.68,
-    "performance": "+41.67%",
+    "currentPrice": 0.685,
+    "performance": "+42.71%",
     "strategy": "Scalp",
     "symbol": "EIPOWER",
     "sifuTargetPrice": 0.61,
@@ -1209,7 +1225,8 @@ var ipoData = [
       "<strong>Market Leader:</strong> Pemimpin pasaran dalam EPCC untuk diesel power backup & fuel distribution system bagi Data Center Tier 3 dan Tier 4 di Malaysia. Satu-satunya niche DC player seumpamanya di Bursa.",
       "<strong>Operating Leverage Padu:</strong> Pertumbuhan PAT yang eksponen (+111% YoY untung bersih dari RM9m ke RM19.1m) dengan pengembangan margin bersih (10.7% -> 18.0% -> 24.8%)."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan = 17.4x. Walaupun nampak premium berbanding peers biasa, kedudukan niche dan pertumbuhan profit +111% menjustifikasikan premium ini."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan = 17.4x. Walaupun nampak premium berbanding peers biasa, kedudukan niche dan pertumbuhan profit +111% menjustifikasikan premium ini.",
+    "v7TargetPrice": 0.61
   },
   {
     "id": "empire-premium",
@@ -1238,9 +1255,9 @@ var ipoData = [
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Empire Premium Food mempamerkan prestasi pertumbuhan luar biasa dengan PAT CAGR 3 tahun cecah 61% menerusi model grab-and-go. Keputusan 3Q25 sangat mantap membuktikan keberkesanan fasa scale-up.<br><br>📊 <b>Kelebihan Utama:</b><br>• Margin kasar stabil sekitar 40% dengan CAGR PAT 61%.<br>• Model perniagaan grab-and-go berisiko rendah & kos cawangan rendah.<br>• Penyenaraian Main Market dengan sokongan Maybank IB.",
     "sifuTargetPrice": 0.83,
     "dailyChange": 0,
-    "calibratedSifuTargetPrice": 0.8,
+    "calibratedSifuTargetPrice": 0.9,
     "v3TargetPrice": 0.873,
-    "zone2TargetPrice": 0.83,
+    "zone2TargetPrice": 0.9,
     "freeFloat": 0.28,
     "anchorInvestors": true,
     "lockupMonths": 12,
@@ -1289,7 +1306,8 @@ var ipoData = [
       "<strong>Model Perniagaan Sangat Skalable (Grab & Go):</strong> Model perniagaan berisiko rendah, kos permulaan outlet yang rendah dengan tumpuan pada trafik tinggi membolehkan pengembangan pantas (56 outlet baharu dalam 3 tahun).",
       "<strong>Premium Brand Power & Listing Main Market:</strong> Penyenaraian di Pasaran Utama (Main Market) dengan sokongan Maybank IB memberikan kredibiliti besar dan tarikan kepada pelabur institusi."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 14.09x - 17.11x, sangat berpatutan berbanding purata PE industri makanan berjenama premium di Bursa Malaysia yang melebihi 25x. Menawarkan Fair Value **RM 0.83 - RM 1.01**."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 14.09x - 17.11x, sangat berpatutan berbanding purata PE industri makanan berjenama premium di Bursa Malaysia yang melebihi 25x. Menawarkan Fair Value **RM 0.83 - RM 1.01**.",
+    "v7TargetPrice": 0.9
   },
   {
     "id": "gdgroup",
@@ -1318,9 +1336,9 @@ var ipoData = [
     "analystInsight": "GDGROUP is a scalable B2B model with a national reach and minimal retail overhead and marketing costs. The company has a healthy PAT of RM28.3m and is a stronger fundamental proxy for tourism compared to its peers. However, the company faces risks such as geopolitical macro shocks, digital disintermediation, and FX/fuel volatility.",
     "sifuTargetPrice": 0.45,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.45,
+    "calibratedSifuTargetPrice": 0.44,
     "v3TargetPrice": 0.426,
-    "zone2TargetPrice": 0.45,
+    "zone2TargetPrice": 0.44,
     "freeFloat": 0.25,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -1366,7 +1384,8 @@ var ipoData = [
       "Visa Policy Tailwinds"
     ],
     "peers": "GDGROUP maintains a healthy PAT of RM28.3m, making it a stronger fundamental proxy for tourism compared to its primary listed peer Parlo Berhad (PARLO), which is loss-making.",
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.44
   },
   {
     "id": "gold-li",
@@ -1394,9 +1413,9 @@ var ipoData = [
     "symbol": "GOLDLI",
     "sifuTargetPrice": 0.13,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.13,
+    "calibratedSifuTargetPrice": 0.12,
     "v3TargetPrice": 0.068,
-    "zone2TargetPrice": 0.13,
+    "zone2TargetPrice": 0.12,
     "freeFloat": 0.35,
     "anchorInvestors": false,
     "lockupMonths": 6,
@@ -1441,7 +1460,8 @@ var ipoData = [
       "High-Rise Market Gap"
     ],
     "peers": "Median Sectors PE: N/A Median Peers PE",
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.12
   },
   {
     "id": "hocksoon",
@@ -1450,8 +1470,8 @@ var ipoData = [
     "listingDate": "13-Feb-2026",
     "year": 2026,
     "price": 0.6,
-    "currentPrice": 0.33,
-    "performance": "-45.00%",
+    "currentPrice": 0.32,
+    "performance": "-46.67%",
     "os": 12.5,
     "ib": "Alliance",
     "sector": "Consumer",
@@ -1520,7 +1540,8 @@ var ipoData = [
       "<strong>Dividen Defensif Jangka Panjang:</strong> Walaupun harga IPO tidak perform kerana ketiadaan minat belian, unjuran QR akan datang menunjukkan potensi pengumuman dividen interim yang baik.",
       "<strong>Sebab Beliau Disiplin Skip/Loss (🚀🚀🚀 Rating):</strong> Cincai-cincai kira menunjukkan potensi peningkatan (upside) yang amat rendah iaitu sekitar **3% hingga 5%** sahaja, maka ia adalah Skip/Avoid bagi dagangan jangka pendek."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 6.20x - 6.93x. Nampak sangat murah berbanding poultry peers yang lain di Bursa Malaysia."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 6.20x - 6.93x. Nampak sangat murah berbanding poultry peers yang lain di Bursa Malaysia.",
+    "v7TargetPrice": 0.63
   },
   {
     "id": "inspace-creation",
@@ -1556,9 +1577,9 @@ var ipoData = [
     "predictedGrade": "B",
     "sifuTargetPrice": 0.32,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.3,
+    "calibratedSifuTargetPrice": 0.31,
     "v3TargetPrice": 0.297,
-    "zone2TargetPrice": 0.32,
+    "zone2TargetPrice": 0.31,
     "freeFloat": 0.25,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -1607,7 +1628,8 @@ var ipoData = [
       "<strong>Pertumbuhan Industri & Untung Tinggi:</strong> PAT CAGR naik superb **300%** dalam 3 tahun, dipacu oleh CAGR IMR industri sebanyak **26.3%** yang merupakan antara tertinggi.",
       "<strong>Analisis QR Pertama (Kemas kini Sifu):</strong> Pasaran bimbang sebab 1st QR pasca-listing lemah. Bagi Sifu, ia tidak mencerminkan FY26 kerana kemerosotan bermusim (perayaan & isu pekerja). Sentiasa pantau QR seterusnya untuk re-rating."
     ],
-    "peers": "<strong>Peer Comparison & Risiko:</strong> Penilaian murah (11.4x PE sasaran vs peers 15.5x). Risiko utama: Tiada pendapatan berulang (project-based), Order Book kecil, tumpuan pelanggan tinggi (Top 5 = 62.9%), dan OCF negatif."
+    "peers": "<strong>Peer Comparison & Risiko:</strong> Penilaian murah (11.4x PE sasaran vs peers 15.5x). Risiko utama: Tiada pendapatan berulang (project-based), Order Book kecil, tumpuan pelanggan tinggi (Top 5 = 62.9%), dan OCF negatif.",
+    "v7TargetPrice": 0.31
   },
   {
     "id": "isf",
@@ -1616,8 +1638,8 @@ var ipoData = [
     "listingDate": "28-Jan-2026",
     "year": 2026,
     "price": 0.53,
-    "currentPrice": 0.63,
-    "performance": "+18.87%",
+    "currentPrice": 0.635,
+    "performance": "+19.81%",
     "os": 20,
     "ib": "Alliance Islamic Bank",
     "sector": "Industrial (Piping)",
@@ -1684,7 +1706,8 @@ var ipoData = [
       "<strong>Strategi Pintar Let Profits Grow:</strong> Pengambilan sebahagian keuntungan (partial profit-taking) telah dibuat. Baki pegangan sebanyak **40% (sekitar 820,000 unit)** dikekalkan untuk membiarkan keuntungan berjalan secara organik mengikut pelan.",
       "<strong>Disiplin Dagangan & Pelan Peribadi:</strong> Tiada penyelesaian 'one size fits all' dalam pasaran saham; keutamaan diletakkan pada pematuhan pelan dagangan tersendiri dan kawalan risiko disiplin."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan Sasaran = 12.73x (berdasarkan harga IPO RM0.33). Walaupun kelihatan premium pada harga IPO (PE ~34.5x), unjuran Fwd PE jatuh mendadak kepada **12.7x** bersandarkan unjuran PAT RM25.9 juta bagi FYE26."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan Sasaran = 12.73x (berdasarkan harga IPO RM0.33). Walaupun kelihatan premium pada harga IPO (PE ~34.5x), unjuran Fwd PE jatuh mendadak kepada **12.7x** bersandarkan unjuran PAT RM25.9 juta bagi FYE26.",
+    "v7TargetPrice": 0.69
   },
   {
     "id": "keeming",
@@ -1693,8 +1716,8 @@ var ipoData = [
     "listingDate": "12-Feb-2026",
     "year": 2026,
     "price": 0.38,
-    "currentPrice": 1.88,
-    "performance": "+394.74%",
+    "currentPrice": 1.9,
+    "performance": "+400.00%",
     "os": 85.4,
     "ib": "M&A Securities",
     "sector": "Technology",
@@ -1761,7 +1784,8 @@ var ipoData = [
     "assetsEstimate": "revenue * 1.5",
     "liabilitiesEstimate": "assets * 0.4",
     "growthRate": 15,
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.68
   },
   {
     "id": "manforce-group",
@@ -1791,9 +1815,9 @@ var ipoData = [
     "predictedGrade": "B",
     "sifuTargetPrice": 0.4,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.41,
+    "calibratedSifuTargetPrice": 0.38,
     "v3TargetPrice": 0.355,
-    "zone2TargetPrice": 0.4,
+    "zone2TargetPrice": 0.38,
     "freeFloat": 0.28,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -1841,7 +1865,8 @@ var ipoData = [
       "<strong>Unjuran Kuota Penempatan Pekerja Asing:</strong> Pertumbuhan didorong oleh sasaran peningkatan saiz tenaga kerja tajaan daripada 6,761 pekerja kepada 11,230 pekerja menjelang FY27 (+16% EPS growth).",
       "<strong>Perpindahan Papan Penyenaraian LEAP ke ACE:</strong> Perpindahan ini meningkatkan kecairan dagangan dan membolehkan penyertaan pelabur runcit yang lebih luas."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 12.5x - 14.5x. Sektor pengurusan tenaga kerja asing menghadapi risiko dasar kawal selia kemasukan pekerja asing yang tidak menentu. Ditawarkan pada nilai saksama **RM 0.395** (+3.9% upside)."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 12.5x - 14.5x. Sektor pengurusan tenaga kerja asing menghadapi risiko dasar kawal selia kemasukan pekerja asing yang tidak menentu. Ditawarkan pada nilai saksama **RM 0.395** (+3.9% upside).",
+    "v7TargetPrice": 0.38
   },
   {
     "id": "mtt-shipping",
@@ -1850,8 +1875,8 @@ var ipoData = [
     "listingDate": "21-Apr-2026",
     "year": 2026,
     "price": 1.03,
-    "currentPrice": 0.97,
-    "performance": "-5.83%",
+    "currentPrice": 0.965,
+    "performance": "-6.31%",
     "os": 2.7,
     "ib": "CIMB Investment Bank",
     "sector": "Transportation (Shipping)",
@@ -1870,9 +1895,9 @@ var ipoData = [
     "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>MTT Shipping and Logistics merupakan peneraju pasaran (market leader) kapal kargo domestik di semenanjung dan Sabah/Sarawak. Mempunyai baki lembaran yang mantap dengan gearing rendah 0.5x.<br><br>📊 <b>Kelebihan Utama:</b><br>• Peneraju pasaran domestic shipping dengan fleet moden.<br>• Polisi dividen tinggi (50% payout ratio) & gearing 0.5x.<br>• PE Terbitan munasabah di paras 9.18x - 10.04x.",
     "sifuTargetPrice": 1.16,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.89,
+    "calibratedSifuTargetPrice": 1.1,
     "v3TargetPrice": 1.175,
-    "zone2TargetPrice": 1.16,
+    "zone2TargetPrice": 1.1,
     "freeFloat": 0.4,
     "anchorInvestors": true,
     "lockupMonths": 12,
@@ -1921,7 +1946,8 @@ var ipoData = [
       "<strong>Pelan Pengembangan Kapasiti Fleet:</strong> Sebahagian besar dana IPO digunakan untuk membeli kapal kontena baru (fleet expansion) bagi menambah kapasiti pengangkutan.",
       "<strong>Status Kewangan & Dividen Solid:</strong> Kadar hutang yang terurus (Gearing 0.5x, Current Ratio 1.5x) berserta dengan polisi dividen yang tinggi (50% payout ratio) dan Net Assets RM0.92."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 9.18x - 10.04x. Sektor perkapalan dinilai pada gandaan PE yang rendah kerana sifatnya yang kitaran (cyclical) dan telah melepasi kemuncak prestasi industri perkapalan global (peak cycle 2022)."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 9.18x - 10.04x. Sektor perkapalan dinilai pada gandaan PE yang rendah kerana sifatnya yang kitaran (cyclical) dan telah melepasi kemuncak prestasi industri perkapalan global (peak cycle 2022).",
+    "v7TargetPrice": 1.1
   },
   {
     "id": "ogm",
@@ -1930,8 +1956,8 @@ var ipoData = [
     "listingDate": "27-Jan-2026",
     "year": 2026,
     "price": 0.25,
-    "currentPrice": 0.135,
-    "performance": "-46.00%",
+    "currentPrice": 0.13,
+    "performance": "-48.00%",
     "os": 20,
     "ib": "Malacca Securities",
     "sector": "Technology",
@@ -1996,7 +2022,8 @@ var ipoData = [
     "gpMargin": 25,
     "assetsEstimate": 75000000,
     "liabilitiesEstimate": 30000000,
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.3
   },
   {
     "id": "ogx",
@@ -2005,8 +2032,8 @@ var ipoData = [
     "listingDate": "12-Mar-2026",
     "year": 2026,
     "price": 0.35,
-    "currentPrice": 0.465,
-    "performance": "+32.86%",
+    "currentPrice": 0.48,
+    "performance": "+37.14%",
     "os": 110.1,
     "ib": "M&A Securities",
     "sector": "Industrial",
@@ -2025,9 +2052,9 @@ var ipoData = [
     "analystInsight": "⚠️ <b>RISK PLAY (GRADE C)</b><br>OGX Group menunjukkan pemulihan hasil yang baik pada FPE 25Q2 (RM94M vs RM66.9M). Meskipun harganya merosot di bawah IPO pada hari pertama (sebab sentimen perang/geopolitik), syarikat telah melonjak melebihi 70% (ke RM0.60) disokong fundamental dan anugerah kontrak data center yang besar.<br><br>📊 <b>Kelebihan Utama:</b><br>• Keputusan suku tahunan 25Q2 melonjak menandakan fasa pertumbuhan semula.<br>• Sifu unjurkan PE 17.0x dengan Fair Value RM0.40 - RM0.49.",
     "sifuTargetPrice": 0.49,
     "dailyChange": 5,
-    "calibratedSifuTargetPrice": 0.47,
+    "calibratedSifuTargetPrice": 0.4,
     "v3TargetPrice": 0.305,
-    "zone2TargetPrice": 0.49,
+    "zone2TargetPrice": 0.4,
     "freeFloat": 0.3,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -2078,7 +2105,8 @@ var ipoData = [
       "<strong>Upside Potential Sederhana:</strong> Pengiraan Cincai-Cincai Sifu mengunjurkan target PE 17.0x dengan Nilai Wajar **RM 0.40 - RM 0.49** (+15% hingga +40% upside potential).",
       "<strong>Risiko Sentimen Pasaran (Sebab Barai):</strong> Walaupun fundamental syarikat solid dan balance sheet decent, ketiadaan sentiment pasaran yang menyokong semasa listing menyebabkan harganya merosot di bawah IPO."
     ],
-    "peers": "<strong>Peer Comparison:</strong> Forward PE berada di sekitar 12.09x hingga 14.94x. Wajar dipantau untuk pengumpulan semula jika sentimen pasaran pulih."
+    "peers": "<strong>Peer Comparison:</strong> Forward PE berada di sekitar 12.09x hingga 14.94x. Wajar dipantau untuk pengumpulan semula jika sentimen pasaran pulih.",
+    "v7TargetPrice": 0.4
   },
   {
     "id": "sbs",
@@ -2106,9 +2134,9 @@ var ipoData = [
     "analystInsight": "We expect the company to continue its growth trajectory driven by increasing demand for digital transformation and expansion into new markets. The company's strong financials and competitive advantage position it well for future success. We recommend investors to consider this stock for long-term growth.",
     "sifuTargetPrice": 0.25,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.24,
+    "calibratedSifuTargetPrice": 0.26,
     "v3TargetPrice": 0.229,
-    "zone2TargetPrice": 0.25,
+    "zone2TargetPrice": 0.26,
     "insightUrl": "https://www.isaham.my/stock/sbs/insights",
     "totalShares": 500000000,
     "headers": [
@@ -2153,7 +2181,8 @@ var ipoData = [
     "gpMargin": 25,
     "assetsEstimate": 1.5,
     "liabilitiesEstimate": 0.4,
-    "enrichedBy": "AI"
+    "enrichedBy": "AI",
+    "v7TargetPrice": 0.26
   },
   {
     "id": "skyechip",
@@ -2204,8 +2233,8 @@ var ipoData = [
     "openPrice": 3.5,
     "highPrice": 3.8,
     "closePrice": 2.210032,
-    "currentPrice": 2.94,
-    "performance": "+234.09%",
+    "currentPrice": 3.01,
+    "performance": "+242.05%",
     "symbol": "SKYECHIP",
     "strategy": "Scalp",
     "sifuTargetPrice": 1.58,
@@ -2258,7 +2287,8 @@ var ipoData = [
       "<strong>Sektor IC Design Premium:</strong> Pembuat cip rekaan litar bersepadu (IC Design) Penang berasaskan AI dan HPC (High Performance Computing) dengan pertumbuhan kukuh.",
       "<strong>Rekod Kewangan Mantap:</strong> Hasil meningkat dari RM152.8M (FYE F) ke RM166.7M (FYE F+1) dengan margin kasar (GP margin) yang stabil pada 38.7%."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY26) berada di sekitar 24.50x - 26.73x. Premium yang wajar berbanding peers semikonduktor tempatan kerana pendedahan langsung kepada rekaan litar AI/HPC proprietary."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY26) berada di sekitar 24.50x - 26.73x. Premium yang wajar berbanding peers semikonduktor tempatan kerana pendedahan langsung kepada rekaan litar AI/HPC proprietary.",
+    "v7TargetPrice": 1.58
   },
   {
     "id": "sunmed",
@@ -2267,8 +2297,8 @@ var ipoData = [
     "listingDate": "18-Mar-2026",
     "year": 2026,
     "price": 1.45,
-    "currentPrice": 1.96,
-    "performance": "+35.17%",
+    "currentPrice": 1.97,
+    "performance": "+35.86%",
     "os": 5.57,
     "ib": "Maybank / AmInvestment",
     "sector": "Healthcare",
@@ -2287,9 +2317,9 @@ var ipoData = [
     "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Sunway Healthcare (SUNMED) merekodkan permohonan runcit tertinggi dengan tarikan jenama Sunway yang sangat kuat. Merupakan hospital pertahanan bertaraf mega dengan profil pertumbuhan jangka panjang yang mantap.<br><br>📊 <b>Kelebihan Utama:</b><br>• Rekod jumlah permohonan runcit tertinggi (hype amat besar).<br>• Hospital defensif bertaraf mega dengan kualiti aset gred-A.<br>• Potensi sasaran Fair Value RM1.84 (+26.9% upside).",
     "sifuTargetPrice": 1.84,
     "dailyChange": 0.5,
-    "calibratedSifuTargetPrice": 1.92,
+    "calibratedSifuTargetPrice": 1.94,
     "v3TargetPrice": 1.782,
-    "zone2TargetPrice": 1.84,
+    "zone2TargetPrice": 1.94,
     "freeFloat": 0.35,
     "anchorInvestors": true,
     "lockupMonths": 12,
@@ -2338,7 +2368,8 @@ var ipoData = [
       "<strong>Hype Applicant Terbesar:</strong> Walaupun harga tawarkan PE agak premium/overvalued, sentimen & hype runcit merekodkan jumlah permohonan awam tertinggi setakat ini.",
       "<strong>Defensive & Expansion Story:</strong> Sunway Medical Group adalah rangkaian hospital terkemuka dengan profil pendapatan pertahanan bertaraf mega."
     ],
-    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 50.93x. Sangat premium berbanding hospital biasa, tetapi disokong oleh kualiti aset gred-A dan rekod pencapaian jenama Sunway."
+    "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 50.93x. Sangat premium berbanding hospital biasa, tetapi disokong oleh kualiti aset gred-A dan rekod pencapaian jenama Sunway.",
+    "v7TargetPrice": 1.94
   },
   {
     "id": "teamstr",
@@ -2369,7 +2400,8 @@ var ipoData = [
     "calibratedSifuTargetPrice": 0.32,
     "v3TargetPrice": 0.224,
     "zone2TargetPrice": 0.32,
-    "insightUrl": "https://www.isaham.my/stock/teamstr/insights"
+    "insightUrl": "https://www.isaham.my/stock/teamstr/insights",
+    "v7TargetPrice": 0.32
   },
   {
     "id": "a1akk",
@@ -2404,8 +2436,8 @@ var ipoData = [
     "listingDate": "19-Nov-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.165,
-    "performance": "-46.77%",
+    "currentPrice": 0.17,
+    "performance": "-45.16%",
     "os": 7.4,
     "ib": "Maybank Investment Bank",
     "sector": "Consumer",
@@ -2476,8 +2508,8 @@ var ipoData = [
     "listingDate": "16-Jan-2025",
     "year": 2025,
     "price": 0.545,
-    "currentPrice": 0.7,
-    "performance": "+28.44%",
+    "currentPrice": 0.71,
+    "performance": "+30.28%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -2551,8 +2583,8 @@ var ipoData = [
     "listingDate": "07-Oct-2025",
     "year": 2025,
     "price": 0.36,
-    "currentPrice": 0.585,
-    "performance": "+62.50%",
+    "currentPrice": 0.575,
+    "performance": "+59.72%",
     "os": 20,
     "ib": "TA Securities",
     "sector": "Utilities (Power Infrastructure)",
@@ -2752,8 +2784,8 @@ var ipoData = [
     "listingDate": "08-May-2025",
     "year": 2025,
     "price": 0.55,
-    "currentPrice": 0.785,
-    "performance": "+42.73%",
+    "currentPrice": 0.78,
+    "performance": "+41.82%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -2775,8 +2807,8 @@ var ipoData = [
     "listingDate": "11-Dec-2025",
     "year": 2025,
     "price": 1,
-    "currentPrice": 0.385,
-    "performance": "-61.50%",
+    "currentPrice": 0.38,
+    "performance": "-62.00%",
     "os": 4.2,
     "ib": "CIMB Investment Bank",
     "sector": "Energy",
@@ -2800,8 +2832,8 @@ var ipoData = [
     "listingDate": "05-Dec-2025",
     "year": 2025,
     "price": 0.55,
-    "currentPrice": 0.28,
-    "performance": "-49.09%",
+    "currentPrice": 0.285,
+    "performance": "-48.18%",
     "os": 15,
     "ib": "UOB Kay Hian",
     "sector": "Construction",
@@ -2823,8 +2855,8 @@ var ipoData = [
     "listingDate": "28-Mar-2025",
     "year": 2025,
     "price": 1.22,
-    "currentPrice": 0.765,
-    "performance": "-37.30%",
+    "currentPrice": 0.77,
+    "performance": "-36.89%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -2848,8 +2880,8 @@ var ipoData = [
     "listingDate": "09-Jun-2025",
     "year": 2025,
     "price": 0.335,
-    "currentPrice": 0.59,
-    "performance": "+76.12%",
+    "currentPrice": 0.605,
+    "performance": "+80.60%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -2927,8 +2959,8 @@ var ipoData = [
     "listingDate": "27-Oct-2025",
     "year": 2025,
     "price": 1.34,
-    "currentPrice": 1.46,
-    "performance": "+8.96%",
+    "currentPrice": 1.5,
+    "performance": "+11.94%",
     "os": 11.5,
     "ib": "Alliance Islamic Bank",
     "sector": "Industrial",
@@ -3002,8 +3034,8 @@ var ipoData = [
     "listingDate": "17-Jul-2025",
     "year": 2025,
     "price": 0.24,
-    "currentPrice": 0.625,
-    "performance": "+160.42%",
+    "currentPrice": 0.63,
+    "performance": "+162.50%",
     "os": 20,
     "ib": "Alliance Islamic Bank",
     "sector": "Industrial (Cleanroom Services)",
@@ -3048,8 +3080,8 @@ var ipoData = [
     "listingDate": "23-Sep-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.205,
-    "performance": "-33.87%",
+    "currentPrice": 0.195,
+    "performance": "-37.10%",
     "os": 45.1,
     "ib": "Alliance",
     "sector": "Energy",
@@ -3074,8 +3106,8 @@ var ipoData = [
     "listingDate": "23-Jan-2025",
     "year": 2025,
     "price": 0.44,
-    "currentPrice": 0.915,
-    "performance": "+107.95%",
+    "currentPrice": 0.92,
+    "performance": "+109.09%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3102,8 +3134,8 @@ var ipoData = [
     "listingDate": "10-Dec-2025",
     "year": 2025,
     "price": 0.75,
-    "currentPrice": 0.705,
-    "performance": "-6.00%",
+    "currentPrice": 0.7,
+    "performance": "-6.67%",
     "os": 8.5,
     "ib": "AmInvestment Bank",
     "sector": "Healthcare",
@@ -3125,8 +3157,8 @@ var ipoData = [
     "listingDate": "21-Mar-2025",
     "year": 2025,
     "price": 0.88,
-    "currentPrice": 1.63,
-    "performance": "+85.23%",
+    "currentPrice": 1.67,
+    "performance": "+89.77%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3449,8 +3481,8 @@ var ipoData = [
     "listingDate": "25-Nov-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.17,
-    "performance": "-32.00%",
+    "currentPrice": 0.175,
+    "performance": "-30.00%",
     "os": 18.5,
     "ib": "Kenanga Investment Bank",
     "sector": "Industrial",
@@ -3521,8 +3553,8 @@ var ipoData = [
     "listingDate": "02-May-2025",
     "year": 2025,
     "price": 0.52,
-    "currentPrice": 0.38,
-    "performance": "-26.92%",
+    "currentPrice": 0.375,
+    "performance": "-27.88%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3599,8 +3631,8 @@ var ipoData = [
     "listingDate": "08-Jan-2025",
     "year": 2025,
     "price": 0.28,
-    "currentPrice": 0.235,
-    "performance": "-16.07%",
+    "currentPrice": 0.23,
+    "performance": "-17.86%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3625,8 +3657,8 @@ var ipoData = [
     "listingDate": "09-Apr-2025",
     "year": 2025,
     "price": 0.24,
-    "currentPrice": 0.095,
-    "performance": "-60.42%",
+    "currentPrice": 0.09,
+    "performance": "-62.50%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3648,8 +3680,8 @@ var ipoData = [
     "listingDate": "20-Feb-2025",
     "year": 2025,
     "price": 0.3,
-    "currentPrice": 0.335,
-    "performance": "+11.67%",
+    "currentPrice": 0.34,
+    "performance": "+13.33%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3725,8 +3757,8 @@ var ipoData = [
     "listingDate": "23-Oct-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 1.7,
-    "performance": "+448.39%",
+    "currentPrice": 1.8,
+    "performance": "+480.65%",
     "os": 12.4,
     "ib": "Kenanga",
     "sector": "Consumer",
@@ -3750,8 +3782,8 @@ var ipoData = [
     "listingDate": "22-Oct-2025",
     "year": 2025,
     "price": 0.31,
-    "currentPrice": 0.22,
-    "performance": "-29.03%",
+    "currentPrice": 0.215,
+    "performance": "-30.65%",
     "os": 18.2,
     "ib": "Mercury Securities",
     "sector": "Energy (Solar)",
@@ -3797,8 +3829,8 @@ var ipoData = [
     "listingDate": "05-May-2025",
     "year": 2025,
     "price": 0.39,
-    "currentPrice": 0.265,
-    "performance": "-32.05%",
+    "currentPrice": 0.26,
+    "performance": "-33.33%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3820,8 +3852,8 @@ var ipoData = [
     "listingDate": "29-Apr-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.12,
-    "performance": "-52.00%",
+    "currentPrice": 0.11,
+    "performance": "-56.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3846,8 +3878,8 @@ var ipoData = [
     "listingDate": "24-Sep-2025",
     "year": 2025,
     "price": 0.2,
-    "currentPrice": 0.16,
-    "performance": "-20.00%",
+    "currentPrice": 0.165,
+    "performance": "-17.50%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3970,8 +4002,8 @@ var ipoData = [
     "listingDate": "11-Nov-2024",
     "year": 2024,
     "price": 0.78,
-    "currentPrice": 0.99,
-    "performance": "+26.92%",
+    "currentPrice": 0.995,
+    "performance": "+27.56%",
     "os": 23,
     "ib": "Maybank",
     "sector": "Construction",
@@ -5135,8 +5167,8 @@ var ipoData = [
     "listingDate": "19-Dec-2024",
     "year": 2024,
     "price": 0.35,
-    "currentPrice": 0.56,
-    "performance": "+60.00%",
+    "currentPrice": 0.555,
+    "performance": "+58.57%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -5189,8 +5221,8 @@ var ipoData = [
     "listingDate": "18-Dec-2023",
     "year": 2023,
     "price": 0.35,
-    "currentPrice": 1.84,
-    "performance": "+425.71%",
+    "currentPrice": 1.92,
+    "performance": "+448.57%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -5545,8 +5577,8 @@ var ipoData = [
     "listingDate": "20-Jul-2023",
     "year": 2023,
     "price": 0.81,
-    "currentPrice": 0.14,
-    "performance": "-82.72%",
+    "currentPrice": 0.135,
+    "performance": "-83.33%",
     "os": 5.28,
     "ib": "RHB",
     "sector": "Consumer",
@@ -6298,8 +6330,8 @@ var ipoData = [
     "listingDate": "07-Jul-2022",
     "year": 2022,
     "price": 0.75,
-    "currentPrice": 0.665,
-    "performance": "-11.33%",
+    "currentPrice": 0.67,
+    "performance": "-10.67%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6472,8 +6504,8 @@ var ipoData = [
     "listingDate": "05-Aug-2022",
     "year": 2022,
     "price": 0.26,
-    "currentPrice": 0.445,
-    "performance": "+71.15%",
+    "currentPrice": 0.45,
+    "performance": "+73.08%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6568,8 +6600,8 @@ var ipoData = [
     "listingDate": "16-Dec-2021",
     "year": 2021,
     "price": 1.36,
-    "currentPrice": 0.745,
-    "performance": "-45.22%",
+    "currentPrice": 0.735,
+    "performance": "-45.96%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6799,8 +6831,8 @@ var ipoData = [
     "listingDate": "23-Jun-2021",
     "year": 2021,
     "price": 0.32,
-    "currentPrice": 1.78,
-    "performance": "+456.25%",
+    "currentPrice": 1.85,
+    "performance": "+478.13%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -7258,8 +7290,8 @@ var ipoData = [
     "listingDate": "13-Jun-2019",
     "year": 2019,
     "price": 0.61,
-    "currentPrice": 2.42,
-    "performance": "+296.72%",
+    "currentPrice": 2.44,
+    "performance": "+300.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -7506,9 +7538,9 @@ var ipoData = [
     "predictedGrade": "C",
     "analystInsight": "⚠️ <b>WORTH IT UNTUK SCALP SAHAJA (GRADE C)</b><br>💡 Rest N Go mempunyai fundamental cash-cow yang baik dengan margin bersih tinggi (~36%) dan dibimbing oleh IB cemerlang (M&A Securities). Walau bagaimanapun, penawaran ini mempunyai <b>OFS besar (38.4%)</b> yang boleh mendatangkan tekanan jualan di hari listing. Sesuai untuk <b>Scalping sahaja</b> jika OS runcit kelak melebihi 45x+. Jika OS lemah, elak terus.",
     "dailyChange": 0.4,
-    "calibratedSifuTargetPrice": 0.38,
+    "calibratedSifuTargetPrice": 0.25,
     "v3TargetPrice": 0.269,
-    "zone2TargetPrice": 0.33,
+    "zone2TargetPrice": 0.25,
     "freeFloat": 0.38,
     "anchorInvestors": false,
     "lockupMonths": 6,
@@ -7559,7 +7591,8 @@ var ipoData = [
       "<strong>Wow Factor:</strong> Aliran tunai yang sangat kukuh dengan MRS (Meter Reading System) dan RNG App untuk kutipan hasil tanpa tunai."
     ],
     "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 15x - 20x PE. RNG Tech mempunyai kelebihan pasaran (market leader) yang besar.",
-    "highPrice": 0.13
+    "highPrice": 0.13,
+    "v7TargetPrice": 0.25
   },
   {
     "id": "liftech-group-berhad",
@@ -7581,9 +7614,9 @@ var ipoData = [
     "sifuTargetPrice": 0.28,
     "dailyChange": -5.17,
     "performance": "-20.69%",
-    "calibratedSifuTargetPrice": 0.36,
+    "calibratedSifuTargetPrice": 0.25,
     "v3TargetPrice": 0.244,
-    "zone2TargetPrice": 0.28,
+    "zone2TargetPrice": 0.25,
     "freeFloat": 0.25,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -7636,7 +7669,8 @@ var ipoData = [
       "<strong>Kemudahan Baru di Penang & KK:</strong> Memperluas kapasiti dengan memperoleh kemudahan operasi baru di Bukit Minyak dan Kota Kinabalu bagi menyokong permintaan MRO."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan 13.9x berbanding harga IPO RM0.29. Nilai wajar Sifu dianggarkan sekitar **RM 0.26** dengan diskaun memandangkan aliran tunai yang rata.",
-    "highPrice": 0.29
+    "highPrice": 0.29,
+    "v7TargetPrice": 0.25
   },
   {
     "id": "hss-holdings-berhad",
@@ -7650,7 +7684,7 @@ var ipoData = [
     "stage": 5,
     "status": "Listed",
     "year": 2026,
-    "currentPrice": 0.155,
+    "currentPrice": 0.16,
     "openPrice": 0.176,
     "closePrice": 0.18,
     "predictedGrade": "C",
@@ -7661,13 +7695,13 @@ var ipoData = [
     "ofsValue": 9180000,
     "fundUse": "33% bank repayment, 22% working capital, 19% capital expenditure, remainder for listing expenses (total IPO ≈ RM22.95M, OFS ≈ 40%)",
     "os": 10.56,
-    "performance": "-13.89%",
+    "performance": "-11.11%",
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.28,
+    "calibratedSifuTargetPrice": 0.2,
     "sector": "Consumer (Food & Beverage)",
     "ib": "M&A Securities",
     "v3TargetPrice": 0.174,
-    "zone2TargetPrice": 0.24,
+    "zone2TargetPrice": 0.2,
     "freeFloat": 0.32,
     "anchorInvestors": false,
     "lockupMonths": 6,
@@ -7717,7 +7751,8 @@ var ipoData = [
       "<strong>PE Terbitan Rendah (10.5x):</strong> Ditawarkan pada diskaun penilaian yang menarik berbanding SDS Group dan peers roti tempatan (15x-20x PE)."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan sekitar 10.5x pada harga IPO RM0.18. Menawarkan diskaun ketara berbanding purata industri makanan runcit (15x).",
-    "highPrice": 0.18
+    "highPrice": 0.18,
+    "v7TargetPrice": 0.2
   },
   {
     "id": "spb-development-berhad",
@@ -7733,7 +7768,9 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.5,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.55
+    "calibratedSifuTargetPrice": 0.55,
+    "v7TargetPrice": 0.55,
+    "zone2TargetPrice": 0.55
   },
   {
     "id": "readycare-holdings-berhad",
@@ -7749,7 +7786,9 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.5,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.52
+    "calibratedSifuTargetPrice": 0.5,
+    "v7TargetPrice": 0.5,
+    "zone2TargetPrice": 0.5
   },
   {
     "id": "ttl-holdings-berhad",
@@ -7765,11 +7804,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.3,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.24,
+    "calibratedSifuTargetPrice": 0.33,
     "sector": "Technology (Digital Transformation & IT)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.288,
-    "zone2TargetPrice": 0.3
+    "zone2TargetPrice": 0.33,
+    "v7TargetPrice": 0.33
   },
   {
     "id": "cmgi-berhad",
@@ -7785,11 +7825,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.28,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.31,
+    "calibratedSifuTargetPrice": 0.32,
     "sector": "Industrial (Construction Materials)",
     "geography": "Selangor",
     "v3TargetPrice": 0.166,
-    "zone2TargetPrice": 0.28
+    "zone2TargetPrice": 0.32,
+    "v7TargetPrice": 0.32
   },
   {
     "id": "mmc-port-holdings-berhad",
@@ -7805,11 +7846,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 1.8,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 1.52,
+    "calibratedSifuTargetPrice": 1.9,
     "sector": "Industrial (Port Management & Logistics)",
     "geography": "Johor",
     "v3TargetPrice": 1.222,
-    "zone2TargetPrice": 1.8
+    "zone2TargetPrice": 1.9,
+    "v7TargetPrice": 1.9
   },
   {
     "id": "custom-food-holding-berhad",
@@ -7825,11 +7867,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.35,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.37,
+    "calibratedSifuTargetPrice": 0.38,
     "sector": "Consumer (Food Manufacturing)",
     "geography": "Selangor",
     "v3TargetPrice": 0.327,
-    "zone2TargetPrice": 0.35
+    "zone2TargetPrice": 0.38,
+    "v7TargetPrice": 0.38
   },
   {
     "id": "wintech-metal-berhad",
@@ -7845,11 +7888,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.28,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.25,
+    "calibratedSifuTargetPrice": 0.27,
     "sector": "Industrial (Metal Manufacturing)",
     "geography": "Selangor",
     "v3TargetPrice": 0.196,
-    "zone2TargetPrice": 0.28
+    "zone2TargetPrice": 0.27,
+    "v7TargetPrice": 0.27
   },
   {
     "id": "likei-logistic-services-berhad",
@@ -7865,11 +7909,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.3,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.27,
+    "calibratedSifuTargetPrice": 0.29,
     "sector": "Industrial (Logistics & Transportation)",
     "geography": "Selangor",
     "v3TargetPrice": 0.21,
-    "zone2TargetPrice": 0.3
+    "zone2TargetPrice": 0.29,
+    "v7TargetPrice": 0.29
   },
   {
     "id": "butterfield-fb-berhad",
@@ -7891,7 +7936,7 @@ var ipoData = [
     "sector": "Consumer (Food & Beverage)",
     "geography": "Selangor",
     "v3TargetPrice": 0.293,
-    "zone2TargetPrice": 0.32,
+    "zone2TargetPrice": 0,
     "insightUrl": "https://www.isaham.my/ipo/insights/butterfield-fb-berhad",
     "totalShares": 800000000,
     "headers": [
@@ -7933,7 +7978,8 @@ var ipoData = [
       "Catalyst 3: Estimated listing expenses"
     ],
     "peers": "Consumer Products & Services (11.7)",
-    "ib": "M&A Securities"
+    "ib": "M&A Securities",
+    "v7TargetPrice": 0
   },
   {
     "id": "evocom-berhad",
@@ -7949,11 +7995,11 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.33,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.27,
+    "calibratedSifuTargetPrice": 0.36,
     "sector": "Technology (Digital Transformation & IT)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.317,
-    "zone2TargetPrice": 0.33,
+    "zone2TargetPrice": 0.36,
     "insightUrl": "https://www.isaham.my/ipo/insights/evocom-berhad",
     "totalShares": 455630000,
     "headers": [
@@ -7996,7 +8042,8 @@ var ipoData = [
     ],
     "peers": "Transportation & Logistics Services (11.2), Transportation & Logistics (11.7)",
     "analystInsight": "Analisis SWOT tidak tersedia. Namun, kami melihat potensi pertumbuhan yang kuat dalam industri perkhidmatan pekerjaan fleksibel dan teknologi. Kami juga melihat peluang untuk ekspansi ke pasaran baru.",
-    "predictedGrade": "C"
+    "predictedGrade": "C",
+    "v7TargetPrice": 0.36
   },
   {
     "id": "slgc-berhad",
@@ -8018,7 +8065,7 @@ var ipoData = [
     "dailyChange": 0.5,
     "calibratedSifuTargetPrice": 0,
     "v3TargetPrice": 0.203,
-    "zone2TargetPrice": 0.36,
+    "zone2TargetPrice": 0,
     "freeFloat": 0.28,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -8072,7 +8119,8 @@ var ipoData = [
     "gp25": 0,
     "pat25": 0,
     "assets25": 0,
-    "liab25": 0
+    "liab25": 0,
+    "v7TargetPrice": 0
   },
   {
     "id": "keb-berhad",
@@ -8138,7 +8186,8 @@ var ipoData = [
     "peers": "Property sector",
     "mitiOpenDate": "13-Jul-2026",
     "mitiCloseDate": "22-Jul-2026",
-    "ib": "M&A Securities"
+    "ib": "M&A Securities",
+    "v7TargetPrice": 0.34
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -8154,11 +8203,12 @@ var ipoData = [
     "year": 2026,
     "sifuTargetPrice": 0.25,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.27,
+    "calibratedSifuTargetPrice": 0.25,
     "sector": "Finance (Investment Holding)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.25,
-    "zone2TargetPrice": 0.25
+    "zone2TargetPrice": 0.25,
+    "v7TargetPrice": 0.25
   },
   {
     "id": "cnergenz",
@@ -8184,9 +8234,9 @@ var ipoData = [
     "closePrice": 0.58,
     "sifuTargetPrice": 0.53,
     "dailyChange": 2.59,
-    "calibratedSifuTargetPrice": 0.65,
+    "calibratedSifuTargetPrice": 0.66,
     "v3TargetPrice": 0.626,
-    "zone2TargetPrice": 0.65,
+    "zone2TargetPrice": 0.66,
     "freeFloat": 0.2,
     "anchorInvestors": false,
     "lockupMonths": 12,
@@ -8236,7 +8286,7 @@ var ipoData = [
       "<strong>Limpahan AI & EV:</strong> Pertumbuhan didorong oleh segmen hyperscaler AI dan pembuatan EV yang memerlukan modul kuasa serta papan AI server."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 21.5x, sejajar dengan purata industri pembuatan peralatan SMT/Semicon.",
-    "v7TargetPrice": 0.65
+    "v7TargetPrice": 0.66
   },
   {
     "id": "destini",
@@ -8402,10 +8452,10 @@ var ipoData = [
     "price": 0.25,
     "openPrice": 0.45,
     "closePrice": 0.375,
-    "currentPrice": 0.555,
+    "currentPrice": 0.565,
     "year": 2026,
     "listingDate": "2026-01-13",
-    "performance": "+122.00%",
+    "performance": "+126.00%",
     "market": "ACE Market",
     "highPrice": 0.565
   },
@@ -8450,10 +8500,10 @@ var ipoData = [
     "price": 1,
     "openPrice": 1,
     "closePrice": 1,
-    "currentPrice": 0.935,
+    "currentPrice": 0.93,
     "year": 2025,
     "listingDate": "2025-06-10",
-    "performance": "-6.50%",
+    "performance": "-7.00%",
     "market": "ACE Market",
     "highPrice": 1
   },
@@ -8482,10 +8532,10 @@ var ipoData = [
     "price": 0.63,
     "openPrice": 0.9000179999999999,
     "closePrice": 0.7900200000000001,
-    "currentPrice": 0.68,
+    "currentPrice": 0.685,
     "year": 2025,
     "listingDate": "2025-02-06",
-    "performance": "+7.94%",
+    "performance": "+8.73%",
     "market": "ACE Market",
     "highPrice": 0.9
   },
@@ -8498,10 +8548,10 @@ var ipoData = [
     "price": 0.67,
     "openPrice": 0.67,
     "closePrice": 0.654992,
-    "currentPrice": 1.74,
+    "currentPrice": 1.79,
     "year": 2024,
     "listingDate": "2024-11-11",
-    "performance": "+159.70%",
+    "performance": "+167.16%",
     "market": "ACE Market",
     "highPrice": 1.72
   },
@@ -8514,10 +8564,10 @@ var ipoData = [
     "price": 0.28,
     "openPrice": 0.33499200000000007,
     "closePrice": 0.39499600000000007,
-    "currentPrice": 0.405,
+    "currentPrice": 0.415,
     "year": 2024,
     "listingDate": "2024-11-06",
-    "performance": "+44.64%",
+    "performance": "+48.21%",
     "market": "ACE Market",
     "highPrice": 0.425
   },
@@ -8774,8 +8824,8 @@ var ipoData = [
     "stage": 5,
     "status": "Listed",
     "year": 2026,
-    "currentPrice": 0.15,
-    "performance": "-16.67%",
+    "currentPrice": 0.145,
+    "performance": "-19.44%",
     "highPrice": 0.18,
     "os": 59.96,
     "isAutoOS": true
@@ -8819,7 +8869,7 @@ var ipoData = [
     "sector": "Consumer Products (Edible Bird's Nest)",
     "geography": "Selangor",
     "v3TargetPrice": 0.13,
-    "zone2TargetPrice": 0.13,
+    "zone2TargetPrice": 0.22,
     "openPrice": 0.13,
     "currentPrice": 0.1,
     "closePrice": 0.105001,
@@ -8840,18 +8890,18 @@ var ipoData = [
     "rev23": 120330000,
     "rev24": 146210000,
     "rev25": 158382000,
-    "revF": 174220000,
-    "revF1": 196869000,
+    "revF": 158380000,
+    "revF1": 168440000,
     "gp23": 30082500,
     "gp24": 36552500,
     "gp25": 0,
-    "gpF": 52266000,
-    "gpF1": 59061000,
+    "gpF": 39595000,
+    "gpF1": 42110000,
     "pat23": 7000000,
     "pat24": 8430000,
     "pat25": 8365,
-    "patF": 8525000,
-    "patF1": 9633000,
+    "patF": 8370000,
+    "patF1": 8600000,
     "assets23": 60000000,
     "assets24": 75000000,
     "assets25": 0,
@@ -8876,7 +8926,8 @@ var ipoData = [
     "gp22": 28242500,
     "pat22": 6460000,
     "assets22": 50000000,
-    "liab22": 20000000
+    "liab22": 20000000,
+    "v7TargetPrice": 0.22
   },
   {
     "id": "tuc-holdings-berhad",
@@ -8906,11 +8957,12 @@ var ipoData = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sifuTargetPrice": 0.6,
-    "calibratedSifuTargetPrice": 0.69,
+    "calibratedSifuTargetPrice": 0.76,
     "sector": "Property (Residential Development)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.383,
-    "zone2TargetPrice": 0.6
+    "zone2TargetPrice": 0.76,
+    "v7TargetPrice": 0.76
   },
   {
     "id": "wastech-resources-berhad",
@@ -9045,11 +9097,12 @@ var ipoData = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sifuTargetPrice": 0.3,
-    "calibratedSifuTargetPrice": 0.31,
+    "calibratedSifuTargetPrice": 0.3,
     "sector": "Energy (Renewable / Solar)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.245,
-    "zone2TargetPrice": 0.3
+    "zone2TargetPrice": 0.3,
+    "v7TargetPrice": 0.3
   },
   {
     "id": "qube-international-berhad",
@@ -9109,11 +9162,12 @@ var ipoData = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sifuTargetPrice": 0.35,
-    "calibratedSifuTargetPrice": 0.28,
+    "calibratedSifuTargetPrice": 0.38,
     "sector": "Technology (Data Centre)",
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.336,
-    "zone2TargetPrice": 0.35
+    "zone2TargetPrice": 0.38,
+    "v7TargetPrice": 0.38
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -9128,7 +9182,7 @@ var ipoData = [
     "status": "MITI Allocation Phase",
     "year": 2026,
     "sector": "Industrial Products & Services (Chemicals)",
-    "geography": "Kuala Lumpur",
+    "geography": "Penang",
     "predictedGrade": "B",
     "sifuTargetPrice": 0.3,
     "calibratedSifuTargetPrice": 0.3,
@@ -9137,7 +9191,8 @@ var ipoData = [
     "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC.",
     "mitiOpenDate": null,
     "mitiCloseDate": null,
-    "ib": "Malacca Securities"
+    "ib": "Malacca Securities",
+    "v7TargetPrice": 0.3
   },
   {
     "id": "redplanet-berhad",
@@ -9154,7 +9209,9 @@ var ipoData = [
     "sector": "Technology (Digital / E-Commerce)",
     "geography": "Kuala Lumpur",
     "sifuTargetPrice": 0.3,
-    "calibratedSifuTargetPrice": 0.24
+    "calibratedSifuTargetPrice": 0.33,
+    "v7TargetPrice": 0.33,
+    "zone2TargetPrice": 0.33
   },
   {
     "id": "empg-group-berhad",
@@ -9186,7 +9243,9 @@ var ipoData = [
     "sector": "Industrial (Automotive Parts)",
     "geography": "Selangor",
     "sifuTargetPrice": 0.3,
-    "calibratedSifuTargetPrice": 0.27
+    "calibratedSifuTargetPrice": 0.29,
+    "v7TargetPrice": 0.29,
+    "zone2TargetPrice": 0.29
   },
   {
     "id": "emits-berhad",
@@ -9427,11 +9486,11 @@ var ipoData = [
     "price": 0.13,
     "openPrice": 0.13,
     "closePrice": 0.13,
-    "currentPrice": 0.135,
+    "currentPrice": 0.14,
     "year": 2026,
     "listingDate": "2026-07-07",
     "highPrice": 0.155,
-    "performance": "+3.85%"
+    "performance": "+7.69%"
   },
   {
     "id": "eghi",
@@ -9448,8 +9507,14 @@ var ipoData = [
     "sector": "Consumer Products (Interior Fit-out & Building Materials)",
     "fundUse": "Head office & warehouse construction, debt repayment, working capital",
     "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>EGH International (EGHI) specializes in interior fit-out and furniture supply. Proposed ACE Market listing with 240M new shares. Healthy growth profile but in a competitive sector."
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>EGH International (EGHI) specializes in interior fit-out and furniture supply. Proposed ACE Market listing with 240M new shares. Healthy growth profile but in a competitive sector.",
+    "sifuTargetPrice": 0.3,
+    "calibratedSifuTargetPrice": 0.3,
+    "v7TargetPrice": 0.3,
+    "zone2TargetPrice": 0.3
   }
 ];
-var IPO_DATA = ipoData;
-if (typeof module !== 'undefined' && module.exports) { module.exports = ipoData; }
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = IPO_DATA;
+}

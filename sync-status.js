@@ -1,8 +1,8 @@
 const SYNC_STATUS = {
-  "lastSync": "20/07/2026, 8:01:45 pm",
+  "lastSync": "21/07/2026, 3:54:38 pm",
   "status": "Success",
   "enrichedCount": 0,
-  "totalIpos": 305
+  "totalIpos": 306
 };
 
 if (typeof module !== 'undefined' && module.exports) {
