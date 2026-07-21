@@ -409,8 +409,8 @@
                 score += 1; // Premium consumer & ESG gets moderate points
             }
             
-            // 2. Sponsor Quality (M&A, KAF, Maybank are elite Tier 1 for listing pops)
-            if (ib.includes('m&a') || ib.includes('ma securities') || ib.includes('kaf') || ib.includes('maybank')) {
+            // 2. Sponsor Quality (Top-tier/M&A/KAF/Maybank/Malacca etc. get pop bonus)
+            if (ib.includes('m&a') || ib.includes('ma securities') || ib.includes('kaf') || ib.includes('maybank') || ib.includes('cimb') || ib.includes('rhb') || ib.includes('uob') || ib.includes('malacca') || ib.includes('public') || ib.includes('alliance') || ib.includes('aminvestment') || ib.includes('affin')) {
                 score += 1;
             }
             

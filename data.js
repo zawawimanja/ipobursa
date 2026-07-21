@@ -8136,7 +8136,8 @@ var ipoData = [
     ],
     "peers": "Property sector",
     "mitiOpenDate": "13-Jul-2026",
-    "mitiCloseDate": "22-Jul-2026"
+    "mitiCloseDate": "22-Jul-2026",
+    "ib": "M&A Securities"
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -9134,7 +9135,8 @@ var ipoData = [
     "zone2TargetPrice": 0.3,
     "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC.",
     "mitiOpenDate": null,
-    "mitiCloseDate": null
+    "mitiCloseDate": null,
+    "ib": "Malacca Securities"
   },
   {
     "id": "redplanet-berhad",
