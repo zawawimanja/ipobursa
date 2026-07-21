@@ -518,6 +518,12 @@
     </main>
 
     <script>
+        // Normalize data variable: data.js exports IPO_DATA, but this page uses ipoData
+        // main.js normalizes this but miti-journal.html loads data.js directly
+        var ipoData = (typeof IPO_DATA !== 'undefined' && Array.isArray(IPO_DATA) && IPO_DATA.length > 0)
+            ? IPO_DATA
+            : [];
+
         // Setup icons
         if (typeof lucide !== 'undefined') lucide.createIcons();
 
