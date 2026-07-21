@@ -16,23 +16,23 @@
     <script src="sync-status.js?v=2.0"></script>
     <style>
         .journal-container {
-            margin-top: 2rem;
-            margin-bottom: 4rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 1rem; /* Compact card gaps */
         }
 
         .journal-header-section {
             text-align: center;
-            padding: 2.5rem 1.5rem;
+            padding: 1.25rem 1rem; /* Compact header padding */
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(16px);
-            border-radius: 1.5rem;
+            border-radius: 1.25rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .journal-title-glow {
@@ -58,16 +58,16 @@
             background: rgba(30, 41, 59, 0.3);
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(12px);
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 1rem;
+            padding: 1rem 1.25rem; /* Tightened card padding */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .journal-card-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem; /* Slightly smaller for compactness */
             margin-top: 0;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.75rem; /* Tightened title spacing */
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -157,12 +157,12 @@
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.25);
             border-left: 4px solid #ef4444;
-            padding: 1rem 1.25rem;
+            padding: 0.75rem 1rem; /* Compact warning padding */
             border-radius: 0.75rem;
             display: flex;
             gap: 0.75rem;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem; /* Compact margin */
         }
 
         .alert-moratorium i {
@@ -206,7 +206,7 @@
             max-height: 2000px;
             opacity: 1;
             overflow: hidden;
-            margin-top: 1.25rem;
+            margin-top: 0.75rem; /* Reduced top gap for open tables */
         }
         .journal-card.collapsed .collapsible-content {
             max-height: 0;
@@ -272,7 +272,7 @@
             </div>
 
             <!-- Why Focus Main Market Info -->
-            <div class="alert-moratorium" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-left: 4px solid #6366f1; margin-top: -0.5rem; margin-bottom: 1.5rem;">
+            <div class="alert-moratorium" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-left: 4px solid #6366f1; margin-top: -0.25rem; margin-bottom: 1rem;">
                 <i data-lucide="info" style="color: #a5b4fc; width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.1rem;"></i>
                 <div>
                     <p style="color: #e2e8f0; font-size: 0.85rem; line-height: 1.5; margin: 0;">
