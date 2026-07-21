@@ -403,7 +403,8 @@
         // Render Stage 2 Active/Recently Closed
         function renderStage2() {
             const tableBody = document.querySelector('#stage2-table tbody');
-            const stage2Data = ipoData.filter(ipo => ipo.stage === 2);
+            // Filter Stage 2 IPOs that are Main Market only
+            const stage2Data = ipoData.filter(ipo => ipo.stage === 2 && ipo.market && ipo.market.toLowerCase().includes('main'));
             
             // Sort active open (keb) first
             stage2Data.sort((a, b) => {
@@ -516,12 +517,12 @@
                 }
             ];
 
-            // Append any other Stage 1 items from data.js
+            // Append any other Stage 1 items from data.js (Filter Main Market only)
             ipoData.forEach(item => {
-                if (item.stage === 1 && !futurePipeline.some(f => item.companyName.toLowerCase().includes(f.name.toLowerCase().substring(0, 10)))) {
+                if (item.stage === 1 && item.market && item.market.toLowerCase().includes('main') && !futurePipeline.some(f => item.companyName.toLowerCase().includes(f.name.toLowerCase().substring(0, 10)))) {
                     futurePipeline.push({
                         name: item.companyName,
-                        market: item.market || 'ACE Market',
+                        market: item.market,
                         sector: item.sector || 'N/A',
                         grade: item.predictedGrade || 'Pending',
                         fires: (item.sector && (item.sector.toLowerCase().includes('semicon') || item.sector.toLowerCase().includes('automation'))) ? 3 : 1,
