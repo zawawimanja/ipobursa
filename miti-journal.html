@@ -346,68 +346,42 @@
                 </p>
             </div>
 
-            <!-- Moratorium Warning -->
-            <div class="alert-moratorium">
-                <i data-lucide="alert-triangle" style="width: 20px; height: 20px;"></i>
-                <div>
-                    <p>
-                        <strong>Syarat Moratorium MITI 2026:</strong> Pastikan anda hanya memohon saham MITI yang bernilai tinggi. Kegagalan melunaskan bayaran alokasi penuh yang diluluskan akan menyebabkan akaun anda disekat dari semua permohonan MITI selama <strong>180 hari (6 bulan)</strong>!
-                    </p>
-                </div>
-            </div>
 
-            <!-- Why Focus Main Market Info -->
-            <div class="alert-moratorium" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-left: 4px solid #6366f1; margin-top: -0.25rem; margin-bottom: 1rem;">
-                <i data-lucide="info" style="color: #a5b4fc; width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.1rem;"></i>
-                <div>
-                    <p style="color: #e2e8f0; font-size: 0.85rem; line-height: 1.5; margin: 0;">
-                        <strong style="color: #a5b4fc;">Info Strategi MITI: Pasaran Utama (Main) vs Pasaran ACE</strong><br>
-                        • <strong>Kuota Wajib:</strong> Syarikat Main Market wajib memperuntukkan 12.5% saham khas Bumiputera (MITI). Syarikat ACE Market pula hanya secara sukarela.<br>
-                        • <strong>Kebarangkalian Alokasi Unit:</strong> Main Market menawarkan kebarangkalian agihan unit besar (3,000 - 20,000 unit) secara konsisten. Walau bagaimanapun, bagi kaunter ACE Market yang kurang persaingan, anda **masih boleh mendapat alokasi yang sangat besar** jika memohon jumlah yang tinggi (contohnya Ramssol Group Berhad di mana pemohon mendapat alokasi penuh 40,000 unit!).<br>
-                        • <strong>Kira-kira Untung Kasar (RM):</strong> Menggabungkan alokasi unit yang besar dan premium pembukaan yang sihat akan menjana keuntungan Ringgit Malaysia (RM) bersih yang paling lumayan bagi modal anda.
-                    </p>
-                </div>
-            </div>
 
-            <!-- SECTION: TRACKER ACCURACY ANALYSIS -->
-            <div class="journal-card collapsed" id="card-accuracy" style="border-left: 4px solid #10b981;">
-                <div class="journal-card-header" onclick="toggleCard('card-accuracy')">
+            <!-- SECTION: SECTOR HISTORICAL STATS -->
+            <div class="journal-card collapsed" id="card-sector-stats" style="border-left: 4px solid #f59e0b;">
+                <div class="journal-card-header" onclick="toggleCard('card-sector-stats')">
                     <h2 class="journal-card-title">
-                        <i data-lucide="shield-check" style="color: #10b981; width: 20px; height: 20px;"></i> 
-                        Analisis Risiko & Rekod Ketepatan Gred Sifu (2025-2026)
+                        <i data-lucide="bar-chart-2" style="color: #f59e0b; width: 20px; height: 20px;"></i>
+                        Statistik Sejarah Premium Hari Pertama Mengikut Sektor
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
                 <div class="collapsible-content">
-                    <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0 0 1rem 0;">
-                        Sistem tracker kami menganalisis data secara kuantitatif untuk memisahkan antara kaunter peluang tinggi (Gred A/B) dan kaunter jerat kerugian (Gred C). Berikut adalah statistik pembuktian hasil listing 2025-2026:
+                    <p style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.75rem 0;">
+                        Dikira secara automatik dari <strong id="sector-total-count">—</strong> IPO yang tersenarai dalam tracker ini (semua IPO Bursa, bukan MITI sahaja). Data ini menunjukkan sektor mana yang <em>secara historis</em> memberi premium hari pertama paling tinggi — berguna untuk menilai risiko sektor bagi permohonan MITI baharu.
                     </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.25rem;">
-                        <!-- Safe / Success Zone -->
-                        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.75rem; border-radius: 8px;">
-                            <h4 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
-                                <i data-lucide="trending-up" style="width: 16px; height: 16px;"></i> Hasil Gred A & B (Worth It)
-                            </h4>
-                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
-                                <li><strong>RTECH (Gred B):</strong> Hari 1 Buka <strong>+200.0%</strong> 🚀</li>
-                                <li><strong>Stratus (Gred A):</strong> Hari 1 Buka <strong>+145.0%</strong> 🚀</li>
-                                <li><strong>Northern Solar (Gred A):</strong> Hari 1 Buka <strong>+100.0%</strong> 🚀</li>
-                                <li><strong>Oriental Kopi (Gred B):</strong> Hari 1 Buka <strong>+47.7%</strong> 🚀</li>
-                            </ul>
-                        </div>
-                        <!-- Danger / Traps Zone -->
-                        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.75rem; border-radius: 8px;">
-                            <h4 style="color: #f87171; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
-                                <i data-lucide="alert-octagon" style="width: 16px; height: 16px;"></i> Hasil Gred C (Skip / Avoid)
-                            </h4>
-                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
-                                <li><strong>PGLOBAL (Gred C):</strong> Hari 1 Buka <strong>-31.6%</strong> 🚨</li>
-                                <li><strong>SUMI (Gred C):</strong> Hari 1 Buka <strong>-25.0%</strong> 🚨</li>
-                                <li><strong>MSB (Gred C):</strong> Hari 1 Buka <strong>-15.0%</strong> 🚨</li>
-                                <li><strong>Liftech (Gred C):</strong> Hari 1 Buka <strong>-5.2%</strong> 🚨</li>
-                            </ul>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="journal-table" id="sector-stats-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Sektor</th>
+                                    <th>Bil. IPO</th>
+                                    <th>Avg Premium</th>
+                                    <th>Win Rate</th>
+                                    <th>>20% Hari 1</th>
+                                    <th>Penilaian</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sector-stats-body">
+                                <!-- Dynamic -->
+                            </tbody>
+                        </table>
                     </div>
+                    <p style="color: var(--text-dim); font-size: 0.72rem; margin-top: 0.6rem; font-style: italic;">
+                        ⚠️ Statistik ini merangkumi <em>semua</em> IPO Bursa (public ballot + MITI). Sektor dengan sampel kecil (< 3 IPO) mungkin kurang representatif. Guna sebagai panduan sentimen pasaran, bukan jaminan pulangan.
+                    </p>
                 </div>
             </div>
 
@@ -440,6 +414,23 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+
+            <!-- SECTION: PRECEDENT ANALYSIS -->
+            <div class="journal-card collapsed" id="card-precedent" style="border-left: 4px solid #e879f9;">
+                <div class="journal-card-header" onclick="toggleCard('card-precedent')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="git-compare" style="color: #e879f9; width: 20px; height: 20px;"></i>
+                        Analisis Precedent — IPO Sebenar Yang Paling Serupa
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <p style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.75rem 0;">
+                        Bukan V7 target atau Gred semata — ini adalah IPO <strong>sebenar</strong> yang paling mirip dengan setiap permohonan MITI aktif, berdasarkan <strong>sektor, penaja, pasaran, gred dan OS</strong>. Tengok apa jadi pada diorang.
+                    </p>
+                    <div id="precedent-container"></div>
                 </div>
             </div>
 
@@ -586,73 +577,87 @@
             return isNaN(p) ? null : new Date(p);
         }
 
+        // Build sector stats lookup from listed data (reused by renderStage2)
+        function buildSectorLookup() {
+            const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && x.id !== 'skyechip');
+            const map = {};
+            listed.forEach(x => {
+                const sector = (x.sector || 'Lain-lain').split('/')[0].split('(')[0].trim();
+                if (!map[sector]) map[sector] = { total: 0, positive: 0, sum: 0, over20: 0 };
+                const prem = ((x.openPrice - x.price) / x.price) * 100;
+                map[sector].total++;
+                if (prem > 0) map[sector].positive++;
+                if (prem >= 20) map[sector].over20++;
+                map[sector].sum += prem;
+            });
+            return map;
+        }
+
+
+        // Render Stage 2 Active/Recently Closed
         // Render Stage 2 Active/Recently Closed
         function renderStage2() {
             const tableBody = document.querySelector('#stage2-table tbody');
-            // Show all Stage 2 IPOs (both Main and ACE) so we don't miss active applications like KEB Berhad
+            if (!tableBody) return;
+
             const stage2Data = ipoData.filter(ipo => ipo.stage === 2);
-            
-            // Sort active open (keb) first
             stage2Data.sort((a, b) => {
-                if (a.id === 'keb-berhad') return -1;
-                if (b.id === 'keb-berhad') return 1;
+                const aOpen = a.mitiCloseDate ? new Date(a.mitiCloseDate) >= new Date() : false;
+                const bOpen = b.mitiCloseDate ? new Date(b.mitiCloseDate) >= new Date() : false;
+                if (aOpen && !bOpen) return -1;
+                if (!aOpen && bOpen) return 1;
                 return a.companyName.localeCompare(b.companyName);
             });
 
             if (stage2Data.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-dim);">Tiada rekod Stage 2 ditemui.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text-dim);">Tiada rekod Stage 2 ditemui.</td></tr>`;
                 return;
             }
 
+            const sectorLookup = buildSectorLookup();
+
             tableBody.innerHTML = stage2Data.map(ipo => {
-                const isKeb = ipo.id === 'keb-berhad';
-                
-                let dateDisplay = '';
-                let statusLabel = '';
-                
-                if (isKeb) {
-                    dateDisplay = `<span style="color: #10b981; font-weight:600;">13 Jul - 22 Jul</span>`;
-                    statusLabel = `<span style="color: #10b981; font-weight:700; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(16,185,129,0.2); font-size: 0.7rem;">ACTIVE OPEN</span>`;
-                } else {
-                    dateDisplay = `<span style="color: var(--text-dim);">Closed</span>`;
-                    statusLabel = `<span style="color: #f87171; font-weight:700; background: rgba(239, 68, 68, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(239,68,68,0.2); font-size: 0.7rem;">ALREADY CLOSED</span>`;
-                }
+                const today = new Date();
+                const mitiClose = ipo.mitiCloseDate ? new Date(ipo.mitiCloseDate) : null;
+                const isActive = mitiClose && mitiClose >= today;
+
+                const dateDisplay = ipo.mitiOpenDate && ipo.mitiCloseDate
+                    ? `${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}`
+                    : isActive ? `<span style="color:#10b981;">Buka</span>` : `<span style="color:var(--text-dim);">Closed</span>`;
+
+                const statusLabel = isActive
+                    ? `<span style="color:#10b981;font-weight:700;background:rgba(16,185,129,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(16,185,129,0.2);font-size:0.7rem;">ACTIVE</span>`
+                    : `<span style="color:#f87171;font-weight:700;background:rgba(239,68,68,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(239,68,68,0.2);font-size:0.7rem;">CLOSED</span>`;
 
                 const grade = ipo.predictedGrade || 'B';
                 const sector = ipo.sector || 'N/A';
-                
-                // Detailed analysis and verdict
+                const sectorKey = sector.split('/')[0].split('(')[0].trim();
+
+                // Sector win rate inline badge from historical data
+                const ss = sectorLookup[sectorKey];
+                let sectorBadge = '';
+                if (ss && ss.total >= 2) {
+                    const avg = ss.sum / ss.total;
+                    const wr = (ss.positive / ss.total * 100).toFixed(0);
+                    const sColor = avg >= 30 ? '#10b981' : avg >= 10 ? '#60a5fa' : avg >= 0 ? '#fbbf24' : '#f87171';
+                    const avgStr = (avg >= 0 ? '+' : '') + avg.toFixed(1) + '%';
+                    sectorBadge = `<div style="font-size:0.68rem;color:${sColor};margin-top:0.15rem;">avg ${avgStr} | win ${wr}%</div>`;
+                }
+
                 let verdictBadge = '';
-                let rawInsight = ipo.analystInsight || '';
-                
-                if (!rawInsight) {
-                    if (ipo.id === 'spb-development-berhad') {
-                        rawInsight = 'Syarikat pemaju hartanah perumahan di utara Semenanjung. Kunci kira-kira kukuh, penaja M&A Securities.';
-                    } else if (grade === 'C') {
-                        rawInsight = 'Syarikat berkualiti rendah / tiada SWOT. Risiko fluktuasi harga bahan mentah dan persaingan pasaran sengit. Disarankan Skip.';
-                    } else {
-                        rawInsight = 'Syarikat draft prospektus dalam fasa kelulusan. Fundamental stabil dengan prospek pertumbuhan sederhana.';
-                    }
-                }
-
-                // Clean tags for preview
-                let cleanUlasan = rawInsight.replace(/<br>/gi, ' ').replace(/<\/?[^>]+(>|$)/g, "");
-
                 if (grade === 'A') {
-                    verdictBadge = `<span style="color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">WORTH IT (GRADE A)</span>`;
+                    verdictBadge = `<span style="color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">WORTH IT (A)</span>`;
                 } else if (grade === 'B') {
-                    verdictBadge = `<span style="color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">SWING (GRADE B)</span>`;
+                    verdictBadge = `<span style="color:#fbbf24;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">SWING (B)</span>`;
                 } else {
-                    verdictBadge = `<span style="color: #f87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.15rem 0.4rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem;">AVOID (GRADE C)</span>`;
+                    verdictBadge = `<span style="color:#f87171;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">AVOID (C)</span>`;
                 }
 
-                const marketLabel = ipo.market && ipo.market.toLowerCase().includes('main')
-                    ? `<span style="font-size:0.7rem; color: #a5b4fc; background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">MAIN</span>`
-                    : `<span style="font-size:0.7rem; color: #f472b6; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.2); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 600;">ACE</span>`;
+                const marketLabel = (ipo.market || '').toLowerCase().includes('main')
+                    ? `<span style="font-size:0.7rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>`
+                    : `<span style="font-size:0.7rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>`;
 
-                // Calculate fires based on Sifu Multi-factor Analysis (Sektor, Penaja, Fundamental)
                 const fires = calculateSifuHype(ipo);
-                
                 let fireStr = '';
                 for (let i = 0; i < fires; i++) fireStr += '🔥';
 
@@ -660,26 +665,33 @@
                     <tr>
                         <td><strong>${ipo.companyName}</strong></td>
                         <td>${marketLabel}</td>
-                        <td>${(ipo.sector || 'N/A').split('(')[0]}</td>
+                        <td>
+                            <div>${sector.split('(')[0].trim()}</div>
+                            ${sectorBadge}
+                        </td>
                         <td>RM ${ipo.price ? ipo.price.toFixed(3) : 'TBA'}</td>
-                        <td>${dateDisplay}</td>
-                        <td><span style="font-weight: 700; color: #a78bfa;">${grade}</span></td>
+                        <td style="font-size:0.8rem;">${dateDisplay}</td>
+                        <td><span style="font-weight:700;color:#a78bfa;">${grade}</span></td>
                         <td><div class="fire-rating">${fireStr}</div></td>
                         <td>
-                            <div style="display: flex; gap: 0.35rem; margin-bottom: 0.25rem; align-items: center; flex-wrap: wrap;">
+                            <div style="display:flex;gap:0.35rem;align-items:center;flex-wrap:wrap;">
                                 ${statusLabel}
                                 ${verdictBadge}
-                            </div>
-                            <div style="font-size: 0.75rem; color: var(--text-dim); max-width: 320px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" title="${cleanUlasan}">
-                                ${cleanUlasan}
                             </div>
                         </td>
                     </tr>
                 `;
             }).join('');
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // Render Future Stage 1 Drafts
+
+
+
+
+
+                // Render Future Stage 1 Drafts
         function renderFuture() {
             const tableBody = document.querySelector('#future-table tbody');
             
@@ -861,11 +873,239 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
+        // Render Sector Historical Stats
+        function renderSectorStats() {
+            const tbody = document.getElementById('sector-stats-body');
+            const countEl = document.getElementById('sector-total-count');
+            if (!tbody) return;
+
+            // Only listed IPOs with open prices
+            const listed = ipoData.filter(x =>
+                x.status === 'Listed' &&
+                x.openPrice != null &&
+                x.price != null &&
+                x.id !== 'skyechip'
+            );
+
+            if (countEl) countEl.textContent = listed.length;
+
+            // Group by sector (take first part before '/' or '(')
+            const sectorMap = {};
+            listed.forEach(x => {
+                const rawSector = (x.sector || 'Lain-lain');
+                const sector = rawSector.split('/')[0].split('(')[0].trim();
+                if (!sectorMap[sector]) sectorMap[sector] = { total: 0, positive: 0, sum: 0, over20: 0 };
+                const prem = ((x.openPrice - x.price) / x.price) * 100;
+                sectorMap[sector].total++;
+                if (prem > 0) sectorMap[sector].positive++;
+                if (prem >= 20) sectorMap[sector].over20++;
+                sectorMap[sector].sum += prem;
+            });
+
+            // Sort by avg premium desc, min 2 IPOs
+            const sorted = Object.entries(sectorMap)
+                .filter(([, d]) => d.total >= 2)
+                .sort((a, b) => (b[1].sum / b[1].total) - (a[1].sum / a[1].total));
+
+            tbody.innerHTML = sorted.map(([sector, d], idx) => {
+                const avg = d.sum / d.total;
+                const winRate = (d.positive / d.total) * 100;
+                const avgStr = (avg >= 0 ? '+' : '') + avg.toFixed(1) + '%';
+                const winStr = winRate.toFixed(0) + '%';
+                const over20Str = d.over20 + '/' + d.total;
+
+                // Color coding
+                let avgColor = '#94a3b8'; // neutral
+                let rowHighlight = '';
+                let verdict = '';
+                let verdictColor = '';
+
+                if (avg >= 30) {
+                    avgColor = '#10b981'; verdictColor = '#10b981';
+                    verdict = '🔥 Terpanas';
+                    rowHighlight = 'background: rgba(16, 185, 129, 0.04);';
+                } else if (avg >= 15) {
+                    avgColor = '#60a5fa'; verdictColor = '#60a5fa';
+                    verdict = '✅ Kukuh';
+                    rowHighlight = 'background: rgba(96, 165, 250, 0.04);';
+                } else if (avg >= 5) {
+                    avgColor = '#fbbf24'; verdictColor = '#fbbf24';
+                    verdict = '⚠️ Sederhana';
+                    rowHighlight = 'background: rgba(251, 191, 36, 0.04);';
+                } else if (avg >= 0) {
+                    avgColor = '#f97316'; verdictColor = '#f97316';
+                    verdict = '😐 Lemah';
+                    rowHighlight = '';
+                } else {
+                    avgColor = '#f87171'; verdictColor = '#f87171';
+                    verdict = '💀 Bahaya';
+                    rowHighlight = 'background: rgba(239, 68, 68, 0.06);';
+                }
+
+                const rankBadge = idx === 0 
+                    ? `<span style="background:#f59e0b;color:#000;padding:0.1rem 0.35rem;border-radius:4px;font-weight:700;font-size:0.7rem;">#${idx+1}</span>`
+                    : `<span style="color:var(--text-dim);font-size:0.8rem;">${idx+1}</span>`;
+
+                return `
+                    <tr style="${rowHighlight}">
+                        <td>${rankBadge}</td>
+                        <td><strong>${sector}</strong></td>
+                        <td style="color:var(--text-dim);">${d.total}</td>
+                        <td style="color:${avgColor};font-weight:700;">${avgStr}</td>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:0.4rem;">
+                                <div style="width:50px;height:5px;border-radius:3px;background:rgba(255,255,255,0.1);">
+                                    <div style="width:${winRate.toFixed(0)}%;height:100%;border-radius:3px;background:${avgColor};transition:width 0.5s;"></div>
+                                </div>
+                                <span style="color:${avgColor};font-weight:600;font-size:0.8rem;">${winStr}</span>
+                            </div>
+                        </td>
+                        <td style="color:var(--text-dim);">${over20Str}</td>
+                        <td><span style="color:${verdictColor};font-weight:600;font-size:0.8rem;">${verdict}</span></td>
+                    </tr>
+                `;
+            }).join('');
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+
+        // Render Precedent Analysis — find most comparable historical IPOs for each Stage 2 IPO
+        function renderPrecedent() {
+            const container = document.getElementById('precedent-container');
+            if (!container) return;
+
+            const stage2 = ipoData.filter(x => x.stage === 2);
+            const listed = ipoData.filter(x =>
+                x.status === 'Listed' &&
+                x.openPrice != null &&
+                x.price != null
+            );
+
+            if (stage2.length === 0) {
+                container.innerHTML = `<p style="color:var(--text-dim);font-size:0.8rem;">Tiada IPO Stage 2 untuk dianalisis.</p>`;
+                return;
+            }
+
+            // OS bucket helper
+            function osBucket(os) {
+                if (!os) return null;
+                if (os <= 3) return 'very-low';
+                if (os <= 10) return 'low';
+                if (os <= 30) return 'mid';
+                if (os <= 80) return 'high';
+                return 'very-high';
+            }
+
+            // Sector root (first word match)
+            function sectorRoot(s) {
+                return (s || '').toLowerCase().split(/[\s\/\(]/)[0];
+            }
+
+            container.innerHTML = stage2.map(target => {
+                const targetSector = sectorRoot(target.sector);
+                const targetIb = (target.ib || '').toLowerCase();
+                const targetMarket = (target.market || '').toLowerCase().includes('main') ? 'main' : 'ace';
+                const targetGrade = target.predictedGrade || '?';
+                const targetOsBucket = osBucket(target.os);
+
+                // Score each listed IPO
+                const scored = listed.map(comp => {
+                    let score = 0;
+                    const compSector = sectorRoot(comp.sector);
+                    const compIb = (comp.ib || '').toLowerCase();
+                    const compMarket = (comp.market || '').toLowerCase().includes('main') ? 'main' : 'ace';
+                    const compGrade = comp.predictedGrade || '?';
+                    const compOsBucket = osBucket(comp.os);
+
+                    if (compSector && targetSector && compSector === targetSector) score += 3;
+                    if (compIb && targetIb && compIb.includes(targetIb.split(' ')[0]) || targetIb.includes(compIb.split(' ')[0])) score += 2;
+                    if (compMarket === targetMarket) score += 1;
+                    if (compGrade === targetGrade && compGrade !== '?') score += 1;
+                    if (compOsBucket && targetOsBucket && compOsBucket === targetOsBucket) score += 1;
+
+                    return { comp, score };
+                });
+
+                // Sort by score desc, take top 5 (score > 0)
+                const top = scored
+                    .filter(x => x.score > 0 && x.comp.id !== target.id)
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 5);
+
+                const rows = top.map(({ comp, score }) => {
+                    const day1Prem = ((comp.openPrice - comp.price) / comp.price * 100).toFixed(1);
+                    const currPrem = comp.currentPrice
+                        ? ((comp.currentPrice - comp.price) / comp.price * 100).toFixed(1)
+                        : null;
+                    const day1Color = parseFloat(day1Prem) >= 20 ? '#10b981' : parseFloat(day1Prem) >= 0 ? '#60a5fa' : '#f87171';
+                    const currColor = currPrem !== null ? (parseFloat(currPrem) >= 0 ? '#10b981' : '#f87171') : '#94a3b8';
+                    const day1Icon = parseFloat(day1Prem) >= 20 ? '🚀' : parseFloat(day1Prem) >= 0 ? '✅' : '🔴';
+
+                    // Match tags
+                    const tags = [];
+                    const compSector = sectorRoot(comp.sector);
+                    const compIb = (comp.ib || '').toLowerCase();
+                    if (compSector === targetSector) tags.push(`<span style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Sektor</span>`);
+                    if (compIb.includes(targetIb.split(' ')[0]) || targetIb.includes(compIb.split(' ')[0])) tags.push(`<span style="background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">IB</span>`);
+                    if ((comp.market||'').toLowerCase().includes('main') ? 'main':'ace' === targetMarket) tags.push(`<span style="background:rgba(236,72,153,0.1);color:#f472b6;border:1px solid rgba(236,72,153,0.2);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Pasaran</span>`);
+                    if ((comp.predictedGrade||'?') === (target.predictedGrade||'?') && comp.predictedGrade !== '?') tags.push(`<span style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Gred</span>`);
+                    if (osBucket(comp.os) === osBucket(target.os) && comp.os) tags.push(`<span style="background:rgba(20,184,166,0.15);color:#2dd4bf;border:1px solid rgba(20,184,166,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">OS Range</span>`);
+
+                    return `
+                    <tr>
+                        <td>
+                            <div style="font-weight:600;font-size:0.82rem;">${comp.companyName}</div>
+                            <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.1rem;">${(comp.sector||'').split('(')[0].trim()}</div>
+                            <div style="display:flex;gap:0.2rem;flex-wrap:wrap;margin-top:0.2rem;">${tags.join('')}</div>
+                        </td>
+                        <td style="font-size:0.8rem;color:var(--text-dim);">${comp.ib || '—'}</td>
+                        <td style="font-size:0.8rem;color:var(--text-dim);">${comp.os != null ? comp.os + 'x' : '—'}</td>
+                        <td style="font-size:0.8rem;font-weight:700;color:var(--text-dim);">${comp.predictedGrade || '?'}</td>
+                        <td style="font-weight:700;color:${day1Color};">${day1Icon} ${parseFloat(day1Prem) >= 0 ? '+' : ''}${day1Prem}%</td>
+                        <td style="font-weight:700;color:${currColor};">${currPrem !== null ? (parseFloat(currPrem) >= 0 ? '+' : '') + currPrem + '%' : '—'}</td>
+                    </tr>`;
+                }).join('');
+
+                const isActive = target.mitiCloseDate && new Date(target.mitiCloseDate) >= new Date();
+                const statusDot = isActive ? '🟢' : '🔴';
+
+                return `
+                <div style="margin-bottom:1.25rem;">
+                    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap;">
+                        <span style="font-size:0.85rem;">${statusDot}</span>
+                        <strong style="color:white;font-size:0.95rem;">${target.companyName}</strong>
+                        <span style="font-size:0.75rem;color:var(--text-dim);">— Comparable berdasarkan data sebenar tracker</span>
+                    </div>
+                    ${top.length === 0 ? `<p style="color:var(--text-dim);font-size:0.8rem;padding:0.5rem 0;">Tiada comparable ditemui dalam tracker.</p>` : `
+                    <div class="table-responsive">
+                        <table class="journal-table" style="font-size:0.8rem;">
+                            <thead>
+                                <tr>
+                                    <th>Syarikat Comparable</th>
+                                    <th>Penaja</th>
+                                    <th>OS</th>
+                                    <th>Gred</th>
+                                    <th>Hari 1</th>
+                                    <th>Sekarang</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>`}
+                </div>`;
+            }).join('<hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:0.75rem 0;">');
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
         // Initialize lists on load
         document.addEventListener('DOMContentLoaded', () => {
             renderStage2();
             renderFuture();
             renderHistorical();
+            renderSectorStats();
+            renderPrecedent();
         });
     </script>
 </body>
