@@ -181,6 +181,38 @@
         .alert-moratorium strong {
             color: #f87171;
         }
+
+        /* Collapsible Journal Cards */
+        .journal-card-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .journal-card-title {
+            margin: 0 !important;
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-dim);
+            cursor: pointer;
+        }
+        .journal-card.collapsed .chevron-icon {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+            max-height: 2000px;
+            opacity: 1;
+            overflow: hidden;
+            margin-top: 1.25rem;
+        }
+        .journal-card.collapsed .collapsible-content {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
     </style>
 </head>
 
@@ -240,79 +272,94 @@
             </div>
 
             <!-- SECTION 1: ACTIVE STAGE 2 -->
-            <div class="journal-card">
-                <h2 class="journal-card-title">
-                    <i data-lucide="clock" style="color: #6366f1; width: 20px; height: 20px;"></i> 
-                    Fasa Permohonan MITI Semasa & Baru Tutup (Stage 2)
-                </h2>
-                <div class="table-responsive">
-                    <table class="journal-table" id="stage2-table">
-                        <thead>
-                            <tr>
-                                <th>Syarikat</th>
-                                <th>Market</th>
-                                <th>Sektor</th>
-                                <th>Harga</th>
-                                <th>Tempoh MITI</th>
-                                <th>Gred</th>
-                                <th>Keputusan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynanmic Content Injected Here -->
-                        </tbody>
-                    </table>
+            <div class="journal-card" id="card-stage2">
+                <div class="journal-card-header" onclick="toggleCard('card-stage2')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="clock" style="color: #6366f1; width: 20px; height: 20px;"></i> 
+                        Fasa Permohonan MITI Semasa & Baru Tutup (Stage 2)
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <div class="table-responsive">
+                        <table class="journal-table" id="stage2-table">
+                            <thead>
+                                <tr>
+                                    <th>Syarikat</th>
+                                    <th>Market</th>
+                                    <th>Sektor</th>
+                                    <th>Harga</th>
+                                    <th>Tempoh MITI</th>
+                                    <th>Gred</th>
+                                    <th>Keputusan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynanmic Content Injected Here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <!-- SECTION 2: FUTURE DRAFTS -->
-            <div class="journal-card">
-                <h2 class="journal-card-title">
-                    <i data-lucide="compass" style="color: #10b981; width: 20px; height: 20px;"></i> 
-                    Radar Masa Depan / Future MITI (Stage 1 Draft Pipeline)
-                </h2>
-                <div class="table-responsive">
-                    <table class="journal-table" id="future-table">
-                        <thead>
-                            <tr>
-                                <th>Syarikat</th>
-                                <th>Market</th>
-                                <th>Sektor</th>
-                                <th>Gred Awal</th>
-                                <th>Hype Rating</th>
-                                <th>Catatan Fundamental / Pemangkin</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynamic Content Injected Here -->
-                        </tbody>
-                    </table>
+            <div class="journal-card" id="card-future">
+                <div class="journal-card-header" onclick="toggleCard('card-future')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="compass" style="color: #10b981; width: 20px; height: 20px;"></i> 
+                        Radar Masa Depan / Future MITI (Stage 1 Draft Pipeline)
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <div class="table-responsive">
+                        <table class="journal-table" id="future-table">
+                            <thead>
+                                <tr>
+                                    <th>Syarikat</th>
+                                    <th>Market</th>
+                                    <th>Sektor</th>
+                                    <th>Gred Awal</th>
+                                    <th>Hype Rating</th>
+                                    <th>Catatan Fundamental / Pemangkin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic Content Injected Here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <!-- SECTION 3: PAST HISTORICAL RECORD -->
-            <div class="journal-card">
-                <h2 class="journal-card-title">
-                    <i data-lucide="history" style="color: #fbbf24; width: 20px; height: 20px;"></i> 
-                    Rekod Sejarah Penyenaraian (Main Market MITI)
-                </h2>
-                <div class="table-responsive">
-                    <table class="journal-table" id="historical-table">
-                        <thead>
-                            <tr>
-                                <th>Syarikat</th>
-                                <th>Sektor</th>
-                                <th>Harga IPO</th>
-                                <th>Harga Buka</th>
-                                <th>Premium Buka</th>
-                                <th>Premium ATH</th>
-                                <th>Saranan Strategi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dynamic Content Injected Here -->
-                        </tbody>
-                    </table>
+            <div class="journal-card" id="card-historical">
+                <div class="journal-card-header" onclick="toggleCard('card-historical')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="history" style="color: #fbbf24; width: 20px; height: 20px;"></i> 
+                        Rekod Sejarah Penyenaraian (Main Market MITI)
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <div class="table-responsive">
+                        <table class="journal-table" id="historical-table">
+                            <thead>
+                                <tr>
+                                    <th>Syarikat</th>
+                                    <th>Sektor</th>
+                                    <th>Harga IPO</th>
+                                    <th>Harga Buka</th>
+                                    <th>Premium Buka</th>
+                                    <th>Premium ATH</th>
+                                    <th>Saranan Strategi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic Content Injected Here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -322,6 +369,14 @@
     <script>
         // Setup icons
         if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        // Collapsible Card Toggle function
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.toggle('collapsed');
+            }
+        }
 
         // Helper: Parse date formatted as DD-MMM-YYYY or ISO
         function parseFlexDate(str) {
