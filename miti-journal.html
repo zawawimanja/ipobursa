@@ -278,6 +278,48 @@
                 </div>
             </div>
 
+            <!-- SECTION: TRACKER ACCURACY ANALYSIS -->
+            <div class="journal-card collapsed" id="card-accuracy" style="border-left: 4px solid #10b981; margin-bottom: 1rem;">
+                <div class="journal-card-header" onclick="toggleCard('card-accuracy')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="shield-check" style="color: #10b981; width: 20px; height: 20px;"></i> 
+                        Analisis Risiko & Rekod Ketepatan Gred Sifu (2025-2026)
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0 0 1rem 0;">
+                        Sistem tracker kami menganalisis data secara kuantitatif untuk memisahkan antara kaunter peluang tinggi (Gred A/B) dan kaunter jerat kerugian (Gred C). Berikut adalah statistik pembuktian hasil listing 2025-2026:
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.25rem;">
+                        <!-- Safe / Success Zone -->
+                        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.75rem; border-radius: 8px;">
+                            <h4 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                                <i data-lucide="trending-up" style="width: 16px; height: 16px;"></i> Hasil Gred A & B (Worth It)
+                            </h4>
+                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
+                                <li><strong>RTECH (Gred B):</strong> Hari 1 Buka <strong>+200.0%</strong> 🚀</li>
+                                <li><strong>Stratus (Gred A):</strong> Hari 1 Buka <strong>+145.0%</strong> 🚀</li>
+                                <li><strong>Northern Solar (Gred A):</strong> Hari 1 Buka <strong>+100.0%</strong> 🚀</li>
+                                <li><strong>Oriental Kopi (Gred B):</strong> Hari 1 Buka <strong>+47.7%</strong> 🚀</li>
+                            </ul>
+                        </div>
+                        <!-- Danger / Traps Zone -->
+                        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.75rem; border-radius: 8px;">
+                            <h4 style="color: #f87171; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
+                                <i data-lucide="alert-octagon" style="width: 16px; height: 16px;"></i> Hasil Gred C (Skip / Avoid)
+                            </h4>
+                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
+                                <li><strong>PGLOBAL (Gred C):</strong> Hari 1 Buka <strong>-31.6%</strong> 🚨</li>
+                                <li><strong>SUMI (Gred C):</strong> Hari 1 Buka <strong>-25.0%</strong> 🚨</li>
+                                <li><strong>MSB (Gred C):</strong> Hari 1 Buka <strong>-15.0%</strong> 🚨</li>
+                                <li><strong>Liftech (Gred C):</strong> Hari 1 Buka <strong>-5.2%</strong> 🚨</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- SECTION 1: ACTIVE STAGE 2 -->
             <div class="journal-card" id="card-stage2">
                 <div class="journal-card-header" onclick="toggleCard('card-stage2')">
@@ -340,47 +382,7 @@
                 </div>
             </div>
 
-            <!-- SECTION: TRACKER ACCURACY ANALYSIS -->
-            <div class="journal-card collapsed" id="card-accuracy" style="border-left: 4px solid #10b981;">
-                <div class="journal-card-header" onclick="toggleCard('card-accuracy')">
-                    <h2 class="journal-card-title">
-                        <i data-lucide="shield-check" style="color: #10b981; width: 20px; height: 20px;"></i> 
-                        Analisis Risiko & Rekod Ketepatan Gred Sifu (2025-2026)
-                    </h2>
-                    <i data-lucide="chevron-down" class="chevron-icon"></i>
-                </div>
-                <div class="collapsible-content">
-                    <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.5; margin: 0 0 1rem 0;">
-                        Sistem tracker kami menganalisis data secara kuantitatif untuk memisahkan antara kaunter peluang tinggi (Gred A/B) dan kaunter jerat kerugian (Gred C). Berikut adalah statistik pembuktian hasil listing 2025-2026:
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.25rem;">
-                        <!-- Safe / Success Zone -->
-                        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.75rem; border-radius: 8px;">
-                            <h4 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
-                                <i data-lucide="trending-up" style="width: 16px; height: 16px;"></i> Hasil Gred A & B (Worth It)
-                            </h4>
-                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
-                                <li><strong>RTECH (Gred B):</strong> Hari 1 Buka <strong>+200.0%</strong> 🚀</li>
-                                <li><strong>Stratus (Gred A):</strong> Hari 1 Buka <strong>+145.0%</strong> 🚀</li>
-                                <li><strong>Northern Solar (Gred A):</strong> Hari 1 Buka <strong>+100.0%</strong> 🚀</li>
-                                <li><strong>Oriental Kopi (Gred B):</strong> Hari 1 Buka <strong>+47.7%</strong> 🚀</li>
-                            </ul>
-                        </div>
-                        <!-- Danger / Traps Zone -->
-                        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.75rem; border-radius: 8px;">
-                            <h4 style="color: #f87171; margin: 0 0 0.5rem 0; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem;">
-                                <i data-lucide="alert-octagon" style="width: 16px; height: 16px;"></i> Hasil Gred C (Skip / Avoid)
-                            </h4>
-                            <ul style="color: #e2e8f0; font-size: 0.75rem; margin: 0; padding-left: 1.2rem; line-height: 1.6;">
-                                <li><strong>PGLOBAL (Gred C):</strong> Hari 1 Buka <strong>-31.6%</strong> 🚨</li>
-                                <li><strong>SUMI (Gred C):</strong> Hari 1 Buka <strong>-25.0%</strong> 🚨</li>
-                                <li><strong>MSB (Gred C):</strong> Hari 1 Buka <strong>-15.0%</strong> 🚨</li>
-                                <li><strong>Liftech (Gred C):</strong> Hari 1 Buka <strong>-5.2%</strong> 🚨</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- SECTION 3: PAST HISTORICAL RECORD -->
             <div class="journal-card" id="card-historical">
