@@ -337,9 +337,15 @@
     </style>
 </head>
 <body>
-    <div class="nav-container">
+    <div class="nav-container" style="display: flex; gap: 20px;">
         <a href="index.html" class="nav-link">
             <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+        <a href="tips.html" class="nav-link">
+            <i class="fas fa-lightbulb"></i> Tips
+        </a>
+        <a href="blog.html" class="nav-link">
+            <i class="fas fa-book-open"></i> IPO Analysis
         </a>
     </div>
 
@@ -742,6 +748,23 @@
             }
         });
     </script>
+
+    <footer class="glass-footer" style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(255,255,255,0.08); padding: 3rem 0 2rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center;">
+            <div style="max-width: 800px; margin: 0 auto 2rem auto; font-size: 0.75rem; color: #94a3b8; line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.5rem; text-align: left;">
+                <p>⚠️ <strong>Penafian Kewangan (Financial Disclaimer):</strong> Semua maklumat, analisis, gred, unjuran harga, dan pengiraan kalkulator yang dipaparkan di laman web ini adalah bertujuan untuk rujukan pembelajaran dan pendidikan sahaja. Ia tidak boleh dianggap sebagai nasihat pelaburan, syor membeli atau menjual mana-mana sekuriti. Pelaburan pasaran saham terutamanya langganan IPO membawa risiko kerugian modal yang tinggi. Kami tidak menjamin ketepatan maklumat yang dikumpul. Anda dinasihatkan untuk berunding dengan penasihat kewangan berlesen sebelum membuat sebarang keputusan pelaburan.</p>
+            </div>
+            <div class="footer-content" style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+                <p style="font-size: 0.85rem; color: #94a3b8;">&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem;">
+                    <a href="privacy-policy.html" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Privacy Policy</a>
+                    <a href="terms.html" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Terms of Service</a>
+                    <a href="about.html" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">About Us</a>
+                    <a href="contact.html" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#94a3b8'">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- LIGHTBOX LIGHT-WEIGHT MODAL -->
     <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Bursa IPO Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+        .form-group input, .form-group textarea {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            color: white;
+            outline: none;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.2);"></div>
+        <div class="blob blob-3" style="background: rgba(245, 158, 11, 0.2);"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 3rem; margin-bottom: 5rem;">
+        <header class="hero" style="text-align: center; margin-bottom: 3rem;">
+            <h1>Contact <span>Us</span></h1>
+            <p>Have questions, suggestions, or want to report incorrect data? Get in touch with us.</p>
+        </header>
+
+        <section class="glass-card" style="padding: 2.5rem; max-width: 600px; margin: 0 auto; line-height: 1.8; text-align: center;">
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">
+                    <i data-lucide="mail" style="color: var(--primary-light); width: 18px;"></i>
+                    <span>support@bursaipo.my</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.9rem;">
+                    <i data-lucide="map-pin" style="color: var(--primary-light); width: 18px;"></i>
+                    <span>Kuala Lumpur, Malaysia</span>
+                </div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Thank you for contacting us! We will get back to you shortly.'); this.reset();">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="e.g. Ali">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="e.g. ali@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" required placeholder="e.g. Data correction / Feedback">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required placeholder="Write your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn-moomoo" style="width: 100%; justify-content: center; margin-top: 1.5rem; background: var(--primary); border: none; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); cursor: pointer;">
+                    Send Message
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container" style="text-align: center; padding: 2rem 0;">
+            <p>&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; font-size: 0.85rem;">
+                <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
+                <a href="about.html" style="color: var(--text-dim); text-decoration: none;">About Us</a>
+                <a href="contact.html" style="color: var(--primary-light); text-decoration: none;">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

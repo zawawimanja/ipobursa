@@ -162,6 +162,7 @@
     },
     "gb-bond-holdings-berhad": {
         "shariah": true,
+        "geography": "Penang",
         "sector": "Industrial Products & Services (Chemicals)",
         "predictedGrade": "B",
         "sifuTargetPrice": 0.30,

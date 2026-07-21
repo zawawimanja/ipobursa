@@ -1,0 +1,23 @@
+{
+  "osLinear": -0.045479,
+  "osQuad": -0.027829,
+  "tech": 1.094659,
+  "consumer": 0.983594,
+  "energy": 0.992896,
+  "health": 1.088745,
+  "industrial": 0.966187,
+  "construction": 1.155089,
+  "main": 1.089565,
+  "ibInf": 0.119831,
+  "ofs": 0.909459,
+  "ff": -1.007622,
+  "qual": 0.123072,
+  "pe": -0.027927,
+  "lockup": 0.051254,
+  "_training": {
+    "hitRate": "86.5%",
+    "downsideErr": "13.5%",
+    "upsideMissed": "28.4%",
+    "overallAcc": "73.81%"
+  }
+}
