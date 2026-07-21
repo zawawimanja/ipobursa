@@ -195,6 +195,24 @@ async function scrapeMitiAndDraftIPOs(existingData) {
                 nextElem = nextElem.next();
             }
 
+            // Extract MITI open/close dates from details text
+            let mitiOpenDate = null;
+            let mitiCloseDate = null;
+            if (currentSection === 'MITI' && detailsText) {
+                const allDates = detailsText.match(/\d{1,2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-\d{4}/g);
+                if (allDates && allDates.length >= 2) {
+                    mitiOpenDate = allDates[0];
+                    mitiCloseDate = allDates[1];
+                } else if (allDates && allDates.length === 1) {
+                    // Try to infer: if text contains "close" or "tutup", it's close date
+                    if (/close|tutup|akhir/i.test(detailsText)) {
+                        mitiCloseDate = allDates[0];
+                    } else {
+                        mitiOpenDate = allDates[0];
+                    }
+                }
+            }
+
             let stage = currentSection === 'MITI' ? 2 : 1;
             let status = currentSection === 'MITI' ? 'MITI Allocation Phase' : 'Draft / Exposure Phase';
             
@@ -206,15 +224,21 @@ async function scrapeMitiAndDraftIPOs(existingData) {
                     existing.stage = stage;
                     existing.status = status;
                 }
+                // Always update MITI dates if found
+                if (mitiOpenDate) existing.mitiOpenDate = mitiOpenDate;
+                if (mitiCloseDate) existing.mitiCloseDate = mitiCloseDate;
             } else {
-                existingData.push({
+                const newEntry = {
                     id: companyName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                     companyName,
                     stage,
                     status,
                     price: 0,
                     year: new Date().getFullYear()
-                });
+                };
+                if (mitiOpenDate) newEntry.mitiOpenDate = mitiOpenDate;
+                if (mitiCloseDate) newEntry.mitiCloseDate = mitiCloseDate;
+                existingData.push(newEntry);
             }
             count++;
         }
@@ -472,6 +496,20 @@ function autoPromoteIPOs(finalData) {
             ipo.status = 'Listed';
             promotedCount++;
             console.log(`  [Auto-Promote] ${ipo.companyName} (Status Listed or Year < 2026 -> Stage 5)`);
+        }
+
+        // Stage 2: MITI phase — promote to Stage 3 when MITI close date has passed
+        if (ipo.stage === 2) {
+            const closeStr = ipo.mitiCloseDate || ipo.closingDate;
+            if (closeStr) {
+                const closeDate = parseFlexDate(closeStr);
+                if (closeDate && closeDate < now) {
+                    ipo.stage = 3;
+                    ipo.status = 'Application Open';
+                    promotedCount++;
+                    console.log(`  [Auto-Promote] ${ipo.companyName} (MITI close ${closeStr} passed -> Stage 3)`);
+                }
+            }
         }
 
         if (ipo.stage >= 3) {

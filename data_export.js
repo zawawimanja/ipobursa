@@ -363,10 +363,10 @@ const IPO_DATA = [
     "id": "stratus-global",
     "companyName": "Stratus Global Holdings Berhad",
     "sector": "Factory Automation / Cleanroom Handling",
-    "stage": 2,
-    "price": 0.75,
+    "stage": 5,
+    "price": 0.8,
     "market": "Main Market",
-    "status": "MITI Allocation Phase",
+    "status": "Listed",
     "closingDate": "2026-05-14T17:00:00",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "year": 2026,
@@ -376,10 +376,18 @@ const IPO_DATA = [
     "fundUse": "Expansion & R&D",
     "predictedGrade": "B",
     "analystInsight": "✅ <b>WORTH IT — VALUE PLAY SEBENAR (GRADE B)</b><br>Stratus Global adalah <b>factory automation + cleanroom AMHS provider untuk industri semiconductor</b> — sektor paling hot 2026.<br><br>📊 <b>Kenapa menarik:</b><br>• PE hanya ~14x vs peers Tech (29.8x) dan Semiconductor (38.2x) = <b>diskaun 50-60%</b><br>• Tiada OFS — pure public issue 356.25M shares<br>• Main Market (RM937M mktcap) = institutional backing kuat<br>• Shariah-compliant ✅<br><br>⚠️ <b>Satu-satunya risiko:</b> IB UOB Kay Hian — rekod kita hanya GDGROUP (Consumer sector, -11%) tapi tu sektor berbeza. Untuk Main Market semiconductor play, story fundamental lebih dominant dari IB retail reputation.<br><br><b>Kesimpulan: Apply. Target RM0.95+. Ini lebih kepada hold play bukan pure scalp.</b>",
-    "symbol": "Stratus Global Holdings Berhad",
+    "symbol": "STRATUS",
     "sifuTargetPrice": 1.04,
-    "dailyChange": null,
-    "calibratedSifuTargetPrice": 1.04
+    "dailyChange": 145,
+    "calibratedSifuTargetPrice": 1.04,
+    "stockCode": "5356",
+    "openPrice": 1.96,
+    "currentPrice": 1.96,
+    "closePrice": 1.96,
+    "highPrice": 2.03,
+    "performance": "+145.00%",
+    "listingDate": "21-Jul-2026",
+    "strategy": "Swing"
   },
   {
     "id": "ei-power",
@@ -5891,7 +5899,9 @@ const IPO_DATA = [
     "predictedGrade": "B",
     "v3TargetPrice": 0.34,
     "zone2TargetPrice": 0.34,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pemaju hartanah dengan pertumbuhan PAT kukuh (+23% CAGR FY25) dan margin PAT yang sihat (16.2%).<br><br>📊 <b>Valuation & Advisor:</b><br>• Ditaja oleh <b>M&A Securities</b> (IB terkemuka dengan rekod prestasi cemerlang untuk premium hari pertama).<br>• Gandaan PE Terbitan dianggarkan sekitar <b>9.9x PE</b> (berdasarkan PAT FY25 RM24.88M), menawarkan diskaun berbanding purata industri (12x-15x PE).<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 22 Julai 2026."
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pemaju hartanah dengan pertumbuhan PAT kukuh (+23% CAGR FY25) dan margin PAT yang sihat (16.2%).<br><br>📊 <b>Valuation & Advisor:</b><br>• Ditaja oleh <b>M&A Securities</b> (IB terkemuka dengan rekod prestasi cemerlang untuk premium hari pertama).<br>• Gandaan PE Terbitan dianggarkan sekitar <b>9.9x PE</b> (berdasarkan PAT FY25 RM24.88M), menawarkan diskaun berbanding purata industri (12x-15x PE).<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 22 Julai 2026.",
+    "mitiOpenDate": "13-Jul-2026",
+    "mitiCloseDate": "22-Jul-2026"
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -6733,7 +6743,9 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.3,
     "v3TargetPrice": 0.3,
     "zone2TargetPrice": 0.3,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC."
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC.",
+    "mitiOpenDate": null,
+    "mitiCloseDate": null
   },
   {
     "id": "redplanet-berhad",
@@ -9595,6 +9607,23 @@ const IPO_DATA = [
     "strategy": "Swing",
     "symbol": "DNEX",
     "sifuTargetPrice": 0.7
+  },
+  {
+    "id": "eghi",
+    "companyName": "EGH International Berhad",
+    "symbol": "EGHI [NS]",
+    "market": "ACE Market",
+    "price": 0.3,
+    "closingDate": "",
+    "listingDate": "Aug-2026",
+    "shariah": true,
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
+    "year": 2026,
+    "sector": "Consumer Products (Interior Fit-out & Building Materials)",
+    "fundUse": "Head office & warehouse construction, debt repayment, working capital",
+    "predictedGrade": "B",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>EGH International (EGHI) specializes in interior fit-out and furniture supply. Proposed ACE Market listing with 240M new shares. Healthy growth profile but in a competitive sector."
   }
 ];
 

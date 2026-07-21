@@ -1,4 +1,4 @@
-let ipoData = [];
+ipoData = [];
 let currentStage = 1;
 
 function getGroqKey() {
@@ -18,12 +18,15 @@ let currentSort = 'newest';
 // Load data from inline script (works with file:// protocol)
 function initializeData() {
     try {
-        // Step 1: Start with enrichment data from data.js
-        if (typeof IPO_DATA !== 'undefined') {
-            console.log('DEBUG: Initializing with ' + IPO_DATA.length + ' items from data.js');
-            const stage4Count = IPO_DATA.filter(i => i.stage === 4).length;
-            console.log('DEBUG: Items in Stage 4 in data.js: ' + stage4Count);
-            ipoData = JSON.parse(JSON.stringify(IPO_DATA)); 
+        const rawData = (typeof IPO_DATA !== 'undefined' && Array.isArray(IPO_DATA) && IPO_DATA.length > 0)
+            ? IPO_DATA
+            : ((typeof ipoData !== 'undefined' && Array.isArray(ipoData) && ipoData.length > 0) ? ipoData : []);
+
+        if (rawData.length > 0) {
+            console.log('DEBUG: Initializing with ' + rawData.length + ' items');
+            const stage4Count = rawData.filter(i => i.stage === 4).length;
+            console.log('DEBUG: Items in Stage 4: ' + stage4Count);
+            ipoData = JSON.parse(JSON.stringify(rawData)); 
             
             // Auto-promote IPOs whose listing date has passed
             autoPromoteIPOs(ipoData);
@@ -194,14 +197,42 @@ async function fetchLiveUpdates() {
                     const stage = currentSection === 'MITI' ? 2 : 1;
                     const status = currentSection === 'MITI' ? 'MITI Stage' : 'Draft / Exposure';
                     
+                    // Look ahead for details (dates, etc)
+                    let detailsText = '';
+                    let nextEl = el.nextElementSibling;
+                    while (nextEl && !['H5','H4','H3'].includes(nextEl.tagName)) {
+                        detailsText += nextEl.innerText + ' ';
+                        nextEl = nextEl.nextElementSibling;
+                    }
+                    
+                    // Extract MITI dates from details
+                    let mitiOpenDate = null;
+                    let mitiCloseDate = null;
+                    if (currentSection === 'MITI' && detailsText) {
+                        const allDates = detailsText.match(/\d{1,2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-\d{4}/g);
+                        if (allDates && allDates.length >= 2) {
+                            mitiOpenDate = allDates[0];
+                            mitiCloseDate = allDates[1];
+                        } else if (allDates && allDates.length === 1) {
+                            if (/close|tutup|akhir/i.test(detailsText)) {
+                                mitiCloseDate = allDates[0];
+                            } else {
+                                mitiOpenDate = allDates[0];
+                            }
+                        }
+                    }
+                    
                     if (!liveIpos.some(i => i.companyName.toLowerCase().includes(name.toLowerCase().substring(0, 10)))) {
-                        liveIpos.push({
+                        const entry = {
                             id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                             companyName: name,
                             stage: stage,
                             status: status,
                             price: 0
-                        });
+                        };
+                        if (mitiOpenDate) entry.mitiOpenDate = mitiOpenDate;
+                        if (mitiCloseDate) entry.mitiCloseDate = mitiCloseDate;
+                        liveIpos.push(entry);
                     }
                 }
             });
@@ -616,6 +647,18 @@ function autoPromoteIPOs(finalData) {
         if (ipo.year && ipo.year < 2026) {
             ipo.stage = 5;
             ipo.status = 'Listed';
+        }
+
+        // Stage 2: MITI phase — promote to Stage 3 when MITI close date has passed
+        if (ipo.stage === 2) {
+            const closeStr = ipo.mitiCloseDate || ipo.closingDate;
+            if (closeStr) {
+                const closeDate = parseFlexDate(closeStr);
+                if (closeDate && closeDate < now) {
+                    ipo.stage = 3;
+                    ipo.status = 'Application Open';
+                }
+            }
         }
 
         if (ipo.stage >= 3) {
@@ -1038,6 +1081,21 @@ function checkMissingListings() {
     }
 }
 
+function isIpoOpen(ipo) {
+    if (ipo.stage === 2) {
+        // Only KEB is open in Stage 2
+        return ipo.id === 'keb-berhad';
+    }
+    if (ipo.stage === 3) {
+        // In Stage 3, check if closing date is in the future
+        if (ipo.closingDate) {
+            const parsedClose = parseFlexDate(ipo.closingDate);
+            return parsedClose && parsedClose >= new Date();
+        }
+        return ipo.status === 'Application Open';
+    }
+    return false;
+}
 
 function renderIPOs(stage) {
     ipoGrid.innerHTML = `
@@ -1089,6 +1147,11 @@ function renderIPOs(stage) {
 
             // Sorting Logic — use computed performance for sorting
             displayData.sort((a, b) => {
+                // Priority: Open IPOs go to the top
+                const openA = isIpoOpen(a) ? 1 : 0;
+                const openB = isIpoOpen(b) ? 1 : 0;
+                if (openA !== openB) return openB - openA;
+
                 if (currentSort === 'performance-desc') {
                     const perfA = getOpenPerformance(a) || -999;
                     const perfB = getOpenPerformance(b) || -999;
@@ -1346,7 +1409,39 @@ function createIPOCard(ipo, index = 0) {
     const gradeColor = baseGrade === 'A' ? '#10b981' : baseGrade === 'B' ? '#f59e0b' : (baseGrade === 'Pending' ? '#a5b4fc' : '#ef4444');
 
     let dateDisplay = '<span style="color: var(--text-dim);">TBA</span>';
-    if (ipo.stage === 3 || ipo.stage === 4) {
+    if (ipo.stage === 2) {
+        const now = new Date();
+        const openRaw = ipo.mitiOpenDate || ipo.openingDate;
+        const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
+        let openStr = 'TBA', closeStr = 'TBA';
+        let closeIsClosed = false;
+        
+        // If not KEB, then it is an old closed Stage 2 IPO
+        if (ipo.id !== 'keb-berhad') {
+            closeIsClosed = true;
+        }
+
+        if (closeRaw) {
+            const closeDate = parseFlexDate(closeRaw);
+            if (closeDate && closeDate < now) {
+                closeIsClosed = true;
+            }
+        }
+        
+        if (closeIsClosed) {
+            dateDisplay = `
+                <div style="font-weight: 600; color: var(--text-dim); font-size: 0.75rem;">MITI Status:</div>
+                <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 700; text-transform: uppercase;">Already Closed</div>
+            `;
+        } else {
+            if (openRaw) openStr = openRaw;
+            if (closeRaw) closeStr = closeRaw;
+            dateDisplay = `
+                <div style="font-weight: 600; color: #10b981; font-size: 0.75rem;">MITI Open: ${openStr}</div>
+                <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 600;">MITI Close: ${closeStr}</div>
+            `;
+        }
+    } else if (ipo.stage === 3 || ipo.stage === 4) {
         const closing = ipo.closingDate ? new Date(ipo.closingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : 'TBA';
         const listing = ipo.listingDate ? (isNaN(new Date(ipo.listingDate).getTime()) ? ipo.listingDate : new Date(ipo.listingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })) : 'TBA';
         dateDisplay = `

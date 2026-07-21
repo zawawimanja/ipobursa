@@ -1017,10 +1017,10 @@ var ipoData = [
     "id": "stratus-global",
     "companyName": "Stratus Global Holdings Berhad",
     "sector": "Factory Automation / Cleanroom Handling",
-    "stage": 4,
+    "stage": 5,
     "price": 0.8,
     "market": "Main Market",
-    "status": "Pre-Listing",
+    "status": "Listed",
     "closingDate": "10-Jul-2026",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "year": 2026,
@@ -1030,9 +1030,9 @@ var ipoData = [
     "fundUse": "Expansion & R&D",
     "predictedGrade": "A",
     "analystInsight": "Stratus has a strong track record of profitability with superior profit margins and a fortress balance sheet. However, the company faces severe customer concentration, structural FX fragility, and volatile earnings track. The global semiconductor AMHS market is expanding, driven by massive investments in AI, data centres, and transition to 300mm wafer fabs.",
-    "symbol": "Stratus Global Holdings Berhad",
+    "symbol": "STRATUS",
     "sifuTargetPrice": 1.04,
-    "dailyChange": null,
+    "dailyChange": 145,
     "calibratedSifuTargetPrice": 1.02,
     "v3TargetPrice": 0.949,
     "zone2TargetPrice": 1.04,
@@ -1086,7 +1086,14 @@ var ipoData = [
     ],
     "peers": "Peer comparison details: Technology (21.2) Semiconductors (47.4) Median Peers PE",
     "listingDate": "21-Jul-2026",
-    "insightUrl": "https://www.isaham.my/ipo/insights/stratus-global-holdings-berhad"
+    "insightUrl": "https://www.isaham.my/ipo/insights/stratus-global-holdings-berhad",
+    "stockCode": "5356",
+    "openPrice": 1.96,
+    "currentPrice": 1.96,
+    "closePrice": 1.96,
+    "highPrice": 2.03,
+    "performance": "+145.00%",
+    "strategy": "Swing"
   },
   {
     "id": "ei-power",
@@ -8122,7 +8129,9 @@ var ipoData = [
       "Working capital for project development",
       "Repayment of bank borrowings"
     ],
-    "peers": "Property sector"
+    "peers": "Property sector",
+    "mitiOpenDate": "13-Jul-2026",
+    "mitiCloseDate": "22-Jul-2026"
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -9115,7 +9124,9 @@ var ipoData = [
     "calibratedSifuTargetPrice": 0.3,
     "v3TargetPrice": 0.3,
     "zone2TargetPrice": 0.3,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC."
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC.",
+    "mitiOpenDate": null,
+    "mitiCloseDate": null
   },
   {
     "id": "redplanet-berhad",
@@ -9410,5 +9421,24 @@ var ipoData = [
     "listingDate": "2026-07-07",
     "highPrice": 0.155,
     "performance": "+3.85%"
+  },
+  {
+    "id": "eghi",
+    "companyName": "EGH International Berhad",
+    "symbol": "EGHI [NS]",
+    "market": "ACE Market",
+    "price": 0.3,
+    "closingDate": "",
+    "listingDate": "Aug-2026",
+    "shariah": true,
+    "stage": 1,
+    "status": "Draft / Exposure Phase",
+    "year": 2026,
+    "sector": "Consumer Products (Interior Fit-out & Building Materials)",
+    "fundUse": "Head office & warehouse construction, debt repayment, working capital",
+    "predictedGrade": "B",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>EGH International (EGHI) specializes in interior fit-out and furniture supply. Proposed ACE Market listing with 240M new shares. Healthy growth profile but in a competitive sector."
   }
 ];
+var IPO_DATA = ipoData;
+if (typeof module !== 'undefined' && module.exports) { module.exports = ipoData; }

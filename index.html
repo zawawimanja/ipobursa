@@ -65,6 +65,9 @@
                 <a href="tips.html" class="btn-moomoo" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem;">
                     <i data-lucide="sparkles"></i> <span class="nav-text">Tips</span>
                 </a>
+                <a href="miti-journal.html" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.25); text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.35rem; color: #a5b4fc;">
+                    <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> <span class="nav-text">MITI Journal</span>
+                </a>
                 <a href="scalping-sop.html" class="btn-moomoo" style="background: rgba(236, 72, 153, 0.1); border: 1px solid rgba(236, 72, 153, 0.2); color: #ec4899; text-decoration: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
                     <i data-lucide="zap" style="width: 14px; height: 14px;"></i> <span class="nav-text">Scalping SOP</span>
                 </a>
@@ -102,6 +105,11 @@
             <!-- Decision Engine Button -->
             <a href="ipo-decision.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: 1px solid rgba(167, 139, 250, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.25); transition: all 0.3s; cursor: pointer;">
                 <i data-lucide="zap" style="width: 14px; height: 14px;"></i> Decision Engine: Sub/Skip?
+            </a>
+
+            <!-- MITI Journal Button -->
+            <a href="miti-journal.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #f59e0b, #d97706); border: 1px solid rgba(245, 158, 11, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Jurnal Pelaburan MITI
             </a>
 
 
@@ -712,7 +720,7 @@
 
     <script src="main.js?v=2.1"></script>
     <script>
-        lucide.createIcons();
+        try { lucide.createIcons(); } catch(e) { console.warn('lucide CDN failed, continuing...'); }
         initializeData();
         if (typeof SYNC_STATUS !== 'undefined') {
             const descEl = document.getElementById('automation-sync-desc');
