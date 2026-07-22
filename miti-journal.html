@@ -619,7 +619,7 @@
             const tableBody = document.querySelector('#stage2-table tbody');
             if (!tableBody) return;
 
-            const stage2Data = ipoData.filter(ipo => ipo.stage === 2);
+            const stage2Data = ipoData.filter(ipo => ipo.stage === 2 || ipo.mitiOpenDate != null || ipo.status === 'MITI Allocation Phase');
             stage2Data.sort((a, b) => {
                 const today = new Date();
                 today.setHours(0,0,0,0);
