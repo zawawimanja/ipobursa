@@ -7770,11 +7770,14 @@ const IPO_DATA = [
     "year": 2026,
     "sifuTargetPrice": 0.5,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.55,
-    "v7TargetPrice": 0.55,
-    "zone2TargetPrice": 0.55,
+    "calibratedSifuTargetPrice": 0.63,
+    "v7TargetPrice": 0.63,
+    "zone2TargetPrice": 0.63,
     "mitiOpenDate": "01-Jul-2026",
-    "mitiCloseDate": "10-Jul-2026"
+    "mitiCloseDate": "10-Jul-2026",
+    "sector": "Property (Housing Development)",
+    "predictedGrade": "C",
+    "analystInsight": "🚨 <b>AVOID / HIGH RISK (GRADE C — SEKTOR HARTANAH)</b><br>Syarikat pemaju hartanah perumahan di utara Semenanjung."
   },
   {
     "id": "readycare-holdings-berhad",

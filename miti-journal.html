@@ -578,24 +578,42 @@
             return isNaN(p) ? null : new Date(p);
         }
 
+        function getNormalizedSectorGroup(s) {
+            if (!s) return 'Lain-lain';
+            const str = s.toLowerCase();
+            if (str.includes('tech') || str.includes('semicon') || str.includes('software') || str.includes('digital') || str.includes('ai')) return 'Technology';
+            if (str.includes('consumer') || str.includes('food') || str.includes('beverage') || str.includes('retail') || str.includes('beauty')) return 'Consumer';
+            if (str.includes('industrial') || str.includes('manufactur') || str.includes('chemical') || str.includes('metal')) return 'Industrial';
+            if (str.includes('property') || str.includes('real estate')) return 'Property';
+            if (str.includes('construct') || str.includes('infrastruct')) return 'Construction';
+            if (str.includes('energy') || str.includes('solar') || str.includes('renewable')) return 'Energy';
+            if (str.includes('health') || str.includes('pharma') || str.includes('care') || str.includes('medical')) return 'Healthcare';
+            return s.split('/')[0].split('(')[0].trim();
+        }
+
         // Build sector stats lookup from listed data (reused by renderStage2)
         function buildSectorLookup() {
             const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && x.id !== 'skyechip');
             const map = {};
             listed.forEach(x => {
-                const sector = (x.sector || 'Lain-lain').split('/')[0].split('(')[0].trim();
-                if (!map[sector]) map[sector] = { total: 0, positive: 0, sum: 0, over20: 0 };
-                const prem = ((x.openPrice - x.price) / x.price) * 100;
-                map[sector].total++;
-                if (prem > 0) map[sector].positive++;
-                if (prem >= 20) map[sector].over20++;
-                map[sector].sum += prem;
+                const rawSec = x.sector || 'Lain-lain';
+                const key1 = rawSec.split('/')[0].split('(')[0].trim();
+                const key2 = getNormalizedSectorGroup(rawSec);
+                
+                [key1, key2].forEach(secKey => {
+                    if (!secKey) return;
+                    if (!map[secKey]) map[secKey] = { total: 0, positive: 0, sum: 0, over20: 0 };
+                    const prem = ((x.openPrice - x.price) / x.price) * 100;
+                    map[secKey].total++;
+                    if (prem > 0) map[secKey].positive++;
+                    if (prem >= 20) map[secKey].over20++;
+                    map[secKey].sum += prem;
+                });
             });
             return map;
         }
 
 
-        // Render Stage 2 Active/Recently Closed
         // Render Stage 2 Active/Recently Closed
         function renderStage2() {
             const tableBody = document.querySelector('#stage2-table tbody');
@@ -659,10 +677,11 @@
 
                 const grade = ipo.predictedGrade || 'B';
                 const sector = ipo.sector || 'N/A';
-                const sectorKey = sector.split('/')[0].split('(')[0].trim();
+                const sectorKey1 = sector.split('/')[0].split('(')[0].trim();
+                const sectorKey2 = getNormalizedSectorGroup(sector);
 
                 // Sector win rate inline badge from historical data
-                const ss = sectorLookup[sectorKey];
+                const ss = sectorLookup[sectorKey1] || sectorLookup[sectorKey2];
                 let sectorBadge = '';
                 if (ss && ss.total >= 2) {
                     const avg = ss.sum / ss.total;
