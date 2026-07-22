@@ -565,7 +565,9 @@ const IPO_DATA = [
     ],
     "peers": "Consumer Products & Services (11.7) Consumer Services (40.1)",
     "v7TargetPrice": 0.5,
-    "zone2TargetPrice": 0.5
+    "zone2TargetPrice": 0.5,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026"
   },
   {
     "id": "bus-cap",
@@ -1405,10 +1407,8 @@ const IPO_DATA = [
     "prospectusUrl": "https://bursamalaysia.com/",
     "year": 2026,
     "shariah": true,
-    "os": 1.19,
-    "mitiOpenDate": "2026-04-28",
-    "mitiCloseDate": "2026-05-05",
-    "ib": "M&A Securities",
+    "os": 3.26,
+    "ib": "TBA",
     "fundUse": "Working Capital & Development",
     "predictedGrade": "C",
     "analystInsight": "The company's integrated operations and strong profitability are key strengths, but high labor dependency and execution risk are notable weaknesses. The upcoming apartment project in Muar and regional economic spillovers present opportunities, while JV deadlock risk and labor policy shifts pose threats.",
@@ -7772,7 +7772,9 @@ const IPO_DATA = [
     "dailyChange": null,
     "calibratedSifuTargetPrice": 0.55,
     "v7TargetPrice": 0.55,
-    "zone2TargetPrice": 0.55
+    "zone2TargetPrice": 0.55,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026"
   },
   {
     "id": "readycare-holdings-berhad",
@@ -7981,7 +7983,9 @@ const IPO_DATA = [
     ],
     "peers": "Consumer Products & Services (11.7)",
     "ib": "M&A Securities",
-    "v7TargetPrice": 0
+    "v7TargetPrice": 0,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026"
   },
   {
     "id": "evocom-berhad",
@@ -8045,7 +8049,9 @@ const IPO_DATA = [
     "peers": "Transportation & Logistics Services (11.2), Transportation & Logistics (11.7)",
     "analystInsight": "Analisis SWOT tidak tersedia. Namun, kami melihat potensi pertumbuhan yang kuat dalam industri perkhidmatan pekerjaan fleksibel dan teknologi. Kami juga melihat peluang untuk ekspansi ke pasaran baru.",
     "predictedGrade": "C",
-    "v7TargetPrice": 0.36
+    "v7TargetPrice": 0.36,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026"
   },
   {
     "id": "slgc-berhad",
@@ -8122,29 +8128,31 @@ const IPO_DATA = [
     "pat25": 0,
     "assets25": 0,
     "liab25": 0,
-    "v7TargetPrice": 0
+    "v7TargetPrice": 0,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026"
   },
   {
     "id": "keb-berhad",
     "companyName": "KEB Berhad",
     "symbol": "KEB Berhad",
     "market": "ACE Market",
-    "price": 0.35,
+    "price": 0.28,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
     "stage": 2,
     "status": "MITI Allocation Phase",
     "year": 2026,
-    "sifuTargetPrice": 0.43,
+    "sifuTargetPrice": 0.28,
     "dailyChange": null,
-    "calibratedSifuTargetPrice": 0.42,
+    "calibratedSifuTargetPrice": 0.28,
     "sector": "Property",
     "geography": "Selangor",
-    "v3TargetPrice": 0.42,
-    "zone2TargetPrice": 0.43,
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pemaju hartanah dengan pertumbuhan PAT kukuh (+23% CAGR FY25) dan margin PAT yang sihat (16.2%).<br><br>📊 <b>Valuation & Advisor:</b><br>• Ditaja oleh <b>M&A Securities</b> (IB terkemuka dengan rekod prestasi cemerlang untuk premium hari pertama).<br>• Harga terbitan MITI: <b>RM0.35</b>. Gandaan PE Terbitan kini sekitar <b>12.4x PE</b> (berdasarkan PAT FY25 RM24.88M) — masih dalam julat munasabah berbanding purata industri (12x-15x PE).<br>• Target harga wajar: <b>RM0.42 - RM0.43</b> (potensi +20% hingga +23% dari harga terbitan).<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 22 Julai 2026.",
+    "v3TargetPrice": 0.28,
+    "zone2TargetPrice": 0.28,
+    "predictedGrade": "C",
+    "analystInsight": "🚨 <b>AVOID / HIGH RISK (GRADE C — SEKTOR HARTANAH)</b><br>Syarikat pemaju hartanah perumahan. Berdasarkan analisis perbandingan precedent Bursa Malaysia, sektor Hartanah di Pasaran ACE mempunyai peratusan kemenangan (win rate) paling rendah dan kerap ditutup diskaun.<br><br>📊 <b>Perbandingan & Amaran Sifu:</b><br>• Sejarah IPO sektor Hartanah ACE kerap dibuka bawah harga IPO (-5% hingga -15%).<br>• Modal terikat dalam projek perumahan & nisbah aliran tunai berisiko tinggi.<br><br>⚠️ Status: Permohonan AKTIF DIBUKA di portal SahamOnline MITI (Tutup 22 Julai).",
     "insightUrl": "https://www.isaham.my/ipo/insights/keb-berhad",
     "totalShares": 882390000,
     "headers": [
@@ -8189,7 +8197,8 @@ const IPO_DATA = [
     "mitiOpenDate": "13-Jul-2026",
     "mitiCloseDate": "22-Jul-2026",
     "ib": "M&A Securities",
-    "v7TargetPrice": 0.42
+    "v7TargetPrice": 0.28,
+    "prospectusUrl": "https://sahamonline.miti.gov.my/"
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -9191,8 +9200,8 @@ const IPO_DATA = [
     "v3TargetPrice": 0.3,
     "zone2TargetPrice": 0.3,
     "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI)</b><br>Syarikat pengeluar pelekat industri (industrial adhesives), emulsion polymers, dan sealants yang bertapak di Pulau Pinang.<br><br>📊 <b>Valuation & Fundamental:</b><br>• Ditaja oleh <b>Malacca Securities</b> (Sponsor/IB berwibawa).<br>• Pertumbuhan PAT dilaraskan (adjusted PAT) meningkat mantap sebanyak <b>+62.3%</b> (dari RM5.04M FY23 kepada RM8.18M FY24).<br>• Gandaan PE Terbitan sekitar <b>12.6x PE</b> (berdasarkan adjusted PAT FY24) atau <b>9.9x PE</b> (berdasarkan unadjusted PAT FY24), yang sangat munasabah bagi sektor pembuatan kimia.<br><br>⚠️ Saham Khas Bumiputera (SKB) kini dibuka untuk permohonan melalui portal SahamOnline MITI dari 13 Julai hingga 19 Julai 2026. Status Shariah disahkan patuh oleh SC.",
-    "mitiOpenDate": null,
-    "mitiCloseDate": null,
+    "mitiOpenDate": "01-Jul-2026",
+    "mitiCloseDate": "10-Jul-2026",
     "ib": "Malacca Securities",
     "v7TargetPrice": 0.3
   },
@@ -9205,15 +9214,21 @@ const IPO_DATA = [
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
     "year": 2026,
-    "sector": "Technology (Digital / E-Commerce)",
+    "sector": "Technology (Geospatial / GIS)",
     "geography": "Kuala Lumpur",
     "sifuTargetPrice": 0.3,
     "calibratedSifuTargetPrice": 0.33,
     "v7TargetPrice": 0.33,
-    "zone2TargetPrice": 0.33
+    "zone2TargetPrice": 0.33,
+    "predictedGrade": "B",
+    "prospectusUrl": "https://sahamonline.miti.gov.my/",
+    "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI ACTIVE OPEN)</b><br>Syarikat pemindahan penyenaraian dari Pasaran LEAP ke Pasaran ACE dalam sektor Teknologi Geospatial & GIS.<br><br>📊 <b>Status Permohonan MITI:</b><br>• Saham Khas Bumiputera (SKB) KINI DIBUKA untuk permohonan di portal SahamOnline MITI.<br>• Peruntukan 12.50% saham dilaraskan untuk pelabur Bumiputera.<br><br>⚠️ Status: Permohonan AKTIF DIBUKA di portal SahamOnline MITI.",
+    "mitiOpenDate": "20-Jul-2026",
+    "mitiCloseDate": "29-Jul-2026",
+    "v3TargetPrice": 0.33
   },
   {
     "id": "empg-group-berhad",

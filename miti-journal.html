@@ -403,6 +403,7 @@
                                     <th>Market</th>
                                     <th>Sektor</th>
                                     <th>Harga</th>
+                                    <th>Sasaran V7 (%)</th>
                                     <th>Tempoh MITI</th>
                                     <th>Gred</th>
                                     <th>Hype</th>
@@ -602,10 +603,29 @@
 
             const stage2Data = ipoData.filter(ipo => ipo.stage === 2);
             stage2Data.sort((a, b) => {
-                const aOpen = a.mitiCloseDate ? new Date(a.mitiCloseDate) >= new Date() : false;
-                const bOpen = b.mitiCloseDate ? new Date(b.mitiCloseDate) >= new Date() : false;
-                if (aOpen && !bOpen) return -1;
-                if (!aOpen && bOpen) return 1;
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                const getStatusWeight = (ipo) => {
+                    if (ipo.mitiOpenDate && ipo.mitiCloseDate) {
+                        const closeD = parseFlexDate(ipo.mitiCloseDate);
+                        if (closeD && closeD >= today) return 1; // Active Open
+                        return 3; // Closed
+                    }
+                    return 2; // Upcoming / Pending dates
+                };
+
+                const wA = getStatusWeight(a);
+                const wB = getStatusWeight(b);
+                if (wA !== wB) return wA - wB;
+
+                // For Active Open (weight 1), sort farthest closing date first (RedPlanet on top)
+                if (wA === 1) {
+                    const dateA = parseFlexDate(a.mitiCloseDate) || new Date(0);
+                    const dateB = parseFlexDate(b.mitiCloseDate) || new Date(0);
+                    return dateB - dateA;
+                }
+
                 return a.companyName.localeCompare(b.companyName);
             });
 
@@ -618,16 +638,24 @@
 
             tableBody.innerHTML = stage2Data.map(ipo => {
                 const today = new Date();
-                const mitiClose = ipo.mitiCloseDate ? new Date(ipo.mitiCloseDate) : null;
-                const isActive = mitiClose && mitiClose >= today;
+                today.setHours(0,0,0,0);
+                
+                let dateDisplay = '';
+                let statusLabel = '';
 
-                const dateDisplay = ipo.mitiOpenDate && ipo.mitiCloseDate
-                    ? `${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}`
-                    : isActive ? `<span style="color:#10b981;">Buka</span>` : `<span style="color:var(--text-dim);">Closed</span>`;
-
-                const statusLabel = isActive
-                    ? `<span style="color:#10b981;font-weight:700;background:rgba(16,185,129,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(16,185,129,0.2);font-size:0.7rem;">ACTIVE</span>`
-                    : `<span style="color:#f87171;font-weight:700;background:rgba(239,68,68,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(239,68,68,0.2);font-size:0.7rem;">CLOSED</span>`;
+                if (ipo.mitiOpenDate && ipo.mitiCloseDate) {
+                    const closeD = parseFlexDate(ipo.mitiCloseDate);
+                    if (closeD && closeD >= today) {
+                        dateDisplay = `<span style="color:#10b981;font-weight:600;">${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}</span>`;
+                        statusLabel = `<span style="color:#10b981;font-weight:700;background:rgba(16,185,129,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(16,185,129,0.2);font-size:0.7rem;">ACTIVE OPEN</span>`;
+                    } else {
+                        dateDisplay = `<span style="color:var(--text-dim);">${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}</span>`;
+                        statusLabel = `<span style="color:#f87171;font-weight:700;background:rgba(239,68,68,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(239,68,68,0.2);font-size:0.7rem;">ALREADY CLOSED</span>`;
+                    }
+                } else {
+                    dateDisplay = `<span style="color:#fbbf24;font-weight:600;">Akan Dibuka (TBA)</span>`;
+                    statusLabel = `<span style="color:#fbbf24;font-weight:700;background:rgba(245,158,11,0.15);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(245,158,11,0.3);font-size:0.7rem;">UPCOMING / PENDING DATES</span>`;
+                }
 
                 const grade = ipo.predictedGrade || 'B';
                 const sector = ipo.sector || 'N/A';
@@ -661,6 +689,15 @@
                 let fireStr = '';
                 for (let i = 0; i < fires; i++) fireStr += '🔥';
 
+                const ipoPrice = ipo.price || 0;
+                const tp = ipo.calibratedSifuTargetPrice || ipo.v7TargetPrice || ipo.sifuTargetPrice || ipoPrice;
+                const upsidePercent = ipoPrice > 0 ? ((tp - ipoPrice) / ipoPrice * 100) : 0;
+                const upsideStr = ipoPrice > 0 ? (upsidePercent >= 0 ? '+' : '') + upsidePercent.toFixed(1) + '%' : 'TBA';
+                const upsideColor = upsidePercent >= 15 ? '#10b981' : upsidePercent > 0 ? '#60a5fa' : '#f87171';
+                const tpCell = ipoPrice > 0 
+                    ? `<div>RM ${tp.toFixed(3)}</div><div style="font-size:0.72rem;font-weight:700;color:${upsideColor};">${upsideStr}</div>` 
+                    : `<span style="color:var(--text-dim);">TBA</span>`;
+
                 return `
                     <tr>
                         <td><strong>${ipo.companyName}</strong></td>
@@ -670,6 +707,7 @@
                             ${sectorBadge}
                         </td>
                         <td>RM ${ipo.price ? ipo.price.toFixed(3) : 'TBA'}</td>
+                        <td>${tpCell}</td>
                         <td style="font-size:0.8rem;">${dateDisplay}</td>
                         <td><span style="font-weight:700;color:#a78bfa;">${grade}</span></td>
                         <td><div class="fire-rating">${fireStr}</div></td>

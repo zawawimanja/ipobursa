@@ -161,8 +161,11 @@ try {
         console.log(`- ${ipo.id} (${ipo.companyName}): target = RM ${sifuTargets[ipo.id].toFixed(2)} | Calibrated = RM ${calibratedTargets[ipo.id].toFixed(2)} [Source: ${source}]`);
     });
     
-    // Save both targets into data.json
+    // Save both targets and overrides into data.json
     data.forEach(ipo => {
+        if (overrides[ipo.id]) {
+            Object.assign(ipo, overrides[ipo.id]);
+        }
         if (sifuTargets[ipo.id] !== undefined) {
             ipo.sifuTargetPrice = sifuTargets[ipo.id];
         }
