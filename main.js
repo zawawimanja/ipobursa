@@ -1104,15 +1104,21 @@ function checkMissingListings() {
 }
 
 function isIpoOpen(ipo) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
     if (ipo.stage === 2) {
-        // Only KEB is open in Stage 2
-        return ipo.id === 'keb-berhad';
+        const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
+        if (closeRaw) {
+            const parsedClose = parseFlexDate(closeRaw);
+            return parsedClose && parsedClose >= today;
+        }
+        return ipo.status === 'MITI Allocation Phase';
     }
     if (ipo.stage === 3) {
         // In Stage 3, check if closing date is in the future
         if (ipo.closingDate) {
             const parsedClose = parseFlexDate(ipo.closingDate);
-            return parsedClose && parsedClose >= new Date();
+            return parsedClose && parsedClose >= today;
         }
         return ipo.status === 'Application Open';
     }
@@ -1432,22 +1438,20 @@ function createIPOCard(ipo, index = 0) {
 
     let dateDisplay = '<span style="color: var(--text-dim);">TBA</span>';
     if (ipo.stage === 2) {
-        const now = new Date();
+        const today = new Date();
+        today.setHours(0,0,0,0);
         const openRaw = ipo.mitiOpenDate || ipo.openingDate;
         const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
         let openStr = 'TBA', closeStr = 'TBA';
         let closeIsClosed = false;
         
-        // If not KEB, then it is an old closed Stage 2 IPO
-        if (ipo.id !== 'keb-berhad') {
-            closeIsClosed = true;
-        }
-
         if (closeRaw) {
             const closeDate = parseFlexDate(closeRaw);
-            if (closeDate && closeDate < now) {
+            if (closeDate && closeDate < today) {
                 closeIsClosed = true;
             }
+        } else {
+            closeIsClosed = true;
         }
         
         if (closeIsClosed) {
