@@ -9230,7 +9230,7 @@ const IPO_DATA = [
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI ACTIVE OPEN)</b><br>Syarikat pemindahan penyenaraian dari Pasaran LEAP ke Pasaran ACE dalam sektor Teknologi Geospatial & GIS.<br><br>📊 <b>Status Permohonan MITI:</b><br>• Saham Khas Bumiputera (SKB) KINI DIBUKA untuk permohonan di portal SahamOnline MITI.<br>• Peruntukan 12.50% saham dilaraskan untuk pelabur Bumiputera.<br><br>⚠️ Status: Permohonan AKTIF DIBUKA di portal SahamOnline MITI.",
     "mitiOpenDate": "20-Jul-2026",
-    "mitiCloseDate": "29-Jul-2026",
+    "mitiCloseDate": "28-Jul-2026",
     "v3TargetPrice": 0.33
   },
   {
