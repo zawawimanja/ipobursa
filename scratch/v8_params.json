@@ -1,0 +1,16 @@
+{
+  "osLinear": -0.05,
+  "techPremium": 0.9,
+  "constructionPen": 0.15,
+  "mainPremium": 0.91,
+  "ibQuality": 0.1,
+  "ofsDrag": 0,
+  "peValue": 0,
+  "anchorBoost": 0.66,
+  "freeFloatPen": 0,
+  "globalScale": 0.98,
+  "_trainHitRate": "93.8%",
+  "_trainAccuracy": "70.18%",
+  "_testHitRate": "86.7%",
+  "_testAccuracy": "51.60%"
+}

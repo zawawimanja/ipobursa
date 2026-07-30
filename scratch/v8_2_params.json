@@ -1,0 +1,21 @@
+{
+  "osLinear": -0.066308,
+  "osQuadratic": -0.059757,
+  "techMult": 1.07162,
+  "consumerMult": 1.195907,
+  "energyMult": 0.959382,
+  "healthMult": 1.021177,
+  "industrialMult": 0.981392,
+  "constructionMult": 1.237633,
+  "mainMult": 1.047295,
+  "ibInfluence": 0.137995,
+  "ofsDrag": 0.717568,
+  "freeFloatImpact": -1.143727,
+  "qualInfluence": 0.169109,
+  "peImpact": -0.052679,
+  "lockupImpact": 0.094177,
+  "techMainInteract": 0.939967,
+  "techOsInteract": 1.263706,
+  "_trainingHitRate": "68.3%",
+  "_trainingAccuracy": "74.52%"
+}
