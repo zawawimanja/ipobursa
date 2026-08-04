@@ -167,7 +167,9 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "enrichedBy": "AI",
     "v7TargetPrice": 0.6,
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "mitiOpenDate": "18-Jun-2026",
+    "mitiCloseDate": "25-Jun-2026"
   },
   {
     "id": "sum-technology",
@@ -1810,7 +1812,9 @@ const IPO_DATA = [
     "growthRate": 15,
     "enrichedBy": "AI",
     "v7TargetPrice": 0.68,
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "mitiOpenDate": "21-Jan-2026",
+    "mitiCloseDate": "27-Jan-2026"
   },
   {
     "id": "manforce-group",
