@@ -844,7 +844,8 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 1.05,
     "v3TargetPrice": 0.661,
     "zone2TargetPrice": 1.05,
-    "v7TargetPrice": 1.05
+    "v7TargetPrice": 1.05,
+    "hasMitiTranche": true
   },
   {
     "id": "ambest",
@@ -1039,7 +1040,8 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 1.31,
     "v3TargetPrice": 0.933,
     "zone2TargetPrice": 1.31,
-    "v7TargetPrice": 1.31
+    "v7TargetPrice": 1.31,
+    "hasMitiTranche": true
   },
   {
     "id": "stratus-global",
@@ -1123,7 +1125,7 @@ const IPO_DATA = [
     "performance": "+162.50%",
     "strategy": "Swing",
     "v7TargetPrice": 1.14,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "ei-power",
@@ -1323,7 +1325,7 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 14.09x - 17.11x, sangat berpatutan berbanding purata PE industri makanan berjenama premium di Bursa Malaysia yang melebihi 25x. Menawarkan Fair Value **RM 0.83 - RM 1.01**.",
     "v7TargetPrice": 0.9,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "gdgroup",
@@ -1972,7 +1974,7 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 9.18x - 10.04x. Sektor perkapalan dinilai pada gandaan PE yang rendah kerana sifatnya yang kitaran (cyclical) dan telah melepasi kemuncak prestasi industri perkapalan global (peak cycle 2022).",
     "v7TargetPrice": 1.1,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "ogm",
@@ -2316,7 +2318,8 @@ const IPO_DATA = [
       "<strong>Rekod Kewangan Mantap:</strong> Hasil meningkat dari RM152.8M (FYE F) ke RM166.7M (FYE F+1) dengan margin kasar (GP margin) yang stabil pada 38.7%."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY26) berada di sekitar 24.50x - 26.73x. Premium yang wajar berbanding peers semikonduktor tempatan kerana pendedahan langsung kepada rekaan litar AI/HPC proprietary.",
-    "v7TargetPrice": 1.58
+    "v7TargetPrice": 1.58,
+    "hasMitiTranche": false
   },
   {
     "id": "sunmed",
@@ -2398,7 +2401,7 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 50.93x. Sangat premium berbanding hospital biasa, tetapi disokong oleh kualiti aset gred-A dan rekod pencapaian jenama Sunway.",
     "v7TargetPrice": 1.94,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "teamstr",
@@ -2868,7 +2871,7 @@ const IPO_DATA = [
     "highPrice": 1,
     "symbol": "GENERGY",
     "dailyChange": null,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "geohan",
@@ -2892,7 +2895,7 @@ const IPO_DATA = [
     "closePrice": 0.5399900000000001,
     "symbol": "GEOHAN",
     "dailyChange": null,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "hi",
@@ -3202,7 +3205,7 @@ const IPO_DATA = [
     "closePrice": 0.765,
     "symbol": "LACMED",
     "dailyChange": null,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "lsh",
@@ -3343,7 +3346,8 @@ const IPO_DATA = [
     "fundUse": "60% Ekspansi, 20% R&D",
     "pe": 32.3,
     "highPrice": 1.2189999999999999,
-    "dailyChange": 0.1
+    "dailyChange": 0.1,
+    "hasMitiTranche": true
   },
   {
     "id": "orkim",
@@ -3370,7 +3374,7 @@ const IPO_DATA = [
     "sifuTargetPrice": 1.098,
     "v3TargetPrice": 0.747,
     "zone2TargetPrice": 1.098,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "oxb",
@@ -3416,7 +3420,8 @@ const IPO_DATA = [
     "pe": 11.4,
     "highPrice": 1.265,
     "os": 44.93,
-    "dailyChange": 1
+    "dailyChange": 1,
+    "hasMitiTranche": true
   },
   {
     "id": "people",
@@ -3897,7 +3902,8 @@ const IPO_DATA = [
     "ib": "Public Investment",
     "fundUse": "60% Ekspansi, 20% R&D",
     "highPrice": 0.713,
-    "dailyChange": 1.7
+    "dailyChange": 1.7,
+    "hasMitiTranche": true
   },
   {
     "id": "westrvr",
@@ -3997,7 +4003,8 @@ const IPO_DATA = [
     "fundUse": "60% Ekspansi, 20% R&D",
     "pe": 50.2,
     "highPrice": 2.852,
-    "dailyChange": 5.3
+    "dailyChange": 5.3,
+    "hasMitiTranche": true
   },
   {
     "id": "agricor",
@@ -4075,7 +4082,8 @@ const IPO_DATA = [
     "highPrice": 0.322,
     "listingDate": "2023-01-03",
     "symbol": "L&PBHD",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "azam-jaya",
@@ -4104,7 +4112,7 @@ const IPO_DATA = [
     "sifuTargetPrice": 1.04,
     "v3TargetPrice": 0.641,
     "zone2TargetPrice": 1.04,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "bwys",
@@ -4421,7 +4429,8 @@ const IPO_DATA = [
     "fundUse": "60% Ekspansi, 20% R&D",
     "pe": 11.7,
     "highPrice": 1.9779999999999998,
-    "dailyChange": 1.1
+    "dailyChange": 1.1,
+    "hasMitiTranche": true
   },
   {
     "id": "jpg",
@@ -4655,7 +4664,8 @@ const IPO_DATA = [
     "fundUse": "35% Bayar Hutang, 20% Operasi",
     "pe": 16.2,
     "highPrice": 0.7474999999999999,
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "metro",
@@ -4701,7 +4711,8 @@ const IPO_DATA = [
     "fundUse": "35% Bayar Hutang, 20% Operasi",
     "pe": 7.6,
     "highPrice": 0.6669999999999999,
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "mkhop",
@@ -4875,7 +4886,8 @@ const IPO_DATA = [
     "fundUse": "35% Bayar Hutang, 20% Operasi",
     "pe": 35.8,
     "highPrice": 1.081,
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": false
   },
   {
     "id": "sbh",
@@ -5861,7 +5873,8 @@ const IPO_DATA = [
     "fundUse": "Land Acquisition",
     "pe": 5.56,
     "highPrice": 0.8,
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "ssf",
@@ -6037,7 +6050,8 @@ const IPO_DATA = [
     "openPrice": 1.13,
     "closePrice": 1.1599449999999998,
     "symbol": "AMEREIT",
-    "dailyChange": 0.3
+    "dailyChange": 0.3,
+    "hasMitiTranche": false
   },
   {
     "id": "beta",
@@ -7022,7 +7036,8 @@ const IPO_DATA = [
     "strategy": "Wait / Exit",
     "pe": 17.5,
     "symbol": "SWIFT",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "teladan",
@@ -7980,7 +7995,8 @@ const IPO_DATA = [
     "geography": "Johor",
     "v3TargetPrice": 1.222,
     "zone2TargetPrice": 1.9,
-    "v7TargetPrice": 1.9
+    "v7TargetPrice": 1.9,
+    "hasMitiTranche": true
   },
   {
     "id": "custom-food-holding-berhad",
@@ -8001,7 +8017,8 @@ const IPO_DATA = [
     "geography": "Selangor",
     "v3TargetPrice": 0.327,
     "zone2TargetPrice": 0.38,
-    "v7TargetPrice": 0.38
+    "v7TargetPrice": 0.38,
+    "hasMitiTranche": true
   },
   {
     "id": "wintech-metal-berhad",
@@ -8426,7 +8443,8 @@ const IPO_DATA = [
       "<strong>Limpahan AI & EV:</strong> Pertumbuhan didorong oleh segmen hyperscaler AI dan pembuatan EV yang memerlukan modul kuasa serta papan AI server."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 21.5x, sejajar dengan purata industri pembuatan peralatan SMT/Semicon.",
-    "v7TargetPrice": 0.66
+    "v7TargetPrice": 0.66,
+    "hasMitiTranche": true
   },
   {
     "id": "destini",
@@ -8503,7 +8521,8 @@ const IPO_DATA = [
       "<strong>Kedudukan Aliran Tunai Stabil:</strong> Keputusan mengumumkan dividen interim menandakan kedudukan kunci kira-kira yang semakin sihat dan aliran tunai yang pulih."
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 5.2x, sangat murah berbanding purata peers industri kejuruteraan MRO.",
-    "v7TargetPrice": 0.61
+    "v7TargetPrice": 0.61,
+    "hasMitiTranche": true
   },
   {
     "id": "solarvest",
@@ -8581,7 +8600,8 @@ const IPO_DATA = [
       "<strong>Nilaian Premium Mampan:</strong> Dagangan PE premium sekitar 25x-35x disokong oleh CAGR untung bersih melebihi 40%."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan sekitar 30.0x-35.0x disokong oleh CAGR untung melebihi 40% berbanding purata industri utility-scale solar.",
-    "v7TargetPrice": 3.27
+    "v7TargetPrice": 3.27,
+    "hasMitiTranche": true
   },
   {
     "id": "semico-ns-",
@@ -9104,7 +9124,8 @@ const IPO_DATA = [
     "geography": "Kuala Lumpur",
     "v3TargetPrice": 0.383,
     "zone2TargetPrice": 0.76,
-    "v7TargetPrice": 0.76
+    "v7TargetPrice": 0.76,
+    "hasMitiTranche": true
   },
   {
     "id": "wastech-resources-berhad",
@@ -9149,7 +9170,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Energy (Solar / Renewable)",
-    "geography": "Selangor"
+    "geography": "Selangor",
+    "hasMitiTranche": true
   },
   {
     "id": "eplas-global-berhad",
@@ -9179,7 +9201,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Consumer (Food & Beverage / Tealive)",
-    "geography": "Kuala Lumpur"
+    "geography": "Kuala Lumpur",
+    "hasMitiTranche": true
   },
   {
     "id": "goldfinch-group-berhad",
@@ -9224,7 +9247,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Finance (Insurance)",
-    "geography": "Kuala Lumpur"
+    "geography": "Kuala Lumpur",
+    "hasMitiTranche": true
   },
   {
     "id": "united-asiapac-energy-berhad",
@@ -9435,7 +9459,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Technology (Semiconductor / Advanced Interconnect)",
-    "geography": "Penang"
+    "geography": "Penang",
+    "hasMitiTranche": true
   },
   {
     "id": "sca-solutions-berhad",
@@ -9480,7 +9505,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Healthcare (Medical Services)",
-    "geography": "Kuala Lumpur"
+    "geography": "Kuala Lumpur",
+    "hasMitiTranche": true
   },
   {
     "id": "kk-mart-retail-berhad",
@@ -9495,7 +9521,8 @@ const IPO_DATA = [
     "status": "Draft / Exposure Phase",
     "year": 2026,
     "sector": "Consumer (Retail Convenience Store)",
-    "geography": "Kuala Lumpur"
+    "geography": "Kuala Lumpur",
+    "hasMitiTranche": true
   },
   {
     "id": "ska-capital-berhad",
@@ -9561,7 +9588,8 @@ const IPO_DATA = [
     "market": "Main Market",
     "status": "Listed",
     "year": 2024,
-    "highPrice": 1.05
+    "highPrice": 1.05,
+    "hasMitiTranche": false
   },
   {
     "id": "saliran-group",
@@ -9581,7 +9609,8 @@ const IPO_DATA = [
     "symbol": "SALIRAN [NS]",
     "highPrice": 0.52,
     "os": 76.03,
-    "isAutoOS": true
+    "isAutoOS": true,
+    "hasMitiTranche": true
   },
   {
     "id": "northeast",
@@ -9636,7 +9665,8 @@ const IPO_DATA = [
     "symbol": "DNEX",
     "sifuTargetPrice": 0.7,
     "v3TargetPrice": 0.765,
-    "zone2TargetPrice": 0.7
+    "zone2TargetPrice": 0.7,
+    "hasMitiTranche": true
   },
   {
     "id": "restngo",
