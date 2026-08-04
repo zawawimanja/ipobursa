@@ -12,8 +12,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=2.0"></script>
-    <script src="sync-status.js?v=2.0"></script>
+    <script src="data.js?v=3.0"></script>
+    <script src="sync-status.js?v=3.0"></script>
     <style>
         .journal-container {
             margin-top: 0.4rem;
@@ -488,10 +488,16 @@
                             <option value="2023">2023</option>
                             <option value="2022">2022</option>
                         </select>
+                        <select id="sort-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: #fbbf24; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer; font-weight: 600;">
+                            <option value="listing_desc" selected>Susun: Terkini (Listing Date)</option>
+                            <option value="prem_desc">Susun: Untung (Premium % High)</option>
+                            <option value="prem_asc">Susun: Rugi / Diskaun (Low %)</option>
+                        </select>
                         <i data-lucide="chevron-down" class="chevron-icon"></i>
                     </div>
                 </div>
                 <div class="collapsible-content">
+                    <div id="historical-summary-bar" style="margin-bottom: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;"></div>
                     <div class="table-responsive">
                         <table class="journal-table" id="historical-table">
                             <thead>
@@ -861,14 +867,15 @@
             }).join('');
         }
 
-        // Render Historical Listed Table with Market + Year Filter (MITI tagged only)
+        // Render Historical Listed Table with Market + Year + Sort Filter
         function renderHistorical() {
             const tableBody = document.querySelector('#historical-table tbody');
+            const summaryBar = document.getElementById('historical-summary-bar');
             const filterVal = document.getElementById('market-filter').value;
             const yearVal = (document.getElementById('year-filter') || {}).value || 'all';
+            const sortVal = (document.getElementById('sort-filter') || {}).value || 'listing_desc';
             
             // Filter: Listed + have prices + Confirmed MITI tranche
-            // (Main Market IPOs are mandatory MITI, ACE Market confirmed MITI entries)
             const listData = ipoData.filter(x => {
                 const isListed = x.status === 'Listed';
                 const hasPrices = x.openPrice != null && x.price != null;
@@ -889,10 +896,46 @@
                 return isListed && hasPrices && isMiti && matchesMarket && matchesYear;
             });
 
-            // Sort by opening premium desc
+            // Calculate Stats for Summary Bar
+            let posCount = 0, negCount = 0, parCount = 0;
+            listData.forEach(x => {
+                const prem = ((x.openPrice - x.price) / x.price) * 100;
+                if (prem > 0) posCount++;
+                else if (prem < 0) negCount++;
+                else parCount++;
+            });
+
+            if (summaryBar) {
+                summaryBar.innerHTML = `
+                    <span style="font-size:0.75rem; color:white; background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.4); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
+                        📊 Jumlah IPO MITI: <strong>${listData.length}</strong>
+                    </span>
+                    <span style="font-size:0.75rem; color:#34d399; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
+                        🟢 Untung: <strong>${posCount}</strong> (${listData.length ? Math.round(posCount/listData.length*100) : 0}%)
+                    </span>
+                    <span style="font-size:0.75rem; color:#f87171; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
+                        🔴 Rugi / Diskaun: <strong>${negCount}</strong> (${listData.length ? Math.round(negCount/listData.length*100) : 0}%)
+                    </span>
+                    <span style="font-size:0.75rem; color:#fbbf24; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
+                        🟡 Par / Seri (0%): <strong>${parCount}</strong>
+                    </span>
+                `;
+            }
+
+            // Apply Sorting
             listData.sort((a, b) => {
                 const premA = ((a.openPrice - a.price) / a.price) * 100;
                 const premB = ((b.openPrice - b.price) / b.price) * 100;
+
+                if (sortVal === 'prem_desc') return premB - premA;
+                if (sortVal === 'prem_asc') return premA - premB;
+
+                // Default: listing_desc (Most Recent Listing Date First)
+                const dateA = parseFlexDate(a.listingDate || a.openingDate) || new Date(a.year || 1900, 0, 1);
+                const dateB = parseFlexDate(b.listingDate || b.openingDate) || new Date(b.year || 1900, 0, 1);
+                if (dateB.getTime() !== dateA.getTime()) {
+                    return dateB - dateA;
+                }
                 return premB - premA;
             });
 
