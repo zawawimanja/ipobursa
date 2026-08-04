@@ -78,7 +78,8 @@
         "growthRate": 0.15,
         "fairValue": 0.35,
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.45
+        "v7TargetPrice": 0.45,
+        "hasMitiTranche": true
     },
     {
         "id": "srkk-ai",
@@ -165,7 +166,8 @@
         "performance": "+68.75%",
         "strategy": "Scalp",
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.6
+        "v7TargetPrice": 0.6,
+        "hasMitiTranche": true
     },
     {
         "id": "sum-technology",
@@ -249,7 +251,8 @@
             "<strong>Solid Retail Demand (110.54x OS):</strong> Tiada tawaran jualan (OFS) bersama permintaan runcit yang sangat kuat (110.54 kali ganda oversubscription) memberikan pemangkin kecairan pasca-listing."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 20.7x. Didagangkan hampir setaraf dengan purata peers kejuruteraan industri (18x-22x), tetapi disokong oleh kitaran pertumbuhan bilik bersih yang agresif. Nilai wajar Sifu dianggarkan sekitar **RM 0.39** (+39.3% upside).",
-        "v7TargetPrice": 0.43
+        "v7TargetPrice": 0.43,
+        "hasMitiTranche": true
     },
     {
         "id": "elsa",
@@ -333,7 +336,8 @@
             "<strong>Risiko Tekanan Jualan (OFS):</strong> Tawaran jualan (Offer for Sale) sebanyak RM8.37 juta daripada pemegang saham sedia ada boleh mewujudkan tekanan jualan pasca-listing."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY25) = 11.5x. Ditawarkan pada diskaun berbanding peers OGSE Main Market (14x-18x), tetapi sektor ini kurang momentum semasa. Nilai wajar Sifu dianggarkan sekitar **RM 0.305** (+32.6% upside).",
-        "v7TargetPrice": 0.28
+        "v7TargetPrice": 0.28,
+        "hasMitiTranche": true
     },
     {
         "id": "pentech",
@@ -418,7 +422,8 @@
             "<strong>Wow Factor:</strong> Sektor ICT infra mungkin hambar tetapi peningkatan margin cloud menaikkan profitability syarikat secara ketara."
         ],
         "peers": "<strong>Peer Comparison:</strong> ICT peers average PE ~8x, CP PE ~12x, manakala Infotec PE ~118x (disebabkan loss making tahun lepas). Valuation owner PE 11x, tapi forward PE sifu hanyalah <strong>6.50x</strong>!",
-        "v7TargetPrice": 0.33
+        "v7TargetPrice": 0.33,
+        "hasMitiTranche": true
     },
     {
         "id": "mm-computer",
@@ -502,7 +507,8 @@
             "<strong>Sektor Biasa:</strong> IT Services biasa tanpa momentum tema besar (AI/Data Center) untuk menarik minat institusi."
         ],
         "peers": "<strong>Peer Comparison:</strong> Profil hampir sama dengan OGX. Walaupun PE munasabah (12.3x), disyorkan AVOID kerana risiko OFS besar.",
-        "v7TargetPrice": 0.24
+        "v7TargetPrice": 0.24,
+        "hasMitiTranche": true
     },
     {
         "id": "1doc",
@@ -567,7 +573,8 @@
         "v7TargetPrice": 0.5,
         "zone2TargetPrice": 0.5,
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "bus-cap",
@@ -648,7 +655,8 @@
             "<strong>Wow Factor:</strong> Margin kasar unjuran meningkat disebabkan skala ekonomi baru."
         ],
         "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 12x - 15x PE. Bus Cap adalah industri tradisional tetapi dijamin murah.",
-        "v7TargetPrice": 0.29
+        "v7TargetPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "5e-resources",
@@ -734,7 +742,8 @@
             "<strong>Kekuatan Aliran Tunai (Net Cash):</strong> Memiliki ROE >20%, profit margin >25% dan posisi tunai bersih +RM49.3M yang memberikan perlindungan kuat semasa ketidaktentuan pasaran."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 15.55x - 16.77x. Sangat munasabah untuk syarikat niche pengurusan sisa scheduled waste dengan profit margin melebihi 25%.",
-        "v7TargetPrice": 0.29
+        "v7TargetPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "adnex",
@@ -812,7 +821,8 @@
         ],
         "peers": "Median Sectors PE: N/A Median Peers PE",
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.21
+        "v7TargetPrice": 0.21,
+        "hasMitiTranche": true
     },
     {
         "id": "aerodyne",
@@ -835,7 +845,8 @@
         "calibratedSifuTargetPrice": 1.05,
         "v3TargetPrice": 0.661,
         "zone2TargetPrice": 1.05,
-        "v7TargetPrice": 1.05
+        "v7TargetPrice": 1.05,
+        "hasMitiTranche": true
     },
     {
         "id": "ambest",
@@ -916,7 +927,8 @@
             "<strong>Katalis vs Angka Kewangan:</strong> Ambest dan AMS membuktikan bahawa kajian IPO bukan sahaja melihat angka, tetapi melihat tema pemangkin yang besar."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 10.05x. Sangat murah berbanding peers industri yang biasanya berdagang sekitar 15.5x PE.",
-        "v7TargetPrice": 0.34
+        "v7TargetPrice": 0.34,
+        "hasMitiTranche": true
     },
     {
         "id": "ams-material",
@@ -1005,7 +1017,8 @@
             "<strong>Maybank IB dan M&A Securities Backing:</strong> Sokongan padu penaja jamin dengan rekod langganan awam yang baik memberikan sokongan premium yang sihat semasa listing day."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 17.03x - 21.77x, menawarkan nilai diskaun ketara berbanding dengan gergasi industrial material yang tersenarai di papan utama. Nilai wajar dianggarkan di paras **RM 0.38 - RM 0.49**.",
-        "v7TargetPrice": 0.33
+        "v7TargetPrice": 0.33,
+        "hasMitiTranche": true
     },
     {
         "id": "carsome",
@@ -1028,7 +1041,8 @@
         "calibratedSifuTargetPrice": 1.31,
         "v3TargetPrice": 0.933,
         "zone2TargetPrice": 1.31,
-        "v7TargetPrice": 1.31
+        "v7TargetPrice": 1.31,
+        "hasMitiTranche": true
     },
     {
         "id": "stratus-global",
@@ -1111,7 +1125,8 @@
         "highPrice": 2.03,
         "performance": "+162.50%",
         "strategy": "Swing",
-        "v7TargetPrice": 1.14
+        "v7TargetPrice": 1.14,
+        "hasMitiTranche": true
     },
     {
         "id": "ei-power",
@@ -1228,7 +1243,8 @@
             "<strong>Operating Leverage Padu:</strong> Pertumbuhan PAT yang eksponen (+111% YoY untung bersih dari RM9m ke RM19.1m) dengan pengembangan margin bersih (10.7% -> 18.0% -> 24.8%)."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan = 17.4x. Walaupun nampak premium berbanding peers biasa, kedudukan niche dan pertumbuhan profit +111% menjustifikasikan premium ini.",
-        "v7TargetPrice": 0.61
+        "v7TargetPrice": 0.61,
+        "hasMitiTranche": true
     },
     {
         "id": "empire-premium",
@@ -1309,7 +1325,8 @@
             "<strong>Premium Brand Power & Listing Main Market:</strong> Penyenaraian di Pasaran Utama (Main Market) dengan sokongan Maybank IB memberikan kredibiliti besar dan tarikan kepada pelabur institusi."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 14.09x - 17.11x, sangat berpatutan berbanding purata PE industri makanan berjenama premium di Bursa Malaysia yang melebihi 25x. Menawarkan Fair Value **RM 0.83 - RM 1.01**.",
-        "v7TargetPrice": 0.9
+        "v7TargetPrice": 0.9,
+        "hasMitiTranche": true
     },
     {
         "id": "gdgroup",
@@ -1387,7 +1404,8 @@
         ],
         "peers": "GDGROUP maintains a healthy PAT of RM28.3m, making it a stronger fundamental proxy for tourism compared to its primary listed peer Parlo Berhad (PARLO), which is loss-making.",
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.44
+        "v7TargetPrice": 0.44,
+        "hasMitiTranche": true
     },
     {
         "id": "gold-li",
@@ -1463,7 +1481,8 @@
         ],
         "peers": "Median Sectors PE: N/A Median Peers PE",
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.12
+        "v7TargetPrice": 0.12,
+        "hasMitiTranche": true
     },
     {
         "id": "hocksoon",
@@ -1543,7 +1562,8 @@
             "<strong>Sebab Beliau Disiplin Skip/Loss (🚀🚀🚀 Rating):</strong> Cincai-cincai kira menunjukkan potensi peningkatan (upside) yang amat rendah iaitu sekitar **3% hingga 5%** sahaja, maka ia adalah Skip/Avoid bagi dagangan jangka pendek."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 6.20x - 6.93x. Nampak sangat murah berbanding poultry peers yang lain di Bursa Malaysia.",
-        "v7TargetPrice": 0.63
+        "v7TargetPrice": 0.63,
+        "hasMitiTranche": true
     },
     {
         "id": "inspace-creation",
@@ -1631,7 +1651,8 @@
             "<strong>Analisis QR Pertama (Kemas kini Sifu):</strong> Pasaran bimbang sebab 1st QR pasca-listing lemah. Bagi Sifu, ia tidak mencerminkan FY26 kerana kemerosotan bermusim (perayaan & isu pekerja). Sentiasa pantau QR seterusnya untuk re-rating."
         ],
         "peers": "<strong>Peer Comparison & Risiko:</strong> Penilaian murah (11.4x PE sasaran vs peers 15.5x). Risiko utama: Tiada pendapatan berulang (project-based), Order Book kecil, tumpuan pelanggan tinggi (Top 5 = 62.9%), dan OCF negatif.",
-        "v7TargetPrice": 0.31
+        "v7TargetPrice": 0.31,
+        "hasMitiTranche": true
     },
     {
         "id": "isf",
@@ -1709,7 +1730,8 @@
             "<strong>Disiplin Dagangan & Pelan Peribadi:</strong> Tiada penyelesaian 'one size fits all' dalam pasaran saham; keutamaan diletakkan pada pematuhan pelan dagangan tersendiri dan kawalan risiko disiplin."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan Sasaran = 12.73x (berdasarkan harga IPO RM0.33). Walaupun kelihatan premium pada harga IPO (PE ~34.5x), unjuran Fwd PE jatuh mendadak kepada **12.7x** bersandarkan unjuran PAT RM25.9 juta bagi FYE26.",
-        "v7TargetPrice": 0.69
+        "v7TargetPrice": 0.69,
+        "hasMitiTranche": true
     },
     {
         "id": "keeming",
@@ -1787,7 +1809,8 @@
         "liabilitiesEstimate": "assets * 0.4",
         "growthRate": 15,
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.68
+        "v7TargetPrice": 0.68,
+        "hasMitiTranche": true
     },
     {
         "id": "manforce-group",
@@ -1868,7 +1891,8 @@
             "<strong>Perpindahan Papan Penyenaraian LEAP ke ACE:</strong> Perpindahan ini meningkatkan kecairan dagangan dan membolehkan penyertaan pelabur runcit yang lebih luas."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 12.5x - 14.5x. Sektor pengurusan tenaga kerja asing menghadapi risiko dasar kawal selia kemasukan pekerja asing yang tidak menentu. Ditawarkan pada nilai saksama **RM 0.395** (+3.9% upside).",
-        "v7TargetPrice": 0.38
+        "v7TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "mtt-shipping",
@@ -1949,7 +1973,8 @@
             "<strong>Status Kewangan & Dividen Solid:</strong> Kadar hutang yang terurus (Gearing 0.5x, Current Ratio 1.5x) berserta dengan polisi dividen yang tinggi (50% payout ratio) dan Net Assets RM0.92."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 9.18x - 10.04x. Sektor perkapalan dinilai pada gandaan PE yang rendah kerana sifatnya yang kitaran (cyclical) dan telah melepasi kemuncak prestasi industri perkapalan global (peak cycle 2022).",
-        "v7TargetPrice": 1.1
+        "v7TargetPrice": 1.1,
+        "hasMitiTranche": true
     },
     {
         "id": "ogm",
@@ -2025,7 +2050,8 @@
         "assetsEstimate": 75000000,
         "liabilitiesEstimate": 30000000,
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.3
+        "v7TargetPrice": 0.3,
+        "hasMitiTranche": true
     },
     {
         "id": "ogx",
@@ -2108,7 +2134,8 @@
             "<strong>Risiko Sentimen Pasaran (Sebab Barai):</strong> Walaupun fundamental syarikat solid dan balance sheet decent, ketiadaan sentiment pasaran yang menyokong semasa listing menyebabkan harganya merosot di bawah IPO."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE berada di sekitar 12.09x hingga 14.94x. Wajar dipantau untuk pengumpulan semula jika sentimen pasaran pulih.",
-        "v7TargetPrice": 0.4
+        "v7TargetPrice": 0.4,
+        "hasMitiTranche": true
     },
     {
         "id": "sbs",
@@ -2184,7 +2211,8 @@
         "assetsEstimate": 1.5,
         "liabilitiesEstimate": 0.4,
         "enrichedBy": "AI",
-        "v7TargetPrice": 0.26
+        "v7TargetPrice": 0.26,
+        "hasMitiTranche": true
     },
     {
         "id": "skyechip",
@@ -2371,7 +2399,8 @@
             "<strong>Defensive & Expansion Story:</strong> Sunway Medical Group adalah rangkaian hospital terkemuka dengan profil pendapatan pertahanan bertaraf mega."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) = 50.93x. Sangat premium berbanding hospital biasa, tetapi disokong oleh kualiti aset gred-A dan rekod pencapaian jenama Sunway.",
-        "v7TargetPrice": 1.94
+        "v7TargetPrice": 1.94,
+        "hasMitiTranche": true
     },
     {
         "id": "teamstr",
@@ -2403,7 +2432,8 @@
         "v3TargetPrice": 0.224,
         "zone2TargetPrice": 0.32,
         "insightUrl": "https://www.isaham.my/stock/teamstr/insights",
-        "v7TargetPrice": 0.32
+        "v7TargetPrice": 0.32,
+        "hasMitiTranche": true
     },
     {
         "id": "a1akk",
@@ -2429,7 +2459,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.196,
         "v3TargetPrice": 0.176,
-        "zone2TargetPrice": 0.196
+        "zone2TargetPrice": 0.196,
+        "hasMitiTranche": true
     },
     {
         "id": "aquawalk",
@@ -2452,7 +2483,8 @@
         "openPrice": 0.299987,
         "closePrice": 0.379998,
         "symbol": "AQUAWALK",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "asm",
@@ -2478,7 +2510,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.178,
         "v3TargetPrice": 0.124,
-        "zone2TargetPrice": 0.178
+        "zone2TargetPrice": 0.178,
+        "hasMitiTranche": true
     },
     {
         "id": "bms",
@@ -2501,7 +2534,8 @@
         "openPrice": 0.195008,
         "closePrice": 0.17501,
         "symbol": "BMS",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "cbhb",
@@ -2576,7 +2610,8 @@
             "<strong>Kecairan Tinggi:</strong> Disokong oleh pangkalan modal yang besar dengan 1.88 bilion shares outstanding, menjadikannya pilihan institusi."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 25.6x, bersesuaian dengan margin premium subsektor M&E data center.",
-        "v7TargetPrice": 0.38
+        "v7TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "cheeding",
@@ -2604,7 +2639,8 @@
         "dailyChange": -0.8,
         "sifuTargetPrice": 0.851,
         "v3TargetPrice": 0.746,
-        "zone2TargetPrice": 0.851
+        "zone2TargetPrice": 0.851,
+        "hasMitiTranche": true
     },
     {
         "id": "cki",
@@ -2627,7 +2663,8 @@
         "openPrice": 1.0900440000000002,
         "closePrice": 1.08,
         "symbol": "CKI",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "clite",
@@ -2650,7 +2687,8 @@
         "openPrice": 0.23,
         "closePrice": 0.23,
         "symbol": "CLITE",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "colform",
@@ -2676,7 +2714,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.299,
         "v3TargetPrice": 0.269,
-        "zone2TargetPrice": 0.299
+        "zone2TargetPrice": 0.299,
+        "hasMitiTranche": true
     },
     {
         "id": "dengkil",
@@ -2702,7 +2741,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.178,
         "v3TargetPrice": 0.159,
-        "zone2TargetPrice": 0.178
+        "zone2TargetPrice": 0.178,
+        "hasMitiTranche": true
     },
     {
         "id": "ecoshop",
@@ -2728,7 +2768,8 @@
         "dailyChange": 0.3,
         "sifuTargetPrice": 1.31,
         "v3TargetPrice": 1.205,
-        "zone2TargetPrice": 1.31
+        "zone2TargetPrice": 1.31,
+        "hasMitiTranche": true
     },
     {
         "id": "enpro",
@@ -2754,7 +2795,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.253,
         "v3TargetPrice": 0.231,
-        "zone2TargetPrice": 0.253
+        "zone2TargetPrice": 0.253,
+        "hasMitiTranche": true
     },
     {
         "id": "famiera",
@@ -2777,7 +2819,8 @@
         "openPrice": 0.25,
         "closePrice": 0.255,
         "symbol": "FAMIERA",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "fibro",
@@ -2800,7 +2843,8 @@
         "openPrice": 0.46002000000000004,
         "closePrice": 0.49500000000000005,
         "symbol": "FIBRO",
-        "dailyChange": 0.3
+        "dailyChange": 0.3,
+        "hasMitiTranche": true
     },
     {
         "id": "genergy",
@@ -2825,7 +2869,8 @@
         "pe": 15,
         "highPrice": 1,
         "symbol": "GENERGY",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "geohan",
@@ -2848,7 +2893,8 @@
         "openPrice": 0.5399900000000001,
         "closePrice": 0.5399900000000001,
         "symbol": "GEOHAN",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "hi",
@@ -2873,7 +2919,8 @@
         "openPrice": 1.65002,
         "closePrice": 1.1,
         "symbol": "LHI [NS]",
-        "dailyChange": -0.1
+        "dailyChange": -0.1,
+        "hasMitiTranche": true
     },
     {
         "id": "hkb",
@@ -2952,7 +2999,8 @@
             "<strong>Tenderbook Aktif:</strong> Membida projek jalan raya, jambatan, dan kemudahan awam bernilai tinggi di bawah peruntukan pembangunan Malaysia Timur."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 19.0x, berpatutan bagi kontraktor binaan gred-A Sarawak.",
-        "v7TargetPrice": 0.21
+        "v7TargetPrice": 0.21,
+        "hasMitiTranche": true
     },
     {
         "id": "iab",
@@ -3027,7 +3075,8 @@
             "<strong>Digitalisasi Infrastruktur Air:</strong> Rakan kerjasama utama agensi air Sarawak dalam mengesan air tidak terhasil (Non-Revenue Water) menggunakan sensor IoT pintar."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 24.5x, menikmati diskaun berbanding peers teknologi analitik data yang berdagang melebihi 30x PE.",
-        "v7TargetPrice": 0.71
+        "v7TargetPrice": 0.71,
+        "hasMitiTranche": true
     },
     {
         "id": "icents",
@@ -3050,7 +3099,8 @@
         "openPrice": 0.28999199999999997,
         "closePrice": 0.340008,
         "symbol": "ICENTS",
-        "dailyChange": 1
+        "dailyChange": 1,
+        "hasMitiTranche": true
     },
     {
         "id": "ictzone",
@@ -3073,7 +3123,8 @@
         "openPrice": 0.2,
         "closePrice": 0.2,
         "symbol": "ICTZONE",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "jssolar",
@@ -3099,7 +3150,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.265,
         "v3TargetPrice": 0.2,
-        "zone2TargetPrice": 0.265
+        "zone2TargetPrice": 0.265,
+        "hasMitiTranche": true
     },
     {
         "id": "kopi",
@@ -3127,7 +3179,8 @@
         "dailyChange": 0.2,
         "sifuTargetPrice": 0.55,
         "v3TargetPrice": 0.509,
-        "zone2TargetPrice": 0.55
+        "zone2TargetPrice": 0.55,
+        "hasMitiTranche": true
     },
     {
         "id": "lacmed",
@@ -3150,7 +3203,8 @@
         "openPrice": 0.75,
         "closePrice": 0.765,
         "symbol": "LACMED",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "lsh",
@@ -3175,7 +3229,8 @@
         "openPrice": 0.72996,
         "closePrice": 0.8300160000000001,
         "symbol": "LSH",
-        "dailyChange": 0.2
+        "dailyChange": 0.2,
+        "hasMitiTranche": true
     },
     {
         "id": "minimart-2025",
@@ -3196,7 +3251,8 @@
         "ib": "Small Broker",
         "fundUse": "Repay Loans",
         "highPrice": 0.5,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "msb",
@@ -3219,7 +3275,8 @@
         "openPrice": 0.17,
         "closePrice": 0.17,
         "symbol": "MSB",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "northern-solar-listed",
@@ -3243,7 +3300,8 @@
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 0.7,
-        "dailyChange": 0
+        "dailyChange": 0,
+        "hasMitiTranche": true
     },
     {
         "id": "ohm",
@@ -3266,7 +3324,8 @@
         "openPrice": 0.28501200000000004,
         "closePrice": 0.28501200000000004,
         "symbol": "OHM",
-        "dailyChange": 1
+        "dailyChange": 1,
+        "hasMitiTranche": true
     },
     {
         "id": "oriental-kopi-listed",
@@ -3288,7 +3347,8 @@
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 32.3,
         "highPrice": 1.2189999999999999,
-        "dailyChange": 0.1
+        "dailyChange": 0.1,
+        "hasMitiTranche": true
     },
     {
         "id": "orkim",
@@ -3314,7 +3374,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 1.098,
         "v3TargetPrice": 0.747,
-        "zone2TargetPrice": 1.098
+        "zone2TargetPrice": 1.098,
+        "hasMitiTranche": true
     },
     {
         "id": "oxb",
@@ -3337,7 +3398,8 @@
         "openPrice": 0.360006,
         "closePrice": 0.38500399999999996,
         "symbol": "OXB",
-        "dailyChange": -0.1
+        "dailyChange": -0.1,
+        "hasMitiTranche": true
     },
     {
         "id": "pantech-global",
@@ -3359,7 +3421,8 @@
         "pe": 11.4,
         "highPrice": 1.265,
         "os": 44.93,
-        "dailyChange": 1
+        "dailyChange": 1,
+        "hasMitiTranche": true
     },
     {
         "id": "people",
@@ -3382,7 +3445,8 @@
         "openPrice": 0.24,
         "closePrice": 0.265,
         "symbol": "PEOPLE",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "pglobal",
@@ -3405,7 +3469,8 @@
         "openPrice": 0.464984,
         "closePrice": 0.5750080000000001,
         "symbol": "PGLOBAL",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "pmck",
@@ -3428,7 +3493,8 @@
         "openPrice": 0.224994,
         "closePrice": 0.23001000000000002,
         "symbol": "PMCK",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "pmibhd",
@@ -3451,7 +3517,8 @@
         "openPrice": 0.235008,
         "closePrice": 0.23001300000000002,
         "symbol": "PMIBHD",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "pmw",
@@ -3474,7 +3541,8 @@
         "openPrice": 0.34,
         "closePrice": 0.344998,
         "symbol": "PMW",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "polymer",
@@ -3497,7 +3565,8 @@
         "openPrice": 0.25,
         "closePrice": 0.25,
         "symbol": "POLYMER",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "power",
@@ -3523,7 +3592,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.41,
         "v3TargetPrice": 0.333,
-        "zone2TargetPrice": 0.41
+        "zone2TargetPrice": 0.41,
+        "hasMitiTranche": true
     },
     {
         "id": "psp",
@@ -3546,7 +3616,8 @@
         "openPrice": 0.16,
         "closePrice": 0.144992,
         "symbol": "PSP",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "reachten",
@@ -3569,7 +3640,8 @@
         "openPrice": 0.52,
         "closePrice": 0.5400200000000001,
         "symbol": "REACHTEN",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "rtech",
@@ -3595,7 +3667,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.207,
         "v3TargetPrice": 0.186,
-        "zone2TargetPrice": 0.207
+        "zone2TargetPrice": 0.207,
+        "hasMitiTranche": true
     },
     {
         "id": "sag",
@@ -3624,7 +3697,8 @@
         "calibratedSifuTargetPrice": 0.88,
         "v3TargetPrice": 0.823,
         "zone2TargetPrice": 0.88,
-        "v7TargetPrice": 0.88
+        "v7TargetPrice": 0.88,
+        "hasMitiTranche": true
     },
     {
         "id": "set",
@@ -3650,7 +3724,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.201,
         "v3TargetPrice": 0.18,
-        "zone2TargetPrice": 0.201
+        "zone2TargetPrice": 0.201,
+        "hasMitiTranche": true
     },
     {
         "id": "sumi",
@@ -3673,7 +3748,8 @@
         "openPrice": 0.18,
         "closePrice": 0.18,
         "symbol": "SUMI",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "sunlogy",
@@ -3696,7 +3772,8 @@
         "openPrice": 0.30500999999999995,
         "closePrice": 0.3,
         "symbol": "SUNLOGY",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "supreme-consolidated",
@@ -3724,7 +3801,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.29,
         "v3TargetPrice": 0.268,
-        "zone2TargetPrice": 0.29
+        "zone2TargetPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "techstore",
@@ -3750,7 +3828,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.28,
         "v3TargetPrice": 0.261,
-        "zone2TargetPrice": 0.28
+        "zone2TargetPrice": 0.28,
+        "hasMitiTranche": true
     },
     {
         "id": "thmy",
@@ -3775,7 +3854,8 @@
         "openPrice": 0.799986,
         "closePrice": 0.9100050000000001,
         "symbol": "THMY",
-        "dailyChange": 2.7
+        "dailyChange": 2.7,
+        "hasMitiTranche": true
     },
     {
         "id": "verdant",
@@ -3801,7 +3881,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.38,
         "v3TargetPrice": 0.299,
-        "zone2TargetPrice": 0.38
+        "zone2TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "wawasan-dengkil",
@@ -3822,7 +3903,8 @@
         "ib": "Public Investment",
         "fundUse": "60% Ekspansi, 20% R&D",
         "highPrice": 0.713,
-        "dailyChange": 1.7
+        "dailyChange": 1.7,
+        "hasMitiTranche": true
     },
     {
         "id": "westrvr",
@@ -3845,7 +3927,8 @@
         "openPrice": 0.394992,
         "closePrice": 0.369993,
         "symbol": "WESTRVR",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "wtec",
@@ -3871,7 +3954,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.138,
         "v3TargetPrice": 0.122,
-        "zone2TargetPrice": 0.138
+        "zone2TargetPrice": 0.138,
+        "hasMitiTranche": true
     },
     {
         "id": "xpb",
@@ -3897,7 +3981,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.25,
         "v3TargetPrice": 0.231,
-        "zone2TargetPrice": 0.25
+        "zone2TargetPrice": 0.25,
+        "hasMitiTranche": true
     },
     {
         "id": "99-speedmart",
@@ -3919,7 +4004,8 @@
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 50.2,
         "highPrice": 2.852,
-        "dailyChange": 5.3
+        "dailyChange": 5.3,
+        "hasMitiTranche": true
     },
     {
         "id": "agricor",
@@ -3945,7 +4031,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.448,
         "v3TargetPrice": 0.405,
-        "zone2TargetPrice": 0.448
+        "zone2TargetPrice": 0.448,
+        "hasMitiTranche": true
     },
     {
         "id": "agx",
@@ -3971,7 +4058,8 @@
         "dailyChange": 0.7,
         "sifuTargetPrice": 0.494,
         "v3TargetPrice": 0.462,
-        "zone2TargetPrice": 0.494
+        "zone2TargetPrice": 0.494,
+        "hasMitiTranche": true
     },
     {
         "id": "alpha-ivf",
@@ -3995,7 +4083,8 @@
         "highPrice": 0.322,
         "listingDate": "2023-01-03",
         "symbol": "L&PBHD",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "azam-jaya",
@@ -4023,7 +4112,8 @@
         "dailyChange": -1.6,
         "sifuTargetPrice": 1.04,
         "v3TargetPrice": 0.641,
-        "zone2TargetPrice": 1.04
+        "zone2TargetPrice": 1.04,
+        "hasMitiTranche": true
     },
     {
         "id": "bwys",
@@ -4049,7 +4139,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.31,
         "v3TargetPrice": 0.29,
-        "zone2TargetPrice": 0.31
+        "zone2TargetPrice": 0.31,
+        "hasMitiTranche": true
     },
     {
         "id": "carlorino",
@@ -4072,7 +4163,8 @@
         "openPrice": 0.235008,
         "closePrice": 0.5150009999999999,
         "symbol": "RL",
-        "dailyChange": -0.5
+        "dailyChange": -0.5,
+        "hasMitiTranche": true
     },
     {
         "id": "crest",
@@ -4098,7 +4190,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.32,
         "v3TargetPrice": 0.29,
-        "zone2TargetPrice": 0.32
+        "zone2TargetPrice": 0.32,
+        "hasMitiTranche": true
     },
     {
         "id": "crpmate",
@@ -4124,7 +4217,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.23,
         "v3TargetPrice": 0.211,
-        "zone2TargetPrice": 0.23
+        "zone2TargetPrice": 0.23,
+        "hasMitiTranche": true
     },
     {
         "id": "elridge",
@@ -4152,7 +4246,8 @@
         "dailyChange": -0.8,
         "sifuTargetPrice": 0.55,
         "v3TargetPrice": 0.53,
-        "zone2TargetPrice": 0.55
+        "zone2TargetPrice": 0.55,
+        "hasMitiTranche": true
     },
     {
         "id": "epb",
@@ -4178,7 +4273,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.71,
         "v3TargetPrice": 0.657,
-        "zone2TargetPrice": 0.71
+        "zone2TargetPrice": 0.71,
+        "hasMitiTranche": true
     },
     {
         "id": "farm-price",
@@ -4202,7 +4298,8 @@
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 0.5175,
-        "dailyChange": -0.7
+        "dailyChange": -0.7,
+        "hasMitiTranche": true
     },
     {
         "id": "feytech",
@@ -4230,7 +4327,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.259,
         "v3TargetPrice": 0.173,
-        "zone2TargetPrice": 0.259
+        "zone2TargetPrice": 0.259,
+        "hasMitiTranche": true
     },
     {
         "id": "fphb",
@@ -4256,7 +4354,8 @@
         "dailyChange": -1,
         "sifuTargetPrice": 0.38,
         "v3TargetPrice": 0.359,
-        "zone2TargetPrice": 0.38
+        "zone2TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "gohub",
@@ -4281,7 +4380,8 @@
         "openPrice": 0.7999949999999999,
         "closePrice": 0.950005,
         "symbol": "GOHUB",
-        "dailyChange": -0.9
+        "dailyChange": -0.9,
+        "hasMitiTranche": true
     },
     {
         "id": "hawk",
@@ -4307,7 +4407,8 @@
         "dailyChange": 0.1,
         "sifuTargetPrice": 0.241,
         "v3TargetPrice": 0.228,
-        "zone2TargetPrice": 0.241
+        "zone2TargetPrice": 0.241,
+        "hasMitiTranche": true
     },
     {
         "id": "johor-plantations",
@@ -4330,7 +4431,8 @@
         "fundUse": "60% Ekspansi, 20% R&D",
         "pe": 11.7,
         "highPrice": 1.9779999999999998,
-        "dailyChange": 1.1
+        "dailyChange": 1.1,
+        "hasMitiTranche": true
     },
     {
         "id": "jpg",
@@ -4355,7 +4457,8 @@
         "openPrice": 0.84,
         "closePrice": 0.8999759999999999,
         "symbol": "JPG",
-        "dailyChange": -0.1
+        "dailyChange": -0.1,
+        "hasMitiTranche": true
     },
     {
         "id": "kawan-renergy",
@@ -4377,7 +4480,8 @@
         "fundUse": "Expansion",
         "pe": 10.8,
         "highPrice": 0.598,
-        "dailyChange": 1.8
+        "dailyChange": 1.8,
+        "hasMitiTranche": true
     },
     {
         "id": "kenergy",
@@ -4403,7 +4507,8 @@
         "dailyChange": 1.8,
         "sifuTargetPrice": 0.598,
         "v3TargetPrice": 0.579,
-        "zone2TargetPrice": 0.598
+        "zone2TargetPrice": 0.598,
+        "hasMitiTranche": true
     },
     {
         "id": "keyfield",
@@ -4433,7 +4538,8 @@
         "dailyChange": -0.3,
         "sifuTargetPrice": 2.14,
         "v3TargetPrice": 1.825,
-        "zone2TargetPrice": 2.14
+        "zone2TargetPrice": 2.14,
+        "hasMitiTranche": true
     },
     {
         "id": "kjts",
@@ -4461,7 +4567,8 @@
         "dailyChange": 1.2,
         "sifuTargetPrice": 0.989,
         "v3TargetPrice": 0.801,
-        "zone2TargetPrice": 0.989
+        "zone2TargetPrice": 0.989,
+        "hasMitiTranche": true
     },
     {
         "id": "kti",
@@ -4486,7 +4593,8 @@
         "openPrice": 0.3,
         "closePrice": 0.285,
         "symbol": "KTI",
-        "dailyChange": 0.2
+        "dailyChange": 0.2,
+        "hasMitiTranche": true
     },
     {
         "id": "lwsabah",
@@ -4514,7 +4622,8 @@
         "sifuTargetPrice": 0.8,
         "dailyChange": 10.08,
         "v3TargetPrice": 0.739,
-        "zone2TargetPrice": 0.8
+        "zone2TargetPrice": 0.8,
+        "hasMitiTranche": true
     },
     {
         "id": "master-tec",
@@ -4536,7 +4645,8 @@
         "fundUse": "Working Capital",
         "pe": 38.9,
         "highPrice": 1.288,
-        "dailyChange": -0.2
+        "dailyChange": -0.2,
+        "hasMitiTranche": true
     },
     {
         "id": "mega-fortris",
@@ -4558,7 +4668,8 @@
         "fundUse": "35% Bayar Hutang, 20% Operasi",
         "pe": 16.2,
         "highPrice": 0.7474999999999999,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "metro",
@@ -4581,7 +4692,8 @@
         "openPrice": 0.255,
         "closePrice": 0.255,
         "symbol": "METRO",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "mkh-oil",
@@ -4603,7 +4715,8 @@
         "fundUse": "35% Bayar Hutang, 20% Operasi",
         "pe": 7.6,
         "highPrice": 0.6669999999999999,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "mkhop",
@@ -4626,7 +4739,8 @@
         "openPrice": 0.629982,
         "closePrice": 0.614978,
         "symbol": "MKHOP",
-        "dailyChange": 1.1
+        "dailyChange": 1.1,
+        "hasMitiTranche": true
     },
     {
         "id": "mtec",
@@ -4654,7 +4768,8 @@
         "symbol": "MTEC",
         "sifuTargetPrice": 1.184,
         "v3TargetPrice": 1.219,
-        "zone2TargetPrice": 1.184
+        "zone2TargetPrice": 1.184,
+        "hasMitiTranche": true
     },
     {
         "id": "obhb",
@@ -4677,7 +4792,8 @@
         "openPrice": 0.250008,
         "closePrice": 0.250008,
         "symbol": "OBHB",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "ocean-fresh",
@@ -4701,7 +4817,8 @@
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 0.6669999999999999,
-        "dailyChange": 0.5
+        "dailyChange": 0.5,
+        "hasMitiTranche": true
     },
     {
         "id": "ofb",
@@ -4727,7 +4844,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.184,
         "v3TargetPrice": 0.164,
-        "zone2TargetPrice": 0.184
+        "zone2TargetPrice": 0.184,
+        "hasMitiTranche": true
     },
     {
         "id": "plintas",
@@ -4750,7 +4868,8 @@
         "openPrice": 0.95,
         "closePrice": 0.9700449999999998,
         "symbol": "PLINTAS",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "prolintas",
@@ -4798,7 +4917,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.178,
         "v3TargetPrice": 0.16,
-        "zone2TargetPrice": 0.178
+        "zone2TargetPrice": 0.178,
+        "hasMitiTranche": true
     },
     {
         "id": "scb",
@@ -4824,7 +4944,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.144,
         "v3TargetPrice": 0.127,
-        "zone2TargetPrice": 0.144
+        "zone2TargetPrice": 0.144,
+        "hasMitiTranche": true
     },
     {
         "id": "sdcg",
@@ -4850,7 +4971,8 @@
         "dailyChange": 0.8,
         "sifuTargetPrice": 0.54,
         "v3TargetPrice": 0.505,
-        "zone2TargetPrice": 0.54
+        "zone2TargetPrice": 0.54,
+        "hasMitiTranche": true
     },
     {
         "id": "sinkung",
@@ -4876,7 +4998,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.092,
         "v3TargetPrice": 0.082,
-        "zone2TargetPrice": 0.092
+        "zone2TargetPrice": 0.092,
+        "hasMitiTranche": true
     },
     {
         "id": "smart",
@@ -4902,7 +5025,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.172,
         "v3TargetPrice": 0.151,
-        "zone2TargetPrice": 0.172
+        "zone2TargetPrice": 0.172,
+        "hasMitiTranche": true
     },
     {
         "id": "sorento",
@@ -4925,7 +5049,8 @@
         "openPrice": 0.374995,
         "closePrice": 0.374995,
         "symbol": "SORENTO",
-        "dailyChange": 1.6
+        "dailyChange": 1.6,
+        "hasMitiTranche": true
     },
     {
         "id": "steel-hawk",
@@ -4949,7 +5074,8 @@
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 0.40249999999999997,
-        "dailyChange": 1.2
+        "dailyChange": 1.2,
+        "hasMitiTranche": true
     },
     {
         "id": "tmk",
@@ -4972,7 +5098,8 @@
         "openPrice": 1.9699749999999998,
         "closePrice": 1.9199249999999999,
         "symbol": "TMK",
-        "dailyChange": 1.3
+        "dailyChange": 1.3,
+        "hasMitiTranche": true
     },
     {
         "id": "topmix",
@@ -4998,7 +5125,8 @@
         "dailyChange": 2.6,
         "sifuTargetPrice": 0.546,
         "v3TargetPrice": 0.521,
-        "zone2TargetPrice": 0.546
+        "zone2TargetPrice": 0.546,
+        "hasMitiTranche": true
     },
     {
         "id": "topvisn",
@@ -5024,7 +5152,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.41,
         "v3TargetPrice": 0.379,
-        "zone2TargetPrice": 0.41
+        "zone2TargetPrice": 0.41,
+        "hasMitiTranche": true
     },
     {
         "id": "tsa",
@@ -5050,7 +5179,8 @@
         "dailyChange": 0.3,
         "sifuTargetPrice": 0.989,
         "v3TargetPrice": 0.947,
-        "zone2TargetPrice": 0.989
+        "zone2TargetPrice": 0.989,
+        "hasMitiTranche": true
     },
     {
         "id": "uue-holdings",
@@ -5080,7 +5210,8 @@
         "dailyChange": 2.2,
         "sifuTargetPrice": 0.977,
         "v3TargetPrice": 0.916,
-        "zone2TargetPrice": 0.977
+        "zone2TargetPrice": 0.977,
+        "hasMitiTranche": true
     },
     {
         "id": "vanzo",
@@ -5106,7 +5237,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.144,
         "v3TargetPrice": 0.131,
-        "zone2TargetPrice": 0.144
+        "zone2TargetPrice": 0.144,
+        "hasMitiTranche": true
     },
     {
         "id": "vtc",
@@ -5132,7 +5264,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.265,
         "v3TargetPrice": 0.242,
-        "zone2TargetPrice": 0.265
+        "zone2TargetPrice": 0.265,
+        "hasMitiTranche": true
     },
     {
         "id": "wentel-engineering",
@@ -5160,7 +5293,8 @@
         "dailyChange": 1.2,
         "sifuTargetPrice": 0.276,
         "v3TargetPrice": 0.193,
-        "zone2TargetPrice": 0.276
+        "zone2TargetPrice": 0.276,
+        "hasMitiTranche": true
     },
     {
         "id": "winstar",
@@ -5186,7 +5320,8 @@
         "dailyChange": 2.3,
         "sifuTargetPrice": 0.51,
         "v3TargetPrice": 0.478,
-        "zone2TargetPrice": 0.51
+        "zone2TargetPrice": 0.51,
+        "hasMitiTranche": true
     },
     {
         "id": "zantat",
@@ -5214,7 +5349,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.201,
         "v3TargetPrice": 0.181,
-        "zone2TargetPrice": 0.201
+        "zone2TargetPrice": 0.201,
+        "hasMitiTranche": true
     },
     {
         "id": "chb",
@@ -5239,7 +5375,8 @@
         "openPrice": 0.50001,
         "closePrice": 0.57001,
         "symbol": "CHB",
-        "dailyChange": -1.3
+        "dailyChange": -1.3,
+        "hasMitiTranche": true
     },
     {
         "id": "cloudpt",
@@ -5265,7 +5402,8 @@
         "dailyChange": 0.5,
         "sifuTargetPrice": 0.604,
         "v3TargetPrice": 0.563,
-        "zone2TargetPrice": 0.604
+        "zone2TargetPrice": 0.604,
+        "hasMitiTranche": true
     },
     {
         "id": "cpetech",
@@ -5288,7 +5426,8 @@
         "openPrice": 0.899977,
         "closePrice": 0.914957,
         "symbol": "CPETECH",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "day3",
@@ -5314,7 +5453,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.144,
         "v3TargetPrice": 0.127,
-        "zone2TargetPrice": 0.144
+        "zone2TargetPrice": 0.144,
+        "hasMitiTranche": true
     },
     {
         "id": "dchcare",
@@ -5340,7 +5480,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.127,
         "v3TargetPrice": 0.112,
-        "zone2TargetPrice": 0.127
+        "zone2TargetPrice": 0.127,
+        "hasMitiTranche": true
     },
     {
         "id": "dss",
@@ -5366,7 +5507,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.293,
         "v3TargetPrice": 0.259,
-        "zone2TargetPrice": 0.293
+        "zone2TargetPrice": 0.293,
+        "hasMitiTranche": true
     },
     {
         "id": "dxn",
@@ -5389,7 +5531,8 @@
         "openPrice": 0.68999,
         "closePrice": 0.6649999999999999,
         "symbol": "DXN",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "edelteq",
@@ -5415,7 +5558,8 @@
         "dailyChange": 0.4,
         "sifuTargetPrice": 0.437,
         "v3TargetPrice": 0.419,
-        "zone2TargetPrice": 0.437
+        "zone2TargetPrice": 0.437,
+        "hasMitiTranche": true
     },
     {
         "id": "glxt",
@@ -5441,7 +5585,8 @@
         "dailyChange": 0.9,
         "sifuTargetPrice": 0.241,
         "v3TargetPrice": 0.223,
-        "zone2TargetPrice": 0.241
+        "zone2TargetPrice": 0.241,
+        "hasMitiTranche": true
     },
     {
         "id": "jtgroup",
@@ -5469,7 +5614,8 @@
         "dailyChange": 0.8,
         "sifuTargetPrice": 0.627,
         "v3TargetPrice": 0.619,
-        "zone2TargetPrice": 0.627
+        "zone2TargetPrice": 0.627,
+        "hasMitiTranche": true
     },
     {
         "id": "kgw",
@@ -5495,7 +5641,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.121,
         "v3TargetPrice": 0.107,
-        "zone2TargetPrice": 0.121
+        "zone2TargetPrice": 0.121,
+        "hasMitiTranche": true
     },
     {
         "id": "kitacon",
@@ -5521,7 +5668,8 @@
         "dailyChange": 0.7,
         "sifuTargetPrice": 0.793,
         "v3TargetPrice": 0.73,
-        "zone2TargetPrice": 0.793
+        "zone2TargetPrice": 0.793,
+        "hasMitiTranche": true
     },
     {
         "id": "lpbhd",
@@ -5544,7 +5692,8 @@
         "dailyChange": null,
         "openPrice": 0.32,
         "closePrice": 0.32,
-        "symbol": "ALPHA [NS]"
+        "symbol": "ALPHA [NS]",
+        "hasMitiTranche": true
     },
     {
         "id": "minox",
@@ -5570,7 +5719,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.218,
         "v3TargetPrice": 0.197,
-        "zone2TargetPrice": 0.218
+        "zone2TargetPrice": 0.218,
+        "hasMitiTranche": true
     },
     {
         "id": "mstgolf",
@@ -5593,7 +5743,8 @@
         "openPrice": 0.784971,
         "closePrice": 0.78003,
         "symbol": "MSTGOLF",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "natgate",
@@ -5621,7 +5772,8 @@
         "dailyChange": 0.1,
         "sifuTargetPrice": 0.851,
         "v3TargetPrice": 0.837,
-        "zone2TargetPrice": 0.851
+        "zone2TargetPrice": 0.851,
+        "hasMitiTranche": true
     },
     {
         "id": "oppstar",
@@ -5649,7 +5801,8 @@
         "symbol": "OPPSTAR",
         "dailyChange": null,
         "v3TargetPrice": 0.791,
-        "zone2TargetPrice": 0.85
+        "zone2TargetPrice": 0.85,
+        "hasMitiTranche": true
     },
     {
         "id": "plytec",
@@ -5672,7 +5825,8 @@
         "openPrice": 0.36000999999999994,
         "closePrice": 0.32500999999999997,
         "symbol": "PLYTEC",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "radium",
@@ -5697,7 +5851,8 @@
         "pe": 17.1,
         "highPrice": 0.575,
         "symbol": "RADIUM",
-        "dailyChange": 1.3
+        "dailyChange": 1.3,
+        "hasMitiTranche": true
     },
     {
         "id": "skywld",
@@ -5720,7 +5875,8 @@
         "openPrice": 0.8,
         "closePrice": 0.7400000000000001,
         "symbol": "SKYWLD",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "skyworld",
@@ -5742,7 +5898,8 @@
         "fundUse": "Land Acquisition",
         "pe": 5.56,
         "highPrice": 0.8,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "ssf",
@@ -5768,7 +5925,8 @@
         "dailyChange": 0.7,
         "sifuTargetPrice": 0.443,
         "v3TargetPrice": 0.423,
-        "zone2TargetPrice": 0.443
+        "zone2TargetPrice": 0.443,
+        "hasMitiTranche": true
     },
     {
         "id": "synergy",
@@ -5791,7 +5949,8 @@
         "openPrice": 0.37999099999999997,
         "closePrice": 0.35002,
         "symbol": "SYNERGY",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "ttvhb",
@@ -5814,7 +5973,8 @@
         "openPrice": 1.4900160000000002,
         "closePrice": 1.2799980000000002,
         "symbol": "TTVHB",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "vlb",
@@ -5840,7 +6000,8 @@
         "dailyChange": 0.6,
         "sifuTargetPrice": 0.673,
         "v3TargetPrice": 0.654,
-        "zone2TargetPrice": 0.673
+        "zone2TargetPrice": 0.673,
+        "hasMitiTranche": true
     },
     {
         "id": "wells",
@@ -5868,7 +6029,8 @@
         "dailyChange": 2.4,
         "sifuTargetPrice": 0.759,
         "v3TargetPrice": 0.793,
-        "zone2TargetPrice": 0.759
+        "zone2TargetPrice": 0.759,
+        "hasMitiTranche": true
     },
     {
         "id": "agmo",
@@ -5895,7 +6057,8 @@
         "sifuTargetPrice": 0.5,
         "dailyChange": 1.61,
         "v3TargetPrice": 0.482,
-        "zone2TargetPrice": 0.5
+        "zone2TargetPrice": 0.5,
+        "hasMitiTranche": true
     },
     {
         "id": "amereit",
@@ -5944,7 +6107,8 @@
         "dailyChange": -1.5,
         "sifuTargetPrice": 0.661,
         "v3TargetPrice": 0.614,
-        "zone2TargetPrice": 0.661
+        "zone2TargetPrice": 0.661,
+        "hasMitiTranche": true
     },
     {
         "id": "cengild",
@@ -5970,7 +6134,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.236,
         "v3TargetPrice": 0.211,
-        "zone2TargetPrice": 0.236
+        "zone2TargetPrice": 0.236,
+        "hasMitiTranche": true
     },
     {
         "id": "cnergen",
@@ -5990,7 +6155,8 @@
         "status": "Listed",
         "shariah": true,
         "highPrice": 0.58,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "coraza",
@@ -6015,7 +6181,8 @@
         "openPrice": 0.7000000000000001,
         "closePrice": 0.6450080000000001,
         "symbol": "CORAZA",
-        "dailyChange": -1.4
+        "dailyChange": -1.4,
+        "hasMitiTranche": true
     },
     {
         "id": "eca",
@@ -6038,7 +6205,8 @@
         "openPrice": 0.6499950000000001,
         "closePrice": 0.7550040000000001,
         "symbol": "ECA",
-        "dailyChange": -1.2
+        "dailyChange": -1.2,
+        "hasMitiTranche": true
     },
     {
         "id": "ffb",
@@ -6066,7 +6234,8 @@
         "dailyChange": -1,
         "sifuTargetPrice": 2.921,
         "v3TargetPrice": 2.859,
-        "zone2TargetPrice": 2.921
+        "zone2TargetPrice": 2.921,
+        "hasMitiTranche": true
     },
     {
         "id": "infom",
@@ -6094,7 +6263,8 @@
         "dailyChange": 0.4,
         "sifuTargetPrice": 1.23,
         "v3TargetPrice": 1.258,
-        "zone2TargetPrice": 1.23
+        "zone2TargetPrice": 1.23,
+        "hasMitiTranche": true
     },
     {
         "id": "infotec",
@@ -6117,7 +6287,8 @@
         "openPrice": 0.33001600000000003,
         "closePrice": 0.304992,
         "symbol": "INFOTEC",
-        "dailyChange": -0.6
+        "dailyChange": -0.6,
+        "hasMitiTranche": true
     },
     {
         "id": "itmax",
@@ -6145,7 +6316,8 @@
         "dailyChange": 1.5,
         "sifuTargetPrice": 5.577,
         "v3TargetPrice": 6.458,
-        "zone2TargetPrice": 5.577
+        "zone2TargetPrice": 5.577,
+        "hasMitiTranche": true
     },
     {
         "id": "leform",
@@ -6168,7 +6340,8 @@
         "openPrice": 0.194994,
         "closePrice": 0.18498900000000001,
         "symbol": "LEFORM",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "lgms",
@@ -6195,7 +6368,8 @@
         "sifuTargetPrice": 0.65,
         "dailyChange": null,
         "v3TargetPrice": 0.603,
-        "zone2TargetPrice": 0.65
+        "zone2TargetPrice": 0.65,
+        "hasMitiTranche": true
     },
     {
         "id": "mnhldg",
@@ -6274,7 +6448,8 @@
             "<strong>Katalis TNB Grid Upgrade:</strong> Menjadi rakan kontrak utama TNB dalam menaik taraf infrastruktur penghantaran tenaga nasional selaras dengan Pelan Hala Tuju Peralihan Tenaga Negara (NETR)."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 19.7x. Berada di paras menarik berbanding peers data center utilities yang berdagang sekitar 25x - 30x PE.",
-        "v7TargetPrice": 2.95
+        "v7TargetPrice": 2.95,
+        "hasMitiTranche": true
     },
     {
         "id": "orgabio",
@@ -6300,7 +6475,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.322,
         "v3TargetPrice": 0.294,
-        "zone2TargetPrice": 0.322
+        "zone2TargetPrice": 0.322,
+        "hasMitiTranche": true
     },
     {
         "id": "ptrb",
@@ -6323,7 +6499,8 @@
         "openPrice": 0.370008,
         "closePrice": 0.370008,
         "symbol": "PTRB",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "senfong",
@@ -6346,7 +6523,8 @@
         "openPrice": 0.75,
         "closePrice": 0.675,
         "symbol": "SENFONG",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "senheng",
@@ -6371,7 +6549,8 @@
         "pe": 28.8,
         "highPrice": 1.07,
         "symbol": "SENHENG",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "sfptech",
@@ -6394,7 +6573,8 @@
         "openPrice": 0.6,
         "closePrice": 0.66999,
         "symbol": "SFPTECH",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "sns",
@@ -6422,7 +6602,8 @@
         "dailyChange": 2,
         "sifuTargetPrice": 0.54,
         "v3TargetPrice": 0.528,
-        "zone2TargetPrice": 0.54
+        "zone2TargetPrice": 0.54,
+        "hasMitiTranche": true
     },
     {
         "id": "sunview",
@@ -6448,7 +6629,8 @@
         "dailyChange": 2.4,
         "sifuTargetPrice": 0.42,
         "v3TargetPrice": 0.393,
-        "zone2TargetPrice": 0.42
+        "zone2TargetPrice": 0.42,
+        "hasMitiTranche": true
     },
     {
         "id": "taghill",
@@ -6471,7 +6653,8 @@
         "openPrice": 0.30999000000000004,
         "closePrice": 0.30999000000000004,
         "symbol": "TAGHILL",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "umc",
@@ -6497,7 +6680,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.356,
         "v3TargetPrice": 0.326,
-        "zone2TargetPrice": 0.356
+        "zone2TargetPrice": 0.356,
+        "hasMitiTranche": true
     },
     {
         "id": "unique",
@@ -6520,7 +6704,8 @@
         "openPrice": 0.210002,
         "closePrice": 0.22500399999999998,
         "symbol": "UNIQUE",
-        "dailyChange": 0.8
+        "dailyChange": 0.8,
+        "hasMitiTranche": true
     },
     {
         "id": "unitrade",
@@ -6542,7 +6727,8 @@
         "fundUse": "Working Capital",
         "pe": 11.9,
         "highPrice": 0.32,
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "yewlee",
@@ -6567,7 +6753,8 @@
         "openPrice": 0.28501200000000004,
         "closePrice": 0.28999600000000003,
         "symbol": "YEWLEE",
-        "dailyChange": 1.2
+        "dailyChange": 1.2,
+        "hasMitiTranche": true
     },
     {
         "id": "yxpm",
@@ -6593,7 +6780,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.241,
         "v3TargetPrice": 0.217,
-        "zone2TargetPrice": 0.241
+        "zone2TargetPrice": 0.241,
+        "hasMitiTranche": true
     },
     {
         "id": "atech",
@@ -6616,7 +6804,8 @@
         "openPrice": 1.410048,
         "closePrice": 1.7000000000000002,
         "symbol": "ATECH",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "cekd",
@@ -6642,7 +6831,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.339,
         "v3TargetPrice": 0.303,
-        "zone2TargetPrice": 0.339
+        "zone2TargetPrice": 0.339,
+        "hasMitiTranche": true
     },
     {
         "id": "ctos",
@@ -6669,7 +6859,8 @@
         "sifuTargetPrice": 0.9,
         "dailyChange": null,
         "v3TargetPrice": 0.843,
-        "zone2TargetPrice": 0.9
+        "zone2TargetPrice": 0.9,
+        "hasMitiTranche": true
     },
     {
         "id": "ecomate",
@@ -6697,7 +6888,8 @@
         "dailyChange": -0.8,
         "sifuTargetPrice": 0.977,
         "v3TargetPrice": 1.002,
-        "zone2TargetPrice": 0.977
+        "zone2TargetPrice": 0.977,
+        "hasMitiTranche": true
     },
     {
         "id": "flexi",
@@ -6723,7 +6915,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.149,
         "v3TargetPrice": 0.133,
-        "zone2TargetPrice": 0.149
+        "zone2TargetPrice": 0.149,
+        "hasMitiTranche": true
     },
     {
         "id": "haily",
@@ -6749,7 +6942,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.224,
         "v3TargetPrice": 0.195,
-        "zone2TargetPrice": 0.224
+        "zone2TargetPrice": 0.224,
+        "hasMitiTranche": true
     },
     {
         "id": "hpphb",
@@ -6772,7 +6966,8 @@
         "openPrice": 0.5699879999999999,
         "closePrice": 0.709992,
         "symbol": "HPPHB",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "mobilia",
@@ -6798,7 +6993,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.098,
         "v3TargetPrice": 0.086,
-        "zone2TargetPrice": 0.098
+        "zone2TargetPrice": 0.098,
+        "hasMitiTranche": true
     },
     {
         "id": "nestcon",
@@ -6824,7 +7020,8 @@
         "dailyChange": 1,
         "sifuTargetPrice": 0.397,
         "v3TargetPrice": 0.371,
-        "zone2TargetPrice": 0.397
+        "zone2TargetPrice": 0.397,
+        "hasMitiTranche": true
     },
     {
         "id": "pekat",
@@ -6852,7 +7049,8 @@
         "dailyChange": 1.8,
         "sifuTargetPrice": 1.84,
         "v3TargetPrice": 2.189,
-        "zone2TargetPrice": 1.84
+        "zone2TargetPrice": 1.84,
+        "hasMitiTranche": true
     },
     {
         "id": "ramssol",
@@ -6878,7 +7076,8 @@
         "dailyChange": 1.2,
         "sifuTargetPrice": 0.839,
         "v3TargetPrice": 0.617,
-        "zone2TargetPrice": 0.839
+        "zone2TargetPrice": 0.839,
+        "hasMitiTranche": true
     },
     {
         "id": "swift-haulage",
@@ -6903,7 +7102,8 @@
         "strategy": "Wait / Exit",
         "pe": 17.5,
         "symbol": "SWIFT",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "teladan",
@@ -6929,7 +7129,8 @@
         "dailyChange": 1.6,
         "sifuTargetPrice": 0.908,
         "v3TargetPrice": 0.874,
-        "zone2TargetPrice": 0.908
+        "zone2TargetPrice": 0.908,
+        "hasMitiTranche": true
     },
     {
         "id": "tjsetia",
@@ -6955,7 +7156,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.247,
         "v3TargetPrice": 0.215,
-        "zone2TargetPrice": 0.247
+        "zone2TargetPrice": 0.247,
+        "hasMitiTranche": true
     },
     {
         "id": "volcano",
@@ -6978,7 +7180,8 @@
         "openPrice": 0.7,
         "closePrice": 0.48499499999999995,
         "symbol": "VOLCANO",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "aco",
@@ -7001,7 +7204,8 @@
         "openPrice": 0.200004,
         "closePrice": 0.15999200000000002,
         "symbol": "ACO",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "aneka",
@@ -7027,7 +7231,8 @@
         "symbol": "ANEKA",
         "sifuTargetPrice": 0.144,
         "v3TargetPrice": 0.126,
-        "zone2TargetPrice": 0.144
+        "zone2TargetPrice": 0.144,
+        "hasMitiTranche": true
     },
     {
         "id": "eframe",
@@ -7053,7 +7258,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.322,
         "v3TargetPrice": 0.296,
-        "zone2TargetPrice": 0.322
+        "zone2TargetPrice": 0.322,
+        "hasMitiTranche": true
     },
     {
         "id": "mrdiy",
@@ -7076,7 +7282,8 @@
         "openPrice": 1.6,
         "closePrice": 1.74992,
         "symbol": "MRDIY",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "optimax",
@@ -7104,7 +7311,8 @@
         "dailyChange": 2.1,
         "sifuTargetPrice": 0.644,
         "v3TargetPrice": 0.612,
-        "zone2TargetPrice": 0.644
+        "zone2TargetPrice": 0.644,
+        "hasMitiTranche": true
     },
     {
         "id": "pwrwell",
@@ -7129,7 +7337,8 @@
         "openPrice": 0.255,
         "closePrice": 0.28500000000000003,
         "symbol": "PWRWELL",
-        "dailyChange": 1
+        "dailyChange": 1,
+        "hasMitiTranche": true
     },
     {
         "id": "samaiden",
@@ -7157,7 +7366,8 @@
         "dailyChange": 1.5,
         "sifuTargetPrice": 1.472,
         "v3TargetPrice": 1.519,
-        "zone2TargetPrice": 1.472
+        "zone2TargetPrice": 1.472,
+        "hasMitiTranche": true
     },
     {
         "id": "scgbhd",
@@ -7182,7 +7392,8 @@
         "openPrice": 0.335002,
         "closePrice": 0.330004,
         "symbol": "SCGBHD",
-        "dailyChange": 0.5
+        "dailyChange": 0.5,
+        "hasMitiTranche": true
     },
     {
         "id": "tcs",
@@ -7208,7 +7419,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.103,
         "v3TargetPrice": 0.09,
-        "zone2TargetPrice": 0.103
+        "zone2TargetPrice": 0.103,
+        "hasMitiTranche": true
     },
     {
         "id": "aimflex",
@@ -7234,7 +7446,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.092,
         "v3TargetPrice": 0.081,
-        "zone2TargetPrice": 0.092
+        "zone2TargetPrice": 0.092,
+        "hasMitiTranche": true
     },
     {
         "id": "ame",
@@ -7257,7 +7470,8 @@
         "openPrice": 1.2799800000000001,
         "closePrice": 1.54999,
         "symbol": "AME",
-        "dailyChange": -1.2
+        "dailyChange": -1.2,
+        "hasMitiTranche": true
     },
     {
         "id": "dpih",
@@ -7283,7 +7497,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.121,
         "v3TargetPrice": 0.106,
-        "zone2TargetPrice": 0.121
+        "zone2TargetPrice": 0.121,
+        "hasMitiTranche": true
     },
     {
         "id": "greatec",
@@ -7313,7 +7528,8 @@
         "calibratedSifuTargetPrice": 3.12,
         "targetPrice": 3.12,
         "v3TargetPrice": 3.595,
-        "zone2TargetPrice": 3.12
+        "zone2TargetPrice": 3.12,
+        "hasMitiTranche": true
     },
     {
         "id": "hpmt",
@@ -7336,7 +7552,8 @@
         "openPrice": 0.5799920000000001,
         "closePrice": 0.500024,
         "symbol": "HPMT",
-        "dailyChange": null
+        "dailyChange": null,
+        "hasMitiTranche": true
     },
     {
         "id": "mestron",
@@ -7362,7 +7579,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.155,
         "v3TargetPrice": 0.141,
-        "zone2TargetPrice": 0.155
+        "zone2TargetPrice": 0.155,
+        "hasMitiTranche": true
     },
     {
         "id": "mtag",
@@ -7388,7 +7606,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.276,
         "v3TargetPrice": 0.243,
-        "zone2TargetPrice": 0.276
+        "zone2TargetPrice": 0.276,
+        "hasMitiTranche": true
     },
     {
         "id": "nadibhd",
@@ -7414,7 +7633,8 @@
         "dailyChange": 0,
         "sifuTargetPrice": 0.402,
         "v3TargetPrice": 0.374,
-        "zone2TargetPrice": 0.402
+        "zone2TargetPrice": 0.402,
+        "hasMitiTranche": true
     },
     {
         "id": "sds",
@@ -7442,7 +7662,8 @@
         "dailyChange": 2,
         "sifuTargetPrice": 0.552,
         "v3TargetPrice": 0.548,
-        "zone2TargetPrice": 0.552
+        "zone2TargetPrice": 0.552,
+        "hasMitiTranche": true
     },
     {
         "id": "spring",
@@ -7468,7 +7689,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.138,
         "v3TargetPrice": 0.122,
-        "zone2TargetPrice": 0.138
+        "zone2TargetPrice": 0.138,
+        "hasMitiTranche": true
     },
     {
         "id": "tashin",
@@ -7494,7 +7716,8 @@
         "dailyChange": null,
         "sifuTargetPrice": 0.236,
         "v3TargetPrice": 0.207,
-        "zone2TargetPrice": 0.236
+        "zone2TargetPrice": 0.236,
+        "hasMitiTranche": true
     },
     {
         "id": "uwc",
@@ -7519,7 +7742,8 @@
         "openPrice": 1.1000299999999998,
         "closePrice": 1.399986,
         "symbol": "UWC",
-        "dailyChange": 0.6
+        "dailyChange": 0.6,
+        "hasMitiTranche": true
     },
     {
         "id": "rng-tech-berhad",
@@ -7594,7 +7818,8 @@
         ],
         "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 15x - 20x PE. RNG Tech mempunyai kelebihan pasaran (market leader) yang besar.",
         "highPrice": 0.13,
-        "v7TargetPrice": 0.25
+        "v7TargetPrice": 0.25,
+        "hasMitiTranche": true
     },
     {
         "id": "liftech-group-berhad",
@@ -7672,7 +7897,8 @@
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan 13.9x berbanding harga IPO RM0.29. Nilai wajar Sifu dianggarkan sekitar **RM 0.26** dengan diskaun memandangkan aliran tunai yang rata.",
         "highPrice": 0.29,
-        "v7TargetPrice": 0.25
+        "v7TargetPrice": 0.25,
+        "hasMitiTranche": true
     },
     {
         "id": "hss-holdings-berhad",
@@ -7754,7 +7980,8 @@
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan sekitar 10.5x pada harga IPO RM0.18. Menawarkan diskaun ketara berbanding purata industri makanan runcit (15x).",
         "highPrice": 0.18,
-        "v7TargetPrice": 0.2
+        "v7TargetPrice": 0.2,
+        "hasMitiTranche": true
     },
     {
         "id": "spb-development-berhad",
@@ -7777,7 +8004,8 @@
         "mitiCloseDate": "10-Jul-2026",
         "sector": "Property (Housing Development)",
         "predictedGrade": "C",
-        "analystInsight": "🚨 <b>AVOID / HIGH RISK (GRADE C — SEKTOR HARTANAH)</b><br>Syarikat pemaju hartanah perumahan di utara Semenanjung."
+        "analystInsight": "🚨 <b>AVOID / HIGH RISK (GRADE C — SEKTOR HARTANAH)</b><br>Syarikat pemaju hartanah perumahan di utara Semenanjung.",
+        "hasMitiTranche": true
     },
     {
         "id": "readycare-holdings-berhad",
@@ -7795,7 +8023,8 @@
         "dailyChange": null,
         "calibratedSifuTargetPrice": 0.5,
         "v7TargetPrice": 0.5,
-        "zone2TargetPrice": 0.5
+        "zone2TargetPrice": 0.5,
+        "hasMitiTranche": true
     },
     {
         "id": "ttl-holdings-berhad",
@@ -7816,7 +8045,8 @@
         "geography": "Kuala Lumpur",
         "v3TargetPrice": 0.288,
         "zone2TargetPrice": 0.33,
-        "v7TargetPrice": 0.33
+        "v7TargetPrice": 0.33,
+        "hasMitiTranche": true
     },
     {
         "id": "cmgi-berhad",
@@ -7837,7 +8067,8 @@
         "geography": "Selangor",
         "v3TargetPrice": 0.166,
         "zone2TargetPrice": 0.32,
-        "v7TargetPrice": 0.32
+        "v7TargetPrice": 0.32,
+        "hasMitiTranche": true
     },
     {
         "id": "mmc-port-holdings-berhad",
@@ -7858,7 +8089,8 @@
         "geography": "Johor",
         "v3TargetPrice": 1.222,
         "zone2TargetPrice": 1.9,
-        "v7TargetPrice": 1.9
+        "v7TargetPrice": 1.9,
+        "hasMitiTranche": true
     },
     {
         "id": "custom-food-holding-berhad",
@@ -7879,7 +8111,8 @@
         "geography": "Selangor",
         "v3TargetPrice": 0.327,
         "zone2TargetPrice": 0.38,
-        "v7TargetPrice": 0.38
+        "v7TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "wintech-metal-berhad",
@@ -7900,7 +8133,8 @@
         "geography": "Selangor",
         "v3TargetPrice": 0.196,
         "zone2TargetPrice": 0.27,
-        "v7TargetPrice": 0.27
+        "v7TargetPrice": 0.27,
+        "hasMitiTranche": true
     },
     {
         "id": "likei-logistic-services-berhad",
@@ -7921,7 +8155,8 @@
         "geography": "Selangor",
         "v3TargetPrice": 0.21,
         "zone2TargetPrice": 0.29,
-        "v7TargetPrice": 0.29
+        "v7TargetPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "butterfield-fb-berhad",
@@ -7988,7 +8223,8 @@
         "ib": "M&A Securities",
         "v7TargetPrice": 0,
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "evocom-berhad",
@@ -8054,7 +8290,8 @@
         "predictedGrade": "C",
         "v7TargetPrice": 0.36,
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "slgc-berhad",
@@ -8133,7 +8370,8 @@
         "liab25": 0,
         "v7TargetPrice": 0,
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "keb-berhad",
@@ -8201,7 +8439,8 @@
         "mitiCloseDate": "22-Jul-2026",
         "ib": "M&A Securities",
         "v7TargetPrice": 0.28,
-        "prospectusUrl": "https://sahamonline.miti.gov.my/"
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "hasMitiTranche": true
     },
     {
         "id": "impact-capital-holdings-berhad",
@@ -8222,7 +8461,8 @@
         "geography": "Kuala Lumpur",
         "v3TargetPrice": 0.25,
         "zone2TargetPrice": 0.25,
-        "v7TargetPrice": 0.25
+        "v7TargetPrice": 0.25,
+        "hasMitiTranche": true
     },
     {
         "id": "cnergenz",
@@ -8300,7 +8540,8 @@
             "<strong>Limpahan AI & EV:</strong> Pertumbuhan didorong oleh segmen hyperscaler AI dan pembuatan EV yang memerlukan modul kuasa serta papan AI server."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 21.5x, sejajar dengan purata industri pembuatan peralatan SMT/Semicon.",
-        "v7TargetPrice": 0.66
+        "v7TargetPrice": 0.66,
+        "hasMitiTranche": true
     },
     {
         "id": "destini",
@@ -8377,7 +8618,8 @@
             "<strong>Kedudukan Aliran Tunai Stabil:</strong> Keputusan mengumumkan dividen interim menandakan kedudukan kunci kira-kira yang semakin sihat dan aliran tunai yang pulih."
         ],
         "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 5.2x, sangat murah berbanding purata peers industri kejuruteraan MRO.",
-        "v7TargetPrice": 0.61
+        "v7TargetPrice": 0.61,
+        "hasMitiTranche": true
     },
     {
         "id": "solarvest",
@@ -8455,7 +8697,8 @@
             "<strong>Nilaian Premium Mampan:</strong> Dagangan PE premium sekitar 25x-35x disokong oleh CAGR untung bersih melebihi 40%."
         ],
         "peers": "<strong>Peer Comparison:</strong> PE Terbitan sekitar 30.0x-35.0x disokong oleh CAGR untung melebihi 40% berbanding purata industri utility-scale solar.",
-        "v7TargetPrice": 3.27
+        "v7TargetPrice": 3.27,
+        "hasMitiTranche": true
     },
     {
         "id": "semico-ns-",
@@ -8471,7 +8714,8 @@
         "listingDate": "2026-01-13",
         "performance": "+122.00%",
         "market": "ACE Market",
-        "highPrice": 0.565
+        "highPrice": 0.565,
+        "hasMitiTranche": true
     },
     {
         "id": "foodie-ns-",
@@ -8487,7 +8731,8 @@
         "listingDate": "2025-11-28",
         "performance": "+20.00%",
         "market": "ACE Market",
-        "highPrice": 0.4
+        "highPrice": 0.4,
+        "hasMitiTranche": true
     },
     {
         "id": "camaroe--ns-",
@@ -8503,7 +8748,8 @@
         "listingDate": "2025-10-02",
         "performance": "-39.29%",
         "market": "ACE Market",
-        "highPrice": 0.16
+        "highPrice": 0.16,
+        "hasMitiTranche": true
     },
     {
         "id": "paradigm--ns-",
@@ -8519,7 +8765,8 @@
         "listingDate": "2025-06-10",
         "performance": "-8.00%",
         "market": "ACE Market",
-        "highPrice": 1
+        "highPrice": 1,
+        "hasMitiTranche": true
     },
     {
         "id": "saliran--ns-",
@@ -8535,7 +8782,8 @@
         "listingDate": "2025-03-13",
         "performance": "-31.48%",
         "market": "ACE Market",
-        "highPrice": 0.275
+        "highPrice": 0.275,
+        "hasMitiTranche": true
     },
     {
         "id": "northern--ns-",
@@ -8551,7 +8799,8 @@
         "listingDate": "2025-02-06",
         "performance": "+7.94%",
         "market": "ACE Market",
-        "highPrice": 0.9
+        "highPrice": 0.9,
+        "hasMitiTranche": true
     },
     {
         "id": "megafb",
@@ -8567,7 +8816,8 @@
         "listingDate": "2024-11-11",
         "performance": "+185.07%",
         "market": "ACE Market",
-        "highPrice": 1.72
+        "highPrice": 1.72,
+        "hasMitiTranche": true
     },
     {
         "id": "3ren--ns-",
@@ -8583,7 +8833,8 @@
         "listingDate": "2024-11-06",
         "performance": "+39.29%",
         "market": "ACE Market",
-        "highPrice": 0.425
+        "highPrice": 0.425,
+        "hasMitiTranche": true
     },
     {
         "id": "khb--ns-",
@@ -8599,7 +8850,8 @@
         "listingDate": "2024-10-08",
         "performance": "-60.00%",
         "market": "ACE Market",
-        "highPrice": 0.29
+        "highPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "kucingko--ns-",
@@ -8615,7 +8867,8 @@
         "listingDate": "2024-07-26",
         "performance": "-66.67%",
         "market": "ACE Market",
-        "highPrice": 0.805
+        "highPrice": 0.805,
+        "hasMitiTranche": true
     },
     {
         "id": "panda",
@@ -8632,7 +8885,8 @@
         "market": "ACE Market",
         "shariah": false,
         "performance": "+21.88%",
-        "highPrice": 0.29
+        "highPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "emcc--ns-",
@@ -8648,7 +8902,8 @@
         "listingDate": "2023-09-26",
         "performance": "+41.67%",
         "market": "ACE Market",
-        "highPrice": 0.345
+        "highPrice": 0.345,
+        "hasMitiTranche": true
     },
     {
         "id": "mersec--ns-",
@@ -8664,7 +8919,8 @@
         "listingDate": "2023-09-19",
         "performance": "+6.00%",
         "market": "ACE Market",
-        "highPrice": 0.3
+        "highPrice": 0.3,
+        "hasMitiTranche": true
     },
     {
         "id": "mbn--ns-",
@@ -8680,7 +8936,8 @@
         "listingDate": "2023-07-25",
         "performance": "-33.33%",
         "market": "ACE Market",
-        "highPrice": 0.28
+        "highPrice": 0.28,
+        "hasMitiTranche": true
     },
     {
         "id": "adb",
@@ -8696,7 +8953,8 @@
         "listingDate": "2023-05-09",
         "performance": "+78.79%",
         "market": "ACE Market",
-        "highPrice": 1.09
+        "highPrice": 1.09,
+        "hasMitiTranche": true
     },
     {
         "id": "ceb--ns-",
@@ -8712,7 +8970,8 @@
         "listingDate": "2023-03-10",
         "performance": "-69.44%",
         "market": "ACE Market",
-        "highPrice": 1.5
+        "highPrice": 1.5,
+        "hasMitiTranche": true
     },
     {
         "id": "eib--ns-",
@@ -8728,7 +8987,8 @@
         "listingDate": "2022-07-18",
         "performance": "-63.33%",
         "market": "ACE Market",
-        "highPrice": 0.3
+        "highPrice": 0.3,
+        "hasMitiTranche": true
     },
     {
         "id": "unitrad--ns-",
@@ -8744,7 +9004,8 @@
         "listingDate": "2022-06-14",
         "performance": "-28.13%",
         "market": "ACE Market",
-        "highPrice": 0.32
+        "highPrice": 0.32,
+        "hasMitiTranche": true
     },
     {
         "id": "ppjack--ns-",
@@ -8760,7 +9021,8 @@
         "listingDate": "2022-04-01",
         "performance": "+201.67%",
         "market": "ACE Market",
-        "highPrice": 0.92
+        "highPrice": 0.92,
+        "hasMitiTranche": true
     },
     {
         "id": "yenher--ns-",
@@ -8776,7 +9038,8 @@
         "listingDate": "2021-07-15",
         "performance": "-15.79%",
         "market": "ACE Market",
-        "highPrice": 0.995
+        "highPrice": 0.995,
+        "hasMitiTranche": true
     },
     {
         "id": "ovh--ns-",
@@ -8792,7 +9055,8 @@
         "listingDate": "2020-07-22",
         "performance": "-7.69%",
         "market": "ACE Market",
-        "highPrice": 0.53
+        "highPrice": 0.53,
+        "hasMitiTranche": true
     },
     {
         "id": "innature--ns-",
@@ -8808,7 +9072,8 @@
         "listingDate": "2020-02-20",
         "performance": "-75.00%",
         "market": "ACE Market",
-        "highPrice": 0.72
+        "highPrice": 0.72,
+        "hasMitiTranche": true
     },
     {
         "id": "khjb--ns-",
@@ -8824,7 +9089,8 @@
         "listingDate": "2019-07-08",
         "performance": "-80.23%",
         "market": "ACE Market",
-        "highPrice": 0.43
+        "highPrice": 0.43,
+        "hasMitiTranche": true
     },
     {
         "id": "rt-pastry-holdings-berhad",
@@ -8842,7 +9108,8 @@
         "performance": "-25.00%",
         "highPrice": 0.18,
         "os": 59.96,
-        "isAutoOS": true
+        "isAutoOS": true,
+        "hasMitiTranche": true
     },
     {
         "id": "eckem-holdings-berhad",
@@ -8864,7 +9131,8 @@
         "closePrice": 0.12,
         "highPrice": 0.125,
         "os": 8.09,
-        "isAutoOS": true
+        "isAutoOS": true,
+        "hasMitiTranche": true
     },
     {
         "id": "enest-group-berhad",
@@ -8941,7 +9209,8 @@
         "pat22": 6460000,
         "assets22": 50000000,
         "liab22": 20000000,
-        "v7TargetPrice": 0.22
+        "v7TargetPrice": 0.22,
+        "hasMitiTranche": true
     },
     {
         "id": "tuc-holdings-berhad",
@@ -8956,7 +9225,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Food & Beverage Distribution)",
-        "geography": "Johor"
+        "geography": "Johor",
+        "hasMitiTranche": true
     },
     {
         "id": "paragrene-land-berhad",
@@ -8976,7 +9246,8 @@
         "geography": "Kuala Lumpur",
         "v3TargetPrice": 0.383,
         "zone2TargetPrice": 0.76,
-        "v7TargetPrice": 0.76
+        "v7TargetPrice": 0.76,
+        "hasMitiTranche": true
     },
     {
         "id": "wastech-resources-berhad",
@@ -8991,7 +9262,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Industrial (Waste Management)",
-        "geography": "Selangor"
+        "geography": "Selangor",
+        "hasMitiTranche": true
     },
     {
         "id": "eta-world-group-berhad",
@@ -9006,7 +9278,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Technology (Engineering & Technical Services)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "leader-energy-holding-berhad",
@@ -9021,7 +9294,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Energy (Solar / Renewable)",
-        "geography": "Selangor"
+        "geography": "Selangor",
+        "hasMitiTranche": true
     },
     {
         "id": "eplas-global-berhad",
@@ -9036,7 +9310,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Industrial (Plastic Manufacturing)",
-        "geography": "Johor"
+        "geography": "Johor",
+        "hasMitiTranche": true
     },
     {
         "id": "loob-berhad",
@@ -9051,7 +9326,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Food & Beverage / Tealive)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "goldfinch-group-berhad",
@@ -9066,7 +9342,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Food & Beverage)",
-        "geography": "Selangor"
+        "geography": "Selangor",
+        "hasMitiTranche": true
     },
     {
         "id": "unioleo-holdings-berhad",
@@ -9081,7 +9358,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Industrial (Oleochemical)",
-        "geography": "Johor"
+        "geography": "Johor",
+        "hasMitiTranche": true
     },
     {
         "id": "chubb-insurance-malaysia-berhad",
@@ -9096,7 +9374,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Finance (Insurance)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "united-asiapac-energy-berhad",
@@ -9125,7 +9404,8 @@
         "predictedGrade": "B",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>United Asiapac Energy Berhad (UNIPAC) ialah penyedia perkhidmatan intervensi telaga (well intervention) khusus untuk industri minyak & gas hulu (upstream) di Kemaman, Terengganu dan Labuan.<br><br>📊 <b>Valuation & Advisor:</b><br>• Ditaja oleh <b>TA Securities</b> (IB momentum yang baik).<br>• Harga IPO RM0.35 memberikan trailing PE sebanyak <b>27.6x</b> berdasarkan PAT FY25 (RM6.98 juta). Walau bagaimanapun, forward PE adalah sangat menarik sekitar <b>12.7x</b> berdasarkan unjuran tahunan PAT FPE2026 (9-bulan) sebanyak RM11.3M - RM11.4M.<br>• Tiada komponen <b>Offer for Sale (OFS)</b> — 100% dana awam digunakan untuk pertumbuhan syarikat.<br><br>⚠️ <b>Sifu/Analyst Verdict:</b> MBSB Research meletakkan fair value RM0.39 (selepas disemak naik). Sifat perniagaan well intervention yang defensif dan kurang terikat terus dengan harga minyak mentah menjadikan UNIPAC sebagai kaunter bernilai baik. Sasaran harga jangka pendek sekitar RM0.41 (upside ~17%). Permohonan ditutup pada 5 Ogos 2026.",
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "qube-international-berhad",
@@ -9140,7 +9420,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Technology (IT Services)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "pioneer-heat-holdings-berhad",
@@ -9155,7 +9436,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Industrial (Heat Treatment Manufacturing)",
-        "geography": "Selangor"
+        "geography": "Selangor",
+        "hasMitiTranche": true
     },
     {
         "id": "jrk-holdings-berhad",
@@ -9170,7 +9452,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Retail / Services)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "mydcd-berhad",
@@ -9190,7 +9473,8 @@
         "geography": "Kuala Lumpur",
         "v3TargetPrice": 0.336,
         "zone2TargetPrice": 0.38,
-        "v7TargetPrice": 0.38
+        "v7TargetPrice": 0.38,
+        "hasMitiTranche": true
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -9215,7 +9499,8 @@
         "mitiOpenDate": "01-Jul-2026",
         "mitiCloseDate": "10-Jul-2026",
         "ib": "Malacca Securities",
-        "v7TargetPrice": 0.3
+        "v7TargetPrice": 0.3,
+        "hasMitiTranche": true
     },
     {
         "id": "redplanet-berhad",
@@ -9240,7 +9525,8 @@
         "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI ACTIVE OPEN)</b><br>Syarikat pemindahan penyenaraian dari Pasaran LEAP ke Pasaran ACE dalam sektor Teknologi Geospatial & GIS.<br><br>📊 <b>Status Permohonan MITI:</b><br>• Saham Khas Bumiputera (SKB) KINI DIBUKA untuk permohonan di portal SahamOnline MITI.<br>• Peruntukan 12.50% saham dilaraskan untuk pelabur Bumiputera.<br><br>⚠️ Status: Permohonan AKTIF DIBUKA di portal SahamOnline MITI.",
         "mitiOpenDate": "20-Jul-2026",
         "mitiCloseDate": "28-Jul-2026",
-        "v3TargetPrice": 0.33
+        "v3TargetPrice": 0.33,
+        "hasMitiTranche": true
     },
     {
         "id": "empg-group-berhad",
@@ -9255,7 +9541,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Events & Media)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "gta-holdings-berhad",
@@ -9274,7 +9561,8 @@
         "sifuTargetPrice": 0.3,
         "calibratedSifuTargetPrice": 0.29,
         "v7TargetPrice": 0.29,
-        "zone2TargetPrice": 0.29
+        "zone2TargetPrice": 0.29,
+        "hasMitiTranche": true
     },
     {
         "id": "emits-berhad",
@@ -9289,7 +9577,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Technology (Electronic Manufacturing)",
-        "geography": "Penang"
+        "geography": "Penang",
+        "hasMitiTranche": true
     },
     {
         "id": "sq-advanced-interconnect-berhad",
@@ -9304,7 +9593,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Technology (Semiconductor / Advanced Interconnect)",
-        "geography": "Penang"
+        "geography": "Penang",
+        "hasMitiTranche": true
     },
     {
         "id": "sca-solutions-berhad",
@@ -9319,7 +9609,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Technology (Semiconductor / Test & Assembly)",
-        "geography": "Penang"
+        "geography": "Penang",
+        "hasMitiTranche": true
     },
     {
         "id": "yes-group-management-berhad",
@@ -9334,7 +9625,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Education / Training)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "big-caring-group-bhd",
@@ -9349,7 +9641,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Healthcare (Medical Services)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "kk-mart-retail-berhad",
@@ -9364,7 +9657,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Consumer (Retail Convenience Store)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "ska-capital-berhad",
@@ -9379,7 +9673,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Finance (Capital Markets)",
-        "geography": "Kuala Lumpur"
+        "geography": "Kuala Lumpur",
+        "hasMitiTranche": true
     },
     {
         "id": "wil-key-berhad",
@@ -9394,7 +9689,8 @@
         "status": "Draft / Exposure Phase",
         "year": 2026,
         "sector": "Industrial (Engineering)",
-        "geography": "Selangor"
+        "geography": "Selangor",
+        "hasMitiTranche": true
     },
     {
         "id": "tfp",
@@ -9414,7 +9710,8 @@
         "predictedGrade": "B",
         "performance": "+70.00%",
         "v3TargetPrice": 0.097,
-        "zone2TargetPrice": 0.1
+        "zone2TargetPrice": 0.1,
+        "hasMitiTranche": true
     },
     {
         "id": "wct-reit",
@@ -9450,7 +9747,8 @@
         "symbol": "SALIRAN [NS]",
         "highPrice": 0.52,
         "os": 76.03,
-        "isAutoOS": true
+        "isAutoOS": true,
+        "hasMitiTranche": true
     },
     {
         "id": "northeast",
@@ -9479,7 +9777,8 @@
         "avgTP": 1.3,
         "dailyChange": 0,
         "v3TargetPrice": 0.976,
-        "zone2TargetPrice": 1.3
+        "zone2TargetPrice": 1.3,
+        "hasMitiTranche": true
     },
     {
         "id": "dnex",
@@ -9504,7 +9803,8 @@
         "symbol": "DNEX",
         "sifuTargetPrice": 0.7,
         "v3TargetPrice": 0.765,
-        "zone2TargetPrice": 0.7
+        "zone2TargetPrice": 0.7,
+        "hasMitiTranche": true
     },
     {
         "id": "restngo",
@@ -9519,7 +9819,8 @@
         "year": 2026,
         "listingDate": "2026-07-07",
         "highPrice": 0.155,
-        "performance": "-3.85%"
+        "performance": "-3.85%",
+        "hasMitiTranche": true
     },
     {
         "id": "eghi",
@@ -9540,6 +9841,7 @@
         "sifuTargetPrice": 0.3,
         "calibratedSifuTargetPrice": 0.3,
         "v7TargetPrice": 0.3,
-        "zone2TargetPrice": 0.3
+        "zone2TargetPrice": 0.3,
+        "hasMitiTranche": true
     }
 ]

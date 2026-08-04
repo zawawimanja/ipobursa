@@ -474,11 +474,19 @@
                         <i data-lucide="history" style="color: #fbbf24; width: 20px; height: 20px;"></i> 
                         Rekod Sejarah Penyenaraian (MITI)
                     </h2>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;" onclick="event.stopPropagation()">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;" onclick="event.stopPropagation()">
                         <select id="market-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer;">
                             <option value="all">Semua Pasaran</option>
-                            <option value="main" selected>Pasaran Utama (Main)</option>
-                            <option value="ace">Pasaran ACE</option>
+                            <option value="main">Pasaran Utama (Main)</option>
+                            <option value="ace" selected>Pasaran ACE</option>
+                        </select>
+                        <select id="year-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer;">
+                            <option value="all">Semua Tahun</option>
+                            <option value="2026" selected>2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
                         </select>
                         <i data-lucide="chevron-down" class="chevron-icon"></i>
                     </div>
@@ -593,7 +601,7 @@
 
         // Build sector stats lookup from listed data (reused by renderStage2)
         function buildSectorLookup() {
-            const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && x.id !== 'skyechip');
+            const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && (x.hasMitiTranche === true || x.mitiOpenDate != null));
             const map = {};
             listed.forEach(x => {
                 const rawSec = x.sector || 'Lain-lain';
@@ -853,16 +861,17 @@
             }).join('');
         }
 
-        // Render Historical Listed Table with Market Filter
+        // Render Historical Listed Table with Market + Year Filter (MITI tagged only)
         function renderHistorical() {
             const tableBody = document.querySelector('#historical-table tbody');
             const filterVal = document.getElementById('market-filter').value;
+            const yearVal = (document.getElementById('year-filter') || {}).value || 'all';
             
-            // Filter listed with prices, exclude skyechip (no miti)
+            // Filter: must be Listed + have prices + tagged as MITI tranche
             const listData = ipoData.filter(x => {
                 const isListed = x.status === 'Listed';
                 const hasPrices = x.openPrice != null && x.price != null;
-                const notSkyechip = x.id !== 'skyechip';
+                const isMiti = x.hasMitiTranche === true || x.mitiOpenDate != null;
                 
                 let matchesMarket = true;
                 if (filterVal === 'main') {
@@ -870,8 +879,13 @@
                 } else if (filterVal === 'ace') {
                     matchesMarket = x.market && x.market.toLowerCase().includes('ace');
                 }
+
+                let matchesYear = true;
+                if (yearVal !== 'all') {
+                    matchesYear = String(x.year) === yearVal;
+                }
                 
-                return isListed && hasPrices && notSkyechip && matchesMarket;
+                return isListed && hasPrices && isMiti && matchesMarket && matchesYear;
             });
 
             // Sort by opening premium desc
