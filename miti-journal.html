@@ -601,7 +601,7 @@
 
         // Build sector stats lookup from listed data (reused by renderStage2)
         function buildSectorLookup() {
-            const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && (x.hasMitiTranche === true || x.mitiOpenDate != null));
+            const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && x.hasMitiTranche !== false);
             const map = {};
             listed.forEach(x => {
                 const rawSec = x.sector || 'Lain-lain';
@@ -867,11 +867,14 @@
             const filterVal = document.getElementById('market-filter').value;
             const yearVal = (document.getElementById('year-filter') || {}).value || 'all';
             
-            // Filter: must be Listed + have prices + tagged as MITI tranche
+            // Filter: Listed + have prices + NOT confirmed as non-MITI
+            // hasMitiTranche===false = confirmed NO MITI (exclude)
+            // hasMitiTranche===true or mitiOpenDate = confirmed HAS MITI (include)
+            // hasMitiTranche===undefined = unverified (include with note)
             const listData = ipoData.filter(x => {
                 const isListed = x.status === 'Listed';
                 const hasPrices = x.openPrice != null && x.price != null;
-                const isMiti = x.hasMitiTranche === true || x.mitiOpenDate != null;
+                const notConfirmedNoMiti = x.hasMitiTranche !== false;
                 
                 let matchesMarket = true;
                 if (filterVal === 'main') {
@@ -885,7 +888,7 @@
                     matchesYear = String(x.year) === yearVal;
                 }
                 
-                return isListed && hasPrices && isMiti && matchesMarket && matchesYear;
+                return isListed && hasPrices && notConfirmedNoMiti && matchesMarket && matchesYear;
             });
 
             // Sort by opening premium desc
