@@ -167,9 +167,7 @@ const IPO_DATA = [
     "strategy": "Scalp",
     "enrichedBy": "AI",
     "v7TargetPrice": 0.6,
-    "hasMitiTranche": true,
-    "mitiOpenDate": "18-Jun-2026",
-    "mitiCloseDate": "25-Jun-2026"
+    "hasMitiTranche": false
   },
   {
     "id": "sum-technology",
