@@ -1,0 +1,740 @@
+[
+  {
+    "dataId": "stratus-global",
+    "slug": "stratus-global-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "enest-group",
+    "slug": "enest-group-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "srkk-ai",
+    "slug": "srkk-ai-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "eckem-holdings",
+    "slug": "eckem-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "liftech-group",
+    "slug": "liftech-group-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "hss-holdings",
+    "slug": "hss-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sum-technology",
+    "slug": "sum-technology-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "elsa-berhad",
+    "slug": "elsa-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "pentech-holdings",
+    "slug": "pentech-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "mm-computer",
+    "slug": "mm-computer-systems-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "bus-cap",
+    "slug": "bus-cap-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "keeming",
+    "slug": "keeming",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ei-power",
+    "slug": "ei-power-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "gold-li",
+    "slug": "gold-li-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "inspace-creation",
+    "slug": "inspace-creation-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "manforce-group",
+    "slug": "manforce-group-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ams-advanced",
+    "slug": "ams-advanced-material-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "empire-premium",
+    "slug": "empire-premium-food-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "golden-destinations",
+    "slug": "golden-destinations-group-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "5e-resources",
+    "slug": "5e-resources-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "adnex",
+    "slug": "adnex-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "mtt-shipping",
+    "slug": "mtt-shipping-and-logistics-bhd",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sunmed",
+    "slug": "sunmed-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "teamstr",
+    "slug": "teamstr-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "hocksoon",
+    "slug": "hocksoon-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ambest",
+    "slug": "ambest-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "isf",
+    "slug": "isf-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ogm",
+    "slug": "ogm-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sbs",
+    "slug": "sbs-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ogx",
+    "slug": "ogx-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "skychip",
+    "slug": "skyechip-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "genergy",
+    "slug": "genergy-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "lacmed",
+    "slug": "lacmed-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "orkim",
+    "slug": "orkim-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "bms",
+    "slug": "bms-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "geohan",
+    "slug": "geohan-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "psp",
+    "slug": "psp-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "polymer",
+    "slug": "polymer-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "aquawalk",
+    "slug": "aquawalk-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "pmw",
+    "slug": "pmw-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "famiera",
+    "slug": "famiera-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "power",
+    "slug": "power-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "iab",
+    "slug": "iab-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "thmy",
+    "slug": "thmy-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "verdant",
+    "slug": "verdant-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "xpb",
+    "slug": "xpb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "jssolar",
+    "slug": "jssolar-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "oxb",
+    "slug": "oxb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "enpro",
+    "slug": "enpro-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "icents",
+    "slug": "icents-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "a1akk",
+    "slug": "a1akk-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "pmck",
+    "slug": "pmck-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "asm",
+    "slug": "asm-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "pmibhd",
+    "slug": "pmibhd-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "cki",
+    "slug": "cki-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "hkb",
+    "slug": "hkb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sag",
+    "slug": "sag-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ictzone",
+    "slug": "ictzone-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ohm",
+    "slug": "ohm-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ecoshop",
+    "slug": "ecoshop-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "people",
+    "slug": "people-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "fibro",
+    "slug": "fibro-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "westrvr",
+    "slug": "westrvr-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "reachten",
+    "slug": "reachten-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "wtec",
+    "slug": "wtec-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "msb",
+    "slug": "msb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sumi",
+    "slug": "sumi-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "hi",
+    "slug": "hi-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "clite",
+    "slug": "clite-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "dengkil",
+    "slug": "wawasan-dengkil-holdings",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "lsh",
+    "slug": "lsh-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "pglobal",
+    "slug": "pglobal-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sunlogy",
+    "slug": "sunlogy-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "techstore",
+    "slug": "techstore-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "rtech",
+    "slug": "rtech-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "colform",
+    "slug": "colform-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "kopi",
+    "slug": "kopi-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "cbhb",
+    "slug": "cbhb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "set",
+    "slug": "set-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "winstar",
+    "slug": "winstar-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "carlorino",
+    "slug": "carlorino-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "vanzo",
+    "slug": "vanzo-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "topvisn",
+    "slug": "topvisn-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "tmk",
+    "slug": "tmk-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "cheeding",
+    "slug": "cheeding-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "crpmate",
+    "slug": "crpmate-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "supreme-consolidated",
+    "slug": "supreme-consolidated-resources-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "metro",
+    "slug": "metro-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "lwsabah",
+    "slug": "lwsabah-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "azam-jaya",
+    "slug": "azam-jaya-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "obhb",
+    "slug": "obhb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sorento",
+    "slug": "sorento-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "northeast-group",
+    "slug": "northeast-group-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "crest",
+    "slug": "crest-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sdcg",
+    "slug": "sdcg-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "hawk",
+    "slug": "hawk-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "vtc",
+    "slug": "vtc-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "epb",
+    "slug": "epb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "elridge",
+    "slug": "elridge-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "scb",
+    "slug": "scb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "bwys",
+    "slug": "bwys-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "jpg",
+    "slug": "jpg-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "ofb",
+    "slug": "ofb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "gohub",
+    "slug": "gohub-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "uue-holdings",
+    "slug": "uue-holdings-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "agricor",
+    "slug": "agricor-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "kti",
+    "slug": "kti-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "kenergy",
+    "slug": "kenergy-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "smart",
+    "slug": "smart-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "feytech",
+    "slug": "feytech-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sinkung",
+    "slug": "sinkung-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "fphb",
+    "slug": "fphb-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "mkhop",
+    "slug": "mkhop-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "topmix",
+    "slug": "topmix-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "keyfield",
+    "slug": "keyfield-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "sbh",
+    "slug": "sbh-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "zantat",
+    "slug": "zantat-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "plintas",
+    "slug": "plintas-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "agx",
+    "slug": "agx-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "wentel",
+    "slug": "wentel-engineering",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "tsa",
+    "slug": "tsa-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "mtec",
+    "slug": "mtec-berhad",
+    "status": 403,
+    "hasMiti": false
+  },
+  {
+    "dataId": "kjts",
+    "slug": "kjts-berhad",
+    "status": 403,
+    "hasMiti": false
+  }
+]
