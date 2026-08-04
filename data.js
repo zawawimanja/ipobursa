@@ -4435,7 +4435,7 @@ const IPO_DATA = [
   {
     "id": "jpg",
     "companyName": "JPG",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "09-Jul-2024",
     "year": 2024,
     "price": 0.84,
@@ -4456,7 +4456,7 @@ const IPO_DATA = [
     "closePrice": 0.8999759999999999,
     "symbol": "JPG",
     "dailyChange": -0.1,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "kawan-renergy",
@@ -4510,7 +4510,7 @@ const IPO_DATA = [
   {
     "id": "keyfield",
     "companyName": "KEYFIELD",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "22-Apr-2024",
     "year": 2024,
     "price": 0.9,
@@ -4536,7 +4536,7 @@ const IPO_DATA = [
     "sifuTargetPrice": 2.14,
     "v3TargetPrice": 1.825,
     "zone2TargetPrice": 2.14,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "kjts",
@@ -4845,7 +4845,7 @@ const IPO_DATA = [
   {
     "id": "plintas",
     "companyName": "PLINTAS",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "25-Mar-2024",
     "year": 2024,
     "price": 0.95,
@@ -4864,7 +4864,7 @@ const IPO_DATA = [
     "closePrice": 0.9700449999999998,
     "symbol": "PLINTAS",
     "dailyChange": null,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "prolintas",
@@ -4887,7 +4887,7 @@ const IPO_DATA = [
     "pe": 35.8,
     "highPrice": 1.081,
     "dailyChange": null,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "sbh",
@@ -5075,7 +5075,7 @@ const IPO_DATA = [
   {
     "id": "tmk",
     "companyName": "TMK",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "12-Dec-2024",
     "year": 2024,
     "price": 1.75,
@@ -5094,7 +5094,7 @@ const IPO_DATA = [
     "closePrice": 1.9199249999999999,
     "symbol": "TMK",
     "dailyChange": 1.3,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "topmix",
@@ -5401,7 +5401,7 @@ const IPO_DATA = [
   {
     "id": "cpetech",
     "companyName": "CPETECH",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "07-Dec-2023",
     "year": 2023,
     "price": 1.07,
@@ -5419,7 +5419,8 @@ const IPO_DATA = [
     "openPrice": 0.899977,
     "closePrice": 0.914957,
     "symbol": "CPETECH",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "day3",
@@ -5502,7 +5503,7 @@ const IPO_DATA = [
   {
     "id": "dxn",
     "companyName": "DXN",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "19-May-2023",
     "year": 2023,
     "price": 0.7,
@@ -5520,7 +5521,8 @@ const IPO_DATA = [
     "openPrice": 0.68999,
     "closePrice": 0.6649999999999999,
     "symbol": "DXN",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "edelteq",
@@ -5706,7 +5708,7 @@ const IPO_DATA = [
   {
     "id": "mstgolf",
     "companyName": "MSTGOLF",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "20-Jul-2023",
     "year": 2023,
     "price": 0.81,
@@ -5724,7 +5726,8 @@ const IPO_DATA = [
     "openPrice": 0.784971,
     "closePrice": 0.78003,
     "symbol": "MSTGOLF",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "natgate",
@@ -5808,7 +5811,7 @@ const IPO_DATA = [
   {
     "id": "radium",
     "companyName": "RADIUM",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "31-May-2023",
     "year": 2023,
     "price": 0.5,
@@ -5828,12 +5831,13 @@ const IPO_DATA = [
     "pe": 17.1,
     "highPrice": 0.575,
     "symbol": "RADIUM",
-    "dailyChange": 1.3
+    "dailyChange": 1.3,
+    "hasMitiTranche": true
   },
   {
     "id": "skywld",
     "companyName": "SKYWLD",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "10-Jul-2023",
     "year": 2023,
     "price": 0.8,
@@ -5851,7 +5855,8 @@ const IPO_DATA = [
     "openPrice": 0.8,
     "closePrice": 0.7400000000000001,
     "symbol": "SKYWLD",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "skyworld",
@@ -6032,7 +6037,7 @@ const IPO_DATA = [
   {
     "id": "amereit",
     "companyName": "AMEREIT",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "20-Sep-2022",
     "year": 2022,
     "price": 1.13,
@@ -6051,7 +6056,7 @@ const IPO_DATA = [
     "closePrice": 1.1599449999999998,
     "symbol": "AMEREIT",
     "dailyChange": 0.3,
-    "hasMitiTranche": false
+    "hasMitiTranche": true
   },
   {
     "id": "beta",
@@ -6176,7 +6181,7 @@ const IPO_DATA = [
   {
     "id": "ffb",
     "companyName": "FFB",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "22-Mar-2022",
     "year": 2022,
     "price": 1.35,
@@ -6199,7 +6204,8 @@ const IPO_DATA = [
     "dailyChange": -1,
     "sifuTargetPrice": 2.921,
     "v3TargetPrice": 2.859,
-    "zone2TargetPrice": 2.921
+    "zone2TargetPrice": 2.921,
+    "hasMitiTranche": true
   },
   {
     "id": "infom",
@@ -6255,7 +6261,7 @@ const IPO_DATA = [
   {
     "id": "itmax",
     "companyName": "ITMAX",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "13-Dec-2022",
     "year": 2022,
     "price": 1.07,
@@ -6278,7 +6284,8 @@ const IPO_DATA = [
     "dailyChange": 1.5,
     "sifuTargetPrice": 5.577,
     "v3TargetPrice": 6.458,
-    "zone2TargetPrice": 5.577
+    "zone2TargetPrice": 5.577,
+    "hasMitiTranche": true
   },
   {
     "id": "leform",
@@ -6484,7 +6491,7 @@ const IPO_DATA = [
   {
     "id": "senheng",
     "companyName": "SENHENG",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "25-Jan-2022",
     "year": 2022,
     "price": 1.07,
@@ -6504,7 +6511,8 @@ const IPO_DATA = [
     "pe": 28.8,
     "highPrice": 1.07,
     "symbol": "SENHENG",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "sfptech",
@@ -6780,7 +6788,7 @@ const IPO_DATA = [
   {
     "id": "ctos",
     "companyName": "CTOS",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "19-Jul-2021",
     "year": 2021,
     "price": 1.1,
@@ -6802,7 +6810,8 @@ const IPO_DATA = [
     "sifuTargetPrice": 0.9,
     "dailyChange": null,
     "v3TargetPrice": 0.843,
-    "zone2TargetPrice": 0.9
+    "zone2TargetPrice": 0.9,
+    "hasMitiTranche": true
   },
   {
     "id": "ecomate",
@@ -7166,7 +7175,7 @@ const IPO_DATA = [
   {
     "id": "eframe",
     "companyName": "EFRAME",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "27-Oct-2020",
     "year": 2020,
     "price": 0.28,
@@ -7187,12 +7196,13 @@ const IPO_DATA = [
     "dailyChange": null,
     "sifuTargetPrice": 0.322,
     "v3TargetPrice": 0.296,
-    "zone2TargetPrice": 0.322
+    "zone2TargetPrice": 0.322,
+    "hasMitiTranche": true
   },
   {
     "id": "mrdiy",
     "companyName": "MRDIY",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "26-Oct-2020",
     "year": 2020,
     "price": 1.6,
@@ -7210,12 +7220,13 @@ const IPO_DATA = [
     "openPrice": 1.6,
     "closePrice": 1.74992,
     "symbol": "MRDIY",
-    "dailyChange": null
+    "dailyChange": null,
+    "hasMitiTranche": true
   },
   {
     "id": "optimax",
     "companyName": "OPTIMAX",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "18-Aug-2020",
     "year": 2020,
     "price": 0.3,
@@ -7238,7 +7249,8 @@ const IPO_DATA = [
     "dailyChange": 2.1,
     "sifuTargetPrice": 0.644,
     "v3TargetPrice": 0.612,
-    "zone2TargetPrice": 0.644
+    "zone2TargetPrice": 0.644,
+    "hasMitiTranche": true
   },
   {
     "id": "pwrwell",
@@ -7268,7 +7280,7 @@ const IPO_DATA = [
   {
     "id": "samaiden",
     "companyName": "SAMAIDEN",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "15-Oct-2020",
     "year": 2020,
     "price": 0.48,
@@ -7291,7 +7303,8 @@ const IPO_DATA = [
     "dailyChange": 1.5,
     "sifuTargetPrice": 1.472,
     "v3TargetPrice": 1.519,
-    "zone2TargetPrice": 1.472
+    "zone2TargetPrice": 1.472,
+    "hasMitiTranche": true
   },
   {
     "id": "scgbhd",
@@ -7373,7 +7386,7 @@ const IPO_DATA = [
   {
     "id": "ame",
     "companyName": "AME",
-    "market": "ACE Market",
+    "market": "Main Market",
     "listingDate": "14-Oct-2019",
     "year": 2019,
     "price": 1.3,
@@ -7391,7 +7404,8 @@ const IPO_DATA = [
     "openPrice": 1.2799800000000001,
     "closePrice": 1.54999,
     "symbol": "AME",
-    "dailyChange": -1.2
+    "dailyChange": -1.2,
+    "hasMitiTranche": true
   },
   {
     "id": "dpih",
@@ -8712,8 +8726,9 @@ const IPO_DATA = [
     "year": 2024,
     "listingDate": "2024-11-11",
     "performance": "+185.07%",
-    "market": "ACE Market",
-    "highPrice": 1.72
+    "market": "Main Market",
+    "highPrice": 1.72,
+    "hasMitiTranche": true
   },
   {
     "id": "3ren--ns-",
