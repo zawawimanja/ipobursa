@@ -1157,7 +1157,8 @@ function renderIPOs(stage) {
             if (typeof selectedGrades !== 'undefined') {
                 displayData = displayData.filter(ipo => {
                     const cleanGrade = getIpoGrade(ipo).grade.replace('Pred: ', '').trim();
-                    return selectedGrades.includes(cleanGrade);
+                    const baseLetter = cleanGrade.replace(/[^A-Za-z]/g, '');
+                    return selectedGrades.includes(cleanGrade) || selectedGrades.includes(baseLetter);
                 });
             }
             

@@ -9326,7 +9326,7 @@ const IPO_DATA = [
     "sector": "Industrial Products & Services (Heat Treatment & Engineering)",
     "geography": "Selangor",
     "ib": "Malacca Securities",
-    "predictedGrade": "B+",
+    "predictedGrade": "B",
     "sifuTargetPrice": 0.30,
     "calibratedSifuTargetPrice": 0.31,
     "v7TargetPrice": 0.31,
