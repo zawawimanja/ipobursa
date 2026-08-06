@@ -1,5 +1,5 @@
 const SYNC_STATUS = {
-  "lastSync": "06/08/2026, 11:54:29 am",
+  "lastSync": "06/08/2026, 4:01:08 pm",
   "status": "Success",
   "enrichedCount": 0,
   "totalIpos": 306
