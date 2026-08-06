@@ -9316,11 +9316,12 @@
         "symbol": "Pioneer Heat Holdings Berhad",
         "market": "ACE Market",
         "price": 0.25,
+        "openingDate": "12-Aug-2026",
         "closingDate": "03-Sep-2026",
         "listingDate": "",
         "shariah": true,
         "stage": 3,
-        "status": "Application Open",
+        "status": "Application Scheduled (Opens 12 Aug)",
         "year": 2026,
         "sector": "Industrial Products & Services (Heat Treatment & Engineering)",
         "geography": "Selangor",
@@ -9330,7 +9331,7 @@
         "calibratedSifuTargetPrice": 0.31,
         "v7TargetPrice": 0.31,
         "zone2TargetPrice": 0.31,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B+ — OPENING 12 AUG)</b><br>Syarikat penyedia perkhidmatan kejuruteraan mekanikal & rawatan haba (heat treatment / PWHT) untuk sektor Minyak & Gas, Petrokimia dan Loji Industri.<br><br>📊 <b>Kewangan & Penilaian:</b><br>• Ditaja oleh <b>Malacca Securities</b>.<br>• Pertumbuhan PAT FY25 melompat <b>+60.7%</b> kepada RM5.16M (FY24: RM3.21M) dengan Revenue RM42.97M.<br>• Nisbah PE Terbitan sekitar <b>21.0x PE</b> pada harga tawaran RM0.25.<br><br>🎯 <b>Harga Sasaran (TP):</b> RM0.30 - RM0.31 (Potensi Upside +20% hingga +24%)."
+        "analystInsight": "✅ <b>WORTH IT (GRADE B+ — OPENS 12 AUG)</b><br>Syarikat penyedia perkhidmatan kejuruteraan mekanikal & rawatan haba (heat treatment / PWHT) untuk sektor Minyak & Gas, Petrokimia dan Loji Industri.<br><br>📊 <b>Kewangan & Penilaian:</b><br>• Ditaja oleh <b>Malacca Securities</b>.<br>• Pertumbuhan PAT FY25 melompat <b>+60.7%</b> kepada RM5.16M (FY24: RM3.21M) dengan Revenue RM42.97M.<br>• Nisbah PE Terbitan sekitar <b>21.0x PE</b> pada harga tawaran RM0.25.<br><br>🎯 <b>Harga Sasaran (TP):</b> RM0.30 - RM0.31 (Potensi Upside +20% hingga +24%)."
     },
     {
         "id": "jrk-holdings-berhad",
