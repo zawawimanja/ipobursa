@@ -1,15 +1,6 @@
 ipoData = [];
 let currentStage = 1;
 
-function getGroqKey() {
-    const params = new URLSearchParams(window.location.search);
-    const urlKey = params.get('groq');
-    if (urlKey) {
-        localStorage.setItem('gadisai_groq_key', urlKey);
-        return urlKey;
-    }
-    return localStorage.getItem('gadisai_groq_key') || '';
-}
 let selectedGrades = ['A', 'B', 'C', 'Pending'];
 let currentYear = 'all';
 let currentSearch = '';
@@ -35,7 +26,6 @@ function initializeData() {
         // Step 2: Show initial state
         updateGradeFilterUI();
         renderIPOs(currentStage);
-        setTimeout(() => { checkPriceAlerts(); }, 500);
 
         console.log('Sync Engine: Ready (Manual trigger only)');
         
@@ -319,8 +309,7 @@ async function fetchLiveUpdates() {
 
         ipoData = finalData;
         renderIPOs(currentStage);
-        setTimeout(() => { checkPriceAlerts(); }, 500);
-        
+
         // Trigger deep sync for missing OS/TP
         triggerDeepSync();
         
@@ -1056,53 +1045,6 @@ function getBoomPrediction(ipo) {
 
     return { score, label, color, isPreliminary: os === 0 };
 }
-function checkMissingListings() {
-    const bannerContainer = document.getElementById('reminder-banner-container');
-    if (!bannerContainer) return;
-    
-    // Disabled per user request: user prefers not to do manual entry for scalping
-    bannerContainer.innerHTML = '';
-    return;
-    
-    const now = new Date();
-    // Look for Stage 4 IPOs with a listing date that is <= today, but no openPrice
-    const missing = ipoData.filter(ipo => {
-        // Must be stage 5 (Listed stage)
-        if (ipo.stage === 5 && ipo.listingDate && typeof ipo.openPrice === 'undefined') {
-            const listDate = new Date(ipo.listingDate);
-            const today = new Date();
-            
-            // Set both times to midnight for fair comparison
-            listDate.setHours(0,0,0,0);
-            today.setHours(0,0,0,0);
-
-            // Calculate the difference in days
-            const diffTime = today - listDate;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            // Only alert if the listing was in the last 7 days
-            return listDate <= today && diffDays <= 7;
-        }
-        return false;
-    });
-
-    if (missing.length > 0) {
-        const names = missing.map(m => m.companyName).join(', ');
-        bannerContainer.innerHTML = `
-            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-left: 4px solid #ef4444; padding: 1rem 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; margin-top: 2rem;">
-                <i data-lucide="alert-triangle" style="color: #ef4444; width: 24px; height: 24px; flex-shrink: 0;"></i>
-                <div>
-                    <h4 style="color: #ef4444; margin: 0 0 0.25rem 0; font-size: 1.05rem;">Listing Day Action Required!</h4>
-                    <p style="margin: 0; color: var(--text-main); font-size: 0.95rem;">Please update the opening price for: <strong>${names}</strong> in <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.4rem; border-radius: 4px;">data.js</code></p>
-                </div>
-            </div>
-        `;
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-    } else {
-        bannerContainer.innerHTML = '';
-    }
-}
-
 function isIpoOpen(ipo) {
     const today = new Date();
     today.setHours(0,0,0,0);
@@ -1242,8 +1184,6 @@ function renderIPOs(stage) {
                 </div>
             `;
             if(typeof lucide !== 'undefined') lucide.createIcons();
-            checkMissingListings();
-            renderListedSidebar();
         } catch(err) {
             console.error('renderIPOs error:', err);
             ipoGrid.innerHTML = `
@@ -1906,31 +1846,19 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 
 IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID only. Grade B = SCALP only. Grade A = MUST BUY or WORTH IT. Never contradict the Hunter Grade.`;
 
-        const savedKey = getGroqKey();
         let responseText = '';
 
-        // Helper: call Groq with auto-fallback (70b → 8b-instant)
+        // Helper: call Groq through the secure serverless proxy (key lives in Vercel env vars)
         const callGroqWithFallback = async (primaryModel, fallbackModel) => {
             const tryModel = async (model) => {
-                if (savedKey) {
-                    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                        method: 'POST',
-                        headers: { 'Authorization': `Bearer ${savedKey}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }], max_tokens: 1024, temperature: 0.5 })
-                    });
-                    const d = await res.json();
-                    if (!res.ok) throw new Error(d?.error?.message || 'Groq error');
-                    return d?.choices?.[0]?.message?.content || '';
-                } else {
-                    const res = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt, systemPrompt, model, max_tokens: 1024, temperature: 0.5 })
-                    });
-                    const d = await res.json();
-                    if (!res.ok || d.error) throw new Error(d?.error || 'Proxy error');
-                    return d.text || '';
-                }
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, systemPrompt, model, max_tokens: 1024, temperature: 0.5 })
+                });
+                const d = await res.json();
+                if (!res.ok || d.error) throw new Error(d?.error || 'Proxy error');
+                return d.text || '';
             };
 
             try {
@@ -2325,66 +2253,31 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
 
 
 
-        const savedKey = getGroqKey();
-        let response;
+        // Production: secure proxy on Vercel (key hidden in env vars)
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prompt: 'User question: ' + text,
+                systemPrompt: systemPrompt,
+                model: 'llama-3.1-8b-instant',
+                max_tokens: 512,
+                temperature: 0.7
+            })
+        });
 
-        if (savedKey) {
-            // Direct browser call with manual key
-            response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${savedKey}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
-                    messages: [
-                        { role: 'system', content: systemPrompt },
-                        { role: 'user', content: text }
-                    ],
-                    max_tokens: 512,
-                    temperature: 0.7
-                })
-            });
-            const groqData = await response.json();
-            if (!response.ok) {
-                const errMsg = groqData?.error?.message || 'Groq API returned an error.';
-                response = { ok: false, _groqText: `⚠️ Error: ${errMsg}` };
-            } else {
-                const groqText = groqData?.choices?.[0]?.message?.content || '';
-                response = { ok: true, _groqText: groqText };
-            }
-        } else {
-            // Production: secure proxy on Vercel (key hidden in env vars)
-            response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prompt: 'User question: ' + text,
-                    systemPrompt: systemPrompt,
-                    model: 'llama-3.1-8b-instant',
-                    max_tokens: 512,
-                    temperature: 0.7
-                })
-            });
-        }
-
-        // Handle both local (Groq direct) and production (proxy) responses
+        // Handle the proxy response
         let rawText = '';
-        if (response._groqText !== undefined) {
-            rawText = response._groqText; // local mode — already extracted
-        } else {
-            let data;
-            try {
-                data = await response.json();
-            } catch (jsonErr) {
-                rawText = `⚠️ Proxy parse error: ${response.status} ${response.statusText}`;
-            }
-            if (data) {
-                rawText = data.text || '';
-                if (!rawText && data.error) {
-                    rawText = `⚠️ Error: ${data.error}`;
-                }
+        let data;
+        try {
+            data = await response.json();
+        } catch (jsonErr) {
+            rawText = `⚠️ Proxy parse error: ${response.status} ${response.statusText}`;
+        }
+        if (data) {
+            rawText = data.text || '';
+            if (!rawText && data.error) {
+                rawText = `⚠️ Error: ${data.error}`;
             }
         }
 
@@ -2416,214 +2309,3 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
 
 window.toggleChat = toggleChat;
 window.sendAIMessage = sendAIMessage;
-
-// Price Alert System
-function promptPriceAlert(id, companyName, currentPrice) {
-    const ipo = ipoData.find(x => x.id === id);
-    if (!ipo || typeof ipo.sifuTargetPrice !== 'number') {
-        showToast("Tiada harga sasaran Sifu untuk kaunter ini.");
-        return;
-    }
-    
-    const targetPrice = ipo.sifuTargetPrice;
-    const isTriggered = currentPrice > 0 && currentPrice <= targetPrice;
-    
-    if (isTriggered) {
-        const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
-        const index = dismissed.indexOf(id);
-        
-        if (index !== -1) {
-            // Unmute / Undismiss
-            dismissed.splice(index, 1);
-            localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
-            showToast(`Alert diaktifkan semula untuk ${companyName}!`);
-        } else {
-            // Mute / Dismiss
-            dismissed.push(id);
-            localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
-            showToast(`Alert dipadam untuk ${companyName}.`);
-        }
-    } else {
-        showToast(`Alert Beli Aktif: Sistem akan memberitahu jika harga turun ke RM ${targetPrice.toFixed(2)} (semasa: RM ${currentPrice.toFixed(2)}).`);
-    }
-    
-    renderIPOs(currentStage);
-    checkPriceAlerts();
-}
-
-function clearPriceAlert(id) {
-    const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
-    if (!dismissed.includes(id)) {
-        dismissed.push(id);
-        localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
-    }
-    renderIPOs(currentStage);
-    checkPriceAlerts();
-    showToast("Alert harga dipadam.");
-}
-
-function checkPriceAlerts() {
-    const container = document.getElementById('active-price-alerts-container');
-    if (!container) return;
-    
-    const dismissed = JSON.parse(localStorage.getItem('dismissedPriceAlerts') || '[]');
-    const activeAlerts = [];
-    
-    ipoData.forEach(ipo => {
-        if (ipo.stage === 5 && typeof ipo.sifuTargetPrice === 'number' && ipo.shariah === true) {
-            const curPrice = ipo.currentPrice || ipo.price || 0;
-            const targetPrice = ipo.sifuTargetPrice;
-            
-            if (curPrice > 0 && curPrice <= targetPrice) {
-                if (!dismissed.includes(ipo.id)) {
-                    activeAlerts.push({
-                        id: ipo.id,
-                        companyName: ipo.companyName,
-                        curPrice,
-                        targetPrice
-                    });
-                }
-            } else {
-                // Auto-cleanup from dismissed state if price rises back above target
-                const index = dismissed.indexOf(ipo.id);
-                if (index !== -1) {
-                    dismissed.splice(index, 1);
-                    localStorage.setItem('dismissedPriceAlerts', JSON.stringify(dismissed));
-                }
-            }
-        }
-    });
-    
-    if (activeAlerts.length > 0) {
-        container.style.display = 'block';
-        container.innerHTML = `
-            <div class="glass-card" style="border: 1px solid rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.5)); padding: 1rem 1.5rem; border-radius: 1rem; box-shadow: 0 8px 32px rgba(245, 158, 11, 0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-                <span style="font-size: 0.9rem; color: #f8fafc; font-family: 'Outfit', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
-                    <i data-lucide="bell-ring" class="pulse-green-text" style="width: 18px; color: #f59e0b;"></i> 
-                    Kita ada <strong style="color: #f59e0b; font-size: 1.05rem;">${activeAlerts.length}</strong> alert harga sasaran Zon Beli yang dipicu sekarang!
-                </span>
-                <a href="alerts.html" class="btn-moomoo" style="background: #f59e0b; border: none; color: white; font-weight: 700; text-decoration: none; padding: 0.4rem 1rem; border-radius: 0.5rem; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); display: flex; align-items: center; gap: 0.4rem;">
-                    Lihat & Urus Alert <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
-                </a>
-            </div>
-        `;
-        if(typeof lucide !== 'undefined') lucide.createIcons();
-    } else {
-        container.style.display = 'none';
-        container.innerHTML = '';
-    }
-}
-
-window.promptPriceAlert = promptPriceAlert;
-window.clearPriceAlert = clearPriceAlert;
-window.checkPriceAlerts = checkPriceAlerts;
-
-function renderListedSidebar() {
-    const sidebarEl = document.getElementById('listed-sidebar');
-    const sidebarListEl = document.getElementById('listed-sidebar-list');
-    const sidebarCountEl = document.getElementById('sidebar-count');
-    
-    if (!sidebarEl || !sidebarListEl) return;
-    
-    const stageNum = parseInt(currentStage || 1);
-    if (stageNum === 5) {
-        sidebarEl.style.display = 'none';
-        return;
-    }
-    
-    sidebarEl.style.display = 'flex';
-    
-    // Get all listed IPOs
-    const listedIpos = ipoData.filter(ipo => ipo.stage === 5);
-    
-    // Sort by listing date newest first
-    listedIpos.sort((a, b) => getBestSortDate(b) - getBestSortDate(a));
-    
-    if (sidebarCountEl) {
-        sidebarCountEl.textContent = listedIpos.length;
-    }
-    
-    if (listedIpos.length === 0) {
-        sidebarListEl.innerHTML = `
-            <div style="color: var(--text-dim); font-size: 0.85rem; text-align: center; padding: 1rem;">
-                No listed IPOs found.
-            </div>
-        `;
-        return;
-    }
-    
-    sidebarListEl.innerHTML = listedIpos.map(ipo => {
-        const gradeObj = getIpoGrade(ipo);
-        const grade = gradeObj.grade;
-        const baseGrade = grade.replace('Pred: ', '');
-        const gradeColor = baseGrade === 'A' ? '#10b981' : baseGrade === 'B' ? '#f59e0b' : (baseGrade === 'Pending' ? '#a5b4fc' : '#ef4444');
-        
-        const curPrice = ipo.currentPrice || ipo.price || 0;
-        const openPrice = ipo.openPrice || ipo.price || 0;
-        
-        let holdPerf = 0;
-        let perfColor = 'var(--text-main)';
-        if (ipo.currentPrice) {
-            holdPerf = ((ipo.currentPrice - ipo.price) / ipo.price * 100);
-            perfColor = holdPerf >= 0 ? '#10b981' : '#ef4444';
-        }
-        
-        let openToNow = 0;
-        let openToNowColor = 'var(--text-main)';
-        let hasOpenToNow = false;
-        if (ipo.currentPrice && ipo.openPrice) {
-            openToNow = ((ipo.currentPrice - ipo.openPrice) / ipo.openPrice * 100);
-            openToNowColor = openToNow >= 0 ? '#10b981' : '#ef4444';
-            hasOpenToNow = true;
-        }
-        
-        return `
-            <div class="sidebar-ipo-card" style="padding: 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(99,102,241,0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.05)';">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem;">
-                    <div style="font-weight: 600; font-size: 0.85rem; color: var(--text-main); line-height: 1.3;">
-                        <a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); transition: color 0.2s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">
-                            ${ipo.companyName} 🔗
-                        </a>
-                        ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
-                    </div>
-                    <span style="color: ${gradeColor}; font-weight: bold; font-size: 0.7rem; padding: 0.1rem 0.35rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10; flex-shrink: 0;">
-                        ${baseGrade}
-                    </span>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim);">
-                    <span>${ipo.sector} • ${ipo.symbol || 'TBA'}</span>
-                    <span>${ipo.listingDate || ipo.year}</span>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.25rem; font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 0.4rem; border-radius: 0.35rem; text-align: center; margin: 0.25rem 0;">
-                    <div>
-                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">IPO</div>
-                        <div style="font-weight: 600;">RM ${ipo.price.toFixed(3)}</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">Open</div>
-                        <div style="font-weight: 600;">RM ${openPrice.toFixed(3)}</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase;">Current</div>
-                        <div style="font-weight: 600; color: #60a5fa;">RM ${curPrice.toFixed(3)}</div>
-                    </div>
-                </div>
-                
-                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; gap: 0.5rem; margin-top: 0.25rem;">
-                    <div style="flex: 1; background: rgba(255,255,255,0.01); padding: 0.35rem; border-radius: 0.25rem; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
-                        <div style="font-size: 0.6rem; color: var(--text-dim);">IPO to Now</div>
-                        <div style="font-weight: 700; color: ${perfColor};">${holdPerf > 0 ? '+' : ''}${holdPerf.toFixed(1)}%</div>
-                    </div>
-                    <div style="flex: 1; background: rgba(255,255,255,0.01); padding: 0.35rem; border-radius: 0.25rem; text-align: center; border: 1px solid rgba(255,255,255,0.04);">
-                        <div style="font-size: 0.6rem; color: var(--text-dim);">Open to Now</div>
-                        <div style="font-weight: 700; color: ${openToNowColor};">${hasOpenToNow ? (openToNow > 0 ? '+' : '') + openToNow.toFixed(1) + '%' : '-'}</div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-    
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-}
-window.renderListedSidebar = renderListedSidebar;

@@ -1055,13 +1055,15 @@ h3,
     color: white;
 }
 
-#modal-body h2 {
+#modal-body h2,
+#calculator-modal-body h2 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
     color: white;
 }
 
-#modal-body p {
+#modal-body p,
+#calculator-modal-body p {
     color: var(--text-dim);
     margin-bottom: 1.5rem;
 }
