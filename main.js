@@ -2093,7 +2093,7 @@ function openCalculatorModal() {
         select.innerHTML = '<option value="">-- Select IPO --</option>';
         const stage3Ipos = ipoData.filter(ipo => ipo.stage === 3);
         stage3Ipos.forEach(ipo => {
-            select.innerHTML += `<option value="${ipo.id}" data-price="${ipo.price}">${ipo.companyName} (RM ${ipo.price})</option>`;
+            select.innerHTML += `<option value="${ipo.id}" data-price="${ipo.price || ''}">${ipo.companyName} (${ipo.price > 0 ? 'RM ' + ipo.price : 'TBA'})</option>`;
         });
     }
     
