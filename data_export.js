@@ -9255,11 +9255,15 @@ const IPO_DATA = [
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 1,
-    "status": "Draft / Exposure Phase",
+    "stage": 2,
+    "status": "MITI Allocation Phase",
+    "mitiOpenDate": "14-Aug-2026",
+    "mitiCloseDate": "23-Aug-2026",
+    "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "year": 2026,
-    "sector": "Healthcare (Medical Services)",
-    "geography": "Kuala Lumpur"
+    "sector": "Healthcare (Pharmacy)",
+    "geography": "Kuala Lumpur",
+    "hasMitiTranche": true
   },
   {
     "id": "kk-mart-retail-berhad",

@@ -53,7 +53,11 @@ function findExistingIPO(name, existingData) {
         'NE': 'adnex',
         '5ER': '5e-resources',
         'SRKK': 'srkk-ai',
-        'SRKK AI BERHAD': 'srkk-ai'
+        'SRKK AI BERHAD': 'srkk-ai',
+        'BIG PHARMACY': 'big-caring-group-bhd',
+        'CARING PHARMACY': 'big-caring-group-bhd',
+        'BIG CARING': 'big-caring-group-bhd',
+        'BIG CARING GROUP': 'big-caring-group-bhd'
     };
 
     if (idMap[cleanName]) {
