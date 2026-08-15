@@ -9251,7 +9251,7 @@ const IPO_DATA = [
     "companyName": "Big Caring Group Bhd",
     "symbol": "Big Caring Group Bhd",
     "market": "Main Market",
-    "price": 0.9,
+    "price": 0,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
@@ -9263,7 +9263,8 @@ const IPO_DATA = [
     "year": 2026,
     "sector": "Healthcare (Pharmacy)",
     "geography": "Kuala Lumpur",
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "ib": "Maybank IB, RHB IB, AmInvestment Bank"
   },
   {
     "id": "kk-mart-retail-berhad",
