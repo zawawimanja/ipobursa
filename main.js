@@ -1160,14 +1160,14 @@ function renderIPOs(stage) {
                     <table class="ipo-table" style="width: 100%; border-collapse: collapse; text-align: left;">
                         <thead style="position: sticky; top: 0; z-index: 10; background: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
                             <tr style="font-size: 0.72rem; white-space: nowrap;">
-                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Company</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim); width: 220px; min-width: 200px;">Company</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Date</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">OS</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Price</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">IPO Perf.</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Open Perf.</th>
                                 <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Grade</th>
-                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim);">Verdict</th>
+                                <th style="padding: 0.5rem 0.6rem; font-weight: 600; color: var(--text-dim); min-width: 360px;">Verdict</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1338,7 +1338,7 @@ function renderStyledVerdict(reason, grade, ipo) {
     if (!listHtml && !noteHtml) {
         // Fallback if cleaning removed everything
         return `
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 320px;">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 100%;">
                 <div style="display: flex; align-items: center; gap: 0.4rem;">
                     <span style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeBorder}; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.25rem;">
                         <i data-lucide="${badgeIcon}" style="width: 10px; height: 10px;"></i> ${badgeText}
@@ -1350,7 +1350,7 @@ function renderStyledVerdict(reason, grade, ipo) {
     }
 
     return `
-        <div class="verdict-card" style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 320px; text-align: left;">
+        <div class="verdict-card" style="display: flex; flex-direction: column; gap: 0.4rem; max-width: 100%; text-align: left;">
             <div style="display: flex; align-items: center; gap: 0.4rem;">
                 <span style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeBorder}; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.25rem;">
                     <i data-lucide="${badgeIcon}" style="width: 10px; height: 10px;"></i> ${badgeText}
@@ -1479,18 +1479,20 @@ function createIPOCard(ipo, index = 0) {
 
     return `
         <tr class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
-            <td style="padding: 0.75rem 0.6rem;">
-                <div style="display: flex; align-items: center; gap: 0.6rem;">
-                    <span class="badge ${ipo.market?.includes('Main') ? 'main-market' : 'ace-market'}" style="padding: 0.15rem 0.4rem; font-size: 0.65rem; min-width: 35px; text-align: center;">${ipo.market === 'Main Market' ? 'MAIN' : 'ACE'}</span>
-                    ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
-                    ${ipo.outlier ? '<span class="badge outlier-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="zap" style="width: 10px; height: 10px; margin-right: 2px;"></i> Outlier Watch</span>' : ''}
-                    <div style="font-weight: 600; font-size: 0.9rem;">
-                        ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Buka chart TradingView (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName} 
+            <td style="padding: 0.75rem 0.6rem; width: 220px; min-width: 200px; max-width: 240px; vertical-align: top;">
+                <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                    <div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
+                        <span class="badge ${ipo.market?.includes('Main') ? 'main-market' : 'ace-market'}" style="padding: 0.15rem 0.4rem; font-size: 0.65rem; min-width: 35px; text-align: center;">${ipo.market === 'Main Market' ? 'MAIN' : 'ACE'}</span>
+                        ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
+                        ${ipo.outlier ? '<span class="badge outlier-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="zap" style="width: 10px; height: 10px; margin-right: 2px;"></i> Outlier Watch</span>' : ''}
                         ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
-                        ${ipo.enrichedBy === 'AI' ? `<span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; font-size: 0.58rem; padding: 0.1rem 0.35rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; margin-left: 0.4rem; vertical-align: middle; box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);"><i data-lucide="sparkles" style="width: 10px; height: 10px;"></i> AI</span>` : ''}
+                        ${ipo.enrichedBy === 'AI' ? `<span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; font-size: 0.58rem; padding: 0.1rem 0.35rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);"><i data-lucide="sparkles" style="width: 10px; height: 10px;"></i> AI</span>` : ''}
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.88rem; line-height: 1.25; word-break: break-word;">
+                        ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Buka chart TradingView (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName}
                     </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.3rem; color: var(--text-dim); padding-left: 2.8rem;">
+                <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.35rem; color: var(--text-dim);">
                     <span class="status-dot ${statusClass}" style="width: 6px; height: 6px; display: inline-block; border-radius: 50%;"></span>
                     ${ipo.sector} • ${ipo.ib || 'TBA'}
                 </div>
@@ -1564,7 +1566,7 @@ function createIPOCard(ipo, index = 0) {
                 </div>
                 ` : ''}
             </td>
-            <td style="padding: 0.75rem 0.6rem; min-width: 180px; max-width: 280px; font-size: 0.75rem; line-height: 1.3; vertical-align: top;">
+            <td style="padding: 0.75rem 0.6rem; min-width: 360px; max-width: 500px; font-size: 0.78rem; line-height: 1.35; vertical-align: top;">
                 ${renderStyledVerdict(gradeObj.reason, grade, ipo)}
                 <div style="margin-top: 0.5rem; padding-top: 0.4rem; border-top: 1px solid rgba(255,255,255,0.06);">${finalActionCol}</div>
             </td>

@@ -1025,7 +1025,7 @@
                 }
                 
                 // Insight
-                insightEl.innerHTML = ipo.analystInsight || 'Tiada ulasan bertulis dalam pangkalan data.';
+                insightEl.innerHTML = ipo.fullAnalysis || ipo.analystInsight || 'Tiada ulasan bertulis dalam pangkalan data.';
                 
                 // Dynamic Warning Card
                 const warningCard = document.getElementById('sifu-edu-warning-card');
