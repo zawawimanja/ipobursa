@@ -235,6 +235,15 @@ h3,
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+    white-space: nowrap;
+}
+
+@media (min-width: 769px) {
+    .nav-links .btn-moomoo {
+        height: 40px;
+        min-width: 110px;
+        justify-content: center;
+    }
 }
 
 .nav-links .btn-moomoo svg {
