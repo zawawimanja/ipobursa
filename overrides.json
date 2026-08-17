@@ -261,5 +261,22 @@
         "ib": "Maybank IB, RHB IB, AmInvestment Bank",
         "predictedGrade": "B",
         "analystInsight": "✅ <b>WORTH IT (GRADE B — MITI ACTIVE OPEN)</b><br>Rangkaian runcit farmasi terbesar di Malaysia (>600 cawangan) hasil penggabungan jenama BIG Pharmacy, CARiNG Pharmacy, Georgetown, Wellings & Ting.<br><br>📊 <b>Bedah Siasat Isu 'Bayar Hutang' & Playbook Creador:</b><br>• <b>Isu Hutang Bank:</b> Sebahagian besar dana IPO digunakan untuk melunaskan pinjaman bank yang diambil semasa pengambilalihan CARiNG bernilai ~RM850M–RM900M pada 2023. Ini adalah <i>hutang akuisisi strategik M&A</i>, bukan hutang kerugian operasi.<br>• <b>Impak Positif Penjimatan Faedah:</b> Pelunasan pinjaman ini memotong beban kos faedah tahunan secara mendadak dan terus melonjakkan margin keuntungan bersih (Net Profit) pada suku-suku tahun berikutnya.<br>• <b>DNA Serupa MR D.I.Y. & CTOS:</b> Disokong oleh firma ekuiti swasta (PE) <i>Creador</i>. Seperti kes MR D.I.Y. (2020), keraguan awal pelabur mengenai 'bayar hutang & OFS' diimbangi oleh minat agresif dana institusi gergasi (KWSP, PNB) terhadap bisnes tunai monopoli runcit yang kalis krisis.<br><br>🎯 <b>Strategi Pelaburan:</b><br>• <b>Sederhana/Panjang & Dividen:</b> Sangat kukuh kerana dominasi pasaran, aliran tunai harian konsisten, dan potensi dividen tetap.<br>• <b>Stagging / Flip Hari Pertama:</b> Berpada-pada kerana saiz modal pasaran Main Market yang mega lazimnya mencatatkan kenaikan hari pertama yang lebih stabil berbanding kaunter Pasaran ACE."
+    },
+    "ioipg-malaysia-reit": {
+        "stage": 2,
+        "status": "MITI Allocation Phase",
+        "mitiOpenDate": "17-Aug-2026",
+        "mitiCloseDate": "26-Aug-2026",
+        "closingDate": "26-Aug-2026",
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "sector": "REITs",
+        "shariah": true,
+        "price": 0.9,
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.97,
+        "calibratedSifuTargetPrice": 0.98,
+        "v7TargetPrice": 1.0,
+        "zone2TargetPrice": 1.05,
+        "analystInsight": "📊 <b>REIT PERTAMA IOI — UNJURAN YIELD 6.5–7%</b><br>💡 IOIPG Malaysia REIT — REIT milik IOI Properties (kekal 60% selepas listing). Portfolio RM7.58B (9 hartanah): IOI City Mall (RM5.1B — 2/3 portfolio, mall kedua terbesar Malaysia), IOI City Towers, PFCC Towers + 6 hotel premium (Putrajaya Marriott, Le Méridien Putrajaya, Moxy Putrajaya, Four Points Puchong, W Kuala Lumpur, Courtyard Penang).<br><br>⚠️ <b>POINT PENTING:</b><br>• Harga indikatif RM0.90/unit ≈ NAV — bukan premium.<br>• Unjuran yield 6.5–7.0% — hujung atas sektor REIT Malaysia (~5-6%).<br>• MITI tranche 687.5 juta unit (12.5%) — gergasi, 0 pelabur setakat ni → allocation hampir pasti penuh.<br>• REIT = playbook dividen, BUKAN flip besar. Debut biasanya +0–5%.<br>• ⚠️ Status shariah SAC belum disahkan rasmi (sebelum listing) — diandaikan compliant: pembiayaan sukuk, core asset retail mall.<br><br>📌 <b>Keputusan:</b> Bagus untuk yield & keselamatan (sponsor IOI kukuh, aset landmark). Untuk flip: jangkaan kecil (+2–5%) — jangan banding dengan Big Caring (+15–20%). Angka kewangan adalah pro-forma/unjuran (REIT baharu, prospektus belum diakses)."
     }
 }
