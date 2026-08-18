@@ -1234,7 +1234,11 @@ function renderMitiCountdownStrip() {
 
     const items = (ipoData || [])
         .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
-        .map(ipo => ({ ipo, close: parseFlexDate(ipo.mitiCloseDate) }))
+        .map(ipo => {
+            const close = parseFlexDate(ipo.mitiCloseDate);
+            close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+            return { ipo, close };
+        })
         .filter(x => x.close >= now)
         .sort((a, b) => a.close - b.close);
 
