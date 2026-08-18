@@ -388,6 +388,25 @@
                 </div>
             </div>
 
+            <!-- SECTION 0: MITI COUNTDOWN -->
+            <div class="journal-card" id="card-miti-countdown" style="border-left: 4px solid #10b981;">
+                <div class="journal-card-header" onclick="toggleCard('card-miti-countdown')">
+                    <h2 class="journal-card-title">
+                        <i data-lucide="timer" style="color: #10b981; width: 20px; height: 20px;"></i> 
+                        MITI Countdown — Peruntukan Saham Masih Dibuka
+                    </h2>
+                    <i data-lucide="chevron-down" class="chevron-icon"></i>
+                </div>
+                <div class="collapsible-content">
+                    <div id="miti-countdown-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem;margin-bottom:0.75rem;">
+                        <!-- Dynamic countdown cards -->
+                    </div>
+                    <p style="color: var(--text-dim); font-size: 0.72rem; margin-top: 0.6rem; font-style: italic;">
+                        ⏱ Countdown dikira automatik dari tarikh tutup dalam tracker. Data <strong>Jumlah Tawaran</strong> & <strong>Jumlah Pemohon</strong> diambil dari portal SahamOnline MITI — tarikh/angka disemak pada 18 Ogos 2026 dan mungkin berubah.
+                    </p>
+                </div>
+            </div>
+
             <!-- SECTION 1: ACTIVE STAGE 2 -->
             <div class="journal-card" id="card-stage2">
                 <div class="journal-card-header" onclick="toggleCard('card-stage2')">
@@ -1209,13 +1228,67 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
+        // MITI Countdown — live ticking cards for open MITI allocations
+        function renderMitiCountdown() {
+            const grid = document.getElementById('miti-countdown-grid');
+            if (!grid) return;
+            const now = new Date();
+
+            const items = ipoData
+                .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate))
+                .map(ipo => ({ ipo, close: parseFlexDate(ipo.mitiCloseDate) }))
+                .filter(x => x.close >= now)
+                .sort((a, b) => a.close - b.close);
+
+            if (items.length === 0) {
+                grid.innerHTML = `<p style="color:var(--text-dim);font-size:0.85rem;">Tiada peruntukan MITI aktif sekarang. Semak semula selepas prospektus IPO baharu dilancarkan.</p>`;
+                return;
+            }
+
+            grid.innerHTML = items.map(({ ipo, close }) => {
+                const diff = close - now;
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+
+                let cdText, cdColor = '#10b981';
+                if (days > 0) { cdText = `${days} hari ${hours} jam`; }
+                else if (hours > 0) { cdText = `${hours} jam ${mins} minit`; cdColor = '#fbbf24'; }
+                else { cdText = `${Math.max(0, mins)} minit`; cdColor = '#f87171'; }
+
+                const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
+                const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
+                const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
+                const marketBadge = (ipo.market || '').toLowerCase().includes('main')
+                    ? `<span style="font-size:0.65rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>`
+                    : `<span style="font-size:0.65rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>`;
+
+                return `
+                <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:0.9rem;padding:1rem 1.1rem;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                        <strong style="color:white;font-size:0.95rem;">${ipo.companyName}</strong>
+                        ${marketBadge}
+                    </div>
+                    <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:0.6rem;">${ipo.sector || 'N/A'} · Gred ${ipo.predictedGrade || 'B'}</div>
+                    <div style="font-size:1.35rem;font-weight:800;color:${cdColor};line-height:1.2;">${cdText}</div>
+                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.15rem;">sebelum tutup · ${ipo.mitiCloseDate}</div>
+                    <div style="display:flex;gap:1.2rem;margin-top:0.65rem;padding-top:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-main);">
+                        <span>🎯 Tawaran: <strong>${offerStr}</strong></span>
+                        <span>👥 Pemohon: <strong>${appsStr}</strong></span>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
         // Initialize lists on load
         document.addEventListener('DOMContentLoaded', () => {
+            renderMitiCountdown();
             renderStage2();
             renderFuture();
             renderHistorical();
             renderSectorStats();
             renderPrecedent();
+            setInterval(renderMitiCountdown, 60000); // live tick every minute
         });
     </script>
 </body>

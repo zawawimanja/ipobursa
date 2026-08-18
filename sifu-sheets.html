@@ -739,7 +739,7 @@
             // Scan localIpoData (data.js) to find listed or upcoming Shariah 2026 IPOs
             if (typeof localIpoData !== 'undefined') {
                 localIpoData.forEach(ipo => {
-                    if (ipo.year === 2026 && ipo.shariah === true && (ipo.status === 'Listed' || ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4)) {
+                    if (ipo.year === 2026 && ipo.shariah === true && (ipo.status === 'Listed' || ipo.stage === 1 || ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4)) {
                         profiles.push({
                             id: ipo.id,
                             companyName: ipo.companyName
