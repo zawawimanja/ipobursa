@@ -46,14 +46,24 @@ else
     echo "✅ browser_cookie3 sudah ada"
 fi
 
-# --- 4) Cookies isaham (perlu login isaham dalam Chrome SEKALI) ---
+# --- 4) Cookies isaham + MITI (perlu login sekali dalam Chrome) ---
 echo "🍪 Semak cookies isaham..."
 if python3 "$REPO_DIR/scratch/dump-isaham-cookies.py"; then
-    echo "✅ Cookies OK — sesi isaham sah"
+    echo "✅ Cookies isaham OK — sesi sah"
 else
-    echo "⚠️  Cookies belum ada."
+    echo "⚠️  Cookies isaham belum ada."
     echo "   → Buka Chrome, login https://www.isaham.my (Facebook/Telegram),"
     echo "   → pastikan halaman /ipo terbuka, lepas tu run script ni sekali lagi."
+    exit 1
+fi
+
+echo "🍪 Semak cookies MITI (SahamOnline)..."
+if python3 "$REPO_DIR/scratch/dump-miti-cookies.py"; then
+    echo "✅ Cookies MITI OK — sesi sah"
+else
+    echo "⚠️  Cookies MITI belum ada."
+    echo "   → Buka Chrome, login https://sahamonline.miti.gov.my/portal/login,"
+    echo "   → lepas tu run script ni sekali lagi."
     exit 1
 fi
 
@@ -87,10 +97,14 @@ systemctl --user restart ipohunter-auto-runner.service
 echo "✅ Service ipohunter-auto-runner aktif:"
 systemctl --user status ipohunter-auto-runner.service --no-pager | head -6
 
-# --- 6) Test sync-isaham sekali ---
+# --- 6) Test sync-isaham + MITI applicants sekali ---
 echo ""
 echo "🧪 Test sync-isaham.js (pastikan [iSaham] OK, bukan DEGRADED)..."
 (cd "$REPO_DIR" && timeout 180 node sync-isaham.js 2>&1 | grep -E "\[iSaham\]|Sync Complete|Total IPOs|DEGRADED" | head -8)
+
+echo ""
+echo "🧪 Test scrape-miti-applicants.js (Jumlah Pelabur Mohon Saham)..."
+(cd "$REPO_DIR" && timeout 120 node scratch/scrape-miti-applicants.js 2>&1 | tail -8)
 
 echo ""
 echo "===================================================================="

@@ -45,8 +45,8 @@ function checkAndRun() {
 // MITI auto-sync: setiap 30 minit waktu bekerja (08:30 - 18:30, Isnin - Jumaat)
 //   1) sync-miti-portal-dates.js   — tarikh buka/tutup dari halaman AWAM portal
 //      (tiada login, sentiasa boleh jalan)
-//   2) scrape-miti-applicants.js --quiet — jumlah pemohon; headless, dan skip
-//      senyap jika sesi login tamat (perlu run manual sekali untuk login semula)
+//   2) scrape-miti-applicants.js --quiet — jumlah pemohon guna cookies Chrome (tiada login manual); skip jika cookies tiada
+//      (login portal MITI sekali dalam Chrome, lepas tu dump cookies)
 // ---------------------------------------------------------------------------
 let lastMitiRun = null;
 

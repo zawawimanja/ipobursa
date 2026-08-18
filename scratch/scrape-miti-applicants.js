@@ -3,95 +3,127 @@
  * scrape-miti-applicants.js
  *
  * Auto-scrape "Jumlah Pelabur Mohon Saham" dari portal SahamOnline MITI
- * menggunakan Puppeteer dengan SESSION PERSISTENCE:
- *   - Kali pertama (tanpa --quiet): browser BUKA (headed), anda log masuk +
- *     selesaikan CAPTCHA SEKALI. Sesi disimpan dalam scratch/.miti-profile.
- *   - Kali seterusnya: run headless, auto-scrape, dan data dikemas kini sendiri
- *     (HANYA jika nombor berubah).
- *   - Mod --quiet (digunakan auto_runner.js): headless; jika sesi tiada/expired,
- *     keluar senyap tanpa buka browser (perlu run manual sekali untuk login).
+ * menggunakan cookies sesi Chrome (TIADA login manual + CAPTCHA):
+ *   - Cookies diekstrak dari Chrome oleh scratch/dump-miti-cookies.py →
+ *     scratch/miti-cookies.json (login portal MITI SEKALI dalam Chrome).
+ *   - Auto-refresh dari Chrome jika fail cookies tua (> 12 jam).
+ *   - Parse SEMUA tawaran saham pada halaman /portal/maklumat-saham (dinamik,
+ *     bukan senarai hardcoded) dan padankan dengan data.json ikut nama.
  *
  * CARA GUNA:
- *   1) (Pilihan) Isi fail .env di root projek:
- *        MITI_USERNAME=no.kp@email
- *        MITI_PASSWORD=rahsia
- *      (.env dalam .gitignore — tidak akan di-commit)
- *
- *   2) node scratch/scrape-miti-applicants.js          (run biasa / login jika perlu)
- *      node scratch/scrape-miti-applicants.js --quiet  (untuk jadual auto)
- *
- * Pilihan lain:
- *   --headed   paksa browser nampak walaupun sesi sudah ada (debug)
- *   --dump     simpan teks mentah halaman ke scratch/miti_portal_dump.txt
+ *   node scratch/scrape-miti-applicants.js          (run biasa)
+ *   node scratch/scrape-miti-applicants.js --quiet  (untuk jadual auto;
+ *                                                    skip senyap jika cookies tiada)
+ *   node scratch/scrape-miti-applicants.js --dump   (simpan teks halaman ke scratch/miti_portal_dump.txt)
  */
 
-const puppeteer = require('puppeteer');
+const axios = require('axios');
+const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const ROOT = path.join(__dirname, '..');
-const PROFILE = path.join(__dirname, '.miti-profile');
+const COOKIES_FILE = path.join(__dirname, 'miti-cookies.json');
 const DUMP = path.join(__dirname, 'miti_portal_dump.txt');
-const PORTAL = 'https://sahamonline.miti.gov.my/';
-const NAV_TIMEOUT = 20000;
-const LOGIN_WAIT_MS = 300000; // 5 minit untuk log masuk manual + CAPTCHA
+const MAKLUMAT_URL = 'https://sahamonline.miti.gov.my/portal/maklumat-saham';
 
-const TARGETS = [
-    { id: 'big-caring-group-bhd', names: ['big caring'] },
-    { id: 'ioipg-malaysia-reit',   names: ['ioipg'] },
-    { id: 'mydcd-berhad',          names: ['mydcd'] },
-];
+// Portal MITI guna TLS cert yang tidak lengkap — sahkan permintaan seperti
+// browser sebenar (Chrome terima cert ini; curl/node tak). Data hanya dibaca,
+// tiada hantar maklumat sensitif.
+const AGENT = new https.Agent({ rejectUnauthorized: false });
 
-function loadEnv() {
+const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36';
+
+function refreshMitiCookies() {
+    const { execSync } = require('child_process');
     try {
-        const raw = fs.readFileSync(path.join(ROOT, '.env'), 'utf8');
-        raw.split(/\r?\n/).forEach(line => {
-            const m = line.match(/^\s*([A-Za-z0-9_]+)\s*=\s*(.*?)\s*$/);
-            if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+        execSync('python3 scratch/dump-miti-cookies.py', {
+            cwd: ROOT,
+            timeout: 30000,
+            stdio: 'ignore'
         });
-    } catch (e) { /* tiada fail .env — ok, login manual */ }
+        return true;
+    } catch (e) {
+        console.log(`  [MITI] Cookie refresh gagal: ${e.message}`);
+        return false;
+    }
 }
 
-function findApplicants(text) {
-    const out = {};
-    TARGETS.forEach(t => { out[t.id] = null; });
-    if (!text) return out;
-
-    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-    for (let i = 0; i < lines.length; i++) {
-        const lower = lines[i].toLowerCase();
-        const t = TARGETS.find(x => x.names.some(n => lower.includes(n)));
-        if (!t) continue;
-        for (let j = i + 1; j < Math.min(i + 15, lines.length); j++) {
-            const m = lines[j].match(/jumlah\s*pelabur\s*mohon\s*saham\s*[:=]?\s*([\d,]+)/i);
-            if (m) {
-                out[t.id] = parseInt(m[1].replace(/,/g, ''), 10);
-                break;
-            }
-            if (TARGETS.some(x => x !== t && x.names.some(n => lines[j].toLowerCase().includes(n)))) break;
+function loadMitiCookies() {
+    try {
+        const mtime = fs.statSync(COOKIES_FILE).mtimeMs;
+        if ((Date.now() - mtime) > 12 * 60 * 60 * 1000) {
+            console.log('  [MITI] Cookies lama (>12 jam) — refresh dari Chrome...');
+            refreshMitiCookies();
         }
+    } catch (e) { /* fail tiada — cuba refresh di bawah */ }
+
+    try {
+        if (fs.existsSync(COOKIES_FILE)) {
+            const data = JSON.parse(fs.readFileSync(COOKIES_FILE, 'utf8'));
+            if (data.cookieHeader && data.hasSession) return data.cookieHeader;
+        }
+    } catch (e) { /* fall through */ }
+
+    if (refreshMitiCookies()) {
+        try {
+            const data = JSON.parse(fs.readFileSync(COOKIES_FILE, 'utf8'));
+            if (data.cookieHeader && data.hasSession) return data.cookieHeader;
+        } catch (e) { /* gagal juga */ }
     }
+    return null;
+}
+
+// Padankan nama syarikat portal dengan entri data (kes-kecil, dua hala)
+function matchEntry(data, companyName) {
+    const name = companyName.toLowerCase().trim();
+    return data.find(x => {
+        const cn = (x.companyName || '').toLowerCase().trim();
+        return cn.includes(name) || name.includes(cn);
+    });
+}
+
+// Parse setiap kad saham pada halaman maklumat-saham
+function parseMaklumatSaham(html) {
+    const $ = cheerio.load(html);
+    const out = [];
+    $('.card').each((i, card) => {
+        const header = $(card).find('.card-header').first().text().trim();
+        if (!header) return;
+        let applicants = null;
+        $(card).find('tr').each((j, tr) => {
+            const label = $(tr).find('td').first().text().trim();
+            if (/jumlah\s*pelabur\s*mohon\s*saham/i.test(label)) {
+                const val = $(tr).find('td').eq(1).text().replace(/[^\d]/g, '');
+                if (val) applicants = parseInt(val, 10);
+            }
+        });
+        if (applicants != null) out.push({ company: header, applicants });
+    });
     return out;
 }
 
 // Kemas kini data files + overrides HANYA jika ada nilai yang berubah
-function applyApplicants(applicants) {
+function applyApplicants(found) {
     const DATA_JSON = path.join(ROOT, 'data.json');
     const OVERRIDES_JSON = path.join(ROOT, 'overrides.json');
-    const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 
-    const data = read(DATA_JSON);
+    const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
     const changes = [];
-    TARGETS.forEach(t => {
-        const v = applicants[t.id];
-        if (v == null) return;
-        const ipo = data.find(x => x.id === t.id);
-        if (!ipo) return;
-        if (ipo.mitiApplicants !== v) {
-            ipo.mitiApplicants = v;
-            changes.push({ id: t.id, label: t.id, value: v });
+
+    for (const f of found) {
+        const ipo = matchEntry(data, f.company);
+        if (!ipo) {
+            console.log(`   ⚠️  ${f.company} ada di portal tapi TIADA dalam data — akan ditambah oleh sync isaham.`);
+            continue;
         }
-    });
+        if (ipo.mitiApplicants !== f.applicants) {
+            console.log(`   ${f.company}: ${ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '-'} → ${f.applicants.toLocaleString()} pelabur`);
+            ipo.mitiApplicants = f.applicants;
+            changes.push({ id: ipo.id, value: f.applicants });
+        }
+    }
 
     if (changes.length === 0) {
         console.log('ℹ️  Jumlah pemohon masih sama — tiada perubahan.');
@@ -103,7 +135,7 @@ function applyApplicants(applicants) {
     fs.writeFileSync(path.join(ROOT, 'data.js'), js, 'utf8');
     fs.writeFileSync(path.join(ROOT, 'data_export.js'), js, 'utf8');
 
-    const overrides = read(OVERRIDES_JSON);
+    const overrides = JSON.parse(fs.readFileSync(OVERRIDES_JSON, 'utf8'));
     changes.forEach(c => {
         if (!overrides[c.id]) overrides[c.id] = {};
         overrides[c.id].mitiApplicants = c.value;
@@ -113,127 +145,51 @@ function applyApplicants(applicants) {
     console.log(`✅ Jumlah pemohon dikemas kini (${changes.length} IPO) → data.json, data.js, data_export.js, overrides.json`);
 }
 
-async function launch(headlessMode) {
-    return puppeteer.launch({
-        headless: headlessMode,
-        userDataDir: PROFILE,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        defaultViewport: { width: 1280, height: 900 },
-    });
-}
-
-async function gotoPortal(page) {
-    try {
-        await page.goto(PORTAL, { waitUntil: 'networkidle2', timeout: NAV_TIMEOUT });
-    } catch (e) {
-        console.log('⚠️  goto warning:', e.message);
-    }
-}
-
-async function pageText(page) {
-    return page.evaluate(() => document.body ? document.body.innerText : '');
-}
-
 async function main() {
-    loadEnv();
-    const headed = process.argv.includes('--headed');
     const quiet = process.argv.includes('--quiet');
-    const dumpOnly = process.argv.includes('--dump');
 
-    if (dumpOnly) {
-        console.log('🌐 Membuka portal (headed) untuk dump...');
-        const browser = await launch(false);
-        const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
-        await gotoPortal(page);
-        const text = await pageText(page);
-        fs.writeFileSync(DUMP, text, 'utf8');
-        console.log(`📄 Teks halaman disimpan ke ${DUMP}`);
-        await browser.close();
-        return;
-    }
-
-    // Percubaan headless dahulu
-    console.log('🌐 Membuka portal SahamOnline MITI (headless)...');
-    let browser = await launch(true);
-    let page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
-    await gotoPortal(page);
-
-    let text = await pageText(page);
-    let applicants = findApplicants(text);
-    const needLogin = Object.values(applicants).every(v => v === null);
-
-    if (needLogin) {
-        await browser.close();
+    const cookieHeader = loadMitiCookies();
+    if (!cookieHeader) {
         if (quiet) {
-            console.log('⏭️  Sesi MITI tiada/expired — skip (run manual sekali untuk login + CAPTCHA).');
+            console.log('⏭️  [MITI] Cookies portal tiada/expired — skip (run manual sekali untuk dump cookies).');
             return;
         }
-        console.log('🔐 Sesi tiada/expired — browser DIBUKA untuk log masuk.');
-        console.log('   Sila log masuk + selesaikan CAPTCHA secara manual dalam browser.');
-        console.log(`   (Masa menunggu maksimum: ${LOGIN_WAIT_MS / 60000} minit)`);
+        console.error('❌ Cookies MITI tiada/expired.');
+        console.error('   → Login https://sahamonline.miti.gov.my/portal/login dalam Chrome SEKALI.');
+        console.error('   → Lepas tu run: python3 scratch/dump-miti-cookies.py');
+        process.exit(1);
+    }
 
-        browser = await launch(headed ? true : false);
-        page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
-        await gotoPortal(page);
+    let resp;
+    try {
+        resp = await axios.get(MAKLUMAT_URL, {
+            headers: { 'User-Agent': UA, 'Cookie': cookieHeader, 'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8' },
+            httpsAgent: AGENT,
+            timeout: 30000,
+        });
+    } catch (e) {
+        console.log(`⚠️  [MITI] Gagal fetch maklumat-saham: ${e.message}`);
+        if (quiet) return;
+        process.exit(1);
+    }
 
-        if (process.env.MITI_USERNAME && process.env.MITI_PASSWORD) {
-            try {
-                const userSel = 'input[type="text"], input[name*="user" i], input[name*="ic" i], input[name*="kp" i], input[id*="user" i], input[id*="ic" i], input[id*="username" i]';
-                const user = await page.$(userSel);
-                const pass = await page.$('input[type="password"]');
-                if (user && pass) {
-                    await user.click({ clickCount: 3 });
-                    await user.type(process.env.MITI_USERNAME);
-                    await pass.type(process.env.MITI_PASSWORD);
-                    console.log('   ✔ Kredential dari .env diisi — sila selesaikan CAPTCHA & klik log masuk.');
-                }
-            } catch (e) { /* biarkan user isi manual */ }
-        }
+    if (process.argv.includes('--dump')) {
+        fs.writeFileSync(DUMP, resp.data, 'utf8');
+        console.log(`📄 Teks halaman disimpan ke ${DUMP}`);
+    }
 
-        const start = Date.now();
-        while (Date.now() - start < LOGIN_WAIT_MS) {
-            await new Promise(r => setTimeout(r, 3000));
-            try {
-                text = await pageText(page);
-                applicants = findApplicants(text);
-                if (Object.values(applicants).some(v => v !== null)) break;
-
-                if (/log\s*keluar|logout|mysaham/i.test(text)) {
-                    const clicked = await page.evaluate(() => {
-                        const els = [...document.querySelectorAll('a, button, li, span')];
-                        const el = els.find(e => /maklumat\s*saham|saham\s*terkini|senarai\s*saham/i.test(e.textContent || ''));
-                        if (el) { el.click(); return true; }
-                        return false;
-                    });
-                    if (clicked) {
-                        await new Promise(r => setTimeout(r, 3000));
-                        text = await pageText(page);
-                        applicants = findApplicants(text);
-                    }
-                }
-            } catch (e) { /* halaman sedang tukar — teruskan */ }
-        }
-
-        if (Object.values(applicants).every(v => v === null)) {
-            console.error('❌ Gagal mendapatkan jumlah pemohon selepas log masuk.');
-            console.error('   Guna: node scratch/scrape-miti-applicants.js --dump  (untuk debug struktur halaman)');
-            await browser.close();
-            process.exit(1);
-        }
+    const found = parseMaklumatSaham(resp.data);
+    if (found.length === 0) {
+        console.log(`⚠️  [MITI] Tiada kad saham dijumpai pada halaman — mungkin sesi expired (${resp.status}).`);
+        if (quiet) return;
+        process.exit(1);
     }
 
     console.log('\n📊 Jumlah Pelabur Mohon Saham (portal SahamOnline):');
-    TARGETS.forEach(t => console.log(`   ${t.id.padEnd(24)} ${applicants[t.id] != null ? applicants[t.id].toLocaleString() : 'TIADA'}`));
+    found.forEach(f => console.log(`   ${f.company.padEnd(32)} ${f.applicants.toLocaleString()} pelabur`));
 
-    applyApplicants(applicants);
-
-    fs.writeFileSync(DUMP, text, 'utf8');
-
-    await browser.close();
-    console.log('\n✅ Selesai. Sesi disimpan — run seterusnya akan headless & auto.');
+    applyApplicants(found);
+    console.log('\n✅ Selesai — guna cookies sesi Chrome (tiada CAPTCHA).');
 }
 
 main().catch(e => { console.error('Fatal:', e); process.exit(1); });
