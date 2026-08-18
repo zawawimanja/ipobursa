@@ -34,7 +34,7 @@ const PROFILE = path.join(__dirname, '.miti-profile');
 const DUMP = path.join(__dirname, 'miti_portal_dump.txt');
 const PORTAL = 'https://sahamonline.miti.gov.my/';
 const NAV_TIMEOUT = 20000;
-const LOGIN_WAIT_MS = 180000; // 3 minit untuk log masuk manual + CAPTCHA
+const LOGIN_WAIT_MS = 300000; // 5 minit untuk log masuk manual + CAPTCHA
 
 const TARGETS = [
     { id: 'big-caring-group-bhd', names: ['big caring'] },
