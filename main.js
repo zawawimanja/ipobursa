@@ -27,6 +27,13 @@ function initializeData() {
         updateGradeFilterUI();
         renderIPOs(currentStage);
 
+        // MITI countdown strip on the main tracker (live ticking)
+        renderMitiCountdownStrip();
+        if (!window.__mitiTickerStarted) {
+            window.__mitiTickerStarted = true;
+            setInterval(renderMitiCountdownStrip, 60000); // tick every minute
+        }
+
         console.log('Sync Engine: Ready (Manual trigger only)');
         
         // Disable auto-sync on load to prevent CORS errors. 
@@ -1217,6 +1224,69 @@ function updateIpoCount(showing, total) {
         <span>Showing <strong>${showing}</strong> of <strong>${total}</strong> IPO${total !== 1 ? 's' : ''}</span>
     `;
     if(typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+// MITI Countdown — live ticking strip on the main tracker for open MITI allocations
+function renderMitiCountdownStrip() {
+    const container = document.getElementById('miti-countdown-strip');
+    if (!container) return;
+    const now = new Date();
+
+    const items = (ipoData || [])
+        .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
+        .map(ipo => ({ ipo, close: parseFlexDate(ipo.mitiCloseDate) }))
+        .filter(x => x.close >= now)
+        .sort((a, b) => a.close - b.close);
+
+    if (items.length === 0) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+    }
+    container.style.display = '';
+
+    container.innerHTML = `
+        <div class="glass-card" style="padding: 0.9rem 1.1rem; border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(15, 23, 42, 0.65);">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
+                <span style="font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <i data-lucide="timer" style="width: 16px; height: 16px;"></i> MITI Countdown — Peruntukan Saham Masih Dibuka
+                </span>
+                <a href="miti-journal.html" style="font-size: 0.75rem; color: #a5b4fc; text-decoration: none; font-weight: 600;">Jurnal MITI penuh →</a>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
+                ${items.map(({ ipo, close }) => {
+                    const diff = close - now;
+                    const days = Math.floor(diff / 86400000);
+                    const hours = Math.floor((diff % 86400000) / 3600000);
+                    let cdText, cdColor = '#10b981';
+                    if (days > 0) cdText = `${days} hari ${hours} jam`;
+                    else if (hours > 0) { cdText = `${hours} jam ${Math.floor((diff % 3600000) / 60000)} minit`; cdColor = '#fbbf24'; }
+                    else { cdText = `${Math.max(0, Math.floor(diff / 60000))} minit`; cdColor = '#f87171'; }
+                    const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
+                    const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
+                    const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
+                    const marketBadge = (ipo.market || '').toLowerCase().includes('main')
+                        ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
+                        : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
+                    return `
+                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+                                <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
+                                ${marketBadge}
+                            </div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Gred ${ipo.predictedGrade || 'B'}</div>
+                            <div style="font-size:1.05rem; font-weight:800; color:${cdColor}; line-height:1.2;">${cdText}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">sebelum tutup · ${ipo.mitiCloseDate}</div>
+                            <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
+                                <span>🎯 ${offerStr}</span>
+                                <span>👥 ${appsStr}</span>
+                            </div>
+                        </div>`;
+                }).join('')}
+            </div>
+        </div>
+    `;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 function getPredictedGrade(ipo) {
