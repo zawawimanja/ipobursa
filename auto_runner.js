@@ -3,7 +3,8 @@ const path = require('path');
 
 console.log('========================================================================');
 console.log('Background Auto-Runner started successfully.');
-console.log('Monitoring times: 08:45, 13:00, 17:30 (Monday - Friday).');
+console.log('Daily IPO sync times: 08:45, 13:00, 17:30 (Monday - Friday).');
+console.log('MITI auto-sync: every 30 min (08:30 - 18:30, Monday - Friday).');
 console.log('Keep this process running in the background.');
 console.log('========================================================================');
 
@@ -32,6 +33,49 @@ function checkAndRun() {
     }
 }
 
+// ---------------------------------------------------------------------------
+// MITI auto-sync: setiap 30 minit waktu bekerja (08:30 - 18:30, Isnin - Jumaat)
+//   1) sync-miti-portal-dates.js   — tarikh buka/tutup dari halaman AWAM portal
+//      (tiada login, sentiasa boleh jalan)
+//   2) scrape-miti-applicants.js --quiet — jumlah pemohon; headless, dan skip
+//      senyap jika sesi login tamat (perlu run manual sekali untuk login semula)
+// ---------------------------------------------------------------------------
+let lastMitiRun = null;
+
+function checkAndRunMiti() {
+    const now = new Date();
+    const day = now.getDay();
+
+    // Hujung minggu skip
+    if (day < 1 || day > 5) return;
+
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const seconds = now.getSeconds();
+
+    // Window 08:30 - 18:30, pada minit :00 dan :30 sahaja
+    if (minutes < 510 || minutes > 1110) return;
+    if (minutes % 30 !== 0) return;
+    if (parseInt(seconds) > 15) return;
+
+    // Elak run dua kali dalam tempoh 29 minit
+    if (lastMitiRun && (now - lastMitiRun) < 29 * 60000) return;
+    lastMitiRun = now;
+
+    console.log(`[${now.toLocaleString()}] MITI auto-sync (portal dates + applicants)...`);
+
+    exec('node scratch/sync-miti-portal-dates.js', { cwd: __dirname }, (error, stdout, stderr) => {
+        if (stdout) console.log(stdout);
+        if (error) console.error(`[${new Date().toLocaleString()}] [MITI dates] Error: ${error.message}`);
+    });
+
+    exec('node scratch/scrape-miti-applicants.js --quiet', { cwd: __dirname }, (error, stdout, stderr) => {
+        if (stdout) console.log(stdout);
+        if (error) console.error(`[${new Date().toLocaleString()}] [MITI apps] Error: ${error.message}`);
+    });
+}
+
 // Check every 10 seconds for high precision
 setInterval(checkAndRun, 10000);
+setInterval(checkAndRunMiti, 10000);
 checkAndRun();
+checkAndRunMiti();

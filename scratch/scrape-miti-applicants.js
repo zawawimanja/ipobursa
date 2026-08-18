@@ -4,24 +4,25 @@
  *
  * Auto-scrape "Jumlah Pelabur Mohon Saham" dari portal SahamOnline MITI
  * menggunakan Puppeteer dengan SESSION PERSISTENCE:
- *   - Kali pertama: browser BUKA (headed), anda log masuk + selesaikan CAPTCHA
- *     SEKALI sahaja. Sesi/cookies disimpan dalam scratch/.miti-profile.
- *   - Kali seterusnya (selagi sesi belum tamat): run terus, headless, auto-scrape,
- *     dan data.js/data.json/data_export.js/overrides.json dikemas kini sendiri.
+ *   - Kali pertama (tanpa --quiet): browser BUKA (headed), anda log masuk +
+ *     selesaikan CAPTCHA SEKALI. Sesi disimpan dalam scratch/.miti-profile.
+ *   - Kali seterusnya: run headless, auto-scrape, dan data dikemas kini sendiri
+ *     (HANYA jika nombor berubah).
+ *   - Mod --quiet (digunakan auto_runner.js): headless; jika sesi tiada/expired,
+ *     keluar senyap tanpa buka browser (perlu run manual sekali untuk login).
  *
  * CARA GUNA:
- *   1) (Pilihan) Buat/isi fail .env di root projek:
+ *   1) (Pilihan) Isi fail .env di root projek:
  *        MITI_USERNAME=no.kp@email
  *        MITI_PASSWORD=rahsia
- *      Kredential ini TIDAK akan di-commit (.env dalam .gitignore).
- *      Kalau kosong, anda log masuk manual dalam browser — sama sahaja.
+ *      (.env dalam .gitignore — tidak akan di-commit)
  *
- *   2) node scratch/scrape-miti-applicants.js
+ *   2) node scratch/scrape-miti-applicants.js          (run biasa / login jika perlu)
+ *      node scratch/scrape-miti-applicants.js --quiet  (untuk jadual auto)
  *
- * Pilihan:
+ * Pilihan lain:
  *   --headed   paksa browser nampak walaupun sesi sudah ada (debug)
  *   --dump     simpan teks mentah halaman ke scratch/miti_portal_dump.txt
- *              (guna jika struktur portal berubah — senang debug parser)
  */
 
 const puppeteer = require('puppeteer');
@@ -35,14 +36,12 @@ const PORTAL = 'https://sahamonline.miti.gov.my/';
 const NAV_TIMEOUT = 20000;
 const LOGIN_WAIT_MS = 180000; // 3 minit untuk log masuk manual + CAPTCHA
 
-// --- Susunan target (id dalam data kami -> nama yang muncul di portal) ---
 const TARGETS = [
     { id: 'big-caring-group-bhd', names: ['big caring'] },
     { id: 'ioipg-malaysia-reit',   names: ['ioipg'] },
     { id: 'mydcd-berhad',          names: ['mydcd'] },
 ];
 
-// --- Baca .env ringkas (tanpa dependency dotenv) ---
 function loadEnv() {
     try {
         const raw = fs.readFileSync(path.join(ROOT, '.env'), 'utf8');
@@ -53,12 +52,6 @@ function loadEnv() {
     } catch (e) { /* tiada fail .env — ok, login manual */ }
 }
 
-// --- Ekstrak jumlah pemohon dari teks halaman ---
-// Corak blok di portal (per syarikat):
-//   BIG CARING GROUP BHD
-//   Jumlah Tawaran Saham\t922,730,000
-//   Jumlah Pelabur Mohon Saham\t653
-//   SAHAM DITUTUP 6 HARI LAGI
 function findApplicants(text) {
     const out = {};
     TARGETS.forEach(t => { out[t.id] = null; });
@@ -69,93 +62,123 @@ function findApplicants(text) {
         const lower = lines[i].toLowerCase();
         const t = TARGETS.find(x => x.names.some(n => lower.includes(n)));
         if (!t) continue;
-        // Cari "Jumlah Pelabur Mohon Saham <nombor>" dalam 15 baris selepas nama syarikat
         for (let j = i + 1; j < Math.min(i + 15, lines.length); j++) {
             const m = lines[j].match(/jumlah\s*pelabur\s*mohon\s*saham\s*[:=]?\s*([\d,]+)/i);
             if (m) {
                 out[t.id] = parseInt(m[1].replace(/,/g, ''), 10);
                 break;
             }
-            // Berhenti scan jika terserempak nama syarikat lain
             if (TARGETS.some(x => x !== t && x.names.some(n => lines[j].toLowerCase().includes(n)))) break;
         }
     }
     return out;
 }
 
-// --- Kemas kini data files + overrides (sama corak seperti update-miti-applicants.js) ---
+// Kemas kini data files + overrides HANYA jika ada nilai yang berubah
 function applyApplicants(applicants) {
     const DATA_JSON = path.join(ROOT, 'data.json');
-    const DATA_JS = path.join(ROOT, 'data.js');
-    const DATA_EXPORT_JS = path.join(ROOT, 'data_export.js');
     const OVERRIDES_JSON = path.join(ROOT, 'overrides.json');
     const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 
     const data = read(DATA_JSON);
-    let updated = 0;
+    const changes = [];
     TARGETS.forEach(t => {
         const v = applicants[t.id];
         if (v == null) return;
         const ipo = data.find(x => x.id === t.id);
-        if (ipo) { ipo.mitiApplicants = v; updated++; }
+        if (!ipo) return;
+        if (ipo.mitiApplicants !== v) {
+            ipo.mitiApplicants = v;
+            changes.push({ id: t.id, label: t.id, value: v });
+        }
     });
-    if (updated === 0) { console.log('⚠️  Tiada nilai baharu untuk dikemas kini.'); return; }
+
+    if (changes.length === 0) {
+        console.log('ℹ️  Jumlah pemohon masih sama — tiada perubahan.');
+        return;
+    }
 
     fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
     const js = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
-    fs.writeFileSync(DATA_JS, js, 'utf8');
-    fs.writeFileSync(DATA_EXPORT_JS, js, 'utf8');
+    fs.writeFileSync(path.join(ROOT, 'data.js'), js, 'utf8');
+    fs.writeFileSync(path.join(ROOT, 'data_export.js'), js, 'utf8');
 
     const overrides = read(OVERRIDES_JSON);
-    TARGETS.forEach(t => {
-        if (applicants[t.id] == null) return;
-        if (!overrides[t.id]) overrides[t.id] = {};
-        overrides[t.id].mitiApplicants = applicants[t.id];
+    changes.forEach(c => {
+        if (!overrides[c.id]) overrides[c.id] = {};
+        overrides[c.id].mitiApplicants = c.value;
     });
     fs.writeFileSync(OVERRIDES_JSON, JSON.stringify(overrides, null, 4), 'utf8');
 
-    console.log(`✅ Data dikemas kini (${updated} IPO): data.json, data.js, data_export.js, overrides.json`);
+    console.log(`✅ Jumlah pemohon dikemas kini (${changes.length} IPO) → data.json, data.js, data_export.js, overrides.json`);
 }
 
-async function main() {
-    loadEnv();
-    const headed = process.argv.includes('--headed');
-    const dumpOnly = process.argv.includes('--dump');
-
-    console.log('🌐 Membuka portal SahamOnline MITI...');
-    const browser = await puppeteer.launch({
-        headless: headed || dumpOnly ? false : true,
+async function launch(headlessMode) {
+    return puppeteer.launch({
+        headless: headlessMode,
         userDataDir: PROFILE,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
         defaultViewport: { width: 1280, height: 900 },
     });
-    const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+}
 
+async function gotoPortal(page) {
     try {
         await page.goto(PORTAL, { waitUntil: 'networkidle2', timeout: NAV_TIMEOUT });
     } catch (e) {
         console.log('⚠️  goto warning:', e.message);
     }
+}
 
-    let text = await page.evaluate(() => document.body ? document.body.innerText : '');
-    let applicants = findApplicants(text);
+async function pageText(page) {
+    return page.evaluate(() => document.body ? document.body.innerText : '');
+}
+
+async function main() {
+    loadEnv();
+    const headed = process.argv.includes('--headed');
+    const quiet = process.argv.includes('--quiet');
+    const dumpOnly = process.argv.includes('--dump');
 
     if (dumpOnly) {
+        console.log('🌐 Membuka portal (headed) untuk dump...');
+        const browser = await launch(false);
+        const page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+        await gotoPortal(page);
+        const text = await pageText(page);
         fs.writeFileSync(DUMP, text, 'utf8');
         console.log(`📄 Teks halaman disimpan ke ${DUMP}`);
         await browser.close();
         return;
     }
 
+    // Percubaan headless dahulu
+    console.log('🌐 Membuka portal SahamOnline MITI (headless)...');
+    let browser = await launch(true);
+    let page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+    await gotoPortal(page);
+
+    let text = await pageText(page);
+    let applicants = findApplicants(text);
     const needLogin = Object.values(applicants).every(v => v === null);
 
     if (needLogin) {
+        await browser.close();
+        if (quiet) {
+            console.log('⏭️  Sesi MITI tiada/expired — skip (run manual sekali untuk login + CAPTCHA).');
+            return;
+        }
         console.log('🔐 Sesi tiada/expired — browser DIBUKA untuk log masuk.');
         console.log('   Sila log masuk + selesaikan CAPTCHA secara manual dalam browser.');
         console.log(`   (Masa menunggu maksimum: ${LOGIN_WAIT_MS / 60000} minit)`);
 
-        // Auto-isi kredential jika ada dalam .env (CAPTCHA tetap manual)
+        browser = await launch(headed ? true : false);
+        page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36');
+        await gotoPortal(page);
+
         if (process.env.MITI_USERNAME && process.env.MITI_PASSWORD) {
             try {
                 const userSel = 'input[type="text"], input[name*="user" i], input[name*="ic" i], input[name*="kp" i], input[id*="user" i], input[id*="ic" i], input[id*="username" i]';
@@ -170,17 +193,14 @@ async function main() {
             } catch (e) { /* biarkan user isi manual */ }
         }
 
-        // Tunggu sehingga berjaya (halaman papar jumlah pemohon atau menu dalaman)
         const start = Date.now();
         while (Date.now() - start < LOGIN_WAIT_MS) {
             await new Promise(r => setTimeout(r, 3000));
             try {
-                text = await page.evaluate(() => document.body ? document.body.innerText : '');
+                text = await pageText(page);
                 applicants = findApplicants(text);
                 if (Object.values(applicants).some(v => v !== null)) break;
 
-                // Dah log masuk (menu dalaman nampak) tapi tawaran belum dipaparkan —
-                // cuba klik pautan "Maklumat Saham"
                 if (/log\s*keluar|logout|mysaham/i.test(text)) {
                     const clicked = await page.evaluate(() => {
                         const els = [...document.querySelectorAll('a, button, li, span')];
@@ -190,7 +210,7 @@ async function main() {
                     });
                     if (clicked) {
                         await new Promise(r => setTimeout(r, 3000));
-                        text = await page.evaluate(() => document.body ? document.body.innerText : '');
+                        text = await pageText(page);
                         applicants = findApplicants(text);
                     }
                 }
@@ -210,7 +230,6 @@ async function main() {
 
     applyApplicants(applicants);
 
-    // Simpan teks mentah untuk rujukan/debug
     fs.writeFileSync(DUMP, text, 'utf8');
 
     await browser.close();

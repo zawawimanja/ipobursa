@@ -6,3 +6,7 @@ node_modules/
 .env*.local
 .freebuff/
 cloned_jerungbursa/
+
+# MITI scrape session & dumps (mengandungi cookies/sesi peribadi — JANGAN commit)
+scratch/.miti-profile/
+scratch/miti_portal_dump.txt
