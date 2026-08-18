@@ -661,15 +661,29 @@ function autoPromoteIPOs(finalData) {
             ipo.status = 'Listed';
         }
 
-        // Stage 2: MITI phase — promote to Stage 3 when MITI close date has passed
+        // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
         if (ipo.stage === 2) {
             const closeStr = ipo.mitiCloseDate || ipo.closingDate;
             if (closeStr) {
                 const closeDate = parseFlexDate(closeStr);
                 if (closeDate && closeDate < now) {
-                    ipo.stage = 3;
-                    ipo.status = 'Application Open';
+                    if (ipo.closingDate && parseFlexDate(ipo.closingDate)) {
+                        ipo.stage = 3;
+                        ipo.status = 'Application Open';
+                    } else {
+                        ipo.stage = 6;
+                        ipo.status = 'Menunggu Keputusan MITI';
+                    }
                 }
+            }
+        }
+
+        // Stage 6 (Post-MITI): naik ke Public/Pre-Listing bila permohonan awam dibuka
+        if (ipo.stage === 6 && ipo.closingDate) {
+            const closeDate = parseFlexDate(ipo.closingDate);
+            if (closeDate) {
+                ipo.stage = closeDate >= now ? 3 : 4;
+                ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
             }
         }
 
@@ -1636,6 +1650,11 @@ function createIPOCard(ipo, index = 0) {
         `;
     } else if (ipo.stage === 5) {
         dateDisplay = ipo.listingDate || ipo.year || 'Listed';
+    } else if (ipo.stage === 6) {
+        dateDisplay = `
+            <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
+            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⏳ Menunggu Keputusan</div>
+        `;
     }
 
     let priceDisplay = ipo.price > 0 ? 'RM ' + ipo.price.toFixed(2) : 'TBA';
@@ -1688,6 +1707,8 @@ function createIPOCard(ipo, index = 0) {
     } else if (ipo.stage === 1) {
         actionBtn = detailsBtn;
     } else if (ipo.stage === 4) {
+        actionBtn = detailsBtn;
+    } else if (ipo.stage === 6) {
         actionBtn = detailsBtn;
     } else {
         actionBtn = `

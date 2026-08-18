@@ -125,9 +125,9 @@ async function scrapeUpcomingIPOs(existingData) {
         let targetStatus = 'Application Open';
 
         if (price === 0 || !closingDate || closingDate.toLowerCase().includes('tba')) {
-            // It has no pricing or active closing dates yet - stay in Draft or MITI stage!
-            targetStage = (existing && existing.stage && existing.stage < 3) ? existing.stage : 1;
-            targetStatus = targetStage === 2 ? 'MITI Allocation Phase' : 'Draft / Exposure Phase';
+            // It has no pricing or active closing dates yet - stay in Draft/MITI/Post-MITI stage!
+            targetStage = (existing && existing.stage && (existing.stage <= 2 || existing.stage === 6)) ? existing.stage : 1;
+            targetStatus = targetStage === 2 ? 'MITI Allocation Phase' : (targetStage === 6 ? 'Menunggu Keputusan MITI' : 'Draft / Exposure Phase');
         }
 
         if (existing) {
@@ -502,17 +502,33 @@ function autoPromoteIPOs(finalData) {
             console.log(`  [Auto-Promote] ${ipo.companyName} (Status Listed or Year < 2026 -> Stage 5)`);
         }
 
-        // Stage 2: MITI phase — promote to Stage 3 when MITI close date has passed
+        // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
         if (ipo.stage === 2) {
             const closeStr = ipo.mitiCloseDate || ipo.closingDate;
             if (closeStr) {
                 const closeDate = parseFlexDate(closeStr);
                 if (closeDate && closeDate < now) {
-                    ipo.stage = 3;
-                    ipo.status = 'Application Open';
+                    if (ipo.closingDate && parseFlexDate(ipo.closingDate)) {
+                        ipo.stage = 3;
+                        ipo.status = 'Application Open';
+                    } else {
+                        ipo.stage = 6;
+                        ipo.status = 'Menunggu Keputusan MITI';
+                    }
                     promotedCount++;
-                    console.log(`  [Auto-Promote] ${ipo.companyName} (MITI close ${closeStr} passed -> Stage 3)`);
+                    console.log(`  [Auto-Promote] ${ipo.companyName} (MITI close ${closeStr} passed -> ${ipo.stage === 6 ? 'Stage 6 Post-MITI' : 'Stage 3 Public'})`);
                 }
+            }
+        }
+
+        // Stage 6 (Post-MITI): naik ke Public/Pre-Listing bila permohonan awam dibuka
+        if (ipo.stage === 6 && ipo.closingDate) {
+            const closeDate = parseFlexDate(ipo.closingDate);
+            if (closeDate) {
+                ipo.stage = closeDate >= now ? 3 : 4;
+                ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
+                promotedCount++;
+                console.log(`  [Auto-Promote] ${ipo.companyName} (Public app ${ipo.closingDate} -> Stage ${ipo.stage})`);
             }
         }
 
@@ -692,7 +708,7 @@ async function autoEnrichFinancials(existingData) {
     const targets = existingData.filter(ipo => 
         ipo.shariah === true && 
         (ipo.year === 2026 || ipo.year === 2027 || !ipo.year) &&
-        (ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5) &&
+        (ipo.stage === 2 || ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5 || ipo.stage === 6) &&
         (!ipo.headers || ipo.headers.length === 0)
     );
 
