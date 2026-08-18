@@ -6,17 +6,23 @@
  * dengan SESSION PERSISTENCE untuk tembus Cloudflare (punca 403 yang
  * membuatkan sync-isaham.js gagal senyap):
  *
- *   - Kali pertama (tanpa --quiet): browser BUKA (headed), anda selesaikan
- *     challenge Cloudflare SEKALI. Sesi disimpan dalam scratch/.isaham-profile.
- *   - Kali seterusnya: run headless, muat turun HTML halaman IPO/MITI/Stats,
- *     dan simpan ke scratch/isaham-cache/ untuk dibaca sync-isaham.js.
- *   - Mod --quiet (digunakan auto_runner.js): headless; jika sesi tiada/expired,
- *     keluar senyap tanpa buka browser (perlu run manual sekali).
+ * ALIRAN:
+ *   1) HEADLESS dahulu (guna sesi tersimpan di scratch/.isaham-profile):
+ *      poll sehingga 45s setiap halaman — JS challenge selalunya auto-solve.
+ *      Jika berjaya → cache dikemas kini, selesai.
+ *   2) Jika gagal & TIDAK --quiet → browser DIBUKA (headed). Anda selesaikan
+ *      challenge Cloudflare SEKALI secara manual. Sebaik sesi sah, SEMUA
+ *      halaman yang gagal terus dimuat turun dalam sesi yang sama.
+ *   3) VERIFIKASI headless selepas sesi disimpan — pastikan run seterusnya
+ *      (auto_runner / sync-isaham) akan terus headless.
+ *   4) Mod --quiet (digunakan auto_runner.js & sync-isaham.js): headless
+ *      sahaja; jika sesi tiada/expired, keluar senyap TANPA buka browser
+ *      (perlu run manual sekali: node scratch/scrape-isaham.js).
  *
  * CARA GUNA:
- *   node scratch/scrape-isaham.js               (run biasa / login jika perlu)
+ *   node scratch/scrape-isaham.js               (run biasa / solve challenge jika perlu)
  *   node scratch/scrape-isaham.js --quiet       (untuk jadual auto)
- *   node scratch/scrape-isaham.js --headed      (paksa browser nampak)
+ *   node scratch/scrape-isaham.js --headed      (paksa browser nampak terus)
  *   node scratch/scrape-isaham.js --fresh       (paksa muat turun walaupun cache baru)
  */
 
@@ -27,10 +33,11 @@ const path = require('path');
 const PROFILE = path.join(__dirname, '.isaham-profile');
 const CACHE_DIR = path.join(__dirname, 'isaham-cache');
 const NAV_TIMEOUT = 20000;
-const CHALLENGE_WAIT_MS = 300000; // 5 minit untuk selesaikan challenge manual
+const HEADLESS_POLL_MS = 45000;    // headless: tempoh tunggu auto-solve (JS challenge)
+const CHALLENGE_WAIT_MS = 300000;  // headed: 5 minit untuk selesaikan challenge manual
+const FAST_WAIT_MS = 90000;        // headed: selepas sesi sudah sah, tunggu singkat
+const STUCK_RELOAD_MS = 30000;     // re-goto hanya jika tersekat TANPA frame Turnstile
 const FRESH_MS = 24 * 60 * 60 * 1000; // cache dianggap segar dalam 24 jam
-
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
 const PAGES = [
     {
@@ -73,6 +80,11 @@ function isFresh(key) {
     }
 }
 
+function saveCache(key, html) {
+    fs.mkdirSync(CACHE_DIR, { recursive: true });
+    fs.writeFileSync(cachePath(key), html, 'utf8');
+}
+
 // Stealth: sembunyi tanda automasi supaya Cloudflare Turnstile boleh selesai.
 // Guna Chrome SEBENAR (channel: 'chrome') — fingerprint jauh lebih "manusia"
 // berbanding Chromium bundled, dan challenge selalunya auto-pass selepas itu.
@@ -98,6 +110,18 @@ async function launch(headlessMode) {
     }
 }
 
+// Padankan UA dengan versi Chrome sebenar — Cloudflare detect ketidakpadanan
+// antara navigator.userAgent dan versi sebenar sebagai tanda bot.
+async function matchingUA(browser) {
+    try {
+        const m = (await browser.version()).match(/(\d+\.\d+\.\d+\.\d+)/);
+        if (m) {
+            return `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${m[1]} Safari/537.36`;
+        }
+    } catch (e) { /* fallback di bawah */ }
+    return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36';
+}
+
 // Patch navigator.webdriver & ciri automasi lain pada setiap halaman baru
 async function stealthInit(page) {
     await page.evaluateOnNewDocument(() => {
@@ -120,29 +144,57 @@ async function pageText(page) {
     return page.evaluate(() => document.body ? document.body.innerText : '');
 }
 
+function hasTurnstile(page) {
+    try {
+        return page.frames().some(f => f.url().includes('challenges.cloudflare.com'));
+    } catch (e) {
+        return false;
+    }
+}
+
 async function gotoPage(page, url) {
     try {
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
     } catch (e) {
-        // Timeout biasa pada halaman challenge — biarkan, poll isOk akan tentukan.
+        // Timeout biasa pada halaman challenge — poll isOk akan tentukan hasil.
     }
 }
 
-// Muat turun satu halaman dan simpan HTML jika kandungan sah.
-async function fetchAndSave(page, spec) {
-    await gotoPage(page, spec.url);
-    let ok = false;
-    try {
-        ok = await spec.isOk(page);
-    } catch (e) {
-        // Detached frame biasa berlaku bila Cloudflare redirect — cuba semula selepas jeda
-        await new Promise(r => setTimeout(r, 4000));
-        try { ok = await spec.isOk(page); } catch (e2) { ok = false; }
+// Poll sehingga kandungan sah atau timeout.
+// PENTING: JANGAN re-goto semasa frame Turnstile kelihatan — restart challenge
+// yang sedang diselesaikan (punca lama: re-goto setiap 8s membuatkan solve tidak
+// pernah selesai). Re-goto hanya jika halaman tersekat TANPA frame tersebut.
+async function waitForContent(page, spec, timeoutMs) {
+    const start = Date.now();
+    let lastReload = start;
+    while (Date.now() - start < timeoutMs) {
+        try {
+            if (await spec.isOk(page)) return true;
+        } catch (e) {
+            // Detached frame — halaman sedang redirect selepas challenge diselesaikan
+        }
+        if (Date.now() - lastReload > STUCK_RELOAD_MS && !hasTurnstile(page)) {
+            await gotoPage(page, spec.url);
+            lastReload = Date.now();
+        }
+        await new Promise(r => setTimeout(r, 2000));
     }
+    return false;
+}
+
+// Muat turun satu halaman dan simpan HTML jika kandungan sah.
+async function fetchAndSave(page, spec, timeoutMs) {
+    await gotoPage(page, spec.url);
+    const ok = await waitForContent(page, spec, timeoutMs);
     if (ok) {
-        const html = await page.content();
-        fs.writeFileSync(cachePath(spec.key), html, 'utf8');
-        console.log(`  ✓ ${spec.label} — disimpan (${(html.length / 1024).toFixed(0)} KB)`);
+        try {
+            const html = await page.content();
+            saveCache(spec.key, html);
+            console.log(`  ✓ ${spec.label} — disimpan (${(html.length / 1024).toFixed(0)} KB)`);
+        } catch (e) {
+            console.log(`  ✗ ${spec.label} — halaman sah tetapi HTML gagal dibaca: ${e.message}`);
+            return false;
+        }
     } else {
         const t = (await pageText(page)).slice(0, 120).replace(/\s+/g, ' ');
         console.log(`  ✗ ${spec.label} — kandungan tidak sah (challenge Cloudflare?)`);
@@ -151,59 +203,66 @@ async function fetchAndSave(page, spec) {
     return ok;
 }
 
-// Tunggu sehingga challenge diselesaikan (guna untuk run headed manual).
-async function waitForChallenge(page, spec) {
-    const start = Date.now();
-    while (Date.now() - start < CHALLENGE_WAIT_MS) {
-        await new Promise(r => setTimeout(r, 2000));
-        try {
-            if (await spec.isOk(page)) return true;
-        } catch (e) {
-            // Detached frame — halaman sedang redirect selepas challenge diselesaikan
+// Status cookie cf_clearance — untuk maklumkankan berapa lama sesi bertahan.
+async function cookieSummary(page) {
+    try {
+        const client = await page.createCDPSession();
+        await client.send('Network.enable');
+        const { cookies } = await client.send('Network.getAllCookies');
+        const cf = cookies.filter(c => c.domain.includes('isaham.my') && c.name === 'cf_clearance');
+        if (cf.length) {
+            const exp = cf[0].expires
+                ? new Date(cf[0].expires * 1000).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })
+                : '(sesi sahaja)';
+            return `cf_clearance sah sehingga ${exp}`;
         }
-        // Halaman challenge kadang auto-redirect selepas beberapa saat
-        if (Date.now() - start > 8000) {
-            await gotoPage(page, spec.url);
-        }
+        return 'cf_clearance belum wujud (sila solve challenge sekali)';
+    } catch (e) {
+        return '(pemeriksaan cookie gagal)';
     }
-    return false;
 }
 
+// ---------------------------------------------------------------------------
+// ALIRAN UTAMA
+// ---------------------------------------------------------------------------
 async function main() {
-    const headed = process.argv.includes('--headed');
+    const headedForce = process.argv.includes('--headed');
     const quiet = process.argv.includes('--quiet');
     const force = process.argv.includes('--fresh');
 
     fs.mkdirSync(CACHE_DIR, { recursive: true });
 
-    // Mod --fresh: muat turun semua walaupun cache segar.
     const targets = PAGES.filter(p => force || !isFresh(p.key));
-    if (targets.length === 0) {
+    if (targets.length === 0 && !headedForce) {
         console.log('ℹ️  Cache isaham masih segar (< 24 jam) — tiada muat turun diperlukan.');
         console.log('   (Guna --fresh untuk paksa muat turun semula.)');
         return;
     }
-
     console.log('🌐 Membuka isaham.my (Puppeteer)...');
 
-    // --- Percubaan headless dahulu (guna sesi tersimpan) ---
-    let browser = await launch(true);
-    let page = await browser.newPage();
-    await stealthInit(page);
-    await page.setUserAgent(UA);
+    let failed = [...targets];
 
-    const failed = [];
-    for (const spec of targets) {
-        console.log(`\n📄 ${spec.label} — ${spec.url}`);
-        const ok = await fetchAndSave(page, spec);
-        if (!ok) failed.push(spec);
-    }
+    // --- 1) PASS HEADLESS (guna sesi tersimpan) ---
+    if (!headedForce) {
+        console.log('\n🔍 Pass 1: headless (sesi tersimpan)...');
+        const browser = await launch(true);
+        const page = await browser.newPage();
+        await stealthInit(page);
+        await page.setUserAgent(await matchingUA(browser));
 
-    await browser.close();
+        failed = [];
+        for (const spec of targets) {
+            console.log(`\n📄 ${spec.label} — ${spec.url}`);
+            const ok = await fetchAndSave(page, spec, HEADLESS_POLL_MS);
+            if (!ok) failed.push(spec);
+        }
+        console.log(`\n🍪 ${await cookieSummary(page)}`);
+        await browser.close();
 
-    if (failed.length === 0) {
-        console.log('\n✅ Semua halaman dimuat turun (headless, sesi sah).');
-        return;
+        if (failed.length === 0) {
+            console.log('\n✅ Semua halaman dimuat turun (headless, sesi sah).');
+            return;
+        }
     }
 
     // --- Sesi tidak sah / belum ada ---
@@ -213,30 +272,70 @@ async function main() {
         return;
     }
 
-    console.log('\n🔐 Sesi Cloudflare tiada/expired — browser DIBUKA.');
+    // --- 2) PASS HEADED: solve challenge SEKALI secara manual ---
+    console.log(`\n🔐 Sesi Cloudflare tiada/expired — browser DIBUKA (headed).`);
     console.log('   Sila selesaikan challenge Cloudflare secara manual dalam browser.');
-    console.log(`   (Masa menunggu maksimum: ${CHALLENGE_WAIT_MS / 60000} minit)`);
+    console.log(`   (Masa menunggu maksimum: ${CHALLENGE_WAIT_MS / 60000} minit setiap halaman)`);
 
-    browser = await launch(headed ? true : false);
-    page = await browser.newPage();
+    const browser = await launch(false); // <-- SELALU headed di sini (headless: false)
+    const page = await browser.newPage();
     await stealthInit(page);
-    await page.setUserAgent(UA);
+    await page.setUserAgent(await matchingUA(browser));
 
+    const stillFailed = [];
+    let solvedOnce = false;
     for (const spec of failed) {
         console.log(`\n📄 ${spec.label} — ${spec.url}`);
         await gotoPage(page, spec.url);
-        const solved = await waitForChallenge(page, spec);
-        if (solved) {
-            const html = await page.content();
-            fs.writeFileSync(cachePath(spec.key), html, 'utf8');
-            console.log(`  ✓ ${spec.label} — disimpan (${(html.length / 1024).toFixed(0)} KB)`);
+        const waitMs = solvedOnce ? FAST_WAIT_MS : CHALLENGE_WAIT_MS;
+        const ok = await waitForContent(page, spec, waitMs);
+        if (ok) {
+            try {
+                const html = await page.content();
+                saveCache(spec.key, html);
+                console.log(`  ✓ ${spec.label} — disimpan (${(html.length / 1024).toFixed(0)} KB)`);
+                solvedOnce = true;
+                if (failed.length > 1) {
+                    console.log('  ✔ Sesi kini sah — halaman lain akan muat turun lebih cepat.');
+                }
+            } catch (e) {
+                console.log(`  ✗ ${spec.label} — HTML gagal dibaca: ${e.message}`);
+                stillFailed.push(spec);
+            }
         } else {
             console.error(`  ❌ ${spec.label} — challenge belum diselesaikan.`);
+            stillFailed.push(spec);
+        }
+    }
+    console.log(`\n🍪 ${await cookieSummary(page)}`);
+    await browser.close();
+
+    // --- 3) VERIFIKASI HEADLESS: sesi tersimpan berfungsi untuk run seterusnya? ---
+    if (solvedOnce && stillFailed.length > 0) {
+        console.log('\n🔍 Pass 3: verifikasi headless selepas solve (pastikan run auto berfungsi)...');
+        const vb = await launch(true);
+        const vp = await vb.newPage();
+        await stealthInit(vp);
+        await vp.setUserAgent(await matchingUA(vb));
+
+        const vFailed = [];
+        for (const spec of stillFailed) {
+            console.log(`\n📄 ${spec.label} — ${spec.url}`);
+            const ok = await fetchAndSave(vp, spec, HEADLESS_POLL_MS);
+            if (!ok) vFailed.push(spec);
+        }
+        console.log(`\n🍪 ${await cookieSummary(vp)}`);
+        await vb.close();
+        if (vFailed.length === 0) {
+            console.log('\n✅ Verifikasi headless lulus — run seterusnya akan auto (headless).');
+        } else {
+            console.log('\n⚠️  Verifikasi headless masih gagal — sesi mungkin berjangka pendek.');
+            console.log('   Selagi cache segar, sync-isaham tetap guna data. Sila run manual semula esok jika perlu.');
         }
     }
 
-    await browser.close();
     console.log('\n✅ Selesai. Sesi disimpan — run seterusnya akan headless & auto.');
+    console.log('   (Jadual auto: auto_runner.js setiap hari 08:45, 13:00, 17:30)');
 }
 
 main().catch(e => { console.error('Fatal:', e); process.exit(1); });

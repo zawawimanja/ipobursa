@@ -102,8 +102,9 @@ async function fetchPage(url) {
 //   1) Cache tempatan (scratch/isaham-cache/) jika SEGAR (< 26 jam) — paling
 //      boleh dipercayai kerana ia dimuat turun melalui sesi Cloudflare yang sah.
 //   2) axios terus — isaham kadang buka semula tanpa challenge.
-//   3) Jalankan scratch/scrape-isaham.js --quiet (Puppeteer headless dengan sesi
-//      tersimpan) untuk refresh cache, kemudian baca semula.
+//   3) Jalankan scratch/scrape-isaham.js --quiet --fresh (Puppeteer headless,
+//      paksa muat turun walaupun cache 24 jam scraper masih segar) untuk refresh
+//      cache, kemudian baca semula.
 //   4) Cache STALE sebagai pilihan terakhir (lebih baik dari tiada data).
 // ---------------------------------------------------------------------------
 const ISAHAM_CACHE_DIR = path.join(__dirname, 'scratch', 'isaham-cache');
@@ -148,9 +149,9 @@ function isValidIsahamHtml(key, html) {
 function runIsahamScraperQuiet() {
     const { execSync } = require('child_process');
     try {
-        execSync('node scratch/scrape-isaham.js --quiet', {
+        execSync('node scratch/scrape-isaham.js --quiet --fresh', {
             cwd: __dirname,
-            timeout: 90000,
+            timeout: 260000,
             stdio: 'inherit'
         });
         return true;
@@ -160,10 +161,14 @@ function runIsahamScraperQuiet() {
     }
 }
 
+// Jejak sama ada mana-mana halaman iSaham berjaya dimuat turun (network/live).
+let isahamNetworkOk = false;
+
 async function fetchListPage(key, url) {
     // 1) Cache segar dahulu
     const cached = readIsahamCache(key);
     if (cached && isahamCacheFresh(key) && isValidIsahamHtml(key, cached)) {
+        isahamNetworkOk = true;
         console.log(`[iSaham] ${key}: guna cache segar (${new Date(fs.statSync(isahamCachePath(key)).mtimeMs).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })})`);
         return cheerio.load(cached);
     }
@@ -173,6 +178,7 @@ async function fetchListPage(key, url) {
         const response = await axios.get(url, { headers: HEADERS });
         if (isValidIsahamHtml(key, response.data)) {
             writeIsahamCache(key, response.data);
+            isahamNetworkOk = true;
             console.log(`[iSaham] ${key}: axios berjaya — cache dikemas kini.`);
             return cheerio.load(response.data);
         }
@@ -186,6 +192,7 @@ async function fetchListPage(key, url) {
     runIsahamScraperQuiet();
     const refreshed = readIsahamCache(key);
     if (refreshed && isValidIsahamHtml(key, refreshed)) {
+        isahamNetworkOk = true;
         console.log(`[iSaham] ${key}: cache dimuat turun via Puppeteer session.`);
         return cheerio.load(refreshed);
     }
@@ -1097,6 +1104,15 @@ async function main() {
     console.log(`\n--- Sync Complete ---`);
     console.log(`Total IPOs: ${existingData.length} (Added ${existingData.length - initialCount} new)`);
     console.log(`Files updated: data.json, data.js, sync-status.js`);
+
+    if (!isahamNetworkOk) {
+        console.log(`\n🔴 [iSaham] DEGRADED — tiada halaman iSaham dimuat turun untuk run ini (403/Cloudflare).`);
+        console.log(`   Data tarikh bergantung pada cache — jika ia tidak dikemas kini lebih 26 jam, tarikh akan jadi stale/hilang.`);
+        console.log(`   PENYELESAIAN: jalankan sekali:  node scratch/scrape-isaham.js`);
+        console.log(`   (browser terbuka → selesaikan challenge Cloudflare sekali → sesi disimpan → auto-sync harian terus berfungsi.)`);
+    } else {
+        console.log(`[iSaham] OK — halaman iSaham dimuat turun/dibaca seperti biasa.`);
+    }
 
     // Auto git push to update live dashboard
     await gitPush();

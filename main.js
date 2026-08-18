@@ -1275,18 +1275,18 @@ function toggleCdStrip(key) {
 }
 window.toggleCdStrip = toggleCdStrip;
 
-// Countdown format: hari, jam, minit, saat (per-second live updates)
+// Countdown format: days, hrs, min, sec (per-second live updates)
 function formatCountdown(diff, baseColor) {
-    if (diff <= 0) return { text: '0 saat', color: '#f87171' };
+    if (diff <= 0) return { text: '0 sec', color: '#f87171' };
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins = Math.floor((diff % 3600000) / 60000);
     const secs = Math.floor((diff % 60000) / 1000);
     let text, color = baseColor || '#10b981';
-    if (days > 0) { text = `${days} hari ${hours} jam ${mins} minit ${secs} saat`; }
-    else if (hours > 0) { text = `${hours} jam ${mins} minit ${secs} saat`; color = '#fbbf24'; }
-    else if (mins > 0) { text = `${mins} minit ${secs} saat`; color = '#f87171'; }
-    else { text = `${secs} saat`; color = '#f87171'; }
+    if (days > 0) { text = `${days}d ${hours}h ${mins}m ${secs}s`; }
+    else if (hours > 0) { text = `${hours}h ${mins}m ${secs}s`; color = '#fbbf24'; }
+    else if (mins > 0) { text = `${mins}m ${secs}s`; color = '#f87171'; }
+    else { text = `${secs}s`; color = '#f87171'; }
     return { text, color, base: baseColor };
 }
 
@@ -1340,11 +1340,11 @@ function renderMitiCountdownStrip() {
         <div class="glass-card" style="padding: 0.9rem 1.1rem; border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(15, 23, 42, 0.65);">
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
                 <span style="font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">
-                    <i data-lucide="timer" style="width: 16px; height: 16px;"></i> MITI Countdown — Peruntukan Saham Masih Dibuka
+                    <i data-lucide="timer" style="width: 16px; height: 16px;"></i> MITI Countdown — Bumi Allocation Still Open
                 </span>
                 <div style="display: flex; align-items: center; gap: 0.6rem;">
-                    <a href="miti-journal.html" style="font-size: 0.75rem; color: #a5b4fc; text-decoration: none; font-weight: 600;">Jurnal MITI penuh →</a>
-                    <button onclick="toggleCdStrip('mitiCd')" title="${collapsed ? 'Kembangkan' : 'Tutup'}" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #34d399; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <a href="miti-journal.html" style="font-size: 0.75rem; color: #a5b4fc; text-decoration: none; font-weight: 600;">Full MITI Journal →</a>
+                    <button onclick="toggleCdStrip('mitiCd')" title="${collapsed ? 'Expand' : 'Collapse'}" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #34d399; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
                         <i data-lucide="${collapsed ? 'chevron-down' : 'chevron-up'}" style="width: 16px; height: 16px;"></i>
                     </button>
                 </div>
@@ -1364,9 +1364,9 @@ function renderMitiCountdownStrip() {
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
                             </div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Gred ${ipo.predictedGrade || 'B'}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Grade ${ipo.predictedGrade || 'B'}</div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">sebelum tutup · ${ipo.mitiCloseDate}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">closes · ${ipo.mitiCloseDate}</div>
                             <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span>🎯 ${offerStr}</span>
                                 <span>👥 ${appsStr}</span>
@@ -1407,9 +1407,9 @@ function renderPublicCountdownStrip() {
         <div class="glass-card" style="padding: 0.9rem 1.1rem; border: 1px solid rgba(56, 189, 248, 0.35); background: rgba(15, 23, 42, 0.65);">
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
                 <span style="font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">
-                    <i data-lucide="hourglass" style="width: 16px; height: 16px;"></i> IPO Countdown — Permohonan Awam Masih Dibuka
+                    <i data-lucide="hourglass" style="width: 16px; height: 16px;"></i> IPO Countdown — Public Application Still Open
                 </span>
-                <button onclick="toggleCdStrip('publicCd')" title="${collapsed ? 'Kembangkan' : 'Tutup'}" style="background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                <button onclick="toggleCdStrip('publicCd')" title="${collapsed ? 'Expand' : 'Collapse'}" style="background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
                     <i data-lucide="${collapsed ? 'chevron-down' : 'chevron-up'}" style="width: 16px; height: 16px;"></i>
                 </button>
             </div>
@@ -1426,9 +1426,9 @@ function renderPublicCountdownStrip() {
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
                             </div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Gred ${ipo.predictedGrade || 'B'}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Grade ${ipo.predictedGrade || 'B'}</div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">sebelum tutup · ${ipo.closingDate}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">closes · ${ipo.closingDate}</div>
                             <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span>💰 ${priceStr}</span>
                                 <span>🏛️ ${ipo.ib || '—'}</span>
@@ -1653,7 +1653,7 @@ function createIPOCard(ipo, index = 0) {
     } else if (ipo.stage === 6) {
         dateDisplay = `
             <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
-            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⏳ Menunggu Keputusan</div>
+            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⏳ Awaiting Decision</div>
         `;
     }
 
