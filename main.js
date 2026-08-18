@@ -785,7 +785,8 @@ function getIpoGrade(ipo) {
     
     // If it's listed (Stage 5) but does not have an open price yet (still listing morning / data pending),
     // treat its stage as Stage 4 (subscription results in, waiting for debut).
-    const effectiveStage = (ipo.stage === 5 && !ipo.openPrice) ? 4 : ipo.stage;
+    // Stage 6 (menunggu keputusan MITI) belum buka subscription awam — gred sebagai pre-OS (Stage 3).
+    const effectiveStage = (ipo.stage === 5 && !ipo.openPrice) ? 4 : (ipo.stage === 6 ? 3 : ipo.stage);
     
     const os = ipo.os || 0;
     const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0; 
