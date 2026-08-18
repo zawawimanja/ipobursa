@@ -29,9 +29,22 @@ function initializeData() {
 
         // MITI countdown strip on the main tracker (live ticking)
         renderMitiCountdownStrip();
+        // Public IPO countdown strip on the main tracker (live ticking)
+        renderPublicCountdownStrip();
         if (!window.__mitiTickerStarted) {
             window.__mitiTickerStarted = true;
-            setInterval(renderMitiCountdownStrip, 60000); // tick every minute
+            setInterval(updateCountdownTexts, 1000); // per-second countdown text
+            setInterval(() => {
+                // Live stage auto-promotion: move IPOs when applications close / listing dates pass
+                const before = ipoData.map(i => i.stage + '|' + i.status).join('~');
+                autoPromoteIPOs(ipoData);
+                const after = ipoData.map(i => i.stage + '|' + i.status).join('~');
+                if (before !== after) {
+                    renderIPOs(currentStage);
+                }
+                renderMitiCountdownStrip();
+                renderPublicCountdownStrip();
+            }, 60000); // full re-render every minute
         }
 
         console.log('Sync Engine: Ready (Manual trigger only)');
@@ -688,6 +701,19 @@ function autoPromoteIPOs(finalData) {
                 }
             }
         }
+
+        // Refresh status for open applications (Stage 3 with a future closing date)
+        if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
+            const cd = parseFlexDate(ipo.closingDate);
+            if (cd && cd >= now) {
+                let openingFuture = false;
+                if (ipo.openingDate) {
+                    const od = new Date(ipo.openingDate);
+                    if (!isNaN(od.getTime())) openingFuture = od > now;
+                }
+                if (!openingFuture) ipo.status = 'Application Open';
+            }
+        }
     });
 }
 
@@ -1226,6 +1252,52 @@ function updateIpoCount(showing, total) {
     if(typeof lucide !== 'undefined') lucide.createIcons();
 }
 
+// Collapse/expand state for the countdown strips (persisted in localStorage)
+function isCdCollapsed(key) { try { return localStorage.getItem(key) === '1'; } catch (e) { return false; } }
+function toggleCdStrip(key) {
+    try { localStorage.setItem(key, isCdCollapsed(key) ? '0' : '1'); } catch (e) {}
+    renderMitiCountdownStrip();
+    renderPublicCountdownStrip();
+}
+window.toggleCdStrip = toggleCdStrip;
+
+// Countdown format: hari, jam, minit, saat (per-second live updates)
+function formatCountdown(diff, baseColor) {
+    if (diff <= 0) return { text: '0 saat', color: '#f87171' };
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    let text, color = baseColor || '#10b981';
+    if (days > 0) { text = `${days} hari ${hours} jam ${mins} minit ${secs} saat`; }
+    else if (hours > 0) { text = `${hours} jam ${mins} minit ${secs} saat`; color = '#fbbf24'; }
+    else if (mins > 0) { text = `${mins} minit ${secs} saat`; color = '#f87171'; }
+    else { text = `${secs} saat`; color = '#f87171'; }
+    return { text, color, base: baseColor };
+}
+
+// Live per-second update of all countdown texts; removes cards when expired
+function updateCountdownTexts() {
+    const now = Date.now();
+    document.querySelectorAll('[data-cd-end]').forEach(el => {
+        const end = parseInt(el.getAttribute('data-cd-end'), 10);
+        const diff = end - now;
+        if (diff <= 0) {
+            const card = el.closest('div[style*="background: rgba(15,23,42,0.55)"]');
+            if (card) card.remove();
+            const strip = el.closest('#miti-countdown-strip, #public-countdown-strip');
+            if (strip && !strip.querySelector('[data-cd-end]')) {
+                strip.style.display = 'none';
+                strip.innerHTML = '';
+            }
+            return;
+        }
+        const cd = formatCountdown(diff, el.getAttribute('data-cd-base') || '#10b981');
+        el.textContent = cd.text;
+        el.style.color = cd.color;
+    });
+}
+
 // MITI Countdown — live ticking strip on the main tracker for open MITI allocations
 function renderMitiCountdownStrip() {
     const container = document.getElementById('miti-countdown-strip');
@@ -1248,6 +1320,7 @@ function renderMitiCountdownStrip() {
         return;
     }
     container.style.display = '';
+    const collapsed = isCdCollapsed('mitiCd');
 
     container.innerHTML = `
         <div class="glass-card" style="padding: 0.9rem 1.1rem; border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(15, 23, 42, 0.65);">
@@ -1255,17 +1328,16 @@ function renderMitiCountdownStrip() {
                 <span style="font-weight: 700; color: #34d399; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">
                     <i data-lucide="timer" style="width: 16px; height: 16px;"></i> MITI Countdown — Peruntukan Saham Masih Dibuka
                 </span>
-                <a href="miti-journal.html" style="font-size: 0.75rem; color: #a5b4fc; text-decoration: none; font-weight: 600;">Jurnal MITI penuh →</a>
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <a href="miti-journal.html" style="font-size: 0.75rem; color: #a5b4fc; text-decoration: none; font-weight: 600;">Jurnal MITI penuh →</a>
+                    <button onclick="toggleCdStrip('mitiCd')" title="${collapsed ? 'Kembangkan' : 'Tutup'}" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #34d399; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                        <i data-lucide="${collapsed ? 'chevron-down' : 'chevron-up'}" style="width: 16px; height: 16px;"></i>
+                    </button>
+                </div>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
+            <div style="display: ${collapsed ? 'none' : 'grid'}; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
                 ${items.map(({ ipo, close }) => {
-                    const diff = close - now;
-                    const days = Math.floor(diff / 86400000);
-                    const hours = Math.floor((diff % 86400000) / 3600000);
-                    let cdText, cdColor = '#10b981';
-                    if (days > 0) cdText = `${days} hari ${hours} jam`;
-                    else if (hours > 0) { cdText = `${hours} jam ${Math.floor((diff % 3600000) / 60000)} minit`; cdColor = '#fbbf24'; }
-                    else { cdText = `${Math.max(0, Math.floor(diff / 60000))} minit`; cdColor = '#f87171'; }
+                    const cd = formatCountdown(close - now, '#10b981');
                     const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
                     const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                     const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
@@ -1279,11 +1351,73 @@ function renderMitiCountdownStrip() {
                                 ${marketBadge}
                             </div>
                             <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Gred ${ipo.predictedGrade || 'B'}</div>
-                            <div style="font-size:1.05rem; font-weight:800; color:${cdColor}; line-height:1.2;">${cdText}</div>
+                            <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
                             <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">sebelum tutup · ${ipo.mitiCloseDate}</div>
                             <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span>🎯 ${offerStr}</span>
                                 <span>👥 ${appsStr}</span>
+                            </div>
+                        </div>`;
+                }).join('')}
+            </div>
+        </div>
+    `;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+// Public IPO Countdown — live ticking strip on the main tracker for open public applications
+function renderPublicCountdownStrip() {
+    const container = document.getElementById('public-countdown-strip');
+    if (!container) return;
+    const now = new Date();
+
+    const items = (ipoData || [])
+        .filter(ipo => ipo.stage === 3 && ipo.closingDate && parseFlexDate(ipo.closingDate))
+        .map(ipo => {
+            const close = parseFlexDate(ipo.closingDate);
+            close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+            return { ipo, close };
+        })
+        .filter(x => x.close >= now)
+        .sort((a, b) => a.close - b.close);
+
+    if (items.length === 0) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+    }
+    container.style.display = '';
+    const collapsed = isCdCollapsed('publicCd');
+
+    container.innerHTML = `
+        <div class="glass-card" style="padding: 0.9rem 1.1rem; border: 1px solid rgba(56, 189, 248, 0.35); background: rgba(15, 23, 42, 0.65);">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
+                <span style="font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <i data-lucide="hourglass" style="width: 16px; height: 16px;"></i> IPO Countdown — Permohonan Awam Masih Dibuka
+                </span>
+                <button onclick="toggleCdStrip('publicCd')" title="${collapsed ? 'Kembangkan' : 'Tutup'}" style="background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <i data-lucide="${collapsed ? 'chevron-down' : 'chevron-up'}" style="width: 16px; height: 16px;"></i>
+                </button>
+            </div>
+            <div style="display: ${collapsed ? 'none' : 'grid'}; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
+                ${items.map(({ ipo, close }) => {
+                    const cd = formatCountdown(close - now, '#38bdf8');
+                    const priceStr = ipo.price ? 'RM ' + ipo.price.toFixed(2) : 'TBA';
+                    const marketBadge = (ipo.market || '').toLowerCase().includes('main')
+                        ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
+                        : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
+                    return `
+                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
+                                <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
+                                ${marketBadge}
+                            </div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Gred ${ipo.predictedGrade || 'B'}</div>
+                            <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
+                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">sebelum tutup · ${ipo.closingDate}</div>
+                            <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
+                                <span>💰 ${priceStr}</span>
+                                <span>🏛️ ${ipo.ib || '—'}</span>
                             </div>
                         </div>`;
                 }).join('')}

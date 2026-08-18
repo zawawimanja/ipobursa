@@ -5,6 +5,11 @@
  * Auto-sync tarikh buka/tutup MITI terus dari halaman AWAM portal SahamOnline
  * (https://sahamonline.miti.gov.my/portal/index) — TIADA login diperlukan.
  *
+ * Padanan dibuat ikut NAMA SYARIKAT terhadap SEMUA entri dalam data — bukan
+ * senarai hardcoded. Jadi bila mana-mana tawaran MITI baharu ditambah oleh
+ * sync isaham (3x sehari), tarikhnya akan terus diselaraskan dari portal rasmi
+ * setiap 30 minit.
+ *
  * Kemas kini data.js/data.json/data_export.js + overrides.json HANYA jika
  * tarikh berubah (elak tulis fail sia-sia setiap kali). Dijalankan oleh
  * auto_runner.js setiap 30 minit waktu bekerja.
@@ -26,16 +31,19 @@ const MONTHS = {
     'november': 'Nov', 'disember': 'Dec'
 };
 
-const TARGETS = [
-    { id: 'big-caring-group-bhd', match: /big caring/i },
-    { id: 'ioipg-malaysia-reit',   match: /ioipg/i },
-    { id: 'mydcd-berhad',          match: /mydcd/i },
-];
-
 function fmt(d, mon, y) {
     const m = MONTHS[String(mon).toLowerCase()];
     if (!m) return null;
     return `${String(d).padStart(2, '0')}-${m}-${y}`;
+}
+
+// Padankan nama syarikat portal dengan entri data (kes-kecil, dua hala)
+function matchEntry(data, companyName) {
+    const name = companyName.toLowerCase().trim();
+    return data.find(x => {
+        const cn = (x.companyName || '').toLowerCase().trim();
+        return cn.includes(name) || name.includes(cn);
+    });
 }
 
 async function main() {
@@ -63,11 +71,9 @@ async function main() {
     let m;
     while ((m = re.exec(text))) {
         const company = m[1].trim();
-        const t = TARGETS.find(x => x.match.test(company));
-        if (!t) continue;
         const open = fmt(m[2], m[3], m[4]);
         const close = fmt(m[5], m[6], m[7]);
-        if (open && close) found[t.id] = { open, close, company };
+        if (open && close) found[company.toLowerCase()] = { open, close, company };
     }
 
     if (Object.keys(found).length === 0) {
@@ -77,14 +83,19 @@ async function main() {
 
     const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data.json'), 'utf8'));
     const changes = [];
-    for (const [id, v] of Object.entries(found)) {
-        const ipo = data.find(x => x.id === id);
-        if (!ipo) { console.log(`⚠️  ${id} tiada dalam data — skip`); continue; }
-        if (ipo.mitiOpenDate !== v.open || ipo.mitiCloseDate !== v.close) {
-            console.log(`   ${v.company}: ${ipo.mitiOpenDate}→${v.open} | ${ipo.mitiCloseDate}→${v.close}`);
+    for (const [nameKey, v] of Object.entries(found)) {
+        const ipo = matchEntry(data, v.company);
+        if (!ipo) {
+            console.log(`⚠️  ${v.company} ada di portal tapi TIADA dalam data — akan ditambah oleh sync isaham (3x sehari).`);
+            continue;
+        }
+        const changed = ipo.mitiOpenDate !== v.open || ipo.mitiCloseDate !== v.close || !ipo.hasMitiTranche;
+        if (changed) {
+            console.log(`   ${v.company}: ${ipo.mitiOpenDate || '-'}→${v.open} | ${ipo.mitiCloseDate || '-'}→${v.close}`);
             ipo.mitiOpenDate = v.open;
             ipo.mitiCloseDate = v.close;
-            changes.push(id);
+            ipo.hasMitiTranche = true;
+            changes.push({ id: ipo.id, nameKey });
         }
     }
 
@@ -101,10 +112,10 @@ async function main() {
 
     const ovPath = path.join(ROOT, 'overrides.json');
     const overrides = JSON.parse(fs.readFileSync(ovPath, 'utf8'));
-    for (const id of changes) {
-        if (!overrides[id]) overrides[id] = {};
-        overrides[id].mitiOpenDate = found[id].open;
-        overrides[id].mitiCloseDate = found[id].close;
+    for (const c of changes) {
+        if (!overrides[c.id]) overrides[c.id] = {};
+        overrides[c.id].mitiOpenDate = found[c.nameKey].open;
+        overrides[c.id].mitiCloseDate = found[c.nameKey].close;
     }
     fs.writeFileSync(ovPath, JSON.stringify(overrides, null, 4), 'utf8');
 

@@ -548,6 +548,19 @@ function autoPromoteIPOs(finalData) {
                 }
             }
         }
+
+        // Refresh status for open applications (Stage 3 with a future closing date)
+        if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
+            const cd = parseFlexDate(ipo.closingDate);
+            if (cd && cd >= now) {
+                let openingFuture = false;
+                if (ipo.openingDate) {
+                    const od = new Date(ipo.openingDate);
+                    if (!isNaN(od.getTime())) openingFuture = od > now;
+                }
+                if (!openingFuture) ipo.status = 'Application Open';
+            }
+        }
     });
     return promotedCount;
 }
@@ -934,6 +947,12 @@ async function main() {
         } catch (e) {
             console.error('  [Overrides] Error applying overrides:', e.message);
         }
+    }
+
+    // Re-run auto-promotion after overrides so pinned stage/status values can't go stale
+    const repromoted = autoPromoteIPOs(existingData);
+    if (repromoted > 0) {
+        console.log(`  [Overrides] Re-promoted ${repromoted} IPO(s) after overrides.`);
     }
 
     // Save back to data.json
