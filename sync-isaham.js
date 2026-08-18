@@ -24,6 +24,58 @@ const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 };
 
+// ---------------------------------------------------------------------------
+// Chrome session cookies (bypass Cloudflare 403)
+// ---------------------------------------------------------------------------
+const ISAHAM_COOKIES_FILE = path.join(__dirname, 'scratch', 'isaham-cookies.json');
+
+let isahamCookieHeader = null;
+
+function refreshIsahamCookies() {
+    // Regenerate cookies from the user's Chrome profile (session may expire)
+    const { execSync } = require('child_process');
+    try {
+        execSync('python3 scratch/dump-isaham-cookies.py', {
+            cwd: __dirname,
+            timeout: 30000,
+            stdio: 'ignore'
+        });
+        return true;
+    } catch (e) {
+        console.log(`  [iSaham] Cookie refresh gagal: ${e.message}`);
+        return false;
+    }
+}
+
+function loadIsahamCookies() {
+    // Auto-refresh dari Chrome jika fail cookies sudah tua (> 12 jam) —
+    // sesi login isaham boleh expire; fail yang lama = risiko 403 semula.
+    try {
+        const mtime = fs.statSync(ISAHAM_COOKIES_FILE).mtimeMs;
+        if ((Date.now() - mtime) > 12 * 60 * 60 * 1000) {
+            console.log('  [iSaham] Cookies lama (>12 jam) — refresh dari Chrome...');
+            refreshIsahamCookies();
+        }
+    } catch (e) { /* fail tiada — cuba refresh di bawah */ }
+
+    try {
+        if (fs.existsSync(ISAHAM_COOKIES_FILE)) {
+            const data = JSON.parse(fs.readFileSync(ISAHAM_COOKIES_FILE, 'utf8'));
+            if (data.cookieHeader && data.hasLogin && data.hasCfClearance) {
+                return data.cookieHeader;
+            }
+        }
+    } catch (e) { /* fall through to refresh */ }
+
+    if (refreshIsahamCookies()) {
+        try {
+            const data = JSON.parse(fs.readFileSync(ISAHAM_COOKIES_FILE, 'utf8'));
+            if (data.cookieHeader) return data.cookieHeader;
+        } catch (e) { /* still failing */ }
+    }
+    return null;
+}
+
 function normalizeName(name) {
     return name.toLowerCase()
         .replace(/berhad|bhd|group|holdings|corp/g, '')
@@ -90,6 +142,20 @@ async function fetchPage(url) {
             // Silence 404s as they are expected during brute-force probing
             return null;
         }
+        // Retry with Chrome session cookies (bypass Cloudflare 403)
+        try {
+            const cookieHeader = loadIsahamCookies();
+            if (cookieHeader) {
+                const response = await axios.get(url, {
+                    headers: {
+                        ...HEADERS,
+                        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36',
+                        'Cookie': cookieHeader
+                    }
+                });
+                return cheerio.load(response.data);
+            }
+        } catch (e2) { /* ignore retry failure */ }
         console.error(`Failed to fetch ${url}:`, e.message);
         return null;
     }
@@ -186,6 +252,33 @@ async function fetchListPage(key, url) {
     } catch (e) {
         if (e.response && e.response.status === 404) return null;
         console.log(`[iSaham] ${key}: axios gagal (${e.message}) — guna Puppeteer.`);
+    }
+
+    // 2b) axios + cookies sesi Chrome (bypass Cloudflare 403 — SUMBER UTAMA)
+    const cookieHeader = loadIsahamCookies();
+    if (cookieHeader) {
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    ...HEADERS,
+                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36',
+                    'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8',
+                    'Cookie': cookieHeader
+                }
+            });
+            if (isValidIsahamHtml(key, response.data)) {
+                writeIsahamCache(key, response.data);
+                isahamNetworkOk = true;
+                console.log(`[iSaham] ${key}: axios+cookies Chrome berjaya — cache dikemas kini.`);
+                return cheerio.load(response.data);
+            }
+            console.log(`[iSaham] ${key}: axios+cookies pulang halaman challenge — cookies mungkin expired.`);
+        } catch (e) {
+            if (e.response && e.response.status === 404) return null;
+            console.log(`[iSaham] ${key}: axios+cookies gagal (${e.message}).`);
+        }
+    } else {
+        console.log(`[iSaham] ${key}: tiada cookies Chrome — guna Puppeteer.`);
     }
 
     // 3) Refresh via Puppeteer persistent session
@@ -882,7 +975,24 @@ async function autoEnrichFinancials(existingData) {
                         break;
                     }
                 } catch (e) {
-                    // Ignore probing errors
+                    // Retry with Chrome session cookies (bypass Cloudflare 403)
+                    try {
+                        const cookieHeader = loadIsahamCookies();
+                        if (cookieHeader) {
+                            const response = await axios.get(url, {
+                                headers: {
+                                    ...HEADERS,
+                                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36',
+                                    'Cookie': cookieHeader
+                                }
+                            });
+                            if (response.data && (response.data.includes('revenueFyeBarChart') || response.data.includes('SWOT Analysis') || response.data.includes('Analyst Highlights') || response.data.includes('card-body'))) {
+                                htmlData = response.data;
+                                matchedUrl = url;
+                                break;
+                            }
+                        }
+                    } catch (e2) { /* ignore retry failure */ }
                 }
             }
 
@@ -984,7 +1094,7 @@ Return ONLY a valid JSON object matching this structure (these are EXAMPLE numbe
             try {
                 console.log('      Sending request to Groq...');
                 const groqResponse = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
-                    model: 'llama-3.1-8b-instant',
+                    model: 'openai/gpt-oss-20b',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: JSON.stringify(promptContext, null, 2) }

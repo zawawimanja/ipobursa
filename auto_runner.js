@@ -1,55 +1,20 @@
-const { exec, spawn } = require('child_process');
-const http = require('http');
+const { exec } = require('child_process');
 const path = require('path');
 
 console.log('========================================================================');
 console.log('Background Auto-Runner started successfully.');
 console.log('Daily IPO sync times: 08:45, 13:00, 17:30 (Monday - Friday).');
 console.log('MITI auto-sync: every 30 min (08:30 - 18:30, Monday - Friday).');
-console.log('iSaham browser keeper: dipastikan hidup secara automatik (selesai');
-console.log('challenge Cloudflare SEKALI → auto-sync setiap hari terus berfungsi).');
+console.log('iSaham 403 bypass: guna cookies sesi Chrome (diekstrak automatik oleh');
+console.log('sync-isaham.js dari scratch/isaham-cookies.json — refresh 12 jam).');
 console.log('Keep this process running in the background.');
 console.log('========================================================================');
 
 // ---------------------------------------------------------------------------
-// iSaham Browser Keeper — satu browser Chrome kekal untuk sesi Cloudflare yang
-// sah. Cloudflare cabar sekali per sesi browser; dengan keeper, sync harian
-// hanya SAMBUNG ke sesi sedia ada (port 9222) — tiada lagi 403 berulang.
+// iSaham 403 bypass via Chrome session cookies (TIDAK perlu browser keeper —
+// Cloudflare challenge tak boleh auto-solve; cookies sesi Chrome yang sah
+// adalah cara yang terbukti berfungsi — lihat sync-isaham.js loadIsahamCookies)
 // ---------------------------------------------------------------------------
-let keeperChild = null;
-
-function keeperAlive() {
-    return new Promise(resolve => {
-        const req = http.get('http://127.0.0.1:9222/json/version', r => {
-            r.resume();
-            resolve(true);
-        });
-        req.on('error', () => resolve(false));
-        req.setTimeout(3000, () => { req.destroy(); resolve(false); });
-    });
-}
-
-async function ensureIsahamKeeper() {
-    if (keeperChild && keeperChild.exitCode === null) return; // proses kita sudah hidup
-    try {
-        if (await keeperAlive()) { keeperChild = null; return; } // keeper lain sudah ada
-    } catch (e) { /* teruskan spawn */ }
-
-    console.log(`[${new Date().toLocaleString()}] 💻 Spawning iSaham browser keeper (sesi Cloudflare)...`);
-    keeperChild = spawn('node', ['scratch/isaham-browser-keeper.js'], { cwd: __dirname, stdio: 'inherit' });
-    keeperChild.on('exit', (code) => {
-        console.log(`[${new Date().toLocaleString()}] ⚠️  iSaham keeper exited (code ${code}) — akan di-spawn semula pada pemeriksaan seterusnya.`);
-        keeperChild = null;
-    });
-    keeperChild.on('error', (err) => {
-        console.error(`[${new Date().toLocaleString()}] ❌ iSaham keeper spawn error: ${err.message}`);
-        keeperChild = null;
-    });
-}
-
-function checkAndRunKeeper() {
-    ensureIsahamKeeper();
-}
 
 function checkAndRun() {
     const now = new Date();
@@ -120,8 +85,5 @@ function checkAndRunMiti() {
 // Check every 10 seconds for high precision
 setInterval(checkAndRun, 10000);
 setInterval(checkAndRunMiti, 10000);
-// Keeper check: setiap 5 minit (murah; elak spawn berganda)
-setInterval(checkAndRunKeeper, 300000);
 checkAndRun();
 checkAndRunMiti();
-checkAndRunKeeper();
