@@ -20,6 +20,57 @@ if (fs.existsSync(envPath)) {
 const DATA_JSON_FILE = path.join(__dirname, 'data.json');
 const DATA_JS_FILE = path.join(__dirname, 'data.js');
 
+// ---------------------------------------------------------------------------
+// Telegram alert (sesi isaham expired / sync DEGRADED) — guna bot yang sama
+// dengan project JerungBursa. Tetapkan TELEGRAM_BOT_TOKEN & TELEGRAM_CHAT_ID
+// dalam .env untuk aktifkan.
+// ---------------------------------------------------------------------------
+const https = require('https');
+
+async function sendTelegram(text) {
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    if (!token || !chatId) return false;
+    try {
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        const body = JSON.stringify({ chat_id: chatId, text });
+        await new Promise((resolve, reject) => {
+            const req = https.request(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+            }, (res) => {
+                let s = '';
+                res.on('data', d => s += d);
+                res.on('end', () => { try { const j = JSON.parse(s); j.ok ? resolve() : reject(new Error(JSON.stringify(j))); } catch (e) { reject(e); } });
+            });
+            req.on('error', reject);
+            req.write(body);
+            req.end();
+        });
+        console.log('📢 Telegram alert dihantar.');
+        return true;
+    } catch (e) {
+        console.error('❌ Telegram alert gagal:', e.message);
+        return false;
+    }
+}
+
+async function alertIsahamDegraded(reason) {
+    const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+    const msg = [
+        '🚨 *IPO HUNTER: isaham 403 / DEGRADED*',
+        '',
+        `⏰ ${stamp}`,
+        `⚠️ ${reason}`,
+        '',
+        '➡️ Login semula isaham.my dalam Chrome (Facebook/Telegram),',
+        '➡️ Lepas tu run: `bash setup-auto-runner.sh`',
+        '',
+        'Data tarikh IPO public sekarang guna cache lama — semakin stale.'
+    ].join('\n');
+    await sendTelegram(msg);
+}
+
 const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 };
@@ -976,8 +1027,8 @@ async function main() {
     if (!isahamNetworkOk) {
         console.log(`\n🔴 [iSaham] DEGRADED — tiada halaman iSaham dimuat turun untuk run ini (403/Cloudflare).`);
         console.log(`   Data tarikh bergantung pada cache — jika ia tidak dikemas kini lebih 26 jam, tarikh akan jadi stale/hilang.`);
-        console.log(`   PENYELESAIAN: jalankan sekali:  node scratch/scrape-isaham.js`);
-        console.log(`   (browser terbuka → selesaikan challenge Cloudflare sekali → sesi disimpan → auto-sync harian terus berfungsi.)`);
+        console.log(`   PENYELESAIAN: login semula isaham.my dalam Chrome, lepas tu run: bash setup-auto-runner.sh`);
+        await alertIsahamDegraded('Sesi isaham 403 — cookies Chrome expired atau Chrome tak jalan.');
     } else {
         console.log(`[iSaham] OK — halaman iSaham dimuat turun/dibaca seperti biasa.`);
     }
