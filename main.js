@@ -633,6 +633,9 @@ function autoPromoteIPOs(finalData) {
         // Skip auto-promotion if manually set to Stage 5 (Listed)
         if (ipo.stage === 5) return;
         
+        // Skip auto-promotion for entries manually withdrawn from MITI
+        if (ipo.mitiWithdrawn) return;
+        
         if (ipo.year && ipo.year < 2026) {
             ipo.stage = 5;
             ipo.status = 'Listed';
@@ -1048,6 +1051,7 @@ function getBoomPrediction(ipo) {
 function isIpoOpen(ipo) {
     const today = new Date();
     today.setHours(0,0,0,0);
+    if (ipo.mitiWithdrawn) return false;
     if (ipo.stage === 2) {
         const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
         if (closeRaw) {
@@ -1408,6 +1412,13 @@ function createIPOCard(ipo, index = 0) {
                 <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 600;">MITI Close: ${closeStr}</div>
             `;
         }
+        
+        if (ipo.mitiWithdrawn) {
+            dateDisplay = `
+                <div style="font-weight: 600; color: #ef4444; font-size: 0.75rem;">MITI Status:</div>
+                <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⛔ Keluar / Withdrawn</div>
+            `;
+        }
     } else if (ipo.stage === 3 || ipo.stage === 4) {
         const closing = ipo.closingDate ? new Date(ipo.closingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : 'TBA';
         const listing = ipo.listingDate ? (isNaN(new Date(ipo.listingDate).getTime()) ? ipo.listingDate : new Date(ipo.listingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })) : 'TBA';
@@ -1455,7 +1466,13 @@ function createIPOCard(ipo, index = 0) {
                 ${detailsBtn}
             </div>`;
     } else if (ipo.stage === 2) {
-        actionBtn = `
+        actionBtn = ipo.mitiWithdrawn
+            ? `
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.7rem; color: #f87171; font-weight: 700; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 0.3rem 0.6rem; border-radius: 6px;">KELUAR MITI</span>
+                ${detailsBtn}
+            </div>`
+            : `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <a href="https://sahamonline.miti.gov.my/" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; text-decoration: none; display: inline-block; background: #059669; border: none;">MITI</a>
                 ${detailsBtn}
