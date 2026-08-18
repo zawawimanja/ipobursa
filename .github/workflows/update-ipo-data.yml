@@ -28,12 +28,16 @@ jobs:
       - name: Install dependencies
         run: npm install
           
-      - name: Run Scrapers (iSaham + i3investor), Recalculate Targets, and Archive Daily Groups
+      - name: Run Scrapers (i3investor), Recalculate Targets, and Archive Daily Groups
         run: |
-          node sync-isaham.js
+          # NOTE: sync-isaham.js dijalankan di LAPTOP (auto_runner.js) — ia perlukan
+          # cookies sesi Chrome (login isaham) yang terikat dengan IP laptop.
+          # GitHub Actions tiada sesi itu, jadi isaham akan DEGRADED di sini.
+          # Laptop push data.json/data.js/sync-status.js sendiri selepas sync.
           node scrape-i3.js
           node scratch/calc_sifu_targets.js
           node archive-groups.js
+        continue-on-error: true
         
       - name: Commit and Push Changes
         run: |
