@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -285,7 +285,7 @@
                 Replicate your Sifu's exact Excel financial modeling workspace. Pick a stock, customize projections, and calculate target valuations instantly.
             </p>
             <div style="max-width: 750px; margin: 1rem auto 0 auto; padding: 0.6rem 1rem; background: rgba(16, 185, 129, 0.08); border: 1px dashed rgba(16, 185, 129, 0.3); border-radius: 6px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.4; text-align: left; display: inline-block;">
-                📢 <strong>Info Rujukan PE:</strong> Halaman ini adalah <strong>dinamik</strong>. Apabila memuatkan saham, sistem akan mengira dan menetapkan nilai <strong>Target PE Pintar</strong> yang tepat bagi menyamai harga target asal Sifu (bukan memilih had paling tinggi atau terendah secara rawak). Anda bebas melaraskan PE ini secara manual mengikut sentimen pasaran!
+                📢 <strong>PE Reference Guide:</strong> This page is <strong>dynamic</strong>. When a stock is loaded, the system calculates and sets the precise <strong>Smart Target PE</strong> value that matches Sifu's original target price (rather than randomly selecting the highest or lowest bound). You can freely adjust this PE manually based on market sentiment!
             </div>
         </header>
 
@@ -356,14 +356,14 @@
                         </label>
                         <input type="number" id="sheet-target-pe" value="9.0" step="0.5" oninput="calculateSheet()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem; text-align: left; font-weight: bold; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);">
                         <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.4; padding: 0.6rem 0.75rem; background: rgba(99, 102, 241, 0.06); border-radius: 0.4rem; border: 1px solid rgba(99, 102, 241, 0.15);">
-                            <span style="color: #a78bfa; font-weight: bold; display: block; margin-bottom: 0.2rem;">⚡ Helaian Dinamik (Real-Time Recalibration):</span>
-                            Laras kotak PE di atas untuk menguji pelbagai senario target harga (Zone 1 & Zone 2) secara automatik.<br>
-                            <span style="color: #cbd5e1; display: block; margin-top: 0.3rem;"><strong>💡 Panduan Anggaran PE Sektor (Semasa vs Unjuran):</strong></span>
-                            Julat PE di bawah berbeza mengikut keuntungan semasa (Trailing) berbanding unjuran masa depan (Forward PE) yang digunakan dalam Helaian:<br>
-                            • 🤖 <strong>AI & High-Tech (Gred A):</strong> Semasa: 35x-50x | Unjuran Sifu: 20-25x PE<br>
-                            • 💻 <strong>Teknologi Am / Hardware:</strong> Semasa: 20x-30x | Unjuran Sifu: 15-20x PE<br>
-                            • 🏭 <strong>Pembuatan & Industri:</strong> Semasa: 12x-18x | Unjuran Sifu: 10-12x PE<br>
-                            • 📦 <strong>Tradisional / Utiliti:</strong> Semasa: 8x-12x | Unjuran Sifu: 6-8x PE
+                            <span style="color: #a78bfa; font-weight: bold; display: block; margin-bottom: 0.2rem;">⚡ Dynamic Sheet (Real-Time Recalibration):</span>
+                            Adjust the PE box above to test various price target scenarios (Zone 1 & Zone 2) automatically.<br>
+                            <span style="color: #cbd5e1; display: block; margin-top: 0.3rem;"><strong>💡 Sector PE Estimation Guide (Current vs Projected):</strong></span>
+                            PE ranges below vary between current (Trailing) vs future projections (Forward PE) used in the Sheet:<br>
+                            • 🤖 <strong>AI & High-Tech (Grade A):</strong> Current: 35x-50x | Sifu Projection: 20-25x PE<br>
+                            • 💻 <strong>General Technology / Hardware:</strong> Current: 20x-30x | Sifu Projection: 15-20x PE<br>
+                            • 🏭 <strong>Manufacturing & Industrial:</strong> Current: 12x-18x | Sifu Projection: 10-12x PE<br>
+                            • 📦 <strong>Traditional / Utilities:</strong> Current: 8x-12x | Sifu Projection: 6-8x PE
                         </div>
                     </div>
                 </div>
@@ -377,17 +377,17 @@
                 <div class="sheet-card" style="border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.03); margin-top: 1rem;">
                     <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #10b981; font-size: 1rem;">
                         <i data-lucide="list-checks" style="width: 18px;"></i>
-                        Keputusan SOP Sifu
+                        Sifu's SOP Decision
                     </h3>
                     <div id="sifu-sop-dynamic-content" style="margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1);">
                         <!-- Dynamically filled -->
                     </div>
                     <div style="font-size: 0.72rem; color: var(--text-dim); line-height: 1.45;">
-                        <span style="font-weight: bold; color: #ffffff; display: block; margin-bottom: 0.25rem;">Rujukan Panduan SOP:</span>
-                        • <strong>Tapis 1:</strong> Beli jika harga IPO &lt; Target Sifu (ada MoS).<br>
-                        • <strong>Tapis 2 Gred A/B:</strong> Boleh Apply & Hold (Swing/DCA).<br>
-                        • <strong>Tapis 2 Gred C + OS Tinggi:</strong> Scalp sahaja (jual 10m pertama).<br>
-                        • <strong>Tapis 2 Gred C + OS Rendah:</strong> SKIP terus.
+                        <span style="font-weight: bold; color: #ffffff; display: block; margin-bottom: 0.25rem;">SOP Guidelines Reference:</span>
+                        • <strong>Filter 1:</strong> Buy if IPO price &lt; Sifu Target (has MoS).<br>
+                        • <strong>Filter 2 Grade A/B:</strong> Can Apply & Hold (Swing/DCA).<br>
+                        • <strong>Filter 2 Grade C + High OS:</strong> Scalp only (sell in first 10 mins).<br>
+                        • <strong>Filter 2 Grade C + Low OS:</strong> SKIP entirely.
                     </div>
                 </div>
             </div>
@@ -491,7 +491,7 @@
 
                             <!-- Balance Sheet -->
                             <tr class="section-header">
-                                <td colspan="7">BALANCE SHEET (KUNCI KIRA-KIRA)</td>
+                                <td colspan="7">BALANCE SHEET</td>
                             </tr>
                             <tr>
                                 <td class="label-cell">Total Assets</td>
@@ -659,7 +659,7 @@
 
     <footer style="text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); font-size: 0.8rem;">
         <p>© 2026 Bursa IPO Tracker. All calculations modeled after Sifu's proprietary valuation method.</p>
-        <p style="max-width: 850px; margin: 1rem auto 0 auto; font-size: 0.78rem; color: var(--text-dim); line-height: 1.6;">&#9888;&#65039; <strong>Penafian Kewangan (Financial Disclaimer):</strong> Semua maklumat, analisis, gred, unjuran harga, dan pengiraan kalkulator yang dipaparkan di laman web ini adalah bertujuan untuk rujukan pembelajaran dan pendidikan sahaja. Ia tidak boleh dianggap sebagai nasihat pelaburan, syor membeli atau menjual mana-mana sekuriti. Pelaburan pasaran saham terutamanya langganan IPO membawa risiko kerugian modal yang tinggi. Kami tidak menjamin ketepatan maklumat yang dikumpul. Anda dinasihatkan untuk berunding dengan penasihat kewangan berlesen sebelum membuat sebarang keputusan pelaburan.</p>
+        <p style="max-width: 850px; margin: 1rem auto 0 auto; font-size: 0.78rem; color: var(--text-dim); line-height: 1.6;">&#9888;&#65039; <strong>Financial Disclaimer:</strong> All information, analyses, grades, price projections, and calculator outputs on this website are for educational and research reference purposes only. They do not constitute investment advice or a recommendation to buy or sell any security. Stock market investments, particularly IPO subscriptions, carry a high risk of capital loss. We do not guarantee the accuracy of the information compiled. You are advised to consult a licensed financial advisor before making any investment decisions.</p>
     </footer>
 
     <script>
@@ -1056,14 +1056,14 @@
                             warningCard.innerHTML = `
                                 <h3 style="margin-top: 0; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #ef4444; font-size: 1rem;">
                                     <i data-lucide="alert-triangle" style="width: 18px;"></i>
-                                    Amaran Gred C (Kualitatif Rendah + OS Lemah ⚠️)
+                                    Grade C Warning (Low Qualitative + Weak OS ⚠️)
                                 </h3>
                                 <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.75rem;">
-                                    Jangan hanya melihat <strong>Kuantitatif (Math/Formula Cincai)</strong> sahaja. Anda <strong>WAJIB</strong> menyilang dengan <strong>Gred Kualitatif & Sentimen Pasaran</strong>!
+                                    Do not rely solely on <strong>Quantitative data (Math/Cincai Formula)</strong>. You <strong>MUST</strong> cross-reference with <strong>Qualitative Grade & Market Sentiment</strong>!
                                 </p>
                                 <div style="background: rgba(0,0,0,0.25); padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(239, 68, 68, 0.15); font-size: 0.75rem; line-height: 1.45;">
-                                    <strong style="color: #ef4444; display: block; margin-bottom: 0.25rem;">Kes Hock Soon (Formula OK tapi Barai?):</strong>
-                                    Secara formula matematik/PE, Hock Soon nampak murah (PE 6.2x) tetapi harganya merosot teruk (-11.7% Open, -36.7% Hold) kerana ia bertaraf <strong>Gred C</strong> disebabkan oversubscription sangat rendah (1.36x), ketiadaan minat belian, dan sentimen pasaran yang buruk semasa listing.
+                                    <strong style="color: #ef4444; display: block; margin-bottom: 0.25rem;">Hock Soon Case (Formula OK but Crashed?):</strong>
+                                    Mathematically by PE, Hock Soon looked cheap (PE 6.2x) but its price dropped sharply (-11.7% Open, -36.7% Hold) because it was rated <strong>Grade C</strong> due to extremely low oversubscription (1.36x), lack of buying interest, and poor market sentiment at listing.
                                 </div>
                             `;
                         }

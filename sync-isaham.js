@@ -95,9 +95,114 @@ async function fetchPage(url) {
     }
 }
 
+// ---------------------------------------------------------------------------
+// iSaham cache-first fetch (tembus Cloudflare 403 via Puppeteer persistent session)
+//
+// Urutan cubaan:
+//   1) Cache tempatan (scratch/isaham-cache/) jika SEGAR (< 26 jam) — paling
+//      boleh dipercayai kerana ia dimuat turun melalui sesi Cloudflare yang sah.
+//   2) axios terus — isaham kadang buka semula tanpa challenge.
+//   3) Jalankan scratch/scrape-isaham.js --quiet (Puppeteer headless dengan sesi
+//      tersimpan) untuk refresh cache, kemudian baca semula.
+//   4) Cache STALE sebagai pilihan terakhir (lebih baik dari tiada data).
+// ---------------------------------------------------------------------------
+const ISAHAM_CACHE_DIR = path.join(__dirname, 'scratch', 'isaham-cache');
+const ISAHAM_CACHE_FRESH_MS = 26 * 60 * 60 * 1000;
+
+function isahamCachePath(key) {
+    return path.join(ISAHAM_CACHE_DIR, `isaham_${key}.html`);
+}
+
+function readIsahamCache(key) {
+    try {
+        return fs.readFileSync(isahamCachePath(key), 'utf8');
+    } catch (e) {
+        return null;
+    }
+}
+
+function isahamCacheFresh(key) {
+    try {
+        return (Date.now() - fs.statSync(isahamCachePath(key)).mtimeMs) < ISAHAM_CACHE_FRESH_MS;
+    } catch (e) {
+        return false;
+    }
+}
+
+function writeIsahamCache(key, html) {
+    try {
+        fs.mkdirSync(ISAHAM_CACHE_DIR, { recursive: true });
+        fs.writeFileSync(isahamCachePath(key), html, 'utf8');
+    } catch (e) { /* cache tidak kritikal */ }
+}
+
+// Pengesahan HTML sebenar (bukan halaman challenge Cloudflare yang pulang status 200)
+function isValidIsahamHtml(key, html) {
+    if (!html) return false;
+    if (key === 'ipo') return html.includes('f-ipo-card');
+    if (key === 'miti') return /MITI IPO|Future IPO/i.test(html);
+    if (key === 'stats') return html.includes('statsTable');
+    return true;
+}
+
+function runIsahamScraperQuiet() {
+    const { execSync } = require('child_process');
+    try {
+        execSync('node scratch/scrape-isaham.js --quiet', {
+            cwd: __dirname,
+            timeout: 90000,
+            stdio: 'inherit'
+        });
+        return true;
+    } catch (e) {
+        console.log(`  [iSaham] Scraper quiet gagal: ${e.message}`);
+        return false;
+    }
+}
+
+async function fetchListPage(key, url) {
+    // 1) Cache segar dahulu
+    const cached = readIsahamCache(key);
+    if (cached && isahamCacheFresh(key) && isValidIsahamHtml(key, cached)) {
+        console.log(`[iSaham] ${key}: guna cache segar (${new Date(fs.statSync(isahamCachePath(key)).mtimeMs).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })})`);
+        return cheerio.load(cached);
+    }
+
+    // 2) axios terus
+    try {
+        const response = await axios.get(url, { headers: HEADERS });
+        if (isValidIsahamHtml(key, response.data)) {
+            writeIsahamCache(key, response.data);
+            console.log(`[iSaham] ${key}: axios berjaya — cache dikemas kini.`);
+            return cheerio.load(response.data);
+        }
+        console.log(`[iSaham] ${key}: axios pulang halaman challenge — guna Puppeteer.`);
+    } catch (e) {
+        if (e.response && e.response.status === 404) return null;
+        console.log(`[iSaham] ${key}: axios gagal (${e.message}) — guna Puppeteer.`);
+    }
+
+    // 3) Refresh via Puppeteer persistent session
+    runIsahamScraperQuiet();
+    const refreshed = readIsahamCache(key);
+    if (refreshed && isValidIsahamHtml(key, refreshed)) {
+        console.log(`[iSaham] ${key}: cache dimuat turun via Puppeteer session.`);
+        return cheerio.load(refreshed);
+    }
+
+    // 4) Cache stale sebagai pilihan terakhir
+    if (cached && isValidIsahamHtml(key, cached)) {
+        const mtime = new Date(fs.statSync(isahamCachePath(key)).mtimeMs).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+        console.log(`⚠️ [iSaham] ${key}: guna cache STALE (${mtime}) — sesi Cloudflare mungkin tamat, run: node scratch/scrape-isaham.js`);
+        return cheerio.load(cached);
+    }
+
+    return null;
+}
+
 async function scrapeUpcomingIPOs(existingData) {
     console.log('Scraping Stage 3 (Upcoming) IPOs...');
-    const $ = await fetchPage('https://www.isaham.my/ipo');
+    const $ = await fetchListPage('ipo', 'https://www.isaham.my/ipo');
     if (!$) return 0;
 
     let count = 0;
@@ -163,7 +268,7 @@ async function scrapeUpcomingIPOs(existingData) {
 
 async function scrapeMitiAndDraftIPOs(existingData) {
     console.log('Scraping Stage 1 & 2 (MITI and Draft) IPOs...');
-    const $ = await fetchPage('https://www.isaham.my/ipo/miti');
+    const $ = await fetchListPage('miti', 'https://www.isaham.my/ipo/miti');
     if (!$) return 0;
 
     let count = 0;
@@ -269,7 +374,7 @@ function formatListingDate(dateStr) {
 
 async function scrapeListedStatistics(existingData) {
     console.log('Scraping Stage 5 (Listed Statistics) IPOs...');
-    const $ = await fetchPage('https://www.isaham.my/ipo/statistics');
+    const $ = await fetchListPage('stats', 'https://www.isaham.my/ipo/statistics');
     if (!$) return 0;
 
     let count = 0;

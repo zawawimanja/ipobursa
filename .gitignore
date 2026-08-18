@@ -10,3 +10,7 @@ cloned_jerungbursa/
 # MITI scrape session & dumps (mengandungi cookies/sesi peribadi — JANGAN commit)
 scratch/.miti-profile/
 scratch/miti_portal_dump.txt
+
+# iSaham Cloudflare session & cache HTML (sesi peribadi + fail sementara — JANGAN commit)
+scratch/.isaham-profile/
+scratch/isaham-cache/
