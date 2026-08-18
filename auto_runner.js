@@ -4,7 +4,7 @@ const path = require('path');
 console.log('========================================================================');
 console.log('Background Auto-Runner started successfully.');
 console.log('Daily IPO sync times: 08:45, 13:00, 17:30 (Monday - Friday).');
-console.log('MITI auto-sync: every 30 min (08:30 - 18:30, Monday - Friday).');
+console.log('MITI auto-sync: every 30 min (24/7, termasuk cuti & hujung minggu).');
 console.log('iSaham 403 bypass: guna cookies sesi Chrome (diekstrak automatik oleh');
 console.log('sync-isaham.js dari scratch/isaham-cookies.json — refresh 12 jam).');
 console.log('Keep this process running in the background.');
@@ -42,7 +42,8 @@ function checkAndRun() {
 }
 
 // ---------------------------------------------------------------------------
-// MITI auto-sync: setiap 30 minit waktu bekerja (08:30 - 18:30, Isnin - Jumaat)
+// MITI auto-sync: setiap 30 minit 24/7 (pemohon boleh apply walau cuti/hujung
+// minggu — nombor sentiasa berubah, jadi pantau berterusan)
 //   1) sync-miti-portal-dates.js   — tarikh buka/tutup dari halaman AWAM portal
 //      (tiada login, sentiasa boleh jalan)
 //   2) scrape-miti-applicants.js --quiet — jumlah pemohon guna cookies Chrome (tiada login manual); skip jika cookies tiada
@@ -52,16 +53,10 @@ let lastMitiRun = null;
 
 function checkAndRunMiti() {
     const now = new Date();
-    const day = now.getDay();
-
-    // Hujung minggu skip
-    if (day < 1 || day > 5) return;
-
     const minutes = now.getHours() * 60 + now.getMinutes();
     const seconds = now.getSeconds();
 
-    // Window 08:30 - 18:30, pada minit :00 dan :30 sahaja
-    if (minutes < 510 || minutes > 1110) return;
+    // Setiap :00 dan :30, 24 jam sehari
     if (minutes % 30 !== 0) return;
     if (parseInt(seconds) > 15) return;
 
