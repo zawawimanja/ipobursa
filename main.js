@@ -997,13 +997,13 @@ function getIpoStrategy(ipo) {
         if (holdPerf < -10) return 'Exit (Crashing)';
 
         if (openPrem >= 40) {
-            return 'Jual Hari 1 (Open >40%)';
+            return 'Sell Day 1 (Open >40%)';
         }
         if (openPrem < 20) {
             if (grade === 'A' || grade === 'B') {
                 return 'Hold untuk ATH (Fund OK)';
             }
-            return 'Jual / Exit (Fund Lemah)';
+            return 'Sell / Exit (Weak Fund)';
         }
         return 'Swing Play (20-40%)';
     }
@@ -2035,7 +2035,7 @@ window.generateModalAIAnalysis = async function(id) {
     const cooldownMs = 15000; // 15 seconds cooldown
     if (now - lastClick < cooldownMs) {
         const remaining = Math.ceil((cooldownMs - (now - lastClick)) / 1000);
-        alert(`Sila tunggu ${remaining} saat sebelum membuat analisis baru.`);
+        alert(`Please wait ${remaining} seconds before making a new analysis.`);
         return;
     }
     window._lastAnalysisClick = now;
@@ -2044,7 +2044,7 @@ window.generateModalAIAnalysis = async function(id) {
     verdictBox.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.75rem;">
             <div class="spinner" style="width: 22px; height: 22px; border: 2px solid rgba(167, 139, 250, 0.2); border-top-color: #a78bfa; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-            <span style="font-size: 0.8rem; color: #a78bfa; font-weight: 600;">Menganalisis Prospektus & Sektor...</span>
+            <span style="font-size: 0.8rem; color: #a78bfa; font-weight: 600;">Analysing Prospectus & Sector...</span>
         </div>
     `;
 
@@ -2056,17 +2056,17 @@ You evaluate IPOs across 4 pillars:
 3. Sector Momentum (High-growth tech, solar, AI, semiconductors, cleanroom are super hot; standard fabrication, trading, services are neutral/boring).
 4. Structure & Risks (OFS components decrease retail listing performance, lock-up terms, utilization of funds like debt paying vs R&D/Expansion).
 
-Format your response in professional Malay/Manglish mixed style, using the following exact structure:
+Format your response in professional English, using the following exact structure:
 ### 🌟 AI VERDICT: [MUST BUY / WORTH IT / SCALP / AVOID / PENDING]
 Provide a concise 1-sentence verdict on whether to subscribe or skip.
 
 ### 📊 Valuation & Financial Health
 Give a brief critique of the valuation (is it cheap, fair, or overpriced? PE value) and fund utilization.
 
-### ⚡ Catalysts (Pemangkin)
+### ⚡ Catalysts
 List 2-3 positive catalysts (e.g. sponsor record, industry trends, orderbook, growth strategy) as bullet points.
 
-### ⚠️ Risk Factors (Faktor Risiko)
+### ⚠️ Risk Factors
 List 1-2 major risks (e.g. OFS percentage, customer concentration, competitor pricing, shariah status if non-shariah) as bullet points.
 
 ### ⚓ Action Strategy
@@ -2164,7 +2164,7 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
                 ${formattedHtml}
             </div>
             <div style="margin-top:0.5rem; padding:0.35rem 0.5rem; background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.18); border-radius:5px; font-size:0.65rem; color:#f59e0b; line-height:1.4;">
-                ⚠️ AI verdict adalah panduan sahaja — bukan nasihat kewangan. Semak prospektus & Bursa rasmi sebelum buat keputusan.
+                ⚠️ AI verdict is a guide only — not financial advice. Check the official prospectus & Bursa before making any decision.
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:0.6rem; padding-top:0.4rem; text-align:right;">
                 <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">

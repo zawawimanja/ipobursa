@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jurnal Pelaburan MITI | Bursa IPO Tracker</title>
-    <meta name="description" content="Jurnal Pelaburan Khas MITI Bumiputera - Senarai sejarah, kaunter aktif, dan radar masa depan.">
+    <title>MITI Investment Journal | Bursa IPO Tracker</title>
+    <meta name="description" content="MITI Bumiputera Special Investment Journal - Historical records, active counters, and future radar.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
@@ -343,7 +343,7 @@
             
             <!-- Header Section -->
             <div class="journal-header-section">
-                <h1 class="journal-title-glow">JURNAL PELABURAN IPO MITI</h1>
+                <h1 class="journal-title-glow">MITI IPO INVESTMENT JOURNAL</h1>
                 <p class="journal-subtitle">
                     Pemantau strategi alokasi Bumiputera (MITI) untuk mencari peluang *jackpot* jangka sederhana bersumberkan data sejarah Bursa Malaysia.
                 </p>
@@ -356,25 +356,25 @@
                 <div class="journal-card-header" onclick="toggleCard('card-sector-stats')">
                     <h2 class="journal-card-title">
                         <i data-lucide="bar-chart-2" style="color: #f59e0b; width: 20px; height: 20px;"></i>
-                        Statistik Sejarah Premium Hari Pertama Mengikut Sektor
+                        Premium Day 1 Historical Statistics by Sector
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
                 <div class="collapsible-content">
                     <p style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.75rem 0;">
-                        Dikira secara automatik dari <strong id="sector-total-count">—</strong> IPO yang tersenarai dalam tracker ini (semua IPO Bursa, bukan MITI sahaja). Data ini menunjukkan sektor mana yang <em>secara historis</em> memberi premium hari pertama paling tinggi — berguna untuk menilai risiko sektor bagi permohonan MITI baharu.
+                        Calculated automatically from <strong id="sector-total-count">-</strong> IPOs listed in this tracker (all Bursa IPOs, not MITI only). This data shows which sectors <em>historically</em> deliver the highest Day 1 premium — useful for assessing sector risk in new MITI applications.
                     </p>
                     <div class="table-responsive">
                         <table class="journal-table" id="sector-stats-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Sektor</th>
-                                    <th>Bil. IPO</th>
+                                    <th>Sector</th>
+                                    <th>Total IPO</th>
                                     <th>Avg Premium</th>
                                     <th>Win Rate</th>
-                                    <th>>20% Hari 1</th>
-                                    <th>Penilaian</th>
+                                    <th>>20% Day 1</th>
+                                    <th>Assessment</th>
                                 </tr>
                             </thead>
                             <tbody id="sector-stats-body">
@@ -383,7 +383,7 @@
                         </table>
                     </div>
                     <p style="color: var(--text-dim); font-size: 0.72rem; margin-top: 0.6rem; font-style: italic;">
-                        ⚠️ Statistik ini merangkumi <em>semua</em> IPO Bursa (public ballot + MITI). Sektor dengan sampel kecil (< 3 IPO) mungkin kurang representatif. Guna sebagai panduan sentimen pasaran, bukan jaminan pulangan.
+                        ⚠️ This statistic covers <em>all</em> Bursa IPOs (public ballot + MITI). Sectors with small samples (< 3 IPOs) may be less representative. Use as a market sentiment guide, not a guarantee of returns.
                     </p>
                 </div>
             </div>
@@ -393,7 +393,7 @@
                 <div class="journal-card-header" onclick="toggleCard('card-miti-countdown')">
                     <h2 class="journal-card-title">
                         <i data-lucide="timer" style="color: #10b981; width: 20px; height: 20px;"></i> 
-                        MITI Countdown — Peruntukan Saham Masih Dibuka
+                        MITI Countdown - Bumi Allocation Still Open
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
@@ -402,7 +402,7 @@
                         <!-- Dynamic countdown cards -->
                     </div>
                     <p style="color: var(--text-dim); font-size: 0.72rem; margin-top: 0.6rem; font-style: italic;">
-                        ⏱ Countdown dikira automatik dari tarikh tutup dalam tracker. Data <strong>Jumlah Tawaran</strong> & <strong>Jumlah Pemohon</strong> diambil dari portal SahamOnline MITI — tarikh/angka disemak pada 18 Ogos 2026 dan mungkin berubah.
+                        ⏱️ Countdown calculated automatically from the closing date in the tracker. <strong>Total Offer</strong> & <strong>Total Applicants</strong> data sourced from SahamOnline MITI portal — figures verified on 18 Aug 2026 and are subject to change.
                     </p>
                 </div>
             </div>
@@ -412,7 +412,7 @@
                 <div class="journal-card-header" onclick="toggleCard('card-stage2')">
                     <h2 class="journal-card-title">
                         <i data-lucide="clock" style="color: #6366f1; width: 20px; height: 20px;"></i> 
-                        Fasa Permohonan MITI Semasa & Baru Tutup (Stage 2)
+                        Current & Recently Closed MITI Applications (Stage 2)
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
@@ -421,15 +421,15 @@
                         <table class="journal-table" id="stage2-table">
                             <thead>
                                 <tr>
-                                    <th style="width: 200px; min-width: 180px;">Syarikat</th>
+                                    <th style="width: 200px; min-width: 180px;">Company</th>
                                     <th>Market</th>
-                                    <th>Sektor</th>
-                                    <th>Harga</th>
-                                    <th>Sasaran V7 (%)</th>
-                                    <th>Tempoh MITI</th>
-                                    <th>Gred</th>
+                                    <th>Sector</th>
+                                    <th>Price</th>
+                                    <th>V7 Target (%)</th>
+                                    <th>MITI Period</th>
+                                    <th>Grade</th>
                                     <th>Hype</th>
-                                    <th style="min-width: 240px;">Keputusan</th>
+                                    <th style="min-width: 240px;">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -445,13 +445,13 @@
                 <div class="journal-card-header" onclick="toggleCard('card-precedent')">
                     <h2 class="journal-card-title">
                         <i data-lucide="git-compare" style="color: #e879f9; width: 20px; height: 20px;"></i>
-                        Analisis Precedent — IPO Sebenar Yang Paling Serupa
+                        Precedent Analysis - Most Similar Real IPO
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
                 <div class="collapsible-content">
                     <p style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.75rem 0;">
-                        Bukan V7 target atau Gred semata — ini adalah IPO <strong>sebenar</strong> yang paling mirip dengan setiap permohonan MITI aktif, berdasarkan <strong>sektor, penaja, pasaran, gred dan OS</strong>. Tengok apa jadi pada diorang.
+                        Not just V7 target or Grade alone — these are the <strong>actual</strong> IPOs most similar to each active MITI application, based on <strong>sector, underwriter, market, grade and OS</strong>. See what happened to them.
                     </p>
                     <div id="precedent-container"></div>
                 </div>
@@ -462,7 +462,7 @@
                 <div class="journal-card-header" onclick="toggleCard('card-future')">
                     <h2 class="journal-card-title">
                         <i data-lucide="compass" style="color: #10b981; width: 20px; height: 20px;"></i> 
-                        Radar Masa Depan / Future MITI (Stage 1 Draft Pipeline)
+                        Future Radar / Future MITI (Stage 1 Draft Pipeline)
                     </h2>
                     <i data-lucide="chevron-down" class="chevron-icon"></i>
                 </div>
@@ -471,12 +471,12 @@
                         <table class="journal-table" id="future-table">
                             <thead>
                                 <tr>
-                                    <th style="width: 200px; min-width: 180px;">Syarikat</th>
+                                    <th style="width: 200px; min-width: 180px;">Company</th>
                                     <th>Market</th>
-                                    <th>Sektor</th>
-                                    <th>Gred Awal</th>
+                                    <th>Sector</th>
+                                    <th>Initial Grade</th>
                                     <th>Hype Rating</th>
-                                    <th style="min-width: 320px;">Catatan Fundamental / Pemangkin</th>
+                                    <th style="min-width: 320px;">Fundamental Notes / Catalyst</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -494,16 +494,16 @@
                 <div class="journal-card-header" onclick="toggleCard('card-historical')">
                     <h2 class="journal-card-title">
                         <i data-lucide="history" style="color: #fbbf24; width: 20px; height: 20px;"></i> 
-                        Rekod Sejarah Penyenaraian (MITI)
+                        Historical Listing Records (MITI)
                     </h2>
                     <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;" onclick="event.stopPropagation()">
                         <select id="market-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer;">
-                            <option value="all" selected>Semua Pasaran</option>
-                            <option value="main">Pasaran Utama (Main)</option>
-                            <option value="ace">Pasaran ACE</option>
+                            <option value="all" selected>All Markets</option>
+                            <option value="main">Main Market</option>
+                            <option value="ace">ACE Market</option>
                         </select>
                         <select id="year-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer;">
-                            <option value="all" selected>Semua Tahun</option>
+                            <option value="all" selected>All Years</option>
                             <option value="2026">2026</option>
                             <option value="2025">2025</option>
                             <option value="2024">2024</option>
@@ -511,9 +511,9 @@
                             <option value="2022">2022</option>
                         </select>
                         <select id="sort-filter" onchange="renderHistorical()" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: #fbbf24; padding: 0.25rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-family: 'Inter', sans-serif; outline: none; cursor: pointer; font-weight: 600;">
-                            <option value="listing_desc" selected>Susun: Terkini (Listing Date)</option>
-                            <option value="prem_desc">Susun: Untung (Premium % High)</option>
-                            <option value="prem_asc">Susun: Rugi / Diskaun (Low %)</option>
+                            <option value="listing_desc" selected>Sort: Recent (Listing Date)</option>
+                            <option value="prem_desc">Sort: Profit (Premium % High)</option>
+                            <option value="prem_asc">Sort: Loss / Discount (Low %)</option>
                         </select>
                         <i data-lucide="chevron-down" class="chevron-icon"></i>
                     </div>
@@ -524,14 +524,14 @@
                         <table class="journal-table" id="historical-table">
                             <thead>
                                 <tr>
-                                    <th style="width: 200px; min-width: 180px;">Syarikat</th>
-                                    <th>Pasaran</th>
-                                    <th>Sektor</th>
-                                    <th>Harga IPO</th>
-                                    <th>Harga Buka</th>
-                                    <th>Premium Buka</th>
-                                    <th>Premium ATH</th>
-                                    <th style="min-width: 300px;">Saranan Strategi</th>
+                                    <th style="width: 200px; min-width: 180px;">Company</th>
+                                    <th>Market</th>
+                                    <th>Sector</th>
+                                    <th>IPO Price</th>
+                                    <th>Open Price</th>
+                                    <th>Open Premium</th>
+                                    <th>ATH Premium</th>
+                                    <th style="min-width: 300px;">Strategy Advice</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -615,7 +615,7 @@
         }
 
         function getNormalizedSectorGroup(s) {
-            if (!s) return 'Lain-lain';
+            if (!s) return 'Others';
             const str = s.toLowerCase();
             if (str.includes('tech') || str.includes('semicon') || str.includes('software') || str.includes('digital') || str.includes('ai')) return 'Technology';
             if (str.includes('consumer') || str.includes('food') || str.includes('beverage') || str.includes('retail') || str.includes('beauty')) return 'Consumer';
@@ -632,7 +632,7 @@
             const listed = ipoData.filter(x => x.status === 'Listed' && x.openPrice != null && x.price != null && x.hasMitiTranche !== false);
             const map = {};
             listed.forEach(x => {
-                const rawSec = x.sector || 'Lain-lain';
+                const rawSec = x.sector || 'Others';
                 const key1 = rawSec.split('/')[0].split('(')[0].trim();
                 const key2 = getNormalizedSectorGroup(rawSec);
                 
@@ -684,7 +684,7 @@
             });
 
             if (stage2Data.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text-dim);">Tiada rekod Stage 2 ditemui.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text-dim);">No Stage 2 records found.</td></tr>`;
                 return;
             }
 
@@ -707,7 +707,7 @@
                         statusLabel = `<span style="color:#f87171;font-weight:700;background:rgba(239,68,68,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(239,68,68,0.2);font-size:0.7rem;">ALREADY CLOSED</span>`;
                     }
                 } else {
-                    dateDisplay = `<span style="color:#fbbf24;font-weight:600;">Akan Dibuka (TBA)</span>`;
+                    dateDisplay = `<span style="color:#fbbf24;font-weight:600;">Opening Soon (TBA)</span>`;
                     statusLabel = `<span style="color:#fbbf24;font-weight:700;background:rgba(245,158,11,0.15);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(245,158,11,0.3);font-size:0.7rem;">UPCOMING / PENDING DATES</span>`;
                 }
 
@@ -796,7 +796,7 @@
                     sector: 'Semiconductor', 
                     grade: 'A', 
                     fires: 3, 
-                    note: '<b>🔥 Supercycle Semicon & AI:</b> Rekaan litar maju (advanced interconnect) untuk cip kelajuan tinggi. Pemangkin utama ialah permintaan Data Centre & AI global serta pelonggaran sekatan cip ke China. Pelanggan utama dispekulasikan berkaitan gergasi dunia (seperti Infineon/TSMC). Dijangka mempunyai kunci kira-kira yang kukuh (Net Cash) dengan margin keuntungan tinggi.' 
+                    note: '<b>🔥 Supercycle Semicon & AI:</b> Advanced interconnect designs for high-speed chips. Primary catalyst is global demand for Data Centers & AI, plus easing of chip restrictions to China. Expected to have a strong balance sheet (Net Cash) with high profit margins.' 
                 },
                 { 
                     name: 'Loob Berhad (Tealive)', 
@@ -804,7 +804,7 @@
                     sector: 'Consumer (Beverages)', 
                     grade: 'A', 
                     fires: 2, 
-                    note: '<b>☕ Dominasi Jenama & Cash Flow:</b> Peneraju rantaian minuman boba terbesar di Malaysia. Aliran tunai runcit harian sangat mantap dan model francais/ekspansi yang agresif. Tarikan kuat untuk dana institusi yang mahukan pendedahan kepada sektor F&B berkualiti.' 
+                    note: '<b>☕ Brand Dominance & Cash Flow:</b> Leader in the largest boba tea chain in Malaysia. Solid daily retail cash flow and aggressive franchise/expansion model. Strong attraction for institutional funds seeking high-quality F&B exposure.' 
                 },
                 { 
                     name: 'KK Mart Retail', 
@@ -812,7 +812,7 @@
                     sector: 'Consumer Retail', 
                     grade: 'B', 
                     fires: 2, 
-                    note: '<b>🛒 Trafik Runcit & Skala:</b> Model perniagaan berasaskan kedai serbaneka 24 jam dengan trafik pelanggan harian yang padat. Walau bagaimanapun, menghadapi persaingan hebat dari 99 Speedmart & 7-Eleven yang boleh mengehadkan margin keuntungan bersih.' 
+                    note: '<b>🛒 Retail Traffic & Scale:</b> Business model based on 24-hour convenience stores with dense daily customer traffic. However, faces stiff competition from 99 Speedmart & 7-Eleven which may cap net profit margins.' 
                 },
                 { 
                     name: 'Leader Energy', 
@@ -820,7 +820,7 @@
                     sector: 'Solar / Renewable', 
                     grade: 'B', 
                     fires: 1, 
-                    note: '<b>☀️ Tema Tenaga Solar & ESG:</b> Pengendali infrastruktur solar janakuasa. Menepati kriteria pematuhan kelestarian global (ESG) yang menarik dana asing, tetapi pergerakan harga hari pertama (debut) biasanya lebih stabil dan lambat berbanding sektor teknologi.' 
+                    note: '<b>☀️ Solar Energy & ESG Theme:</b> Solar infrastructure operator. Fits global ESG compliance criteria attractive to foreign funds, but first-day (debut) price movements are usually more stable and slower than the tech sector.' 
                 },
                 { 
                     name: 'Chubb Insurance', 
@@ -828,7 +828,7 @@
                     sector: 'Finance / Insurance', 
                     grade: 'B', 
                     fires: 1, 
-                    note: '<b>🏦 Dividen & Risiko Rendah:</b> Sektor insurans dan kewangan tradisional. Model perniagaan sangat stabil dengan rekod dividen yang dijangka konsisten, namun kekurangan elemen kejutan (hype) untuk kenaikan harga mendadak.' 
+                    note: '<b>🏦 Dividend & Low Risk:</b> Traditional insurance and finance sector. Very stable business model with expected consistent dividend records, but lacks the surprise element (hype) for sudden price surges.' 
                 }
             ];
 
@@ -841,11 +841,11 @@
                     let noteText = item.analystInsight || '';
                     if (!noteText) {
                         if (sector.toLowerCase().includes('semicon') || sector.toLowerCase().includes('test') || sector.toLowerCase().includes('assembly')) {
-                            noteText = '<b>🔌 Rantaian Bekalan Semikonduktor:</b> Berkaitan segmen test/assembly atau pembuatan bahan logam perkakasan. Pemangkin pertumbuhan dipengaruhi oleh pemulihan sektor teknologi global.';
+                            noteText = '<b>🔌 Semiconductor Supply Chain:</b> Related to the testing/assembly segment or hardware metal manufacturing. Growth catalysts influenced by the global tech sector recovery.';
                         } else if (sector.toLowerCase().includes('solar') || sector.toLowerCase().includes('renewable') || sector.toLowerCase().includes('energy')) {
-                            noteText = '<b>☀️ ESG & Tenaga Solar:</b> Loji solar janakuasa atau kawalan sisa industri. Pelaburan mampan bertemakan ESG, namun pergerakan harga biasanya lebih defensif.';
+                            noteText = '<b>☀️ ESG & Solar Energy:</b> Solar power plants or industrial waste management. Sustainable investments with ESG themes, but price movements are usually more defensive.';
                         } else {
-                            noteText = 'Syarikat draft prospektus dalam fasa semakan awal oleh Suruhanjaya Sekuriti / MITI.';
+                            noteText = 'Prospectus draft company in the early review phase by Securities Commission / MITI.';
                         }
                     }
 
@@ -922,16 +922,16 @@
             if (summaryBar) {
                 summaryBar.innerHTML = `
                     <span style="font-size:0.75rem; color:white; background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.4); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
-                        📊 Jumlah IPO MITI: <strong>${listData.length}</strong>
+                        📊 Total MITI IPOs: <strong>${listData.length}</strong>
                     </span>
                     <span style="font-size:0.75rem; color:#34d399; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
-                        🟢 Untung: <strong>${posCount}</strong> (${listData.length ? Math.round(posCount/listData.length*100) : 0}%)
+                        ✅ Profit: <strong>${posCount}</strong> (${listData.length ? Math.round(posCount/listData.length*100) : 0}%)
                     </span>
                     <span style="font-size:0.75rem; color:#f87171; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
-                        🔴 Rugi / Diskaun: <strong>${negCount}</strong> (${listData.length ? Math.round(negCount/listData.length*100) : 0}%)
+                        ❌ Loss / Discount: <strong>${negCount}</strong> (${listData.length ? Math.round(negCount/listData.length*100) : 0}%)
                     </span>
                     <span style="font-size:0.75rem; color:#fbbf24; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); padding:0.2rem 0.55rem; border-radius:1rem; font-weight:600;">
-                        🟡 Par / Seri (0%): <strong>${parCount}</strong>
+                        🟡 Par / Flat (0%): <strong>${parCount}</strong>
                     </span>
                 `;
             }
@@ -954,7 +954,7 @@
             });
 
             if (listData.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-dim);">Tiada rekod penyenaraian ditemui untuk pasaran yang dipilih.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-dim);">No listing records found for the selected market.</td></tr>`;
                 return;
             }
 
@@ -970,12 +970,12 @@
                 const grade = ipo.predictedGrade || 'B';
                 
                 if (openPrem >= 40) {
-                    strategyBadge = `<span class="badge-strategy sell"><i data-lucide="zap" style="width:10px;height:10px;"></i> JUAL HARI 1</span>`;
+                    strategyBadge = `<span class="badge-strategy sell"><i data-lucide="zap" style="width:10px;height:10px;"></i> SELL DAY 1</span>`;
                 } else if (openPrem < 20) {
                     if (grade === 'A' || grade === 'B') {
-                        strategyBadge = `<span class="badge-strategy hold"><i data-lucide="trending-up" style="width:10px;height:10px;"></i> HOLD UNTUK ATH</span>`;
+                        strategyBadge = `<span class="badge-strategy hold"><i data-lucide="trending-up" style="width:10px;height:10px;"></i> HOLD FOR ATH</span>`;
                     } else {
-                        strategyBadge = `<span class="badge-strategy sell"><i data-lucide="alert-circle" style="width:10px;height:10px;"></i> JUAL / EXIT</span>`;
+                        strategyBadge = `<span class="badge-strategy sell"><i data-lucide="alert-circle" style="width:10px;height:10px;"></i> SELL / EXIT</span>`;
                     }
                 } else {
                     strategyBadge = `<span class="badge-strategy swing"><i data-lucide="line-chart" style="width:10px;height:10px;"></i> SWING PLAY</span>`;
@@ -1021,7 +1021,7 @@
             // Group by sector (take first part before '/' or '(')
             const sectorMap = {};
             listed.forEach(x => {
-                const rawSector = (x.sector || 'Lain-lain');
+                const rawSector = (x.sector || 'Others');
                 const sector = rawSector.split('/')[0].split('(')[0].trim();
                 if (!sectorMap[sector]) sectorMap[sector] = { total: 0, positive: 0, sum: 0, over20: 0 };
                 const prem = ((x.openPrice - x.price) / x.price) * 100;
@@ -1051,23 +1051,23 @@
 
                 if (avg >= 30) {
                     avgColor = '#10b981'; verdictColor = '#10b981';
-                    verdict = '🔥 Terpanas';
+                    verdict = '🔥 Hottest';
                     rowHighlight = 'background: rgba(16, 185, 129, 0.04);';
                 } else if (avg >= 15) {
                     avgColor = '#60a5fa'; verdictColor = '#60a5fa';
-                    verdict = '✅ Kukuh';
+                    verdict = '✅ Strong';
                     rowHighlight = 'background: rgba(96, 165, 250, 0.04);';
                 } else if (avg >= 5) {
                     avgColor = '#fbbf24'; verdictColor = '#fbbf24';
-                    verdict = '⚠️ Sederhana';
+                    verdict = '⚠️ Moderate';
                     rowHighlight = 'background: rgba(251, 191, 36, 0.04);';
                 } else if (avg >= 0) {
                     avgColor = '#f97316'; verdictColor = '#f97316';
-                    verdict = '😐 Lemah';
+                    verdict = '😐 Weak';
                     rowHighlight = '';
                 } else {
                     avgColor = '#f87171'; verdictColor = '#f87171';
-                    verdict = '💀 Bahaya';
+                    verdict = '💀 Dangerous';
                     rowHighlight = 'background: rgba(239, 68, 68, 0.06);';
                 }
 
@@ -1112,7 +1112,7 @@
             );
 
             if (stage2.length === 0) {
-                container.innerHTML = `<p style="color:var(--text-dim);font-size:0.8rem;">Tiada IPO Stage 2 untuk dianalisis.</p>`;
+                container.innerHTML = `<p style="color:var(--text-dim);font-size:0.8rem;">No Stage 2 IPOs to analyze.</p>`;
                 return;
             }
 
@@ -1175,10 +1175,10 @@
                     const tags = [];
                     const compSector = sectorRoot(comp.sector);
                     const compIb = (comp.ib || '').toLowerCase();
-                    if (compSector === targetSector) tags.push(`<span style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Sektor</span>`);
+                    if (compSector === targetSector) tags.push(`<span style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Sector</span>`);
                     if (compIb.includes(targetIb.split(' ')[0]) || targetIb.includes(compIb.split(' ')[0])) tags.push(`<span style="background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">IB</span>`);
-                    if ((comp.market||'').toLowerCase().includes('main') ? 'main':'ace' === targetMarket) tags.push(`<span style="background:rgba(236,72,153,0.1);color:#f472b6;border:1px solid rgba(236,72,153,0.2);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Pasaran</span>`);
-                    if ((comp.predictedGrade||'?') === (target.predictedGrade||'?') && comp.predictedGrade !== '?') tags.push(`<span style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Gred</span>`);
+                    if ((comp.market||'').toLowerCase().includes('main') ? 'main':'ace' === targetMarket) tags.push(`<span style="background:rgba(236,72,153,0.1);color:#f472b6;border:1px solid rgba(236,72,153,0.2);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Market</span>`);
+                    if ((comp.predictedGrade||'?') === (target.predictedGrade||'?') && comp.predictedGrade !== '?') tags.push(`<span style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">Grade</span>`);
                     if (osBucket(comp.os) === osBucket(target.os) && comp.os) tags.push(`<span style="background:rgba(20,184,166,0.15);color:#2dd4bf;border:1px solid rgba(20,184,166,0.3);padding:0.05rem 0.3rem;border-radius:3px;font-size:0.65rem;">OS Range</span>`);
 
                     return `
@@ -1204,19 +1204,19 @@
                     <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap;">
                         <span style="font-size:0.85rem;">${statusDot}</span>
                         <strong style="color:white;font-size:0.95rem;">${target.companyName}</strong>
-                        <span style="font-size:0.75rem;color:var(--text-dim);">— Comparable berdasarkan data sebenar tracker</span>
+                        <span style="font-size:0.75rem;color:var(--text-dim);">— Comparable based on actual tracking data</span>
                     </div>
-                    ${top.length === 0 ? `<p style="color:var(--text-dim);font-size:0.8rem;padding:0.5rem 0;">Tiada comparable ditemui dalam tracker.</p>` : `
+                    ${top.length === 0 ? `<p style="color:var(--text-dim);font-size:0.8rem;padding:0.5rem 0;">No comparable companies found in tracker.</p>` : `
                     <div class="table-responsive">
                         <table class="journal-table" style="font-size:0.8rem;">
                             <thead>
                                 <tr>
-                                    <th>Syarikat Comparable</th>
-                                    <th>Penaja</th>
+                                    <th>Comparable Company</th>
+                                    <th>Underwriter</th>
                                     <th>OS</th>
-                                    <th>Gred</th>
-                                    <th>Hari 1</th>
-                                    <th>Sekarang</th>
+                                    <th>Grade</th>
+                                    <th>Day 1</th>
+                                    <th>Current</th>
                                 </tr>
                             </thead>
                             <tbody>${rows}</tbody>
@@ -1228,18 +1228,18 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // Countdown format: hari, jam, minit, saat (per-second live updates)
-        function formatJournalCountdown(diff) {
-            if (diff <= 0) return { text: '0 saat', color: '#f87171' };
+        // Countdown format: days, hrs, min, sec (per-second live updates)
+        function formatCountdown(diff, baseColor) {
+            if (diff <= 0) return { text: '0 sec', color: '#f87171' };
             const days = Math.floor(diff / 86400000);
             const hours = Math.floor((diff % 86400000) / 3600000);
             const mins = Math.floor((diff % 3600000) / 60000);
             const secs = Math.floor((diff % 60000) / 1000);
-            let text, color = '#10b981';
-            if (days > 0) { text = `${days} hari ${hours} jam ${mins} minit ${secs} saat`; }
-            else if (hours > 0) { text = `${hours} jam ${mins} minit ${secs} saat`; color = '#fbbf24'; }
-            else if (mins > 0) { text = `${mins} minit ${secs} saat`; color = '#f87171'; }
-            else { text = `${secs} saat`; color = '#f87171'; }
+            let text, color = baseColor || '#10b981';
+            if (days > 0) { text = `${days}d ${hours}h ${mins}m ${secs}s`; }
+            else if (hours > 0) { text = `${hours}h ${mins}m ${secs}s`; color = '#fbbf24'; }
+            else if (mins > 0) { text = `${mins}m ${secs}s`; color = '#f87171'; }
+            else { text = `${secs}s`; color = '#f87171'; }
             return { text, color };
         }
 
@@ -1270,7 +1270,7 @@
                 .sort((a, b) => a.close - b.close);
 
             if (items.length === 0) {
-                grid.innerHTML = `<p style="color:var(--text-dim);font-size:0.85rem;">Tiada peruntukan MITI aktif sekarang. Semak semula selepas prospektus IPO baharu dilancarkan.</p>`;
+                grid.innerHTML = `<p style="color:var(--text-dim);font-size:0.85rem;">No active MITI allocations at this time. Check back when a new IPO prospectus is launched.</p>`;;
                 return;
             }
 

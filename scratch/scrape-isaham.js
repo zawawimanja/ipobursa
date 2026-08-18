@@ -7,12 +7,15 @@
  * membuatkan sync-isaham.js gagal senyap):
  *
  * ALIRAN:
+ *   0) SAMBUNG KE BROWSER KEEPER (scratch/isaham-browser-keeper.js, port
+ *      9222) jika hidup — sesi Cloudflare yang sudah sah, TIADA challenge.
  *   1) HEADLESS dahulu (guna sesi tersimpan di scratch/.isaham-profile):
  *      poll sehingga 45s setiap halaman — JS challenge selalunya auto-solve.
  *      Jika berjaya → cache dikemas kini, selesai.
  *   2) Jika gagal & TIDAK --quiet → browser DIBUKA (headed). Anda selesaikan
  *      challenge Cloudflare SEKALI secara manual. Sebaik sesi sah, SEMUA
  *      halaman yang gagal terus dimuat turun dalam sesi yang sama.
+ *      (Cadangan kuat: gunakan keeper agar tak perlu solve lagi selepas ini.)
  *   3) VERIFIKASI headless selepas sesi disimpan — pastikan run seterusnya
  *      (auto_runner / sync-isaham) akan terus headless.
  *   4) Mod --quiet (digunakan auto_runner.js & sync-isaham.js): headless
@@ -20,10 +23,11 @@
  *      (perlu run manual sekali: node scratch/scrape-isaham.js).
  *
  * CARA GUNA:
- *   node scratch/scrape-isaham.js               (run biasa / solve challenge jika perlu)
- *   node scratch/scrape-isaham.js --quiet       (untuk jadual auto)
- *   node scratch/scrape-isaham.js --headed      (paksa browser nampak terus)
- *   node scratch/scrape-isaham.js --fresh       (paksa muat turun walaupun cache baru)
+ *   node scratch/isaham-browser-keeper.js              (BEST: browser kekal, solve sekali)
+ *   node scratch/scrape-isaham.js                      (run biasa / solve challenge jika perlu)
+ *   node scratch/scrape-isaham.js --quiet              (untuk jadual auto)
+ *   node scratch/scrape-isaham.js --headed             (paksa browser nampak terus)
+ *   node scratch/scrape-isaham.js --fresh              (paksa muat turun walaupun cache baru)
  */
 
 const puppeteer = require('puppeteer');
@@ -222,6 +226,48 @@ async function cookieSummary(page) {
     }
 }
 
+const KEEPER_PORT = 9222;
+
+async function keeperUrl() {
+    try {
+        const resp = await fetch(`http://127.0.0.1:${KEEPER_PORT}/json/version`, { signal: AbortSignal.timeout(3000) });
+        return resp.ok;
+    } catch (e) {
+        return false;
+    }
+}
+
+// Sambung ke browser keeper (sesi Cloudflare yang sudah sah) — elak
+// lancarkan browser baru yang akan kena challenge semula.
+async function tryKeeper(targets) {
+    if (!(await keeperUrl())) return { used: false, failed: targets };
+    let browser;
+    try {
+        browser = await puppeteer.connect({ browserURL: `http://127.0.0.1:${KEEPER_PORT}`, defaultViewport: null });
+    } catch (e) {
+        console.log(`ℹ️  Browser keeper wujud tetapi gagal disambung (${e.message}) — guna browser baharu.`);
+        return { used: false, failed: targets };
+    }
+    console.log('🔌 Browser keeper dijumpai (sesi Cloudflare sah) — guna sesi sedia ada, tiada challenge baharu.');
+    const failed = [];
+    for (const spec of targets) {
+        const page = await browser.newPage();
+        try {
+            await stealthInit(page);
+            console.log(`\n📄 ${spec.label} — ${spec.url}`);
+            const ok = await fetchAndSave(page, spec, 30000);
+            if (!ok) failed.push(spec);
+        } catch (e) {
+            console.log(`  ✗ ${spec.label} — ralat: ${e.message}`);
+            failed.push(spec);
+        } finally {
+            try { await page.close(); } catch (e2) { /* tab sudah tutup */ }
+        }
+    }
+    await browser.disconnect();
+    return { used: true, failed };
+}
+
 // ---------------------------------------------------------------------------
 // ALIRAN UTAMA
 // ---------------------------------------------------------------------------
@@ -241,6 +287,19 @@ async function main() {
     console.log('🌐 Membuka isaham.my (Puppeteer)...');
 
     let failed = [...targets];
+
+    // --- 0) SAMBUNG KE BROWSER KEEPER (jika hidup) — SESI CLOUDFLARE SUDAH SAH ---
+    if (!headedForce) {
+        const keeper = await tryKeeper(targets);
+        if (keeper.used) {
+            if (keeper.failed.length === 0) {
+                console.log('\n✅ Semua halaman dimuat turun melalui sesi keeper (tiada challenge).');
+                return;
+            }
+            failed = keeper.failed;
+            console.log(`\n⚠️ ${keeper.failed.length} halaman gagal melalui keeper — cuba browser baharu...`);
+        }
+    }
 
     // --- 1) PASS HEADLESS (guna sesi tersimpan) ---
     if (!headedForce) {
