@@ -1243,6 +1243,8 @@
             return { text, color };
         }
 
+        const formatJournalCountdown = formatCountdown;
+
         function updateJournalCountdowns() {
             const now = Date.now();
             document.querySelectorAll('#miti-countdown-grid [data-cd-end]').forEach(el => {
