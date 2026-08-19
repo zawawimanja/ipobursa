@@ -1,7 +1,7 @@
 const SYNC_STATUS = {
-  "lastSync": "18/08/2026, 11:17:55 pm",
+  "lastSync": "19/08/2026, 8:45:46 am",
   "status": "Success",
-  "totalIpos": 310
+  "totalIpos": 307
 };
 
 if (typeof module !== 'undefined' && module.exports) {
