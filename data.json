@@ -2914,7 +2914,7 @@
         "predictedGrade": "C",
         "stage": 5,
         "status": "Listed",
-        "shariah": true,
+        "shariah": false,
         "outlier": true,
         "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
         "highPrice": 2.576,
@@ -5652,7 +5652,7 @@
         "predictedGrade": "B",
         "stage": 5,
         "status": "Listed",
-        "shariah": true,
+        "shariah": false,
         "highPrice": 0.32,
         "dailyChange": null,
         "openPrice": 0.32,
@@ -8558,7 +8558,8 @@
         "listingDate": "2026-01-13",
         "performance": "+138.00%",
         "market": "ACE Market",
-        "highPrice": 0.585
+        "highPrice": 0.585,
+        "shariah": false
     },
     {
         "id": "foodie-ns-",
@@ -8574,7 +8575,8 @@
         "listingDate": "2025-11-28",
         "performance": "+21.67%",
         "market": "ACE Market",
-        "highPrice": 0.4
+        "highPrice": 0.4,
+        "shariah": false
     },
     {
         "id": "camaroe--ns-",
@@ -8590,7 +8592,8 @@
         "listingDate": "2025-10-02",
         "performance": "-42.86%",
         "market": "ACE Market",
-        "highPrice": 0.16
+        "highPrice": 0.16,
+        "shariah": false
     },
     {
         "id": "paradigm--ns-",
@@ -8606,7 +8609,8 @@
         "listingDate": "2025-06-10",
         "performance": "-8.00%",
         "market": "ACE Market",
-        "highPrice": 1
+        "highPrice": 1,
+        "shariah": false
     },
     {
         "id": "northern--ns-",
@@ -8622,7 +8626,8 @@
         "listingDate": "2025-02-06",
         "performance": "+8.73%",
         "market": "ACE Market",
-        "highPrice": 0.9
+        "highPrice": 0.9,
+        "shariah": false
     },
     {
         "id": "megafb",
@@ -8639,7 +8644,8 @@
         "performance": "+191.04%",
         "market": "Main Market",
         "highPrice": 1.84,
-        "hasMitiTranche": true
+        "hasMitiTranche": true,
+        "shariah": false
     },
     {
         "id": "3ren--ns-",
@@ -8655,7 +8661,8 @@
         "listingDate": "2024-11-06",
         "performance": "+46.43%",
         "market": "ACE Market",
-        "highPrice": 0.45
+        "highPrice": 0.45,
+        "shariah": false
     },
     {
         "id": "khb--ns-",
@@ -8671,7 +8678,8 @@
         "listingDate": "2024-10-08",
         "performance": "-57.50%",
         "market": "ACE Market",
-        "highPrice": 0.29
+        "highPrice": 0.29,
+        "shariah": false
     },
     {
         "id": "kucingko--ns-",
@@ -8687,7 +8695,8 @@
         "listingDate": "2024-07-26",
         "performance": "-66.67%",
         "market": "ACE Market",
-        "highPrice": 0.805
+        "highPrice": 0.805,
+        "shariah": false
     },
     {
         "id": "panda",
@@ -8720,7 +8729,8 @@
         "listingDate": "2023-09-26",
         "performance": "+45.83%",
         "market": "ACE Market",
-        "highPrice": 0.345
+        "highPrice": 0.345,
+        "shariah": false
     },
     {
         "id": "mersec--ns-",
@@ -8736,7 +8746,8 @@
         "listingDate": "2023-09-19",
         "performance": "+12.00%",
         "market": "ACE Market",
-        "highPrice": 0.3
+        "highPrice": 0.3,
+        "shariah": false
     },
     {
         "id": "mbn--ns-",
@@ -8752,7 +8763,8 @@
         "listingDate": "2023-07-25",
         "performance": "-19.05%",
         "market": "ACE Market",
-        "highPrice": 0.28
+        "highPrice": 0.28,
+        "shariah": false
     },
     {
         "id": "adb",
@@ -8784,7 +8796,8 @@
         "listingDate": "2023-03-10",
         "performance": "-69.44%",
         "market": "ACE Market",
-        "highPrice": 1.5
+        "highPrice": 1.5,
+        "shariah": false
     },
     {
         "id": "eib--ns-",
@@ -8800,7 +8813,8 @@
         "listingDate": "2022-07-18",
         "performance": "-68.33%",
         "market": "ACE Market",
-        "highPrice": 0.3
+        "highPrice": 0.3,
+        "shariah": false
     },
     {
         "id": "unitrad--ns-",
@@ -8816,7 +8830,8 @@
         "listingDate": "2022-06-14",
         "performance": "-25.00%",
         "market": "ACE Market",
-        "highPrice": 0.32
+        "highPrice": 0.32,
+        "shariah": false
     },
     {
         "id": "ppjack--ns-",
@@ -8832,7 +8847,8 @@
         "listingDate": "2022-04-01",
         "performance": "+200.00%",
         "market": "ACE Market",
-        "highPrice": 0.92
+        "highPrice": 0.92,
+        "shariah": false
     },
     {
         "id": "yenher--ns-",
@@ -8848,7 +8864,8 @@
         "listingDate": "2021-07-15",
         "performance": "-16.84%",
         "market": "ACE Market",
-        "highPrice": 0.995
+        "highPrice": 0.995,
+        "shariah": false
     },
     {
         "id": "ovh--ns-",
@@ -8864,7 +8881,8 @@
         "listingDate": "2020-07-22",
         "performance": "-1.92%",
         "market": "ACE Market",
-        "highPrice": 0.53
+        "highPrice": 0.53,
+        "shariah": false
     },
     {
         "id": "innature--ns-",
@@ -8880,7 +8898,8 @@
         "listingDate": "2020-02-20",
         "performance": "-75.78%",
         "market": "ACE Market",
-        "highPrice": 0.72
+        "highPrice": 0.72,
+        "shariah": false
     },
     {
         "id": "khjb--ns-",
@@ -8896,7 +8915,8 @@
         "listingDate": "2019-07-08",
         "performance": "-75.58%",
         "market": "ACE Market",
-        "highPrice": 0.43
+        "highPrice": 0.43,
+        "shariah": false
     },
     {
         "id": "rt-pastry-holdings-berhad",
@@ -9238,7 +9258,7 @@
         "openingDate": "12-Aug-2026",
         "closingDate": "03-Sep-2026",
         "listingDate": "17-Sep-2026",
-        "shariah": false,
+        "shariah": true,
         "stage": 3,
         "status": "Application Open",
         "year": 2026,
@@ -9710,7 +9730,8 @@
         "status": "Listed",
         "year": 2024,
         "highPrice": 1.05,
-        "hasMitiTranche": false
+        "hasMitiTranche": false,
+        "shariah": false
     },
     {
         "id": "saliran-group",
@@ -9731,7 +9752,8 @@
         "highPrice": 0.52,
         "os": 76.03,
         "isAutoOS": true,
-        "hasMitiTranche": true
+        "hasMitiTranche": true,
+        "shariah": false
     },
     {
         "id": "northeast",
@@ -9900,7 +9922,8 @@
         "currentPrice": 0.13,
         "performance": "-27.78%",
         "year": 2026,
-        "listingDate": "2026-06-29"
+        "listingDate": "2026-06-29",
+        "shariah": false
     },
     {
         "id": "features",

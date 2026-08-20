@@ -47,6 +47,13 @@ jobs:
           node scratch/sync-miti-applicants-login.js --no-push
         continue-on-error: true
 
+      - name: Sync Shariah Status (senarai rasmi SC)
+        run: |
+          # Auto-sync status shariah dari senarai rasmi Securities Commission
+          # (Compliant / Non-Compliant) — padan ikut nama syarikat.
+          node sync-shariah.js --no-push
+        continue-on-error: true
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
