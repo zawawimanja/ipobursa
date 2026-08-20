@@ -1283,6 +1283,8 @@
                 const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                 const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
                 const priceBadge = ipo.price ? ` · <span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : '';
+                const ibShort = ipo.ib ? ipo.ib.split(',')[0].trim() : '';
+                const ibText = ibShort ? ` · ${ibShort}` : '';
                 const marketBadge = (ipo.market || '').toLowerCase().includes('main')
                     ? `<span style="font-size:0.65rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>`
                     : `<span style="font-size:0.65rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>`;
@@ -1293,7 +1295,7 @@
                         <strong style="color:white;font-size:0.95rem;">${ipo.companyName}</strong>
                         ${marketBadge}
                     </div>
-                    <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:0.6rem;">${ipo.sector || 'N/A'} · Grade ${ipo.predictedGrade || 'B'}</div>
+                    <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:0.6rem;">${ipo.sector || 'N/A'}${ibText} · Grade ${ipo.predictedGrade || 'B'}</div>
                     <div data-cd-end="${close.getTime()}" style="font-size:1.35rem;font-weight:800;color:${cd.color};line-height:1.2;">${cd.text}</div>
                     <div style="font-size:0.82rem;font-weight:600;color:#e2e8f0;margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
                     <div style="display:flex;justify-content:space-between;align-items:center;gap:1.2rem;margin-top:0.65rem;padding-top:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-main);">
