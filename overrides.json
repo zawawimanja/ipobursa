@@ -289,6 +289,7 @@
     "mydcd-berhad": {
         "stage": 2,
         "status": "MITI Allocation Phase",
+        "price": 0.56,
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
