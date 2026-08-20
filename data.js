@@ -9552,7 +9552,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.6,
     "zone2TargetPrice": 0.6,
     "mitiOfferShares": 922730000,
-    "mitiApplicants": 1192,
+    "mitiApplicants": 1194,
     "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
   },
   {
