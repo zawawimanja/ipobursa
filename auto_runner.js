@@ -44,10 +44,10 @@ function checkAndRun() {
 // ---------------------------------------------------------------------------
 // MITI auto-sync: setiap 30 minit 24/7 (pemohon boleh apply walau cuti/hujung
 // minggu — nombor sentiasa berubah, jadi pantau berterusan)
-//   1) sync-miti-portal-dates.js   — tarikh buka/tutup dari halaman AWAM portal
+//   1) sync-miti-portal-dates.js — tarikh buka/tutup dari halaman AWAM portal
 //      (tiada login, sentiasa boleh jalan)
-//   2) scrape-miti-applicants.js --quiet — jumlah pemohon guna cookies Chrome (tiada login manual); skip jika cookies tiada
-//      (login portal MITI sekali dalam Chrome, lepas tu dump cookies)
+//   2) sync-miti-applicants-login.js --quiet — jumlah pemohon + tawaran guna
+//      LOGIN TERUS (kredential .env, TIADA cookies Chrome/CAPTCHA)
 // ---------------------------------------------------------------------------
 let lastMitiRun = null;
 
@@ -71,7 +71,7 @@ function checkAndRunMiti() {
         if (error) console.error(`[${new Date().toLocaleString()}] [MITI dates] Error: ${error.message}`);
     });
 
-    exec('node scratch/scrape-miti-applicants.js --quiet', { cwd: __dirname }, (error, stdout, stderr) => {
+    exec('node scratch/sync-miti-applicants-login.js --quiet', { cwd: __dirname }, (error, stdout, stderr) => {
         if (stdout) console.log(stdout);
         if (error) console.error(`[${new Date().toLocaleString()}] [MITI apps] Error: ${error.message}`);
     });
