@@ -2,12 +2,9 @@ name: Update Daily IPO Data
 
 on:
   schedule:
-    # 00:45 UTC = 8:45 AM Malaysia Time (Market open). Runs Monday to Friday.
-    - cron: '45 0 * * 1-5'
-    # 05:30 UTC = 1:30 PM Malaysia Time (Lunch break). Runs Monday to Friday.
-    - cron: '30 5 * * 1-5'
-    # 09:30 UTC = 5:30 PM Malaysia Time (Market close). Runs Monday to Friday.
-    - cron: '30 9 * * 1-5'
+    # 10x sehari (setiap jam), waktu pasaran MYT: 08:00, 09:00, ..., 17:00
+    # (MYT = UTC+8, jadi 00:00–09:00 UTC). Hari bekerja sahaja.
+    - cron: '0 0,1,2,3,4,5,6,7,8,9 * * 1-5'
   workflow_dispatch: # Allows manual click run
 
 jobs:
