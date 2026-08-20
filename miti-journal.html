@@ -1294,10 +1294,10 @@
                     </div>
                     <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:0.6rem;">${ipo.sector || 'N/A'} · Grade ${ipo.predictedGrade || 'B'}</div>
                     <div data-cd-end="${close.getTime()}" style="font-size:1.35rem;font-weight:800;color:${cd.color};line-height:1.2;">${cd.text}</div>
-                    <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.15rem;">closes · ${ipo.mitiCloseDate}</div>
-                    <div style="display:flex;gap:1.2rem;margin-top:0.65rem;padding-top:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-main);">
-                        <span>🎯 Offer: <strong>${offerStr}</strong></span>
-                        <span>👥 Applicants: <strong>${appsStr}</strong></span>
+                    <div style="font-size:0.82rem;font-weight:600;color:#e2e8f0;margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:1.2rem;margin-top:0.65rem;padding-top:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-main);">
+                        <span style="font-size:0.75rem;color:var(--text-dim);">🎯 Offer: <strong>${offerStr}</strong></span>
+                        <span style="font-size:0.92rem;font-weight:700;color:#34d399;">👥 Applicants: <strong>${appsStr}</strong></span>
                     </div>
                 </div>`;
             }).join('');

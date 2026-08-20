@@ -1367,10 +1367,10 @@ function renderMitiCountdownStrip() {
                             </div>
                             <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()} · Grade ${ipo.predictedGrade || 'B'}</div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin-top:0.1rem;">closes · ${ipo.mitiCloseDate}</div>
-                            <div style="display:flex; gap:0.8rem; margin-top:0.35rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
-                                <span>🎯 ${offerStr}</span>
-                                <span>👥 ${appsStr}</span>
+                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
+                                <span style="font-size:0.72rem; color:var(--text-dim);">🎯 ${offerStr}</span>
+                                <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
                             </div>
                         </div>`;
                 }).join('')}
