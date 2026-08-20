@@ -9545,7 +9545,7 @@ const IPO_DATA = [
     "mitiOpenDate": "17-Aug-2026",
     "mitiCloseDate": "27-Aug-2026",
     "listingDate": "",
-    "shariah": true,
+    "shariah": false,
     "stage": 2,
     "status": "MITI Allocation Phase",
     "year": 2026,

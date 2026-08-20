@@ -1314,6 +1314,17 @@ function updateCountdownTexts() {
 }
 
 // MITI Countdown — live ticking strip on the main tracker for open MITI allocations
+// Helper: badge status syariah yang JELAS (hijau compliant / merah tak compliant)
+function shariahBadge(ipo) {
+    if (ipo.shariah === true) {
+        return '<span style="font-size:0.62rem;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✓ SYARIAH</span>';
+    }
+    if (ipo.shariah === false) {
+        return '<span style="font-size:0.62rem;color:#f87171;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✗ TAK SYARIAH</span>';
+    }
+    return '<span style="font-size:0.62rem;color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.3);padding:0.1rem 0.4rem;border-radius:4px;font-weight:600;">SYARIAH?</span>';
+}
+
 function renderMitiCountdownStrip() {
     const container = document.getElementById('miti-countdown-strip');
     if (!container) return;
@@ -1368,7 +1379,10 @@ function renderMitiCountdownStrip() {
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
                             </div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin-top:0.2rem;">
+                                ${shariahBadge(ipo)}
+                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</span>
+                            </div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
                             <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
@@ -1434,7 +1448,10 @@ function renderPublicCountdownStrip() {
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
                             </div>
-                            <div style="font-size:0.68rem; color:var(--text-dim); margin:0.15rem 0 0.35rem 0;">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin-top:0.2rem;">
+                                ${shariahBadge(ipo)}
+                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</span>
+                            </div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
                             <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.closingDate}</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
@@ -1739,7 +1756,8 @@ function createIPOCard(ipo, index = 0) {
                         <span class="badge ${ipo.market?.includes('Main') ? 'main-market' : 'ace-market'}" style="padding: 0.15rem 0.4rem; font-size: 0.65rem; min-width: 35px; text-align: center;">${ipo.market === 'Main Market' ? 'MAIN' : 'ACE'}</span>
                         ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
                         ${ipo.outlier ? '<span class="badge outlier-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="zap" style="width: 10px; height: 10px; margin-right: 2px;"></i> Outlier Watch</span>' : ''}
-                        ${ipo.shariah ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
+                        ${ipo.shariah === true ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
+                        ${ipo.shariah === false ? '<span style="color: #f87171; font-size: 0.75rem;" title="Tak Shariah-Compliant">[NS]</span>' : ''}
                         ${ipo.enrichedBy === 'AI' ? `<span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; font-size: 0.58rem; padding: 0.1rem 0.35rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);"><i data-lucide="sparkles" style="width: 10px; height: 10px;"></i> AI</span>` : ''}
                     </div>
                     <div style="font-weight: 600; font-size: 0.88rem; line-height: 1.25; word-break: break-word;">

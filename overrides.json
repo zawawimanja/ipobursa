@@ -276,7 +276,7 @@
         "closingDate": "27-Aug-2026",
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
         "sector": "REITs",
-        "shariah": true,
+        "shariah": false,
         "price": 0,
         "ib": "Maybank IB",
         "predictedGrade": "B",
