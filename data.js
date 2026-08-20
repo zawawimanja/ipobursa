@@ -9348,7 +9348,7 @@ const IPO_DATA = [
     "mitiOpenDate": "18-Aug-2026",
     "mitiCloseDate": "28-Aug-2026",
     "mitiOfferShares": 224250000,
-    "mitiApplicants": 565
+    "mitiApplicants": 579
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -9532,7 +9532,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.6,
     "zone2TargetPrice": 0.6,
     "mitiOfferShares": 922730000,
-    "mitiApplicants": 1012,
+    "mitiApplicants": 1025,
     "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
   },
   {
@@ -9555,7 +9555,7 @@ const IPO_DATA = [
     "zone2TargetPrice": 0.98,
     "sector": "REITs",
     "os": 0,
-    "ib": "",
+    "ib": "Maybank IB",
     "fundUse": "Hasil IPO membiayai pembelian portfolio hartanah RM7.58B dari IOI Properties ΓÇö 5.5B unit baru (RM0.90/unit) + RM2.65B tunai (dibiayai sukuk).",
     "predictedGrade": "B",
     "analystInsight": "📊 <b>REIT PERTAMA IOI — UNJURAN YIELD 6.5–7%</b><br>💡 IOIPG Malaysia REIT — REIT milik IOI Properties (kekal 60% selepas listing). Portfolio RM7.58B (9 hartanah): IOI City Mall (RM5.1B — 2/3 portfolio, mall kedua terbesar Malaysia), IOI City Towers, PFCC Towers + 6 hotel premium (Putrajaya Marriott, Le Méridien Putrajaya, Moxy Putrajaya, Four Points Puchong, W Kuala Lumpur, Courtyard Penang).<br><br>⚠️ <b>POINT PENTING:</b><br>• Harga indikatif RM0.90/unit ≈ NAV — bukan premium.<br>• Unjuran yield 6.5–7.0% — hujung atas sektor REIT Malaysia (~5-6%).<br>• MITI tranche 687.5 juta unit (12.5%) — gergasi, 0 pelabur setakat ni → allocation hampir pasti penuh.<br>• REIT = playbook dividen, BUKAN flip besar. Debut biasanya +0–5%.<br>• ⚠️ Status shariah SAC belum disahkan rasmi (sebelum listing) — diandaikan compliant: pembiayaan sukuk, core asset retail mall.<br><br>📌 <b>Keputusan:</b> Bagus untuk yield & keselamatan (sponsor IOI kukuh, aset landmark). Untuk flip: jangkaan kecil (+2–5%) — jangan banding dengan Big Caring (+15–20%). Angka kewangan adalah pro-forma/unjuran (REIT baharu, prospektus belum diakses).",
@@ -9623,7 +9623,7 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "mitiTranche": 687500000,
     "mitiOfferShares": 687500000,
-    "mitiApplicants": 157
+    "mitiApplicants": 160
   },
   {
     "id": "kk-mart-retail-berhad",

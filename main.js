@@ -1356,7 +1356,7 @@ function renderMitiCountdownStrip() {
                     const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
                     const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                     const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
-                    const priceBadge = ipo.price ? ` · <span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : '';
+                    const priceStr = ipo.price ? `<span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : 'TBA';
                     const ibShort = ipo.ib ? ipo.ib.split(',')[0].trim() : '';
                     const ibText = ibShort ? ` · ${ibShort}` : '';
                     const marketBadge = (ipo.market || '').toLowerCase().includes('main')
@@ -1372,7 +1372,7 @@ function renderMitiCountdownStrip() {
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
                             <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
-                                <span style="font-size:0.72rem; color:var(--text-dim);">🎯 ${offerStr}${priceBadge}</span>
+                                <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
                             </div>
                         </div>`;
@@ -1420,12 +1420,11 @@ function renderPublicCountdownStrip() {
             <div style="display: ${collapsed ? 'none' : 'grid'}; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
                 ${items.map(({ ipo, close }) => {
                     const cd = formatCountdown(close - now, '#38bdf8');
-                    const priceStr = ipo.price ? 'RM ' + ipo.price.toFixed(2) : 'TBA';
+                    const priceStr = ipo.price ? `<span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : 'TBA';
                     const ibShort = ipo.ib ? ipo.ib.split(',')[0].trim() : '';
                     const ibText = ibShort ? ` · ${ibShort}` : '';
                     const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
-                    const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '';
-                    const offerBadge = offerStr ? ` · 🎯 ${offerStr}` : '';
+                    const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                     const marketBadge = (ipo.market || '').toLowerCase().includes('main')
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
@@ -1439,7 +1438,7 @@ function renderPublicCountdownStrip() {
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
                             <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.closingDate}</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
-                                <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr}${offerBadge}</span>
+                                <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#38bdf8;">🏛️ ${ibShort || '—'}</span>
                             </div>
                         </div>`;

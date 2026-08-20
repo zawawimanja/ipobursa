@@ -1282,7 +1282,7 @@
                 const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
                 const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                 const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
-                const priceBadge = ipo.price ? ` · <span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : '';
+                const priceStr = ipo.price ? `<span style="color:#fbbf24;font-weight:600;">RM ${ipo.price.toFixed(2)}</span>` : 'TBA';
                 const ibShort = ipo.ib ? ipo.ib.split(',')[0].trim() : '';
                 const ibText = ibShort ? ` · ${ibShort}` : '';
                 const marketBadge = (ipo.market || '').toLowerCase().includes('main')
@@ -1299,7 +1299,7 @@
                     <div data-cd-end="${close.getTime()}" style="font-size:1.35rem;font-weight:800;color:${cd.color};line-height:1.2;">${cd.text}</div>
                     <div style="font-size:0.82rem;font-weight:600;color:#e2e8f0;margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
                     <div style="display:flex;justify-content:space-between;align-items:center;gap:1.2rem;margin-top:0.65rem;padding-top:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);font-size:0.75rem;color:var(--text-main);">
-                        <span style="font-size:0.75rem;color:var(--text-dim);">🎯 Offer: <strong>${offerStr}${priceBadge}</strong></span>
+                        <span style="font-size:0.75rem;color:var(--text-dim);">💰 Price: ${priceStr} · 🎯 Offer: <strong>${offerStr}</strong></span>
                         <span style="font-size:0.92rem;font-weight:700;color:#34d399;">👥 Applicants: <strong>${appsStr}</strong></span>
                     </div>
                 </div>`;
