@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
           
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Scrapers (i3investor), Recalculate Targets, and Archive Daily Groups
         run: |
@@ -59,4 +59,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json data.js data_export.js overrides.json archive/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git push)
+          git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git push)
