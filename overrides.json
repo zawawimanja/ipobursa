@@ -277,7 +277,7 @@
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
         "sector": "REITs",
         "shariah": true,
-        "price": 0.9,
+        "price": 0,
         "predictedGrade": "B",
         "sifuTargetPrice": 0.97,
         "calibratedSifuTargetPrice": 0.98,
