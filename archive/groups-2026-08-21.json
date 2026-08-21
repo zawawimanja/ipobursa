@@ -1,6 +1,6 @@
 {
     "date": "2026-08-21",
-    "timestamp": "2026-08-21T13:37:13.198Z",
+    "timestamp": "2026-08-21T14:49:45.381Z",
     "total_stocks": 101,
     "kumpulan_1": {
         "count": 2,
@@ -845,11 +845,11 @@
                 "id": "vlb",
                 "companyName": "VLB",
                 "symbol": "VLB",
-                "currentPrice": 0.845,
+                "currentPrice": 0.85,
                 "dailyChange": 0.6,
                 "trend": "Sikat",
                 "sifuTargetPrice": 0.673,
-                "upside": -20.4,
+                "upside": -20.8,
                 "highPrice": 0.71,
                 "price": 0.33,
                 "predictedGrade": "B",
