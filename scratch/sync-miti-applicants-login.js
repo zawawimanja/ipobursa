@@ -25,6 +25,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const ROOT = path.join(__dirname, '..');
 const DATA_JSON = path.join(ROOT, 'data.json');
@@ -36,6 +37,54 @@ const MAKLUMAT_URL = 'https://sahamonline.miti.gov.my/portal/maklumat-saham';
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 const AGENT = new (require('https').Agent)({ rejectUnauthorized: false });
+
+// ---------------------------------------------------------------------------
+// Telegram alert — bot yang sama dengan sync-isaham.js
+// Tetapkan TELEGRAM_BOT_TOKEN & TELEGRAM_CHAT_ID dalam .env untuk aktifkan.
+// ---------------------------------------------------------------------------
+async function sendTelegram(text) {
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    if (!token || !chatId) return false;
+    try {
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        const body = JSON.stringify({ chat_id: chatId, text });
+        await new Promise((resolve, reject) => {
+            const req = https.request(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+            }, (res) => {
+                let s = '';
+                res.on('data', d => s += d);
+                res.on('end', () => { try { const j = JSON.parse(s); j.ok ? resolve() : reject(new Error(JSON.stringify(j))); } catch (e) { reject(e); } });
+            });
+            req.on('error', reject);
+            req.write(body);
+            req.end();
+        });
+        console.log('📢 Telegram alert dihantar.');
+        return true;
+    } catch (e) {
+        console.error('❌ Telegram alert gagal:', e.message);
+        return false;
+    }
+}
+
+async function alertMitiDegraded(reason) {
+    const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+    const msg = [
+        '🚨 IPO HUNTER: MITI Sync GAGAL',
+        '',
+        `⏰ ${stamp}`,
+        `⚠️ ${reason}`,
+        '',
+        '➡️ Semak: sahamonline.miti.gov.my (portal up?)',
+        '➡️ Semak: MITI_USERNAME/MITI_PASSWORD dalam GitHub Secrets',
+        '',
+        'Jumlah pemohon MITI mungkin STALE — sync manual diperlukan.'
+    ].join('\n');
+    await sendTelegram(msg);
+}
 
 // ---------------------------------------------------------------------------
 // Load .env manual (sama seperti sync-isaham-api.js)
@@ -213,12 +262,16 @@ async function main() {
     try {
         session = await login(username, password);
     } catch (e) {
-        console.error('❌ Login portal MITI gagal:', e.response ? e.response.status + ' ' + (e.response.data || '').slice(0, 200) : e.message);
+        const reason = `Login portal MITI gagal: ${e.response ? e.response.status + ' ' + (e.response.data || '').slice(0, 120) : e.message}`;
+        console.error('❌', reason);
+        await alertMitiDegraded(reason);
         if (quiet) return;
         process.exit(1);
     }
     if (!session.cookieHeader.includes('_panelUserpublic')) {
-        console.error('❌ Login tidak menghasilkan sesi pengguna (mungkin kredential salah / CAPTCHA dikehendaki).');
+        const reason = 'Login tidak menghasilkan sesi pengguna — kredential salah atau CAPTCHA dikehendaki.';
+        console.error('❌', reason);
+        await alertMitiDegraded(reason);
         if (quiet) return;
         process.exit(1);
     }
@@ -229,14 +282,18 @@ async function main() {
     try {
         html = await fetchMaklumat(session.cookieHeader);
     } catch (e) {
-        console.error('⚠️  Gagal fetch maklumat-saham:', e.message);
+        const reason = `Gagal fetch maklumat-saham: ${e.message}`;
+        console.error('⚠️ ', reason);
+        await alertMitiDegraded(reason);
         if (quiet) return;
         process.exit(1);
     }
 
     const found = parseMaklumatSaham(html);
     if (found.length === 0) {
-        console.log('⚠️  Tiada kad saham dijumpai pada halaman — sesi mungkin expired.');
+        const reason = 'Tiada kad saham dijumpai pada halaman maklumat-saham — sesi mungkin expired atau portal tukar struktur HTML.';
+        console.log('⚠️ ', reason);
+        await alertMitiDegraded(reason);
         if (quiet) return;
         process.exit(1);
     }
