@@ -9368,7 +9368,7 @@
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
-        "mitiApplicants": 1289
+        "mitiApplicants": 1291
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -9552,7 +9552,7 @@
         "v7TargetPrice": 0.6,
         "zone2TargetPrice": 0.6,
         "mitiOfferShares": 922730000,
-        "mitiApplicants": 1758,
+        "mitiApplicants": 1762,
         "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
     },
     {
@@ -9643,7 +9643,7 @@
         "hasMitiTranche": true,
         "mitiTranche": 687500000,
         "mitiOfferShares": 687500000,
-        "mitiApplicants": 272
+        "mitiApplicants": 273
     },
     {
         "id": "kk-mart-retail-berhad",
@@ -9679,7 +9679,7 @@
         "calibratedSifuTargetPrice": 0.25,
         "v7TargetPrice": 0.25,
         "zone2TargetPrice": 0.25,
-        "mitiApplicants": 10,
+        "mitiApplicants": 18,
         "mitiOfferShares": 111938000
     },
     {
