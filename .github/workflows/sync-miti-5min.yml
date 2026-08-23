@@ -2,9 +2,9 @@ name: Sync MITI Applicants (5 min)
 
 on:
   schedule:
-    # Setiap 5 minit, 24/7 (pemohon boleh apply walau hujung minggu/cuti —
-    # nombor sentiasa berubah). Hari bekerja sahaja.
-    - cron: '*/5 * * * 1-5'
+    # Setiap 5 minit, 7 hari seminggu (pemohon boleh apply walau hujung minggu/cuti —
+    # nombor sentiasa berubah sepanjang masa).
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allows manual click run
 
 jobs:
