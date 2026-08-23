@@ -9552,7 +9552,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.6,
     "zone2TargetPrice": 0.6,
     "mitiOfferShares": 922730000,
-    "mitiApplicants": 1756,
+    "mitiApplicants": 1757,
     "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
   },
   {
@@ -9643,7 +9643,7 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "mitiTranche": 687500000,
     "mitiOfferShares": 687500000,
-    "mitiApplicants": 271
+    "mitiApplicants": 272
   },
   {
     "id": "kk-mart-retail-berhad",
