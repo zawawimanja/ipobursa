@@ -1,6 +1,6 @@
 {
     "date": "2026-08-25",
-    "timestamp": "2026-08-25T09:18:15.941Z",
+    "timestamp": "2026-08-25T11:02:35.875Z",
     "total_stocks": 101,
     "kumpulan_1": {
         "count": 2,
@@ -481,11 +481,11 @@
                 "id": "sds",
                 "companyName": "SDS",
                 "symbol": "SDS",
-                "currentPrice": 0.395,
+                "currentPrice": 0.405,
                 "dailyChange": 2,
                 "trend": "Uptrend",
                 "sifuTargetPrice": 0.552,
-                "upside": 39.7,
+                "upside": 36.3,
                 "highPrice": 0.5519999999999999,
                 "price": 0.23,
                 "predictedGrade": "B",
