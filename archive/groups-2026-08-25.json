@@ -1,6 +1,6 @@
 {
     "date": "2026-08-25",
-    "timestamp": "2026-08-25T11:02:35.875Z",
+    "timestamp": "2026-08-25T11:58:32.196Z",
     "total_stocks": 101,
     "kumpulan_1": {
         "count": 2,
@@ -1349,11 +1349,11 @@
                 "id": "crpmate",
                 "companyName": "CRPMATE",
                 "symbol": "CRPMATE",
-                "currentPrice": 0.205,
+                "currentPrice": 0.21,
                 "dailyChange": null,
                 "trend": "Uptrend",
                 "sifuTargetPrice": 0.23,
-                "upside": 12.2,
+                "upside": 9.5,
                 "highPrice": 0.245,
                 "price": 0.2,
                 "predictedGrade": "B",
