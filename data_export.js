@@ -4654,8 +4654,8 @@ const IPO_DATA = [
     "listingDate": "15-Nov-2024",
     "year": 2024,
     "price": 0.25,
-    "currentPrice": 0.21,
-    "performance": "-16.00%",
+    "currentPrice": 0.215,
+    "performance": "-14.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -4829,8 +4829,8 @@ const IPO_DATA = [
     "listingDate": "25-Mar-2024",
     "year": 2024,
     "price": 0.95,
-    "currentPrice": 0.92,
-    "performance": "-3.16%",
+    "currentPrice": 0.91,
+    "performance": "-4.21%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -5617,8 +5617,8 @@ const IPO_DATA = [
     "listingDate": "17-Jan-2023",
     "year": 2023,
     "price": 0.68,
-    "currentPrice": 0.65,
-    "performance": "-4.41%",
+    "currentPrice": 0.645,
+    "performance": "-5.15%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6122,8 +6122,8 @@ const IPO_DATA = [
     "listingDate": "23-Nov-2022",
     "year": 2022,
     "price": 0.17,
-    "currentPrice": 0.405,
-    "performance": "+138.24%",
+    "currentPrice": 0.38,
+    "performance": "+123.53%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6808,8 +6808,8 @@ const IPO_DATA = [
     "listingDate": "30-Mar-2021",
     "year": 2021,
     "price": 0.2,
-    "currentPrice": 0.125,
-    "performance": "-37.50%",
+    "currentPrice": 0.12,
+    "performance": "-40.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -6834,8 +6834,8 @@ const IPO_DATA = [
     "listingDate": "21-Jul-2021",
     "year": 2021,
     "price": 0.68,
-    "currentPrice": 0.165,
-    "performance": "-75.74%",
+    "currentPrice": 0.17,
+    "performance": "-75.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -9368,7 +9368,7 @@ const IPO_DATA = [
     "mitiOpenDate": "18-Aug-2026",
     "mitiCloseDate": "28-Aug-2026",
     "mitiOfferShares": 224250000,
-    "mitiApplicants": 1734
+    "mitiApplicants": 1778
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -9552,7 +9552,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.6,
     "zone2TargetPrice": 0.6,
     "mitiOfferShares": 922730000,
-    "mitiApplicants": 2289,
+    "mitiApplicants": 2358,
     "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
   },
   {
@@ -9643,7 +9643,7 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "mitiTranche": 687500000,
     "mitiOfferShares": 687500000,
-    "mitiApplicants": 323
+    "mitiApplicants": 325
   },
   {
     "id": "kk-mart-retail-berhad",
@@ -9679,7 +9679,7 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.25,
     "v7TargetPrice": 0.25,
     "zone2TargetPrice": 0.25,
-    "mitiApplicants": 588,
+    "mitiApplicants": 638,
     "mitiOfferShares": 111938000
   },
   {
