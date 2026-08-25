@@ -6021,8 +6021,8 @@
         "listingDate": "20-Sep-2022",
         "year": 2022,
         "price": 1.13,
-        "currentPrice": 1.54,
-        "performance": "+36.28%",
+        "currentPrice": 1.57,
+        "performance": "+38.94%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -6963,8 +6963,8 @@
         "listingDate": "13-Jul-2021",
         "year": 2021,
         "price": 0.45,
-        "currentPrice": 0.75,
-        "performance": "+66.67%",
+        "currentPrice": 0.755,
+        "performance": "+67.78%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial (Aluminium)",
@@ -9368,7 +9368,7 @@
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
-        "mitiApplicants": 1696
+        "mitiApplicants": 1706
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -9552,7 +9552,7 @@
         "v7TargetPrice": 0.6,
         "zone2TargetPrice": 0.6,
         "mitiOfferShares": 922730000,
-        "mitiApplicants": 2235,
+        "mitiApplicants": 2253,
         "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
     },
     {
@@ -9679,7 +9679,7 @@
         "calibratedSifuTargetPrice": 0.25,
         "v7TargetPrice": 0.25,
         "zone2TargetPrice": 0.25,
-        "mitiApplicants": 536,
+        "mitiApplicants": 555,
         "mitiOfferShares": 111938000
     },
     {
@@ -9764,11 +9764,11 @@
         "listingDate": "15-Oct-2024",
         "year": 2024,
         "price": 0.5,
-        "currentPrice": 1.14,
+        "currentPrice": 1.12,
         "highPrice": 1.15,
         "openPrice": 0.53,
         "closePrice": 0.5,
-        "performance": "+128.00%",
+        "performance": "+124.00%",
         "os": 73.42,
         "ib": "Affin Hwang Investment Bank Berhad",
         "sector": "Industrial Machinery",
