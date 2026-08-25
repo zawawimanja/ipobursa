@@ -9679,7 +9679,7 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.25,
     "v7TargetPrice": 0.25,
     "zone2TargetPrice": 0.25,
-    "mitiApplicants": 804,
+    "mitiApplicants": 805,
     "mitiOfferShares": 111938000
   },
   {
