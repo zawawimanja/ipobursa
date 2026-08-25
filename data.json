@@ -9368,7 +9368,7 @@
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
-        "mitiApplicants": 1932
+        "mitiApplicants": 1936
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -9679,7 +9679,7 @@
         "calibratedSifuTargetPrice": 0.25,
         "v7TargetPrice": 0.25,
         "zone2TargetPrice": 0.25,
-        "mitiApplicants": 801,
+        "mitiApplicants": 804,
         "mitiOfferShares": 111938000
     },
     {
