@@ -1,6 +1,6 @@
 {
     "date": "2026-08-25",
-    "timestamp": "2026-08-25T16:46:12.216Z",
+    "timestamp": "2026-08-25T17:39:10.507Z",
     "total_stocks": 101,
     "kumpulan_1": {
         "count": 2,
@@ -1223,7 +1223,7 @@
                 "id": "eca",
                 "companyName": "ECA",
                 "symbol": "ECA",
-                "currentPrice": 0.405,
+                "currentPrice": 0.38,
                 "dailyChange": -1.2,
                 "trend": "Uptrend",
                 "sifuTargetPrice": null,
