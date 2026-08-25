@@ -5744,8 +5744,8 @@
         "listingDate": "15-Mar-2023",
         "year": 2023,
         "price": 0.63,
-        "currentPrice": 0.72,
-        "performance": "+14.29%",
+        "currentPrice": 0.7,
+        "performance": "+11.11%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -6145,8 +6145,8 @@
         "listingDate": "22-Mar-2022",
         "year": 2022,
         "price": 1.35,
-        "currentPrice": 2.1,
-        "performance": "+55.56%",
+        "currentPrice": 2.12,
+        "performance": "+57.04%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -6254,8 +6254,8 @@
         "listingDate": "30-Nov-2022",
         "year": 2022,
         "price": 0.23,
-        "currentPrice": 0.165,
-        "performance": "-28.26%",
+        "currentPrice": 0.17,
+        "performance": "-26.09%",
         "os": 20,
         "ib": "M&A Securities",
         "sector": "Industrial / Consumer",
@@ -9368,7 +9368,7 @@
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
-        "mitiApplicants": 1714
+        "mitiApplicants": 1734
     },
     {
         "id": "gb-bond-holdings-berhad",
@@ -9552,7 +9552,7 @@
         "v7TargetPrice": 0.6,
         "zone2TargetPrice": 0.6,
         "mitiOfferShares": 922730000,
-        "mitiApplicants": 2261,
+        "mitiApplicants": 2289,
         "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
     },
     {
@@ -9643,7 +9643,7 @@
         "hasMitiTranche": true,
         "mitiTranche": 687500000,
         "mitiOfferShares": 687500000,
-        "mitiApplicants": 322
+        "mitiApplicants": 323
     },
     {
         "id": "kk-mart-retail-berhad",
@@ -9679,7 +9679,7 @@
         "calibratedSifuTargetPrice": 0.25,
         "v7TargetPrice": 0.25,
         "zone2TargetPrice": 0.25,
-        "mitiApplicants": 561,
+        "mitiApplicants": 588,
         "mitiOfferShares": 111938000
     },
     {
