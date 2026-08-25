@@ -9368,7 +9368,7 @@ const IPO_DATA = [
     "mitiOpenDate": "18-Aug-2026",
     "mitiCloseDate": "28-Aug-2026",
     "mitiOfferShares": 224250000,
-    "mitiApplicants": 1929
+    "mitiApplicants": 1930
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -9679,7 +9679,7 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.25,
     "v7TargetPrice": 0.25,
     "zone2TargetPrice": 0.25,
-    "mitiApplicants": 796,
+    "mitiApplicants": 798,
     "mitiOfferShares": 111938000
   },
   {
