@@ -9368,7 +9368,7 @@ const IPO_DATA = [
     "mitiOpenDate": "18-Aug-2026",
     "mitiCloseDate": "28-Aug-2026",
     "mitiOfferShares": 224250000,
-    "mitiApplicants": 2139
+    "mitiApplicants": 2151
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -9643,7 +9643,7 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "mitiTranche": 687500000,
     "mitiOfferShares": 687500000,
-    "mitiApplicants": 358
+    "mitiApplicants": 360
   },
   {
     "id": "kk-mart-retail-berhad",
@@ -9679,7 +9679,7 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.25,
     "v7TargetPrice": 0.25,
     "zone2TargetPrice": 0.25,
-    "mitiApplicants": 985,
+    "mitiApplicants": 995,
     "mitiOfferShares": 111938000
   },
   {
