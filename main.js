@@ -1313,6 +1313,39 @@ function updateCountdownTexts() {
     });
 }
 
+// Smooth navigation from countdown cards to the exact stage & row in tracker
+window.navigateToIpo = function(ipoId, targetStage) {
+    const ipo = (ipoData || []).find(item => item.id === ipoId);
+    const stage = targetStage || (ipo ? ipo.stage : 1);
+
+    // 1. Switch active stage tab buttons
+    const tabBtnsList = document.querySelectorAll('.tab-btn');
+    const targetTabBtn = document.querySelector(`.tab-btn[data-stage="${stage}"]`);
+    if (targetTabBtn) {
+        tabBtnsList.forEach(b => b.classList.remove('active'));
+        targetTabBtn.classList.add('active');
+    }
+    currentStage = parseInt(stage);
+
+    // 2. Reset filters to make sure target IPO is not filtered out
+    resetFilters();
+    renderIPOs(currentStage);
+
+    // 3. Scroll smoothly to the IPO row and trigger glowing highlight pulse
+    setTimeout(() => {
+        const row = document.getElementById(`ipo-row-${ipoId}`);
+        if (row) {
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            row.classList.remove('highlight-row-pulse');
+            void row.offsetWidth; // Force reflow to re-trigger animation
+            row.classList.add('highlight-row-pulse');
+        } else {
+            const grid = document.getElementById('ipo-grid') || document.querySelector('.ipo-stages');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 450);
+};
+
 // MITI Countdown — live ticking strip on the main tracker for open MITI allocations
 // Helper: badge status syariah yang JELAS (hijau compliant / merah tak compliant)
 function shariahBadge(ipo) {
@@ -1374,7 +1407,7 @@ function renderMitiCountdownStrip() {
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
                     return `
-                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                        <div class="cd-clickable-card miti" onclick="navigateToIpo('${ipo.id}', 2)" title="Klik untuk lihat ${ipo.companyName} di Stage 02 MITI" style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
@@ -1388,6 +1421,9 @@ function renderMitiCountdownStrip() {
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
+                            </div>
+                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: #6ee7b7; opacity: 0.85; font-weight: 600;">
+                                <span>Lihat di Stage 02</span> →
                             </div>
                         </div>`;
                 }).join('')}
@@ -1443,7 +1479,7 @@ function renderPublicCountdownStrip() {
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
                     return `
-                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                        <div class="cd-clickable-card public" onclick="navigateToIpo('${ipo.id}', 3)" title="Klik untuk lihat ${ipo.companyName} di Stage 03 Public" style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
@@ -1458,6 +1494,9 @@ function renderPublicCountdownStrip() {
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#38bdf8;">🏛️ ${ibShort || '—'}</span>
                             </div>
+                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: #7dd3fc; opacity: 0.85; font-weight: 600;">
+                                <span>Lihat di Stage 03</span> →
+                            </div>
                         </div>`;
                 }).join('')}
             </div>
@@ -1465,6 +1504,7 @@ function renderPublicCountdownStrip() {
     `;
     if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 function getPredictedGrade(ipo) {
     if (ipo.predictedGrade) return ipo.predictedGrade;
@@ -1749,7 +1789,7 @@ function createIPOCard(ipo, index = 0) {
     const isSurging = ipo.price > 0 && ipo.avgTP > (ipo.price * 1.5);
 
     return `
-        <tr class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
+        <tr id="ipo-row-${ipo.id}" data-id="${ipo.id}" class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
             <td style="padding: 0.75rem 0.6rem; width: 220px; min-width: 200px; max-width: 240px; vertical-align: top;">
                 <div style="display: flex; flex-direction: column; gap: 0.3rem;">
                     <div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
