@@ -284,7 +284,7 @@
         "v7TargetPrice": 1,
         "zone2TargetPrice": 1.05,
         "analystInsight": "📊 <b>REIT PLAY (GRADE B)</b><br>• <b>Landmark Portfolio:</b> RM7.58B portfolio anchored by IOI City Mall (RM5.1B) + 6 premium hotels.<br>• <b>Attractive Yield:</b> Projected 6.5%–7.0% distribution yield priced near NAV (RM0.90).<br>• <b>Strategy:</b> Income/dividend stability play rather than aggressive day-1 flipping (+0% to +5% debut).",
-        "mitiApplicants": 380
+        "mitiApplicants": 382
     },
     "mydcd-berhad": {
         "stage": 2,
@@ -303,7 +303,7 @@
         "shariah": false
     },
     "ska-capital-berhad": {
-        "mitiApplicants": 1558,
+        "mitiApplicants": 1614,
         "mitiOfferShares": 111938000
     }
 }
