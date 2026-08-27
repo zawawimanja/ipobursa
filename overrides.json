@@ -284,7 +284,7 @@
         "v7TargetPrice": 1,
         "zone2TargetPrice": 1.05,
         "analystInsight": "📊 <b>REIT PLAY (GRADE B)</b><br>• <b>Landmark Portfolio:</b> RM7.58B portfolio anchored by IOI City Mall (RM5.1B) + 6 premium hotels.<br>• <b>Attractive Yield:</b> Projected 6.5%–7.0% distribution yield priced near NAV (RM0.90).<br>• <b>Strategy:</b> Income/dividend stability play rather than aggressive day-1 flipping (+0% to +5% debut).",
-        "mitiApplicants": 375
+        "mitiApplicants": 380
     },
     "mydcd-berhad": {
         "stage": 2,
@@ -293,7 +293,7 @@
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
         "mitiOfferShares": 224250000,
-        "mitiApplicants": 2454,
+        "mitiApplicants": 2887,
         "analystInsight": "✅ <b>DATA CENTER THEME (GRADE B)</b><br>• <b>Data Center Boom:</b> MEPF integrator benefiting from Malaysia's hyperscale data center boom.<br>• <b>Valuation Premium:</b> FY2025 revenue +105% YoY; RM0.56 price represents premium 25.5x P/E.<br>• <b>Strategy:</b> Hot theme suitable for day-1 momentum scalp; pre-IPO dividend payout was high."
     },
     "wct-reit": {
@@ -303,7 +303,7 @@
         "shariah": false
     },
     "ska-capital-berhad": {
-        "mitiApplicants": 1248,
+        "mitiApplicants": 1558,
         "mitiOfferShares": 111938000
     }
 }
