@@ -649,6 +649,14 @@ function autoPromoteIPOs(finalData) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    const getEndOfDay = (str) => {
+        if (!str) return null;
+        const d = parseFlexDate(str);
+        if (!d) return null;
+        d.setHours(23, 59, 59, 999);
+        return d;
+    };
+
     finalData.forEach(ipo => {
         // Skip auto-promotion if manually set to Stage 5 (Listed)
         if (ipo.stage === 5) return;
@@ -663,24 +671,24 @@ function autoPromoteIPOs(finalData) {
 
         // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
         if (ipo.stage === 2) {
-            const closeStr = ipo.mitiCloseDate || ipo.closingDate;
+            const closeStr = ipo.mitiCloseDate;
             if (closeStr) {
-                const closeDate = parseFlexDate(closeStr);
+                const closeDate = getEndOfDay(closeStr);
                 if (closeDate && closeDate < now) {
-                    if (ipo.closingDate && parseFlexDate(ipo.closingDate)) {
+                    if (ipo.closingDate && parseFlexDate(ipo.closingDate) && getEndOfDay(ipo.closingDate) >= now) {
                         ipo.stage = 3;
                         ipo.status = 'Application Open';
                     } else {
                         ipo.stage = 6;
-                        ipo.status = 'Menunggu Keputusan MITI';
+                        ipo.status = 'Awaiting MITI Decision';
                     }
                 }
             }
         }
 
-        // Stage 6 (Post-MITI): naik ke Public/Pre-Listing bila permohonan awam dibuka
+        // Stage 6 (Post-MITI): promote to Public (Stage 3) or Pre-Listing (Stage 4) when public application is active
         if (ipo.stage === 6 && ipo.closingDate) {
-            const closeDate = parseFlexDate(ipo.closingDate);
+            const closeDate = getEndOfDay(ipo.closingDate);
             if (closeDate) {
                 ipo.stage = closeDate >= now ? 3 : 4;
                 ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
@@ -697,7 +705,7 @@ function autoPromoteIPOs(finalData) {
                         ipo.stage = 5;
                         ipo.status = 'Listed';
                     } else if (ipo.closingDate) {
-                        const closeDate = parseFlexDate(ipo.closingDate);
+                        const closeDate = getEndOfDay(ipo.closingDate);
                         if (closeDate && closeDate < now) {
                             ipo.stage = 4;
                             ipo.status = 'Pre-Listing';
@@ -708,7 +716,7 @@ function autoPromoteIPOs(finalData) {
                     }
                 }
             } else if (ipo.closingDate) {
-                const closeDate = parseFlexDate(ipo.closingDate);
+                const closeDate = getEndOfDay(ipo.closingDate);
                 if (closeDate && closeDate < now) {
                     ipo.stage = 4;
                     ipo.status = 'Pre-Listing';
@@ -718,7 +726,7 @@ function autoPromoteIPOs(finalData) {
 
         // Refresh status for open applications (Stage 3 with a future closing date)
         if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
-            const cd = parseFlexDate(ipo.closingDate);
+            const cd = getEndOfDay(ipo.closingDate);
             if (cd && cd >= now) {
                 let openingFuture = false;
                 if (ipo.openingDate) {
