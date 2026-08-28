@@ -1334,10 +1334,10 @@ function renderMitiCountdownStrip() {
         .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
         .map(ipo => {
             const close = parseFlexDate(ipo.mitiCloseDate);
-            close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+            close.setHours(12, 0, 0, 0); // MITI applications close at 12:00 PM (noon) on closing date
             return { ipo, close };
         })
-        .filter(x => x.close >= now)
+        .filter(x => x.close > now)
         .sort((a, b) => a.close - b.close);
 
     if (items.length === 0) {

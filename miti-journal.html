@@ -12,7 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=3.4"></script>
+    <script src="data.js?v=3.5"></script>
     <script src="sync-status.js?v=3.0"></script>
     <style>
         .journal-container {
@@ -1265,10 +1265,10 @@
                 .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
                 .map(ipo => {
                     const close = parseFlexDate(ipo.mitiCloseDate);
-                    close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+                    close.setHours(12, 0, 0, 0); // MITI closes at 12:00 PM (noon) on closing date
                     return { ipo, close };
                 })
-                .filter(x => x.close >= now)
+                .filter(x => x.close > now)
                 .sort((a, b) => a.close - b.close);
 
             if (items.length === 0) {

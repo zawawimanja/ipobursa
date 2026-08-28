@@ -160,27 +160,55 @@ async function fetchMaklumat(cookieHeader) {
     return resp.data;
 }
 
-// Parse setiap kad saham pada halaman maklumat-saham (nama + pelabur + tawaran)
+function formatMitiDate(dateObj) {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = months[dateObj.getMonth()];
+    const y = dateObj.getFullYear();
+    return `${d}-${m}-${y}`;
+}
+
+// Parse setiap kad saham pada halaman maklumat-saham (nama + pelabur + tawaran + hari tinggal + harga)
 function parseMaklumatSaham(html) {
     const $ = cheerio.load(html);
-    const out = [];
+    const cardMap = {};
+
     $('.card').each((i, card) => {
-        const header = $(card).find('.card-header').first().text().trim();
-        if (!header) return;
-        const row = { company: header, applicants: null, offerShares: null };
-        $(card).find('tr').each((j, tr) => {
-            const label = $(tr).find('td').first().text().trim();
-            const val = $(tr).find('td').eq(1).text().replace(/[^\d]/g, '');
-            if (/jumlah\s*pelabur\s*mohon\s*saham/i.test(label) && val) {
-                row.applicants = parseInt(val, 10);
-            }
-            if (/jumlah\s*tawaran\s*saham/i.test(label) && val) {
-                row.offerShares = parseInt(val, 10);
-            }
-        });
-        if (row.applicants != null || row.offerShares != null) out.push(row);
+        const text = $(card).text().replace(/\s+/g, ' ').trim();
+        const titleMatch = text.match(/([A-Z0-9\s\.\(\)\-]+?)\s+Jumlah\s*Tawaran\s*Saham/i);
+        if (!titleMatch) return;
+        
+        const company = titleMatch[1].trim();
+        const row = { company, applicants: null, offerShares: null, daysLeft: null, price: null };
+
+        const offerM = text.match(/Jumlah\s*Tawaran\s*Saham\s*([\d\,]+)/i);
+        if (offerM) row.offerShares = parseInt(offerM[1].replace(/,/g, ''), 10);
+
+        const appM = text.match(/Jumlah\s*Pelabur\s*Mohon\s*Saham\s*([\d\,]+)/i);
+        if (appM) row.applicants = parseInt(appM[1].replace(/,/g, ''), 10);
+
+        const daysM = text.match(/SAHAM\s*DITUTUP\s*(\d+)\s*HARI\s*LAGI/i);
+        if (daysM) row.daysLeft = parseInt(daysM[1], 10);
+
+        cardMap[company.toLowerCase()] = row;
     });
-    return out;
+
+    $('.feature_item').each((i, item) => {
+        const name = $(item).find('.comName2').text().trim();
+        if (!name) return;
+
+        const priceText = $(item).find('p[style*="color: #296bc7"]').text().trim();
+        const priceM = priceText.match(/RM\s*([\d\.]+)/i);
+
+        const key = Object.keys(cardMap).find(k => k.includes(name.toLowerCase()) || name.toLowerCase().includes(k));
+        if (key && priceM) {
+            cardMap[key].price = parseFloat(priceM[1]);
+        } else if (name && priceM) {
+            cardMap[name.toLowerCase()] = { company: name, applicants: null, offerShares: null, daysLeft: null, price: parseFloat(priceM[1]) };
+        }
+    });
+
+    return Object.values(cardMap);
 }
 
 // ---------------------------------------------------------------------------
@@ -196,18 +224,49 @@ function applyResults(found) {
             console.log(`   ⚠️  ${f.company} ada di portal tapi TIADA dalam data — skip.`);
             continue;
         }
-        let changed = false;
+
+        // Auto-promote Stage 1 -> Stage 2 (MITI Allocation Phase)
+        if (ipo.stage < 2) {
+            console.log(`   🚀 ${ipo.companyName}: Stage ${ipo.stage} → Stage 2 (MITI Allocation Phase)`);
+            ipo.stage = 2;
+            ipo.status = 'MITI Allocation Phase';
+            ipo.hasMitiTranche = true;
+            changes.push({ id: ipo.id, key: 'stage', value: 2 });
+            changes.push({ id: ipo.id, key: 'status', value: 'MITI Allocation Phase' });
+            changes.push({ id: ipo.id, key: 'hasMitiTranche', value: true });
+        }
+
+        if (f.price != null && ipo.price !== f.price) {
+            console.log(`   ${ipo.companyName}: harga RM ${ipo.price != null ? ipo.price : 'TBA'} → RM ${f.price}`);
+            ipo.price = f.price;
+            changes.push({ id: ipo.id, key: 'price', value: f.price });
+        }
+
+        if (f.daysLeft != null) {
+            const closeD = new Date();
+            closeD.setDate(closeD.getDate() + f.daysLeft);
+            const formattedClose = formatMitiDate(closeD);
+            if (ipo.mitiCloseDate !== formattedClose) {
+                console.log(`   ${ipo.companyName}: mitiCloseDate ${ipo.mitiCloseDate || '-'} → ${formattedClose} (${f.daysLeft} hari lagi)`);
+                ipo.mitiCloseDate = formattedClose;
+                changes.push({ id: ipo.id, key: 'mitiCloseDate', value: formattedClose });
+            }
+            if (!ipo.mitiOpenDate) {
+                const openStr = formatMitiDate(new Date());
+                ipo.mitiOpenDate = openStr;
+                changes.push({ id: ipo.id, key: 'mitiOpenDate', value: openStr });
+            }
+        }
+
         if (f.applicants != null && ipo.mitiApplicants !== f.applicants) {
             console.log(`   ${ipo.companyName}: pelabur ${ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '-'} → ${f.applicants.toLocaleString()}`);
             ipo.mitiApplicants = f.applicants;
             changes.push({ id: ipo.id, key: 'mitiApplicants', value: f.applicants });
-            changed = true;
         }
         if (f.offerShares != null && ipo.mitiOfferShares !== f.offerShares) {
             console.log(`   ${ipo.companyName}: tawaran ${ipo.mitiOfferShares != null ? ipo.mitiOfferShares.toLocaleString() : '-'} → ${f.offerShares.toLocaleString()}`);
             ipo.mitiOfferShares = f.offerShares;
             changes.push({ id: ipo.id, key: 'mitiOfferShares', value: f.offerShares });
-            changed = true;
         }
     }
 
