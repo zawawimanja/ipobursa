@@ -9681,7 +9681,7 @@ const IPO_DATA = [
     "stage": 2,
     "status": "MITI Allocation Phase",
     "year": 2026,
-    "sector": "Finance (Capital Markets)",
+    "sector": "Power Infrastructure (EPCC Substation)",
     "geography": "Kuala Lumpur",
     "sifuTargetPrice": 0.42,
     "calibratedSifuTargetPrice": 0.43,
@@ -9694,7 +9694,7 @@ const IPO_DATA = [
     "mitiCloseDate": "01-Sep-2026",
     "predictedGrade": "B",
     "grade": "B",
-    "analystInsight": "📈 <b>CAPITAL MARKETS & FINANCIAL SERVICES (GRADE B):</b> Financial advisory, corporate finance and capital markets solutions provider. Indicative IPO price RM0.425 with high Bumiputera applicant interest (1,668 applicants). Moderate swing target."
+    "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425."
   },
   {
     "id": "wil-key-berhad",
@@ -9984,13 +9984,14 @@ const IPO_DATA = [
     "mitiCloseDate": "04-Sep-2026",
     "sector": "Industrial Products & Services",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.4,
-    "calibratedSifuTargetPrice": 0.4,
-    "v7TargetPrice": 0.4,
+    "sifuTargetPrice": 0.36,
+    "calibratedSifuTargetPrice": 0.36,
+    "v7TargetPrice": 0.36,
     "analystInsight": "📦 <b>PLASTIC PACKAGING & MANUFACTURING:</b> MITI share allocation tranche for SCGM Bhd. Main market listed plastic packaging and thermoforming specialist.",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "os": 0,
-    "ib": "Affin Hwang Investment Bank"
+    "ib": "Affin Hwang Investment Bank",
+    "zone2TargetPrice": 0.36
   }
 ];
 

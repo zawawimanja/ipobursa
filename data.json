@@ -9681,12 +9681,12 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "year": 2026,
-        "sector": "Finance (Capital Markets)",
+        "sector": "Power Infrastructure (EPCC Substation)",
         "geography": "Kuala Lumpur",
         "sifuTargetPrice": 0.42,
-        "calibratedSifuTargetPrice": 0.43,
-        "v7TargetPrice": 0.43,
-        "zone2TargetPrice": 0.43,
+        "calibratedSifuTargetPrice": 0.49,
+        "v7TargetPrice": 0.49,
+        "zone2TargetPrice": 0.49,
         "mitiApplicants": 1668,
         "mitiOfferShares": 111938000,
         "hasMitiTranche": true,
@@ -9694,7 +9694,7 @@
         "mitiCloseDate": "01-Sep-2026",
         "predictedGrade": "B",
         "grade": "B",
-        "analystInsight": "📈 <b>CAPITAL MARKETS & FINANCIAL SERVICES (GRADE B):</b> Financial advisory, corporate finance and capital markets solutions provider. Indicative IPO price RM0.425 with high Bumiputera applicant interest (1,668 applicants). Moderate swing target."
+        "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425."
     },
     {
         "id": "wil-key-berhad",
