@@ -272,7 +272,7 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "mitiOpenDate": "17-Aug-2026",
-        "mitiCloseDate": "27-Aug-2026",
+        "mitiCloseDate": "31-Aug-2026",
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
         "sector": "REITs",
         "shariah": false,
@@ -303,11 +303,21 @@
         "shariah": false
     },
     "ska-capital-berhad": {
-        "mitiApplicants": 1666,
+        "mitiApplicants": 1668,
         "mitiOfferShares": 111938000
     },
     "empg-group-berhad": {
-        "mitiApplicants": 3,
+        "mitiApplicants": 4,
         "mitiOfferShares": 75751000
+    },
+    "scgm-bhd": {
+        "stage": 2,
+        "status": "MITI Allocation Phase",
+        "price": 0.365,
+        "mitiApplicants": 7,
+        "mitiOfferShares": 95300000,
+        "mitiOpenDate": "28-Aug-2026",
+        "mitiCloseDate": "04-Sep-2026",
+        "hasMitiTranche": true
     }
 }
