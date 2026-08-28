@@ -304,11 +304,15 @@
     },
     "ska-capital-berhad": {
         "mitiApplicants": 1668,
-        "mitiOfferShares": 111938000
+        "mitiOfferShares": 111938000,
+        "predictedGrade": "B",
+        "analystInsight": "📈 <b>CAPITAL MARKETS & FINANCIAL SERVICES (GRADE B):</b> Financial advisory, corporate finance and capital markets solutions provider. Indicative IPO price RM0.425 with high Bumiputera applicant interest (1,668 applicants). Moderate swing target."
     },
     "empg-group-berhad": {
         "mitiApplicants": 4,
-        "mitiOfferShares": 75751000
+        "mitiOfferShares": 75751000,
+        "predictedGrade": "B",
+        "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA."
     },
     "scgm-bhd": {
         "stage": 2,

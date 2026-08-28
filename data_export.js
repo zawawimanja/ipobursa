@@ -9446,7 +9446,10 @@ const IPO_DATA = [
     "mitiOfferShares": 75751000,
     "hasMitiTranche": true,
     "mitiOpenDate": "28-Aug-2026",
-    "mitiCloseDate": "04-Sep-2026"
+    "mitiCloseDate": "04-Sep-2026",
+    "predictedGrade": "B",
+    "grade": "B",
+    "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA."
   },
   {
     "id": "gta-holdings-berhad",
@@ -9688,7 +9691,10 @@ const IPO_DATA = [
     "mitiOfferShares": 111938000,
     "hasMitiTranche": true,
     "mitiOpenDate": "23-Aug-2026",
-    "mitiCloseDate": "01-Sep-2026"
+    "mitiCloseDate": "01-Sep-2026",
+    "predictedGrade": "B",
+    "grade": "B",
+    "analystInsight": "📈 <b>CAPITAL MARKETS & FINANCIAL SERVICES (GRADE B):</b> Financial advisory, corporate finance and capital markets solutions provider. Indicative IPO price RM0.425 with high Bumiputera applicant interest (1,668 applicants). Moderate swing target."
   },
   {
     "id": "wil-key-berhad",

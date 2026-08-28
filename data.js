@@ -9446,7 +9446,10 @@ const IPO_DATA = [
     "mitiOfferShares": 75751000,
     "hasMitiTranche": true,
     "mitiOpenDate": "28-Aug-2026",
-    "mitiCloseDate": "04-Sep-2026"
+    "mitiCloseDate": "04-Sep-2026",
+    "predictedGrade": "B",
+    "grade": "B",
+    "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA."
   },
   {
     "id": "gta-holdings-berhad",
@@ -9688,7 +9691,10 @@ const IPO_DATA = [
     "mitiOfferShares": 111938000,
     "hasMitiTranche": true,
     "mitiOpenDate": "23-Aug-2026",
-    "mitiCloseDate": "01-Sep-2026"
+    "mitiCloseDate": "01-Sep-2026",
+    "predictedGrade": "B",
+    "grade": "B",
+    "analystInsight": "📈 <b>CAPITAL MARKETS & FINANCIAL SERVICES (GRADE B):</b> Financial advisory, corporate finance and capital markets solutions provider. Indicative IPO price RM0.425 with high Bumiputera applicant interest (1,668 applicants). Moderate swing target."
   },
   {
     "id": "wil-key-berhad",
@@ -9978,13 +9984,14 @@ const IPO_DATA = [
     "mitiCloseDate": "04-Sep-2026",
     "sector": "Industrial Products & Services",
     "predictedGrade": "B",
-    "sifuTargetPrice": 0.4,
-    "calibratedSifuTargetPrice": 0.4,
-    "v7TargetPrice": 0.4,
+    "sifuTargetPrice": 0.36,
+    "calibratedSifuTargetPrice": 0.36,
+    "v7TargetPrice": 0.36,
     "analystInsight": "📦 <b>PLASTIC PACKAGING & MANUFACTURING:</b> MITI share allocation tranche for SCGM Bhd. Main market listed plastic packaging and thermoforming specialist.",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "os": 0,
-    "ib": "Affin Hwang Investment Bank"
+    "ib": "Affin Hwang Investment Bank",
+    "zone2TargetPrice": 0.36
   }
 ];
 
