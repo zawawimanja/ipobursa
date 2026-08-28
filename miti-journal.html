@@ -754,7 +754,7 @@
                     : `<span style="color:var(--text-dim);">TBA</span>`;
 
                 return `
-                    <tr>
+                    <tr id="miti-row-${ipo.id}">
                         <td><strong>${ipo.companyName}</strong></td>
                         <td>${marketLabel}</td>
                         <td>
@@ -1290,7 +1290,7 @@
                     : `<span style="font-size:0.65rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>`;
 
                 return `
-                <div style="background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:0.9rem;padding:1rem 1.1rem;">
+                <div class="cd-clickable-card miti" onclick="scrollToMitiIpo('${ipo.id}')" title="Click to view ${ipo.companyName} in MITI list" style="background:rgba(15,23,42,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:0.9rem;padding:1rem 1.1rem;cursor:pointer;">
                     <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
                         <strong style="color:white;font-size:0.95rem;">${ipo.companyName}</strong>
                         ${marketBadge}
@@ -1302,8 +1302,22 @@
                         <span style="font-size:0.75rem;color:var(--text-dim);">💰 Price: ${priceStr} · 🎯 Offer: <strong>${offerStr}</strong></span>
                         <span style="font-size:0.92rem;font-weight:700;color:#34d399;">👥 Applicants: <strong>${appsStr}</strong></span>
                     </div>
+                    <div style="margin-top: 0.45rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.72rem; color: #6ee7b7; font-weight: 600; opacity: 0.9;">
+                        <span>View Full Details</span> →
+                    </div>
                 </div>`;
             }).join('');
+        }
+
+        // Smooth scroll and highlight row in MITI table
+        function scrollToMitiIpo(ipoId) {
+            const row = document.getElementById(`miti-row-${ipoId}`);
+            if (row) {
+                row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                row.classList.remove('highlight-row-pulse');
+                void row.offsetWidth; // force reflow
+                row.classList.add('highlight-row-pulse');
+            }
         }
 
         // Initialize lists on load

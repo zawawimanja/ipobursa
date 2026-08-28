@@ -649,6 +649,14 @@ function autoPromoteIPOs(finalData) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    const getEndOfDay = (str) => {
+        if (!str) return null;
+        const d = parseFlexDate(str);
+        if (!d) return null;
+        d.setHours(23, 59, 59, 999);
+        return d;
+    };
+
     finalData.forEach(ipo => {
         // Skip auto-promotion if manually set to Stage 5 (Listed)
         if (ipo.stage === 5) return;
@@ -663,24 +671,24 @@ function autoPromoteIPOs(finalData) {
 
         // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
         if (ipo.stage === 2) {
-            const closeStr = ipo.mitiCloseDate || ipo.closingDate;
+            const closeStr = ipo.mitiCloseDate;
             if (closeStr) {
-                const closeDate = parseFlexDate(closeStr);
+                const closeDate = getEndOfDay(closeStr);
                 if (closeDate && closeDate < now) {
-                    if (ipo.closingDate && parseFlexDate(ipo.closingDate)) {
+                    if (ipo.closingDate && parseFlexDate(ipo.closingDate) && getEndOfDay(ipo.closingDate) >= now) {
                         ipo.stage = 3;
                         ipo.status = 'Application Open';
                     } else {
                         ipo.stage = 6;
-                        ipo.status = 'Menunggu Keputusan MITI';
+                        ipo.status = 'Awaiting MITI Decision';
                     }
                 }
             }
         }
 
-        // Stage 6 (Post-MITI): naik ke Public/Pre-Listing bila permohonan awam dibuka
+        // Stage 6 (Post-MITI): promote to Public (Stage 3) or Pre-Listing (Stage 4) when public application is active
         if (ipo.stage === 6 && ipo.closingDate) {
-            const closeDate = parseFlexDate(ipo.closingDate);
+            const closeDate = getEndOfDay(ipo.closingDate);
             if (closeDate) {
                 ipo.stage = closeDate >= now ? 3 : 4;
                 ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
@@ -697,7 +705,7 @@ function autoPromoteIPOs(finalData) {
                         ipo.stage = 5;
                         ipo.status = 'Listed';
                     } else if (ipo.closingDate) {
-                        const closeDate = parseFlexDate(ipo.closingDate);
+                        const closeDate = getEndOfDay(ipo.closingDate);
                         if (closeDate && closeDate < now) {
                             ipo.stage = 4;
                             ipo.status = 'Pre-Listing';
@@ -708,7 +716,7 @@ function autoPromoteIPOs(finalData) {
                     }
                 }
             } else if (ipo.closingDate) {
-                const closeDate = parseFlexDate(ipo.closingDate);
+                const closeDate = getEndOfDay(ipo.closingDate);
                 if (closeDate && closeDate < now) {
                     ipo.stage = 4;
                     ipo.status = 'Pre-Listing';
@@ -718,7 +726,7 @@ function autoPromoteIPOs(finalData) {
 
         // Refresh status for open applications (Stage 3 with a future closing date)
         if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
-            const cd = parseFlexDate(ipo.closingDate);
+            const cd = getEndOfDay(ipo.closingDate);
             if (cd && cd >= now) {
                 let openingFuture = false;
                 if (ipo.openingDate) {
@@ -1313,16 +1321,49 @@ function updateCountdownTexts() {
     });
 }
 
+// Smooth navigation from countdown cards to the exact stage & row in tracker
+window.navigateToIpo = function(ipoId, targetStage) {
+    const ipo = (ipoData || []).find(item => item.id === ipoId);
+    const stage = targetStage || (ipo ? ipo.stage : 1);
+
+    // 1. Switch active stage tab buttons
+    const tabBtnsList = document.querySelectorAll('.tab-btn');
+    const targetTabBtn = document.querySelector(`.tab-btn[data-stage="${stage}"]`);
+    if (targetTabBtn) {
+        tabBtnsList.forEach(b => b.classList.remove('active'));
+        targetTabBtn.classList.add('active');
+    }
+    currentStage = parseInt(stage);
+
+    // 2. Reset filters to make sure target IPO is not filtered out
+    resetFilters();
+    renderIPOs(currentStage);
+
+    // 3. Scroll smoothly to the IPO row and trigger glowing highlight pulse
+    setTimeout(() => {
+        const row = document.getElementById(`ipo-row-${ipoId}`);
+        if (row) {
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            row.classList.remove('highlight-row-pulse');
+            void row.offsetWidth; // Force reflow to re-trigger animation
+            row.classList.add('highlight-row-pulse');
+        } else {
+            const grid = document.getElementById('ipo-grid') || document.querySelector('.ipo-stages');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 450);
+};
+
 // MITI Countdown — live ticking strip on the main tracker for open MITI allocations
-// Helper: badge status syariah yang JELAS (hijau compliant / merah tak compliant)
+// Helper: standardized Shariah compliance badge
 function shariahBadge(ipo) {
     if (ipo.shariah === true) {
-        return '<span style="font-size:0.62rem;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✓ SYARIAH</span>';
+        return '<span style="font-size:0.62rem;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✓ SHARIAH</span>';
     }
     if (ipo.shariah === false) {
-        return '<span style="font-size:0.62rem;color:#f87171;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✗ TAK SYARIAH</span>';
+        return '<span style="font-size:0.62rem;color:#f87171;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✗ NON-SHARIAH</span>';
     }
-    return '<span style="font-size:0.62rem;color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.3);padding:0.1rem 0.4rem;border-radius:4px;font-weight:600;">SYARIAH?</span>';
+    return '<span style="font-size:0.62rem;color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.3);padding:0.1rem 0.4rem;border-radius:4px;font-weight:600;">SHARIAH?</span>';
 }
 
 function renderMitiCountdownStrip() {
@@ -1374,7 +1415,7 @@ function renderMitiCountdownStrip() {
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
                     return `
-                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                        <div class="cd-clickable-card miti" onclick="navigateToIpo('${ipo.id}', 2)" title="Click to view ${ipo.companyName} in Stage 02 MITI" style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
@@ -1388,6 +1429,9 @@ function renderMitiCountdownStrip() {
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
+                            </div>
+                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: #6ee7b7; opacity: 0.85; font-weight: 600;">
+                                <span>View Stage 02</span> →
                             </div>
                         </div>`;
                 }).join('')}
@@ -1443,7 +1487,7 @@ function renderPublicCountdownStrip() {
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
                     return `
-                        <div style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                        <div class="cd-clickable-card public" onclick="navigateToIpo('${ipo.id}', 3)" title="Click to view ${ipo.companyName} in Stage 03 Public" style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
@@ -1458,6 +1502,9 @@ function renderPublicCountdownStrip() {
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#38bdf8;">🏛️ ${ibShort || '—'}</span>
                             </div>
+                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: #7dd3fc; opacity: 0.85; font-weight: 600;">
+                                <span>View Stage 03</span> →
+                            </div>
                         </div>`;
                 }).join('')}
             </div>
@@ -1465,6 +1512,7 @@ function renderPublicCountdownStrip() {
     `;
     if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 function getPredictedGrade(ipo) {
     if (ipo.predictedGrade) return ipo.predictedGrade;
@@ -1663,7 +1711,7 @@ function createIPOCard(ipo, index = 0) {
         if (ipo.mitiWithdrawn) {
             dateDisplay = `
                 <div style="font-weight: 600; color: #ef4444; font-size: 0.75rem;">MITI Status:</div>
-                <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⛔ Keluar / Withdrawn</div>
+                <div style="font-size: 0.75rem; color: #ef4444; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⛔ Withdrawn</div>
             `;
         }
     } else if (ipo.stage === 3 || ipo.stage === 4) {
@@ -1721,7 +1769,7 @@ function createIPOCard(ipo, index = 0) {
         actionBtn = ipo.mitiWithdrawn
             ? `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
-                <span style="font-size: 0.7rem; color: #f87171; font-weight: 700; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 0.3rem 0.6rem; border-radius: 6px;">KELUAR MITI</span>
+                <span style="font-size: 0.7rem; color: #f87171; font-weight: 700; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 0.3rem 0.6rem; border-radius: 6px;">WITHDRAWN</span>
                 ${detailsBtn}
             </div>`
             : `
@@ -1749,7 +1797,7 @@ function createIPOCard(ipo, index = 0) {
     const isSurging = ipo.price > 0 && ipo.avgTP > (ipo.price * 1.5);
 
     return `
-        <tr class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
+        <tr id="ipo-row-${ipo.id}" data-id="${ipo.id}" class="card-animate ipo-table-row" style="animation-delay: ${animDelay}s; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
             <td style="padding: 0.75rem 0.6rem; width: 220px; min-width: 200px; max-width: 240px; vertical-align: top;">
                 <div style="display: flex; flex-direction: column; gap: 0.3rem;">
                     <div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
@@ -1757,11 +1805,10 @@ function createIPOCard(ipo, index = 0) {
                         ${isSurging ? '<span class="badge surge-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="flame" style="width: 10px; height: 10px; margin-right: 2px;"></i> HOT SURGE</span>' : ''}
                         ${ipo.outlier ? '<span class="badge outlier-badge" style="padding: 0.15rem 0.4rem; font-size: 0.65rem;"><i data-lucide="zap" style="width: 10px; height: 10px; margin-right: 2px;"></i> Outlier Watch</span>' : ''}
                         ${ipo.shariah === true ? '<span style="color: #10b981; font-size: 0.75rem;" title="Shariah-Compliant">[S]</span>' : ''}
-                        ${ipo.shariah === false ? '<span style="color: #f87171; font-size: 0.75rem;" title="Tak Shariah-Compliant">[NS]</span>' : ''}
-                        ${ipo.enrichedBy === 'AI' ? `<span class="ai-badge" title="Automatically enriched by Groq Llama 3.1 AI from prospectus" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; font-size: 0.58rem; padding: 0.1rem 0.35rem; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);"><i data-lucide="sparkles" style="width: 10px; height: 10px;"></i> AI</span>` : ''}
+                        ${ipo.shariah === false ? '<span style="color: #f87171; font-size: 0.75rem;" title="Non-Shariah Compliant">[NS]</span>' : ''}
                     </div>
                     <div style="font-weight: 600; font-size: 0.88rem; line-height: 1.25; word-break: break-word;">
-                        ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Buka chart TradingView (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName}
+                        ${ipo.stage === 5 ? `<a href="https://www.tradingview.com/chart/?symbol=MYX:${ipo.symbol || ipo.id.toUpperCase().replace(/[^A-Z0-9]/g, '')}&interval=5" target="_blank" title="Open TradingView chart (5M)" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 1px; transition: color 0.3s;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='inherit'">${ipo.companyName} 🔗</a>` : ipo.companyName}
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.35rem; color: var(--text-dim);">
@@ -2035,7 +2082,7 @@ window.showDetails = function(id) {
                 <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
                     <i data-lucide="zap" style="width: 13px; height: 13px;"></i> Generate AI Verdict
                 </button>
-                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Menggunakan Llama-3.3-70b-versatile untuk ulasan fundamental & valuation segera.</div>
+                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Powered by Llama-3.3-70b-versatile for instant fundamental & valuation insights.</div>
             </div>
         </div>
 
