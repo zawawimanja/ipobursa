@@ -272,7 +272,7 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "mitiOpenDate": "17-Aug-2026",
-        "mitiCloseDate": "31-Aug-2026",
+        "mitiCloseDate": "30-Aug-2026",
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
         "sector": "REITs",
         "shariah": false,
@@ -303,17 +303,19 @@
         "shariah": false
     },
     "ska-capital-berhad": {
-        "mitiApplicants": 1858,
+        "mitiApplicants": 1876,
         "mitiOfferShares": 111938000,
         "predictedGrade": "B",
         "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425.",
-        "sector": "Power Infrastructure (EPCC Substation)"
+        "sector": "Power Infrastructure (EPCC Substation)",
+        "mitiCloseDate": "31-Aug-2026"
     },
     "empg-group-berhad": {
-        "mitiApplicants": 14,
+        "mitiApplicants": 16,
         "mitiOfferShares": 75751000,
         "predictedGrade": "B",
-        "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA."
+        "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA.",
+        "mitiCloseDate": "03-Sep-2026"
     },
     "scgm-bhd": {
         "stage": 2,
@@ -322,7 +324,7 @@
         "mitiApplicants": 37,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
-        "mitiCloseDate": "04-Sep-2026",
+        "mitiCloseDate": "03-Sep-2026",
         "hasMitiTranche": true
     }
 }
