@@ -9442,7 +9442,7 @@
         "calibratedSifuTargetPrice": 0.28,
         "v7TargetPrice": 0.28,
         "zone2TargetPrice": 0.28,
-        "mitiApplicants": 25,
+        "mitiApplicants": 28,
         "mitiOfferShares": 75751000,
         "hasMitiTranche": true,
         "mitiOpenDate": "28-Aug-2026",
@@ -9651,7 +9651,7 @@
         "hasMitiTranche": true,
         "mitiTranche": 687500000,
         "mitiOfferShares": 687500000,
-        "mitiApplicants": 403
+        "mitiApplicants": 406
     },
     {
         "id": "kk-mart-retail-berhad",
@@ -9687,7 +9687,7 @@
         "calibratedSifuTargetPrice": 0.49,
         "v7TargetPrice": 0.49,
         "zone2TargetPrice": 0.49,
-        "mitiApplicants": 1926,
+        "mitiApplicants": 1993,
         "mitiOfferShares": 111938000,
         "hasMitiTranche": true,
         "mitiOpenDate": "23-Aug-2026",
@@ -9978,7 +9978,7 @@
         "status": "MITI Allocation Phase",
         "hasMitiTranche": true,
         "year": 2026,
-        "mitiApplicants": 45,
+        "mitiApplicants": 46,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
         "mitiCloseDate": "04-Sep-2026",
