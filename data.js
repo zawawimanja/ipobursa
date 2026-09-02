@@ -9442,7 +9442,7 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.28,
     "v7TargetPrice": 0.28,
     "zone2TargetPrice": 0.28,
-    "mitiApplicants": 55,
+    "mitiApplicants": 56,
     "mitiOfferShares": 75751000,
     "hasMitiTranche": true,
     "mitiOpenDate": "28-Aug-2026",
