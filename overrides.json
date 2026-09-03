@@ -311,20 +311,20 @@
         "mitiCloseDate": "01-Sep-2026"
     },
     "empg-group-berhad": {
-        "mitiApplicants": 68,
+        "mitiApplicants": 69,
         "mitiOfferShares": 75751000,
         "predictedGrade": "B",
         "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA.",
-        "mitiCloseDate": "09-Sep-2026"
+        "mitiCloseDate": "08-Sep-2026"
     },
     "scgm-bhd": {
         "stage": 2,
         "status": "MITI Allocation Phase",
         "price": 0.365,
-        "mitiApplicants": 68,
+        "mitiApplicants": 69,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
-        "mitiCloseDate": "12-Sep-2026",
+        "mitiCloseDate": "11-Sep-2026",
         "hasMitiTranche": true
     }
 }
