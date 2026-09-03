@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ipobursa.my/sitemap.xml
+Sitemap: https://www.ipobursa.my/sitemap.xml

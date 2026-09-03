@@ -4,8 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bursa IPO Tracker | Track Malaysian IPOs</title>
-    <meta name="description" content="Track Malaysian IPOs through three stages: Exposure, Application, and Results.">
+    <title>Bursa IPO Tracker | Track Malaysian IPOs, Target Prices & Analysis</title>
+    <meta name="description" content="Comprehensive Bursa Malaysia IPO tracking portal: MITI allocations, Balloting stages, Prospectus analysis, Sifu Target Prices, and Day 1 Performance.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.ipobursa.my/">
+    <meta property="og:title" content="Bursa IPO Tracker | Track Malaysian IPOs, Target Prices & Analysis">
+    <meta property="og:description" content="Comprehensive Bursa Malaysia IPO tracking portal: MITI allocations, Balloting stages, Prospectus analysis, and Target Prices.">
+    <meta property="og:url" content="https://www.ipobursa.my/">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Bursa IPO Tracker",
+      "url": "https://www.ipobursa.my/",
+      "description": "Comprehensive Bursa Malaysia IPO tracking and research platform.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.ipobursa.my/ipo/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
@@ -59,6 +79,12 @@
                 <span class="logo-text"><span>Bursa</span>IPO</span>
             </div>
             <div class="nav-links" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="morning-brief.html" class="btn-moomoo">
+                    <i data-lucide="sun"></i> <span class="nav-text">Morning Brief</span>
+                </a>
+                <a href="ipo/" class="btn-moomoo">
+                    <i data-lucide="folder"></i> <span class="nav-text">IPO Directory</span>
+                </a>
                 <a href="strategy.html" class="btn-moomoo">
                     <i data-lucide="line-chart"></i> <span class="nav-text">Strategy</span>
                 </a>
@@ -91,8 +117,6 @@
 
         <!-- SIFU PREMIUM PORTAL BUTTONS (CENTER PAGE) -->
         <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.75rem; margin-top: 0.5rem;">
-
-
             <!-- Sifu Sheets Button -->
             <a href="sifu-sheets.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #10b981, #059669); border: 1px solid rgba(16, 185, 129, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25); transition: all 0.3s; cursor: pointer;">
                 <i data-lucide="table" style="width: 14px; height: 14px;"></i> Sifu's Projection Sheets
@@ -108,13 +132,20 @@
                 <i data-lucide="zap" style="width: 14px; height: 14px;"></i> Decision Engine: Sub/Skip?
             </a>
 
-
             <!-- MITI Journal Button -->
             <a href="miti-journal.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #f59e0b, #d97706); border: 1px solid rgba(245, 158, 11, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25); transition: all 0.3s; cursor: pointer;">
                 <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> MITI Investment Journal
             </a>
 
+            <!-- Morning Brief Button -->
+            <a href="morning-brief.html" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #06b6d4, #0891b2); border: 1px solid rgba(6, 182, 212, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="sun" style="width: 14px; height: 14px;"></i> Morning Briefing
+            </a>
 
+            <!-- IPO Directory Button -->
+            <a href="ipo/" class="btn-moomoo" style="text-decoration: none; background: linear-gradient(135deg, #8b5cf6, #6366f1); border: 1px solid rgba(139, 92, 246, 0.4); color: white; font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.25rem; border-radius: 2rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25); transition: all 0.3s; cursor: pointer;">
+                <i data-lucide="folder" style="width: 14px; height: 14px;"></i> 📂 IPO Directory
+            </a>
         </div>
 
 
@@ -516,19 +547,72 @@
         <!-- Legend & Education -->
     </main>
 
-    <footer class="glass-footer" style="background: rgba(15, 23, 42, 0.9); border-top: 1px solid rgba(255,255,255,0.08); padding: 3rem 0 2rem 0; margin-top: 4rem;">
-        <div class="container" style="text-align: center;">
-            <div style="max-width: 800px; margin: 0 auto 2rem auto; font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.5rem;">
+    <!-- MEGA FOOTER FOR COMPREHENSIVE CRAWLABILITY & INTERNAL LINKING -->
+    <footer class="glass-footer" style="background: rgba(15, 23, 42, 0.95); border-top: 1px solid rgba(255,255,255,0.08); padding: 3.5rem 0 2rem 0; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2.5rem; text-align: left;">
+                <div>
+                    <h4 style="color: white; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="layout-dashboard" style="width: 16px; height: 16px; color: var(--primary-light);"></i> Core IPO Tools
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                        <li><a href="index.html" style="color: var(--text-dim); text-decoration: none;">Dashboard & Live Radar</a></li>
+                        <li><a href="sifu-sheets.html" style="color: var(--text-dim); text-decoration: none;">Sifu's Projection Sheets</a></li>
+                        <li><a href="cincai-analysis.html" style="color: var(--text-dim); text-decoration: none;">Cincai2 Kira (60 IPOs)</a></li>
+                        <li><a href="ipo-decision.html" style="color: var(--text-dim); text-decoration: none;">Decision Engine: Sub / Skip</a></li>
+                        <li><a href="morning-brief.html" style="color: var(--text-dim); text-decoration: none;">Daily Morning Briefing</a></li>
+                        <li><a href="miti-journal.html" style="color: var(--text-dim); text-decoration: none;">MITI Investment Journal</a></li>
+                        <li><a href="sifu-picks.html" style="color: var(--text-dim); text-decoration: none;">Sifu Target Picks</a></li>
+                        <li><a href="alerts.html" style="color: var(--text-dim); text-decoration: none;">IPO Alerts Tracker</a></li>
+                        <li><a href="ipo/" style="color: #38bdf8; font-weight: 600; text-decoration: none;">📂 Complete IPO Directory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="graduation-cap" style="width: 16px; height: 16px; color: #10b981;"></i> Education & Strategy
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                        <li><a href="strategy.html" style="color: var(--text-dim); text-decoration: none;">IPO Strategy Playbook</a></li>
+                        <li><a href="tips.html" style="color: var(--text-dim); text-decoration: none;">Pro Tips & Balloting Guide</a></li>
+                        <li><a href="scalping-sop.html" style="color: var(--text-dim); text-decoration: none;">Day 1 Scalping SOP</a></li>
+                        <li><a href="scalping-charts.html" style="color: var(--text-dim); text-decoration: none;">Scalping Chart Setups</a></li>
+                        <li><a href="backtest-results.html" style="color: var(--text-dim); text-decoration: none;">Historical Backtest Results</a></li>
+                        <li><a href="https://www.jerungbursa.my/" target="_blank" style="color: #a78bfa; text-decoration: none;">JerungBursa Smart Money ↗</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="book-open" style="color: #f59e0b;"></i> Research & Deep Dives
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                        <li><a href="blog.html" style="color: var(--text-dim); text-decoration: none;">All IPO Commentary</a></li>
+                        <li><a href="blog-mydcd.html" style="color: var(--text-dim); text-decoration: none;">MyDCD Berhad Analysis</a></li>
+                        <li><a href="blog-gta-holdings.html" style="color: var(--text-dim); text-decoration: none;">GTA Holdings Berhad</a></li>
+                        <li><a href="blog-butterfield-fb.html" style="color: var(--text-dim); text-decoration: none;">Butterfield FB Berhad</a></li>
+                        <li><a href="blog-srkk-ai.html" style="color: var(--text-dim); text-decoration: none;">SRKK AI Berhad (312x OS)</a></li>
+                        <li><a href="blog-stratus-global.html" style="color: var(--text-dim); text-decoration: none;">Stratus Global Holdings</a></li>
+                        <li><a href="blog-skyechip.html" style="color: var(--text-dim); text-decoration: none;">SkyeChip (+297% Debut)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: white; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i data-lucide="shield-check" style="width: 16px; height: 16px; color: #ec4899;"></i> Compliance & Legal
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                        <li><a href="about.html" style="color: var(--text-dim); text-decoration: none;">About Bursa IPO Tracker</a></li>
+                        <li><a href="contact.html" style="color: var(--text-dim); text-decoration: none;">Contact Us & Inquiries</a></li>
+                        <li><a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy & Cookie Policy</a></li>
+                        <li><a href="terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a></li>
+                        <li><a href="sitemap.xml" style="color: var(--text-dim); text-decoration: none;">XML Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="max-width: 850px; margin: 0 auto 1.5rem auto; font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; text-align: center;">
                 <p>⚠️ <strong>Financial Disclaimer:</strong> All information, analyses, grades, price projections, and calculator outputs on this website are for educational and research reference purposes only. They do not constitute investment advice or a recommendation to buy or sell any security. Stock market investments, particularly IPO subscriptions, carry a high risk of capital loss. We do not guarantee the accuracy of the information compiled. You are advised to consult a licensed financial advisor before making any investment decisions.</p>
             </div>
-            <div class="footer-content" style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
-                <p style="font-size: 0.85rem; color: var(--text-dim);">&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem;">
-                    <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Privacy Policy</a>
-                    <a href="terms.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Terms of Service</a>
-                    <a href="about.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">About Us</a>
-                    <a href="contact.html" style="color: var(--text-dim); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">Contact Us</a>
-                </div>
+            <div style="text-align: center; font-size: 0.82rem; color: var(--text-dim);">
+                <p>&copy; 2026 Bursa IPO Tracker (www.ipobursa.my). All rights reserved.</p>
             </div>
         </div>
     </footer>
