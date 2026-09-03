@@ -14,7 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=3.6"></script>
+    <script src="data.js?v=3.5"></script>
     <script src="sync-status.js?v=3.0"></script>
     <style>
         .journal-container {
@@ -729,15 +729,6 @@
                     sectorBadge = `<div style="font-size:0.68rem;color:${sColor};margin-top:0.15rem;">avg ${avgStr} | win ${wr}%</div>`;
                 }
 
-                let verdictBadge = '';
-                if (grade === 'A') {
-                    verdictBadge = `<span style="color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">WORTH IT (A)</span>`;
-                } else if (grade === 'B') {
-                    verdictBadge = `<span style="color:#fbbf24;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">SWING (B)</span>`;
-                } else {
-                    verdictBadge = `<span style="color:#f87171;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">AVOID (C)</span>`;
-                }
-
                 const marketLabel = (ipo.market || '').toLowerCase().includes('main')
                     ? `<span style="font-size:0.7rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>`
                     : `<span style="font-size:0.7rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>`;
@@ -754,6 +745,42 @@
                 const tpCell = ipoPrice > 0 
                     ? `<div>RM ${tp.toFixed(3)}</div><div style="font-size:0.72rem;font-weight:700;color:${upsideColor};">${upsideStr}</div>` 
                     : `<span style="color:var(--text-dim);">TBA</span>`;
+
+                // Dynamic Verdict Badge aligning with Target Price, Sector & Hype
+                let verdictLabel = '';
+                let verdictColor = '#fbbf24';
+                let verdictBg = 'rgba(245,158,11,0.15)';
+                let verdictBorder = 'rgba(245,158,11,0.3)';
+
+                const isReit = (sector || '').toLowerCase().includes('reit');
+                if (ipo.mitiVerdict) {
+                    verdictLabel = ipo.mitiVerdict;
+                } else if (isReit) {
+                    verdictLabel = `DIVIDEND (${grade})`;
+                    verdictColor = '#60a5fa'; verdictBg = 'rgba(96,165,250,0.15)'; verdictBorder = 'rgba(96,165,250,0.3)';
+                } else if (upsidePercent < 0 && fires >= 2) {
+                    verdictLabel = `SCALP (${grade})`;
+                    verdictColor = '#f59e0b'; verdictBg = 'rgba(245,158,11,0.15)'; verdictBorder = 'rgba(245,158,11,0.3)';
+                } else if (grade === 'A') {
+                    verdictLabel = `WORTH IT (A)`;
+                    verdictColor = '#10b981'; verdictBg = 'rgba(16,185,129,0.15)'; verdictBorder = 'rgba(16,185,129,0.3)';
+                } else if (grade === 'B') {
+                    if (upsidePercent >= 15) {
+                        verdictLabel = `WORTH IT (B)`;
+                        verdictColor = '#10b981'; verdictBg = 'rgba(16,185,129,0.15)'; verdictBorder = 'rgba(16,185,129,0.3)';
+                    } else if (upsidePercent >= 0) {
+                        verdictLabel = `SWING (B)`;
+                        verdictColor = '#fbbf24'; verdictBg = 'rgba(245,158,11,0.15)'; verdictBorder = 'rgba(245,158,11,0.3)';
+                    } else {
+                        verdictLabel = `SCALP (B)`;
+                        verdictColor = '#f59e0b'; verdictBg = 'rgba(245,158,11,0.15)'; verdictBorder = 'rgba(245,158,11,0.3)';
+                    }
+                } else {
+                    verdictLabel = `AVOID (C)`;
+                    verdictColor = '#f87171'; verdictBg = 'rgba(239,68,68,0.15)'; verdictBorder = 'rgba(239,68,68,0.3)';
+                }
+
+                const verdictBadge = `<span style="color:${verdictColor};background:${verdictBg};border:1px solid ${verdictBorder};padding:0.15rem 0.4rem;border-radius:4px;font-weight:700;font-size:0.7rem;">${verdictLabel}</span>`;
 
                 return `
                     <tr id="miti-row-${ipo.id}">
@@ -1267,10 +1294,10 @@
                 .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
                 .map(ipo => {
                     const close = parseFlexDate(ipo.mitiCloseDate);
-                    close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+                    close.setHours(12, 0, 0, 0); // MITI closes at 12:00 PM (noon) on closing date
                     return { ipo, close };
                 })
-                .filter(x => x.close >= now)
+                .filter(x => x.close > now)
                 .sort((a, b) => a.close - b.close);
 
             if (items.length === 0) {
