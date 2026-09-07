@@ -21,6 +21,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const ROOT = path.join(__dirname, '..');
 const PORTAL = 'https://sahamonline.miti.gov.my/portal/index';
@@ -54,6 +55,7 @@ async function main() {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
                 'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8',
             },
+            httpsAgent: new https.Agent({ rejectUnauthorized: false }),
             timeout: 15000,
         });
     } catch (e) {

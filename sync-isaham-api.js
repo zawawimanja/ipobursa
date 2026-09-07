@@ -73,7 +73,6 @@ function findExistingIPO(name, existingData) {
         'KUCINGKO [NS]': 'kucingko',
         'MFGROUP': 'manforce-group',
         'ADNEX': 'adnex',
-        'NE': 'adnex',
         '5ER': '5e-resources',
         'SRKK': 'srkk-ai',
         'SRKK AI BERHAD': 'srkk-ai',
@@ -337,7 +336,7 @@ async function gitPush() {
         const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
         execSync('git add data.json data.js sync-status.js', { cwd: __dirname });
         execSync(`git commit -m "Auto sync (API): ${stamp}"`, { cwd: __dirname });
-        execSync('git push', { cwd: __dirname });
+        execSync('git pull --rebase origin main && git push', { cwd: __dirname });
         console.log(`\n[Git] ✅ Pushed to GitHub successfully.`);
     } catch (e) {
         console.error('\n[Git] ❌ Push failed:', e.message);

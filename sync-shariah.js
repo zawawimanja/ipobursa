@@ -174,7 +174,7 @@ async function gitPush() {
         const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
         execSync('git add data.json data.js data_export.js', { cwd: ROOT });
         execSync(`git commit -m "Auto sync shariah SC: ${stamp}"`, { cwd: ROOT });
-        execSync('git push', { cwd: ROOT });
+        execSync('git pull --rebase origin main && git push', { cwd: ROOT });
         console.log('\n[Git] ✅ Pushed ke GitHub.');
     } catch (e) {
         console.error('\n[Git] ❌ Push gagal:', e.message);

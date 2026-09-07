@@ -21,6 +21,22 @@ const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 };
 
+const COOKIES_FILE = path.join(__dirname, 'scratch', 'isaham-cookies.json');
+
+function getHeaders() {
+    const headers = { ...HEADERS };
+    try {
+        if (fs.existsSync(COOKIES_FILE)) {
+            const data = JSON.parse(fs.readFileSync(COOKIES_FILE, 'utf8'));
+            if (data.cookieHeader) {
+                headers['Cookie'] = data.cookieHeader;
+                headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36';
+            }
+        }
+    } catch (e) {}
+    return headers;
+}
+
 function getSlug(name) {
     return name.toLowerCase()
         .replace(/[^a-z0-9\s-]/g, '')
@@ -38,9 +54,10 @@ async function fetchOS(companyName) {
         `https://www.isaham.my/ipo/insights/${shortSlug}`,
     ];
 
+    const reqHeaders = getHeaders();
     for (const url of urls) {
         try {
-            const response = await axios.get(url, { headers: HEADERS, timeout: 10000 });
+            const response = await axios.get(url, { headers: reqHeaders, timeout: 10000 });
             const $ = cheerio.load(response.data);
             const text = $('body').text();
 
@@ -125,7 +142,7 @@ async function main() {
             const { execSync } = require('child_process');
             execSync('git add data.json data.js', { cwd: __dirname });
             execSync(`git commit -m "Auto OS update: ${stamp}"`, { cwd: __dirname });
-            execSync('git push', { cwd: __dirname });
+            execSync('git pull --rebase origin main && git push', { cwd: __dirname });
             console.log(`[Git] ✅ Pushed to GitHub.`);
         } catch (e) {
             console.error(`[Git] ❌ Push failed:`, e.message);
