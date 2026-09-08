@@ -9442,7 +9442,7 @@
         "calibratedSifuTargetPrice": 0.28,
         "v7TargetPrice": 0.28,
         "zone2TargetPrice": 0.28,
-        "mitiApplicants": 94,
+        "mitiApplicants": 97,
         "mitiOfferShares": 75751000,
         "hasMitiTranche": true,
         "mitiOpenDate": "28-Aug-2026",
@@ -9551,7 +9551,7 @@
         "hasMitiTranche": true,
         "mitiCloseDate": "14-Sep-2026",
         "mitiOpenDate": "08-Sep-2026",
-        "mitiApplicants": 0,
+        "mitiApplicants": 4,
         "mitiOfferShares": 66250000
     },
     {
