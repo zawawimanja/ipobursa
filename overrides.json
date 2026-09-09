@@ -322,7 +322,7 @@
         "stage": 2,
         "status": "MITI Allocation Phase",
         "price": 0.365,
-        "mitiApplicants": 76,
+        "mitiApplicants": 77,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
         "mitiCloseDate": "12-Sep-2026",
@@ -335,7 +335,7 @@
         "price": 0.18,
         "mitiCloseDate": "14-Sep-2026",
         "mitiOpenDate": "08-Sep-2026",
-        "mitiApplicants": 5,
+        "mitiApplicants": 13,
         "mitiOfferShares": 66250000
     }
 }
