@@ -9549,7 +9549,7 @@
         "v7TargetPrice": 0.2,
         "zone2TargetPrice": 0.2,
         "hasMitiTranche": true,
-        "mitiCloseDate": "14-Sep-2026",
+        "mitiCloseDate": "13-Sep-2026",
         "mitiOpenDate": "08-Sep-2026",
         "mitiApplicants": 38,
         "mitiOfferShares": 66250000
@@ -10002,7 +10002,7 @@
         "mitiApplicants": 80,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
-        "mitiCloseDate": "12-Sep-2026",
+        "mitiCloseDate": "11-Sep-2026",
         "sector": "Industrial Products & Services",
         "predictedGrade": "B",
         "sifuTargetPrice": 0.36,

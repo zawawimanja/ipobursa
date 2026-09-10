@@ -325,7 +325,7 @@
         "mitiApplicants": 80,
         "mitiOfferShares": 95300000,
         "mitiOpenDate": "28-Aug-2026",
-        "mitiCloseDate": "12-Sep-2026",
+        "mitiCloseDate": "11-Sep-2026",
         "hasMitiTranche": true
     },
     "yes-group-management-berhad": {
@@ -333,7 +333,7 @@
         "status": "MITI Allocation Phase",
         "hasMitiTranche": true,
         "price": 0.18,
-        "mitiCloseDate": "14-Sep-2026",
+        "mitiCloseDate": "13-Sep-2026",
         "mitiOpenDate": "08-Sep-2026",
         "mitiApplicants": 38,
         "mitiOfferShares": 66250000
