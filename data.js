@@ -9551,7 +9551,7 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "mitiCloseDate": "14-Sep-2026",
     "mitiOpenDate": "08-Sep-2026",
-    "mitiApplicants": 35,
+    "mitiApplicants": 37,
     "mitiOfferShares": 66250000
   },
   {
@@ -9999,7 +9999,7 @@ const IPO_DATA = [
     "status": "MITI Allocation Phase",
     "hasMitiTranche": true,
     "year": 2026,
-    "mitiApplicants": 79,
+    "mitiApplicants": 80,
     "mitiOfferShares": 95300000,
     "mitiOpenDate": "28-Aug-2026",
     "mitiCloseDate": "12-Sep-2026",
