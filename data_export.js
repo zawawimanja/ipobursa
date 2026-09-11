@@ -9549,7 +9549,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.2,
     "zone2TargetPrice": 0.2,
     "hasMitiTranche": true,
-    "mitiCloseDate": "14-Sep-2026",
+    "mitiCloseDate": "13-Sep-2026",
     "mitiOpenDate": "08-Sep-2026",
     "mitiApplicants": 47,
     "mitiOfferShares": 66250000
