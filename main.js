@@ -1861,18 +1861,6 @@ function createIPOCard(ipo, index = 0) {
                 <span style="color: ${gradeColor}; font-weight: bold; font-size: 0.8rem; padding: 0.15rem 0.4rem; border: 1px solid ${gradeColor}40; border-radius: 4px; background: ${gradeColor}10;">
                     ${grade === 'Pending' ? 'Pending' : grade}
                 </span>
-                ${(function() {
-                    const predGrade = getPredictedGrade(ipo);
-                    if (predGrade && (ipo.stage === 5 || (ipo.stage === 4 && predGrade !== grade))) {
-                        return `
-                        <div style="margin-top: 0.4rem; font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 0.2rem;">
-                            Pred: <strong style="color: ${predGrade === grade ? '#10b981' : '#f59e0b'};">${predGrade}</strong>
-                            ${predGrade === grade ? '<i data-lucide="check-circle" style="width: 12px; color: #10b981;"></i>' : ''}
-                        </div>
-                        `;
-                    }
-                    return '';
-                })()}
                 ${prediction ? `
                 <div style="margin-top: 0.4rem; width: 80px;">
                     <div style="display: flex; justify-content: space-between; font-size: 0.6rem; margin-bottom: 2px;">
