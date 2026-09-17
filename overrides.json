@@ -248,7 +248,14 @@
     },
     "slgc-berhad": {
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "price": 0.28,
+        "sifuTargetPrice": 0.29,
+        "calibratedSifuTargetPrice": 0.29,
+        "v7TargetPrice": 0.29,
+        "v3TargetPrice": 0.29,
+        "predictedGrade": "C",
+        "analystInsight": "⚠️ <b>HIGH RISK / CONSTRUCTON SECTOR (GRADE C)</b><br>Penyedia perkhidmatan pembinaan & kejuruteraan infrastruktur.<br><br>📊 <b>Penilaian:</b><br>• <b>Harga IPO Indikatif:</b> RM0.28 sesaham.<br>• <b>Sektor:</b> Sektor pembinaan tanpa tema berimpak tinggi; margin terdedah kepada kos bahan mentah.<br>• <b>Target Price:</b> RM0.29 (Potensi upside +3.5% terhad)."
     },
     "united-asiapac-energy-berhad": {
         "symbol": "UNIPAC",
