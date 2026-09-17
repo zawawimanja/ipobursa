@@ -229,8 +229,18 @@
         "symbol": "BFIELD"
     },
     "evocom-berhad": {
-        "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "price": 0.18,
+        "openingDate": "03-Sep-2026",
+        "closingDate": "14-Sep-2026",
+        "listingDate": "28-Sep-2026",
+        "stage": 4,
+        "status": "Pre-Listing",
+        "symbol": "EVOCOM",
+        "predictedGrade": "C",
+        "sifuTargetPrice": 0.2,
+        "calibratedSifuTargetPrice": 0.2,
+        "v3TargetPrice": 0.2,
+        "analystInsight": "⚠️ <b>HIGH RISK / WEAK MARGINS (GRADE C)</b><br>Penyedia rantai bekalan e-dagang & tenaga kerja logistik (flexible staffing).<br><br>📊 <b>Penilaian & Risiko:</b><br>• <b>Harga IPO:</b> RM0.18 sesaham (Market cap RM82.0M).<br>• <b>Persaingan & Marjin:</b> Marjin kasar nipis dalam perkhidmatan penyediaan tenaga kerja logistik.<br>• <b>Target Price:</b> RM0.18–RM0.20 (+0% hingga +11% potensi terhad)."
     },
     "slgc-berhad": {
         "mitiOpenDate": "01-Jul-2026",
