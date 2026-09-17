@@ -226,7 +226,11 @@
         "listingDate": "15-Sep-2026",
         "stage": 5,
         "status": "Listed",
-        "symbol": "BFIELD"
+        "symbol": "BFIELD",
+        "sifuTargetPrice": 0.5,
+        "calibratedSifuTargetPrice": 0.5,
+        "v7TargetPrice": 0.5,
+        "v3TargetPrice": 0.5
     },
     "evocom-berhad": {
         "price": 0.18,
