@@ -303,6 +303,15 @@ async function main() {
         }
     }
 
+    // Recalculate Sifu V7 target prices automatically for all IPOs
+    try {
+        const { execSync } = require('child_process');
+        console.log('🔄 Running automatic Sifu V7 target price calculator...');
+        execSync('node scratch/calc_sifu_targets.js', { stdio: 'inherit', cwd: __dirname });
+    } catch (e) {
+        console.error('  [Target Calculation] Error:', e.message);
+    }
+
     // 4) Simpan
     fs.writeFileSync(DATA_JSON_FILE, JSON.stringify(existingData, null, 2));
     const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
