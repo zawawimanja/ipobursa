@@ -222,7 +222,11 @@
     "butterfield-fb-berhad": {
         "mitiOpenDate": "01-Jul-2026",
         "mitiCloseDate": "10-Jul-2026",
-        "closingDate": "02-Sep-2026"
+        "closingDate": "02-Sep-2026",
+        "listingDate": "15-Sep-2026",
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "BFIELD"
     },
     "evocom-berhad": {
         "mitiOpenDate": "01-Jul-2026",
@@ -337,5 +341,21 @@
         "mitiOpenDate": "08-Sep-2026",
         "mitiApplicants": 86,
         "mitiOfferShares": 66250000
+    },
+    "pioneer-heat-holdings-berhad": {
+        "symbol": "PIONEER",
+        "stage": 5,
+        "status": "Listed",
+        "closingDate": "03-Sep-2026",
+        "listingDate": "17-Sep-2026",
+        "os": 47.8,
+        "openPrice": 0.255,
+        "highPrice": 0.325,
+        "dailyChange": 30,
+        "sifuTargetPrice": 0.31,
+        "calibratedSifuTargetPrice": 0.31,
+        "v3TargetPrice": 0.31,
+        "predictedGrade": "B",
+        "analystInsight": "🚀 <b>PENYENARAIAN PASARAN (DEBUT POP +30%)</b><br>Pioneer Heat Holdings Berhad (0368 / PIONEER) tersenarai di Pasaran ACE pada 17-Sep-2026.<br><br>📊 <b>Prestasi Hari Pertama:</b><br>• <b>Harga IPO:</b> RM0.25<br>• <b>Harga Buka:</b> RM0.255 (+2.0%)<br>• <b>Puncak Intraday:</b> RM0.325 (+30.0% / +RM0.075)<br>• <b>Langganan Awam:</b> 47.80x (Bumi 57.35x)<br><br>🎯 <b>Unjuran Sasaran Sifu:</b> Target awal RM0.30–RM0.31 dicapai sepenuhnya pada sesi pertama dengan penaja Malacca Securities."
     }
 }
