@@ -9537,8 +9537,8 @@ const IPO_DATA = [
     "stage": 2,
     "status": "MITI Allocation Phase",
     "year": 2026,
-    "sector": "Technology (Semiconductor / Test & Assembly)",
-    "geography": "Penang",
+    "sector": "Industrial Products & Services (M&E)",
+    "geography": "",
     "sifuTargetPrice": 0.35,
     "calibratedSifuTargetPrice": 0.39,
     "v7TargetPrice": 0.39,
@@ -10034,6 +10034,6 @@ const IPO_DATA = [
   }
 ];
 
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
     module.exports = IPO_DATA;
 }
