@@ -2,45 +2,37 @@
 /**
  * sync-miti-applicants-login.js
  *
- * Auto-sync "Jumlah Pelabur Mohon Saham" + "Jumlah Tawaran Saham" dari portal
- * SahamOnline MITI menggunakan LOGIN TERUS (TIADA cookies Chrome, TIADA CAPTCHA):
+ * Auto-sync data IPO MITI (Portal Filament Baru) menggunakan Puppeteer:
  *
- *   GET  /portal/login          → ambil CSRF token
- *   POST /portal/login          → LoginFormPublic[username/password] + rememberMe
- *   GET  /portal/maklumat-saham → parse kad saham (nama + Jumlah Pelabur/Tawaran)
+ *   1. Buka https://sahamonline.miti.gov.my/login
+ *   2. Masukkan #data.username & #data.password
+ *   3. Navigasi ke https://sahamonline.miti.gov.my/dashboard/maklumat-saham
+ *   4. Ekstrak JSON data saham dari atribut wire:snapshot
  *
  * Kredential dibaca dari persekitaran (.env atau env vars):
  *   MITI_USERNAME, MITI_PASSWORD
  *
- * CARA GUNA:
- *   node scratch/sync-miti-applicants-login.js            (update data + git push)
- *   node scratch/sync-miti-applicants-login.js --no-push  (update data sahaja)
- *   node scratch/sync-miti-applicants-login.js --quiet    (senyap, untuk jadual auto)
- *
- * Sesuai untuk GitHub Actions (secrets MITI_USERNAME/MITI_PASSWORD) — laptop
- * tidak perlu on, tiada cookies expire.
+ * Sesuai untuk GitHub Actions — laptop tidak perlu on.
+ * NOTA: Data "Jumlah Pelabur Mohon Saham" telah dibuang oleh MITI di portal baru.
  */
 
-const axios = require('axios');
-const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { execSync } = require('child_process');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
 
 const ROOT = path.join(__dirname, '..');
 const DATA_JSON = path.join(ROOT, 'data.json');
 const DATA_JS = path.join(ROOT, 'data.js');
 const DATA_EXPORT_JS = path.join(ROOT, 'data_export.js');
 const OVERRIDES_JSON = path.join(ROOT, 'overrides.json');
-const LOGIN_URL = 'https://sahamonline.miti.gov.my/portal/login';
-const MAKLUMAT_URL = 'https://sahamonline.miti.gov.my/portal/maklumat-saham';
-
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
-const AGENT = new (require('https').Agent)({ rejectUnauthorized: false });
+const LOGIN_URL = 'https://sahamonline.miti.gov.my/login';
+const MAKLUMAT_URL = 'https://sahamonline.miti.gov.my/dashboard/maklumat-saham';
 
 // ---------------------------------------------------------------------------
-// Telegram alert — bot yang sama dengan sync-isaham.js
-// Tetapkan TELEGRAM_BOT_TOKEN & TELEGRAM_CHAT_ID dalam .env untuk aktifkan.
+// Telegram alert
 // ---------------------------------------------------------------------------
 async function sendTelegram(text) {
     const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -73,21 +65,19 @@ async function sendTelegram(text) {
 async function alertMitiDegraded(reason) {
     const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
     const msg = [
-        '🚨 IPO HUNTER: MITI Sync GAGAL',
+        '🚨 IPO HUNTER: MITI Sync GAGAL (Puppeteer)',
         '',
         `⏰ ${stamp}`,
         `⚠️ ${reason}`,
         '',
         '➡️ Semak: sahamonline.miti.gov.my (portal up?)',
         '➡️ Semak: MITI_USERNAME/MITI_PASSWORD dalam GitHub Secrets',
-        '',
-        'Jumlah pemohon MITI mungkin STALE — sync manual diperlukan.'
     ].join('\n');
     await sendTelegram(msg);
 }
 
 // ---------------------------------------------------------------------------
-// Load .env manual (sama seperti sync-isaham-api.js)
+// Load .env manual
 // ---------------------------------------------------------------------------
 function loadEnv() {
     const envPath = path.join(ROOT, '.env');
@@ -104,62 +94,6 @@ function loadEnv() {
     }
 }
 
-// ---------------------------------------------------------------------------
-// Login + scrape
-// ---------------------------------------------------------------------------
-function parseCookies(setCookieArr) {
-    return (setCookieArr || []).map(c => c.split(';')[0]).filter(Boolean).join('; ');
-}
-
-// Ambil CSRF + simpan cookies sesi dari halaman login (Yii2: CSRF terikat cookie)
-async function getCsrf() {
-    const resp = await axios.get(LOGIN_URL, {
-        headers: { 'User-Agent': UA, 'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8' },
-        httpsAgent: AGENT,
-        timeout: 30000,
-    });
-    const m = resp.data.match(/name="csrf-token" content="([^"]+)"/);
-    if (!m) throw new Error('CSRF token tidak dijumpai pada halaman login');
-    const sessionCookies = parseCookies(resp.headers['set-cookie']);
-    return { csrf: m[1], sessionCookies };
-}
-
-async function login(username, password) {
-    const { csrf, sessionCookies } = await getCsrf();
-    const body = new URLSearchParams({
-        '_csrf': csrf,
-        'LoginFormPublic[username]': username,
-        'LoginFormPublic[password]': password,
-        'LoginFormPublic[rememberMe]': '1',
-    }).toString();
-
-    const resp = await axios.post(LOGIN_URL, body, {
-        headers: {
-            'User-Agent': UA,
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8',
-            'Referer': LOGIN_URL,
-            'Cookie': sessionCookies,
-        },
-        httpsAgent: AGENT,
-        maxRedirects: 5,
-        timeout: 30000,
-    });
-
-    const hasSession = (resp.headers['set-cookie'] || []).some(c => /_panelUserpublic=/.test(c));
-    const cookies = [sessionCookies, parseCookies(resp.headers['set-cookie'])].filter(Boolean).join('; ');
-    return { cookieHeader: cookies, hasSession: hasSession === 'true' };
-}
-
-async function fetchMaklumat(cookieHeader) {
-    const resp = await axios.get(MAKLUMAT_URL, {
-        headers: { 'User-Agent': UA, 'Cookie': cookieHeader, 'Accept-Language': 'en-US,en;q=0.9,ms;q=0.8' },
-        httpsAgent: AGENT,
-        timeout: 30000,
-    });
-    return resp.data;
-}
-
 function formatMitiDate(dateObj) {
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const d = String(dateObj.getDate()).padStart(2, '0');
@@ -168,52 +102,60 @@ function formatMitiDate(dateObj) {
     return `${d}-${m}-${y}`;
 }
 
-// Parse setiap kad saham pada halaman maklumat-saham (nama + pelabur + tawaran + hari tinggal + harga)
-function parseMaklumatSaham(html) {
-    const $ = cheerio.load(html);
-    const cardMap = {};
-
-    $('.card').each((i, card) => {
-        const text = $(card).text().replace(/\s+/g, ' ').trim();
-        const titleMatch = text.match(/([A-Z0-9\s\.\(\)\-]+?)\s+Jumlah\s*Tawaran\s*Saham/i);
-        if (!titleMatch) return;
-        
-        const company = titleMatch[1].trim();
-        const row = { company, applicants: null, offerShares: null, daysLeft: null, price: null };
-
-        const offerM = text.match(/Jumlah\s*Tawaran\s*Saham\s*([\d\,]+)/i);
-        if (offerM) row.offerShares = parseInt(offerM[1].replace(/,/g, ''), 10);
-
-        const appM = text.match(/Jumlah\s*Pelabur\s*Mohon\s*Saham\s*([\d\,]+)/i);
-        if (appM) row.applicants = parseInt(appM[1].replace(/,/g, ''), 10);
-
-        const daysM = text.match(/SAHAM\s*DITUTUP\s*(\d+)\s*HARI\s*LAGI/i);
-        if (daysM) row.daysLeft = parseInt(daysM[1], 10);
-
-        cardMap[company.toLowerCase()] = row;
+function matchEntry(data, companyName) {
+    const name = companyName.toLowerCase().trim();
+    return data.find(x => {
+        const cn = (x.companyName || '').toLowerCase().trim();
+        return cn.includes(name) || name.includes(cn);
     });
-
-    $('.feature_item').each((i, item) => {
-        const name = $(item).find('.comName2').text().trim();
-        if (!name) return;
-
-        const priceText = $(item).find('p[style*="color: #296bc7"]').text().trim();
-        const priceM = priceText.match(/RM\s*([\d\.]+)/i);
-
-        const key = Object.keys(cardMap).find(k => k.includes(name.toLowerCase()) || name.toLowerCase().includes(k));
-        if (key && priceM) {
-            cardMap[key].price = parseFloat(priceM[1]);
-        } else if (name && priceM) {
-            cardMap[name.toLowerCase()] = { company: name, applicants: null, offerShares: null, daysLeft: null, price: parseFloat(priceM[1]) };
-        }
-    });
-
-    return Object.values(cardMap);
 }
 
-// ---------------------------------------------------------------------------
-// Kemas kini data files + overrides HANYA jika ada nilai yang berubah
-// ---------------------------------------------------------------------------
+function parseMaklumatJSON(html) {
+    const $ = cheerio.load(html);
+    const results = [];
+    
+    $('[wire\\:snapshot]').each((i, el) => {
+        try {
+            const snap = JSON.parse($(el).attr('wire:snapshot'));
+            if (snap.data && snap.data.profiles) {
+                const profilesArr = snap.data.profiles;
+                if (Array.isArray(profilesArr) && Array.isArray(profilesArr[0])) {
+                    const actualProfiles = profilesArr[0][0];
+                    if (Array.isArray(actualProfiles)) {
+                        const profilesData = actualProfiles.filter(p => !p.s);
+                        
+                        profilesData.forEach(p => {
+                            if (!p.name) return;
+                            
+                            const row = { 
+                                company: p.name.trim(), 
+                                applicants: null, // Tiada lagi di portal baru
+                                offerShares: null, 
+                                daysLeft: p.countdownDays !== undefined ? parseInt(p.countdownDays, 10) : null,
+                                price: null,
+                                mitiCloseDate: p.tarikh_akhir_tiers || p.tarikh || null
+                            };
+                            
+                            if (p.rating) {
+                                row.offerShares = parseInt(String(p.rating).replace(/,/g, ''), 10);
+                            }
+                            
+                            if (p.stockIndication) {
+                                const priceM = String(p.stockIndication).match(/RM\s*([\d\.]+)/i);
+                                if (priceM) row.price = parseFloat(priceM[1]);
+                            }
+                            
+                            results.push(row);
+                        });
+                    }
+                }
+            }
+        } catch(e) {}
+    });
+    
+    return results;
+}
+
 function applyResults(found) {
     const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
     const changes = [];
@@ -242,10 +184,13 @@ function applyResults(found) {
             changes.push({ id: ipo.id, key: 'price', value: f.price });
         }
 
-        if (f.daysLeft != null) {
-            const closeD = new Date();
-            closeD.setDate(closeD.getDate() + f.daysLeft);
-            const formattedClose = formatMitiDate(closeD);
+        if (f.mitiCloseDate) {
+            // "29 October 2026"
+            let formattedClose = f.mitiCloseDate;
+            try {
+                formattedClose = formatMitiDate(new Date(f.mitiCloseDate));
+            } catch (e) {}
+            
             if (ipo.mitiCloseDate !== formattedClose) {
                 console.log(`   ${ipo.companyName}: mitiCloseDate ${ipo.mitiCloseDate || '-'} → ${formattedClose} (${f.daysLeft} hari lagi)`);
                 ipo.mitiCloseDate = formattedClose;
@@ -258,11 +203,6 @@ function applyResults(found) {
             }
         }
 
-        if (f.applicants != null && ipo.mitiApplicants !== f.applicants) {
-            console.log(`   ${ipo.companyName}: pelabur ${ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '-'} → ${f.applicants.toLocaleString()}`);
-            ipo.mitiApplicants = f.applicants;
-            changes.push({ id: ipo.id, key: 'mitiApplicants', value: f.applicants });
-        }
         if (f.offerShares != null && ipo.mitiOfferShares !== f.offerShares) {
             console.log(`   ${ipo.companyName}: tawaran ${ipo.mitiOfferShares != null ? ipo.mitiOfferShares.toLocaleString() : '-'} → ${f.offerShares.toLocaleString()}`);
             ipo.mitiOfferShares = f.offerShares;
@@ -271,7 +211,7 @@ function applyResults(found) {
     }
 
     if (changes.length === 0) {
-        console.log('ℹ️  Tiada perubahan jumlah pelabur/tawaran.');
+        console.log('ℹ️  Tiada perubahan.');
         return false;
     }
 
@@ -291,103 +231,89 @@ function applyResults(found) {
     return true;
 }
 
-function matchEntry(data, companyName) {
-    const name = companyName.toLowerCase().trim();
-    return data.find(x => {
-        const cn = (x.companyName || '').toLowerCase().trim();
-        return cn.includes(name) || name.includes(cn);
-    });
+function gitPush() {
+    console.log('🚀 Push ke GitHub...');
+    try {
+        const status = execSync('git status --porcelain').toString();
+        if (!status) {
+            console.log('   Tiada perubahan untuk di-commit.');
+            return;
+        }
+        execSync('git add data.json data.js data_export.js overrides.json');
+        execSync('git commit -m "Automated update: Sync MITI Data (Puppeteer)"');
+        execSync('git push origin main');
+        console.log('   Push BERJAYA.');
+    } catch (e) {
+        console.error('❌ GAGAL push:', e.message);
+    }
 }
 
 // ---------------------------------------------------------------------------
-// UTAMA
+// Main Flow (Puppeteer)
 // ---------------------------------------------------------------------------
 async function main() {
-    loadEnv();
-    const quiet = process.argv.includes('--quiet');
-    const doPush = !process.argv.includes('--no-push');
+    const isQuiet = process.argv.includes('--quiet');
+    const noPush = process.argv.includes('--no-push');
+    if (!isQuiet) console.log('🔄 Memulakan auto-sync MITI (Puppeteer)...');
 
+    loadEnv();
     const username = process.env.MITI_USERNAME;
     const password = process.env.MITI_PASSWORD;
     if (!username || !password) {
-        console.error('❌ MITI_USERNAME/MITI_PASSWORD tiada dalam .env / env vars.');
+        console.error('❌ MITI_USERNAME dan MITI_PASSWORD tidak dijumpai dalam persekitaran atau .env');
         process.exit(1);
     }
 
-    if (!quiet) console.log('--- Sync MITI applicants (login terus) ---');
-
-    // 1) Login
-    let session;
+    let browser;
     try {
-        session = await login(username, password);
+        if (!isQuiet) console.log('   Membuka browser headless...');
+        browser = await puppeteer.launch({
+            headless: 'new',
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--ignore-certificate-errors']
+        });
+        
+        const page = await browser.newPage();
+        
+        if (!isQuiet) console.log('   Navigasi ke login...');
+        await page.goto(LOGIN_URL, { waitUntil: 'networkidle2' });
+        
+        if (!isQuiet) console.log('   Memasukkan kredential...');
+        await page.type('#data\\.username', username);
+        await page.type('#data\\.password', password);
+        
+        await Promise.all([
+            page.waitForNavigation({ waitUntil: 'networkidle2' }),
+            page.click('button[type="submit"]')
+        ]);
+        
+        if (!isQuiet) console.log('   Navigasi ke maklumat-saham...');
+        await page.goto(MAKLUMAT_URL, { waitUntil: 'networkidle2' });
+        
+        const html = await page.content();
+        await browser.close();
+        
+        if (!isQuiet) console.log('   Mengekstrak data JSON...');
+        const found = parseMaklumatJSON(html);
+        
+        if (found.length === 0) {
+            console.log('⚠️ Tiada tawaran saham ditemui di portal MITI.');
+            process.exit(0);
+        }
+
+        if (!isQuiet) console.log(`   Dijumpai ${found.length} saham di MITI.`);
+        found.forEach(f => {
+            if (!isQuiet) console.log(`   - ${f.company} (Tawaran: ${f.offerShares || '-'}, RM${f.price})`);
+        });
+
+        const changed = applyResults(found);
+        if (changed && !noPush) gitPush();
+
     } catch (e) {
-        const reason = `Login portal MITI gagal: ${e.response ? e.response.status + ' ' + (e.response.data || '').slice(0, 120) : e.message}`;
-        console.error('❌', reason);
-        await alertMitiDegraded(reason);
-        if (quiet) return;
+        if (browser) await browser.close();
+        console.error('❌ Ralat:', e.message);
+        await alertMitiDegraded(e.message);
         process.exit(1);
-    }
-    if (!session.cookieHeader.includes('_panelUserpublic')) {
-        const reason = 'Login tidak menghasilkan sesi pengguna — kredential salah atau CAPTCHA dikehendaki.';
-        console.error('❌', reason);
-        await alertMitiDegraded(reason);
-        if (quiet) return;
-        process.exit(1);
-    }
-    if (!quiet) console.log('✓ Login berjaya (sesi _panelUserpublic diperolehi).');
-
-    // 2) Scrape maklumat-saham
-    let html;
-    try {
-        html = await fetchMaklumat(session.cookieHeader);
-    } catch (e) {
-        const reason = `Gagal fetch maklumat-saham: ${e.message}`;
-        console.error('⚠️ ', reason);
-        await alertMitiDegraded(reason);
-        if (quiet) return;
-        process.exit(1);
-    }
-
-    const found = parseMaklumatSaham(html);
-    if (found.length === 0) {
-        const reason = 'Tiada kad saham dijumpai pada halaman maklumat-saham — sesi mungkin expired atau portal tukar struktur HTML.';
-        console.log('⚠️ ', reason);
-        await alertMitiDegraded(reason);
-        if (quiet) return;
-        process.exit(1);
-    }
-
-    if (!quiet) {
-        console.log('\n📊 Jumlah Pelabur Mohon Saham (portal SahamOnline):');
-        found.forEach(f => console.log(`   ${f.company.padEnd(32)} ${f.applicants != null ? f.applicants.toLocaleString() : '-'} pelabur | tawaran ${f.offerShares != null ? f.offerShares.toLocaleString() : '-'}`));
-    }
-
-    // 3) Update data files
-    const changed = applyResults(found);
-    if (!changed) {
-        if (!quiet) console.log('\n✅ Selesai — tiada perubahan.');
-        return;
-    }
-
-    // 4) Git push (skip bila --no-push atau dalam GitHub Actions yang commit sendiri)
-    if (doPush && process.env.GITHUB_ACTIONS !== 'true') {
-        await gitPush();
     }
 }
 
-async function gitPush() {
-    const { execSync } = require('child_process');
-    try {
-        const status = execSync('git status --porcelain data.json data.js data_export.js overrides.json', { cwd: ROOT }).toString().trim();
-        if (!status) return;
-        const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-        execSync('git add data.json data.js data_export.js overrides.json', { cwd: ROOT });
-        execSync(`git commit -m "Auto sync MITI applicants: ${stamp}"`, { cwd: ROOT });
-        execSync('git pull --rebase origin main && git push', { cwd: ROOT });
-        console.log('\n[Git] ✅ Pushed ke GitHub.');
-    } catch (e) {
-        console.error('\n[Git] ❌ Push gagal:', e.message);
-    }
-}
-
-main().catch(e => { console.error('Fatal:', e); process.exit(1); });
+main();
