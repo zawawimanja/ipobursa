@@ -214,9 +214,12 @@
         "mitiCloseDate": "10-Jul-2026"
     },
     "ecosys--malaysia--berhad": {
-        "closingDate": "",
-        "stage": 6,
-        "status": "Menunggu Keputusan MITI",
+        "openingDate": "23-Sep-2026",
+        "closingDate": "29-Sep-2026",
+        "ballotingDate": "01-Oct-2026",
+        "listingDate": "14-Oct-2026",
+        "stage": 3,
+        "status": "Application Open",
         "hasMitiTranche": true
     },
     "butterfield-fb-berhad": {

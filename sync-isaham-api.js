@@ -152,9 +152,11 @@ function applyUpcoming(upcoming, data) {
                 updated++;
                 console.log(`  ✓ ${existing.companyName}: tarikh/harga dikemas kini dari API.`);
             }
-            // Auto-promote: listing date sudah lepas → Listed (jangan turunkan stage)
+            // Auto-promote lifecycle
+            const now = new Date();
+            const today = new Date(); today.setHours(0, 0, 0, 0);
+
             if (listingDate) {
-                const today = new Date(); today.setHours(0, 0, 0, 0);
                 const listDate = new Date(listingDate + 'T00:00:00');
                 if (existing.stage !== 5 && listDate <= today) {
                     existing.stage = 5;
@@ -163,13 +165,44 @@ function applyUpcoming(upcoming, data) {
                     console.log(`  → ${existing.companyName}: promoted ke Stage 5 (tarikh listing lepas).`);
                 }
             }
+
+            // Jika belum tersenarai (Stage 1, 2, atau 6) dan ada closingDate
+            if (existing.stage !== 5 && closingDate) {
+                const closeDate = new Date(closingDate + 'T23:59:59');
+                if (closeDate >= now) {
+                    if (existing.stage !== 3) {
+                        existing.stage = 3;
+                        existing.status = 'Application Open';
+                        updated++;
+                        console.log(`  → ${existing.companyName}: promoted ke Stage 3 (permohonan awam dibuka).`);
+                    }
+                } else if (existing.stage < 4) {
+                    existing.stage = 4;
+                    existing.status = 'Pre-Listing';
+                    updated++;
+                    console.log(`  → ${existing.companyName}: promoted ke Stage 4 (permohonan awam ditutup).`);
+                }
+            }
         } else {
-            // IPO baharu — masukkan sebagai draft/stage 1 dahulu
+            // IPO baharu — semak jika permohonan sudah ada tarikh tutup
+            let initialStage = 1;
+            let initialStatus = 'Draft / Exposure Phase';
+            if (closingDate) {
+                const closeDate = new Date(closingDate + 'T23:59:59');
+                if (closeDate >= new Date()) {
+                    initialStage = 3;
+                    initialStatus = 'Application Open';
+                } else {
+                    initialStage = 4;
+                    initialStatus = 'Pre-Listing';
+                }
+            }
+
             const newEntry = {
                 id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                 companyName: name,
-                stage: 1,
-                status: 'Draft / Exposure Phase',
+                stage: initialStage,
+                status: initialStatus,
                 year: new Date().getFullYear()
             };
             if (price) newEntry.price = price;
@@ -180,7 +213,7 @@ function applyUpcoming(upcoming, data) {
             if (entry.symbol) newEntry.symbol = entry.symbol;
             data.push(newEntry);
             updated++;
-            console.log(`  + ${name}: IPO baharu ditambah dari API.`);
+            console.log(`  + ${name}: IPO baharu ditambah dari API (Stage ${initialStage}).`);
         }
     });
     return updated;
