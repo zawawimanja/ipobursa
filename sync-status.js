@@ -1,7 +1,8 @@
 const SYNC_STATUS = {
-  "lastSync": "27/08/2026, 5:37:17 pm",
+  "lastSync": "28/09/2026, 11:22:45 am",
   "status": "Success",
-  "totalIpos": 307
+  "source": "isaham-api",
+  "totalIpos": 308
 };
 
 if (typeof module !== 'undefined' && module.exports) {
