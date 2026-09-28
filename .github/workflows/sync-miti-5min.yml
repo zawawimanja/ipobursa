@@ -25,6 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Sync MITI Portal Dates & Active Offers (SPSKB 3.0)
+        run: |
+          node scratch/sync-miti-portal-dates.js
+        continue-on-error: true
+
       - name: Sync MITI Applicants (login terus, tanpa CAPTCHA)
         env:
           MITI_USERNAME: ${{ secrets.MITI_USERNAME }}
