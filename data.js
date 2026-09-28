@@ -9577,8 +9577,8 @@ const IPO_DATA = [
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
-    "stage": 2,
-    "status": "MITI Allocation Phase",
+    "stage": 6,
+    "status": "Awaiting MITI Decision",
     "year": 2026,
     "sector": "Industrial Products & Services (M&E)",
     "geography": "",
@@ -9587,7 +9587,7 @@ const IPO_DATA = [
     "v7TargetPrice": 0.27,
     "zone2TargetPrice": 0.27,
     "hasMitiTranche": true,
-    "mitiCloseDate": "29-Oct-2026",
+    "mitiCloseDate": "27-Sep-2026",
     "mitiOpenDate": "21-Sep-2026",
     "mitiOfferShares": 71204000
   },
@@ -10091,6 +10091,6 @@ const IPO_DATA = [
   }
 ];
 
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
     module.exports = IPO_DATA;
 }
