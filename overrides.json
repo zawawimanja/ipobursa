@@ -177,7 +177,15 @@
         "zone2TargetPrice": 0.3,
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Industrial Adhesives:</b> Manufacturer of polymers & sealants backed by Malacca Securities.<br>• <b>Strong Growth:</b> Adjusted PAT expanded +62.3% YoY with attractive 12.6x P/E valuation.<br>• <b>Bumi Allocation:</b> Shariah-compliant MITI tranche open with solid earnings track record.",
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "price": 0.25,
+        "openingDate": "09-Sep-2026",
+        "closingDate": "18-Sep-2026",
+        "ballotingDate": "22-Sep-2026",
+        "listingDate": "01-Oct-2026",
+        "os": 8.22,
+        "stage": 4,
+        "status": "Pre-Listing"
     },
     "spb-development-berhad": {
         "mitiOpenDate": "01-Jul-2026",
@@ -197,17 +205,25 @@
         "prospectusUrl": "https://sahamonline.miti.gov.my/"
     },
     "redplanet-berhad": {
-        "sector": "Technology (Geospatial / GIS)",
+        "price": 0.19,
+        "openingDate": "28-Sep-2026",
+        "closingDate": "08-Oct-2026",
+        "ballotingDate": "13-Oct-2026",
+        "listingDate": "22-Oct-2026",
         "shariah": true,
+        "stage": 3,
+        "status": "Application Open",
+        "sector": "Technology (Geospatial & Intelligent Rail Systems)",
+        "geography": "Kuala Lumpur",
+        "ib": "UOB Kay Hian",
+        "totalShares": 80000000,
         "predictedGrade": "B",
-        "mitiOpenDate": "20-Jul-2026",
-        "mitiCloseDate": "28-Jul-2026",
-        "prospectusUrl": "https://sahamonline.miti.gov.my/",
-        "sifuTargetPrice": 0.3,
-        "calibratedSifuTargetPrice": 0.33,
-        "v3TargetPrice": 0.33,
-        "zone2TargetPrice": 0.33,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS Technology:</b> LEAP-to-ACE transfer specializing in geospatial analytics & smart mapping.<br>• <b>Niche Market:</b> High-margin public & enterprise infrastructure demand.<br>• <b>Bumi Allocation:</b> 12.5% MITI allocation open with solid expansion pipeline."
+        "sifuTargetPrice": 0.22,
+        "calibratedSifuTargetPrice": 0.22,
+        "v3TargetPrice": 0.22,
+        "v7TargetPrice": 0.22,
+        "zone2TargetPrice": 0.22,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah."
     },
     "1doc": {
         "mitiOpenDate": "01-Jul-2026",
@@ -241,14 +257,15 @@
         "openingDate": "03-Sep-2026",
         "closingDate": "14-Sep-2026",
         "listingDate": "28-Sep-2026",
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "symbol": "EVOCOM",
         "predictedGrade": "C",
         "sifuTargetPrice": 0.2,
         "calibratedSifuTargetPrice": 0.2,
         "v3TargetPrice": 0.2,
-        "analystInsight": "⚠️ <b>HIGH RISK / WEAK MARGINS (GRADE C)</b><br>Penyedia rantai bekalan e-dagang & tenaga kerja logistik (flexible staffing).<br><br>📊 <b>Penilaian & Risiko:</b><br>• <b>Harga IPO:</b> RM0.18 sesaham (Market cap RM82.0M).<br>• <b>Persaingan & Marjin:</b> Marjin kasar nipis dalam perkhidmatan penyediaan tenaga kerja logistik.<br>• <b>Target Price:</b> RM0.18–RM0.20 (+0% hingga +11% potensi terhad)."
+        "analystInsight": "⚠️ <b>HIGH RISK / WEAK MARGINS (GRADE C)</b><br>Penyedia rantai bekalan e-dagang & tenaga kerja logistik (flexible staffing).<br><br>📊 <b>Penilaian & Risiko:</b><br>• <b>Harga IPO:</b> RM0.18 sesaham (Market cap RM82.0M).<br>• <b>Persaingan & Marjin:</b> Marjin kasar nipis dalam perkhidmatan penyediaan tenaga kerja logistik.<br>• <b>Target Price:</b> RM0.18–RM0.20 (+0% hingga +11% potensi terhad).",
+        "openPrice": 0.15
     },
     "slgc-berhad": {
         "mitiOpenDate": "01-Jul-2026",
@@ -259,7 +276,14 @@
         "v7TargetPrice": 0.29,
         "v3TargetPrice": 0.29,
         "predictedGrade": "C",
-        "analystInsight": "⚠️ <b>HIGH RISK / CONSTRUCTON SECTOR (GRADE C)</b><br>Penyedia perkhidmatan pembinaan & kejuruteraan infrastruktur.<br><br>📊 <b>Penilaian:</b><br>• <b>Harga IPO Indikatif:</b> RM0.28 sesaham.<br>• <b>Sektor:</b> Sektor pembinaan tanpa tema berimpak tinggi; margin terdedah kepada kos bahan mentah.<br>• <b>Target Price:</b> RM0.29 (Potensi upside +3.5% terhad)."
+        "analystInsight": "⚠️ <b>HIGH RISK / CONSTRUCTON SECTOR (GRADE C)</b><br>Penyedia perkhidmatan pembinaan & kejuruteraan infrastruktur.<br><br>📊 <b>Penilaian:</b><br>• <b>Harga IPO Indikatif:</b> RM0.28 sesaham.<br>• <b>Sektor:</b> Sektor pembinaan tanpa tema berimpak tinggi; margin terdedah kepada kos bahan mentah.<br>• <b>Target Price:</b> RM0.29 (Potensi upside +3.5% terhad).",
+        "openingDate": "10-Sep-2026",
+        "closingDate": "22-Sep-2026",
+        "ballotingDate": "24-Sep-2026",
+        "listingDate": "06-Oct-2026",
+        "os": 3.06,
+        "stage": 4,
+        "status": "Pre-Listing"
     },
     "united-asiapac-energy-berhad": {
         "symbol": "UNIPAC",
@@ -391,5 +415,24 @@
         "mitiCloseDate": "29-Oct-2026",
         "mitiOpenDate": "21-Sep-2026",
         "mitiOfferShares": 71204000
+    },
+    "eghi": {
+        "price": 0.16,
+        "openingDate": "24-Sep-2026",
+        "closingDate": "05-Oct-2026",
+        "ballotingDate": "07-Oct-2026",
+        "listingDate": "16-Oct-2026",
+        "shariah": false,
+        "stage": 3,
+        "status": "Application Open",
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.18,
+        "calibratedSifuTargetPrice": 0.18,
+        "v3TargetPrice": 0.18,
+        "v7TargetPrice": 0.18,
+        "zone2TargetPrice": 0.18,
+        "ib": "Berjaya Securities",
+        "totalShares": 360000000,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
     }
 }

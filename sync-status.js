@@ -1,7 +1,7 @@
 const SYNC_STATUS = {
-  "lastSync": "28/09/2026, 11:22:45 am",
+  "lastSync": "28/09/2026, 11:05:00 pm",
   "status": "Success",
-  "source": "isaham-api",
+  "source": "manual-prospectus-sync",
   "totalIpos": 308
 };
 

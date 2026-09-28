@@ -1040,13 +1040,13 @@ async function main() {
 async function gitPush() {
     const { execSync } = require('child_process');
     try {
-        const status = execSync('git status --porcelain data.json data.js sync-status.js', { cwd: __dirname }).toString().trim();
+        const status = execSync('git status --porcelain data.json data.js data_export.js overrides.json sync-status.js', { cwd: __dirname }).toString().trim();
         if (!status) {
             console.log('\n[Git] No changes to push.');
             return;
         }
         const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-        execSync('git add data.json data.js sync-status.js', { cwd: __dirname });
+        execSync('git add data.json data.js data_export.js overrides.json sync-status.js', { cwd: __dirname });
         execSync(`git commit -m "Auto sync: ${stamp}"`, { cwd: __dirname });
         execSync('git pull --rebase origin main && git push', { cwd: __dirname });
         console.log(`\n[Git] ✅ Pushed to GitHub successfully.`);
