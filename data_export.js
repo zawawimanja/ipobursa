@@ -8079,6 +8079,7 @@ const IPO_DATA = [
   },
   {
     "id": "evocom-berhad",
+    "os": 3.6,
     "companyName": "Evocom Berhad",
     "symbol": "EVOCOM",
     "market": "ACE Market",
