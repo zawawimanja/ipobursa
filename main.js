@@ -27,6 +27,8 @@ function initializeData() {
         updateGradeFilterUI();
         renderIPOs(currentStage);
 
+        // Today's Action Radar & Event Hub (Live events today + upcoming timeline)
+        renderTodayActionRadar();
         // MITI countdown strip on the main tracker (live ticking)
         renderMitiCountdownStrip();
         // Public IPO countdown strip on the main tracker (live ticking)
@@ -42,6 +44,7 @@ function initializeData() {
                 if (before !== after) {
                     renderIPOs(currentStage);
                 }
+                renderTodayActionRadar();
                 renderMitiCountdownStrip();
                 renderPublicCountdownStrip();
             }, 60000); // full re-render every minute
@@ -1364,6 +1367,305 @@ function shariahBadge(ipo) {
         return '<span style="font-size:0.62rem;color:#f87171;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);padding:0.1rem 0.4rem;border-radius:4px;font-weight:700;">✗ NON-SHARIAH</span>';
     }
     return '<span style="font-size:0.62rem;color:#94a3b8;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.3);padding:0.1rem 0.4rem;border-radius:4px;font-weight:600;">SHARIAH?</span>';
+}
+
+// Today's Action Radar & Event Hub (Date-based live events + upcoming timeline)
+function renderTodayActionRadar() {
+    const container = document.getElementById('today-action-radar');
+    if (!container) return;
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today.getTime() + 86400000);
+    const yesterday = new Date(today.getTime() - 86400000);
+
+    const todayEvents = [];
+    const timelineEvents = [];
+
+    (ipoData || []).forEach(ipo => {
+        // 1. Listing Events
+        if (ipo.listingDate) {
+            const ld = parseFlexDate(ipo.listingDate);
+            if (ld) {
+                ld.setHours(0, 0, 0, 0);
+                if (ld.getTime() === today.getTime() || (ipo.stage === 5 && ld.getTime() >= yesterday.getTime() && ld.getTime() <= today.getTime())) {
+                    const openPriceStr = ipo.openPrice ? `RM ${ipo.openPrice.toFixed(2)}` : (ipo.currentPrice ? `RM ${ipo.currentPrice.toFixed(2)}` : 'Live');
+                    const perfStr = ipo.performance || (getOpenPerformance(ipo) ? (getOpenPerformance(ipo) >= 0 ? '+' : '') + getOpenPerformance(ipo).toFixed(1) + '%' : '');
+                    todayEvents.push({
+                        type: 'listing',
+                        badge: '🚀 DEBUT PENYENARAIAN HARI INI',
+                        badgeClass: 'listing',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Harga Debut: <strong style="color:#c084fc;">${openPriceStr}</strong> (vs IPO: RM ${ipo.price ? ipo.price.toFixed(2) : '-'}) ${perfStr ? '· <span style="color:' + (perfStr.includes('-') ? '#f87171' : '#34d399') + ';font-weight:700;">' + perfStr + '</span>' : ''}`,
+                        extra: `OS: ${ipo.os ? ipo.os + 'x' : '—'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 5,
+                        id: ipo.id
+                    });
+                } else if (ld > today && ld <= new Date(today.getTime() + 35 * 86400000)) {
+                    timelineEvents.push({
+                        type: 'listing',
+                        label: '🚀 Penyenaraian',
+                        badgeBg: 'rgba(168, 85, 247, 0.15)',
+                        badgeColor: '#c084fc',
+                        badgeBorder: 'rgba(168, 85, 247, 0.3)',
+                        date: ld,
+                        dateStr: ipo.listingDate,
+                        ipo,
+                        stage: ipo.stage === 5 ? 5 : (ipo.stage >= 3 ? ipo.stage : 4)
+                    });
+                }
+            }
+        }
+
+        // 2. Public Opening Events
+        if (ipo.openingDate) {
+            const od = parseFlexDate(ipo.openingDate);
+            if (od) {
+                od.setHours(0, 0, 0, 0);
+                if (od.getTime() === today.getTime()) {
+                    todayEvents.push({
+                        type: 'public-open',
+                        badge: '🟢 PERMOHONAN AWAM DIBUKA HARI INI',
+                        badgeClass: 'public-open',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Harga IPO: <strong style="color:#38bdf8;">RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'}</strong> · Tutup: <strong>${ipo.closingDate || 'TBA'}</strong>`,
+                        extra: `Penaja: ${ipo.ib ? ipo.ib.split(',')[0].trim() : '—'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 3,
+                        id: ipo.id
+                    });
+                }
+            }
+        }
+
+        // 3. Public Closing Events
+        if (ipo.closingDate) {
+            const cd = parseFlexDate(ipo.closingDate);
+            if (cd) {
+                cd.setHours(0, 0, 0, 0);
+                if (cd.getTime() === today.getTime()) {
+                    todayEvents.push({
+                        type: 'public-close-today',
+                        badge: '⚠️ PERMOHONAN AWAM TUTUP HARI INI (5:00 PM)',
+                        badgeClass: 'closing',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Hari Terakhir Langganan Awam! Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
+                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 3,
+                        id: ipo.id
+                    });
+                } else if (cd.getTime() === tomorrow.getTime()) {
+                    todayEvents.push({
+                        type: 'public-close-tomorrow',
+                        badge: '⏳ PERMOHONAN AWAM TUTUP ESOK (5:00 PM)',
+                        badgeClass: 'closing',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Tamat: <strong>${ipo.closingDate} (5:00 PM)</strong> · Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
+                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 3,
+                        id: ipo.id
+                    });
+                } else if (cd > today && cd <= new Date(today.getTime() + 35 * 86400000)) {
+                    timelineEvents.push({
+                        type: 'public-close',
+                        label: '⏳ Tutup Awam',
+                        badgeBg: 'rgba(56, 189, 248, 0.15)',
+                        badgeColor: '#38bdf8',
+                        badgeBorder: 'rgba(56, 189, 248, 0.3)',
+                        date: cd,
+                        dateStr: ipo.closingDate,
+                        ipo,
+                        stage: 3
+                    });
+                }
+            }
+        }
+
+        // 4. MITI Opening Events
+        if (ipo.mitiOpenDate) {
+            const mo = parseFlexDate(ipo.mitiOpenDate);
+            if (mo) {
+                mo.setHours(0, 0, 0, 0);
+                if (mo.getTime() === today.getTime()) {
+                    const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
+                    const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M Saham' : 'TBA';
+                    todayEvents.push({
+                        type: 'miti-open',
+                        badge: '🏛️ PERMOHONAN MITI DIBUKA HARI INI',
+                        badgeClass: 'miti-open',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Bumi VIP Quota: <strong style="color:#34d399;">${offerStr}</strong> · Tutup: <strong>${ipo.mitiCloseDate || 'TBA'}</strong>`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 2,
+                        id: ipo.id
+                    });
+                }
+            }
+        }
+
+        // 5. MITI Closing Events
+        if (ipo.mitiCloseDate) {
+            const mc = parseFlexDate(ipo.mitiCloseDate);
+            if (mc) {
+                mc.setHours(0, 0, 0, 0);
+                if (mc.getTime() === today.getTime()) {
+                    todayEvents.push({
+                        type: 'miti-close-today',
+                        badge: '⚠️ PERMOHONAN MITI TUTUP HARI INI (12:00 PM)',
+                        badgeClass: 'closing',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Hari Terakhir MITI! Tutup jam 12:00 tengah hari.`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 2,
+                        id: ipo.id
+                    });
+                } else if (mc.getTime() === tomorrow.getTime()) {
+                    todayEvents.push({
+                        type: 'miti-close-tomorrow',
+                        badge: '⏳ PERMOHONAN MITI TUTUP ESOK (12:00 PM)',
+                        badgeClass: 'closing',
+                        title: ipo.companyName,
+                        market: ipo.market,
+                        shariah: ipo.shariah,
+                        sub: `Tamat: <strong>${ipo.mitiCloseDate} (12:00 PM)</strong>`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        stage: 2,
+                        id: ipo.id
+                    });
+                } else if (mc > today && mc <= new Date(today.getTime() + 35 * 86400000)) {
+                    timelineEvents.push({
+                        type: 'miti-close',
+                        label: '🏛️ Tutup MITI',
+                        badgeBg: 'rgba(16, 185, 129, 0.15)',
+                        badgeColor: '#34d399',
+                        badgeBorder: 'rgba(16, 185, 129, 0.3)',
+                        date: mc,
+                        dateStr: ipo.mitiCloseDate,
+                        ipo,
+                        stage: 2
+                    });
+                }
+            }
+        }
+    });
+
+    timelineEvents.sort((a, b) => a.date - b.date);
+
+    if (todayEvents.length === 0 && timelineEvents.length === 0) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+    }
+
+    container.style.display = 'block';
+    const collapsed = isCdCollapsed('radarBox');
+    const todayStr = today.toLocaleDateString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+
+    let todayHtml = '';
+    if (todayEvents.length > 0) {
+        todayHtml = `
+            <div style="margin-bottom: 0.85rem;">
+                <div style="font-size: 0.76rem; font-weight: 700; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <span>🔥 Tindakan / Peristiwa Penting Hari Ini (${todayStr})</span>
+                </div>
+                <div class="radar-grid-today">
+                    ${todayEvents.map(ev => {
+                        const marketBadge = (ev.market || '').toLowerCase().includes('main')
+                            ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
+                            : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
+                        return `
+                            <div class="radar-today-card ${ev.badgeClass}" onclick="navigateToIpo('${ev.id}', ${ev.stage})" title="Klik untuk lihat ${ev.title} di Stage ${ev.stage}">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.4rem; margin-bottom: 0.3rem;">
+                                        <span style="font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;">${ev.badge}</span>
+                                        ${marketBadge}
+                                    </div>
+                                    <div style="font-size: 0.95rem; font-weight: 800; color: white; margin-bottom: 0.25rem;">
+                                        ${ev.title}
+                                    </div>
+                                    <div style="font-size: 0.78rem; color: #cbd5e1; margin-bottom: 0.35rem; line-height: 1.35;">
+                                        ${ev.sub}
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; padding-top: 0.4rem; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.7rem; color: #94a3b8; margin-top: 0.3rem;">
+                                    <span>${ev.extra}</span>
+                                    <span style="color: #38bdf8; font-weight: 700; display: flex; align-items: center; gap: 0.2rem;">Stage 0${ev.stage} →</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    let timelineHtml = '';
+    if (timelineEvents.length > 0) {
+        const previewEvents = timelineEvents.slice(0, 10);
+        timelineHtml = `
+            <div>
+                <div style="font-size: 0.74rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i data-lucide="calendar" style="width: 14px; height: 14px; color: #818cf8;"></i>
+                    <span>📅 Radar Acara & Garis Masa IPO Seterusnya (30 Hari)</span>
+                </div>
+                <div class="radar-timeline-ribbon">
+                    ${previewEvents.map(ev => {
+                        const daysLeft = Math.ceil((ev.date - today) / 86400000);
+                        const daysText = daysLeft === 0 ? 'Hari Ini' : (daysLeft === 1 ? 'Esok' : `${daysLeft} hari lagi`);
+                        const priceStr = ev.ipo.price ? `RM ${ev.ipo.price.toFixed(2)}` : 'TBA';
+                        return `
+                            <div class="radar-timeline-item" onclick="navigateToIpo('${ev.ipo.id}', ${ev.stage})" title="Klik untuk lihat ${ev.ipo.companyName}">
+                                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.3rem; margin-bottom: 0.25rem;">
+                                    <span style="font-size: 0.65rem; font-weight: 700; padding: 0.1rem 0.35rem; border-radius: 4px; background: ${ev.badgeBg}; color: ${ev.badgeColor}; border: 1px solid ${ev.badgeBorder};">
+                                        ${ev.label}
+                                    </span>
+                                    <span style="font-size: 0.65rem; color: #e2e8f0; font-weight: 700;">${daysText}</span>
+                                </div>
+                                <div style="font-size: 0.82rem; font-weight: 700; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    ${ev.ipo.companyName}
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.3rem; font-size: 0.7rem; color: #94a3b8;">
+                                    <span>🗓️ ${ev.dateStr}</span>
+                                    <span style="color: #fbbf24; font-weight: 600;">${priceStr}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="today-radar-wrapper">
+            <div class="radar-header">
+                <div class="radar-title">
+                    <span class="radar-live-badge">● LIVE RADAR</span>
+                    <span>Radar Acara & Tindakan IPO (Hari Ini & Seterusnya)</span>
+                </div>
+                <button onclick="toggleCdStrip('radarBox')" title="${collapsed ? 'Kembangkan' : 'Kuncupkan'}" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <i data-lucide="${collapsed ? 'chevron-down' : 'chevron-up'}" style="width: 16px; height: 16px;"></i>
+                </button>
+            </div>
+            <div style="display: ${collapsed ? 'none' : 'block'};">
+                ${todayHtml}
+                ${timelineHtml}
+            </div>
+        </div>
+    `;
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 function renderMitiCountdownStrip() {

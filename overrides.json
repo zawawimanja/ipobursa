@@ -1,75 +1,183 @@
 {
     "sum-technology": {
         "predictedGrade": "B",
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Sector Tailwind:</b> Tech hardware momentum in 2026; no OFS component & Shariah-compliant.<br>• <b>Sponsor Watch:</b> Final IB appointment will determine debut liquidity.<br>• <b>Valuation:</b> Indicative RM0.28 pricing provides reasonable entry multiple."
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Sector Tailwind:</b> Tech hardware momentum in 2026; no OFS component & Shariah-compliant.<br>• <b>Sponsor Watch:</b> Final IB appointment will determine debut liquidity.<br>• <b>Valuation:</b> Indicative RM0.28 pricing provides reasonable entry multiple.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-May-2026",
+        "closingDate": "04-Jun-2026",
+        "listingDate": "18-Jun-2026",
+        "price": 0.28
     },
     "elsa": {
         "predictedGrade": "B",
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Software R&D:</b> Enterprise software developer backed by Malacca Securities (momentum IB).<br>• <b>Valuation:</b> Fair 15.6x P/E with strong 26.9x retail oversubscription.<br>• <b>Action:</b> +13.6% debut pop with stable price action above IPO price; suitable for swing/scalp."
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Software R&D:</b> Enterprise software developer backed by Malacca Securities (momentum IB).<br>• <b>Valuation:</b> Fair 15.6x P/E with strong 26.9x retail oversubscription.<br>• <b>Action:</b> +13.6% debut pop with stable price action above IPO price; suitable for swing/scalp.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-May-2026",
+        "closingDate": "03-Jun-2026",
+        "listingDate": "16-Jun-2026",
+        "price": 0.23
     },
     "pentech": {
         "sifuTargetPrice": 0.33,
         "predictedGrade": "A",
-        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Massive Demand:</b> High 120.98x retail oversubscription sponsored by Public Investment Bank.<br>• <b>Debut Surge:</b> +45% opening surge to RM0.29 with strong continuation to ATH RM0.355.<br>• <b>Profile:</b> Top-tier momentum scalp and trend-following setup."
+        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Massive Demand:</b> High 120.98x retail oversubscription sponsored by Public Investment Bank.<br>• <b>Debut Surge:</b> +45% opening surge to RM0.29 with strong continuation to ATH RM0.355.<br>• <b>Profile:</b> Top-tier momentum scalp and trend-following setup.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-May-2026",
+        "closingDate": "29-May-2026",
+        "listingDate": "15-Jun-2026",
+        "price": 0.2
     },
     "mm-computer": {
         "sifuTargetPrice": 0.24,
         "predictedGrade": "C",
-        "analystInsight": "❌ <b>AVOID (GRADE C)</b><br>• <b>OFS Overhang:</b> Heavy 47.34M secondary share sale dampened market appetite.<br>• <b>Flat Debut:</b> Opened flat (0.0%) and closed below IPO price at RM0.215 (-2.3%).<br>• <b>Verdict:</b> Lack of sector tailwinds and substantial vendor profit-taking."
+        "analystInsight": "❌ <b>AVOID (GRADE C)</b><br>• <b>OFS Overhang:</b> Heavy 47.34M secondary share sale dampened market appetite.<br>• <b>Flat Debut:</b> Opened flat (0.0%) and closed below IPO price at RM0.215 (-2.3%).<br>• <b>Verdict:</b> Lack of sector tailwinds and substantial vendor profit-taking.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-May-2026",
+        "closingDate": "25-May-2026",
+        "listingDate": "11-Jun-2026",
+        "price": 0.22
     },
     "ambest": {
-        "sifuTargetPrice": 0.34
+        "sifuTargetPrice": 0.34,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2026",
+        "closingDate": "27-Jan-2026",
+        "listingDate": "06-Feb-2026",
+        "price": 0.25
     },
     "ams-material": {
-        "sifuTargetPrice": 0.33
+        "sifuTargetPrice": 0.33,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Mar-2026",
+        "closingDate": "10-Apr-2026",
+        "listingDate": "23-Apr-2026",
+        "price": 0.29
     },
     "ei-power": {
         "sifuTargetPrice": 0.61
     },
     "hocksoon": {
-        "sifuTargetPrice": 0.63
+        "sifuTargetPrice": 0.63,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "22-Jan-2026",
+        "closingDate": "30-Jan-2026",
+        "listingDate": "13-Feb-2026",
+        "price": 0.6
     },
     "isf": {
-        "sifuTargetPrice": 0.69
+        "sifuTargetPrice": 0.69,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "08-Jan-2026",
+        "closingDate": "14-Jan-2026",
+        "listingDate": "28-Jan-2026",
+        "price": 0.53
     },
     "keeming": {
-        "sifuTargetPrice": 0.68
+        "sifuTargetPrice": 0.68,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2026",
+        "closingDate": "27-Jan-2026",
+        "listingDate": "12-Feb-2026",
+        "price": 0.38
     },
     "ogm": {
-        "sifuTargetPrice": 0.3
+        "sifuTargetPrice": 0.3,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Jan-2026",
+        "closingDate": "16-Jan-2026",
+        "listingDate": "27-Jan-2026",
+        "price": 0.25
     },
     "skyechip": {
-        "sifuTargetPrice": 1.58
+        "sifuTargetPrice": 1.58,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Apr-2026",
+        "closingDate": "06-May-2026",
+        "listingDate": "20-May-2026",
+        "price": 0.88
     },
     "teamstr": {
-        "sifuTargetPrice": 0.32
+        "sifuTargetPrice": 0.32,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Jan-2026",
+        "closingDate": "09-Feb-2026",
+        "listingDate": "25-Feb-2026",
+        "price": 0.26
     },
     "cbhb": {
         "sifuTargetPrice": 0.38
     },
     "ecoshop": {
-        "sifuTargetPrice": 1.31
+        "sifuTargetPrice": 1.31,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Apr-2025",
+        "closingDate": "07-May-2025",
+        "listingDate": "23-May-2025",
+        "price": 1.13
     },
     "iab": {
-        "sifuTargetPrice": 0.71
+        "sifuTargetPrice": 0.71,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "07-Oct-2026",
+        "closingDate": "13-Oct-2026",
+        "listingDate": "27-Oct-2025",
+        "price": 1.34
     },
     "kopi": {
         "sifuTargetPrice": 0.55
     },
     "power": {
-        "sifuTargetPrice": 0.41
+        "sifuTargetPrice": 0.41,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-Aug-2025",
+        "closingDate": "08-Sep-2025",
+        "listingDate": "24-Sep-2025",
+        "price": 0.35
     },
     "sag": {
-        "avgTP": 0.88
+        "avgTP": 0.88,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "14-May-2025",
+        "closingDate": "21-May-2025",
+        "listingDate": "05-Jun-2025",
+        "price": 0.62
     },
     "supreme-consolidated": {
         "sifuTargetPrice": 0.29
     },
     "techstore": {
-        "sifuTargetPrice": 0.28
+        "sifuTargetPrice": 0.28,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "22-Jan-2025",
+        "closingDate": "04-Feb-2025",
+        "listingDate": "18-Feb-2025",
+        "price": 0.2
     },
     "verdant": {
-        "sifuTargetPrice": 0.38
+        "sifuTargetPrice": 0.38,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Sep-2026",
+        "closingDate": "07-Oct-2026",
+        "listingDate": "22-Oct-2025",
+        "price": 0.31
     },
     "xpb": {
         "sifuTargetPrice": 0.25
@@ -110,7 +218,13 @@
     "srkk-ai": {
         "predictedGrade": "A",
         "enrichedBy": "AI",
-        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Record Oversubscription:</b> 312.3x retail demand — highest in 2026; certified Microsoft AI Cloud partner.<br>• <b>Recurring Revenue:</b> ~50% recurring income with fair 18.2x P/E on RM0.32 offer price.<br>• <b>Outlook:</b> Strong debut pop anticipated on enterprise AI digitization theme."
+        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Record Oversubscription:</b> 312.3x retail demand — highest in 2026; certified Microsoft AI Cloud partner.<br>• <b>Recurring Revenue:</b> ~50% recurring income with fair 18.2x P/E on RM0.32 offer price.<br>• <b>Outlook:</b> Strong debut pop anticipated on enterprise AI digitization theme.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "18-Jun-2026",
+        "closingDate": "25-Jun-2026",
+        "listingDate": "09-Jul-2026",
+        "price": 0.32
     },
     "enest-group-berhad": {
         "companyName": "Enest Group Berhad",
@@ -164,7 +278,10 @@
             "<strong>Strong China Presence:</strong> China is their largest export market, driving growth."
         ],
         "peers": "Peers trade at 15x-20x PE in consumer processing. Enest at 9x PE (unadjusted) is cheap.",
-        "analystInsight": "✅ <b>LEAP-TO-ACE TRANSFER (GRADE B)</b><br>• <b>Business:</b> Edible bird's nest processor transferred from LEAP to ACE Market.<br>• <b>Valuation:</b> Low entry price at RM0.13 (~9.0x unadjusted P/E).<br>• <b>Proceeds:</b> Loan repayment and factory expansion for China export market."
+        "analystInsight": "✅ <b>LEAP-TO-ACE TRANSFER (GRADE B)</b><br>• <b>Business:</b> Edible bird's nest processor transferred from LEAP to ACE Market.<br>• <b>Valuation:</b> Low entry price at RM0.13 (~9.0x unadjusted P/E).<br>• <b>Proceeds:</b> Loan repayment and factory expansion for China export market.",
+        "openingDate": "26-Jun-2026",
+        "closingDate": "02-Jul-2026",
+        "listingDate": "15-Jul-2026"
     },
     "gb-bond-holdings-berhad": {
         "shariah": true,
@@ -249,7 +366,9 @@
         "sifuTargetPrice": 0.5,
         "calibratedSifuTargetPrice": 0.5,
         "v7TargetPrice": 0.5,
-        "v3TargetPrice": 0.5
+        "v3TargetPrice": 0.5,
+        "openingDate": "18-Aug-2026",
+        "price": 0.48
     },
     "evocom-berhad": {
         "os": 3.6,
@@ -288,9 +407,9 @@
     "united-asiapac-energy-berhad": {
         "symbol": "UNIPAC",
         "price": 0.35,
-        "openingDate": "2026-07-28T09:00:00",
+        "openingDate": "28-Jul-2026",
         "closingDate": "05-Aug-2026",
-        "listingDate": "19-Aug-2026",
+        "listingDate": "14-Sep-2026",
         "sector": "Energy (Oil & Gas Services / Well Intervention)",
         "ib": "TA Securities",
         "fundUse": "Acquisition of specialised well intervention tools & equipment, expansion of workforce, and new corporate office.",
@@ -305,7 +424,9 @@
         "predictedGrade": "B",
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>O&G Niche:</b> Upstream well intervention specialist sponsored by TA Securities.<br>• <b>Forward Valuation:</b> Attractive ~12.7x forward P/E on annualized FY2026 earnings with zero OFS.<br>• <b>Target Price:</b> Fair value estimated at RM0.39–RM0.41 (~17% upside potential).",
         "mitiOpenDate": "01-Jul-2026",
-        "mitiCloseDate": "10-Jul-2026"
+        "mitiCloseDate": "10-Jul-2026",
+        "stage": 5,
+        "status": "Listed"
     },
     "big-caring-group-bhd": {
         "stage": 6,
@@ -481,5 +602,469 @@
         "v7TargetPrice": 0.28,
         "zone2TargetPrice": 0.28,
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Fashion & Lifestyle Retail:</b> Rangkaian peruncitan fesyen, beg & aksesori di bawah jenama Panda Eyes.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> 203.125M saham diperuntukkan kepada pelabur Bumiputera MITI.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh M & A Securities Sdn Bhd.<br>• <b>Status Syariah:</b> Patuh Syariah."
+    },
+    "gta-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Aug-2026",
+        "closingDate": "26-Aug-2026",
+        "listingDate": "08-Sep-2026",
+        "price": 0.35
+    },
+    "stratus-global": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "02-Jul-2026",
+        "closingDate": "10-Jul-2026",
+        "listingDate": "21-Jul-2026",
+        "price": 0.8
+    },
+    "restngo": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "16-Jun-2026",
+        "closingDate": "24-Jun-2026",
+        "listingDate": "07-Jul-2026",
+        "price": 0.13
+    },
+    "eckem-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-May-2026",
+        "closingDate": "19-Jun-2026",
+        "listingDate": "03-Jul-2026",
+        "price": 0.12
+    },
+    "liftech-group-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "08-Jun-2026",
+        "closingDate": "16-Jun-2026",
+        "listingDate": "30-Jun-2026",
+        "price": 0.29
+    },
+    "rt-pastry-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "05-Jun-2026",
+        "closingDate": "15-Jun-2026",
+        "listingDate": "29-Jun-2026",
+        "price": 0.18
+    },
+    "hss-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-May-2026",
+        "closingDate": "09-Jun-2026",
+        "listingDate": "23-Jun-2026",
+        "price": 0.18
+    },
+    "bus-cap": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "06-May-2026",
+        "closingDate": "15-May-2026",
+        "listingDate": "03-Jun-2026",
+        "price": 0.23
+    },
+    "gold-li": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Apr-2026",
+        "closingDate": "05-May-2026",
+        "listingDate": "18-May-2026",
+        "price": 0.13
+    },
+    "inspace-creation": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-Apr-2026",
+        "closingDate": "22-Apr-2026",
+        "listingDate": "08-May-2026",
+        "price": 0.25
+    },
+    "manforce-group": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "15-Apr-2026",
+        "closingDate": "21-Apr-2026",
+        "listingDate": "06-May-2026",
+        "price": 0.38
+    },
+    "mtt-shipping": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2026",
+        "closingDate": "03-Apr-2026",
+        "listingDate": "21-Apr-2026",
+        "price": 1.03
+    },
+    "empire-premium": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Mar-2026",
+        "closingDate": "31-Mar-2026",
+        "listingDate": "17-Apr-2026",
+        "price": 0.7
+    },
+    "gdgroup": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2026",
+        "closingDate": "06-Apr-2026",
+        "listingDate": "16-Apr-2026",
+        "price": 0.45
+    },
+    "5e-resources": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Mar-2026",
+        "closingDate": "03-Apr-2026",
+        "listingDate": "15-Apr-2026",
+        "price": 0.26
+    },
+    "sunmed": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Feb-2026",
+        "closingDate": "05-Mar-2026",
+        "listingDate": "18-Mar-2026",
+        "price": 1.45
+    },
+    "adnex": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Feb-2026",
+        "closingDate": "05-Mar-2026",
+        "listingDate": "17-Mar-2026",
+        "price": 0.2
+    },
+    "ogx": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Feb-2026",
+        "closingDate": "02-Mar-2026",
+        "listingDate": "12-Mar-2026",
+        "price": 0.35
+    },
+    "sbs": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "23-Dec-2026",
+        "closingDate": "07-Jan-2026",
+        "listingDate": "20-Jan-2026",
+        "price": 0.25
+    },
+    "genergy": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-Nov-2026",
+        "closingDate": "28-Nov-2026",
+        "listingDate": "11-Dec-2025",
+        "price": 1
+    },
+    "lacmed": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "14-Nov-2026",
+        "closingDate": "25-Nov-2026",
+        "listingDate": "10-Dec-2025",
+        "price": 0.75
+    },
+    "orkim": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Nov-2026",
+        "closingDate": "26-Nov-2026",
+        "listingDate": "09-Dec-2025",
+        "price": 0.92
+    },
+    "bms": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Mar-2025",
+        "closingDate": "04-Apr-2025",
+        "listingDate": "15-Apr-2025",
+        "price": 0.22
+    },
+    "geohan": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "17-Nov-2026",
+        "closingDate": "21-Nov-2026",
+        "listingDate": "05-Dec-2025",
+        "price": 0.55
+    },
+    "psp": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-Nov-2026",
+        "closingDate": "21-Nov-2026",
+        "listingDate": "04-Dec-2025",
+        "price": 0.16
+    },
+    "polymer": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "04-Nov-2026",
+        "closingDate": "11-Nov-2026",
+        "listingDate": "25-Nov-2025",
+        "price": 0.25
+    },
+    "aquawalk": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Oct-2026",
+        "closingDate": "07-Nov-2026",
+        "listingDate": "19-Nov-2025",
+        "price": 0.31
+    },
+    "pmw": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Oct-2026",
+        "closingDate": "06-Nov-2026",
+        "listingDate": "18-Nov-2025",
+        "price": 0.34
+    },
+    "famiera": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Oct-2026",
+        "closingDate": "30-Oct-2026",
+        "listingDate": "12-Nov-2025",
+        "price": 0.25
+    },
+    "thmy": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Sep-2026",
+        "closingDate": "09-Oct-2026",
+        "listingDate": "23-Oct-2025",
+        "price": 0.31
+    },
+    "cheeding": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Sep-2025",
+        "closingDate": "23-Sep-2025",
+        "listingDate": "07-Oct-2025",
+        "price": 0.36
+    },
+    "eca": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Aug-2025",
+        "closingDate": "12-Sep-2025",
+        "listingDate": "02-Oct-2025",
+        "price": 0.17
+    },
+    "jssolar": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Aug-2025",
+        "closingDate": "09-Sep-2025",
+        "listingDate": "23-Sep-2025",
+        "price": 0.31
+    },
+    "oxb": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Jun-2025",
+        "closingDate": "16-Jul-2025",
+        "listingDate": "29-Jul-2025",
+        "price": 0.29
+    },
+    "enpro": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Jun-2025",
+        "closingDate": "08-Jul-2025",
+        "listingDate": "18-Jul-2025",
+        "price": 0.24
+    },
+    "icents": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Jun-2025",
+        "closingDate": "02-Jul-2025",
+        "listingDate": "17-Jul-2025",
+        "price": 0.24
+    },
+    "a1akk": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "18-Jun-2025",
+        "closingDate": "30-Jun-2025",
+        "listingDate": "11-Jul-2025",
+        "price": 0.25
+    },
+    "pmck": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-May-2025",
+        "closingDate": "25-Jun-2025",
+        "listingDate": "09-Jul-2025",
+        "price": 0.22
+    },
+    "asm": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-May-2025",
+        "closingDate": "19-Jun-2025",
+        "listingDate": "02-Jul-2025",
+        "price": 0.17
+    },
+    "pmibhd": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "06-Jun-2025",
+        "closingDate": "17-Jun-2025",
+        "listingDate": "26-Jun-2025",
+        "price": 0.27
+    },
+    "cki": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2025",
+        "closingDate": "05-Jun-2025",
+        "listingDate": "24-Jun-2025",
+        "price": 1.08
+    },
+    "paradigm--ns-": {
+        "stage": 4,
+        "status": "Pre-Listing",
+        "openingDate": "16-May-2025",
+        "closingDate": "23-May-2025",
+        "listingDate": "2025-06-10",
+        "price": 1
+    },
+    "hkb": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Apr-2025",
+        "closingDate": "27-May-2025",
+        "listingDate": "09-Jun-2025",
+        "price": 0.335
+    },
+    "ictzone": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-May-2025",
+        "closingDate": "20-May-2025",
+        "listingDate": "03-Jun-2025",
+        "price": 0.2
+    },
+    "ohm": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Apr-2025",
+        "closingDate": "09-May-2025",
+        "listingDate": "28-May-2025",
+        "price": 0.28
+    },
+    "people": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Apr-2025",
+        "closingDate": "06-May-2025",
+        "listingDate": "20-May-2025",
+        "price": 0.25
+    },
+    "fibro": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-Apr-2025",
+        "closingDate": "25-Apr-2025",
+        "listingDate": "08-May-2025",
+        "price": 0.55
+    },
+    "westrvr": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "10-Apr-2025",
+        "closingDate": "17-Apr-2025",
+        "listingDate": "05-May-2025",
+        "price": 0.39
+    },
+    "reachten": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "09-Apr-2025",
+        "closingDate": "18-Apr-2025",
+        "listingDate": "02-May-2025",
+        "price": 0.52
+    },
+    "wtec": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "09-Apr-2025",
+        "closingDate": "15-Apr-2025",
+        "listingDate": "29-Apr-2025",
+        "price": 0.25
+    },
+    "sumi": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-Mar-2025",
+        "closingDate": "25-Mar-2025",
+        "listingDate": "09-Apr-2025",
+        "price": 0.24
+    },
+    "clite": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "05-Mar-2025",
+        "closingDate": "12-Mar-2025",
+        "listingDate": "26-Mar-2025",
+        "price": 0.25
+    },
+    "dengkil": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Feb-2025",
+        "closingDate": "11-Mar-2025",
+        "listingDate": "25-Mar-2025",
+        "price": 0.25
+    },
+    "lsh": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Feb-2025",
+        "closingDate": "06-Mar-2025",
+        "listingDate": "21-Mar-2025",
+        "price": 0.88
+    },
+    "saliran-group": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Feb-2025",
+        "closingDate": "28-Feb-2025",
+        "listingDate": "13-Mar-2025",
+        "price": 0.45
+    },
+    "pantech-global": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "10-Feb-2025",
+        "closingDate": "19-Feb-2025",
+        "listingDate": "03-Mar-2025",
+        "price": 0.85
+    },
+    "sunlogy": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Jan-2025",
+        "closingDate": "05-Feb-2025",
+        "listingDate": "20-Feb-2025",
+        "price": 0.3
+    },
+    "rtech": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2025",
+        "closingDate": "31-Jan-2025",
+        "listingDate": "17-Feb-2025",
+        "price": 0.25
     }
 }
