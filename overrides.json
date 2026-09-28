@@ -236,6 +236,7 @@
         "v3TargetPrice": 0.5
     },
     "evocom-berhad": {
+        "os": 3.6,
         "price": 0.18,
         "openingDate": "03-Sep-2026",
         "closingDate": "14-Sep-2026",
