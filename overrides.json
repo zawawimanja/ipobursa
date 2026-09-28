@@ -308,8 +308,8 @@
         "mitiCloseDate": "10-Jul-2026"
     },
     "big-caring-group-bhd": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "mitiOpenDate": "14-Aug-2026",
         "mitiCloseDate": "24-Aug-2026",
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
@@ -322,8 +322,8 @@
         "mitiApplicants": 2563
     },
     "ioipg-malaysia-reit": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "mitiOpenDate": "17-Aug-2026",
         "mitiCloseDate": "31-Aug-2026",
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
@@ -340,8 +340,8 @@
         "mitiApplicants": 406
     },
     "mydcd-berhad": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "price": 0.56,
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
@@ -361,7 +361,9 @@
         "predictedGrade": "B",
         "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425.",
         "sector": "Power Infrastructure (EPCC Substation)",
-        "mitiCloseDate": "01-Sep-2026"
+        "mitiCloseDate": "01-Sep-2026",
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
     },
     "empg-group-berhad": {
         "mitiApplicants": 97,
@@ -369,11 +371,13 @@
         "predictedGrade": "B",
         "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA.",
         "mitiCloseDate": "09-Sep-2026",
-        "mitiOpenDate": "28-Aug-2026"
+        "mitiOpenDate": "28-Aug-2026",
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
     },
     "scgm-bhd": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "price": 0.365,
         "mitiApplicants": 84,
         "mitiOfferShares": 95300000,
@@ -382,8 +386,8 @@
         "hasMitiTranche": true
     },
     "yes-group-management-berhad": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "hasMitiTranche": true,
         "price": 0.18,
         "mitiCloseDate": "14-Sep-2026",
@@ -434,5 +438,48 @@
         "ib": "Berjaya Securities",
         "totalShares": 360000000,
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
+    },
+    "kk-mart-retail-berhad": {
+        "stage": 2,
+        "status": "MITI Allocation Phase",
+        "mitiOpenDate": "28-Sep-2026",
+        "mitiCloseDate": "11-Oct-2026",
+        "hasMitiTranche": true,
+        "predictedGrade": "B",
+        "sifuTargetPrice": 1.65,
+        "calibratedSifuTargetPrice": 1.65,
+        "v3TargetPrice": 1.65,
+        "v7TargetPrice": 1.65,
+        "zone2TargetPrice": 1.65,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Convenience Store Chain:</b> Rangkaian kedai serbaneka 24 jam terkemuka di Malaysia dengan ratusan cawangan.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> Permohonan MITI dibuka 28-Sep hingga 11-Okt-2026 (Pasaran Utama).<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
+    },
+    "panda-eyes-group-berhad": {
+        "id": "panda-eyes-group-berhad",
+        "companyName": "Panda Eyes Group Berhad",
+        "symbol": "PANDAEYES",
+        "market": "ACE Market",
+        "price": 0.25,
+        "openingDate": "",
+        "closingDate": "",
+        "listingDate": "",
+        "mitiOpenDate": "25-Sep-2026",
+        "mitiCloseDate": "08-Oct-2026",
+        "mitiOfferShares": 203125000,
+        "shariah": true,
+        "stage": 2,
+        "status": "MITI Allocation Phase",
+        "hasMitiTranche": true,
+        "year": 2026,
+        "sector": "Consumer Products & Services (Retailers & Fashion)",
+        "geography": "Selangor",
+        "ib": "M & A Securities",
+        "totalShares": 325000000,
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.28,
+        "calibratedSifuTargetPrice": 0.28,
+        "v3TargetPrice": 0.28,
+        "v7TargetPrice": 0.28,
+        "zone2TargetPrice": 0.28,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Fashion & Lifestyle Retail:</b> Rangkaian peruncitan fesyen, beg & aksesori di bawah jenama Panda Eyes.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> 203.125M saham diperuntukkan kepada pelabur Bumiputera MITI.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh M & A Securities Sdn Bhd.<br>• <b>Status Syariah:</b> Patuh Syariah."
     }
 }
