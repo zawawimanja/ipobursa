@@ -1,8 +1,7 @@
 const SYNC_STATUS = {
-  "lastSync": "28/09/2026, 11:05:00 pm",
+  "lastSync": "29/09/2026, 8:52:45 am",
   "status": "Success",
-  "source": "manual-prospectus-sync",
-  "totalIpos": 308
+  "totalIpos": 309
 };
 
 if (typeof module !== 'undefined' && module.exports) {
