@@ -1383,8 +1383,8 @@ function renderTodayActionRadar() {
     const timelineEvents = [];
 
     (ipoData || []).forEach(ipo => {
-        // 1. Listing Events
-        if (ipo.listingDate) {
+        // 1. Listing Events — only show for IPOs at Stage 4+ (pre-listing or listed)
+        if (ipo.listingDate && ipo.stage >= 4) {
             const ld = parseFlexDate(ipo.listingDate);
             if (ld) {
                 ld.setHours(0, 0, 0, 0);
@@ -1419,8 +1419,8 @@ function renderTodayActionRadar() {
             }
         }
 
-        // 2. Public Opening Events
-        if (ipo.openingDate) {
+        // 2. Public Opening Events — only show for Stage 3 (Application Open)
+        if (ipo.openingDate && ipo.stage >= 3) {
             const od = parseFlexDate(ipo.openingDate);
             if (od) {
                 od.setHours(0, 0, 0, 0);
@@ -1441,8 +1441,8 @@ function renderTodayActionRadar() {
             }
         }
 
-        // 3. Public Closing Events
-        if (ipo.closingDate) {
+        // 3. Public Closing Events — only show for Stage 3 (Application Open)
+        if (ipo.closingDate && ipo.stage >= 3) {
             const cd = parseFlexDate(ipo.closingDate);
             if (cd) {
                 cd.setHours(0, 0, 0, 0);
@@ -1488,8 +1488,8 @@ function renderTodayActionRadar() {
             }
         }
 
-        // 4. MITI Opening Events
-        if (ipo.mitiOpenDate) {
+        // 4. MITI Opening Events — only show for Stage 1-2 (MITI phase)
+        if (ipo.mitiOpenDate && ipo.stage <= 2) {
             const mo = parseFlexDate(ipo.mitiOpenDate);
             if (mo) {
                 mo.setHours(0, 0, 0, 0);
@@ -1512,8 +1512,8 @@ function renderTodayActionRadar() {
             }
         }
 
-        // 5. MITI Closing Events
-        if (ipo.mitiCloseDate) {
+        // 5. MITI Closing Events — only show for Stage 1-2 (MITI phase)
+        if (ipo.mitiCloseDate && ipo.stage <= 2) {
             const mc = parseFlexDate(ipo.mitiCloseDate);
             if (mc) {
                 mc.setHours(0, 0, 0, 0);
