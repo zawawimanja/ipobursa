@@ -189,8 +189,8 @@ async function main() {
         let ipo = matchEntry(data, s.companyName, s.symbol);
         if (!ipo) return;
 
-        // Skip historical closed/listed IPOs that already have valid dates
-        if (ipo.stage === 5 && ipo.openingDate && ipo.closingDate) return;
+        // Skip historical closed/listed IPOs to prevent year hallucination downgrading them
+        if (ipo.stage === 5) return;
 
         let changed = false;
 
@@ -225,13 +225,13 @@ async function main() {
                     changed = true;
                 }
             } else if (closeD < now) {
-                if (ipo.stage !== 4) {
+                if (ipo.stage < 4) { // Only upgrade, don't downgrade
                     ipo.stage = 4;
                     ipo.status = 'Pre-Listing';
                     changed = true;
                 }
             } else if (closeD >= now) {
-                if (ipo.stage !== 3) {
+                if (ipo.stage < 3) { // Only upgrade, don't downgrade
                     ipo.stage = 3;
                     ipo.status = 'Application Open';
                     changed = true;
