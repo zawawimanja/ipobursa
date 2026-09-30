@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * sync-public-ipos.js
+ * sync-public-ipos.js  (v2 - rewritten with proper HTML parser)
  *
- * Auto-sync prospektus, tarikh buka/tutup, tarikh penyenaraian, harga IPO,
- * dan status pasaran IPO AWAM Bursa Malaysia daripada KLSE Screener (/v2/ipos).
+ * Sync tarikh buka/tutup, harga IPO, tarikh listing, dan stage
+ * daripada KLSE Screener (/v2/ipos) secara automatik.
  *
  * TIADA Cloudflare, TIADA login, TIADA Puppeteer.
- * Boleh berjalan terus di GitHub Actions dan laptop pada bila-bila masa.
+ * Boleh berjalan di GitHub Actions dan laptop pada bila-bila masa.
  *
  * Guna: node sync-public-ipos.js
  */
@@ -24,52 +24,67 @@ const OVERRIDES_JSON = path.join(ROOT, 'overrides.json');
 
 const URL = 'https://www.klsescreener.com/v2/ipos';
 
-const MONTHS_MAP = {
-    'jan': 'Jan', 'feb': 'Feb', 'mar': 'Mar', 'apr': 'Apr', 'may': 'May', 'jun': 'Jun',
-    'jul': 'Jul', 'aug': 'Aug', 'sep': 'Sep', 'oct': 'Oct', 'nov': 'Nov', 'dec': 'Dec'
+const MONTH_MAP = {
+    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
 };
 
-function parseKlseDate(str, fallbackYear = 2026) {
-    if (!str || str === '-' || str === 'TBA') return null;
-    str = str.replace(/,/g, '').trim();
-    
-    // Format "24 Sep 2026" or "24 Sep, 2026"
-    const m1 = str.match(/^(\d{1,2})\s+([A-Za-z]{3})(?:\s+(\d{4}))?$/);
-    if (m1) {
-        const d = String(parseInt(m1[1], 10)).padStart(2, '0');
-        const m = MONTHS_MAP[m1[2].toLowerCase()];
-        const y = m1[3] || String(fallbackYear);
-        if (m) return `${d}-${m}-${y}`;
-    }
-    
-    // Format "Sep 28 2026" or "Sep 28"
-    const m2 = str.match(/^([A-Za-z]{3})\s+(\d{1,2})(?:\s+[A-Za-z]+)?(?:\s+(\d{4}))?$/);
-    if (m2) {
-        const d = String(parseInt(m2[2], 10)).padStart(2, '0');
-        const m = MONTHS_MAP[m2[1].toLowerCase()];
-        const y = m2[3] || String(fallbackYear);
-        if (m) return `${d}-${m}-${y}`;
-    }
+function parseKlseDate(dayStr, monthStr, year) {
+    const d = parseInt(dayStr, 10);
+    const mIdx = MONTH_MAP[(monthStr || '').toLowerCase()];
+    const y = parseInt(year, 10) || new Date().getFullYear();
+    if (isNaN(d) || mIdx === undefined || isNaN(y)) return null;
+    const dd = String(d).padStart(2, '0');
+    const mm = Object.keys(MONTH_MAP)[mIdx];
+    const mmCap = mm.charAt(0).toUpperCase() + mm.slice(1);
+    return `${dd}-${mmCap}-${y}`;
+}
 
+function parseInlineDate(str, fallbackYear = 2026) {
+    // Handles "09 Sep", "09 Sep 2026", "Sep 09", "Sep 9 2026"
+    if (!str) return null;
+    str = str.replace(/,/g, '').trim();
+    // "09 Sep 2026" or "09 Sep"
+    const m1 = str.match(/^(\d{1,2})\s+([A-Za-z]{3})(?:\s+(\d{4}))?$/);
+    if (m1) return parseKlseDate(m1[1], m1[2], m1[3] || fallbackYear);
+    // "Sep 09 2026" or "Sep 9"
+    const m2 = str.match(/^([A-Za-z]{3})\s+(\d{1,2})(?:\s+(\d{4}))?$/);
+    if (m2) return parseKlseDate(m2[2], m2[1], m2[3] || fallbackYear);
     return null;
+}
+
+function parseFlexDate(str) {
+    if (!str) return null;
+    const parts = str.split('-');
+    if (parts.length !== 3) return null;
+    const mIdx = MONTH_MAP[parts[1].toLowerCase()];
+    if (mIdx === undefined) return null;
+    return new Date(parseInt(parts[2]), mIdx, parseInt(parts[0]));
 }
 
 function normalize(name) {
     return (name || '').toLowerCase()
-        .replace(/berhad|bhd|group|holdings|corp/gi, '')
+        .replace(/\bberhad\b|\bgroup\b|\bholdings\b|\bcorp\b|\bbhd\b|\bthe\b/g, '')
         .replace(/[^a-z0-9]/g, '')
         .trim();
 }
 
-function matchEntry(data, companyName, symbol) {
+function matchEntry(data, companyName, ticker) {
     const n = normalize(companyName);
     if (!n || n.length < 3) return null;
-    
-    // 1. Exact normalized name match
+
+    // 1. Exact ticker match (most reliable)
+    if (ticker && ticker.length >= 3) {
+        const sym = ticker.toLowerCase().trim();
+        const byTicker = data.find(x => x.symbol && x.symbol.toLowerCase().replace(/\[.*?\]/g, '').trim() === sym);
+        if (byTicker) return byTicker;
+    }
+
+    // 2. Exact normalized company name
     let found = data.find(x => normalize(x.companyName) === n);
     if (found) return found;
 
-    // 2. Substring matching for longer unique names (>= 5 chars)
+    // 3. Substring match for longer names
     if (n.length >= 5) {
         found = data.find(x => {
             const cn = normalize(x.companyName);
@@ -78,193 +93,183 @@ function matchEntry(data, companyName, symbol) {
         if (found) return found;
     }
 
-    // 3. Exact unique symbol match (only if symbol is >= 4 chars)
-    if (symbol && symbol.length >= 4) {
-        const sym = symbol.toLowerCase().trim();
-        found = data.find(x => x.symbol && x.symbol.toLowerCase().replace(/\[.*?\]/g, '').trim() === sym);
-        if (found) return found;
-    }
-
-    return null;
-}
-
-function parseFlexDate(s) {
-    if (!s) return null;
-    const parts = s.split('-');
-    if (parts.length === 3) {
-        const d = parseInt(parts[0], 10);
-        const mIdx = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].indexOf(parts[1].toLowerCase());
-        const y = parseInt(parts[2], 10);
-        if (!isNaN(d) && mIdx >= 0 && !isNaN(y)) return new Date(y, mIdx, d);
-    }
     return null;
 }
 
 async function main() {
-    console.log('🔄 Menyelaras data IPO Awam daripada KLSE Screener (/v2/ipos)...');
-    
-    let resp;
+    console.log('🔄 Menyelaras data IPO Awam daripada KLSE Screener...');
+
+    let html;
     try {
-        resp = await axios.get(URL, {
+        const resp = await axios.get(URL, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-MY,en;q=0.9',
             },
-            timeout: 15000
+            timeout: 20000
         });
+        html = resp.data;
     } catch (e) {
         console.error(`❌ Gagal membaca KLSE Screener: ${e.message}`);
         process.exit(1);
     }
 
-    const $ = cheerio.load(resp.data);
-    const scraped = [];
+    const $ = cheerio.load(html);
+    const upcoming = [];
 
-    // Parse each container in the list
-    $('div').each((i, el) => {
-        const text = $(el).text().replace(/\s+/g, ' ').trim();
-        if (text.includes('Open:') && text.includes('Close:') && $(el).children().length >= 2 && $(el).children().length <= 15) {
-            
-            // Extract company name and symbol
-            // e.g. "Oct 16 Friday ECOGRPEGH INTERNATIONAL BERHAD Open: 24 Sep Close: 05 Oct ... 0.16"
-            // or "Initial Public Offering Sep 28 Monday EVOCOMEVOCOM BERHAD Open: 03 Sep Close: 14 Sep ..."
-            const openM = text.match(/Open:\s*([\d\w\s,]+?)\s*Close:/i);
-            const closeM = text.match(/Close:\s*([\d\w\s,]+?)(?:\s*Issue Size:|\s*Board:|\s*Sector:|\s*$)/i);
-            const priceM = text.match(/(?:^|\s)(0\.\d{2,3}|[1-9]\d*\.\d{2})(?:\s*$|\s+[A-Za-z])/);
-            const boardM = text.match(/Board:\s*([\w\s]+?)(?:\s*Sector:|\s*$)/i);
-            const sectorM = text.match(/Sector:\s*([\w\s&]+?)(?:\s*Sub sector:|\s*$)/i);
-            const listDateM = text.match(/^([A-Za-z]{3}\s+\d{1,2}(?:\s+[A-Za-z]+)?(?:\s+\d{4})?)/);
+    // Parse ONLY upcoming IPOs — stop at "Past IPOs" section
+    // Each upcoming IPO is in .card.mb-3.p-0 before the <h3>Past IPOs</h3>
+    let reachedPast = false;
 
-            let companyName = null;
-            let symbol = null;
-
-            // Try to extract company name from headings or strong tags
-            const titleEl = $(el).find('h1, h2, h3, h4, h5, h6, strong, a').first();
-            const rawTitle = titleEl.text().replace(/\s+/g, ' ').trim();
-
-            const bhdM = text.match(/([A-Z0-9\s\(\)\-\.]+?\s+BERHAD)/i);
-            if (bhdM) {
-                companyName = bhdM[1].replace(/^(?:Initial Public Offering|Open|Close|Listing)\s+/gi, '').trim();
-            } else if (rawTitle && rawTitle.length > 3) {
-                companyName = rawTitle;
-            }
-
-            if (companyName && openM && closeM) {
-                const openDate = parseKlseDate(openM[1]);
-                const closeDate = parseKlseDate(closeM[1]);
-                const listDate = listDateM ? parseKlseDate(listDateM[1]) : null;
-                const price = priceM ? parseFloat(priceM[1]) : null;
-                const market = boardM ? boardM[1].trim() : 'ACE Market';
-                const sector = sectorM ? sectorM[1].trim() : null;
-
-                // Deduplicate in list
-                if (!scraped.some(x => normalize(x.companyName) === normalize(companyName))) {
-                    scraped.push({
-                        companyName,
-                        symbol,
-                        openDate,
-                        closeDate,
-                        listingDate: listDate,
-                        price,
-                        market,
-                        sector
-                    });
-                }
-            }
-        }
+    $('h3').each((i, el) => {
+        if ($(el).text().trim() === 'Past IPOs') reachedPast = true;
     });
 
-    console.log(`📋 Berjaya mengekstrak ${scraped.length} rekod IPO dari KLSE Screener.`);
+    // Find all .card elements — past IPOs have background-color:inherit in date block
+    $('div.card.mb-3.p-0').each((i, card) => {
+        const cardEl = $(card);
 
+        // Get the listing date block (left colored div)
+        const dateBlock = cardEl.find('div[style*="width:100px"]').first();
+        const monthText = dateBlock.find('div.pt-2').text().trim();   // e.g. "Oct"
+        const dayText = dateBlock.find('h3').text().trim();            // e.g. "01"
+        const yearAttr = dateBlock.attr('title') || String(new Date().getFullYear()); // from title="2026"
+
+        // Check if this is a past IPO (no title attr color vs. inherit)
+        const styleStr = dateBlock.attr('style') || '';
+        const isPast = styleStr.includes('color:inherit') || styleStr.includes('background-color:inherit');
+        if (isPast) return; // skip past IPOs
+
+        const listingDate = parseKlseDate(dayText, monthText, yearAttr);
+        if (!listingDate) return;
+
+        // Get ticker and company name
+        const ticker = cardEl.find('h4 a').first().text().trim();
+        const companyName = cardEl.find('h4').first().next('span').text().trim() ||
+                            cardEl.find('span.ml-3').first().text().trim();
+
+        // Get open/close dates from text like "Open: 09 Sep" "Close: 18 Sep"
+        let openDate = null, closeDate = null;
+        cardEl.find('span').each((j, span) => {
+            const txt = $(span).text().trim();
+            if (txt === 'Open:') {
+                const sibling = $(span).parent().text().replace('Open:', '').trim().split('\n')[0].trim();
+                openDate = parseInlineDate(sibling, parseInt(yearAttr));
+            }
+            if (txt === 'Close:') {
+                const sibling = $(span).parent().text().replace('Close:', '').trim().split('\n')[0].trim();
+                closeDate = parseInlineDate(sibling, parseInt(yearAttr));
+            }
+        });
+
+        // Fallback: parse Open/Close from parent div text
+        if (!openDate || !closeDate) {
+            cardEl.find('div').each((j, div) => {
+                const txt = $(div).text().replace(/\s+/g, ' ').trim();
+                const openM = txt.match(/Open:\s*(\d{1,2}\s+[A-Za-z]{3}(?:\s+\d{4})?)/i);
+                const closeM = txt.match(/Close:\s*(\d{1,2}\s+[A-Za-z]{3}(?:\s+\d{4})?)/i);
+                if (openM && !openDate) openDate = parseInlineDate(openM[1], parseInt(yearAttr));
+                if (closeM && !closeDate) closeDate = parseInlineDate(closeM[1], parseInt(yearAttr));
+            });
+        }
+
+        // Get price from right green block
+        const priceText = cardEl.find('div[style*="background-color:#27AE60"] h4').text().trim();
+        const price = parseFloat(priceText) || null;
+
+        if (!companyName || !listingDate) return;
+
+        upcoming.push({ ticker, companyName, openDate, closeDate, listingDate, price });
+    });
+
+    console.log(`📋 Dijumpai ${upcoming.length} IPO akan datang dari KLSE Screener:`);
+    upcoming.forEach(x => console.log(`   ${x.ticker} | ${x.companyName} | Open:${x.openDate} Close:${x.closeDate} List:${x.listingDate} RM${x.price}`));
+
+    // Load data
     const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
-    const ovPath = OVERRIDES_JSON;
-    const overrides = fs.existsSync(ovPath) ? JSON.parse(fs.readFileSync(ovPath, 'utf8')) : {};
+    const overrides = fs.existsSync(OVERRIDES_JSON) ? JSON.parse(fs.readFileSync(OVERRIDES_JSON, 'utf8')) : {};
 
     const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
+    const today = new Date(); today.setHours(0, 0, 0, 0);
     let updatedCount = 0;
 
-    scraped.forEach(s => {
-        let ipo = matchEntry(data, s.companyName, s.symbol);
-        if (!ipo) return;
+    upcoming.forEach(s => {
+        const ipo = matchEntry(data, s.companyName, s.ticker);
+        if (!ipo) {
+            console.log(`   ⚠️  Tak jumpa padanan untuk: ${s.companyName} (${s.ticker})`);
+            return;
+        }
 
-        // Skip historical closed/listed IPOs to prevent year hallucination downgrading them
+        // NEVER downgrade a listed (stage 5) IPO
         if (ipo.stage === 5) return;
 
         let changed = false;
 
         if (s.openDate && ipo.openingDate !== s.openDate) {
-            ipo.openingDate = s.openDate;
-            changed = true;
+            ipo.openingDate = s.openDate; changed = true;
         }
         if (s.closeDate && ipo.closingDate !== s.closeDate) {
-            ipo.closingDate = s.closeDate;
-            changed = true;
+            ipo.closingDate = s.closeDate; changed = true;
         }
         if (s.listingDate && ipo.listingDate !== s.listingDate) {
-            ipo.listingDate = s.listingDate;
-            changed = true;
+            ipo.listingDate = s.listingDate; changed = true;
         }
-        if (s.price && (!ipo.price || ipo.price === 0 || ipo.price === 0.3)) {
-            ipo.price = s.price;
-            changed = true;
+        if (s.price && s.price > 0 && (!ipo.price || ipo.price === 0)) {
+            ipo.price = s.price; changed = true;
+        }
+        // Update ticker symbol if missing
+        if (s.ticker && !ipo.symbol) {
+            ipo.symbol = s.ticker; changed = true;
         }
 
-        // Auto-compute stage based on dates
-        const closeD = parseFlexDate(ipo.closingDate);
-        if (closeD) {
-            closeD.setHours(23, 59, 59, 999);
-            const listD = parseFlexDate(ipo.listingDate);
-            if (listD) listD.setHours(0, 0, 0, 0);
+        // Auto-compute correct stage based on confirmed dates
+        const closeD = s.closeDate ? parseFlexDate(s.closeDate) : null;
+        const listD = s.listingDate ? parseFlexDate(s.listingDate) : null;
+        if (listD) listD.setHours(0, 0, 0, 0);
+        if (closeD) closeD.setHours(23, 59, 59, 999);
 
-            if (listD && listD <= today) {
-                if (ipo.stage !== 5) {
-                    ipo.stage = 5;
-                    ipo.status = 'Listed';
-                    changed = true;
-                }
-            } else if (closeD < now) {
-                if (ipo.stage < 4) { // Only upgrade, don't downgrade
-                    ipo.stage = 4;
-                    ipo.status = 'Pre-Listing';
-                    changed = true;
-                }
-            } else if (closeD >= now) {
-                if (ipo.stage < 3) { // Only upgrade, don't downgrade
-                    ipo.stage = 3;
-                    ipo.status = 'Application Open';
-                    changed = true;
-                }
-            }
+        let newStage = ipo.stage;
+        if (listD && listD <= today) {
+            newStage = 5; // Listed
+        } else if (closeD && closeD < now) {
+            newStage = Math.max(ipo.stage, 4); // Pre-Listing (only upgrade)
+        } else if (closeD && closeD >= now) {
+            newStage = Math.max(ipo.stage, 3); // Application Open (only upgrade)
+        }
+
+        if (newStage !== ipo.stage) {
+            const stageNames = { 3: 'Application Open', 4: 'Pre-Listing', 5: 'Listed' };
+            ipo.stage = newStage;
+            ipo.status = stageNames[newStage] || ipo.status;
+            changed = true;
         }
 
         if (changed) {
-            console.log(`   ✨ ${ipo.companyName} dikemas kini -> Stage ${ipo.stage} (${ipo.status}) | Buka: ${ipo.openingDate || '-'}, Tutup: ${ipo.closingDate || '-'}, Harga: RM ${ipo.price || '-'}`);
+            console.log(`   ✨ ${ipo.companyName} → Stage ${ipo.stage} (${ipo.status}) | Close:${ipo.closingDate} List:${ipo.listingDate}`);
             updatedCount++;
 
+            // Sync to overrides
             if (!overrides[ipo.id]) overrides[ipo.id] = {};
-            overrides[ipo.id].stage = ipo.stage;
-            overrides[ipo.id].status = ipo.status;
-            if (ipo.openingDate) overrides[ipo.id].openingDate = ipo.openingDate;
-            if (ipo.closingDate) overrides[ipo.id].closingDate = ipo.closingDate;
-            if (ipo.listingDate) overrides[ipo.id].listingDate = ipo.listingDate;
-            if (ipo.price) overrides[ipo.id].price = ipo.price;
+            ['stage', 'status', 'openingDate', 'closingDate', 'listingDate', 'price', 'symbol'].forEach(k => {
+                if (ipo[k] !== undefined) overrides[ipo.id][k] = ipo[k];
+            });
         }
     });
 
     if (updatedCount === 0) {
-        console.log('✅ Semua tarikh dan peringkat (stage) IPO awam sudah selaras.');
+        console.log('✅ Semua data IPO awam sudah terkini. Tiada perubahan.');
         return;
     }
 
-    fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
     const js = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
+
+    fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
     fs.writeFileSync(DATA_JS, js, 'utf8');
     fs.writeFileSync(DATA_EXPORT_JS, js, 'utf8');
     fs.writeFileSync(OVERRIDES_JSON, JSON.stringify(overrides, null, 4), 'utf8');
 
-    console.log(`\n🎉 Berjaya mengemas kini ${updatedCount} IPO awam ke data.json, data.js, dan overrides.json!`);
+    console.log(`\n🎉 Berjaya mengemas kini ${updatedCount} IPO! data.json, data.js, overrides.json disimpan.`);
 }
 
 main().catch(e => { console.error('Fatal:', e); process.exit(1); });
