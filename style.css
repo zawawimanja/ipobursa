@@ -1,13 +1,13 @@
 :root {
-    --primary: #6366f1;
-    --primary-light: #818cf8;
-    --secondary: #0ea5e9;
-    --accent: #f43f5e;
-    --bg-dark: #07090e; /* Deep Obsidian dark mode */
-    --card-bg: rgba(17, 22, 34, 0.65); /* Darker glassmorphism */
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --text-main: #f8fafc;
-    --text-dim: #94a3b8;
+    --primary: #0f172a;
+    --primary-light: #334155;
+    --secondary: #64748b;
+    --accent: #dc2626;
+    --bg-dark: #f8fafc; 
+    --card-bg: #ffffff; 
+    --glass-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-dim: #475569;
     --container-max: 1200px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -42,14 +42,7 @@ h3,
 
 /* Background Blobs */
 .background-blobs {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    filter: blur(100px); /* Increased blur for smoother transitions */
-    opacity: 0.12; /* Sleek, extremely subtle dark mode depth */
+    display: none;
 }
 
 .blob {
@@ -84,12 +77,12 @@ h3,
     height: 60px;
     display: flex;
     align-items: center;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
+    background: #ffffff;
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .glass-header .container {
@@ -142,10 +135,7 @@ h3,
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #fff, var(--primary-light));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
 }
 
 .hero h1 span {
@@ -297,9 +287,9 @@ h3,
 
 .glass-card {
     background: var(--card-bg);
-    backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
-    border-radius: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .tab-btn {
@@ -2107,4 +2097,233 @@ h3,
     border-color: rgba(99, 102, 241, 0.4);
     background: rgba(30, 41, 59, 0.75);
 }
+
+/* =========================================================================
+   DSLR LIGHT MODE OVERRIDES
+   ========================================================================= */
+
+body {
+    background-color: var(--bg-dark) !important;
+}
+
+/* Force light backgrounds for containers that have dark inline styles */
+.search-sort-bar {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+}
+
+#ipo-search {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: var(--text-main) !important;
+}
+#ipo-search::placeholder {
+    color: #94a3b8 !important;
+}
+
+#ipo-sort {
+    background-color: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: var(--text-main) !important;
+}
+
+#hunter-resource-portal {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+}
+
+#portal-collapsible-body h3, 
+#portal-collapsible-body h4, 
+#portal-collapsible-body strong,
+#portal-collapsible-body h2 {
+    color: var(--text-main) !important;
+}
+
+/* DSLR Card Sharpening */
+.ipo-card {
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+}
+.ipo-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08) !important;
+    border-color: #94a3b8 !important;
+    transform: translateY(-4px) !important;
+}
+
+/* Tab & Buttons Sharpening */
+.btn-moomoo, .tab-btn, .academy-tab-btn, .filter-btn, .year-btn {
+    border-radius: 4px !important;
+}
+
+/* Text Overrides for White text in original design */
+h1, h2, h3, h4, h5, p, span {
+    text-shadow: none !important;
+}
+
+/* Specific text color fixes for previously dark mode elements */
+.tab-label .title,
+.company-info h3,
+.detail-item .value {
+    color: var(--text-main) !important;
+}
+
+.academy-tab-btn {
+    color: var(--text-dim) !important;
+    border-color: #cbd5e1 !important;
+}
+.academy-tab-btn.active {
+    color: #ffffff !important;
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Market guide & Academy split container fixes */
+.academy-details-split > div {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.academy-journey-grid > div {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.market-type li { color: var(--text-main) !important; }
+.pro-tip { 
+    background: #f8fafc !important; 
+    border-color: #cbd5e1 !important;
+}
+.pro-tip p { color: var(--text-main) !important; }
+
+/* Timeline/Radar fixes */
+#today-action-radar h3, #today-action-radar strong, #today-action-radar p {
+    color: var(--text-main) !important;
+}
+.radar-timeline-item {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.radar-timeline-item:hover {
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+/* Timeline/Radar fixes */
+#today-action-radar h3, #today-action-radar strong, #today-action-radar p {
+    color: var(--text-main) !important;
+}
+.radar-timeline-item {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+}
+.radar-timeline-item:hover {
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+.radar-timeline-item p, .radar-timeline-item div {
+    color: var(--text-main) !important;
+}
+
+/* =========================================================================
+   AGGRESSIVE DSLR LIGHT MODE OVERRIDES
+   ========================================================================= */
+
+/* Make all structural backgrounds light and borders crisp */
+.glass-card, 
+.glass-header, 
+.table-responsive,
+.excel-table-wrapper, 
+.picks-table-wrapper,
+.panel, 
+.card,
+[class*="container"],
+[class*="wrapper"],
+div[style*="background: #1e293b"],
+div[style*="background: rgba(15, 23, 42"],
+div[style*="background: rgba(30, 41, 59"],
+th[style*="background: #1e293b"],
+thead[style*="background: #1e293b"] {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* Specific text color fixes for table headers and cells */
+th, td, th[style], td[style], .journal-table th, .journal-table td {
+    color: var(--text-main) !important;
+}
+thead th, .journal-table th, table th, .table-responsive th {
+    background-color: #f8fafc !important;
+    color: #475569 !important; /* Lighter text for headers */
+    font-weight: 700 !important;
+    border-bottom: 2px solid #cbd5e1 !important;
+}
+
+/* Fix Sifu Notes Panel and dark sections */
+.tier-table th, .picks-table th, .excel-table th, .journal-table th {
+    background: #f1f5f9 !important;
+    color: var(--text-main) !important;
+}
+.tier-table td, .picks-table td, .excel-table td, .journal-table td, table td {
+    background: #ffffff !important;
+    color: var(--text-main) !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* Fix all inline white text across the app */
+[style*="color: white"],
+[style*="color: white;"],
+[style*="color: #fff"],
+[style*="color: #ffffff"],
+[style*="color: var(--text-dim)"] {
+    color: var(--text-main) !important;
+}
+
+/* Ensure Nav buttons have visible text */
+.nav-links .btn-moomoo {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: var(--text-main) !important;
+}
+.nav-links .btn-moomoo span, .nav-links .btn-moomoo i {
+    color: var(--text-main) !important;
+}
+
+/* -------------------------------------------------------------------------
+   EXCEPTIONS (KEEP COLORED/WHITE TEXT WHERE INTENDED)
+   ------------------------------------------------------------------------- */
+/* For elements with explicit colorful backgrounds, force text to white */
+.btn-moomoo, .btn-moomoo *,
+.badge, .badge *,
+.outlier-badge, .outlier-badge *,
+.surge-badge, .surge-badge *,
+.main-market, .main-market *,
+.ace-market, .ace-market *,
+.status-dot,
+.filter-btn.active, .year-btn.active, .academy-tab-btn.active,
+[style*="background: linear-gradient"], [style*="background: linear-gradient"] *,
+[style*="background: #10b981"], [style*="background: #10b981"] *,
+[style*="background: #ef4444"], [style*="background: #ef4444"] *,
+[style*="background: #3b82f6"], [style*="background: #3b82f6"] *,
+[style*="background: #a78bfa"], [style*="background: #a78bfa"] *,
+[style*="background: #f59e0b"], [style*="background: #f59e0b"] *,
+[style*="background: var(--primary)"], [style*="background: var(--primary)"] * {
+    color: #ffffff !important;
+}
+
+/* Let colored text be colored! (Overrides the global text-main rule above) */
+[style*="color: #10b981"] { color: #10b981 !important; }
+[style*="color:#10b981"] { color: #10b981 !important; }
+[style*="color: #ef4444"] { color: #ef4444 !important; }
+[style*="color:#ef4444"] { color: #ef4444 !important; }
+[style*="color: #f59e0b"] { color: #f59e0b !important; }
+[style*="color:#f59e0b"] { color: #f59e0b !important; }
+[style*="color: #3b82f6"] { color: #3b82f6 !important; }
+[style*="color:#3b82f6"] { color: #3b82f6 !important; }
+[style*="color: #a78bfa"] { color: #a78bfa !important; }
+[style*="color:#a78bfa"] { color: #a78bfa !important; }
+
+
 
