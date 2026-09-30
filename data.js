@@ -3964,8 +3964,8 @@ const IPO_DATA = [
     "sector": "Consumer",
     "fundUse": "Retail expansion",
     "predictedGrade": "B",
-    "stage": 2,
-    "status": "MITI Allocation Phase",
+    "stage": 5,
+    "status": "Listed",
     "shariah": true,
     "outlier": true,
     "analystInsight": "HISTORICAL OUTLIER: Massive performance pop that defied standard grading.",
@@ -3974,9 +3974,7 @@ const IPO_DATA = [
     "closePrice": 0.799986,
     "symbol": "THMY",
     "dailyChange": 2.7,
-    "hasMitiTranche": false,
-    "openingDate": "29-Sep-2026",
-    "closingDate": "09-Oct-2026"
+    "hasMitiTranche": false
   },
   {
     "id": "verdant",
