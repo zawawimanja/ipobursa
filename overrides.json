@@ -353,8 +353,7 @@
         "listingDate": "14-Oct-2026",
         "stage": 3,
         "status": "Application Open",
-        "hasMitiTranche": true,
-        "price": 0.27
+        "hasMitiTranche": true
     },
     "butterfield-fb-berhad": {
         "mitiOpenDate": "01-Jul-2026",
