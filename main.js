@@ -746,7 +746,70 @@ function autoPromoteIPOs(finalData) {
                 if (!openingFuture) ipo.status = 'Application Open';
             }
         }
+
+        // ── LIVE OS GRADE RECALC ──────────────────────────────────────────────
+        // Bila IPO dah ada OS (stage 4/5), recalc predictedGrade secara live
+        // supaya grade dalam kad mencerminkan OS sebenar, bukan pre-ballot guess.
+        if (ipo.stage >= 4 && ipo.os > 0) {
+            const liveGrade = liveRecalcOsGrade(ipo);
+            if (liveGrade && liveGrade !== ipo.predictedGrade) {
+                ipo._oldPredictedGrade = ipo.predictedGrade; // simpan untuk reference
+                ipo.predictedGrade = liveGrade;
+            }
+        }
+        // ─────────────────────────────────────────────────────────────────────
     });
+}
+
+// Live OS Grade Recalc — mirror of recalcOsGrade() in apply-overrides.js
+// Called from autoPromoteIPOs() every minute in browser
+function liveRecalcOsGrade(ipo) {
+    const os = ipo.os || 0;
+    if (!os || os <= 0 || (ipo.stage || 0) < 4) return null;
+
+    const market = (ipo.market || '').toLowerCase();
+    const ib = (ipo.ib || '').toLowerCase();
+    const pe = ipo.pe || 0;
+
+    const heroIBs = ['maybank', 'public', 'kaf', 'alliance'];
+    const topTierIBs = ['rhb', 'aminvestment', 'alliance', 'affin hwang', 'kaf', 'public', 'maybank'];
+    const momentumIBs = ['m&a', 'malacca', 'ta securities', 'kenanga', 'apex', 'sj securities'];
+
+    const isHero    = heroIBs.some(t => ib.includes(t));
+    const isTopTier = topTierIBs.some(t => ib.includes(t));
+    const isMomentum = momentumIBs.some(t => ib.includes(t));
+
+    const openPrice  = ipo.openPrice || 0;
+    const ipoPrice   = ipo.price || 0;
+    const openPremium = (openPrice && ipoPrice) ? ((openPrice - ipoPrice) / ipoPrice) * 100 : 0;
+    const isStrongGreen = openPremium >= 5.0;
+    const isRed = openPrice > 0 && ipoPrice > 0 && openPrice < ipoPrice;
+
+    if (market.includes('main')) {
+        if (os >= 20 && heroIBs.some(t => ib.includes(t))) return 'A';
+        if (os >= 20) return 'B';
+        if (os >= 5)  return 'B';
+        return 'C';
+    }
+
+    if (market.includes('ace')) {
+        if (ipo.stage === 5 && openPrice > 0) {
+            if (os >= 50 && isStrongGreen) return 'A';
+            if (isHero && isStrongGreen && os >= 3) return 'B';
+            if (os >= 20 && (isMomentum || isTopTier || isHero) && (isStrongGreen || !isRed)) return 'B';
+            if (os >= 20 && isStrongGreen) return 'B';
+            if (os < 10 && !isHero) return 'C';
+            if (isRed) return 'C';
+            if (isStrongGreen && pe <= 18) return 'B';
+            return 'C';
+        }
+        // Stage 4: pre-listing
+        if (os >= 50) return 'A';
+        if (os >= 20) return 'B';
+        return 'C';
+    }
+
+    return null;
 }
 
 
