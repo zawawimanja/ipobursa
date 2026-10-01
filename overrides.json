@@ -1039,5 +1039,18 @@
         "closingDate": "31-Jan-2025",
         "listingDate": "17-Feb-2025",
         "price": 0.25
+    },
+    "gb-bond-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "GBBOND",
+        "predictedGrade": "C",
+        "openPrice": 0.255,
+        "highPrice": 0.255,
+        "lowPrice": 0.225,
+        "closePrice": 0.225,
+        "performance": "red",
+        "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
+        "os": 8.22
     }
 }

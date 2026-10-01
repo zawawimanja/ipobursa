@@ -9596,7 +9596,13 @@
         "insightUrl": "https://www.isaham.my/ipo/insights/gb-bond-holdings-berhad",
         "openingDate": "09-Sep-2026",
         "ballotingDate": "22-Sep-2026",
-        "os": 8.22
+        "os": 8.22,
+        "symbol": "GBBOND",
+        "openPrice": 0.255,
+        "highPrice": 0.255,
+        "lowPrice": 0.225,
+        "closePrice": 0.225,
+        "performance": "red"
     },
     {
         "id": "redplanet-berhad",

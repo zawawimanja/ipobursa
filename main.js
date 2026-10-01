@@ -1,4 +1,4 @@
-ipoData = [];
+let ipoData = [];
 let currentStage = 1;
 
 let selectedGrades = ['A', 'B', 'C', 'Pending'];
@@ -619,13 +619,16 @@ async function autoHuntData(ipo) {
 }
 
 // Global Trigger: Run deep hunt on any Stage 3 or 4 IPO missing OS/TP
-function triggerDeepSync() {
+// NOTE: The primary async batch version of triggerDeepSync is defined above (line ~397).
+// This synchronous fallback is kept for non-awaited calls but delegates to the same autoHuntData.
+async function triggerDeepSync() {
     console.log('🔍 Starting Global Deep Sync...');
-    ipoData.forEach(ipo => {
-        if ((ipo.stage === 3 || ipo.stage === 5) && (!ipo.os || !ipo.avgTP)) {
-            autoHuntData(ipo);
-        }
-    });
+    const missing = ipoData.filter(ipo => (ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5) && (!ipo.os || !ipo.avgTP));
+    if (missing.length === 0) return;
+    for (let i = 0; i < missing.length; i += 3) {
+        const batch = missing.slice(i, i + 3);
+        await Promise.all(batch.map(ipo => autoHuntData(ipo)));
+    }
 }
 
 // Robust date parser - handles all formats from iSaham and data.js
@@ -667,7 +670,8 @@ function autoPromoteIPOs(finalData) {
         // Skip auto-promotion for entries manually withdrawn from MITI
         if (ipo.mitiWithdrawn) return;
         
-        if (ipo.year && ipo.year < 2026) {
+        // Only auto-promote to Listed for past years if not explicitly withdrawn/cancelled
+        if (ipo.year && ipo.year < 2026 && !ipo.mitiWithdrawn && ipo.stage !== 0) {
             ipo.stage = 5;
             ipo.status = 'Listed';
         }
@@ -940,7 +944,7 @@ function getIpoGrade(ipo) {
         
         if (effectiveStage === 5 && !hasOsData && isStrongGreen) {
             if ((isTopTier || isMomentum) && !isHighPE) return { grade: 'A', reason: '<b>Momentum Setup:</b><br>✅ Strong Open<br>📊 Healthy Valuation' };
-            if (pe > 0 && pe < 15 && isStrongGreen) return { grade: 'A', reason: '<b>Value Pick:</b><br>💎 Low PE (${pe}x)<br>🚀 Strong Momentum' };
+            if (pe > 0 && pe < 15 && isStrongGreen) return { grade: 'A', reason: `<b>Value Pick:</b><br>💎 Low PE (${pe}x)<br>🚀 Strong Momentum` };
         }
         
         if (isHighPE && isRed) return { grade: 'C', reason: '<b>High Risk:</b><br>❌ Expensive Valuation<br>📉 Negative Performance' };
@@ -1141,7 +1145,7 @@ function renderIPOs(stage) {
     // Update tab counts whenever we render
     if (ipoData.length > 0) updateTabCounts();
 
-    setTimeout(() => {
+    setTimeout(() => { // minimal delay for UI repaint
         try {
             const stageNum = parseInt(currentStage || stage || 1);
             const filtered = ipoData.filter(ipo => ipo.stage === stageNum);
@@ -1173,9 +1177,11 @@ function renderIPOs(stage) {
 
             if (currentSearch) {
                 const searchLower = currentSearch.toLowerCase();
-                displayData = displayData.filter(ipo => 
-                    ipo.companyName.toLowerCase().includes(searchLower) || 
-                    ipo.sector.toLowerCase().includes(searchLower)
+                displayData = displayData.filter(ipo =>
+                    (ipo.companyName || '').toLowerCase().includes(searchLower) ||
+                    (ipo.sector || '').toLowerCase().includes(searchLower) ||
+                    (ipo.symbol || '').toLowerCase().includes(searchLower) ||
+                    (ipo.ib || '').toLowerCase().includes(searchLower)
                 );
             }
 
@@ -1255,7 +1261,7 @@ function renderIPOs(stage) {
                 </div>
             `;
         }
-    }, 400);
+    }, 50); // reduced from 400ms — data is already in memory, no need for long delay
 }
 
 // IPO count display
@@ -1399,7 +1405,7 @@ function renderTodayActionRadar() {
                         market: ipo.market,
                         shariah: ipo.shariah,
                         sub: `Harga Debut: <strong style="color:#c084fc;">${openPriceStr}</strong> (vs IPO: RM ${ipo.price ? ipo.price.toFixed(2) : '-'}) ${perfStr ? '· <span style="color:' + (perfStr.includes('-') ? '#f87171' : '#34d399') + ';font-weight:700;">' + perfStr + '</span>' : ''}`,
-                        extra: `OS: ${ipo.os ? ipo.os + 'x' : '—'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        extra: `OS: ${ipo.os ? ipo.os + 'x' : '—'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
                         stage: 5,
                         id: ipo.id
                     });
@@ -1433,7 +1439,7 @@ function renderTodayActionRadar() {
                         market: ipo.market,
                         shariah: ipo.shariah,
                         sub: `Harga IPO: <strong style="color:#38bdf8;">RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'}</strong> · Tutup: <strong>${ipo.closingDate || 'TBA'}</strong>`,
-                        extra: `Penaja: ${ipo.ib ? ipo.ib.split(',')[0].trim() : '—'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        extra: `Penaja: ${ipo.ib ? ipo.ib.split(',')[0].trim() : '—'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
                         stage: 3,
                         id: ipo.id
                     });
@@ -1455,7 +1461,7 @@ function renderTodayActionRadar() {
                         market: ipo.market,
                         shariah: ipo.shariah,
                         sub: `Hari Terakhir Langganan Awam! Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
-                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
                         stage: 3,
                         id: ipo.id
                     });
@@ -1468,7 +1474,7 @@ function renderTodayActionRadar() {
                         market: ipo.market,
                         shariah: ipo.shariah,
                         sub: `Tamat: <strong>${ipo.closingDate} (5:00 PM)</strong> · Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
-                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
                         stage: 3,
                         id: ipo.id
                     });
