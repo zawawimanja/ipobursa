@@ -478,30 +478,33 @@ async function runMasterSync(btn) {
     
     for (const id of stages) {
         const item = document.getElementById(id);
-        item.querySelector('.status-label').innerText = 'Syncing...';
+        if (!item) continue;
+        item.querySelector('.status-label').innerText = 'Running...';
         item.querySelector('.progress').style.width = '50%';
         item.querySelector('.progress').style.background = '#6366f1';
         
-        // Small delay to feel real
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 600));
         
         if (id === 'sync-deep') {
+            // Only triggerDeepSync is useful — it reads isaham API via backend
             await triggerDeepSync();
+            item.querySelector('.status-label').innerText = 'Done';
+            item.querySelector('.progress').style.width = '100%';
+            item.querySelector('.progress').style.background = '#10b981';
         } else {
-            await fetchLiveUpdates();
+            // iSaham scrape is blocked by Cloudflare — mark as offline, don't pretend it worked
+            item.querySelector('.status-label').innerText = 'Offline (data dari data.js)';
+            item.querySelector('.progress').style.width = '100%';
+            item.querySelector('.progress').style.background = '#f59e0b';
         }
-
-        item.querySelector('.status-label').innerText = 'Completed';
-        item.querySelector('.progress').style.width = '100%';
-        item.querySelector('.progress').style.background = '#10b981';
     }
 
-    btn.innerHTML = `<i data-lucide="check-circle"></i> Sync Complete!`;
+    btn.innerHTML = `<i data-lucide="check-circle"></i> Sync Selesai (Data dari data.js)`;
     setTimeout(() => {
         btn.disabled = false;
         btn.innerHTML = `<i data-lucide="zap"></i> Start Full Online Sync`;
         if(typeof lucide !== 'undefined') lucide.createIcons();
-    }, 3000);
+    }, 4000);
 }
 
 async function autoHuntData(ipo) {

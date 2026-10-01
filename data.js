@@ -9571,7 +9571,7 @@ const IPO_DATA = [
   {
     "id": "gb-bond-holdings-berhad",
     "companyName": "GB Bond Holdings Berhad",
-    "symbol": "GB Bond Holdings Berhad",
+    "symbol": "GBBOND",
     "market": "ACE Market",
     "price": 0.25,
     "closingDate": "18-Sep-2026",
@@ -9582,12 +9582,12 @@ const IPO_DATA = [
     "year": 2026,
     "sector": "Industrial Products & Services (Chemicals)",
     "geography": "Penang",
-    "predictedGrade": "B",
+    "predictedGrade": "C",
     "sifuTargetPrice": 0.3,
     "calibratedSifuTargetPrice": 0.3,
     "v3TargetPrice": 0.3,
     "zone2TargetPrice": 0.3,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Industrial Adhesives:</b> Manufacturer of polymers & sealants backed by Malacca Securities.<br>• <b>Strong Growth:</b> Adjusted PAT expanded +62.3% YoY with attractive 12.6x P/E valuation.<br>• <b>Bumi Allocation:</b> Shariah-compliant MITI tranche open with solid earnings track record.",
+    "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing 1 Oct 2026:</b> Open RM0.255 (+2%) tapi terus jatuh sepanjang hari.<br>• <b>Close RM0.225 (-10%)</b> — selling pressure kuat, OS 8.22x tidak mencukupi.<br>• <b>Industrial Chemicals:</b> Sektor tiada momentum — skip listing day, tunggu support level.",
     "mitiOpenDate": "01-Jul-2026",
     "mitiCloseDate": "10-Jul-2026",
     "ib": "Malacca Securities",
@@ -9596,7 +9596,12 @@ const IPO_DATA = [
     "insightUrl": "https://www.isaham.my/ipo/insights/gb-bond-holdings-berhad",
     "openingDate": "09-Sep-2026",
     "ballotingDate": "22-Sep-2026",
-    "os": 8.22
+    "os": 8.22,
+    "openPrice": 0.255,
+    "highPrice": 0.255,
+    "lowPrice": 0.225,
+    "closePrice": 0.225,
+    "performance": "red"
   },
   {
     "id": "redplanet-berhad",
