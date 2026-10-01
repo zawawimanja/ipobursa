@@ -287,8 +287,12 @@
         "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Industrial Adhesives:</b> Manufacturer of polymers & sealants backed by Malacca Securities.<br>• <b>Strong Growth:</b> Adjusted PAT expanded +62.3% YoY with attractive 12.6x P/E valuation.<br>• <b>Bumi Allocation:</b> Shariah-compliant MITI tranche open with solid earnings track record.",
         "price": 0.25,
         "os": 8.22,
-        "stage": 4,
-        "status": "Pre-Listing"
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "09-Sep-2026",
+        "closingDate": "18-Sep-2026",
+        "listingDate": "01-Oct-2026",
+        "symbol": "GB Bond Holdings Berhad"
     },
     "spb-development-berhad": {
         "mitiOpenDate": "01-Jul-2026",
