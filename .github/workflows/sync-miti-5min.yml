@@ -1,11 +1,15 @@
-name: Sync MITI Applicants (5 min)
+name: Sync MITI Applicants (Scheduled)
 
 on:
   schedule:
-    # Setiap 5 minit, 7 hari seminggu (pemohon boleh apply walau hujung minggu/cuti —
-    # nombor sentiasa berubah sepanjang masa).
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual click run
+    # Berjalan setiap 2 jam waktu pasaran MYT (00:00, 02:00, 04:00, 06:00, 08:00, 10:00 UTC)
+    # Jimat kuota percuma GitHub Actions (2000 minit/bulan) daripada terbakar setiap 5 minit
+    - cron: '0 0-10/2 * * 1-5'
+  workflow_dispatch: # Boleh klik bila-bila masa secara manual
+
+concurrency:
+  group: git-repo-sync
+  cancel-in-progress: false
 
 jobs:
   sync-miti:
@@ -15,10 +19,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -36,8 +40,7 @@ jobs:
           MITI_PASSWORD: ${{ secrets.MITI_PASSWORD }}
         run: |
           # Login portal SahamOnline MITI terus (kredential dari secrets) —
-          # update "Jumlah Pelabur Mohon Saham" + "Jumlah Tawaran Saham".
-          # Tiada cookies Chrome, tiada CAPTCHA, laptop tak perlu on.
+          # update tarikh tawaran MITI. Tiada cookies Chrome, laptop tak perlu on.
           node scratch/sync-miti-applicants-login.js --no-push
         continue-on-error: true
 

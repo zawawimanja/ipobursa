@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const { normalizeName, isSafeFuzzyMatch, isJunkCompanyName, toDisplayDate } = require('./lib/ipo-utils');
 
 // Load .env manually if exists to protect credentials
 const envPath = path.join(__dirname, '.env');
@@ -127,12 +128,7 @@ function loadIsahamCookies() {
     return null;
 }
 
-function normalizeName(name) {
-    return name.toLowerCase()
-        .replace(/berhad|bhd|group|holdings|corp/g, '')
-        .replace(/[^a-z0-9]/g, '')
-        .trim();
-}
+// normalizeName / isSafeFuzzyMatch / isJunkCompanyName → lib/ipo-utils.js
 
 
 function findExistingIPO(name, existingData) {
@@ -177,11 +173,9 @@ function findExistingIPO(name, existingData) {
     const exactNormalizeMatch = existingData.find(d => normalizeName(d.companyName) === normName);
     if (exactNormalizeMatch) return exactNormalizeMatch;
     
-    // Fallback to fuzzy normalize match
-    return existingData.find(d => {
-        const normExisting = normalizeName(d.companyName);
-        return normExisting.includes(normName) || normName.includes(normExisting);
-    });
+    // Fallback to fuzzy normalize match (min 5 aksara kedua-dua belah — elak
+    // nama pendek/generik seperti "Company" menelan IPO lain)
+    return existingData.find(d => isSafeFuzzyMatch(normalizeName(d.companyName), normName));
 }
 
 async function fetchPage(url) {
@@ -364,6 +358,7 @@ async function scrapeUpcomingIPOs(existingData) {
         const parts = titleText.split('|');
         const symbol = parts[0].trim();
         const companyName = parts[1] ? parts[1].trim() : symbol;
+        if (isJunkCompanyName(companyName)) return;
 
         let market = '', price = 0, closingDate = '', listingDate = '', shariah = false;
         $(el).find('span.font-weight-bold').each((_, span) => {
@@ -371,8 +366,8 @@ async function scrapeUpcomingIPOs(existingData) {
             const val = $(span).next('span').text().trim();
             if (label === 'market:') market = val;
             if (label.includes('listing price')) price = parseFloat(val.replace('RM', '').trim()) || 0;
-            if (label.includes('closing date')) closingDate = val;
-            if (label.includes('listing date')) listingDate = val;
+            if (label.includes('closing date')) closingDate = toDisplayDate(val) || val;
+            if (label.includes('listing date')) listingDate = toDisplayDate(val) || val;
             if (label.includes('shariah')) shariah = val.toLowerCase().includes('yes');
         });
 
@@ -444,8 +439,9 @@ async function scrapeMitiAndDraftIPOs(existingData) {
         } else if (tagName === 'h5') {
             if (!currentSection) return; // Ignore h5s outside the IPO sections
 
-            // It's a company name
+            // It's a company name (abaikan heading generik seperti "Features"/"Others")
             const companyName = text;
+            if (isJunkCompanyName(companyName)) return;
             
             // Look ahead for details
             let nextElem = $(el).next();

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { isJunkCompanyName } = require('./lib/ipo-utils');
 
 const dataFilePath = path.join(__dirname, 'data.json');
 const ipoDir = path.join(__dirname, 'ipo');
@@ -50,6 +51,7 @@ const slugMap = new Map();
 const generatedPages = [];
 
 ipos.forEach((ipo, index) => {
+    if (isJunkCompanyName(ipo.companyName) || isJunkCompanyName(ipo.id)) return;
     let baseSlug = sanitizeSlug(ipo.id || ipo.symbol || ipo.companyName || `ipo-${index}`);
     if (!baseSlug) baseSlug = `ipo-${index + 1}`;
     
@@ -128,6 +130,8 @@ const megaFooterHtml = `
 `;
 
 ipos.forEach((ipo) => {
+    if (!ipo._slug) return;
+    if (isJunkCompanyName(ipo.companyName) || isJunkCompanyName(ipo.id)) return;
     const slug = ipo._slug;
     const companyName = ipo.companyName || 'Bursa IPO Candidate';
     const symbol = ipo.symbol || '-';

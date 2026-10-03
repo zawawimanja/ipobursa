@@ -7,6 +7,10 @@ on:
     - cron: '0 0,1,2,3,4,5,6,7,8,9 * * 1-5'
   workflow_dispatch: # Allows manual click run
 
+concurrency:
+  group: git-repo-sync
+  cancel-in-progress: false
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -15,15 +19,26 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
           
       - name: Install dependencies
         run: npm ci
+
+      - name: Sync iSaham (API rasmi, dihadkan 1x sehari untuk jimat kredit)
+        env:
+          ISAHAM_API_TOKEN: ${{ secrets.ISAHAM_API_TOKEN }}
+        run: |
+          if [ -n "$ISAHAM_API_TOKEN" ]; then
+            node sync-isaham-api.js --no-push
+          else
+            echo "ℹ️ ISAHAM_API_TOKEN tidak ditetapkan dalam GitHub Secrets — langkau."
+          fi
+        continue-on-error: true
 
       - name: Sync Public IPO Prospectuses & Timetables (KLSE Screener)
         run: |
@@ -47,16 +62,11 @@ jobs:
           MITI_USERNAME: ${{ secrets.MITI_USERNAME }}
           MITI_PASSWORD: ${{ secrets.MITI_PASSWORD }}
         run: |
-          # Login portal SahamOnline MITI terus (kredential dari secrets) —
-          # update "Jumlah Pelabur Mohon Saham" + "Jumlah Tawaran Saham" 3x sehari.
-          # Tiada cookies Chrome, tiada CAPTCHA, laptop tak perlu on.
           node scratch/sync-miti-applicants-login.js --no-push
         continue-on-error: true
 
       - name: Sync Shariah Status (senarai rasmi SC)
         run: |
-          # Auto-sync status shariah dari senarai rasmi Securities Commission
-          # (Compliant / Non-Compliant) — padan ikut nama syarikat.
           node sync-shariah.js --no-push
         continue-on-error: true
 
@@ -64,5 +74,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json data.js data_export.js overrides.json archive/
+          git add data.json data.js data_export.js overrides.json sync-status.js isaham-api-status.json archive/
           git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git pull --rebase origin main && git push)

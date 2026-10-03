@@ -1992,24 +1992,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://www.ipobursa.my/ipo/features.html</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ipobursa.my/ipo/others.html</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ipobursa.my/ipo/company.html</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+
   <url>
     <loc>https://www.ipobursa.my/ipo/scgm-bhd.html</loc>
     <lastmod>2026-09-07</lastmod>

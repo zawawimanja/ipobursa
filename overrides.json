@@ -812,8 +812,8 @@
         "price": 0.25
     },
     "thmy": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 5,
+        "status": "Listed",
         "price": 0.31
     },
     "cheeding": {
@@ -905,11 +905,11 @@
         "price": 1.08
     },
     "paradigm--ns-": {
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "openingDate": "16-May-2025",
         "closingDate": "23-May-2025",
-        "listingDate": "2025-06-10",
+        "listingDate": "10-Jun-2025",
         "price": 1
     },
     "hkb": {

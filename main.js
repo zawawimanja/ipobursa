@@ -636,21 +636,39 @@ async function triggerDeepSync() {
 
 // Robust date parser - handles all formats from iSaham and data.js
 // "08-May-2026", "13-Feb-2026", "2026-05-08", "08 May 2026", "06 May", ISO strings
+// Uses integer constructor new Date(y, m, d) to guarantee 100% compatibility across Safari/iOS & Android
 function parseFlexDate(str) {
     if (!str) return null;
-    // Already a valid ISO/JS date string like "2026-05-08" or "2026-05-08T17:00:00"
-    const iso = new Date(str);
-    if (!isNaN(iso.getTime())) return iso;
+    if (str instanceof Date) return isNaN(str.getTime()) ? null : str;
+    const s = String(str).trim();
+    if (!s) return null;
+    const monthNames = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
+
     // Handle "08-May-2026" or "13-Feb-2026" (DD-MMM-YYYY)
-    const dashMonth = str.match(/^(\d{1,2})-([A-Za-z]+)-(\d{4})$/);
-    if (dashMonth) return new Date(`${dashMonth[2]} ${dashMonth[1]}, ${dashMonth[3]}`);
+    const dashMonth = s.match(/^(\d{1,2})-([A-Za-z]{3})[A-Za-z]*-(\d{4})$/);
+    if (dashMonth) {
+        const m = monthNames[dashMonth[2].toLowerCase().slice(0, 3)];
+        if (m !== undefined) return new Date(+dashMonth[3], m, +dashMonth[1]);
+    }
+    // Handle ISO "2026-05-08" or "2026-05-08T..."
+    const isoMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (isoMatch) {
+        return new Date(+isoMatch[1], +isoMatch[2] - 1, +isoMatch[3]);
+    }
     // Handle "08 May 2026" (DD MMM YYYY) - iSaham format
-    const fullDate = str.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
-    if (fullDate) return new Date(`${fullDate[2]} ${fullDate[1]}, ${fullDate[3]}`);
+    const fullDate = s.match(/^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{4})$/);
+    if (fullDate) {
+        const m = monthNames[fullDate[2].toLowerCase().slice(0, 3)];
+        if (m !== undefined) return new Date(+fullDate[3], m, +fullDate[1]);
+    }
     // Handle "06 May" (no year — assume current year)
-    const shortMonth = str.match(/^(\d{1,2})\s+([A-Za-z]+)$/);
-    if (shortMonth) return new Date(`${shortMonth[2]} ${shortMonth[1]}, ${new Date().getFullYear()}`);
-    return null;
+    const shortMonth = s.match(/^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*$/);
+    if (shortMonth) {
+        const m = monthNames[shortMonth[2].toLowerCase().slice(0, 3)];
+        if (m !== undefined) return new Date(new Date().getFullYear(), m, +shortMonth[1]);
+    }
+    const fallback = new Date(s);
+    return isNaN(fallback.getTime()) ? null : fallback;
 }
 
 function autoPromoteIPOs(finalData) {
@@ -740,8 +758,8 @@ function autoPromoteIPOs(finalData) {
             if (cd && cd >= now) {
                 let openingFuture = false;
                 if (ipo.openingDate) {
-                    const od = new Date(ipo.openingDate);
-                    if (!isNaN(od.getTime())) openingFuture = od > now;
+                    const od = parseFlexDate(ipo.openingDate);
+                    if (od) openingFuture = od > now;
                 }
                 if (!openingFuture) ipo.status = 'Application Open';
             }
@@ -2089,8 +2107,10 @@ function createIPOCard(ipo, index = 0) {
             `;
         }
     } else if (ipo.stage === 3 || ipo.stage === 4) {
-        const closing = ipo.closingDate ? new Date(ipo.closingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : 'TBA';
-        const listing = ipo.listingDate ? (isNaN(new Date(ipo.listingDate).getTime()) ? ipo.listingDate : new Date(ipo.listingDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })) : 'TBA';
+        const cdObj = parseFlexDate(ipo.closingDate);
+        const ldObj = parseFlexDate(ipo.listingDate);
+        const closing = cdObj ? cdObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : (ipo.closingDate || 'TBA');
+        const listing = ldObj ? ldObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : (ipo.listingDate || 'TBA');
         dateDisplay = `
             <div style="font-weight: 600; color: var(--text-main); font-size: 0.8rem;">Last Date: ${closing}</div>
             <div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Listing: ${listing}</div>
@@ -2779,9 +2799,9 @@ function syncHunterProCalculator() {
     // Estimate days: closingDate to listingDate
     let days = 15;
     if (ipo.closingDate && ipo.listingDate) {
-        const start = new Date(ipo.closingDate);
-        const end = new Date(ipo.listingDate);
-        if (!isNaN(start) && !isNaN(end)) {
+        const start = parseFlexDate(ipo.closingDate);
+        const end = parseFlexDate(ipo.listingDate);
+        if (start && end) {
             days = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)));
         }
     }

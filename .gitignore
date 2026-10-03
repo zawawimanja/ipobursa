@@ -16,3 +16,7 @@ scratch/.isaham-profile/
 scratch/isaham-cache/
 scratch/isaham-cookies.json
 scratch/miti-cookies.json
+
+# Temporary audit dumps & override backups
+audit-*.txt
+overrides_*.json

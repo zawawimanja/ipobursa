@@ -4,10 +4,29 @@
 const axios = require('axios');
 const ipRequests = new Map(); // Store: IP -> { count, resetTime }
 
+const ALLOWED_MODELS = new Set([
+    'llama-3.3-70b-versatile',
+    'llama-3.1-8b-instant'
+]);
+
+function isAllowedOrigin(originStr) {
+    if (!originStr) return true; // Direct/same-origin
+    try {
+        const u = new URL(originStr);
+        const host = u.hostname.toLowerCase();
+        if (host === 'localhost' || host === '127.0.0.1') return true;
+        if (host === 'ipobursa.my' || host.endsWith('.ipobursa.my')) return true;
+        if (host.endsWith('.vercel.app')) return true;
+        return false;
+    } catch (e) {
+        return false;
+    }
+}
+
 function isRateLimited(ip) {
     const now = Date.now();
     const limitPeriod = 5 * 60 * 1000; // 5 minutes
-    const maxRequests = 10; // max 10 requests per 5 minutes
+    const maxRequests = 15; // max 15 requests per 5 minutes
 
     // Prune old entries to prevent memory growth
     for (const [key, val] of ipRequests.entries()) {
@@ -41,13 +60,25 @@ function isRateLimited(ip) {
 }
 
 module.exports = async (req, res) => {
+    const origin = req.headers.origin || req.headers.referer || '';
+
+    // Check allowed origins
+    if (origin && !isAllowedOrigin(origin)) {
+        console.warn(`Blocked unauthorized origin: ${origin}`);
+        return res.status(403).json({ error: 'Forbidden origin.' });
+    }
+
+    const allowHeaderOrigin = origin && isAllowedOrigin(origin) ? req.headers.origin || '*' : '*';
+
     // Handle CORS preflight
     if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Origin', allowHeaderOrigin);
         res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         return res.status(200).end();
     }
+
+    res.setHeader('Access-Control-Allow-Origin', allowHeaderOrigin);
 
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -58,8 +89,12 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'API key not configured on server.' });
     }
 
-    // IP-based Rate Limiter (Max 10 requests per 5 minutes)
-    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'anonymous';
+    // IP-based Rate Limiter
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : '') ||
+               req.socket?.remoteAddress ||
+               'anonymous';
+
     if (isRateLimited(ip)) {
         console.warn(`Rate limit triggered for IP: ${ip}`);
         return res.status(429).json({ error: 'Too many requests. Please wait 5 minutes.' });
@@ -74,12 +109,21 @@ module.exports = async (req, res) => {
         if (!body || typeof body !== 'object') body = {};
 
         const { prompt, systemPrompt, model, temperature, max_tokens } = body;
-        if (!prompt) return res.status(400).json({ error: 'No prompt provided.' });
+        if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
+            return res.status(400).json({ error: 'No prompt provided.' });
+        }
 
-        const selectedModel = model || 'llama-3.3-70b-versatile';
-        const systemInstruction = systemPrompt || 'You are Hunter AI, a professional Malaysian IPO assistant.';
-        const maxTokens = max_tokens || 1024;
-        const temp = typeof temperature === 'number' ? temperature : 0.7;
+        if (prompt.length > 8000) {
+            return res.status(400).json({ error: 'Prompt too long (max 8000 characters).' });
+        }
+
+        // Enforce strict whitelisting & limits
+        const selectedModel = ALLOWED_MODELS.has(model) ? model : 'llama-3.1-8b-instant';
+        const systemInstruction = (typeof systemPrompt === 'string' && systemPrompt.trim())
+            ? systemPrompt.slice(0, 3000)
+            : 'You are Hunter AI, a professional Malaysian IPO assistant.';
+        const maxTokens = Math.min(Math.max(16, parseInt(max_tokens, 10) || 512), 1024);
+        const temp = Math.min(Math.max(0.0, typeof temperature === 'number' ? temperature : 0.7), 1.0);
 
         const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
             model: selectedModel,
@@ -93,7 +137,8 @@ module.exports = async (req, res) => {
             headers: {
                 'Authorization': `Bearer ${GROQ_KEY}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: 25000
         });
 
         const text = response.data?.choices?.[0]?.message?.content || '';
