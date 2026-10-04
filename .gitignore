@@ -20,3 +20,6 @@ scratch/miti-cookies.json
 # Temporary audit dumps & override backups
 audit-*.txt
 overrides_*.json
+scratch/*.pdf
+scratch/*.html
+scratch/temp_*.js

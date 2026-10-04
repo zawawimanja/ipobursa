@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const csvPath = path.join(__dirname, '../IPO_Graded_Results.csv');
+const csvPath = fs.existsSync(path.join(__dirname, '../archive/IPO_Graded_Results.csv'))
+    ? path.join(__dirname, '../archive/IPO_Graded_Results.csv')
+    : path.join(__dirname, '../IPO_Graded_Results.csv');
 if (!fs.existsSync(csvPath)) {
     console.error("❌ IPO_Graded_Results.csv not found!");
     process.exit(1);
