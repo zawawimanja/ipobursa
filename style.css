@@ -257,6 +257,110 @@ h3,
     filter: brightness(1.1);
 }
 
+/* Nav Dropdown */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown-btn {
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-dropdown-btn .dropdown-chevron {
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover .dropdown-chevron,
+.nav-dropdown.active .dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 250px;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.85rem;
+    padding: 0.5rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.15);
+    z-index: 1000;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.active .nav-dropdown-menu {
+    display: block;
+    animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    color: var(--text-dim) !important;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: white !important;
+    transform: translateX(3px);
+}
+
+.nav-dropdown-menu a i,
+.nav-dropdown-menu a svg {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-light);
+    flex-shrink: 0;
+}
+
+.dropdown-title {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: white;
+}
+
+.dropdown-desc {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 1px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0.35rem 0.5rem;
+}
+
 .hero-cta {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;

@@ -1052,5 +1052,21 @@
         "performance": "red",
         "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
         "os": 8.22
+    },
+    "slgc-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "SLG",
+        "ib": "M & A Securities",
+        "predictedGrade": "C",
+        "openPrice": 0.28,
+        "highPrice": 0.28,
+        "lowPrice": 0.24,
+        "closePrice": 0.25,
+        "currentPrice": 0.25,
+        "performance": "red",
+        "dailyChange": -10.71,
+        "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
+        "os": 3.06
     }
 }
