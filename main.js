@@ -1205,6 +1205,13 @@ function getGlobalMarketSentiment() {
     // Get listed Stage 5 IPOs with performance data
     const listed = rawData.filter(i => i.stage === 5 && (i.openPrice || i.currentPrice || i.performance || i.price));
     
+    // Sort to get the most recent listed IPOs first
+    listed.sort((a, b) => {
+        const dateA = a.listingDate ? (parseFlexDate(a.listingDate) || new Date(0)).getTime() : 0;
+        const dateB = b.listingDate ? (parseFlexDate(b.listingDate) || new Date(0)).getTime() : 0;
+        return dateB - dateA;
+    });
+
     // Take the 5 most recent listed IPOs
     const recent = listed.slice(0, 5);
     
