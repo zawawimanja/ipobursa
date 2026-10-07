@@ -29,6 +29,8 @@ function initializeData() {
 
         // Today's Action Radar & Event Hub (Live events today + upcoming timeline)
         renderTodayActionRadar();
+        // Market Sentiment Widget
+        renderMarketSentimentWidget();
         // MITI countdown strip on the main tracker (live ticking)
         renderMitiCountdownStrip();
         // Public IPO countdown strip on the main tracker (live ticking)
@@ -45,6 +47,7 @@ function initializeData() {
                     renderIPOs(currentStage);
                 }
                 renderTodayActionRadar();
+                renderMarketSentimentWidget();
                 renderMitiCountdownStrip();
                 renderPublicCountdownStrip();
             }, 60000); // full re-render every minute
@@ -1195,7 +1198,165 @@ function getBoomPrediction(ipo) {
 
     return { score, label, color, isPreliminary: os === 0 };
 }
-function isIpoOpen(ipo) {
+
+function getGlobalMarketSentiment() {
+    const rawData = (typeof ipoData !== 'undefined' && Array.isArray(ipoData) && ipoData.length > 0) ? ipoData : (typeof IPO_DATA !== 'undefined' ? IPO_DATA : []);
+    
+    // Get listed Stage 5 IPOs with performance data
+    const listed = rawData.filter(i => i.stage === 5 && (i.openPrice || i.currentPrice || i.performance || i.price));
+    
+    // Take the 5 most recent listed IPOs
+    const recent = listed.slice(0, 5);
+    
+    let redCount = 0;
+    let greenCount = 0;
+
+    recent.forEach(ipo => {
+        let openPerf = 0;
+        if (ipo.openPrice && ipo.price) {
+            openPerf = ((ipo.openPrice - ipo.price) / ipo.price) * 100;
+        } else if (typeof ipo.performance === 'string') {
+            openPerf = parseFloat(ipo.performance.replace('%', '')) || 0;
+        }
+
+        let holdPerf = openPerf;
+        if (ipo.currentPrice && ipo.price) {
+            holdPerf = ((ipo.currentPrice - ipo.price) / ipo.price) * 100;
+        }
+
+        if (openPerf < -0.5 || holdPerf < -2.0) {
+            redCount++;
+        } else if (openPerf > 0.5 || holdPerf > 2.0) {
+            greenCount++;
+        }
+    });
+
+    const total = recent.length || 1;
+    const redRatio = redCount / total;
+    const greenRatio = greenCount / total;
+
+    if (redCount >= 3 || redRatio >= 0.5) {
+        return {
+            status: 'bearish',
+            label: 'SEJUK / CAUTIOUS ❄️🔴',
+            color: '#ef4444',
+            bg: 'rgba(239, 68, 68, 0.12)',
+            border: 'rgba(239, 68, 68, 0.35)',
+            summary: `<strong>Sentimen Sejuk:</strong> ${redCount} daripada ${total} IPO terkini dibuka MERAH. Amalkan pengurusan risiko tinggi untuk kaunter OS rendah.`,
+            redCount,
+            greenCount,
+            total
+        };
+    } else if (greenCount >= 3 || greenRatio >= 0.5) {
+        return {
+            status: 'bullish',
+            label: 'PANAS / BULLISH 🔥🟢',
+            color: '#10b981',
+            bg: 'rgba(16, 185, 129, 0.12)',
+            border: 'rgba(16, 185, 129, 0.35)',
+            summary: `<strong>Sentimen Panas:</strong> ${greenCount} daripada ${total} IPO terkini dibuka HIJAU. High retail appetite di pasaran.`,
+            redCount,
+            greenCount,
+            total
+        };
+    } else {
+        return {
+            status: 'neutral',
+            label: 'SEDERHANA / NEUTRAL ⚖️🟡',
+            color: '#f59e0b',
+            bg: 'rgba(245, 158, 11, 0.12)',
+            border: 'rgba(245, 158, 11, 0.35)',
+            summary: `<strong>Sentimen Sederhana:</strong> Prestasi IPO bercampur (${greenCount} Hijau, ${redCount} Merah). Utamakan penilaian FA & penaja IB.`,
+            redCount,
+            greenCount,
+            total
+        };
+    }
+}
+
+function renderMarketSentimentWidget() {
+    const container = document.getElementById('market-sentiment-container');
+    if (!container) return;
+    
+    const sent = getGlobalMarketSentiment();
+    
+    container.innerHTML = `
+        <div class="glass-card" style="padding: 0.75rem 1.1rem; border: 1px solid ${sent.border}; background: ${sent.bg}; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="font-size: 1.5rem; line-height: 1;">
+                    ${sent.status === 'bearish' ? '❄️' : (sent.status === 'bullish' ? '🔥' : '⚖️')}
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; font-weight: 800; color: ${sent.color}; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.4rem;">
+                        <span>STATUS PASARAN IPO: ${sent.label}</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #e2e8f0; margin-top: 0.15rem; font-weight: 500;">
+                        ${sent.summary}
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; background: rgba(0,0,0,0.35); padding: 0.4rem 0.85rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                <span style="color: #cbd5e1; font-weight: 600;">5 Debut Terkini:</span>
+                <span style="color: #ef4444; font-weight: 700;">🔴 ${sent.redCount} Merah</span>
+                <span style="color: #64748b;">|</span>
+                <span style="color: #10b981; font-weight: 700;">🟢 ${sent.greenCount} Hijau</span>
+            </div>
+        </div>
+    `;
+}
+
+function getIpoSentimentBadge(ipo) {
+    const os = ipo.os || ipo.oversubscription || 0;
+    const globalSent = getGlobalMarketSentiment();
+    
+    let label = '';
+    let bg = '';
+    let color = '';
+    let border = '';
+
+    if (os >= 100) {
+        label = \`🔥 Extreme FOMO (\${os.toFixed(1)}x)\`;
+        bg = 'rgba(239, 68, 68, 0.15)';
+        color = '#f87171';
+        border = 'rgba(239, 68, 68, 0.35)';
+    } else if (os >= 30) {
+        label = \`⚡ High Demand (\${os.toFixed(1)}x)\`;
+        bg = 'rgba(245, 158, 11, 0.15)';
+        color = '#fbbf24';
+        border = 'rgba(245, 158, 11, 0.35)';
+    } else if (os >= 15) {
+        label = \`👍 Sederhana (\${os.toFixed(1)}x)\`;
+        bg = 'rgba(59, 130, 246, 0.15)';
+        color = '#60a5fa';
+        border = 'rgba(59, 130, 246, 0.35)';
+    } else if (os > 0 && os < 15) {
+        if (globalSent.status === 'bearish') {
+            label = \`❄️ OS Lemah (\${os.toFixed(1)}x) + Drag ⚠️\`;
+            bg = 'rgba(239, 68, 68, 0.2)';
+            color = '#fca5a5';
+            border = 'rgba(239, 68, 68, 0.4)';
+        } else {
+            label = \`❄️ Minat Rendah (\${os.toFixed(1)}x)\`;
+            bg = 'rgba(148, 163, 184, 0.15)';
+            color = '#94a3b8';
+            border = 'rgba(148, 163, 184, 0.3)';
+        }
+    } else {
+        if (globalSent.status === 'bearish') {
+            label = \`⏳ Pending OS (Pasaran Sejuk ❄️)\`;
+            bg = 'rgba(168, 85, 247, 0.12)';
+            color = '#c084fc';
+            border = 'rgba(168, 85, 247, 0.3)';
+        } else {
+            label = \`⏳ Pending OS\`;
+            bg = 'rgba(168, 85, 247, 0.12)';
+            color = '#c084fc';
+            border = 'rgba(168, 85, 247, 0.3)';
+        }
+    }
+
+    return \`<span style="font-size: 0.62rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 4px; background: \${bg}; color: \${color}; border: 1px solid \${border}; display: inline-block; white-space: nowrap; margin-top: 0.3rem;">\${label}</span>\`;
+}
     const today = new Date();
     today.setHours(0,0,0,0);
     if (ipo.mitiWithdrawn) return false;
@@ -2228,6 +2389,7 @@ function createIPOCard(ipo, index = 0) {
                     ${ipo.isAutoOS ? '<i data-lucide="cpu" style="width: 12px; color: #10b981;" title="Auto-Hunted"></i>' : ''}
                 </div>
                 <div style="font-size: 0.65rem; color: var(--text-dim);">Subscription</div>
+                ${getIpoSentimentBadge(ipo)}
             </td>
             <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; white-space: nowrap;">
                 ${(ipo.stage === 5 && ipo.currentPrice) ? `
