@@ -2151,12 +2151,20 @@ function createIPOCard(ipo, index = 0) {
     }
 
     const detailsBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.borderColor='rgba(99, 102, 241, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Details AI</button>`;
+    const sifuBtn = `<a href="sifu-sheets.html?stock=${ipo.id}" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s; text-decoration: none; display: inline-block; color: white;" onmouseover="this.style.background='rgba(245, 158, 11, 0.2)'; this.style.borderColor='rgba(245, 158, 11, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Sifu Sheet</a>`;
+
+    const commonBtns = `
+        <div style="display: flex; gap: 0.4rem; align-items: center;">
+            ${sifuBtn}
+            ${detailsBtn}
+        </div>`;
 
     let actionBtn = '';
     if (ipo.stage === 3) {
         actionBtn = `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <button onclick="alert('Apply via your Online Banking (e-IPO) menu e.g. Maybank2u, CIMB Clicks, etc.')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: none; background: var(--primary);">Apply</button>
+                ${sifuBtn}
                 ${detailsBtn}
             </div>`;
     } else if (ipo.stage === 2) {
@@ -2164,23 +2172,26 @@ function createIPOCard(ipo, index = 0) {
             ? `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <span style="font-size: 0.7rem; color: #f87171; font-weight: 700; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 0.3rem 0.6rem; border-radius: 6px;">WITHDRAWN</span>
+                ${sifuBtn}
                 ${detailsBtn}
             </div>`
             : `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <a href="https://sahamonline.miti.gov.my/" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; text-decoration: none; display: inline-block; background: #059669; border: none;">MITI</a>
+                ${sifuBtn}
                 ${detailsBtn}
             </div>`;
     } else if (ipo.stage === 1) {
-        actionBtn = detailsBtn;
+        actionBtn = commonBtns;
     } else if (ipo.stage === 4) {
-        actionBtn = detailsBtn;
+        actionBtn = commonBtns;
     } else if (ipo.stage === 6) {
-        actionBtn = detailsBtn;
+        actionBtn = commonBtns;
     } else {
         actionBtn = `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <span style="font-size: 0.75rem; color: var(--text-dim); margin-right: 0.25rem;">${getIpoStrategy(ipo)}</span>
+                ${sifuBtn}
                 ${detailsBtn}
             </div>`;
     }
