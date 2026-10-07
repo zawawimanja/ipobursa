@@ -1315,47 +1315,47 @@ function getIpoSentimentBadge(ipo) {
     let border = '';
 
     if (os >= 100) {
-        label = \`🔥 Extreme FOMO (\${os.toFixed(1)}x)\`;
+        label = `🔥 Extreme FOMO (${os.toFixed(1)}x)`;
         bg = 'rgba(239, 68, 68, 0.15)';
         color = '#f87171';
         border = 'rgba(239, 68, 68, 0.35)';
     } else if (os >= 30) {
-        label = \`⚡ High Demand (\${os.toFixed(1)}x)\`;
+        label = `⚡ High Demand (${os.toFixed(1)}x)`;
         bg = 'rgba(245, 158, 11, 0.15)';
         color = '#fbbf24';
         border = 'rgba(245, 158, 11, 0.35)';
     } else if (os >= 15) {
-        label = \`👍 Sederhana (\${os.toFixed(1)}x)\`;
+        label = `👍 Sederhana (${os.toFixed(1)}x)`;
         bg = 'rgba(59, 130, 246, 0.15)';
         color = '#60a5fa';
         border = 'rgba(59, 130, 246, 0.35)';
     } else if (os > 0 && os < 15) {
         if (globalSent.status === 'bearish') {
-            label = \`❄️ OS Lemah (\${os.toFixed(1)}x) + Drag ⚠️\`;
+            label = `❄️ OS Lemah (${os.toFixed(1)}x) + Drag ⚠️`;
             bg = 'rgba(239, 68, 68, 0.2)';
             color = '#fca5a5';
             border = 'rgba(239, 68, 68, 0.4)';
         } else {
-            label = \`❄️ Minat Rendah (\${os.toFixed(1)}x)\`;
+            label = `❄️ Minat Rendah (${os.toFixed(1)}x)`;
             bg = 'rgba(148, 163, 184, 0.15)';
             color = '#94a3b8';
             border = 'rgba(148, 163, 184, 0.3)';
         }
     } else {
         if (globalSent.status === 'bearish') {
-            label = \`⏳ Pending OS (Pasaran Sejuk ❄️)\`;
+            label = `⏳ Pending OS (Pasaran Sejuk ❄️)`;
             bg = 'rgba(168, 85, 247, 0.12)';
             color = '#c084fc';
             border = 'rgba(168, 85, 247, 0.3)';
         } else {
-            label = \`⏳ Pending OS\`;
+            label = `⏳ Pending OS`;
             bg = 'rgba(168, 85, 247, 0.12)';
             color = '#c084fc';
             border = 'rgba(168, 85, 247, 0.3)';
         }
     }
 
-    return \`<span style="font-size: 0.62rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 4px; background: \${bg}; color: \${color}; border: 1px solid \${border}; display: inline-block; white-space: nowrap; margin-top: 0.3rem;">\${label}</span>\`;
+    return `<span style="font-size: 0.62rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 4px; background: ${bg}; color: ${color}; border: 1px solid ${border}; display: inline-block; white-space: nowrap; margin-top: 0.3rem;">${label}</span>`;
 }
     const today = new Date();
     today.setHours(0,0,0,0);
