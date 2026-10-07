@@ -1648,17 +1648,22 @@ function renderTodayActionRadar() {
             const ld = parseFlexDate(ipo.listingDate);
             if (ld) {
                 ld.setHours(0, 0, 0, 0);
-                if (ld.getTime() === today.getTime() || (ipo.stage === 5 && ld.getTime() >= yesterday.getTime() && ld.getTime() <= today.getTime())) {
+                if (ld.getTime() === today.getTime() || (ipo.stage === 5 && ld.getTime() === yesterday.getTime())) {
+                    const isToday = ld.getTime() === today.getTime();
                     const openPriceStr = ipo.openPrice ? `RM ${ipo.openPrice.toFixed(2)}` : (ipo.currentPrice ? `RM ${ipo.currentPrice.toFixed(2)}` : 'Live');
-                    const perfStr = ipo.performance || (getOpenPerformance(ipo) ? (getOpenPerformance(ipo) >= 0 ? '+' : '') + getOpenPerformance(ipo).toFixed(1) + '%' : '');
+                    let perfStr = ipo.performance;
+                    if (typeof perfStr === 'string' && (perfStr.toLowerCase() === 'red' || perfStr.toLowerCase() === 'green')) perfStr = ''; // Handle invalid scraped strings
+                    if (!perfStr && typeof getOpenPerformance === 'function' && getOpenPerformance(ipo)) {
+                        perfStr = (getOpenPerformance(ipo) >= 0 ? '+' : '') + getOpenPerformance(ipo).toFixed(1) + '%';
+                    }
                     todayEvents.push({
                         type: 'listing',
-                        badge: '🚀 DEBUT PENYENARAIAN HARI INI',
+                        badge: isToday ? '🚀 DEBUT PENYENARAIAN HARI INI' : '🚀 BARU DISENARAIKAN SEMALAM',
                         badgeClass: 'listing',
                         title: ipo.companyName,
                         market: ipo.market,
                         shariah: ipo.shariah,
-                        sub: `Harga Debut: <strong style="color:#c084fc;">${openPriceStr}</strong> (vs IPO: RM ${ipo.price ? ipo.price.toFixed(2) : '-'}) ${perfStr ? '· <span style="color:' + (perfStr.includes('-') ? '#f87171' : '#34d399') + ';font-weight:700;">' + perfStr + '</span>' : ''}`,
+                        sub: `Harga Debut: <strong style="color:#c084fc;">${openPriceStr}</strong> (vs IPO: RM ${ipo.price ? ipo.price.toFixed(2) : '-'}) ${perfStr ? '· <span style="color:' + (String(perfStr).includes('-') ? '#f87171' : '#34d399') + ';font-weight:700;">' + perfStr + '</span>' : ''}`,
                         extra: `OS: ${ipo.os ? ipo.os + 'x' : '—'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
                         stage: 5,
                         id: ipo.id
