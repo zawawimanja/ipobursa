@@ -1357,6 +1357,8 @@ function getIpoSentimentBadge(ipo) {
 
     return `<span style="font-size: 0.62rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 4px; background: ${bg}; color: ${color}; border: 1px solid ${border}; display: inline-block; white-space: nowrap; margin-top: 0.3rem;">${label}</span>`;
 }
+
+function isIpoOpen(ipo) {
     const today = new Date();
     today.setHours(0,0,0,0);
     if (ipo.mitiWithdrawn) return false;
