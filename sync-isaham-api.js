@@ -208,8 +208,8 @@ function applyUpcoming(upcoming, data) {
             let initialStatus = 'Draft / Exposure Phase';
             if (closingDate) {
                 const closeDate = toLocalDate(closingDate);
-                closeDate.setHours(23, 59, 59, 999);
-                if (closeDate >= new Date()) {
+                if (closeDate) closeDate.setHours(23, 59, 59, 999);
+                if (closeDate && closeDate >= new Date()) {
                     initialStage = 3;
                     initialStatus = 'Application Open';
                 } else {

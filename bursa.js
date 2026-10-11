@@ -16,7 +16,9 @@ if (!quickMode) {
     //   10 kredit/run × 1 run/hari = 300/bulan. Jangan run 3×/hari.
     // - Selain itu: scrape + cookies Chrome (sync-isaham.js) — 0 kredit.
     // - Fallback rapat: jika API gagal → scrape; jika scrape gagal → data sedia ada.
-    const hour = new Date().getHours();
+    // Jam MYT (bukan waktu server/UTC) — penting supaya window API/scrape tepat
+    // walaupun dijalankan di GitHub Actions (UTC).
+    const hour = parseInt(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', hour12: false }), 10);
     const apiWindow = hour < 11; // 08:45 = window API; 13:00/17:30 = scrape
 
     if (apiWindow) {

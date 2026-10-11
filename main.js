@@ -397,18 +397,8 @@ toast.style.transform = 'translateY(0)';
     }, 5000);
 }
 
-async function triggerDeepSync() {
-    const missing = ipoData.filter(ipo => ipo.stage >= 3 && (!ipo.os || !ipo.avgTP));
-    if (missing.length === 0) return;
-    
-    console.log(`Deep Hunter: Probing ${missing.length} IPOs for missing data...`);
-    
-    // Process in batches of 3 to avoid rate limiting
-    for (let i = 0; i < missing.length; i += 3) {
-        const batch = missing.slice(i, i + 3);
-        await Promise.all(batch.map(ipo => autoHuntData(ipo)));
-    }
-}
+// NOTE: Definisi asal triggerDeepSync (stage >= 3, tanpa stage 5) telah dibuang kerana
+// ia diduplikasi dan ditimpa oleh versi lengkap di bawah (yang merangkumi stage 5).
 
 // --- SYNC HUB UI ---
 function openSyncHub() {
