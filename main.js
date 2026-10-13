@@ -513,6 +513,7 @@ function openSyncHub() {
                     </div>
                     <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
                 </div>
+                <div id="deep-hunt-notice" style="display:none; margin-top: 0.5rem; padding: 0.6rem 0.8rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 6px; font-size: 0.78rem; color: #fca5a5;"></div>
             </div>
 
             <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 1rem; border-radius: 0.75rem; font-size: 0.85rem; color: #f59e0b; margin-bottom: 2rem;">
@@ -569,15 +570,19 @@ async function runMasterSync(btn) {
 
 async function autoHuntData(ipo) {
     if (!ipo.companyName) return;
-    
-    const proxy = 'https://api.allorigins.win/get?url=';
+
+    // B5: dual proxy - allorigins.win sebagai utama, corsproxy.io sebagai fallback
+    const PROXIES = [
+        { url: 'https://api.allorigins.win/get?url=', extract: j => j && j.contents },
+        { url: 'https://corsproxy.io/?url=',          extract: j => typeof j === 'string' ? j : null }
+    ];
     const fullSlug = ipo.companyName.toLowerCase()
         .replace(/[^a-z0-9\s-]/g, '')
         .trim()
         .replace(/\s+/g, '-');
     const stem = ipo.companyName.toLowerCase().replace(/berhad|bhd|group|holdings/g, '').trim().replace(/\s+/g, '-');
     const ticker = ipo.symbol ? ipo.symbol.toLowerCase() : stem;
-    
+
     const urls = [
         `https://www.isaham.my/ipo/insights/${fullSlug}`,
         `https://www.isaham.my/ipo-insights/${fullSlug}`,
@@ -587,30 +592,36 @@ async function autoHuntData(ipo) {
         `https://www.isaham.my/stock/${ticker}/insights`,
         `https://www.isaham.my/ipo/${ticker}`
     ];
-    
-    console.log(`🚀 Deep Hunter probing for ${ipo.companyName}...`);
-    
-    for (const url of urls) {
-        try {
-            const res = await fetch(proxy + encodeURIComponent(url));
-            const json = await res.json();
-            if (!json.contents) continue;
 
-            const html = json.contents;
+    console.log('Deep Hunter probing for ' + ipo.companyName + '...');
+    let anyProxyOk = false;
+
+    for (const url of urls) {
+        let html = null;
+        for (const proxy of PROXIES) {
+            try {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 8000);
+                const res = await fetch(proxy.url + encodeURIComponent(url), { signal: controller.signal });
+                clearTimeout(timer);
+                const body = await res.json().catch(() => res.text());
+                const content = proxy.extract(body);
+                if (content) { html = content; anyProxyOk = true; break; }
+            } catch (_) { /* cuba proxy seterusnya */ }
+        }
+        if (!html) continue;
+
+        try {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const text = doc.body.innerText;
 
             // 1. Hunt for OS (Oversubscription)
             if (!ipo.os || ipo.os === 0) {
-                const osMatch = text.match(/Oversubscription rate:\s*(\d+\.\d+)x/i) || 
-                              text.match(/subscribed by\s*(\d+\.\d+)\s*times/i) ||
-                              text.match(/OS Rate:\s*(\d+\.\d+)/i);
-                if (osMatch) {
-                    ipo.os = parseFloat(osMatch[1]);
-                    ipo.isAutoOS = true;
-                    console.log(`✨ OS Found: ${ipo.os}x for ${ipo.id}`);
-                }
+                const osMatch = text.match(/Oversubscription rate:\s*(\d+\.\d+)x/i) ||
+                                text.match(/subscribed by\s*(\d+\.\d+)\s*times/i) ||
+                                text.match(/OS Rate:\s*(\d+\.\d+)/i);
+                if (osMatch) { ipo.os = parseFloat(osMatch[1]); ipo.isAutoOS = true; console.log('OS Found: ' + ipo.os + 'x for ' + ipo.id); }
             }
 
             // 2. Hunt for Target Price / Fair Value
@@ -620,64 +631,43 @@ async function autoHuntData(ipo) {
                 /Average Target Price:\s*RM\s*(\d+\.\d+)/i,
                 /FV\s*(?:of|is|at)?\s*RM\s*(\d+\.\d+)/i
             ];
-
             let foundTP = null;
-            for (const pattern of tpPatterns) {
-                const match = text.match(pattern);
-                if (match) {
-                    foundTP = parseFloat(match[1]);
-                    break;
-                }
-            }
-
+            for (const pattern of tpPatterns) { const m = text.match(pattern); if (m) { foundTP = parseFloat(m[1]); break; } }
             if (foundTP && (!ipo.avgTP || ipo.avgTP === 0)) {
-                ipo.avgTP = foundTP;
-                ipo.isAutoTP = true;
+                ipo.avgTP = foundTP; ipo.isAutoTP = true;
                 if (!ipo.research) ipo.research = [];
-                
-                const analystEntry = { 
-                    house: "iSaham (Auto-Hunt)", 
-                    tp: foundTP, 
-                    view: "Auto-Detected Value", 
-                    img: "https://www.isaham.my/img/logo-isaham.png",
-                    isAuto: true 
-                };
-
-                if (!ipo.research.some(r => r.house === analystEntry.house)) {
-                    ipo.research.push(analystEntry);
-                }
-                console.log(`✨ TP Found: RM ${foundTP} for ${ipo.id}`);
+                const analystEntry = { house: 'iSaham (Auto-Hunt)', tp: foundTP, view: 'Auto-Detected Value', img: 'https://www.isaham.my/img/logo-isaham.png', isAuto: true };
+                if (!ipo.research.some(r => r.house === analystEntry.house)) ipo.research.push(analystEntry);
+                console.log('TP Found: RM ' + foundTP + ' for ' + ipo.id);
             }
 
             // 3. Hunt for P/E Ratio
             if (!ipo.pe || ipo.pe === 0) {
                 const peMatch = text.match(/P\/E Ratio:\s*(\d+\.\d+)/i) || text.match(/PE:\s*(\d+\.\d+)/i);
-                if (peMatch) {
-                    ipo.pe = parseFloat(peMatch[1]);
-                    ipo.isAutoPE = true;
-                    console.log(`✨ PE Found: ${ipo.pe} for ${ipo.id}`);
-                }
+                if (peMatch) { ipo.pe = parseFloat(peMatch[1]); ipo.isAutoPE = true; console.log('PE Found: ' + ipo.pe + ' for ' + ipo.id); }
             }
 
             // Sync with Persistence
             const savedData = JSON.parse(localStorage.getItem('ipo_hunted_data') || '{}');
-            savedData[ipo.id] = {
-                os: ipo.os,
-                avgTP: ipo.avgTP,
-                pe: ipo.pe,
-                research: ipo.research,
-                isAutoOS: ipo.isAutoOS,
-                isAutoTP: ipo.isAutoTP,
-                isAutoPE: ipo.isAutoPE
-            };
+            savedData[ipo.id] = { os: ipo.os, avgTP: ipo.avgTP, pe: ipo.pe, research: ipo.research, isAutoOS: ipo.isAutoOS, isAutoTP: ipo.isAutoTP, isAutoPE: ipo.isAutoPE };
             localStorage.setItem('ipo_hunted_data', JSON.stringify(savedData));
-
         } catch (e) {
-            console.warn(`Deep hunt failed for ${url}`, e);
+            console.warn('Deep hunt parse failed for ' + url, e);
         }
     }
-    
-    // Refresh UI if data was found
+
+    // B5: notis jika semua proxy gagal (iSaham disekat Cloudflare)
+    if (!anyProxyOk) {
+        console.warn('Deep Hunt: semua proxy gagal untuk ' + ipo.companyName + ' - iSaham disekat Cloudflare.');
+        const notice = document.getElementById('deep-hunt-notice');
+        if (notice) {
+            notice.textContent = 'Deep Hunt: Proxy tidak dapat capai iSaham (Cloudflare). Data kekal tidak berubah.';
+            notice.style.display = 'block';
+            setTimeout(() => { notice.style.display = 'none'; }, 6000);
+        }
+    }
+
+    // Refresh UI
     renderIPOs(currentStage);
 }
 
@@ -686,7 +676,8 @@ async function autoHuntData(ipo) {
 // This synchronous fallback is kept for non-awaited calls but delegates to the same autoHuntData.
 async function triggerDeepSync() {
     console.log('🔍 Starting Global Deep Sync...');
-    const missing = ipoData.filter(ipo => (ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5) && (!ipo.os || !ipo.avgTP));
+    // B3: include stage 6 (Post-MITI) — mereka juga perlu OS/TP data
+    const missing = ipoData.filter(ipo => (ipo.stage === 3 || ipo.stage === 4 || ipo.stage === 5 || ipo.stage === 6) && (!ipo.os || !ipo.avgTP));
     if (missing.length === 0) return;
     for (let i = 0; i < missing.length; i += 3) {
         const batch = missing.slice(i, i + 3);
@@ -1351,7 +1342,8 @@ function renderTodayActionRadar() {
                         date: ld,
                         dateStr: ipo.listingDate,
                         ipo,
-                        stage: ipo.stage === 5 ? 5 : (ipo.stage >= 3 ? ipo.stage : 4)
+                        // B4: stage 6 navigate ke tab 2 (MITI) supaya user nampak rekod tersebut
+                        stage: ipo.stage === 5 ? 5 : (ipo.stage === 6 ? 2 : (ipo.stage >= 3 ? ipo.stage : 4))
                     });
                 }
             }
@@ -1903,7 +1895,8 @@ function renderStyledVerdict(reason, grade, ipo) {
 
 function createIPOCard(ipo, index = 0) {
     let specificDetails = '';
-    const statusClass = ipo.stage === 5 ? 'live' : (isIpoOpen(ipo) ? 'open' : 'pending');
+    // B2: stage 6 (Post-MITI menunggu keputusan) guna class 'post-miti', berbeza dari draft 'pending'
+    const statusClass = ipo.stage === 5 ? 'live' : (ipo.stage === 6 ? 'post-miti' : (isIpoOpen(ipo) ? 'open' : 'pending'));
     const animDelay = Math.min(index * 0.06, 0.6); // staggered animation, cap at 600ms
     const perfString = getOpenPerfString(ipo);
     const perfValue = getOpenPerformance(ipo);
@@ -2317,7 +2310,7 @@ window.showDetails = function(id) {
                 <span>Groq AI Smart Analysis</span>
             </h4>
             <div id="ai-verdict-box" style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.85rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
+                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
                     <i data-lucide="zap" style="width: 13px; height: 13px;"></i> Generate AI Verdict
                 </button>
                 <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Powered by Llama-3.3-70b-versatile for instant fundamental & valuation insights.</div>
@@ -2413,7 +2406,8 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
                 const res = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt, systemPrompt, model, max_tokens: 1024, temperature: 0.5 })
+                    // B1: sertakan context IPO supaya AI verdict ada data pasaran semasa
+                    body: JSON.stringify({ prompt, systemPrompt, context: IpoChatUtils.buildContext(ipoData, ipo.companyName, getIpoGrade).context, model, max_tokens: 1024, temperature: 0.5 })
                 });
                 const d = await res.json();
                 if (!res.ok || d.error) {
@@ -2456,7 +2450,7 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
                 ⚠️ AI verdict is a guide only — not financial advice. Check the official prospectus & Bursa before making any decision.
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:0.6rem; padding-top:0.4rem; text-align:right;">
-                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">
+                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">
                     <i data-lucide="refresh-cw" style="width: 9px; height: 9px; display:inline-block; margin-bottom:-1px;"></i> Recalculate
                 </button>
             </div>
@@ -2465,10 +2459,14 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
 
     } catch (err) {
         console.error('AI Analysis failed:', err);
+        const isRateLimited = err && err.status === 429;
+        const msg = isRateLimited
+            ? '⏳ Had capaian dicapai (Rate limit). Sila tunggu sebentar (anggaran 5 minit) sebelum mencuba semula.'
+            : '⚠️ Gagal menjana analisis. Sila semak sambungan internet atau tetapan API Key anda.';
         verdictBox.innerHTML = `
-            <div style="color:#ef4444; font-size:0.75rem; text-align:center; padding: 0.75rem;">
-                ⚠️ Gagal menjana analisis. Sila semak sambungan internet atau tetapan API Key anda.
-                <button onclick="generateModalAIAnalysis('${ipo.id}')" class="btn-primary" style="margin-top:0.5rem; padding:0.35rem 0.75rem; font-size:0.75rem; cursor:pointer; border:none;">Retry</button>
+            <div style="color:${isRateLimited ? '#f59e0b' : '#ef4444'}; font-size:0.75rem; text-align:center; padding: 0.75rem;">
+                ${msg}
+                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-primary" style="margin-top:0.5rem; padding:0.35rem 0.75rem; font-size:0.75rem; cursor:pointer; border:none;">Retry</button>
             </div>
         `;
     }

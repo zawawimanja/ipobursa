@@ -214,3 +214,35 @@ test('chat integration sends a separate context and escapes a mocked malicious r
     assert.ok(!messages.children[1].innerHTML.includes('<img'));
     assert.match(messages.children[1].innerHTML, /&lt;img/);
 });
+
+test('modal AI verdict passes market context and handles 429 rate limit with escaped id', async () => {
+    const source = fs.readFileSync(path.join(__dirname, '../main.js'), 'utf8');
+    const code = source.slice(
+        source.indexOf('window.generateModalAIAnalysis = async function'),
+        source.indexOf('function showResearch')
+    );
+    const box = { style: {}, innerHTML: '' };
+    let request;
+    const browser = {
+        IpoChatUtils: chat,
+        ipoData: [fixture('Special"Quote', 6)],
+        getIpoGrade: () => ({ grade: 'A' }),
+        console: { log: () => {}, warn: () => {}, error: () => {} },
+        document: { getElementById: id => id === 'ai-verdict-box' ? box : null },
+        fetch: async (url, options) => {
+            request = JSON.parse(options.body);
+            return {
+                ok: false,
+                status: 429,
+                json: async () => ({ error: 'Too many requests' })
+            };
+        }
+    };
+    browser.window = browser;
+    vm.runInNewContext(code, browser);
+    await browser.generateModalAIAnalysis('Special"Quote');
+    assert.ok(request.context.includes('Special'));
+    assert.match(box.innerHTML, /Had capaian dicapai/);
+    assert.ok(box.innerHTML.includes('&quot;'));
+    assert.ok(!box.innerHTML.includes('Special"Quote'));
+});

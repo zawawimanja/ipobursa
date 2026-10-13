@@ -676,18 +676,29 @@ h3,
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    display: inline-block;
 }
 
-.status-live {
+.status-dot.live, .status-live {
     background: #10b981;
-    box-shadow: 0 0 10px #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
 }
 
-.status-draft {
+.status-dot.open {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.status-dot.post-miti {
+    background: #a855f7;
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+}
+
+.status-dot.pending, .status-draft {
     background: #f59e0b;
 }
 
-.status-closed {
+.status-dot.closed, .status-closed {
     background: #ef4444;
 }
 
