@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="style.css?v=2.3">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="data.js?v=4.3"></script>
-    <script src="sync-status.js?v=3.2"></script>
+    <script src="sync-status.js?v=3.3"></script>
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
     <script type="module" src="analytics.js"></script>
     <style>
@@ -179,6 +179,8 @@
             </a>
         </div>
 
+
+        <div id="source-health-panel" style="margin-bottom: 0.75rem;"></div>
 
         <!-- Today's IPO Action Radar & Timeline (Rendered dynamically by main.js) -->
         <div id="today-action-radar" style="display: none; margin-bottom: 0.9rem;"></div>
@@ -861,16 +863,13 @@
         </div>
     </div>
 
-    <script src="main.js?v=2.9"></script>
+    <script src="lib/ipo-rules.js?v=1.0"></script>
+    <script src="lib/chat-utils.js?v=1.0"></script>
+    <script src="main.js?v=3.0"></script>
     <script>
         try { lucide.createIcons(); } catch(e) { console.warn('lucide CDN failed, continuing...'); }
         initializeData();
-        if (typeof SYNC_STATUS !== 'undefined') {
-            const descEl = document.getElementById('automation-sync-desc');
-            if (descEl) {
-                descEl.innerHTML = `The following systems are currently running in the background. <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 9999px; font-size: 0.72rem; color: #10b981; margin-left: 0.5rem; font-weight: 600; vertical-align: middle;"><span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 6px #10b981;"></span> Last Sync: ${SYNC_STATUS.lastSync}</span>`;
-            }
-        }
+        renderSourceHealth();
         
         function switchAcademyTab(tabId) {
             // Auto-expand portal if it is collapsed

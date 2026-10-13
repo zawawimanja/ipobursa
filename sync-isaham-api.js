@@ -24,53 +24,111 @@
  *   node sync-isaham-api.js --force    (sync walaupun dah sync hari ini)
  *   node sync-isaham-api.js --no-push  (jangan git commit/push — untuk GitHub Actions)
  *
- * GUARD KREDIT: jika sync-status.js menunjukkan sync API berjaya HARI INI (MYT),
- * skrip keluar awal (0 kredit). Ini membolehkan laptop (bursa.js) DAN GitHub
- * Actions kedua-duanya memanggil skrip ini tanpa membazir kredit.
+ * GUARD KREDIT: setiap endpoint yang berjaya HARI INI (MYT) dilangkau.
+ * Endpoint gagal dicuba maksimum dua kali sehari, sekurang-kurangnya sejam
+ * antara cubaan. --force memintas guard ini secara eksplisit.
  */
 
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const { normalizeName, isSafeFuzzyMatch, isJunkCompanyName, toDisplayDate, toIsoDate, toLocalDate } = require('./lib/ipo-utils');
+const { execFileSync, execSync } = require('child_process');
+const { normalizeName, isSafeFuzzyMatch, isJunkCompanyName, toDisplayDate, toIsoDate } = require('./lib/ipo-utils');
+const { resolveLifecycle } = require('./lib/ipo-rules');
+const { updateSourceStatus, readSyncStatus, safeMessage } = require('./lib/sync-health');
 
 // Load .env manual (sama seperti sync-isaham.js)
-const envPath = path.join(__dirname, '.env');
-if (fs.existsSync(envPath)) {
+function loadEnv() {
+    const envPath = path.join(__dirname, '.env');
+    if (!fs.existsSync(envPath)) return;
     const envLines = fs.readFileSync(envPath, 'utf8').split('\n');
     envLines.forEach(line => {
         const parts = line.split('=');
         if (parts.length >= 2) {
             const key = parts[0].trim();
             const val = parts.slice(1).join('=').trim().replace(/^['"]|['"]$/g, '');
-            process.env[key] = val;
+            if (!(key in process.env)) process.env[key] = val;
         }
     });
 }
 
 const API_BASE = 'https://api.isaham.my/v1';
-const TOKEN = process.env.ISAHAM_API_TOKEN;
-const DATA_JSON_FILE = path.join(__dirname, 'data.json');
-const DATA_JS_FILE = path.join(__dirname, 'data.js');
-const DATA_EXPORT_JS_FILE = path.join(__dirname, 'data_export.js');
-const SYNC_STATUS_FILE = path.join(__dirname, 'sync-status.js');
-// Penanda sync API terakhir (fail berasingan — sync-status.js boleh ditimpa
-// oleh sync-isaham.js/scrape, jadi tak boleh diharap untuk guard kredit).
-const API_MARKER_FILE = path.join(__dirname, 'isaham-api-status.json');
+const ENDPOINTS = ['upcoming', 'live'];
+const MAX_DAILY_ATTEMPTS = 2;
+const RETRY_DELAY_MS = 60 * 60 * 1000;
 
 // Tarikh hari ini (MYT) dalam format YYYY-MM-DD
-function todayMyt() {
-    return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kuala_Lumpur' });
+function todayMyt(now = Date.now()) {
+    return new Date(now).toLocaleDateString('en-CA', { timeZone: 'Asia/Kuala_Lumpur' });
 }
 
-function alreadySyncedToday() {
-    try {
-        if (!fs.existsSync(API_MARKER_FILE)) return false;
-        const st = JSON.parse(fs.readFileSync(API_MARKER_FILE, 'utf8'));
-        return st.lastSyncDate === todayMyt();
-    } catch (e) {
-        return false;
+function persistedTime(value, date) {
+    if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) && Number.isFinite(Date.parse(value))) {
+        return new Date(value).toISOString();
     }
+    // Older API markers stored en-MY day/month and a 12-hour local clock.
+    const match = String(value || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}),?\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*([ap]m)?$/i);
+    if (match) {
+        let hour = +match[4];
+        if (match[7]) hour = hour % 12 + (match[7].toLowerCase() === 'pm' ? 12 : 0);
+        const time = Date.UTC(+match[3], +match[2] - 1, +match[1], hour, +match[5], +(match[6] || 0)) - 8 * 60 * 60 * 1000;
+        return Number.isFinite(time) ? new Date(time).toISOString() : null;
+    }
+    const fallback = typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) ? Date.parse(`${date}T00:00:00+08:00`) : NaN;
+    return Number.isFinite(fallback) ? new Date(fallback).toISOString() : null;
+}
+
+function restoreCompletedHealth(marker, root, health, now) {
+    const sources = readSyncStatus(root).sources || {};
+    ENDPOINTS.forEach(name => {
+        const source = `isaham-${name}`;
+        if (sources[source]) return;
+        const state = marker.endpoints[name];
+        health(source, {
+            status: state.status === 'failed' ? 'failed' : 'success',
+            lastSuccess: persistedTime(state.lastSuccess, state.lastSyncDate),
+            lastAttempt: persistedTime(state.lastAttempt || state.lastSuccess, state.lastSyncDate),
+            message: 'Penanda sync harian digunakan; tiada permintaan API baharu.',
+            now: new Date(now)
+        }, root);
+    });
+    if (!sources['isaham-api']) {
+        health('isaham-api', {
+            status: marker.status === 'partial' ? 'partial' : 'success',
+            lastSuccess: persistedTime(marker.lastSync, marker.lastSyncDate),
+            lastAttempt: persistedTime(marker.lastSync, marker.lastSyncDate),
+            message: 'Sync harian sudah lengkap; timestamp dipulihkan daripada penanda.',
+            now: new Date(now)
+        }, root);
+    }
+}
+
+function readApiMarker(root, now) {
+    try {
+        const marker = JSON.parse(fs.readFileSync(path.join(root, 'isaham-api-status.json'), 'utf8'));
+        if (!marker.endpoints) {
+            marker.endpoints = {};
+            if (marker.lastSyncDate === todayMyt(now)) {
+                ENDPOINTS.forEach(name => {
+                    marker.endpoints[name] = { lastSyncDate: marker.lastSyncDate, lastSuccess: marker.lastSync };
+                });
+            }
+        }
+        return marker;
+    } catch (e) {
+        return { endpoints: {} };
+    }
+}
+
+function pendingEndpoints(marker, now, force = false) {
+    const today = todayMyt(now);
+    return ENDPOINTS.filter(name => {
+        if (force) return true;
+        const state = marker.endpoints[name] || {};
+        if (state.lastSyncDate === today) return false;
+        if (state.attemptDate !== today) return true;
+        return (state.attempts || 0) < MAX_DAILY_ATTEMPTS &&
+            now - Date.parse(state.lastAttempt || 0) >= RETRY_DELAY_MS;
+    });
 }
 
 // ---------------------------------------------------------------------------
@@ -122,9 +180,10 @@ function findExistingIPO(name, existingData) {
 // ---------------------------------------------------------------------------
 // Panggilan API
 // ---------------------------------------------------------------------------
-async function apiGet(endpoint) {
+async function apiGet(endpoint, token) {
+    const axios = require('axios');
     const response = await axios.get(`${API_BASE}${endpoint}`, {
-        headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/json' },
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
         timeout: 30000
     });
     return response.data;
@@ -141,7 +200,7 @@ function sameDate(a, b) {
 // ---------------------------------------------------------------------------
 // Kemas kini data dari /v1/ipo/upcoming
 // ---------------------------------------------------------------------------
-function applyUpcoming(upcoming, data) {
+function applyUpcoming(upcoming, data, now = Date.now()) {
     let updated = 0;
     (upcoming || []).forEach(entry => {
         const name = entry.name || entry.company_name || entry.companyName;
@@ -150,6 +209,7 @@ function applyUpcoming(upcoming, data) {
         const existing = findExistingIPO(name, data);
         const listingDate = toDisplayDate(entry.listing_date || entry.listingDate || entry.listing);
         const closingDate = toDisplayDate(entry.closing_date || entry.closingDate || entry.application_closing_date);
+        const openingDate = toDisplayDate(entry.opening_date || entry.openingDate || entry.application_opening_date);
         const price = parseFloat(entry.ipo_price || entry.price || entry.ipoPrice);
         const score = parseFloat(entry.score || entry.isaham_score);
         const sector = entry.sector;
@@ -159,6 +219,7 @@ function applyUpcoming(upcoming, data) {
             if (price && price > 0 && existing.price !== price) { existing.price = price; changed = true; }
             if (listingDate && !sameDate(existing.listingDate, listingDate)) { existing.listingDate = listingDate; changed = true; }
             if (closingDate && !sameDate(existing.closingDate, closingDate)) { existing.closingDate = closingDate; changed = true; }
+            if (openingDate && !sameDate(existing.openingDate, openingDate)) { existing.openingDate = openingDate; changed = true; }
             if (sector && !existing.sector) { existing.sector = sector; changed = true; }
             if (score && !existing.isahamScore) { existing.isahamScore = score; changed = true; }
             if (!existing.symbol && entry.symbol) { existing.symbol = entry.symbol; changed = true; }
@@ -166,74 +227,34 @@ function applyUpcoming(upcoming, data) {
                 updated++;
                 console.log(`  ✓ ${existing.companyName}: tarikh/harga dikemas kini dari API.`);
             }
-            // Auto-promote lifecycle
-            const now = new Date();
-            const today = new Date(); today.setHours(0, 0, 0, 0);
-
-            if (listingDate) {
-                const listDate = toLocalDate(listingDate);
-                if (existing.stage !== 5 && listDate && listDate <= today) {
-                    existing.stage = 5;
-                    existing.status = 'Listed';
-                    updated++;
-                    console.log(`  → ${existing.companyName}: promoted ke Stage 5 (tarikh listing lepas).`);
-                }
-            }
-
-            // Jika belum tersenarai (Stage 1, 2, atau 6) dan ada closingDate
-            if (existing.stage !== 5 && closingDate) {
-                const closeDate = toLocalDate(closingDate);
-                if (closeDate) closeDate.setHours(23, 59, 59, 999);
-                if (closeDate && closeDate >= now) {
-                    if (existing.stage !== 3) {
-                        existing.stage = 3;
-                        existing.status = 'Application Open';
-                        updated++;
-                        console.log(`  → ${existing.companyName}: promoted ke Stage 3 (permohonan awam dibuka).`);
-                    }
-                } else if (closeDate && existing.stage < 4) {
-                    existing.stage = 4;
-                    existing.status = 'Pre-Listing';
-                    updated++;
-                    console.log(`  → ${existing.companyName}: promoted ke Stage 4 (permohonan awam ditutup).`);
-                }
+            const lifecycle = resolveLifecycle(existing, now);
+            if (existing.stage !== lifecycle.stage || existing.status !== lifecycle.status) {
+                Object.assign(existing, lifecycle);
+                updated++;
             }
         } else {
             if (isJunkCompanyName(name)) {
                 console.log(`  ⚠️  Abaikan nama tak sah dari API: "${name}"`);
                 return;
             }
-            // IPO baharu — semak jika permohonan sudah ada tarikh tutup
-            let initialStage = 1;
-            let initialStatus = 'Draft / Exposure Phase';
-            if (closingDate) {
-                const closeDate = toLocalDate(closingDate);
-                if (closeDate) closeDate.setHours(23, 59, 59, 999);
-                if (closeDate && closeDate >= new Date()) {
-                    initialStage = 3;
-                    initialStatus = 'Application Open';
-                } else {
-                    initialStage = 4;
-                    initialStatus = 'Pre-Listing';
-                }
-            }
-
             const newEntry = {
                 id: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                 companyName: name,
-                stage: initialStage,
-                status: initialStatus,
-                year: new Date().getFullYear()
+                stage: 1,
+                status: 'Draft / Exposure Phase',
+                year: new Date(now).getFullYear()
             };
             if (price) newEntry.price = price;
             if (listingDate) newEntry.listingDate = listingDate;
             if (closingDate) newEntry.closingDate = closingDate;
+            if (openingDate) newEntry.openingDate = openingDate;
             if (sector) newEntry.sector = sector;
             if (score) newEntry.isahamScore = score;
             if (entry.symbol) newEntry.symbol = entry.symbol;
+            Object.assign(newEntry, resolveLifecycle(newEntry, now));
             data.push(newEntry);
             updated++;
-            console.log(`  + ${name}: IPO baharu ditambah dari API (Stage ${initialStage}).`);
+            console.log(`  + ${name}: IPO baharu ditambah dari API (Stage ${newEntry.stage}).`);
         }
     });
     return updated;
@@ -278,136 +299,185 @@ function applyLive(live, data) {
 // ---------------------------------------------------------------------------
 // UTAMA
 // ---------------------------------------------------------------------------
-async function main() {
-    const usageOnly = process.argv.includes('--usage');
-    const force = process.argv.includes('--force');
-
-    if (!usageOnly && !force && alreadySyncedToday()) {
-        console.log(`✅ Sync API iSaham dah berjaya hari ini (${todayMyt()}) — langkau (jimat kredit). Guna --force untuk paksa.`);
-        return;
-    }
-
-    if (!TOKEN) {
-        console.error('❌ ISAHAM_API_TOKEN tidak dijumpai dalam .env');
-        console.error('   Setup sekali sahaja:');
-        console.error('   1) Buka https://api.isaham.my/portal/dashboard');
-        console.error('   2) Log masuk dengan akaun iSaham, klik Generate untuk API token');
-        console.error('   3) Simpan dalam fail .env:  ISAHAM_API_TOKEN=xxxxx');
-        process.exit(1);
-    }
-
-    console.log('--- Sync iSaham (API RASMI) ---');
-
-    // Semak baki kredit dahulu (percuma, 0 kredit)
-    try {
-        const usage = await apiGet('/account/usage');
-        const u = usage.data;
-        console.log(`💳 Tier: ${u.tier} | Kredit: ${u.credits_used}/${u.credits_limit} (baki ${u.credits_remaining}) | ${u.month}`);
-        if (usageOnly) return;
-        if (u.credits_remaining < 10) {
-            console.error('❌ Baki kredit tidak cukup untuk sync (perlu ≥ 10). Upgrade tier atau tunggu bulan depan.');
-            process.exit(1);
-        }
-    } catch (e) {
-        console.error('❌ Gagal semak usage:', e.response ? e.response.status + ' ' + e.response.data?.error?.message : e.message);
-        process.exit(1);
-    }
-
-    let existingData = [];
-    if (fs.existsSync(DATA_JSON_FILE)) {
-        existingData = JSON.parse(fs.readFileSync(DATA_JSON_FILE, 'utf8'));
-    } else {
-        console.warn('data.json not found. Starting fresh.');
-    }
-    const initialCount = existingData.length;
-
-    // 1) Upcoming
-    let apiOk = 0;
-    try {
-        console.log('\n🕒 /v1/ipo/upcoming...');
-        const res = await apiGet('/ipo/upcoming');
-        const list = res.data && res.data.upcoming ? res.data.upcoming : (Array.isArray(res.data) ? res.data : []);
-        const n = applyUpcoming(list, existingData);
-        console.log(`  ${list.length} rekod diterima, ${n} kemas kini.`);
-        apiOk++;
-    } catch (e) {
-        console.error('❌ /ipo/upcoming gagal:', e.response ? e.response.status + ' ' + (e.response.data?.error?.message || '') : e.message);
-    }
-
-    // 2) Live
-    try {
-        console.log('\n📊 /v1/ipo/live...');
-        const res = await apiGet('/ipo/live');
-        const list = res.data && res.data.live ? res.data.live : (Array.isArray(res.data) ? res.data : []);
-        const n = applyLive(list, existingData);
-        console.log(`  ${list.length} rekod diterima, ${n} kemas kini.`);
-        apiOk++;
-    } catch (e) {
-        console.error('❌ /ipo/live gagal:', e.response ? e.response.status + ' ' + (e.response.data?.error?.message || '') : e.message);
-    }
-
-    if (apiOk === 0) {
-        console.error('❌ Kedua-dua endpoint API gagal — data tidak disimpan.');
-        process.exit(1);
-    }
-
-    // 3) Overrides (overrides.json menang atas data auto)
-    const overridesPath = path.join(__dirname, 'overrides.json');
-    if (fs.existsSync(overridesPath)) {
-        try {
-            const overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
-            let appliedCount = 0;
-            existingData.forEach(ipo => {
-                const override = overrides[ipo.id];
-                if (override) {
-                    Object.assign(ipo, override);
-                    appliedCount++;
-                }
-            });
-            console.log(`  [Overrides] Diterapkan pada ${appliedCount} IPO.`);
-        } catch (e) {
-            console.error('  [Overrides] Error:', e.message);
-        }
-    }
-
-    // Recalculate Sifu V7 target prices automatically for all IPOs
-    try {
-        const { execSync } = require('child_process');
-        console.log('🔄 Running automatic Sifu V7 target price calculator...');
-        execSync('node scratch/calc_sifu_targets.js', { stdio: 'inherit', cwd: __dirname });
-    } catch (e) {
-        console.error('  [Target Calculation] Error:', e.message);
-    }
-
-    // 4) Simpan (data.json indent 4 — sama dengan skrip lain, elak diff besar)
-    fs.writeFileSync(DATA_JSON_FILE, JSON.stringify(existingData, null, 4));
-    const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
-    fs.writeFileSync(DATA_JS_FILE, jsContent);
-    fs.writeFileSync(DATA_EXPORT_JS_FILE, jsContent);
-
-    const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-    const syncStatus = {
-        lastSync: stamp,
-        lastSyncDate: todayMyt(),
-        status: "Success",
-        source: "isaham-api",
-        totalIpos: existingData.length
-    };
-    fs.writeFileSync(SYNC_STATUS_FILE,
-        `const SYNC_STATUS = ${JSON.stringify(syncStatus, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = SYNC_STATUS;\n}\n`);
-    fs.writeFileSync(API_MARKER_FILE, JSON.stringify({ lastSyncDate: todayMyt(), lastSync: stamp }, null, 2) + '\n');
-
-    console.log(`\n--- Sync Complete (API) ---`);
-    console.log(`Total IPOs: ${existingData.length} (Added ${existingData.length - initialCount} new)`);
-    console.log(`Files updated: data.json, data.js, data_export.js, sync-status.js`);
-
-    if (process.argv.includes('--no-push')) {
-        console.log('[Git] --no-push: commit/push diuruskan oleh pemanggil (GitHub Actions).');
-        return;
-    }
-    await gitPush();
+function saveDatabase(data, root) {
+    const js = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
+    fs.writeFileSync(path.join(root, 'data.json'), JSON.stringify(data, null, 4));
+    fs.writeFileSync(path.join(root, 'data.js'), js);
+    fs.writeFileSync(path.join(root, 'data_export.js'), js);
 }
 
+function recalculateTargets(root) {
+    execFileSync(process.execPath, [path.join(root, 'scratch', 'calc_sifu_targets.js')], {
+        stdio: 'inherit', cwd: root
+    });
+}
+
+async function syncApi(options = {}) {
+    const root = options.root || __dirname;
+    const now = Number(options.now ?? Date.now());
+    const today = todayMyt(now);
+    const stamp = new Date(now).toISOString();
+    const markerFile = path.join(root, 'isaham-api-status.json');
+    const marker = readApiMarker(root, now);
+    const pending = pendingEndpoints(marker, now, options.force);
+    const health = options.updateSourceStatus || updateSourceStatus;
+    const record = (name, status, message, extra = {}) => health(name, {
+        status, lastAttempt: stamp, message, now: new Date(now), ...extra
+    }, root);
+    const complete = () => ENDPOINTS.every(name => marker.endpoints[name]?.lastSyncDate === today);
+    const partialStatus = () => ENDPOINTS.some(name => marker.endpoints[name]?.lastSyncDate === today) ? 'partial' : 'failed';
+
+    if (!options.usageOnly && complete() && !options.force) {
+        if (marker.targetStatus === 'failed') {
+            try {
+                (options.recalculateTargets || recalculateTargets)(root);
+                const data = JSON.parse(fs.readFileSync(path.join(root, 'data.json'), 'utf8'));
+                data.forEach(ipo => Object.assign(ipo, resolveLifecycle(ipo, now)));
+                saveDatabase(data, root);
+                marker.targetStatus = 'success';
+                marker.status = 'success';
+                fs.writeFileSync(markerFile, JSON.stringify(marker, null, 2) + '\n');
+                record('isaham-api', 'success', 'Pengiraan target dipulihkan; endpoint sudah berjaya hari ini.', {
+                    lastSuccess: marker.lastSync || stamp
+                });
+            } catch (error) {
+                record('isaham-api', 'partial', `Pengiraan target gagal: ${error.message}`);
+                return { status: 'partial', skipped: true };
+            }
+        }
+        restoreCompletedHealth(marker, root, health, now);
+        console.log(`✅ Kedua-dua endpoint iSaham sudah berjaya hari ini (${today}) — langkau.`);
+        return { status: marker.status === 'partial' ? 'partial' : 'success', skipped: true };
+    }
+    if (!options.usageOnly && pending.length === 0) {
+        const status = partialStatus();
+        const message = 'Cubaan endpoint gagal ditangguh: tunggu satu jam atau had dua cubaan sehari tercapai.';
+        // A guard skip does not change the timestamps of the actual attempts.
+        const previous = readSyncStatus(root).sources?.['isaham-api'];
+        health('isaham-api', { status, message, lastAttempt: previous?.lastAttempt || null, now: new Date(now) }, root);
+        console.warn(`⚠️ ${message}`);
+        return { status, skipped: true };
+    }
+    const token = options.token || process.env.ISAHAM_API_TOKEN;
+    if (!token && !options.request) {
+        const message = 'ISAHAM_API_TOKEN tidak ditetapkan.';
+        record('isaham-api', 'failed', message);
+        console.error(`❌ ${message}`);
+        return { status: 'failed', message };
+    }
+    const request = options.request || (endpoint => apiGet(endpoint, token));
+    const delay = options.delay || (ms => new Promise(resolve => setTimeout(resolve, ms)));
+    const requestPaced = async endpoint => {
+        await delay(550); // Free tier: maksimum dua permintaan sesaat.
+        return request(endpoint);
+    };
+    let usage;
+    try {
+        const response = await requestPaced('/account/usage');
+        usage = response.data;
+        if (!usage || !Number.isFinite(Number(usage.credits_remaining))) {
+            throw new Error('Respons usage tidak sah.');
+        }
+        console.log(`💳 Baki kredit iSaham: ${usage.credits_remaining}`);
+        if (options.usageOnly) return { status: 'success', usage };
+        const required = pending.length * 5;
+        if (Number(usage.credits_remaining) < required) {
+            throw new Error(`Baki kredit tidak cukup (perlu ${required}).`);
+        }
+    } catch (error) {
+        const status = partialStatus();
+        const message = `Gagal semak kredit: ${error.response?.status || error.message}`;
+        record('isaham-api', status, message);
+        console.error(`❌ ${message}`);
+        return { status, message };
+    }
+
+    const dataFile = path.join(root, 'data.json');
+    let data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+    const initialCount = data.length;
+    let successes = 0;
+    for (const name of pending) {
+        const previous = marker.endpoints[name] || {};
+        const state = {
+            ...previous,
+            attemptDate: today,
+            attempts: previous.attemptDate === today ? (previous.attempts || 0) + 1 : 1,
+            lastAttempt: stamp
+        };
+        marker.endpoints[name] = state;
+        // Persist before a charged request, including failed runs.
+        fs.writeFileSync(markerFile, JSON.stringify(marker, null, 2) + '\n');
+        try {
+            const response = await requestPaced(`/ipo/${name}`);
+            const list = Array.isArray(response.data) ? response.data : response.data?.[name];
+            if (!Array.isArray(list)) throw new Error(`Respons /ipo/${name} tidak sah.`);
+            const count = name === 'upcoming' ? applyUpcoming(list, data, now) : applyLive(list, data);
+            // Do not mark charged data complete until its fields are persisted.
+            saveDatabase(data, root);
+            state.lastSyncDate = today;
+            state.lastSuccess = stamp;
+            state.status = 'success';
+            state.message = `${list.length} rekod, ${count} kemas kini.`;
+            successes++;
+            record(`isaham-${name}`, 'success', state.message);
+            console.log(`✅ /ipo/${name}: ${state.message}`);
+        } catch (error) {
+            state.status = 'failed';
+            state.message = safeMessage(`Endpoint gagal: ${error.response?.status || error.message}`);
+            record(`isaham-${name}`, 'failed', state.message);
+            console.error(`❌ /ipo/${name}: ${state.message}`);
+        }
+        fs.writeFileSync(markerFile, JSON.stringify(marker, null, 2) + '\n');
+    }
+
+    let targetError = null;
+    if (successes > 0) {
+        const overridesFile = path.join(root, 'overrides.json');
+        const overrides = fs.existsSync(overridesFile) ? JSON.parse(fs.readFileSync(overridesFile, 'utf8')) : {};
+        data.forEach(ipo => {
+            Object.assign(ipo, overrides[ipo.id] || {});
+            Object.assign(ipo, resolveLifecycle(ipo, now));
+        });
+        // Calculator must see fresh API fields, then exports must see its results.
+        saveDatabase(data, root);
+        try {
+            (options.recalculateTargets || recalculateTargets)(root);
+            data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+            // Calculator applies overrides too; resolve dated states afterwards.
+            data.forEach(ipo => Object.assign(ipo, resolveLifecycle(ipo, now)));
+        } catch (error) {
+            targetError = error.message;
+            console.error('❌ Pengiraan target gagal:', targetError);
+        }
+        saveDatabase(data, root);
+    }
+    const endpointFailure = pending.some(name => marker.endpoints[name].status === 'failed');
+    const status = complete() && !targetError && !endpointFailure ? 'success' :
+        (successes > 0 || complete() ? 'partial' : partialStatus());
+    if (successes > 0) marker.targetStatus = targetError ? 'failed' : 'success';
+    marker.status = status;
+    if (complete() && successes > 0 && !endpointFailure) {
+        marker.lastSyncDate = today;
+        marker.lastSync = stamp;
+    }
+    fs.writeFileSync(markerFile, JSON.stringify(marker, null, 2) + '\n');
+    const message = targetError ? 'Data API disimpan, tetapi pengiraan target gagal.' :
+        `${ENDPOINTS.filter(name => marker.endpoints[name]?.lastSyncDate === today).length}/2 endpoint berjaya hari ini; ${data.length} IPO (+${data.length - initialCount}).`;
+    record('isaham-api', status, message, { legacy: { totalIpos: data.length } });
+    console.log(`--- Sync API: ${status.toUpperCase()} — ${message}`);
+    return { status, successes, message };
+}
+
+async function main() {
+    loadEnv();
+    const result = await syncApi({
+        usageOnly: process.argv.includes('--usage'),
+        force: process.argv.includes('--force')
+    });
+    if (!process.argv.includes('--no-push') && !process.argv.includes('--usage')) await gitPush();
+    if (result.status !== 'success') process.exitCode = 1;
+    return result;
+}
 async function gitPush() {
     const { execSync } = require('child_process');
     try {
@@ -417,7 +487,9 @@ async function gitPush() {
             return;
         }
         const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-        execSync('git add data.json data.js data_export.js sync-status.js isaham-api-status.json', { cwd: __dirname });
+        const files = ['data.json', 'data.js', 'data_export.js', 'sync-status.js', 'isaham-api-status.json']
+            .filter(file => fs.existsSync(path.join(__dirname, file)));
+        execFileSync('git', ['add', ...files], { cwd: __dirname });
         execSync(`git commit -m "Auto sync (API): ${stamp}"`, { cwd: __dirname });
         execSync('git pull --rebase origin main && git push', { cwd: __dirname });
         console.log(`\n[Git] ✅ Pushed to GitHub successfully.`);
@@ -426,4 +498,11 @@ async function gitPush() {
     }
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+module.exports = { syncApi, pendingEndpoints, readApiMarker, todayMyt, applyUpcoming, applyLive, main };
+if (require.main === module) {
+    main().catch(e => {
+        updateSourceStatus('isaham-api', { status: 'failed', message: e.message });
+        console.error(e.message);
+        process.exitCode = 1;
+    });
+}

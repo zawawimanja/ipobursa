@@ -7,6 +7,73 @@ let currentSearch = '';
 let currentSort = 'newest';
 
 // Load data from inline script (works with file:// protocol)
+function sourceHealthRows(status, now = Date.now()) {
+    const labels = {
+        'isaham-api': 'iSaham', 'isaham-upcoming': 'iSaham · IPO akan datang',
+        'isaham-live': 'iSaham · Harga', 'isaham-scrape': 'iSaham · Semakan laman',
+        klse: 'Jadual IPO awam', i3investor: 'Harga pasaran',
+        'target-calculation': 'Sasaran harga', 'group-archive': 'Arkib harian',
+        'miti-portal': 'MITI · Tawaran', 'miti-applicants': 'MITI · Pemohon', shariah: 'Status syariah'
+    };
+    return Object.entries(status.sources || {}).map(([name, source]) => {
+        const lastSuccess = Date.parse(source.lastSuccess);
+        const knownSuccess = Number.isFinite(lastSuccess);
+        const stale = knownSuccess && now - lastSuccess > 26 * 60 * 60 * 1000;
+        const sourceStatus = String(source.status || '').toLowerCase();
+        let label = 'Belum disemak', color = '#94a3b8';
+        if (sourceStatus === 'failed') { label = 'Kemas kini gagal'; color = '#f87171'; }
+        else if (sourceStatus === 'partial') { label = 'Sebahagian dikemas kini'; color = '#fbbf24'; }
+        else if (sourceStatus === 'skipped') label = 'Kemas kini dilangkau';
+        else if (sourceStatus === 'success' && knownSuccess) {
+            label = stale ? 'Data perlu dikemas kini' : 'Terkini'; color = stale ? '#fbbf24' : '#34d399';
+        }
+        return { name: labels[name] || name, label, color,
+            attention: sourceStatus === 'failed' || sourceStatus === 'partial' || stale,
+            lastSuccess: knownSuccess ? new Date(lastSuccess).toLocaleString('ms-MY', { timeZone: 'Asia/Kuala_Lumpur' }) + ' MYT' : null };
+    });
+}
+
+function renderSourceHealth() {
+    const panel = document.getElementById('source-health-panel');
+    if (!panel) return;
+    const status = typeof SYNC_STATUS !== 'undefined' ? SYNC_STATUS : {};
+    const rows = sourceHealthRows(status);
+    panel.textContent = '';
+    const details = document.createElement('details');
+    details.className = 'glass-card';
+    details.style.cssText = 'padding:0.7rem 1rem;font-size:0.78rem;';
+    const summary = document.createElement('summary');
+    summary.style.cssText = 'cursor:pointer;font-weight:600;';
+    const attention = rows.filter(row => row.attention).length;
+    summary.textContent = 'Status kemas kini data' + (attention ? ` · ${attention} sumber perlu perhatian` : '');
+    details.appendChild(summary);
+    const list = document.createElement('div');
+    list.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.6rem;margin-top:0.6rem;';
+    rows.forEach(row => {
+        const item = document.createElement('div');
+        item.style.cssText = 'padding:0.45rem;border:1px solid rgba(255,255,255,0.08);border-radius:6px;';
+        const title = document.createElement('div');
+        title.textContent = row.name + ' · ' + row.label;
+        title.style.color = row.color;
+        item.appendChild(title);
+        const stamp = document.createElement('div');
+        stamp.style.cssText = 'font-size:0.7rem;color:var(--text-dim);margin-top:0.2rem;';
+        stamp.textContent = row.lastSuccess ? 'Kemas kini berjaya: ' + row.lastSuccess : 'Belum ada rekod kemas kini berjaya.';
+        item.appendChild(stamp);
+        list.appendChild(item);
+    });
+    if (!rows.length) {
+        const legacy = document.createElement('div');
+        legacy.textContent = status.lastSync ? 'Rekod terakhir: ' + status.lastSync + '. Status setiap sumber akan muncul selepas kemas kini seterusnya.'
+            : 'Status setiap sumber akan muncul selepas kemas kini seterusnya.';
+        list.appendChild(legacy);
+    }
+    details.appendChild(list);
+    panel.appendChild(details);
+    const desc = document.getElementById('automation-sync-desc');
+    if (desc) desc.textContent = 'Kemas kini berjalan mengikut jadual. Semak status setiap sumber di bahagian atas untuk masa data terakhir berjaya dikemas kini.';
+}
+
 function initializeData() {
     try {
         const rawData = (typeof IPO_DATA !== 'undefined' && Array.isArray(IPO_DATA) && IPO_DATA.length > 0)
@@ -630,199 +697,35 @@ async function triggerDeepSync() {
 // Robust date parser - handles all formats from iSaham and data.js
 // "08-May-2026", "13-Feb-2026", "2026-05-08", "08 May 2026", "06 May", ISO strings
 // Uses integer constructor new Date(y, m, d) to guarantee 100% compatibility across Safari/iOS & Android
-function parseFlexDate(str) {
-    if (!str) return null;
-    if (str instanceof Date) return isNaN(str.getTime()) ? null : str;
-    const s = String(str).trim();
-    if (!s) return null;
-    const monthNames = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
-
-    // Handle "08-May-2026" or "13-Feb-2026" (DD-MMM-YYYY)
-    const dashMonth = s.match(/^(\d{1,2})-([A-Za-z]{3})[A-Za-z]*-(\d{4})$/);
-    if (dashMonth) {
-        const m = monthNames[dashMonth[2].toLowerCase().slice(0, 3)];
-        if (m !== undefined) return new Date(+dashMonth[3], m, +dashMonth[1]);
-    }
-    // Handle ISO "2026-05-08" or "2026-05-08T..."
-    const isoMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
-    if (isoMatch) {
-        return new Date(+isoMatch[1], +isoMatch[2] - 1, +isoMatch[3]);
-    }
-    // Handle "08 May 2026" (DD MMM YYYY) - iSaham format
-    const fullDate = s.match(/^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{4})$/);
-    if (fullDate) {
-        const m = monthNames[fullDate[2].toLowerCase().slice(0, 3)];
-        if (m !== undefined) return new Date(+fullDate[3], m, +fullDate[1]);
-    }
-    // Handle "06 May" (no year — assume current year)
-    const shortMonth = s.match(/^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*$/);
-    if (shortMonth) {
-        const m = monthNames[shortMonth[2].toLowerCase().slice(0, 3)];
-        if (m !== undefined) return new Date(new Date().getFullYear(), m, +shortMonth[1]);
-    }
-    const fallback = new Date(s);
-    return isNaN(fallback.getTime()) ? null : fallback;
+function parseFlexDate(value) {
+    const parts = IpoRules.dateParts(value);
+    return parts ? new Date(parts.year, parts.month, parts.day) : null;
 }
 
-function autoPromoteIPOs(finalData) {
-    const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+function malaysiaToday(now = Date.now()) {
+    const shifted = new Date(Number(now) + 8 * 60 * 60 * 1000);
+    return new Date(shifted.getUTCFullYear(), shifted.getUTCMonth(), shifted.getUTCDate());
+}
 
-    const getEndOfDay = (str) => {
-        if (!str) return null;
-        const d = parseFlexDate(str);
-        if (!d) return null;
-        d.setHours(23, 59, 59, 999);
-        return d;
-    };
+function deadlineLabel(ipo, kind = 'public') {
+    const deadline = IpoRules.getDeadline(ipo, kind);
+    return deadline ? deadline.toLocaleTimeString('en-US', { timeZone: 'Asia/Kuala_Lumpur', hour: 'numeric', minute: '2-digit', hour12: true }) : 'TBA';
+}
 
+function autoPromoteIPOs(finalData, now = Date.now()) {
     finalData.forEach(ipo => {
-        // Skip auto-promotion if manually set to Stage 5 (Listed)
-        if (ipo.stage === 5) return;
-        
-        // Skip auto-promotion for entries manually withdrawn from MITI
-        if (ipo.mitiWithdrawn) return;
-        
-        // Only auto-promote to Listed for past years if not explicitly withdrawn/cancelled
-        if (ipo.year && ipo.year < 2026 && !ipo.mitiWithdrawn && ipo.stage !== 0) {
-            ipo.stage = 5;
-            ipo.status = 'Listed';
+        Object.assign(ipo, IpoRules.resolveLifecycle(ipo, now));
+        const grade = IpoRules.recalcOsGrade(ipo);
+        if (grade && grade !== ipo.predictedGrade) {
+            ipo._oldPredictedGrade = ipo.predictedGrade;
+            ipo.predictedGrade = grade;
         }
-
-        // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
-        if (ipo.stage === 2) {
-            const closeStr = ipo.mitiCloseDate;
-            if (closeStr) {
-                const closeDate = getEndOfDay(closeStr);
-                if (closeDate && closeDate < now) {
-                    if (ipo.closingDate && parseFlexDate(ipo.closingDate) && getEndOfDay(ipo.closingDate) >= now) {
-                        ipo.stage = 3;
-                        ipo.status = 'Application Open';
-                    } else {
-                        ipo.stage = 6;
-                        ipo.status = 'Awaiting MITI Decision';
-                    }
-                }
-            }
-        }
-
-        // Stage 6 (Post-MITI): promote to Public (Stage 3) or Pre-Listing (Stage 4) when public application is active
-        if (ipo.stage === 6 && ipo.closingDate) {
-            const closeDate = getEndOfDay(ipo.closingDate);
-            if (closeDate) {
-                ipo.stage = closeDate >= now ? 3 : 4;
-                ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
-            }
-        }
-
-        if (ipo.stage >= 3) {
-            // Auto-promote to Listed if listingDate has passed
-            if (ipo.listingDate) {
-                const listDate = parseFlexDate(ipo.listingDate);
-                if (listDate) {
-                    listDate.setHours(0, 0, 0, 0);
-                    if (listDate <= today) {
-                        ipo.stage = 5;
-                        ipo.status = 'Listed';
-                    } else if (ipo.closingDate) {
-                        const closeDate = getEndOfDay(ipo.closingDate);
-                        if (closeDate && closeDate < now) {
-                            ipo.stage = 4;
-                            ipo.status = 'Pre-Listing';
-                        } else if (closeDate) {
-                            ipo.stage = 3;
-                            ipo.status = 'Application Open';
-                        }
-                    }
-                }
-            } else if (ipo.closingDate) {
-                const closeDate = getEndOfDay(ipo.closingDate);
-                if (closeDate && closeDate < now) {
-                    ipo.stage = 4;
-                    ipo.status = 'Pre-Listing';
-                }
-            }
-        }
-
-        // Refresh status for open applications (Stage 3 with a future closing date)
-        if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
-            const cd = getEndOfDay(ipo.closingDate);
-            if (cd && cd >= now) {
-                let openingFuture = false;
-                if (ipo.openingDate) {
-                    const od = parseFlexDate(ipo.openingDate);
-                    if (od) openingFuture = od > now;
-                }
-                if (!openingFuture) ipo.status = 'Application Open';
-            }
-        }
-
-        // ── LIVE OS GRADE RECALC ──────────────────────────────────────────────
-        // Bila IPO dah ada OS (stage 4/5), recalc predictedGrade secara live
-        // supaya grade dalam kad mencerminkan OS sebenar, bukan pre-ballot guess.
-        if (ipo.stage >= 4 && ipo.os > 0) {
-            const liveGrade = liveRecalcOsGrade(ipo);
-            if (liveGrade && liveGrade !== ipo.predictedGrade) {
-                ipo._oldPredictedGrade = ipo.predictedGrade; // simpan untuk reference
-                ipo.predictedGrade = liveGrade;
-            }
-        }
-        // ─────────────────────────────────────────────────────────────────────
     });
 }
 
-// Live OS Grade Recalc — mirror of recalcOsGrade() in apply-overrides.js
-// Called from autoPromoteIPOs() every minute in browser
 function liveRecalcOsGrade(ipo) {
-    const os = ipo.os || 0;
-    if (!os || os <= 0 || (ipo.stage || 0) < 4) return null;
-
-    const market = (ipo.market || '').toLowerCase();
-    const ib = (ipo.ib || '').toLowerCase();
-    const pe = ipo.pe || 0;
-
-    const heroIBs = ['maybank', 'public', 'kaf', 'alliance'];
-    const topTierIBs = ['rhb', 'aminvestment', 'alliance', 'affin hwang', 'kaf', 'public', 'maybank'];
-    const momentumIBs = ['m&a', 'malacca', 'ta securities', 'kenanga', 'apex', 'sj securities'];
-
-    const isHero    = heroIBs.some(t => ib.includes(t));
-    const isTopTier = topTierIBs.some(t => ib.includes(t));
-    const isMomentum = momentumIBs.some(t => ib.includes(t));
-
-    const openPrice  = ipo.openPrice || 0;
-    const ipoPrice   = ipo.price || 0;
-    const openPremium = (openPrice && ipoPrice) ? ((openPrice - ipoPrice) / ipoPrice) * 100 : 0;
-    const isStrongGreen = openPremium >= 5.0;
-    const isRed = openPrice > 0 && ipoPrice > 0 && openPrice < ipoPrice;
-
-    if (market.includes('main')) {
-        if (os >= 20 && heroIBs.some(t => ib.includes(t))) return 'A';
-        if (os >= 20) return 'B';
-        if (os >= 5)  return 'B';
-        return 'C';
-    }
-
-    if (market.includes('ace')) {
-        if (ipo.stage === 5 && openPrice > 0) {
-            if (os >= 50 && isStrongGreen) return 'A';
-            if (isHero && isStrongGreen && os >= 3) return 'B';
-            if (os >= 20 && (isMomentum || isTopTier || isHero) && (isStrongGreen || !isRed)) return 'B';
-            if (os >= 20 && isStrongGreen) return 'B';
-            if (os < 10 && !isHero) return 'C';
-            if (isRed) return 'C';
-            if (isStrongGreen && pe <= 18) return 'B';
-            return 'C';
-        }
-        // Stage 4: pre-listing
-        if (os >= 50) return 'A';
-        if (os >= 20) return 'B';
-        return 'C';
-    }
-
-    return null;
+    return IpoRules.recalcOsGrade(ipo);
 }
-
 
 const ipoGrid = document.getElementById('ipo-grid');
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -873,209 +776,7 @@ function updateTabCounts() {
 }
 
 function getIpoGrade(ipo) {
-    if (!ipo.market || ipo.market === 'Unknown') return { grade: 'Unrated', reason: 'Market classification unknown.' };
-    
-    // If it's listed (Stage 5) but does not have an open price yet (still listing morning / data pending),
-    // treat its stage as Stage 4 (subscription results in, waiting for debut).
-    // Stage 6 (menunggu keputusan MITI) belum buka subscription awam — gred sebagai pre-OS (Stage 3).
-    const effectiveStage = (ipo.stage === 5 && !ipo.openPrice) ? 4 : (ipo.stage === 6 ? 3 : ipo.stage);
-    
-    const os = ipo.os || 0;
-    const hasOsData = ipo.os !== undefined && ipo.os !== null && ipo.os > 0; 
-    
-    // PRIORITY 1: Respect manual Predicted Grade from data.js if it exists (only pre-listing before subscription results)
-    if (ipo.predictedGrade && effectiveStage < 4) {
-        return { 
-            grade: ipo.predictedGrade, 
-            reason: ipo.analystInsight || 'Manual rating applied.' 
-        };
-    }
-
-    const perf = ipo.performance || '';
-    const ib = (ipo.ib || '').toLowerCase();
-    const pe = ipo.pe || 0;
-    const sector = (ipo.sector || '').toLowerCase();
-    const fundUse = (ipo.fundUse || '').toLowerCase();
-
-    const superHeroIBs = ["maybank"];
-    const heroIBs = ["public", "kaf", "alliance"];
-    const topTierIBs = ["rhb", "aminvestment", "alliance", "affin hwang", "kaf", "public"];
-    const momentumIBs = ["m&a", "malacca", "ta securities", "kenanga", "apex", "sj securities"];
-    const flatSkews = ["uob", "cimb", "mercury"];
-    
-    const trendingSectors = ["data centre", "solar", "ai", "technology", "renewable energy", "ev", "semiconductor", "digital", "cybersecurity"];
-    const expansionKeywords = ["expansion", "ekspansi", "r&d", "growth", "facility", "kilang", "storage", "working capital", "modal kerja"];
-
-    const isSuperHero = superHeroIBs.some(tier => ib.includes(tier));
-    const isHero = heroIBs.some(tier => ib.includes(tier)) || isSuperHero;
-    const isTopTier = topTierIBs.some(tier => ib.includes(tier)) || isSuperHero;
-    const isMomentum = momentumIBs.some(tier => ib.includes(tier));
-    const isFlatSkew = flatSkews.some(tier => ib.includes(tier));
-    const isTrendingSector = trendingSectors.some(s => sector.includes(s));
-    const isExpansionFund = expansionKeywords.some(k => fundUse.includes(k));
-    
-    const isPositiveOpen = ipo.openPrice && ipo.price && ipo.openPrice > ipo.price;
-    const openPremium = (ipo.openPrice && ipo.price) ? ((ipo.openPrice - ipo.price) / ipo.price) * 100 : 0;
-    const isStrongGreen = openPremium >= 5.0;
-    const isFlat = ipo.openPrice && ipo.price && floatEquals(ipo.openPrice, ipo.price);
-    const isHighPE = pe > 18.0;
-    const isAttractivePE = pe > 0 && pe < 12.0;
-    const isRed = (ipo.openPrice && ipo.price) ? (ipo.openPrice < ipo.price) : false;
-
-    const isMainMarket = ipo.market && ipo.market.toLowerCase().includes('main');
-    const isAceMarket = !isMainMarket;
-
-    if (effectiveStage < 5 && os === 0) {
-        // Calculate Pre-OS Grade
-        let score = 0;
-        if (isSuperHero) score += 50;
-        else if (isHero) score += 40;
-        else if (isTopTier) score += 30;
-        else if (isMomentum) score += 20;
-        
-        if (isFlatSkew) score -= 15;
-        
-        if (isTrendingSector) score += 30;
-        if (isExpansionFund) score += 20;
-        
-        if (isMainMarket) score += 10;
-        else if (isAceMarket) score += 5;
-
-        // Price sweet spot scoring
-        if (ipo.price >= 0.30 && ipo.price <= 0.50) {
-            score += 15; // Retail sweet spot
-        } else if (ipo.price >= 0.75 && ipo.price <= 1.00) {
-            score += 15; // Growth sweet spot
-        } else if (ipo.price > 0 && ipo.price < 0.20) {
-            score -= 15; // Penny stock penalty
-        } else if (ipo.price > 1.00) {
-            score -= 15; // High-ticket stock penalty
-        }
-
-        // Geography premium scoring
-        const geo = (ipo.geography || '').toLowerCase();
-        if (geo === 'penang' && isTrendingSector) {
-            score += 20; // Penang Silicon Valley Premium for Tech/Semicon
-        } else if (geo === 'johor' || geo === 'melaka') {
-            score -= 5; // Dorman geography penalty
-        }
-
-        // OFS and PE Valuation Adjustments
-        if (ipo.ofs === true) {
-            score -= 15; // OFS risk penalty
-        }
-        if (pe > 0 && pe < 13.0) {
-            score += 15; // Cheap/Attractive valuation bonus
-        } else if (pe > 0 && pe < 18.0) {
-            score += 5;  // Reasonable valuation bonus
-        } else if (pe > 22.0) {
-            score -= 10; // Expensive valuation penalty
-        }
-
-        let predGrade = 'C';
-        if (score >= 70) predGrade = 'A';
-        else if (score >= 40) predGrade = 'B';
-
-        // Special case for Automation
-        if (sector.includes('automation') && predGrade === 'B') {
-            return { 
-                grade: `Pred: B`, 
-                reason: `<b>Pre-OS Grade B</b> (Score: ${score})<br>💡 Note: If classified as Tech/Semi, jumps to Grade A.<br>⏳ Waiting for OS data.` 
-            };
-        }
-
-        return { 
-            grade: `Pred: ${predGrade}`, 
-            reason: `<b>Pre-OS Grade ${predGrade}</b> (Score: ${score}/100)<br>⏳ Waiting for OS data.` 
-        };
-    }
-    
-    // Stage 3 & 4 - Subscription Results In
-    if ((effectiveStage === 3 || effectiveStage === 4) && os > 0) {
-        if (isMainMarket) {
-            const isTopIB = heroIBs.some(tier => ib.includes(tier));
-            if (os >= 20 && isTopIB) return { grade: 'A', reason: '<b>Grade A (The Giants):</b><br>🚀 Institutional interest (OS > 20x)<br>🏛️ Top-tier IB backing' };
-            if (os >= 20) return { grade: 'B', reason: '<b>Strong Demand:</b><br>✅ Institutional interest (OS > 20x)' };
-            if (os >= 5) return { grade: 'B', reason: '<b>Moderate Interest:</b><br>✅ Main Market stability' };
-            return { grade: 'C', reason: '<b>Low Momentum:</b><br>⚠️ Low subscription interest' };
-        }
-
-        if (isAceMarket) {
-            const reasonParts = [];
-            if (os >= 50) reasonParts.push(`🚀 Exceptional Demand (${os}x)`);
-            else if (os >= 20) reasonParts.push(`✅ High Demand (${os}x)`);
-            else reasonParts.push(`⚠️ Low Demand (${os}x)`);
-
-            if (isMomentum || isTopTier || isHero) reasonParts.push(`⚡ ${ipo.ib} (Momentum IB)`);
-            if (isTrendingSector) reasonParts.push(`🔥 Trending Sector (${ipo.sector})`);
-            if (isAttractivePE) reasonParts.push(`💎 Attractive P/E (${pe}x)`);
-            if (isExpansionFund) reasonParts.push(`📈 Expansion Fund Use`);
-
-            if (os >= 20) return { grade: 'B', reason: reasonParts.join('<br>') };
-            return { grade: 'C', reason: '<b>Low Momentum:</b><br>⚠️ Low oversubscription (< 20x)' };
-        }
-    }
-
-    if (isMainMarket) {
-        if (isHero && (isStrongGreen || isFlat)) return { grade: 'A', reason: '<b>Elite Setup:</b><br>🏛️ Hero IB Support<br>✅ Positive Day 1 Debut' };
-        
-        if (effectiveStage === 5 && !hasOsData && isStrongGreen) {
-            if ((isTopTier || isMomentum) && !isHighPE) return { grade: 'A', reason: '<b>Momentum Setup:</b><br>✅ Strong Open<br>📊 Healthy Valuation' };
-            if (pe > 0 && pe < 15 && isStrongGreen) return { grade: 'A', reason: `<b>Value Pick:</b><br>💎 Low PE (${pe}x)<br>🚀 Strong Momentum` };
-        }
-        
-        if (isHighPE && isRed) return { grade: 'C', reason: '<b>High Risk:</b><br>❌ Expensive Valuation<br>📉 Negative Performance' };
-        if (isFlat && !isHero) return { grade: 'C', reason: '<b>Lack of Support:</b><br>⚠️ Flat debut without Hero IB' };
-        
-        if (isStrongGreen && pe > 0 && pe < 15 && (isTopTier || isMomentum)) return { grade: 'A', reason: '<b>Solid Performance:</b><br>🚀 Strong Debut<br>💎 Attractive PE' };
-        
-        if (isPositiveOpen && pe > 0 && pe < 15 && (isTopTier || isMomentum || isHero)) return { grade: 'B', reason: '<b>Safe Entry:</b><br>📊 Good Valuation<br>🏛️ Reputable IB' };
-        
-        if (hasOsData && os < 10 && !isHero && !isStrongGreen) return { grade: 'C', reason: '<b>Weak Setup:</b><br>⚠️ Low Demand<br>❌ Poor Opening' };
-        if (isHighPE) return { grade: 'C', reason: '<b>Premium Risk:</b><br>⚠️ PE > 18x' };
-        if (isRed) return { grade: 'C', reason: '<b>Sentiment Risk:</b><br>📉 Negative Market Reaction' };
-        
-        if (os >= 20 && (isTopTier || isHero) && isStrongGreen) return { grade: 'A', reason: '<b>High Demand:</b><br>🚀 OS > 20x<br>🏛️ Strong Support' };
-        if (isStrongGreen && !isHighPE) return { grade: 'A', reason: '<b>Positive Debut:</b><br>✅ Healthy setup' };
-        return { grade: 'C', reason: '<b>Caution:</b><br>⚠️ Moderate demand/valuation' };
-    }
-
-    if (isAceMarket) {
-
-        const reasonParts = [];
-        if (os >= 50) reasonParts.push(`🚀 Exceptional Demand (${os}x)`);
-        else if (os >= 20) reasonParts.push(`✅ High Demand (${os}x)`);
-        
-        if (isMomentum || isTopTier || isHero) reasonParts.push(`⚡ ${ipo.ib} Backing`);
-        if (isTrendingSector) reasonParts.push(`🔥 Trending Sector`);
-        if (isAttractivePE) reasonParts.push(`💎 Attractive P/E (${pe}x)`);
-        if (isExpansionFund) reasonParts.push(`📈 Expansion Fund Use`);
-        if (isStrongGreen) reasonParts.push(`🚀 Strong Opening`);
-
-        if (os >= 50 && isStrongGreen) return { grade: 'A', reason: '<b>Grade A (Exceptional Demand):</b><br>' + reasonParts.join('<br>') };
-        if (isHero && isStrongGreen && os >= 3) return { grade: 'B', reason: reasonParts.join('<br>') };
-        
-        if (effectiveStage === 5 && !hasOsData && isStrongGreen) {
-            if ((isMomentum || isTopTier || isHero) && !isHighPE) return { grade: 'B', reason: reasonParts.join('<br>') };
-        }
-        
-        if (isHighPE) {
-            if (os >= 50 && (isMomentum || isTopTier || isHero)) return { grade: 'B', reason: '<b>Demand Rescue:</b><br>' + reasonParts.join('<br>') };
-            if (pe > 28.0) return { grade: 'C', reason: '<b>Extreme Risk:</b><br>❌ PE > 28x' };
-            if (os < 20) return { grade: 'C', reason: '<b>Valuation Risk:</b><br>⚠️ High PE + Low Demand' };
-        }
-        
-        if (os >= 20 && (isMomentum || isTopTier || isHero) && (isStrongGreen || isFlat)) return { grade: 'B', reason: reasonParts.join('<br>') };
-        if (os >= 20 && isStrongGreen) return { grade: 'B', reason: reasonParts.join('<br>') };
-        
-        if (isFlat && os < 20) return { grade: 'C', reason: '<b>No Momentum:</b><br>⚠️ Flat open + Low Demand' };
-        if (hasOsData && os < 10 && !isHero) return { grade: 'C', reason: '<b>Weak Appetite:</b><br>⚠️ Low OS' };
-        if (!hasOsData && !isStrongGreen) return { grade: 'C', reason: '<b>Unknown Setup:</b><br>⚠️ Missing data' };
-        
-        if (isStrongGreen && !isHighPE) return { grade: 'B', reason: reasonParts.join('<br>') };
-        return { grade: 'C', reason: '<b>Avoid:</b><br>❌ Lack of momentum' };
-    }
-    return { grade: 'Unrated', reason: 'Insufficient data for grading.' };
+    return IpoRules.getIpoGrade(ipo);
 }
 
 function getIpoStrategy(ipo) {
@@ -1355,26 +1056,9 @@ function getIpoSentimentBadge(ipo) {
     return `<span style="font-size: 0.62rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 4px; background: ${bg}; color: ${color}; border: 1px solid ${border}; display: inline-block; white-space: nowrap; margin-top: 0.3rem;">${label}</span>`;
 }
 
-function isIpoOpen(ipo) {
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    if (ipo.mitiWithdrawn) return false;
-    if (ipo.stage === 2) {
-        const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
-        if (closeRaw) {
-            const parsedClose = parseFlexDate(closeRaw);
-            return parsedClose && parsedClose >= today;
-        }
-        return ipo.status === 'MITI Allocation Phase';
-    }
-    if (ipo.stage === 3) {
-        // In Stage 3, check if closing date is in the future
-        if (ipo.closingDate) {
-            const parsedClose = parseFlexDate(ipo.closingDate);
-            return parsedClose && parsedClose >= today;
-        }
-        return ipo.status === 'Application Open';
-    }
+function isIpoOpen(ipo, now = Date.now()) {
+    if (ipo.stage === 2) return IpoRules.isApplicationOpen(ipo, 'miti', now);
+    if (ipo.stage === 3) return IpoRules.isApplicationOpen(ipo, 'public', now);
     return false;
 }
 
@@ -1437,12 +1121,12 @@ function renderIPOs(stage) {
                 if (openA !== openB) return openB - openA;
 
                 if (currentSort === 'performance-desc') {
-                    const perfA = getOpenPerformance(a) || -999;
-                    const perfB = getOpenPerformance(b) || -999;
+                    const perfA = a.openPrice > 0 && a.price > 0 ? getOpenPerformance(a) : -Infinity;
+                    const perfB = b.openPrice > 0 && b.price > 0 ? getOpenPerformance(b) : -Infinity;
                     return perfB - perfA;
                 } else if (currentSort === 'performance-asc') {
-                    const perfA = getOpenPerformance(a) || 999;
-                    const perfB = getOpenPerformance(b) || 999;
+                    const perfA = a.openPrice > 0 && a.price > 0 ? getOpenPerformance(a) : Infinity;
+                    const perfB = b.openPrice > 0 && b.price > 0 ? getOpenPerformance(b) : Infinity;
                     return perfA - perfB;
                 } else if (currentSort === 'name-asc') {
                     return a.companyName.localeCompare(b.companyName);
@@ -1624,10 +1308,9 @@ function renderTodayActionRadar() {
     const container = document.getElementById('today-action-radar');
     if (!container) return;
     const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today.getTime() + 86400000);
-    const yesterday = new Date(today.getTime() - 86400000);
+    const today = malaysiaToday();
+    const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    const yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
 
     const todayEvents = [];
     const timelineEvents = [];
@@ -1689,7 +1372,7 @@ function renderTodayActionRadar() {
                         shariah: ipo.shariah,
                         sub: `Harga IPO: <strong style="color:#38bdf8;">RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'}</strong> · Tutup: <strong>${ipo.closingDate || 'TBA'}</strong>`,
                         extra: `Penaja: ${ipo.ib ? ipo.ib.split(',')[0].trim() : '—'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
-                        stage: 3,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 }
@@ -1704,27 +1387,27 @@ function renderTodayActionRadar() {
                 if (cd.getTime() === today.getTime()) {
                     todayEvents.push({
                         type: 'public-close-today',
-                        badge: '⚠️ PERMOHONAN AWAM TUTUP HARI INI (5:00 PM)',
+                        badge: now >= IpoRules.getDeadline(ipo) ? `⛔ PERMOHONAN AWAM SUDAH DITUTUP (${deadlineLabel(ipo)})` : `⚠️ PERMOHONAN AWAM TUTUP HARI INI (${deadlineLabel(ipo)})`,
                         badgeClass: 'closing',
                         title: ipo.companyName,
                         market: ipo.market,
                         shariah: ipo.shariah,
-                        sub: `Hari Terakhir Langganan Awam! Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
+                        sub: `${now >= IpoRules.getDeadline(ipo) ? 'Langganan awam telah ditutup.' : 'Hari Terakhir Langganan Awam!'} Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
                         extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
-                        stage: 3,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 } else if (cd.getTime() === tomorrow.getTime()) {
                     todayEvents.push({
                         type: 'public-close-tomorrow',
-                        badge: '⏳ PERMOHONAN AWAM TUTUP ESOK (5:00 PM)',
+                        badge: `⏳ PERMOHONAN AWAM TUTUP ESOK (${deadlineLabel(ipo)})`,
                         badgeClass: 'closing',
                         title: ipo.companyName,
                         market: ipo.market,
                         shariah: ipo.shariah,
-                        sub: `Tamat: <strong>${ipo.closingDate} (5:00 PM)</strong> · Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
+                        sub: `Tamat: <strong>${ipo.closingDate} (${deadlineLabel(ipo)})</strong> · Harga: <strong>RM ${ipo.price ? ipo.price.toFixed(2) : '-'}</strong>`,
                         extra: `Penyenaraian: ${ipo.listingDate || 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '') || '?'}`,
-                        stage: 3,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 } else if (cd > today && cd <= new Date(today.getTime() + 35 * 86400000)) {
@@ -1737,7 +1420,7 @@ function renderTodayActionRadar() {
                         date: cd,
                         dateStr: ipo.closingDate,
                         ipo,
-                        stage: 3
+                        stage: ipo.stage
                     });
                 }
             }
@@ -1759,7 +1442,7 @@ function renderTodayActionRadar() {
                         market: ipo.market,
                         shariah: ipo.shariah,
                         sub: `Bumi VIP Quota: <strong style="color:#34d399;">${offerStr}</strong> · Tutup: <strong>${ipo.mitiCloseDate || 'TBA'}</strong>`,
-                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
                         stage: 2,
                         id: ipo.id
                     });
@@ -1775,26 +1458,26 @@ function renderTodayActionRadar() {
                 if (mc.getTime() === today.getTime()) {
                     todayEvents.push({
                         type: 'miti-close-today',
-                        badge: '⚠️ PERMOHONAN MITI TUTUP HARI INI (12:00 PM)',
+                        badge: `⚠️ PERMOHONAN MITI TUTUP HARI INI (${deadlineLabel(ipo, 'miti')})`,
                         badgeClass: 'closing',
                         title: ipo.companyName,
                         market: ipo.market,
                         shariah: ipo.shariah,
-                        sub: `Hari Terakhir MITI! Tutup jam 12:00 tengah hari.`,
-                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        sub: `Hari Terakhir MITI! Tutup jam ${deadlineLabel(ipo, 'miti')} MYT.`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
                         stage: 2,
                         id: ipo.id
                     });
                 } else if (mc.getTime() === tomorrow.getTime()) {
                     todayEvents.push({
                         type: 'miti-close-tomorrow',
-                        badge: '⏳ PERMOHONAN MITI TUTUP ESOK (12:00 PM)',
+                        badge: `⏳ PERMOHONAN MITI TUTUP ESOK (${deadlineLabel(ipo, 'miti')})`,
                         badgeClass: 'closing',
                         title: ipo.companyName,
                         market: ipo.market,
                         shariah: ipo.shariah,
-                        sub: `Tamat: <strong>${ipo.mitiCloseDate} (12:00 PM)</strong>`,
-                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${ipo.predictedGrade || 'B'}`,
+                        sub: `Tamat: <strong>${ipo.mitiCloseDate} (${deadlineLabel(ipo, 'miti')})</strong>`,
+                        extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
                         stage: 2,
                         id: ipo.id
                     });
@@ -1931,11 +1614,10 @@ function renderMitiCountdownStrip() {
     const items = (ipoData || [])
         .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
         .map(ipo => {
-            const close = parseFlexDate(ipo.mitiCloseDate);
-            close.setHours(12, 0, 0, 0); // MITI applications close at 12:00 PM (noon) on closing date
+            const close = IpoRules.getDeadline(ipo, 'miti');
             return { ipo, close };
         })
-        .filter(x => x.close > now)
+        .filter(x => x.close && IpoRules.isApplicationOpen(x.ipo, 'miti', now))
         .sort((a, b) => a.close - b.close);
 
     if (items.length === 0) {
@@ -1979,10 +1661,10 @@ function renderMitiCountdownStrip() {
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin-top:0.2rem;">
                                 ${shariahBadge(ipo)}
-                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</span>
+                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}</span>
                             </div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate}</div>
+                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate} · ${deadlineLabel(ipo, 'miti')} MYT</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
@@ -2007,11 +1689,10 @@ function renderPublicCountdownStrip() {
     const items = (ipoData || [])
         .filter(ipo => ipo.stage === 3 && ipo.closingDate && parseFlexDate(ipo.closingDate))
         .map(ipo => {
-            const close = parseFlexDate(ipo.closingDate);
-            close.setHours(23, 59, 59, 999); // countdown until END of the closing day
+            const close = IpoRules.getDeadline(ipo, 'public');
             return { ipo, close };
         })
-        .filter(x => x.close >= now)
+        .filter(x => x.close && IpoRules.isApplicationOpen(x.ipo, 'public', now))
         .sort((a, b) => a.close - b.close);
 
     if (items.length === 0) {
@@ -2051,10 +1732,10 @@ function renderPublicCountdownStrip() {
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin-top:0.2rem;">
                                 ${shariahBadge(ipo)}
-                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${ipo.predictedGrade || 'B'}</span>
+                                <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}</span>
                             </div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.closingDate}</div>
+                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.closingDate} · ${deadlineLabel(ipo)} MYT</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#38bdf8;">🏛️ ${ibShort || '—'}</span>
@@ -2222,7 +1903,7 @@ function renderStyledVerdict(reason, grade, ipo) {
 
 function createIPOCard(ipo, index = 0) {
     let specificDetails = '';
-    const statusClass = ipo.status?.toLowerCase().includes('live') ? 'live' : (ipo.status?.toLowerCase().includes('open') ? 'open' : 'pending');
+    const statusClass = ipo.stage === 5 ? 'live' : (isIpoOpen(ipo) ? 'open' : 'pending');
     const animDelay = Math.min(index * 0.06, 0.6); // staggered animation, cap at 600ms
     const perfString = getOpenPerfString(ipo);
     const perfValue = getOpenPerformance(ipo);
@@ -2235,22 +1916,18 @@ function createIPOCard(ipo, index = 0) {
 
     let dateDisplay = '<span style="color: var(--text-dim);">TBA</span>';
     if (ipo.stage === 2) {
-        const today = new Date();
-        today.setHours(0,0,0,0);
         const openRaw = ipo.mitiOpenDate || ipo.openingDate;
         const closeRaw = ipo.mitiCloseDate || ipo.closingDate;
         let openStr = 'TBA', closeStr = 'TBA';
         let closeIsClosed = false;
         
         if (closeRaw) {
-            const closeDate = parseFlexDate(closeRaw);
-            if (closeDate && closeDate < today) {
+            const closeDate = IpoRules.getDeadline(ipo, 'miti');
+            if (closeDate && closeDate <= new Date()) {
                 closeIsClosed = true;
             }
-        } else {
-            closeIsClosed = true;
         }
-        
+
         if (closeIsClosed) {
             dateDisplay = `
                 <div style="font-weight: 600; color: var(--text-dim); font-size: 0.75rem;">MITI Status:</div>
@@ -2285,7 +1962,7 @@ function createIPOCard(ipo, index = 0) {
     } else if (ipo.stage === 6) {
         dateDisplay = `
             <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
-            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">⏳ Awaiting Decision</div>
+            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">${ipo.status === 'Public Opening Soon' ? '⏳ Public Opening Soon' : '⏳ Awaiting Decision'}</div>
         `;
     }
 
@@ -2325,13 +2002,15 @@ function createIPOCard(ipo, index = 0) {
         </div>`;
 
     let actionBtn = '';
-    if (ipo.stage === 3) {
+    if (ipo.stage === 3 && isIpoOpen(ipo)) {
         actionBtn = `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <button onclick="alert('Apply via your Online Banking (e-IPO) menu e.g. Maybank2u, CIMB Clicks, etc.')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: none; background: var(--primary);">Apply</button>
                 ${sifuBtn}
                 ${detailsBtn}
             </div>`;
+    } else if (ipo.stage === 3) {
+        actionBtn = commonBtns;
     } else if (ipo.stage === 2) {
         actionBtn = ipo.mitiWithdrawn
             ? `
@@ -2717,9 +2396,9 @@ Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target 
 - Investment Bank / Sponsor: ${ipo.ib || 'TBA'}
 - Use of Funds: ${ipo.fundUse || 'TBA'}
 - Oversubscription Rate: ${ipo.os || 'TBA'}
-- Offer For Sale (OFS): ${ipo.ofs === true ? 'Yes (Has existing shares sold by promoters)' : 'No (Pure public issue)'}
+- Offer For Sale (OFS): ${ipo.ofs === true ? 'Yes (Has existing shares sold by promoters)' : ipo.ofs === false ? 'No (Pure public issue)' : 'Unknown'}
 - Sifu Target Price: RM ${ipo.sifuTargetPrice ? ipo.sifuTargetPrice.toFixed(3) : 'TBA'}
-- Shariah Compliant: ${ipo.shariah ? 'Yes' : 'No'}
+- Shariah Compliant: ${ipo.shariah === true ? 'Yes' : ipo.shariah === false ? 'No' : 'Unknown'}
 - Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}
 - HUNTER SYSTEM GRADE: ${hunterGrade} (A=Strong Buy, B=Scalp Only, C=AVOID — official Hunter algorithm verdict)
 - Hunter Grade Reason: ${hunterReason}
@@ -2737,7 +2416,11 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
                     body: JSON.stringify({ prompt, systemPrompt, model, max_tokens: 1024, temperature: 0.5 })
                 });
                 const d = await res.json();
-                if (!res.ok || d.error) throw new Error(d?.error || 'Proxy error');
+                if (!res.ok || d.error) {
+                    const error = new Error(d?.error || 'Proxy error');
+                    error.status = res.status;
+                    throw error;
+                }
                 return d.text || '';
             };
 
@@ -2746,6 +2429,7 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
                 if (result) return { text: result, model: primaryModel };
                 throw new Error('Empty response');
             } catch (e) {
+                if ([400, 403, 429].includes(e.status)) throw e;
                 console.warn(`[AI Verdict] ${primaryModel} failed: ${e.message}. Falling back to ${fallbackModel}...`);
                 const result = await tryModel(fallbackModel);
                 return { text: result, model: fallbackModel };
@@ -2760,34 +2444,7 @@ IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID
             throw new Error('No analysis generated.');
         }
 
-        // Format markdown to HTML
-        let formattedHtml = responseText
-            .replace(/\n/g, '<br>')
-            .replace(/### (.*?)(<br>|$)/g, '<h5 style="color:#a78bfa; font-family:\'Outfit\',sans-serif; font-size:0.9rem; margin: 0.8rem 0 0.35rem 0;">$1</h5>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<i>$1</i>')
-            .replace(/- (.*?)(<br>|$)/g, '<div style="display:flex; align-items:flex-start; gap:0.4rem; font-size:0.78rem; margin-bottom:0.25rem;"><span style="color:#a78bfa;">•</span><span>$1</span></div>');
-
-        // Style the top level verdict headers nicely
-        formattedHtml = formattedHtml.replace(/🌟 AI VERDICT: (.*?)(<\/h5>|<br>|$)/gi, (match, p1) => {
-            let color = '#818cf8';
-            let bg = 'rgba(99, 102, 241, 0.1)';
-            const verdictUpper = p1.toUpperCase();
-            if (verdictUpper.includes('MUST BUY') || verdictUpper.includes('MUST APPLY')) {
-                color = '#c084fc';
-                bg = 'rgba(139, 92, 246, 0.15)';
-            } else if (verdictUpper.includes('WORTH IT')) {
-                color = '#34d399';
-                bg = 'rgba(16, 185, 129, 0.15)';
-            } else if (verdictUpper.includes('AVOID')) {
-                color = '#f87171';
-                bg = 'rgba(239, 68, 68, 0.15)';
-            } else if (verdictUpper.includes('SCALP')) {
-                color = '#38bdf8';
-                bg = 'rgba(56, 189, 248, 0.15)';
-            }
-            return `🌟 AI VERDICT: <span style="background:${bg}; color:${color}; font-weight:800; padding:0.2rem 0.6rem; border-radius:4px; border:1px solid ${color}40; font-size:0.75rem;">${p1}</span>`;
-        });
+        const formattedHtml = IpoChatUtils.formatMarkdown(responseText);
 
         verdictBox.style.alignItems = 'stretch';
         verdictBox.style.textAlign = 'left';
@@ -3102,33 +2759,12 @@ async function sendAIMessage() {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 
     try {
-        // Keep only active IPOs (Stage 1-4) + 10 most recent listed IPOs (Stage 5) to save tokens
-        const activeIpos = ipoData.filter(i => i.stage < 5);
-        const listedIpos = ipoData.filter(i => i.stage === 5)
-            .sort((a, b) => {
-                const dateA = a.listingDate ? new Date(a.listingDate) : new Date(0);
-                const dateB = b.listingDate ? new Date(b.listingDate) : new Date(0);
-                return dateB - dateA; // newest first
-            })
-            .slice(0, 10);
-        const filteredIpos = [...activeIpos, ...listedIpos];
-
-        const compactIpoData = filteredIpos.map(i => {
-            const gradeObj = getIpoGrade(i);
-            const grade = gradeObj ? gradeObj.grade : 'Unrated';
-            const symb = i.symbol || i.id || 'N/A';
-            const priceVal = i.price ? `RM${i.price.toFixed(3)}` : 'TBA';
-            const osVal = i.os ? `${i.os}x` : 'TBA';
-            const mkt = i.market && i.market.toLowerCase().includes('main') ? 'Main' : 'ACE';
-            const name = (i.companyName || i.id || 'Unknown').substring(0, 30);
-            const sect = (i.sector || 'N/A').substring(0, 25);
-            return `${name} (${symb})|${mkt}|Stage ${i.stage}|${priceVal}|OS:${osVal}|PE:${i.pe || 'TBA'}|Grade:${grade}|${sect}`;
-        }).join('\n');
+        const { context } = IpoChatUtils.buildContext(ipoData, text, getIpoGrade);
 
         const systemPrompt = `You are "Hunter AI", a professional Malaysian IPO assistant for the IPO Hunter website.
 You help users understand IPOs listed on Bursa Malaysia.
-CURRENT IPO DATABASE (Format: Name (Symbol)|Market|Stage|Price|OS|PE|Grade|Sector):
-${compactIpoData}
+Use the supplied IPO reference records as facts. Stage 6 is Post-MITI, waiting for MITI results or public subscription.
+The reference data may be a subset. If a fact is absent, say it is unknown; do not invent prices, dates, or grades.
 Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=scalp, C=avoid) when relevant. Respond in Malay/English mix where appropriate.`;
 
 
@@ -3140,6 +2776,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
             body: JSON.stringify({
                 prompt: 'User question: ' + text,
                 systemPrompt: systemPrompt,
+                context,
                 model: 'llama-3.1-8b-instant',
                 max_tokens: 512,
                 temperature: 0.7
@@ -3161,15 +2798,12 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
             }
         }
 
-        messageContainer.removeChild(typingMsg);
+        if (typingMsg.parentNode) typingMsg.parentNode.removeChild(typingMsg);
         const aiMsg = document.createElement('div');
         aiMsg.className = 'message ai-message';
 
         if (rawText) {
-            aiMsg.innerHTML = rawText
-                .replace(/\n/g, '<br>')
-                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-                .replace(/\*(.*?)\*/g, '<i>$1</i>');
+            aiMsg.innerHTML = IpoChatUtils.formatMarkdown(rawText);
         } else {
             aiMsg.innerHTML = "Sorry, I couldn't get a response. Please try again!";
         }
@@ -3177,7 +2811,7 @@ Keep answers short, helpful, and use emojis. Mention Grade (A=strong swing, B=sc
         messageContainer.appendChild(aiMsg);
     } catch (err) {
         console.error('Chat Error:', err);
-        messageContainer.removeChild(typingMsg);
+        if (typingMsg.parentNode) typingMsg.parentNode.removeChild(typingMsg);
         const errorMsg = document.createElement('div');
         errorMsg.className = 'message ai-message';
         errorMsg.textContent = `⚠️ Error: ${err.message || err}`;

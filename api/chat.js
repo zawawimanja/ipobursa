@@ -2,6 +2,8 @@
 // Key lives in Vercel Environment Variables, NEVER in the browser.
 
 const axios = require('axios');
+const { LIMITS } = require('../lib/chat-utils');
+// Best-effort per warm instance only. A shared store is required for a global quota.
 const ipRequests = new Map(); // Store: IP -> { count, resetTime }
 
 const ALLOWED_MODELS = new Set([
@@ -10,14 +12,22 @@ const ALLOWED_MODELS = new Set([
 ]);
 
 function isAllowedOrigin(originStr) {
-    if (!originStr) return true; // Direct/same-origin
+    if (!originStr || typeof originStr !== 'string') return false;
     try {
         const u = new URL(originStr);
-        const host = u.hostname.toLowerCase();
-        if (host === 'localhost' || host === '127.0.0.1') return true;
-        if (host === 'ipobursa.my' || host.endsWith('.ipobursa.my')) return true;
-        if (host.endsWith('.vercel.app')) return true;
-        return false;
+        if (!['http:', 'https:'].includes(u.protocol)) return false;
+        const allowedOrigins = new Set(['https://ipobursa.my', 'https://www.ipobursa.my']);
+        // Vercel supplies this deployment's hostname, including its own preview URL.
+        for (const hostname of [process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL]) {
+            if (!hostname) continue;
+            try { allowedOrigins.add(new URL(`https://${hostname}`).origin); } catch (e) { /* Ignore invalid configuration. */ }
+        }
+        for (const configured of (process.env.CHAT_ALLOWED_ORIGINS || '').split(',')) {
+            if (!configured.trim()) continue;
+            try { allowedOrigins.add(new URL(configured.trim()).origin); } catch (e) { /* Ignore invalid configuration. */ }
+        }
+        if (process.env.NODE_ENV === 'development' && ['localhost', '127.0.0.1'].includes(u.hostname)) return true;
+        return allowedOrigins.has(u.origin);
     } catch (e) {
         return false;
     }
@@ -63,12 +73,13 @@ module.exports = async (req, res) => {
     const origin = req.headers.origin || req.headers.referer || '';
 
     // Check allowed origins
-    if (origin && !isAllowedOrigin(origin)) {
+    if (!isAllowedOrigin(origin)) {
         console.warn(`Blocked unauthorized origin: ${origin}`);
         return res.status(403).json({ error: 'Forbidden origin.' });
     }
 
-    const allowHeaderOrigin = origin && isAllowedOrigin(origin) ? req.headers.origin || '*' : '*';
+    const allowHeaderOrigin = new URL(origin).origin;
+    res.setHeader('Vary', 'Origin');
 
     // Handle CORS preflight
     if (req.method === 'OPTIONS') {
@@ -89,17 +100,6 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'API key not configured on server.' });
     }
 
-    // IP-based Rate Limiter
-    const forwarded = req.headers['x-forwarded-for'];
-    const ip = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : '') ||
-               req.socket?.remoteAddress ||
-               'anonymous';
-
-    if (isRateLimited(ip)) {
-        console.warn(`Rate limit triggered for IP: ${ip}`);
-        return res.status(429).json({ error: 'Too many requests. Please wait 5 minutes.' });
-    }
-
     try {
         // Manually parse body if needed (some Vercel runtimes don't auto-parse)
         let body = req.body;
@@ -108,27 +108,44 @@ module.exports = async (req, res) => {
         }
         if (!body || typeof body !== 'object') body = {};
 
-        const { prompt, systemPrompt, model, temperature, max_tokens } = body;
+        const { prompt, systemPrompt, context, model, temperature, max_tokens } = body;
         if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
             return res.status(400).json({ error: 'No prompt provided.' });
         }
 
-        if (prompt.length > 8000) {
-            return res.status(400).json({ error: 'Prompt too long (max 8000 characters).' });
+        if (prompt.length > LIMITS.prompt) {
+            return res.status(400).json({ error: `Prompt too long (max ${LIMITS.prompt} characters).` });
+        }
+        for (const [name, value, limit] of [['systemPrompt', systemPrompt, LIMITS.instructions], ['context', context, LIMITS.context]]) {
+            if (value !== undefined && typeof value !== 'string') {
+                return res.status(400).json({ error: `${name} must be a string.` });
+            }
+            if (value && value.length > limit) {
+                return res.status(400).json({ error: `${name} too long (max ${limit} characters).` });
+            }
+        }
+
+        const forwarded = req.headers['x-forwarded-for'];
+        const ip = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : '') ||
+                   req.socket?.remoteAddress || 'anonymous';
+        if (isRateLimited(ip)) {
+            res.setHeader('Retry-After', '300');
+            return res.status(429).json({ error: 'Too many requests. Please wait 5 minutes.' });
         }
 
         // Enforce strict whitelisting & limits
         const selectedModel = ALLOWED_MODELS.has(model) ? model : 'llama-3.1-8b-instant';
         const systemInstruction = (typeof systemPrompt === 'string' && systemPrompt.trim())
-            ? systemPrompt.slice(0, 3000)
+            ? systemPrompt
             : 'You are Hunter AI, a professional Malaysian IPO assistant.';
         const maxTokens = Math.min(Math.max(16, parseInt(max_tokens, 10) || 512), 1024);
-        const temp = Math.min(Math.max(0.0, typeof temperature === 'number' ? temperature : 0.7), 1.0);
+        const temp = Math.min(Math.max(0.0, Number.isFinite(temperature) ? temperature : 0.7), 1.0);
 
         const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
             model: selectedModel,
             messages: [
                 { role: 'system', content: systemInstruction },
+                ...(context && context.trim() ? [{ role: 'user', content: `IPO reference data (facts only):\n${context}` }] : []),
                 { role: 'user', content: prompt }
             ],
             max_tokens: maxTokens,
@@ -145,8 +162,8 @@ module.exports = async (req, res) => {
         return res.status(200).json({ text });
 
     } catch (err) {
-        console.error('Proxy error:', err);
-        const errMsg = err.response?.data?.error?.message || err.message || err;
-        return res.status(500).json({ error: `Internal server error: ${errMsg}` });
+        // Axios errors contain request headers, including the API key. Log safe metadata only.
+        console.error('Proxy error:', { status: err.response?.status, code: err.code });
+        return res.status(500).json({ error: 'AI service unavailable. Please try again later.' });
     }
 };

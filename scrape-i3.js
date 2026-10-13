@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { updateSourceStatus } = require('./lib/sync-health');
 
 const DATA_JSON = path.join(__dirname, 'data.json');
 const DATA_JS = path.join(__dirname, 'data.js');
@@ -42,6 +43,7 @@ function saveDatabase(data) {
         fs.writeFileSync(DATA_JS, jsContent, 'utf8');
     } catch (e) {
         console.error('Error saving database:', e.message);
+        throw e;
     }
 }
 
@@ -76,18 +78,23 @@ async function scrapeI3PricesAxios() {
         
         if (listedIpos.length === 0) {
             console.log('No listed IPOs to update.');
+            updateSourceStatus('i3investor', { status: 'skipped', message: 'No listed IPOs to refresh.' });
             return;
         }
 
         console.log(`Found ${listedIpos.length} listed IPOs to update from i3investor using Axios.`);
         
         let updatedCount = 0;
+        let failedCount = 0;
         let pendingSave = false;
 
         for (let i = 0; i < listedIpos.length; i++) {
             let ipo = listedIpos[i];
             let symbolClean = ipo.symbol.replace(/\[.*?\]/g, '').trim();
-            if (!symbolClean) continue;
+            if (!symbolClean) {
+                failedCount++;
+                continue;
+            }
             
             let url = `https://klse.i3investor.com/web/stock/overview/${symbolClean}`;
             
@@ -129,9 +136,11 @@ async function scrapeI3PricesAxios() {
                         }
                     } else {
                         console.log(`   -> Invalid price format: ${priceText}`);
+                        failedCount++;
                     }
                 } else {
                     console.log(`   -> Price element not found for ${symbolClean}`);
+                    failedCount++;
                 }
                 
                 // Polite delay: 1.0 to 1.5 seconds to avoid rate limiting
@@ -139,6 +148,7 @@ async function scrapeI3PricesAxios() {
                 
             } catch (err) {
                 console.error(`❌ Error fetching ${symbolClean}: ${err.message}`);
+                failedCount++;
             }
         }
 
@@ -148,10 +158,19 @@ async function scrapeI3PricesAxios() {
         }
 
         console.log(`\nScraping finished. Successfully updated ${updatedCount} stock prices.`);
+        const status = updatedCount === 0 ? 'failed' : failedCount > 0 ? 'partial' : 'success';
+        updateSourceStatus('i3investor', {
+            status,
+            message: `${updatedCount} prices refreshed; ${failedCount} could not be refreshed.`
+        });
+        if (status !== 'success') process.exitCode = 1;
 
     } catch (e) {
         console.error('Failed to run Axios-based i3investor scraper:', e);
+        updateSourceStatus('i3investor', { status: 'failed', message: 'Price sync could not complete.' });
+        process.exitCode = 1;
     }
 }
 
-scrapeI3PricesAxios();
+module.exports = { scrapeI3PricesAxios };
+if (require.main === module) scrapeI3PricesAxios();

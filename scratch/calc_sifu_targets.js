@@ -27,7 +27,7 @@ try {
     // IB Performance Score (data-driven from historical win rates)
     const ibPerf = {};
     const ibCalc = {};
-    data.filter(d => d.stage >= 5 && d.price > 0 && d.highPrice > 0).forEach(d => {
+    data.filter(d => d.stage === 5 && d.price > 0 && d.highPrice > 0).forEach(d => {
         const ib = (d.ib || 'unknown').toLowerCase().trim();
         if (!ibCalc[ib]) ibCalc[ib] = { wins: 0, total: 0, avgRet: 0 };
         ibCalc[ib].total++;
@@ -184,7 +184,10 @@ try {
     const jsContent = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
     fs.writeFileSync(jsPath, jsContent);
     console.log('Successfully saved to data.js!');
+    fs.writeFileSync(path.join(__dirname, '..', 'data_export.js'), jsContent);
+    console.log('Successfully saved to data_export.js!');
     
 } catch(e) {
     console.error('Error:', e);
+    process.exitCode = 1;
 }

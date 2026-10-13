@@ -29,32 +29,32 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test sync and website logic
+        run: npm test
+
       - name: Sync iSaham (API rasmi, dihadkan 1x sehari untuk jimat kredit)
         env:
           ISAHAM_API_TOKEN: ${{ secrets.ISAHAM_API_TOKEN }}
         run: |
           if [ -n "$ISAHAM_API_TOKEN" ]; then
-            node sync-isaham-api.js --no-push
+            node scripts/run-sync-step.js isaham-api --managed-status sync-isaham-api.js --no-push
           else
-            echo "ℹ️ ISAHAM_API_TOKEN tidak ditetapkan dalam GitHub Secrets — langkau."
+            node scripts/run-sync-step.js isaham-api --skip "API token is not configured."
           fi
         continue-on-error: true
 
       - name: Sync Public IPO Prospectuses & Timetables (KLSE Screener)
         run: |
-          node sync-public-ipos.js
+          node scripts/run-sync-step.js klse sync-public-ipos.js
         continue-on-error: true
 
-      - name: Run Scrapers (i3investor), Recalculate Targets, and Archive Daily Groups
-        run: |
-          node scrape-i3.js
-          node scratch/calc_sifu_targets.js
-          node archive-groups.js
+      - name: Sync i3investor prices
+        run: node scripts/run-sync-step.js i3investor --managed-status scrape-i3.js
         continue-on-error: true
 
       - name: Sync MITI Portal Dates & Active Offers (SPSKB 3.0)
         run: |
-          node scratch/sync-miti-portal-dates.js
+          node scripts/run-sync-step.js miti-portal scratch/sync-miti-portal-dates.js
         continue-on-error: true
 
       - name: Sync MITI Applicants (login terus, tanpa CAPTCHA)
@@ -62,17 +62,32 @@ jobs:
           MITI_USERNAME: ${{ secrets.MITI_USERNAME }}
           MITI_PASSWORD: ${{ secrets.MITI_PASSWORD }}
         run: |
-          node scratch/sync-miti-applicants-login.js --no-push
+          if [ -n "$MITI_USERNAME" ] && [ -n "$MITI_PASSWORD" ]; then
+            node scripts/run-sync-step.js miti-applicants scratch/sync-miti-applicants-login.js --no-push
+          else
+            node scripts/run-sync-step.js miti-applicants --skip "MITI credentials are not configured."
+          fi
         continue-on-error: true
 
       - name: Sync Shariah Status (senarai rasmi SC)
         run: |
-          node sync-shariah.js --no-push
+          node scripts/run-sync-step.js shariah sync-shariah.js --no-push
+        continue-on-error: true
+
+      - name: Recalculate targets from final source data
+        run: node scripts/run-sync-step.js target-calculation scratch/calc_sifu_targets.js
+        continue-on-error: true
+
+      - name: Archive daily groups
+        run: node scripts/run-sync-step.js group-archive archive-groups.js
         continue-on-error: true
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json data.js data_export.js overrides.json sync-status.js isaham-api-status.json archive/
+          git add data.json data.js data_export.js overrides.json sync-status.js archive/
+          if [ -f isaham-api-status.json ]; then
+            git add isaham-api-status.json
+          fi
           git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git pull --rebase origin main && git push)

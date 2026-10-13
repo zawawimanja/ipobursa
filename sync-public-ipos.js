@@ -11,10 +11,9 @@
  * Guna: node sync-public-ipos.js
  */
 
-const axios = require('axios');
-const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const { resolveLifecycle } = require('./lib/ipo-rules');
 
 const ROOT = __dirname;
 const DATA_JSON = path.join(ROOT, 'data.json');
@@ -97,6 +96,8 @@ function matchEntry(data, companyName, ticker) {
 }
 
 async function main() {
+    const axios = require('axios');
+    const cheerio = require('cheerio');
     console.log('🔄 Menyelaras data IPO Awam daripada KLSE Screener...');
 
     let html;
@@ -190,8 +191,24 @@ async function main() {
     const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
     const overrides = fs.existsSync(OVERRIDES_JSON) ? JSON.parse(fs.readFileSync(OVERRIDES_JSON, 'utf8')) : {};
 
-    const now = new Date();
-    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const updatedCount = applyPublicRecords(upcoming, data, overrides);
+
+    if (updatedCount === 0) {
+        console.log('✅ Semua data IPO awam sudah terkini. Tiada perubahan.');
+        return;
+    }
+
+    const js = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
+
+    fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
+    fs.writeFileSync(DATA_JS, js, 'utf8');
+    fs.writeFileSync(DATA_EXPORT_JS, js, 'utf8');
+    fs.writeFileSync(OVERRIDES_JSON, JSON.stringify(overrides, null, 4), 'utf8');
+
+    console.log(`\n🎉 Berjaya mengemas kini ${updatedCount} IPO! data.json, data.js, overrides.json disimpan.`);
+}
+
+function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
     let updatedCount = 0;
 
     upcoming.forEach(s => {
@@ -223,25 +240,9 @@ async function main() {
             ipo.symbol = s.ticker; changed = true;
         }
 
-        // Auto-compute correct stage based on confirmed dates
-        const closeD = s.closeDate ? parseFlexDate(s.closeDate) : null;
-        const listD = s.listingDate ? parseFlexDate(s.listingDate) : null;
-        if (listD) listD.setHours(0, 0, 0, 0);
-        if (closeD) closeD.setHours(23, 59, 59, 999);
-
-        let newStage = ipo.stage;
-        if (listD && listD <= today) {
-            newStage = 5; // Listed
-        } else if (closeD && closeD < now) {
-            newStage = Math.max(ipo.stage, 4); // Pre-Listing (only upgrade)
-        } else if (closeD && closeD >= now) {
-            newStage = Math.max(ipo.stage, 3); // Application Open (only upgrade)
-        }
-
-        if (newStage !== ipo.stage) {
-            const stageNames = { 3: 'Application Open', 4: 'Pre-Listing', 5: 'Listed' };
-            ipo.stage = newStage;
-            ipo.status = stageNames[newStage] || ipo.status;
+        const lifecycle = resolveLifecycle(ipo, now);
+        if (lifecycle.stage !== ipo.stage || lifecycle.status !== ipo.status) {
+            Object.assign(ipo, lifecycle);
             changed = true;
         }
 
@@ -257,19 +258,10 @@ async function main() {
         }
     });
 
-    if (updatedCount === 0) {
-        console.log('✅ Semua data IPO awam sudah terkini. Tiada perubahan.');
-        return;
-    }
-
-    const js = `const IPO_DATA = ${JSON.stringify(data, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}\n`;
-
-    fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
-    fs.writeFileSync(DATA_JS, js, 'utf8');
-    fs.writeFileSync(DATA_EXPORT_JS, js, 'utf8');
-    fs.writeFileSync(OVERRIDES_JSON, JSON.stringify(overrides, null, 4), 'utf8');
-
-    console.log(`\n🎉 Berjaya mengemas kini ${updatedCount} IPO! data.json, data.js, overrides.json disimpan.`);
+    return updatedCount;
 }
 
-main().catch(e => { console.error('Fatal:', e); process.exit(1); });
+module.exports = { applyPublicRecords, matchEntry, parseInlineDate, main };
+if (require.main === module) {
+    main().catch(e => { console.error('Fatal:', e); process.exitCode = 1; });
+}

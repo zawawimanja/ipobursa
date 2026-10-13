@@ -1,19 +1,22 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+let axios;
+let cheerio;
 const fs = require('fs');
 const path = require('path');
 const { normalizeName, isSafeFuzzyMatch, isJunkCompanyName, toDisplayDate } = require('./lib/ipo-utils');
+const { resolveLifecycle } = require('./lib/ipo-rules');
+const { updateSourceStatus } = require('./lib/sync-health');
 
 // Load .env manually if exists to protect credentials
-const envPath = path.join(__dirname, '.env');
-if (fs.existsSync(envPath)) {
+function loadEnv() {
+    const envPath = path.join(__dirname, '.env');
+    if (!fs.existsSync(envPath)) return;
     const envLines = fs.readFileSync(envPath, 'utf8').split('\n');
     envLines.forEach(line => {
         const parts = line.split('=');
         if (parts.length >= 2) {
             const key = parts[0].trim();
             const val = parts.slice(1).join('=').trim().replace(/^['"]|['"]$/g, '');
-            process.env[key] = val;
+            if (!(key in process.env)) process.env[key] = val;
         }
     });
 }
@@ -274,12 +277,15 @@ function runIsahamScraperQuiet() {
 
 // Jejak sama ada mana-mana halaman iSaham berjaya dimuat turun (network/live).
 let isahamNetworkOk = false;
+let isahamDegraded = false;
+let isahamObservations = [];
 
 async function fetchListPage(key, url) {
     // 1) Cache segar dahulu
     const cached = readIsahamCache(key);
     if (cached && isahamCacheFresh(key) && isValidIsahamHtml(key, cached)) {
         isahamNetworkOk = true;
+        isahamObservations.push(fs.statSync(isahamCachePath(key)).mtimeMs);
         console.log(`[iSaham] ${key}: guna cache segar (${new Date(fs.statSync(isahamCachePath(key)).mtimeMs).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' })})`);
         return cheerio.load(cached);
     }
@@ -290,12 +296,13 @@ async function fetchListPage(key, url) {
         if (isValidIsahamHtml(key, response.data)) {
             writeIsahamCache(key, response.data);
             isahamNetworkOk = true;
+            isahamObservations.push(Date.now());
             console.log(`[iSaham] ${key}: axios berjaya — cache dikemas kini.`);
             return cheerio.load(response.data);
         }
         console.log(`[iSaham] ${key}: axios pulang halaman challenge — guna Puppeteer.`);
     } catch (e) {
-        if (e.response && e.response.status === 404) return null;
+        if (e.response && e.response.status === 404) { isahamDegraded = true; return null; }
         console.log(`[iSaham] ${key}: axios gagal (${e.message}) — guna Puppeteer.`);
     }
 
@@ -314,12 +321,13 @@ async function fetchListPage(key, url) {
             if (isValidIsahamHtml(key, response.data)) {
                 writeIsahamCache(key, response.data);
                 isahamNetworkOk = true;
+                isahamObservations.push(Date.now());
                 console.log(`[iSaham] ${key}: axios+cookies Chrome berjaya — cache dikemas kini.`);
                 return cheerio.load(response.data);
             }
             console.log(`[iSaham] ${key}: axios+cookies pulang halaman challenge — cookies mungkin expired.`);
         } catch (e) {
-            if (e.response && e.response.status === 404) return null;
+            if (e.response && e.response.status === 404) { isahamDegraded = true; return null; }
             console.log(`[iSaham] ${key}: axios+cookies gagal (${e.message}).`);
         }
     } else {
@@ -327,21 +335,24 @@ async function fetchListPage(key, url) {
     }
 
     // 3) Refresh via Puppeteer persistent session
-    runIsahamScraperQuiet();
+    const refreshedOk = runIsahamScraperQuiet();
     const refreshed = readIsahamCache(key);
-    if (refreshed && isValidIsahamHtml(key, refreshed)) {
+    if (refreshedOk && refreshed && isahamCacheFresh(key) && isValidIsahamHtml(key, refreshed)) {
         isahamNetworkOk = true;
+        isahamObservations.push(fs.statSync(isahamCachePath(key)).mtimeMs);
         console.log(`[iSaham] ${key}: cache dimuat turun via Puppeteer session.`);
         return cheerio.load(refreshed);
     }
 
     // 4) Cache stale sebagai pilihan terakhir
     if (cached && isValidIsahamHtml(key, cached)) {
+        isahamDegraded = true;
         const mtime = new Date(fs.statSync(isahamCachePath(key)).mtimeMs).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
         console.log(`⚠️ [iSaham] ${key}: guna cache STALE (${mtime}) — sesi Cloudflare mungkin tamat, run: node scratch/scrape-isaham.js`);
         return cheerio.load(cached);
     }
 
+    isahamDegraded = true;
     return null;
 }
 
@@ -738,101 +749,18 @@ function parseFlexDate(str) {
     return null;
 }
 
-function autoPromoteIPOs(finalData) {
-    const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
+function autoPromoteIPOs(finalData, now = Date.now()) {
     let promotedCount = 0;
     finalData.forEach(ipo => {
-        if (ipo.stage === 5) return;
-        
-        if (ipo.status === 'Listed' || (ipo.year && ipo.year < 2026)) {
-            ipo.stage = 5;
-            ipo.status = 'Listed';
+        const lifecycle = resolveLifecycle(ipo, now);
+        if (ipo.stage !== lifecycle.stage || ipo.status !== lifecycle.status) {
+            Object.assign(ipo, lifecycle);
             promotedCount++;
-            console.log(`  [Auto-Promote] ${ipo.companyName} (Status Listed or Year < 2026 -> Stage 5)`);
-        }
-
-        // Stage 2: MITI phase — promote to Stage 3 (public open) or Stage 6 (post-MITI, waiting result)
-        if (ipo.stage === 2) {
-            const closeStr = ipo.mitiCloseDate || ipo.closingDate;
-            if (closeStr) {
-                const closeDate = parseFlexDate(closeStr);
-                if (closeDate && closeDate < now) {
-                    if (ipo.closingDate && parseFlexDate(ipo.closingDate)) {
-                        ipo.stage = 3;
-                        ipo.status = 'Application Open';
-                    } else {
-                        ipo.stage = 6;
-                        ipo.status = 'Menunggu Keputusan MITI';
-                    }
-                    promotedCount++;
-                    console.log(`  [Auto-Promote] ${ipo.companyName} (MITI close ${closeStr} passed -> ${ipo.stage === 6 ? 'Stage 6 Post-MITI' : 'Stage 3 Public'})`);
-                }
-            }
-        }
-
-        // Stage 6 (Post-MITI): naik ke Public/Pre-Listing bila permohonan awam dibuka
-        if (ipo.stage === 6 && ipo.closingDate) {
-            const closeDate = parseFlexDate(ipo.closingDate);
-            if (closeDate) {
-                ipo.stage = closeDate >= now ? 3 : 4;
-                ipo.status = closeDate >= now ? 'Application Open' : 'Pre-Listing';
-                promotedCount++;
-                console.log(`  [Auto-Promote] ${ipo.companyName} (Public app ${ipo.closingDate} -> Stage ${ipo.stage})`);
-            }
-        }
-
-        if (ipo.stage >= 3) {
-            if (ipo.listingDate) {
-                const listDate = parseFlexDate(ipo.listingDate);
-                if (listDate) {
-                    listDate.setHours(0, 0, 0, 0);
-                    if (listDate <= today) {
-                        ipo.stage = 5;
-                        ipo.status = 'Listed';
-                        promotedCount++;
-                        console.log(`  [Auto-Promote] ${ipo.companyName} (Listing date ${ipo.listingDate} passed -> Stage 5)`);
-                    } else if (ipo.closingDate) {
-                        const closeDate = parseFlexDate(ipo.closingDate);
-                        if (closeDate && closeDate < now) {
-                            if (ipo.stage === 3) {
-                                ipo.stage = 4;
-                                ipo.status = 'Pre-Listing';
-                                console.log(`  [Auto-Promote] ${ipo.companyName} (Closing date passed -> Stage 4)`);
-                            }
-                        }
-                    }
-                }
-            } else if (ipo.closingDate) {
-                const closeDate = parseFlexDate(ipo.closingDate);
-                if (closeDate && closeDate < now) {
-                    if (ipo.stage === 3) {
-                        ipo.stage = 4;
-                        ipo.status = 'Pre-Listing';
-                        console.log(`  [Auto-Promote] ${ipo.companyName} (Closing date passed -> Stage 4)`);
-                    }
-                }
-            }
-        }
-
-        // Refresh status for open applications (Stage 3 with a future closing date)
-        if (ipo.stage === 3 && ipo.status !== 'Listed' && ipo.closingDate) {
-            const cd = parseFlexDate(ipo.closingDate);
-            if (cd && cd >= now) {
-                let openingFuture = false;
-                if (ipo.openingDate) {
-                    const od = new Date(ipo.openingDate);
-                    if (!isNaN(od.getTime())) openingFuture = od > now;
-                }
-                if (!openingFuture) ipo.status = 'Application Open';
-            }
+            console.log(`  [Auto-Promote] ${ipo.companyName} -> Stage ${ipo.stage} (${ipo.status})`);
         }
     });
     return promotedCount;
 }
-
 function predictGrade(ipo) {
     const ib = (ipo.ib || '').toLowerCase();
     const pe = ipo.pe || 0;
@@ -949,6 +877,12 @@ function predictGrade(ipo) {
 }
 
 async function main() {
+    loadEnv();
+    axios = require('axios');
+    cheerio = require('cheerio');
+    isahamNetworkOk = false;
+    isahamDegraded = false;
+    isahamObservations = [];
     console.log('--- Starting IPO Hunter Sync ---');
     
     let existingData = [];
@@ -1005,23 +939,21 @@ async function main() {
     // Generate data.js
     const jsContent = `const IPO_DATA = ${JSON.stringify(existingData, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = IPO_DATA;\n}`;
     fs.writeFileSync(DATA_JS_FILE, jsContent);
+    fs.writeFileSync(path.join(__dirname, 'data_export.js'), jsContent);
 
     // Generate sync-status.js
-    const stamp = new Date().toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
-    const syncStatus = {
-        lastSync: stamp,
-        status: "Success",
-        totalIpos: existingData.length
-    };
-    const statusJsContent = `const SYNC_STATUS = ${JSON.stringify(syncStatus, null, 2)};\n\nif (typeof module !== 'undefined' && module.exports) {\n    module.exports = SYNC_STATUS;\n}`;
-    fs.writeFileSync(path.join(__dirname, 'sync-status.js'), statusJsContent);
+    const degraded = !isahamNetworkOk || isahamDegraded;
+    publishScrapeStatus({
+        networkOk: isahamNetworkOk, degraded,
+        observations: isahamObservations, totalIpos: existingData.length
+    });
 
     console.log(`\n--- Sync Complete ---`);
     console.log(`Total IPOs: ${existingData.length} (Added ${existingData.length - initialCount} new)`);
     console.log(`Files updated: data.json, data.js, sync-status.js`);
 
-    if (!isahamNetworkOk) {
-        console.log(`\n🔴 [iSaham] DEGRADED — tiada halaman iSaham dimuat turun untuk run ini (403/Cloudflare).`);
+    if (degraded) {
+        console.log(`\n🔴 [iSaham] DEGRADED — sebahagian atau semua sumber gagal; cache lama dikekalkan.`);
         console.log(`   Data tarikh bergantung pada cache — jika ia tidak dikemas kini lebih 26 jam, tarikh akan jadi stale/hilang.`);
         console.log(`   PENYELESAIAN: login semula isaham.my dalam Chrome, lepas tu run: bash setup-auto-runner.sh`);
         await alertIsahamDegraded('Sesi isaham 403 — cookies Chrome expired atau Chrome tak jalan.');
@@ -1030,7 +962,8 @@ async function main() {
     }
 
     // Auto git push to update live dashboard
-    await gitPush();
+    if (!process.argv.includes('--no-push')) await gitPush();
+    if (degraded) process.exitCode = 1;
 }
 
 async function gitPush() {
@@ -1051,4 +984,25 @@ async function gitPush() {
     }
 }
 
-main().catch(console.error);
+function publishScrapeStatus({ networkOk, degraded, observations, totalIpos, now = Date.now() }, root = __dirname) {
+    const timestamps = observations.filter(time => Number.isFinite(time));
+    const freshness = timestamps.length > 0 ? {
+        // Full source freshness is limited by its oldest accepted page.
+        lastSuccess: new Date(Math.min(...timestamps)).toISOString()
+    } : {};
+    return updateSourceStatus('isaham-scrape', {
+        status: !networkOk ? 'failed' : (degraded ? 'partial' : 'success'),
+        message: degraded ? 'Data disimpan dengan cache lama atau sumber iSaham tidak lengkap.' : 'Halaman iSaham diterima atau cache masih segar.',
+        now: new Date(now), ...freshness,
+        legacy: { totalIpos }
+    }, root);
+}
+
+module.exports = { autoPromoteIPOs, publishScrapeStatus, main };
+if (require.main === module) {
+    main().catch(error => {
+        updateSourceStatus('isaham-scrape', { status: 'failed', message: error.message });
+        console.error(error.message);
+        process.exitCode = 1;
+    });
+}
