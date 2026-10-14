@@ -12,7 +12,7 @@ function sourceHealthRows(status, now = Date.now()) {
         'isaham-api': 'iSaham', 'isaham-upcoming': 'iSaham · IPO akan datang',
         'isaham-live': 'iSaham · Harga', 'isaham-scrape': 'iSaham · Semakan laman',
         klse: 'Jadual IPO awam', balloting: 'Keputusan balloting', i3investor: 'Harga pasaran',
-        'target-calculation': 'Sasaran harga', 'group-archive': 'Arkib harian',
+        'target-calculation': 'Sasaran harga', 'group-archive': 'Arkib harian', 'ipo-pages': 'Profil IPO',
         'miti-portal': 'MITI · Tawaran', 'miti-applicants': 'MITI · Pemohon', shariah: 'Status syariah'
     };
     return Object.entries(status.sources || {}).map(([name, source]) => {

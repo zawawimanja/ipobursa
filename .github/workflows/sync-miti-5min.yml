@@ -51,9 +51,12 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Regenerate IPO profiles from final source data
+        run: node scripts/run-sync-step.js ipo-pages generate-ipo-pages.js
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json data.js data_export.js overrides.json sync-status.js
+          git add data.json data.js data_export.js overrides.json sync-status.js ipo/ sitemap.xml
           git diff --staged --quiet || (git commit -m "Automated update: MITI applicants" && git pull --rebase origin main && git push)

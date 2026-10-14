@@ -1,5 +1,4 @@
 {
-  "buildCommand": "node generate-ipo-pages.js",
   "headers": [
     {
       "source": "/data.js",

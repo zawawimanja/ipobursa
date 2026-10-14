@@ -549,7 +549,7 @@ ipos.forEach((ipo) => {
 `;
 
     const filePath = path.join(ipoDir, `${slug}.html`);
-    fs.writeFileSync(filePath, htmlContent, 'utf8');
+    fs.writeFileSync(filePath, htmlContent.replace(/[\t ]+$/gm, ''), 'utf8');
     generatedPages.push({
         slug,
         companyName,
@@ -707,7 +707,7 @@ const directoryHtml = `<!DOCTYPE html>
 </html>
 `;
 
-fs.writeFileSync(path.join(ipoDir, 'index.html'), directoryHtml, 'utf8');
+fs.writeFileSync(path.join(ipoDir, 'index.html'), directoryHtml.replace(/[\t ]+$/gm, ''), 'utf8');
 console.log('Generated /ipo/index.html directory successfully');
 
 // Regenerate sitemap.xml
