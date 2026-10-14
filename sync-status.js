@@ -1,5 +1,5 @@
 const SYNC_STATUS = {
-  "lastSync": "14/10/2026, 11:50:41 am",
+  "lastSync": "14/10/2026, 5:28:43 pm",
   "status": "Partial",
   "source": "group-archive",
   "totalIpos": 307,
@@ -7,49 +7,49 @@ const SYNC_STATUS = {
     "miti-portal": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T09:05:18.597Z",
+      "lastAttempt": "2026-10-14T09:28:38.002Z",
       "message": "Sync failed (exit 1)."
     },
     "miti-applicants": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T09:05:20.771Z",
+      "lastAttempt": "2026-10-14T09:28:40.034Z",
       "message": "Sync failed (exit 1)."
     },
     "isaham-api": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T03:43:42.174Z",
+      "lastAttempt": "2026-10-14T09:19:00.002Z",
       "message": "API token is not configured."
     },
     "klse": {
       "status": "success",
-      "lastSuccess": "2026-10-14T03:43:43.340Z",
-      "lastAttempt": "2026-10-14T03:43:43.340Z",
+      "lastSuccess": "2026-10-14T09:19:01.585Z",
+      "lastAttempt": "2026-10-14T09:19:01.585Z",
       "message": "Sync completed."
     },
     "i3investor": {
       "status": "partial",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T03:50:35.558Z",
-      "message": "112 prices refreshed; 1 could not be refreshed."
+      "lastAttempt": "2026-10-14T09:28:37.456Z",
+      "message": "110 prices refreshed; 3 could not be refreshed."
     },
     "shariah": {
       "status": "success",
-      "lastSuccess": "2026-10-14T03:50:41.110Z",
-      "lastAttempt": "2026-10-14T03:50:41.110Z",
+      "lastSuccess": "2026-10-14T09:28:42.940Z",
+      "lastAttempt": "2026-10-14T09:28:42.940Z",
       "message": "Sync completed."
     },
     "target-calculation": {
       "status": "success",
-      "lastSuccess": "2026-10-14T03:50:41.225Z",
-      "lastAttempt": "2026-10-14T03:50:41.225Z",
+      "lastSuccess": "2026-10-14T09:28:43.055Z",
+      "lastAttempt": "2026-10-14T09:28:43.055Z",
       "message": "Sync completed."
     },
     "group-archive": {
       "status": "success",
-      "lastSuccess": "2026-10-14T03:50:41.321Z",
-      "lastAttempt": "2026-10-14T03:50:41.321Z",
+      "lastSuccess": "2026-10-14T09:28:43.159Z",
+      "lastAttempt": "2026-10-14T09:28:43.159Z",
       "message": "Sync completed."
     }
   }
