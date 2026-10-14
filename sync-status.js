@@ -7,13 +7,13 @@ const SYNC_STATUS = {
     "miti-portal": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T09:28:38.002Z",
+      "lastAttempt": "2026-10-14T14:45:01.228Z",
       "message": "Sync failed (exit 1)."
     },
     "miti-applicants": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-14T09:28:40.034Z",
+      "lastAttempt": "2026-10-14T14:45:04.091Z",
       "message": "Sync failed (exit 1)."
     },
     "isaham-api": {
