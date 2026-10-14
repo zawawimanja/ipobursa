@@ -276,23 +276,17 @@
         "listingDate": "15-Jul-2026"
     },
     "gb-bond-holdings-berhad": {
-        "shariah": true,
-        "geography": "Penang",
-        "sector": "Industrial Products & Services (Chemicals)",
-        "predictedGrade": "B",
-        "sifuTargetPrice": 0.3,
-        "calibratedSifuTargetPrice": 0.3,
-        "v3TargetPrice": 0.3,
-        "zone2TargetPrice": 0.3,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Industrial Adhesives:</b> Manufacturer of polymers & sealants backed by Malacca Securities.<br>• <b>Strong Growth:</b> Adjusted PAT expanded +62.3% YoY with attractive 12.6x P/E valuation.<br>• <b>Bumi Allocation:</b> Shariah-compliant MITI tranche open with solid earnings track record.",
-        "price": 0.25,
-        "os": 8.22,
         "stage": 5,
         "status": "Listed",
-        "openingDate": "09-Sep-2026",
-        "closingDate": "18-Sep-2026",
-        "listingDate": "01-Oct-2026",
-        "symbol": "GB Bond Holdings Berhad"
+        "symbol": "GBBOND",
+        "predictedGrade": "C",
+        "openPrice": 0.255,
+        "highPrice": 0.255,
+        "lowPrice": 0.225,
+        "closePrice": 0.225,
+        "performance": "red",
+        "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
+        "os": 8.22
     },
     "spb-development-berhad": {
         "mitiOpenDate": "01-Jul-2026",
@@ -314,8 +308,8 @@
     "redplanet-berhad": {
         "price": 0.19,
         "shariah": true,
-        "stage": 3,
-        "status": "Application Open",
+        "stage": 4,
+        "status": "Pre-Listing",
         "sector": "Technology (Geospatial & Intelligent Rail Systems)",
         "geography": "Kuala Lumpur",
         "ib": "UOB Kay Hian",
@@ -326,7 +320,11 @@
         "v3TargetPrice": 0.22,
         "v7TargetPrice": 0.22,
         "zone2TargetPrice": 0.22,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah."
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
+        "openingDate": "28-Sep-2026",
+        "closingDate": "08-Oct-2026",
+        "listingDate": "22-Oct-2026",
+        "symbol": "REDPLANET"
     },
     "1doc": {
         "mitiOpenDate": "01-Jul-2026",
@@ -337,8 +335,8 @@
         "closingDate": "29-Sep-2026",
         "ballotingDate": "01-Oct-2026",
         "listingDate": "14-Oct-2026",
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "hasMitiTranche": true,
         "price": 0.27,
         "symbol": "ECOSYS"
@@ -375,16 +373,20 @@
         "openPrice": 0.15
     },
     "slgc-berhad": {
-        "price": 0.28,
-        "sifuTargetPrice": 0.29,
-        "calibratedSifuTargetPrice": 0.29,
-        "v7TargetPrice": 0.29,
-        "v3TargetPrice": 0.29,
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "SLG",
+        "ib": "M & A Securities",
         "predictedGrade": "C",
-        "analystInsight": "⚠️ <b>HIGH RISK / CONSTRUCTON SECTOR (GRADE C)</b><br>Penyedia perkhidmatan pembinaan & kejuruteraan infrastruktur.<br><br>📊 <b>Penilaian:</b><br>• <b>Harga IPO Indikatif:</b> RM0.28 sesaham.<br>• <b>Sektor:</b> Sektor pembinaan tanpa tema berimpak tinggi; margin terdedah kepada kos bahan mentah.<br>• <b>Target Price:</b> RM0.29 (Potensi upside +3.5% terhad).",
-        "os": 3.06,
-        "stage": 4,
-        "status": "Pre-Listing"
+        "openPrice": 0.28,
+        "highPrice": 0.28,
+        "lowPrice": 0.24,
+        "closePrice": 0.25,
+        "currentPrice": 0.25,
+        "performance": "red",
+        "dailyChange": -10.71,
+        "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
+        "os": 3.06
     },
     "united-asiapac-energy-berhad": {
         "symbol": "UNIPAC",
@@ -526,8 +528,8 @@
     "eghi": {
         "price": 0.16,
         "shariah": false,
-        "stage": 3,
-        "status": "Application Open",
+        "stage": 4,
+        "status": "Pre-Listing",
         "predictedGrade": "B",
         "sifuTargetPrice": 0.18,
         "calibratedSifuTargetPrice": 0.18,
@@ -536,7 +538,11 @@
         "zone2TargetPrice": 0.18,
         "ib": "Berjaya Securities",
         "totalShares": 360000000,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
+        "openingDate": "24-Sep-2026",
+        "closingDate": "05-Oct-2026",
+        "listingDate": "16-Oct-2026",
+        "symbol": "EGHI [NS]"
     },
     "kk-mart-retail-berhad": {
         "stage": 2,
@@ -1040,33 +1046,13 @@
         "listingDate": "17-Feb-2025",
         "price": 0.25
     },
-    "gb-bond-holdings-berhad": {
-        "stage": 5,
-        "status": "Listed",
-        "symbol": "GBBOND",
-        "predictedGrade": "C",
-        "openPrice": 0.255,
-        "highPrice": 0.255,
-        "lowPrice": 0.225,
-        "closePrice": 0.225,
-        "performance": "red",
-        "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
-        "os": 8.22
-    },
-    "slgc-berhad": {
-        "stage": 5,
-        "status": "Listed",
-        "symbol": "SLG",
-        "ib": "M & A Securities",
-        "predictedGrade": "C",
-        "openPrice": 0.28,
-        "highPrice": 0.28,
-        "lowPrice": 0.24,
-        "closePrice": 0.25,
-        "currentPrice": 0.25,
-        "performance": "red",
-        "dailyChange": -10.71,
-        "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
-        "os": 3.06
+    "nwe-resources-group-berhad": {
+        "stage": 4,
+        "status": "Pre-Listing",
+        "openingDate": "29-Sep-2026",
+        "closingDate": "09-Oct-2026",
+        "listingDate": "21-Oct-2026",
+        "price": 0.2,
+        "symbol": "NWEBHD"
     }
 }
