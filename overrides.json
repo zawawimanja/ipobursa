@@ -284,7 +284,6 @@
         "highPrice": 0.255,
         "lowPrice": 0.225,
         "closePrice": 0.225,
-        "performance": "red",
         "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
         "os": 8.22
     },
@@ -314,17 +313,22 @@
         "geography": "Kuala Lumpur",
         "ib": "UOB Kay Hian",
         "totalShares": 80000000,
-        "predictedGrade": "B",
+        "predictedGrade": "A",
         "sifuTargetPrice": 0.22,
         "calibratedSifuTargetPrice": 0.22,
         "v3TargetPrice": 0.22,
         "v7TargetPrice": 0.22,
         "zone2TargetPrice": 0.22,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
+        "analystInsight": "<b>OS awam disahkan:</b> 85.28×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683823\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: A</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
         "openingDate": "28-Sep-2026",
         "closingDate": "08-Oct-2026",
         "listingDate": "22-Oct-2026",
-        "symbol": "REDPLANET"
+        "symbol": "REDPLANET",
+        "os": 85.28,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11683823",
+        "osSourceDate": "13 Oct 2026",
+        "osMetric": "overall-public-oversubscription"
     },
     "1doc": {
         "mitiOpenDate": "01-Jul-2026",
@@ -385,9 +389,6 @@
         "highPrice": 0.28,
         "lowPrice": 0.24,
         "closePrice": 0.25,
-        "currentPrice": 0.25,
-        "performance": "red",
-        "dailyChange": -10.71,
         "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
         "os": 3.06
     },
@@ -533,7 +534,7 @@
         "shariah": false,
         "stage": 4,
         "status": "Pre-Listing",
-        "predictedGrade": "B",
+        "predictedGrade": "C",
         "sifuTargetPrice": 0.18,
         "calibratedSifuTargetPrice": 0.18,
         "v3TargetPrice": 0.18,
@@ -541,11 +542,17 @@
         "zone2TargetPrice": 0.18,
         "ib": "Berjaya Securities",
         "totalShares": 360000000,
-        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
+        "analystInsight": "<b>OS awam disahkan:</b> 1.63×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11680893\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: C</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
         "openingDate": "24-Sep-2026",
         "closingDate": "05-Oct-2026",
         "listingDate": "16-Oct-2026",
-        "symbol": "EGHI [NS]"
+        "symbol": "EGHI [NS]",
+        "os": 1.63,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11680893",
+        "osSourceDate": "07 Oct 2026",
+        "osMetric": "overall-public-oversubscription",
+        "osSubscriptionRate": 2.63
     },
     "kk-mart-retail-berhad": {
         "stage": 2,
@@ -1056,6 +1063,13 @@
         "closingDate": "09-Oct-2026",
         "listingDate": "21-Oct-2026",
         "price": 0.2,
-        "symbol": "NWEBHD"
+        "symbol": "NWEBHD",
+        "os": 2.82,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11683581",
+        "osSourceDate": "13 Oct 2026",
+        "osMetric": "overall-public-oversubscription",
+        "predictedGrade": "C",
+        "analystInsight": "<b>OS awam disahkan:</b> 2.82×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683581\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE."
     }
 }

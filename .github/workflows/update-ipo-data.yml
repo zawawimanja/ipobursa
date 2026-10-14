@@ -52,6 +52,10 @@ jobs:
         run: node scripts/run-sync-step.js i3investor --managed-status scrape-i3.js
         continue-on-error: true
 
+      - name: Sync overall public balloting OS (KLSE issuing-house announcements)
+        run: node scripts/run-sync-step.js balloting --managed-status sync-balloting.js
+        continue-on-error: true
+
       - name: Sync MITI Portal Dates & Active Offers (SPSKB 3.0)
         run: |
           node scripts/run-sync-step.js miti-portal scratch/sync-miti-portal-dates.js

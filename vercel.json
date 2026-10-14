@@ -1,4 +1,23 @@
 {
+  "buildCommand": "node generate-ipo-pages.js",
+  "headers": [
+    {
+      "source": "/data.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    },
+    {
+      "source": "/data.json",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    },
+    {
+      "source": "/data_export.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    },
+    {
+      "source": "/sync-status.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    }
+  ],
   "functions": {
     "api/chat.js": {
       "maxDuration": 30

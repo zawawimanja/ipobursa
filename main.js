@@ -11,7 +11,7 @@ function sourceHealthRows(status, now = Date.now()) {
     const labels = {
         'isaham-api': 'iSaham', 'isaham-upcoming': 'iSaham · IPO akan datang',
         'isaham-live': 'iSaham · Harga', 'isaham-scrape': 'iSaham · Semakan laman',
-        klse: 'Jadual IPO awam', i3investor: 'Harga pasaran',
+        klse: 'Jadual IPO awam', balloting: 'Keputusan balloting', i3investor: 'Harga pasaran',
         'target-calculation': 'Sasaran harga', 'group-archive': 'Arkib harian',
         'miti-portal': 'MITI · Tawaran', 'miti-applicants': 'MITI · Pemohon', shariah: 'Status syariah'
     };
@@ -1314,12 +1314,11 @@ function renderTodayActionRadar() {
                 ld.setHours(0, 0, 0, 0);
                 if (ld.getTime() === today.getTime() || (ipo.stage === 5 && ld.getTime() === yesterday.getTime())) {
                     const isToday = ld.getTime() === today.getTime();
-                    const openPriceStr = ipo.openPrice ? `RM ${ipo.openPrice.toFixed(2)}` : (ipo.currentPrice ? `RM ${ipo.currentPrice.toFixed(2)}` : 'Live');
-                    let perfStr = ipo.performance;
-                    if (typeof perfStr === 'string' && (perfStr.toLowerCase() === 'red' || perfStr.toLowerCase() === 'green')) perfStr = ''; // Handle invalid scraped strings
-                    if (!perfStr && typeof getOpenPerformance === 'function' && getOpenPerformance(ipo)) {
-                        perfStr = (getOpenPerformance(ipo) >= 0 ? '+' : '') + getOpenPerformance(ipo).toFixed(1) + '%';
-                    }
+                    const hasDebut = Number.isFinite(ipo.openPrice) && ipo.openPrice > 0;
+                    const debutDecimals = hasDebut && Math.abs(ipo.openPrice * 100 - Math.round(ipo.openPrice * 100)) > 0.000001 ? 3 : 2;
+                    const openPriceStr = hasDebut ? `RM ${ipo.openPrice.toFixed(debutDecimals)}` : 'Belum disahkan';
+                    const openPerf = hasDebut && ipo.price > 0 ? getOpenPerformance(ipo) : null;
+                    const perfStr = openPerf === null ? '' : (openPerf >= 0 ? '+' : '') + openPerf.toFixed(2) + '%';
                     todayEvents.push({
                         type: 'listing',
                         badge: isToday ? '🚀 DEBUT PENYENARAIAN HARI INI' : '🚀 BARU DISENARAIKAN SEMALAM',
@@ -1342,8 +1341,7 @@ function renderTodayActionRadar() {
                         date: ld,
                         dateStr: ipo.listingDate,
                         ipo,
-                        // B4: stage 6 navigate ke tab 2 (MITI) supaya user nampak rekod tersebut
-                        stage: ipo.stage === 5 ? 5 : (ipo.stage === 6 ? 2 : (ipo.stage >= 3 ? ipo.stage : 4))
+                        stage: ipo.stage
                     });
                 }
             }
@@ -2055,7 +2053,7 @@ function createIPOCard(ipo, index = 0) {
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; margin-top: 0.35rem; color: var(--text-dim);">
                     <span class="status-dot ${statusClass}" style="width: 6px; height: 6px; display: inline-block; border-radius: 50%;"></span>
-                    ${ipo.sector} • ${ipo.ib || 'TBA'}
+                    ${ipo.sector || 'Sektor belum disahkan'} • ${ipo.ib || 'TBA'}
                 </div>
             </td>
             <td style="padding: 0.75rem 0.6rem; font-size: 0.85rem; color: var(--text-dim); white-space: nowrap;">${dateDisplay}</td>

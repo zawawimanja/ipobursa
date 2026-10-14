@@ -3,6 +3,7 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { updateSourceStatus } = require('./lib/sync-health');
+const { atMyt } = require('./lib/ipo-rules');
 
 const DATA_JSON = path.join(__dirname, 'data.json');
 const DATA_JS = path.join(__dirname, 'data.js');
@@ -13,28 +14,31 @@ const HEADERS = {
     'Accept-Language': 'en-US,en;q=0.5',
 };
 
+// Apply manual metadata and fallback prices before fetching live market prices.
+// Applying overrides during a save would replace a fresh quote with an old one.
+function applyOverrides(data) {
+    const overridesPath = path.join(__dirname, 'overrides.json');
+    if (fs.existsSync(overridesPath)) {
+        try {
+            const overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
+            let appliedCount = 0;
+            data.forEach(ipo => {
+                const override = overrides[ipo.id];
+                if (override) {
+                    Object.assign(ipo, override);
+                    appliedCount++;
+                }
+            });
+            console.log(`   -> [Overrides] Applied overrides to ${appliedCount} IPOs from overrides.json.`);
+        } catch (e) {
+            console.error('   -> [Overrides] Error applying overrides:', e.message);
+        }
+    }
+}
+
 // Helper function to save the data array to both data.json and data.js
 function saveDatabase(data) {
     try {
-        // Apply overrides if overrides.json exists
-        const overridesPath = path.join(__dirname, 'overrides.json');
-        if (fs.existsSync(overridesPath)) {
-            try {
-                const overrides = JSON.parse(fs.readFileSync(overridesPath, 'utf8'));
-                let appliedCount = 0;
-                data.forEach(ipo => {
-                    const override = overrides[ipo.id];
-                    if (override) {
-                        Object.assign(ipo, override);
-                        appliedCount++;
-                    }
-                });
-                console.log(`   -> [Overrides] Applied overrides to ${appliedCount} IPOs from overrides.json.`);
-            } catch (e) {
-                console.error('   -> [Overrides] Error applying overrides:', e.message);
-            }
-        }
-
         // Save to data.json
         fs.writeFileSync(DATA_JSON, JSON.stringify(data, null, 4), 'utf8');
         
@@ -61,10 +65,11 @@ async function fetchWithRetry(url, retries = 2) {
     }
 }
 
-async function scrapeI3PricesAxios() {
+async function scrapeI3PricesAxios(options = {}) {
     try {
         console.log('Reading data.json...');
         let existingData = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
+        applyOverrides(existingData);
         
         // Filter listed IPOs:
         // - Must have stage 5 and a valid symbol
@@ -104,12 +109,17 @@ async function scrapeI3PricesAxios() {
                 const $ = cheerio.load(res.data);
                 
                 let priceText = null;
+                let openPriceText = null;
                 $('p').each((idx, el) => {
                     if ($(el).text().trim() === 'Last Price') {
                         const nextP = $(el).next('p');
                         if (nextP.length > 0) {
                             priceText = nextP.text().trim();
                         }
+                    } else if ($(el).text().trim() === 'Open') {
+                        // i3 overview pairs the label/value in adjacent .col-6 cells.
+                        const valueP = $(el).parent().next('.col-6').find('p');
+                        if (valueP.length > 0) openPriceText = valueP.text().trim();
                     }
                 });
 
@@ -118,6 +128,18 @@ async function scrapeI3PricesAxios() {
                     if (!isNaN(currentPrice) && currentPrice > 0) {
                         const oldPrice = ipo.currentPrice;
                         ipo.currentPrice = currentPrice;
+
+                        // Overview Open is today's open, so it is a debut price only
+                        // on the IPO's listing date after Malaysia's market opens.
+                        const now = Number(options.now ?? Date.now());
+                        const listingDay = atMyt(ipo.listingDate, '00:00', now);
+                        const marketOpen = atMyt(ipo.listingDate, '09:00', now);
+                        const openPrice = Number(openPriceText);
+                        if (!(ipo.openPrice > 0) && listingDay && marketOpen &&
+                            now >= marketOpen.getTime() && now < listingDay.getTime() + 24 * 60 * 60 * 1000 &&
+                            Number.isFinite(openPrice) && openPrice > 0) {
+                            ipo.openPrice = openPrice;
+                        }
                         
                         // Recalculate performance
                         if (ipo.price > 0) {

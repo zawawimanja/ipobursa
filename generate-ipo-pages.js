@@ -1,9 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 const { isJunkCompanyName } = require('./lib/ipo-utils');
+const { getIpoGrade } = require('./lib/ipo-rules');
 
-const dataFilePath = path.join(__dirname, 'data.json');
-const ipoDir = path.join(__dirname, 'ipo');
+function argumentPath(name, fallback) {
+    const index = process.argv.indexOf(name);
+    if (index === -1) return fallback;
+    const value = process.argv[index + 1];
+    if (!value || value.startsWith('--')) throw new Error(`${name} requires a path`);
+    return path.resolve(value);
+}
+
+// Alternative paths let previews and tests generate pages without changing the checkout.
+const outputRoot = argumentPath('--output-dir', __dirname);
+const dataFilePath = argumentPath('--data-file', path.join(__dirname, 'data.json'));
+const ipoDir = path.join(outputRoot, 'ipo');
 
 if (!fs.existsSync(ipoDir)) {
     fs.mkdirSync(ipoDir, { recursive: true });
@@ -34,8 +45,51 @@ function escapeHtml(str) {
 }
 
 function formatCurrency(val) {
-    if (val === null || val === undefined || isNaN(val)) return '-';
-    return 'RM ' + Number(val).toFixed(2);
+    if (!positiveNumber(val)) return '-';
+    return 'RM ' + Number(val).toFixed(3).replace(/0$/, '');
+}
+
+function positiveNumber(value) {
+    const number = Number(value);
+    return Number.isFinite(number) && number > 0 ? number : null;
+}
+
+function returnVsOffer(price, offer) {
+    const value = positiveNumber(price);
+    const base = positiveNumber(offer);
+    if (value === null || base === null) return null;
+    return (value - base) / base * 100;
+}
+
+function formatReturn(value) {
+    return value === null ? '-' : `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+}
+
+function listedPerformanceHtml(ipo) {
+    if (Number(ipo.stage) !== 5) return '';
+    const debutReturn = returnVsOffer(ipo.openPrice, ipo.price);
+    const latestReturn = returnVsOffer(ipo.currentPrice, ipo.price);
+    const returnColor = value => value === null ? 'var(--text-dim)' : (value >= 0 ? '#34d399' : '#f87171');
+    return `
+        <section id="listing-performance" class="glass-card" style="padding: 1.75rem; border-radius: 12px; margin-bottom: 1.5rem;">
+            <h3 style="color: white; font-size: 1.15rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="trending-up" style="color: #34d399; width: 20px;"></i> Listing Performance
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.25rem;">
+                <div>
+                    <span style="display: block; font-size: 0.75rem; color: var(--text-dim);">Debut Opening Price</span>
+                    <strong style="font-size: 1.4rem; color: white;">${formatCurrency(ipo.openPrice)}</strong>
+                    <div style="font-size: 0.85rem; color: ${returnColor(debutReturn)};">${formatReturn(debutReturn)} vs IPO</div>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 0.75rem; color: var(--text-dim);">Latest Recorded Price</span>
+                    <strong style="font-size: 1.4rem; color: #60a5fa;">${formatCurrency(ipo.currentPrice)}</strong>
+                    <div style="font-size: 0.85rem; color: ${returnColor(latestReturn)};">${formatReturn(latestReturn)} vs IPO</div>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; margin-bottom: 0;">Prices reflect the latest dataset update. Missing prices are shown as a dash.</p>
+        </section>
+    `;
 }
 
 function formatLargeNumber(val) {
@@ -137,9 +191,10 @@ ipos.forEach((ipo) => {
     const symbol = ipo.symbol || '-';
     const sector = ipo.sector || 'General Equities';
     const market = ipo.market || 'ACE / Main Market';
-    const priceStr = ipo.price ? `RM ${Number(ipo.price).toFixed(2)}` : 'TBA';
-    const sifuTpStr = ipo.sifuTargetPrice ? `RM ${Number(ipo.sifuTargetPrice).toFixed(2)}` : (ipo.fairValue ? `RM ${Number(ipo.fairValue).toFixed(2)}` : '-');
-    const grade = ipo.predictedGrade || 'B';
+    const priceStr = positiveNumber(ipo.price) ? formatCurrency(ipo.price) : 'TBA';
+    const sifuTpStr = positiveNumber(ipo.sifuTargetPrice) ? formatCurrency(ipo.sifuTargetPrice)
+        : (positiveNumber(ipo.fairValue) ? formatCurrency(ipo.fairValue) : '-');
+    const grade = getIpoGrade(ipo).grade;
     const shariahText = ipo.shariah === true ? 'Shariah Compliant' : (ipo.shariah === false ? 'Non-Shariah' : 'Status Pending');
     const shariahColor = ipo.shariah === true ? '#10b981' : (ipo.shariah === false ? '#ef4444' : '#f59e0b');
     const osMultiple = (ipo.os !== undefined && ipo.os !== null && !isNaN(ipo.os) && Number(ipo.os) > 0) ? `${Number(ipo.os).toFixed(1)}x` : '-';
@@ -158,8 +213,11 @@ ipos.forEach((ipo) => {
         }
     }
 
-    const titleTag = `${escapeHtml(companyName)} (${escapeHtml(symbol)}) IPO Prospectus, Valuation & Target Price | Bursa IPO Tracker`;
-    const metaDesc = `Bursa Malaysia IPO analysis for ${companyName} (${symbol}). Offer Price: ${priceStr}, Sector: ${sector}, Market: ${market}, Target Price: ${sifuTpStr}, Underwriter: ${underwriter}. Read full prospectus review and valuation model.`;
+    const isListed = Number(ipo.stage) === 5;
+    const titleTag = `${escapeHtml(companyName)} (${escapeHtml(symbol)}) ${isListed ? 'IPO Debut, Performance & Valuation' : 'IPO Prospectus, Valuation & Target Price'} | Bursa IPO Tracker`;
+    const metaDesc = isListed
+        ? `Bursa Malaysia listed IPO profile for ${companyName} (${symbol}). Offer Price: ${priceStr}, Debut Opening Price: ${formatCurrency(ipo.openPrice)} (${formatReturn(returnVsOffer(ipo.openPrice, ipo.price))} vs IPO), Latest Recorded Price: ${formatCurrency(ipo.currentPrice)} (${formatReturn(returnVsOffer(ipo.currentPrice, ipo.price))} vs IPO), Retail Oversubscription: ${osMultiple}.`
+        : `Bursa Malaysia IPO analysis for ${companyName} (${symbol}). Offer Price: ${priceStr}, Sector: ${sector}, Market: ${market}, Target Price: ${sifuTpStr}, Underwriter: ${underwriter}. Read full prospectus review and valuation model.`;
     const pageUrl = `https://www.ipobursa.my/ipo/${slug}.html`;
 
     let catalystsHtml = '';
@@ -341,6 +399,7 @@ ipos.forEach((ipo) => {
                 <span style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #fbbf24; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 20px;">
                     Grade: ${escapeHtml(grade)}
                 </span>
+                ${isListed ? '<span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 20px;">Listed</span>' : ''}
             </div>
 
             <h1 style="font-size: 2.2rem; font-weight: 800; color: white; margin-bottom: 0.5rem; line-height: 1.2;">
@@ -378,6 +437,8 @@ ipos.forEach((ipo) => {
                 </div>
             </div>
         </header>
+
+        ${listedPerformanceHtml(ipo)}
 
         <!-- IPO Timeline & Key Details -->
         <div class="glass-card" style="padding: 1.75rem; border-radius: 12px; margin-bottom: 1.5rem;">
@@ -458,12 +519,14 @@ ipos.forEach((ipo) => {
         <div class="glass-card" style="padding: 2rem; border-radius: 16px; margin-top: 2.5rem; text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(16, 185, 129, 0.08)); border: 1px solid rgba(99, 102, 241, 0.3);">
             <h3 style="color: white; font-size: 1.3rem; margin-bottom: 0.5rem;">Evaluate ${escapeHtml(companyName)} with Our Tools</h3>
             <p style="color: var(--text-dim); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem auto;">
-                Use the Decision Engine to test whether to subscribe or skip, calculate your optimal balloting tier, or cross-check with Sifu projection sheets.
+                ${isListed ? 'Review the recorded listing performance and cross-check valuations with Sifu projection sheets.' : 'Use the Decision Engine to test whether to subscribe or skip, calculate your optimal balloting tier, or cross-check with Sifu projection sheets.'}
             </p>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+                ${!isListed ? `
                 <a href="../ipo-decision.html" class="btn-moomoo" style="background: var(--primary); color: white; font-weight: 700; text-decoration: none;">
                     <i data-lucide="zap"></i> Decision Engine: Sub or Skip?
                 </a>
+                ` : ''}
                 <a href="../sifu-sheets.html" class="btn-moomoo" style="text-decoration: none;">
                     <i data-lucide="table"></i> View Sifu Sheets
                 </a>
@@ -604,6 +667,7 @@ const directoryHtml = `<!DOCTYPE html>
                 <h3 style="font-size: 1.05rem; font-weight: 700; color: white; line-height: 1.3;">
                     ${escapeHtml(p.companyName)}
                 </h3>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Grade: ${escapeHtml(p.grade)}</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem;">
                     <div>
                         <span style="display: block; font-size: 0.7rem; color: var(--text-dim);">Offer</span>
@@ -647,7 +711,7 @@ fs.writeFileSync(path.join(ipoDir, 'index.html'), directoryHtml, 'utf8');
 console.log('Generated /ipo/index.html directory successfully');
 
 // Regenerate sitemap.xml
-const sitemapFilePath = path.join(__dirname, 'sitemap.xml');
+const sitemapFilePath = path.join(outputRoot, 'sitemap.xml');
 const today = new Date().toISOString().split('T')[0];
 
 const staticUrls = [

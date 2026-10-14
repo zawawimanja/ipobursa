@@ -14,12 +14,17 @@ const IPO_DATA = [
     "shariah": true,
     "year": 2026,
     "sector": "Industrial Products & Services",
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE.",
+    "predictedGrade": "C",
+    "analystInsight": "<b>OS awam disahkan:</b> 2.82×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683581\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE.",
     "sifuTargetPrice": 0.2,
     "calibratedSifuTargetPrice": 0.19,
     "v7TargetPrice": 0.19,
-    "zone2TargetPrice": 0.19
+    "zone2TargetPrice": 0.19,
+    "os": 2.82,
+    "isAutoOS": true,
+    "osSource": "https://www.klsescreener.com/v2/announcements/view/11683581",
+    "osSourceDate": "13 Oct 2026",
+    "osMetric": "overall-public-oversubscription"
   },
   {
     "id": "panda-eyes-group-berhad",
@@ -9649,9 +9654,9 @@ const IPO_DATA = [
     "calibratedSifuTargetPrice": 0.22,
     "v7TargetPrice": 0.22,
     "zone2TargetPrice": 0.22,
-    "predictedGrade": "B",
+    "predictedGrade": "A",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
+    "analystInsight": "<b>OS awam disahkan:</b> 85.28×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683823\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: A</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
     "mitiOpenDate": "20-Jul-2026",
     "mitiCloseDate": "28-Jul-2026",
     "v3TargetPrice": 0.22,
@@ -9660,7 +9665,12 @@ const IPO_DATA = [
     "openingDate": "28-Sep-2026",
     "ballotingDate": "13-Oct-2026",
     "ib": "UOB Kay Hian",
-    "totalShares": 80000000
+    "totalShares": 80000000,
+    "os": 85.28,
+    "isAutoOS": true,
+    "osSource": "https://www.klsescreener.com/v2/announcements/view/11683823",
+    "osSourceDate": "13 Oct 2026",
+    "osMetric": "overall-public-oversubscription"
   },
   {
     "id": "empg-group-berhad",
@@ -10201,8 +10211,8 @@ const IPO_DATA = [
     "year": 2026,
     "sector": "Consumer Products & Services (Interior Fit-out)",
     "fundUse": "Head office & warehouse construction, debt repayment, working capital",
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
+    "predictedGrade": "C",
+    "analystInsight": "<b>OS awam disahkan:</b> 1.63×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11680893\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: C</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
     "sifuTargetPrice": 0.18,
     "calibratedSifuTargetPrice": 0.18,
     "v7TargetPrice": 0.18,
@@ -10211,7 +10221,13 @@ const IPO_DATA = [
     "ballotingDate": "07-Oct-2026",
     "ib": "Berjaya Securities",
     "totalShares": 360000000,
-    "v3TargetPrice": 0.18
+    "v3TargetPrice": 0.18,
+    "os": 1.63,
+    "isAutoOS": true,
+    "osSource": "https://www.klsescreener.com/v2/announcements/view/11680893",
+    "osSourceDate": "07 Oct 2026",
+    "osMetric": "overall-public-oversubscription",
+    "osSubscriptionRate": 2.63
   },
   {
     "id": "rt--ns-",

@@ -121,24 +121,42 @@ test('wrapper records process launch failures', t => {
     assert.equal(readSyncStatus(root).sources.klse.status, 'failed');
 });
 
-async function runPriceFixture(t, successfulSymbols, failWrites = false) {
+async function runPriceFixture(t, successfulSymbols, failWrites = false, overrides = {}, options = {}) {
     const root = temporaryRoot(t);
-    fs.writeFileSync(path.join(root, 'data.json'), JSON.stringify([
+    fs.writeFileSync(path.join(root, 'data.json'), JSON.stringify(options.records || [
         { id: 'a', companyName: 'A', symbol: 'A', stage: 5, year: 2026, price: 1 },
         { id: 'b', companyName: 'B', symbol: 'B', stage: 5, year: 2026, price: 1 }
     ]));
+    fs.writeFileSync(path.join(root, 'overrides.json'), JSON.stringify(overrides));
     const statuses = [];
     const mockRequire = name => {
         if (name === 'fs') return failWrites ? { ...fs, writeFileSync: () => { throw new Error('Disk write failed'); } } : fs;
         if (name === 'path') return path;
         if (name === 'axios') return { get: async url => {
             if (!successfulSymbols.includes(url.split('/').pop())) throw new Error('Source unavailable');
-            return { data: '1.5' };
+            return { data: { price: '1.5', open: options.open } };
         } };
         if (name === './lib/sync-health') return { updateSourceStatus: (source, status) => statuses.push(status) };
-        if (name === 'cheerio') return { load: price => selector => {
-            if (selector === 'p') return { each: callback => callback(0, {}) };
-            return { text: () => 'Last Price', next: () => ({ length: 1, text: () => price }) };
+        if (name === './lib/ipo-rules') return require('../lib/ipo-rules');
+        if (name === 'cheerio') return { load: quote => selector => {
+            const elements = [{ label: 'Last Price', value: quote.price }];
+            if (quote.open !== undefined) elements.push({ label: 'Open', value: quote.open });
+            if (selector === 'p') return { each: callback => elements.forEach((el, i) => callback(i, el)) };
+            const valueP = { length: 1, text: () => String(selector.value) };
+            return {
+                text: () => selector.label,
+                next: requested => {
+                    assert.equal(requested, 'p');
+                    return valueP;
+                },
+                parent: () => ({ next: requested => {
+                    assert.equal(requested, '.col-6');
+                    return { find: requestedTag => {
+                        assert.equal(requestedTag, 'p');
+                        return valueP;
+                    } };
+                } })
+            };
         } };
         throw new Error(`Unexpected dependency: ${name}`);
     };
@@ -147,7 +165,7 @@ async function runPriceFixture(t, successfulSymbols, failWrites = false) {
         console: { log() {}, error() {} }, setTimeout: callback => callback()
     };
     vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', 'scrape-i3.js'), 'utf8'), sandbox);
-    await sandbox.module.exports.scrapeI3PricesAxios();
+    await sandbox.module.exports.scrapeI3PricesAxios({ now: options.now });
     return { status: statuses.at(-1), exitCode: sandbox.process.exitCode, root };
 }
 
@@ -173,6 +191,64 @@ test('price source reports success after a complete saved refresh', async t => {
     const result = await runPriceFixture(t, ['A', 'B']);
     assert.equal(result.status.status, 'success');
     assert.equal(result.exitCode, 0);
+});
+
+test('fresh market quotes survive manual overrides and use the overridden IPO price', async t => {
+    const result = await runPriceFixture(t, ['A', 'B'], false, {
+        a: { currentPrice: 0.25, performance: 'red', price: 0.5, predictedGrade: 'B' }
+    });
+    assert.equal(result.status.status, 'success');
+    const data = JSON.parse(fs.readFileSync(path.join(result.root, 'data.json'), 'utf8'));
+    assert.equal(data[0].currentPrice, 1.5);
+    assert.equal(data[0].performance, '+200.00%');
+    assert.equal(data[0].predictedGrade, 'B');
+    const sandbox = { module: { exports: {} } };
+    vm.runInNewContext(fs.readFileSync(path.join(result.root, 'data.js'), 'utf8'), sandbox);
+    assert.equal(JSON.stringify(sandbox.module.exports), JSON.stringify(data));
+});
+
+test('a failed quote retains the manual fallback while successful quotes refresh', async t => {
+    const result = await runPriceFixture(t, ['A'], false, {
+        a: { currentPrice: 0.25, performance: 'red' },
+        b: { currentPrice: 0.75, performance: '-25.00%' }
+    });
+    const data = JSON.parse(fs.readFileSync(path.join(result.root, 'data.json'), 'utf8'));
+    assert.equal(result.status.status, 'partial');
+    assert.equal(data[0].currentPrice, 1.5);
+    assert.equal(data[0].performance, '+50.00%');
+    assert.equal(data[1].currentPrice, 0.75);
+    assert.equal(data[1].performance, '-25.00%');
+});
+
+test('overview Open fills a missing debut price on the Malaysia listing day', async t => {
+    const result = await runPriceFixture(t, ['A'], false, {}, {
+        records: [{ id: 'a', companyName: 'A', symbol: 'A', stage: 5, year: 2026, price: 0.27, listingDate: '14-Oct-2026' }],
+        now: Date.parse('2026-10-14T01:30:00Z'), open: '0.70'
+    });
+    const [ipo] = JSON.parse(fs.readFileSync(path.join(result.root, 'data.json'), 'utf8'));
+    assert.equal(ipo.openPrice, 0.7);
+    assert.equal(ipo.currentPrice, 1.5);
+});
+
+test('overview Open never replaces a known debut or backfills a later trading day', async t => {
+    for (const scenario of [
+        { listingDate: '14-Oct-2026', openPrice: 0.7, now: '2026-10-14T02:00:00Z', open: '0.80', expected: 0.7 },
+        { listingDate: '13-Oct-2026', now: '2026-10-14T02:00:00Z', open: '0.80' },
+        { listingDate: '2026-10-14', now: '2026-10-14T17:00:00Z', open: '0.80' },
+        { listingDate: '14-Oct-2026', now: '2026-10-14T00:30:00Z', open: '0.70' },
+        { listingDate: '14-Oct-2026', now: '2026-10-14T02:00:00Z', open: '0.00' },
+        { listingDate: '14-Oct-2026', now: '2026-10-14T02:00:00Z', open: '-' },
+        { listingDate: '31-Feb-2026', now: '2026-10-14T02:00:00Z', open: '0.70' }
+    ]) {
+        const result = await runPriceFixture(t, ['A'], false, {}, {
+            records: [{ id: 'a', companyName: 'A', symbol: 'A', stage: 5, year: 2026, price: 0.27,
+                listingDate: scenario.listingDate, ...(scenario.openPrice ? { openPrice: scenario.openPrice } : {}) }],
+            now: Date.parse(scenario.now), open: scenario.open
+        });
+        const [ipo] = JSON.parse(fs.readFileSync(path.join(result.root, 'data.json'), 'utf8'));
+        assert.equal(ipo.openPrice, scenario.expected, JSON.stringify(scenario));
+        assert.equal(ipo.currentPrice, 1.5);
+    }
 });
 
 function runTargetFixture(t, records) {
