@@ -339,7 +339,10 @@
         "status": "Listed",
         "hasMitiTranche": true,
         "price": 0.27,
-        "symbol": "ECOSYS"
+        "symbol": "ECOSYS",
+        "openPrice": 0.7,
+        "os": 206.7,
+        "analystInsight": "✅ <b>ECOSYS — DEBUT 14 OKT 2026</b><br>• <b>Harga IPO:</b> RM0.27.<br>• <b>Harga debut:</b> RM0.70 (+159.26%; +RM0.43 sesaham).<br>• <b>Permintaan awam:</b> Oversubscription 206.70×; 31,734 permohonan.<br>• <b>Pasaran:</b> ACE Market, kod saham 0477.<br>• <b>Perniagaan:</b> Komponen kejuruteraan ketepatan UHP dan sistem abatement untuk industri semikonduktor.<br>• <b>Sumber:</b> <a href=\"https://finance.yahoo.com/markets/stocks/articles/ecosys-malaysia-berhad-debuts-ace-074500156.html\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman debut EcoSys</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11677871\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>."
     },
     "butterfield-fb-berhad": {
         "mitiOpenDate": "01-Jul-2026",
