@@ -1,14 +1,14 @@
 const SYNC_STATUS = {
-  "lastSync": "14/10/2026, 5:28:43 pm",
+  "lastSync": "15/10/2026, 12:43:55 am",
   "status": "Partial",
-  "source": "group-archive",
+  "source": "miti-portal",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
-      "status": "failed",
-      "lastSuccess": null,
-      "lastAttempt": "2026-10-14T14:45:01.228Z",
-      "message": "Sync failed (exit 1)."
+      "status": "success",
+      "lastSuccess": "2026-10-14T16:43:55.013Z",
+      "lastAttempt": "2026-10-14T16:43:55.013Z",
+      "message": "1 public MITI offers verified; 1 records updated."
     },
     "miti-applicants": {
       "status": "failed",

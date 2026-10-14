@@ -3,20 +3,25 @@
  * sync-isaham-api.js
  *
  * Penyegerakan tarikh/data IPO dari API RASMI iSaham (api.isaham.my) —
- * TIADA Cloudflare, tiada Puppeteer, tiada 403.
+ * Tidak menggunakan laman web Cloudflare atau Puppeteer. API masih boleh
+ * menolak token, pelan tanpa akses IPO, atau kuota yang telah habis.
  *
  *   GET /v1/ipo/upcoming   — senarai IPO akan datang (5 kredit)
  *   GET /v1/ipo/live       — IPO yang sedang diniagakan (5 kredit)
  *   GET /v1/account/usage  — semak baki kredit (0 kredit)
  *
- * Free tier: 500 kredit/bulan. 1 run sehari = 10 kredit (300/bulan) — muat.
+ * Endpoint IPO memerlukan pelan Max mengikut https://api.isaham.my/docs.
+ * Token Free sahaja tidak memberi akses IPO walaupun masih berbaki kredit.
+ * 1 sync penuh menggunakan 10 kredit; guard harian mengelak permintaan berulang.
  *
  * SETUP SATU KALI:
  *   1) Buka https://api.isaham.my/portal/dashboard
  *   2) Log masuk dengan akaun iSaham (Facebook/Telegram)
- *   3) Klik "Generate" untuk API token (ditunjuk SEKALI sahaja)
+ *   3) Pastikan pelan akaun mempunyai akses endpoint IPO (Max).
+ *      Klik "Generate" untuk API token (ditunjuk SEKALI sahaja)
  *   4) Simpan dalam fail .env di root projek:
  *        ISAHAM_API_TOKEN=xxxxx
+ *      Untuk sync berjadual, tetapkan GitHub Actions secret dengan nama sama.
  *
  * CARA GUNA:
  *   node sync-isaham-api.js            (sync penuh: upcoming + live + usage)
@@ -189,6 +194,21 @@ async function apiGet(endpoint, token) {
     return response.data;
 }
 
+function apiErrorMessage(error) {
+    const detail = error.response?.data?.error;
+    const code = detail?.code;
+    const known = {
+        UNAUTHORIZED: 'Token iSaham tidak sah atau telah tamat; kemas kini ISAHAM_API_TOKEN.',
+        TIER_UPGRADE_REQUIRED: 'Pelan iSaham tiada akses endpoint IPO; dokumentasi rasmi menetapkan pelan Max.',
+        QUOTA_EXCEEDED: 'Kuota kredit iSaham telah habis.',
+        RATE_LIMITED: 'Had permintaan iSaham dicapai; cuba semula kemudian.'
+    };
+    if (known[code]) return `${code}: ${known[code]}`;
+    if (error.response?.status === 401) return known.UNAUTHORIZED;
+    return safeMessage([error.response?.status, code, detail?.message || error.message]
+        .filter(Boolean).join(': ') || 'Permintaan API gagal.');
+}
+
 // toIsoDate / toDisplayDate → lib/ipo-utils.js
 // Format simpanan standard projek = DD-Mon-YYYY (sama dengan sync-public-ipos.js);
 // perbandingan dibuat dalam ISO supaya format berbeza tak dikira "berubah".
@@ -358,9 +378,9 @@ async function syncApi(options = {}) {
         console.warn(`⚠️ ${message}`);
         return { status, skipped: true };
     }
-    const token = options.token || process.env.ISAHAM_API_TOKEN;
+    const token = String(options.token || process.env.ISAHAM_API_TOKEN || '').trim();
     if (!token && !options.request) {
-        const message = 'ISAHAM_API_TOKEN tidak ditetapkan.';
+        const message = 'ISAHAM_API_TOKEN tidak ditetapkan. Tambah token akaun dengan akses IPO ke .env atau GitHub Actions secret.';
         record('isaham-api', 'failed', message);
         console.error(`❌ ${message}`);
         return { status: 'failed', message };
@@ -386,7 +406,7 @@ async function syncApi(options = {}) {
         }
     } catch (error) {
         const status = partialStatus();
-        const message = `Gagal semak kredit: ${error.response?.status || error.message}`;
+        const message = safeMessage(`Gagal semak kredit: ${apiErrorMessage(error)}`);
         record('isaham-api', status, message);
         console.error(`❌ ${message}`);
         return { status, message };
@@ -423,7 +443,7 @@ async function syncApi(options = {}) {
             console.log(`✅ /ipo/${name}: ${state.message}`);
         } catch (error) {
             state.status = 'failed';
-            state.message = safeMessage(`Endpoint gagal: ${error.response?.status || error.message}`);
+            state.message = safeMessage(`Endpoint gagal: ${apiErrorMessage(error)}`);
             record(`isaham-${name}`, 'failed', state.message);
             console.error(`❌ /ipo/${name}: ${state.message}`);
         }
@@ -461,8 +481,10 @@ async function syncApi(options = {}) {
         marker.lastSync = stamp;
     }
     fs.writeFileSync(markerFile, JSON.stringify(marker, null, 2) + '\n');
+    const failedEndpoint = pending.find(name => marker.endpoints[name].status === 'failed');
     const message = targetError ? 'Data API disimpan, tetapi pengiraan target gagal.' :
-        `${ENDPOINTS.filter(name => marker.endpoints[name]?.lastSyncDate === today).length}/2 endpoint berjaya hari ini; ${data.length} IPO (+${data.length - initialCount}).`;
+        safeMessage(`${ENDPOINTS.filter(name => marker.endpoints[name]?.lastSyncDate === today).length}/2 endpoint berjaya hari ini; ${data.length} IPO (+${data.length - initialCount}).` +
+            (failedEndpoint ? ` ${marker.endpoints[failedEndpoint].message}` : ''));
     record('isaham-api', status, message, { legacy: { totalIpos: data.length } });
     console.log(`--- Sync API: ${status.toUpperCase()} — ${message}`);
     return { status, successes, message };

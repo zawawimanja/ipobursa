@@ -1071,5 +1071,12 @@
         "osMetric": "overall-public-oversubscription",
         "predictedGrade": "C",
         "analystInsight": "<b>OS awam disahkan:</b> 2.82×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683581\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE."
+    },
+    "unioleo-holdings-berhad": {
+        "mitiOpenDate": "14-Oct-2026",
+        "mitiCloseDate": "21-Oct-2026",
+        "hasMitiTranche": true,
+        "stage": 2,
+        "status": "MITI Allocation Phase"
     }
 }

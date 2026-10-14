@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install dependencies
         run: npm ci
@@ -33,19 +33,20 @@ jobs:
         run: npm test
 
       - name: Sync MITI Portal Dates & Active Offers (SPSKB 3.0)
+        id: miti_portal
         run: |
-          node scripts/run-sync-step.js miti-portal scratch/sync-miti-portal-dates.js
+          node scripts/run-sync-step.js miti-portal --managed-status scratch/sync-miti-portal-dates.js
         continue-on-error: true
 
-      - name: Sync MITI Applicants (login terus, tanpa CAPTCHA)
+      - name: Sync MITI offer details (authenticated portal)
+        id: miti_details
         env:
           MITI_USERNAME: ${{ secrets.MITI_USERNAME }}
           MITI_PASSWORD: ${{ secrets.MITI_PASSWORD }}
         run: |
-          # Login portal SahamOnline MITI terus (kredential dari secrets) —
-          # update tarikh tawaran MITI. Tiada cookies Chrome, laptop tak perlu on.
+          # Log in to the current MITI portal with repository secrets.
           if [ -n "$MITI_USERNAME" ] && [ -n "$MITI_PASSWORD" ]; then
-            node scripts/run-sync-step.js miti-applicants scratch/sync-miti-applicants-login.js --no-push
+            node scripts/run-sync-step.js miti-applicants --managed-status scratch/sync-miti-applicants-login.js --no-push
           else
             node scripts/run-sync-step.js miti-applicants --skip "MITI credentials are not configured."
           fi
@@ -60,3 +61,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json data.js data_export.js overrides.json sync-status.js ipo/ sitemap.xml
           git diff --staged --quiet || (git commit -m "Automated update: MITI applicants" && git pull --rebase origin main && git push)
+
+      - name: Report MITI source failures after preserving other updates
+        if: always() && (steps.miti_portal.outcome == 'failure' || steps.miti_details.outcome == 'failure')
+        run: |
+          echo "::error::MITI sync failed. Existing data was preserved; see the MITI step and sync-status.js for the cause."
+          exit 1
