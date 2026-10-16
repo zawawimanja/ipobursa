@@ -532,8 +532,8 @@
     "eghi": {
         "price": 0.16,
         "shariah": false,
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "predictedGrade": "C",
         "sifuTargetPrice": 0.18,
         "calibratedSifuTargetPrice": 0.18,
