@@ -1,19 +1,19 @@
 const SYNC_STATUS = {
-  "lastSync": "15/10/2026, 10:37:09 pm",
+  "lastSync": "16/10/2026, 9:51:50 am",
   "status": "Partial",
-  "source": "group-archive",
+  "source": "ipo-pages",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
       "status": "failed",
       "lastSuccess": "2026-10-14T16:43:55.013Z",
-      "lastAttempt": "2026-10-15T14:37:05.166Z",
+      "lastAttempt": "2026-10-16T01:51:48.631Z",
       "message": "MITI public portal HTTP 403 (access denied from this runner); existing data retained."
     },
     "miti-applicants": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-15T14:37:06.149Z",
+      "lastAttempt": "2026-10-16T01:51:49.519Z",
       "message": "MITI login page HTTP 403 (access denied from this runner); existing data retained."
     },
     "isaham-api": {
@@ -54,8 +54,8 @@ const SYNC_STATUS = {
     },
     "ipo-pages": {
       "status": "success",
-      "lastSuccess": "2026-10-15T14:37:09.775Z",
-      "lastAttempt": "2026-10-15T14:37:09.775Z",
+      "lastSuccess": "2026-10-16T01:51:50.667Z",
+      "lastAttempt": "2026-10-16T01:51:50.667Z",
       "message": "Sync completed."
     },
     "balloting": {
