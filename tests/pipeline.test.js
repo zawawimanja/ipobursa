@@ -61,6 +61,18 @@ test('public sync waits for opening and cannot downgrade an already listed IPO',
     assert.equal(data[1].stage, 5);
 });
 
+test('public sync persists listed lifecycle after an IPO leaves the upcoming feed', () => {
+    const record = {
+        id: 'demo', companyName: 'Demo Berhad', stage: 4, status: 'Pre-Listing', listingDate: '13-Oct-2026'
+    };
+    const overrides = { demo: { stage: 4, status: 'Pre-Listing' } };
+    assert.equal(applyPublicRecords([], [record], overrides, NOW), 1);
+    assert.equal(record.stage, 5);
+    assert.equal(record.status, 'Listed');
+    assert.equal(overrides.demo.stage, 5);
+    assert.equal(overrides.demo.status, 'Listed');
+});
+
 test('API upcoming uses the same opening and 5pm cutoff as public sync', () => {
     const data = [{ id: 'demo', companyName: 'Demo Berhad', stage: 6 }];
     const feed = [{ name: 'Demo Berhad', opening_date: '2026-10-14', closing_date: '2026-10-14', listing_date: '2026-10-20' }];

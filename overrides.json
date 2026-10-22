@@ -1057,13 +1057,16 @@
         "price": 0.25
     },
     "nwe-resources-group-berhad": {
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "openingDate": "29-Sep-2026",
         "closingDate": "09-Oct-2026",
         "listingDate": "21-Oct-2026",
         "price": 0.2,
         "symbol": "NWEBHD",
+        "openPrice": 0.22,
+        "currentPrice": 0.195,
+        "performance": "-2.50%",
         "os": 2.82,
         "isAutoOS": true,
         "osSource": "https://www.klsescreener.com/v2/announcements/view/11683581",

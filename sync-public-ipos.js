@@ -258,6 +258,19 @@ function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
         }
     });
 
+    data.forEach(ipo => {
+        if (ipo.stage === 5 || !ipo.listingDate) return;
+        const lifecycle = resolveLifecycle(ipo, now);
+        if (lifecycle.stage !== 5) return;
+
+        Object.assign(ipo, lifecycle);
+        if (!overrides[ipo.id]) overrides[ipo.id] = {};
+        overrides[ipo.id].stage = ipo.stage;
+        overrides[ipo.id].status = ipo.status;
+        console.log(`   ✨ ${ipo.companyName} → Stage 5 (Listed) | List:${ipo.listingDate}`);
+        updatedCount++;
+    });
+
     return updatedCount;
 }
 
