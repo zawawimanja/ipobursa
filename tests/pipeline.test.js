@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const vm = require('node:vm');
-const { applyPublicRecords } = require('../sync-public-ipos');
+const { applyPublicRecords, readCardDetails, isBursaTicker } = require('../sync-public-ipos');
 const { syncApi, applyUpcoming } = require('../sync-isaham-api');
 const { autoPromoteIPOs, publishScrapeStatus } = require('../sync-isaham');
 const { readSyncStatus } = require('../lib/sync-health');
@@ -71,6 +71,77 @@ test('public sync persists listed lifecycle after an IPO leaves the upcoming fee
     assert.equal(record.status, 'Listed');
     assert.equal(overrides.demo.stage, 5);
     assert.equal(overrides.demo.status, 'Listed');
+});
+
+test('public sync advances an expired MITI offer to Post-MITI without a feed entry', () => {
+    const record = {
+        id: 'expired', companyName: 'Expired Berhad', stage: 2, status: 'MITI Allocation Phase',
+        mitiOpenDate: '15-Oct-2026', mitiCloseDate: '21-Oct-2026'
+    };
+    const overrides = { expired: { stage: 2, status: 'MITI Allocation Phase' } };
+    const afterClose = Date.parse('2026-10-22T09:00:00+08:00');
+    assert.equal(applyPublicRecords([], [record], overrides, afterClose), 1);
+    assert.equal(record.stage, 6);
+    assert.equal(record.status, 'Awaiting MITI Decision');
+    assert.equal(overrides.expired.stage, 6);
+    assert.equal(applyPublicRecords([], [record], overrides, afterClose), 0);
+});
+
+test('KLSE card details enrich a record stored without a ticker, market or sector', () => {
+    const record = { id: 'gta', companyName: 'GTA Holdings Berhad', stage: 5, status: 'Listed',
+        symbol: 'GTA Holdings Berhad', market: 'Unknown', sector: '' };
+    const overrides = {};
+    const feed = [{ companyName: 'GTA HOLDINGS BERHAD', ticker: 'GTA', listingDate: '08-Sep-2026',
+        market: 'ACE Market', sector: 'Technology' }];
+    assert.equal(applyPublicRecords(feed, [record], overrides, NOW), 1);
+    assert.equal(record.symbol, 'GTA');
+    assert.equal(record.market, 'ACE Market');
+    assert.equal(record.sector, 'Technology');
+    assert.equal(overrides.gta.symbol, 'GTA');
+    assert.equal(overrides.gta.sector, 'Technology');
+});
+
+test('a stored sector or market is never overwritten and a numeric code is not a ticker', () => {
+    const record = { id: 'kept', companyName: 'Kept Berhad', stage: 3, symbol: 'KEPT',
+        market: 'Main Market', sector: 'Healthcare' };
+    applyPublicRecords([{ companyName: 'Kept Berhad', ticker: '0479', openDate: '14-Oct-2026',
+        closeDate: '14-Oct-2026', listingDate: '20-Oct-2026', market: 'ACE Market', sector: 'Software' }],
+        [record], {}, NOW);
+    assert.equal(record.symbol, 'KEPT');
+    assert.equal(record.market, 'Main Market');
+    assert.equal(record.sector, 'Healthcare');
+});
+
+test('KLSE board and sector labels parse from the IPO card', () => {
+    const cheerio = require('cheerio');
+    const $ = cheerio.load(`<div class="card"><div class="small dflex">
+        <span class="mr-3"><span class="text-muted">Board:</span> <strong>ACE Market</strong></span>
+        <span class="mr-3"><span class="text-muted">Sector: </span><strong>CONSUMER PRODUCTS & SERVICES</strong></span>
+        <span class="mr-4"><span class="text-muted">Sub sector:</span> <strong>FOOD& BEVERAGES</strong></span>
+        <span class="font-weight-light">Today</span></div></div>`);
+    assert.deepEqual(readCardDetails($('.card'), $), { market: 'ACE Market', sector: 'Consumer Products & Services' });
+    assert.deepEqual(readCardDetails($('<div><span class="text-muted">Issue Size:</span> ?</div>'), $),
+        { market: null, sector: null });
+    assert.equal(isBursaTicker('RPLANET'), true);
+    assert.equal(isBursaTicker('REDPLANET BERHAD'), false);
+    assert.equal(isBursaTicker('0479'), false);
+});
+
+test('a past KLSE card fixes a listed counter without touching its dates', () => {
+    const record = { id: 'eghi', companyName: 'EGH International Berhad', stage: 5, status: 'Listed',
+        symbol: 'EGHI [NS]', listingDate: '16-Oct-2026', price: 0.16, market: 'ACE Market', sector: 'Plantation' };
+    const overrides = {};
+    const feed = [{ past: true, ticker: 'ECOGRP', companyName: 'EGH INTERNATIONAL BERHAD',
+        market: 'ACE Market', sector: 'Plantation Products' }];
+    assert.equal(applyPublicRecords(feed, [record], overrides, NOW), 1);
+    assert.equal(record.symbol, 'ECOGRP');
+    assert.equal(record.listingDate, '16-Oct-2026');
+    assert.equal(record.sector, 'Plantation');
+    assert.equal(overrides.eghi.symbol, 'ECOGRP');
+
+    const draft = { id: 'baru', companyName: 'EGH International Berhad', stage: 2, symbol: '' };
+    assert.equal(applyPublicRecords(feed, [draft], {}, NOW), 0);
+    assert.equal(draft.symbol, '');
 });
 
 test('API upcoming uses the same opening and 5pm cutoff as public sync', () => {

@@ -1,5 +1,5 @@
 const SYNC_STATUS = {
-  "lastSync": "22/10/2026, 11:21:44 am",
+  "lastSync": "22/10/2026, 12:08:58 pm",
   "status": "Partial",
   "source": "ipo-pages",
   "totalIpos": 307,
@@ -24,15 +24,15 @@ const SYNC_STATUS = {
     },
     "klse": {
       "status": "success",
-      "lastSuccess": "2026-10-22T03:03:30.541Z",
-      "lastAttempt": "2026-10-22T03:03:30.541Z",
+      "lastSuccess": "2026-10-22T03:52:49.234Z",
+      "lastAttempt": "2026-10-22T03:52:49.234Z",
       "message": "Sync completed."
     },
     "i3investor": {
       "status": "partial",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-22T03:21:41.191Z",
-      "message": "92 prices refreshed; 22 could not be refreshed."
+      "lastAttempt": "2026-10-22T04:08:25.963Z",
+      "message": "91 prices refreshed; 23 could not be refreshed. 1 debut price(s) backfilled from history."
     },
     "shariah": {
       "status": "success",
@@ -42,8 +42,8 @@ const SYNC_STATUS = {
     },
     "target-calculation": {
       "status": "success",
-      "lastSuccess": "2026-10-22T03:21:44.038Z",
-      "lastAttempt": "2026-10-22T03:21:44.038Z",
+      "lastSuccess": "2026-10-22T04:08:58.272Z",
+      "lastAttempt": "2026-10-22T04:08:58.272Z",
       "message": "Sync completed."
     },
     "group-archive": {
@@ -54,8 +54,8 @@ const SYNC_STATUS = {
     },
     "ipo-pages": {
       "status": "success",
-      "lastSuccess": "2026-10-22T03:21:44.500Z",
-      "lastAttempt": "2026-10-22T03:21:44.500Z",
+      "lastSuccess": "2026-10-22T04:08:58.706Z",
+      "lastAttempt": "2026-10-22T04:08:58.706Z",
       "message": "Sync completed."
     },
     "balloting": {

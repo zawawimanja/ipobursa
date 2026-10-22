@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { updateSourceStatus } = require('./lib/sync-health');
-const { atMyt } = require('./lib/ipo-rules');
+const { atMyt, dateParts } = require('./lib/ipo-rules');
 
 const DATA_JSON = path.join(__dirname, 'data.json');
 const DATA_JS = path.join(__dirname, 'data.js');
@@ -51,17 +51,63 @@ function saveDatabase(data) {
     }
 }
 
-// Fetch helper with retry and timeout
-async function fetchWithRetry(url, retries = 2) {
+// Fetch helper with retry, timeout and rate-limit aware backoff.
+// i3investor throttles bulk requests (HTTP 429), so retry those with longer waits.
+async function fetchWithRetry(url, retries = 2, hooks = {}) {
+    let lastError;
     for (let i = 0; i <= retries; i++) {
         try {
             const res = await axios.get(url, { headers: HEADERS, timeout: 8000 });
+            hooks.onSuccess?.();
             return res;
         } catch (err) {
-            if (i === retries) throw err;
-            console.log(`   -> [Retry ${i + 1}/${retries}] Error: ${err.message}. Retrying in 2s...`);
-            await new Promise(r => setTimeout(r, 2000));
+            lastError = err;
+            if (i === retries) break;
+            const status = err.response && err.response.status;
+            const rateLimited = status === 429 || status === 403;
+            if (rateLimited) hooks.onRateLimit?.();
+            const retryAfter = Number(err.response?.headers?.['retry-after']);
+            const delay = rateLimited
+                ? (Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 4000 * (i + 1))
+                : 2000;
+            console.log(`   -> [Retry ${i + 1}/${retries}] HTTP ${status ?? '-'}: ${err.message}. Retrying in ${Math.round(delay / 1000)}s...`);
+            await new Promise(r => setTimeout(r, delay));
         }
+    }
+    throw lastError;
+}
+
+// The debut day is a one-shot window for the overview 'Open' price. When it is missed
+// (rate limit, counter not yet indexed), the historical chart still holds day-one data.
+const DEBUT_BACKFILL_WINDOW_MS = 14 * 24 * 60 * 60 * 1000;
+
+function parseHistoricalOpen(html, listingDate, now = Date.now()) {
+    if (typeof html !== 'string') return null;
+    const parts = dateParts(listingDate, now);
+    if (!parts) return null;
+    const iso = `${parts.year}-${String(parts.month + 1).padStart(2, '0')}-${String(parts.day).padStart(2, '0')}`;
+    const block = html.match(/var\s+dtdata\s*=\s*(\[[\s\S]*?\]);/);
+    if (!block) return null;
+    const row = block[1].match(new RegExp(`\\[\\s*"${iso}"\\s*,\\s*"([0-9]+(?:\\.[0-9]+)?)"`));
+    const open = Number(row && row[1]);
+    return open > 0 ? open : null;
+}
+
+function historicalChartUrl(overviewHtml) {
+    if (typeof overviewHtml !== 'string') return null;
+    const link = overviewHtml.match(/href="(\/web\/stock\/historical-chart\/[^"]+)"/);
+    return link ? `https://klse.i3investor.com${link[1]}` : null;
+}
+
+async function fetchHistoricalOpen(overviewHtml, listingDate, now, throttle) {
+    const url = historicalChartUrl(overviewHtml);
+    if (!url) return null;
+    try {
+        const res = await fetchWithRetry(url, 2, throttle);
+        return parseHistoricalOpen(res.data, listingDate, now);
+    } catch (err) {
+        console.log(`   -> Historical debut lookup failed: ${err.message}`);
+        return null;
     }
 }
 
@@ -92,6 +138,13 @@ async function scrapeI3PricesAxios(options = {}) {
         let updatedCount = 0;
         let failedCount = 0;
         let pendingSave = false;
+        let debutBackfilled = 0;
+        // Adaptive polite delay: grows on throttling, decays on clean responses.
+        let throttleDelayMs = 1000;
+        const throttle = {
+            onRateLimit: () => { throttleDelayMs = Math.min(throttleDelayMs * 2, 12000); },
+            onSuccess: () => { throttleDelayMs = Math.max(1000, Math.floor(throttleDelayMs / 2)); }
+        };
 
         for (let i = 0; i < listedIpos.length; i++) {
             let ipo = listedIpos[i];
@@ -100,12 +153,19 @@ async function scrapeI3PricesAxios(options = {}) {
                 failedCount++;
                 continue;
             }
+            if (/\s/.test(symbolClean)) {
+                // Bursa tickers have no spaces, so this is a company name stored as a
+                // symbol; i3 would answer with its homepage and no price.
+                console.log(`   -> Skip ${ipo.companyName}: '${symbolClean}' is not a ticker symbol.`);
+                failedCount++;
+                continue;
+            }
             
             let url = `https://klse.i3investor.com/web/stock/overview/${symbolClean}`;
             
             try {
                 console.log(`[${i + 1}/${listedIpos.length}] Fetching ${ipo.companyName} (${symbolClean})...`);
-                const res = await fetchWithRetry(url);
+                const res = await fetchWithRetry(url, 2, throttle);
                 const $ = cheerio.load(res.data);
                 
                 let priceText = null;
@@ -140,7 +200,19 @@ async function scrapeI3PricesAxios(options = {}) {
                             Number.isFinite(openPrice) && openPrice > 0) {
                             ipo.openPrice = openPrice;
                         }
-                        
+
+                        // Missed the debut day? Recover day-one open from the historical chart.
+                        const daysSinceListing = listingDay ? now - listingDay.getTime() : NaN;
+                        if (!(ipo.openPrice > 0) && listingDay && marketOpen && now >= marketOpen.getTime() &&
+                            daysSinceListing <= DEBUT_BACKFILL_WINDOW_MS) {
+                            const historicalOpen = await fetchHistoricalOpen(res.data, ipo.listingDate, now, throttle);
+                            if (historicalOpen) {
+                                ipo.openPrice = historicalOpen;
+                                debutBackfilled++;
+                                console.log(`   -> Backfilled debut open from history: RM ${historicalOpen}`);
+                            }
+                        }
+
                         // Recalculate performance
                         if (ipo.price > 0) {
                             const newPerf = ((currentPrice - ipo.price) / ipo.price) * 100;
@@ -165,12 +237,18 @@ async function scrapeI3PricesAxios(options = {}) {
                     failedCount++;
                 }
                 
-                // Polite delay: 1.0 to 1.5 seconds to avoid rate limiting
-                await new Promise(r => setTimeout(r, 1000 + Math.random() * 500));
+                // Polite delay so i3investor does not throttle the run
+                await new Promise(r => setTimeout(r, throttleDelayMs + Math.random() * 500));
                 
             } catch (err) {
                 console.error(`❌ Error fetching ${symbolClean}: ${err.message}`);
                 failedCount++;
+                const status = err.response && err.response.status;
+                if (status === 429 || status === 403) {
+                    throttle.onRateLimit();
+                    // Stay paused before hitting the next counter with a fresh request budget.
+                    await new Promise(r => setTimeout(r, throttleDelayMs));
+                }
             }
         }
 
@@ -183,7 +261,8 @@ async function scrapeI3PricesAxios(options = {}) {
         const status = updatedCount === 0 ? 'failed' : failedCount > 0 ? 'partial' : 'success';
         updateSourceStatus('i3investor', {
             status,
-            message: `${updatedCount} prices refreshed; ${failedCount} could not be refreshed.`
+            message: `${updatedCount} prices refreshed; ${failedCount} could not be refreshed.` +
+                (debutBackfilled ? ` ${debutBackfilled} debut price(s) backfilled from history.` : '')
         });
         if (status !== 'success') process.exitCode = 1;
 
@@ -194,5 +273,5 @@ async function scrapeI3PricesAxios(options = {}) {
     }
 }
 
-module.exports = { scrapeI3PricesAxios };
+module.exports = { scrapeI3PricesAxios, parseHistoricalOpen };
 if (require.main === module) scrapeI3PricesAxios();

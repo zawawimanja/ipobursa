@@ -95,6 +95,30 @@ function matchEntry(data, companyName, ticker) {
     return null;
 }
 
+// KLSE cards label optional metadata as "<label>: <value>" pairs inside a span.
+function readCardDetails(cardEl, $) {
+    const details = {};
+    cardEl.find('span').each((i, el) => {
+        const labelEl = $(el).children('.text-muted').first();
+        if (!labelEl.length) return;
+        const label = labelEl.text().replace(/[:\s]+$/g, '').trim().toLowerCase();
+        if (label !== 'board' && label !== 'sector') return;
+        const value = $(el).text().replace(labelEl.text(), '').trim();
+        if (value && !details[label]) details[label] = value;
+    });
+    const board = (details.board || '').replace(/\s+/g, ' ').trim();
+    const market = /main\s*market/i.test(board) ? 'Main Market'
+        : /ace\s*market/i.test(board) ? 'ACE Market' : null;
+    const sector = (details.sector || '').replace(/\s+/g, ' ').trim()
+        .toLowerCase().replace(/(^|\s|&|-|\/)([a-z])/g, (m, p, c) => p + c.toUpperCase());
+    return { market, sector: sector || null };
+}
+
+// Bursa tickers are short codes; a value with spaces is a company name stored by mistake.
+function isBursaTicker(value) {
+    return /^[A-Z0-9][A-Z0-9.\-]{1,9}$/.test(String(value || '').trim()) && !/^\d+$/.test(String(value).trim());
+}
+
 async function main() {
     const axios = require('axios');
     const cheerio = require('cheerio');
@@ -140,15 +164,28 @@ async function main() {
         // Check if this is a past IPO (no title attr color vs. inherit)
         const styleStr = dateBlock.attr('style') || '';
         const isPast = styleStr.includes('color:inherit') || styleStr.includes('background-color:inherit');
-        if (isPast) return; // skip past IPOs
-
-        const listingDate = parseKlseDate(dayText, monthText, yearAttr);
-        if (!listingDate) return;
 
         // Get ticker and company name
         const ticker = cardEl.find('h4 a').first().text().trim();
         const companyName = cardEl.find('h4').first().next('span').text().trim() ||
                             cardEl.find('span.ml-3').first().text().trim();
+
+        // KLSE labels the board and sector on the card; MITI-only records start without
+        // them, so carry the details over as soon as the company appears here.
+        const details = readCardDetails(cardEl, $);
+
+        // Past cards carry no trustworthy listing year, so they are only used to correct
+        // identity metadata (ticker/board/sector) that the price scraper depends on.
+        if (isPast) {
+            if (companyName) {
+                upcoming.push({ past: true, ticker, companyName,
+                    market: details.market, sector: details.sector });
+            }
+            return;
+        }
+
+        const listingDate = parseKlseDate(dayText, monthText, yearAttr);
+        if (!listingDate) return;
 
         // Get open/close dates from text like "Open: 09 Sep" "Close: 18 Sep"
         let openDate = null, closeDate = null;
@@ -181,11 +218,13 @@ async function main() {
 
         if (!companyName || !listingDate) return;
 
-        upcoming.push({ ticker, companyName, openDate, closeDate, listingDate, price });
+        upcoming.push({ ticker, companyName, openDate, closeDate, listingDate, price,
+            market: details.market, sector: details.sector });
     });
 
-    console.log(`📋 Dijumpai ${upcoming.length} IPO akan datang dari KLSE Screener:`);
-    upcoming.forEach(x => console.log(`   ${x.ticker} | ${x.companyName} | Open:${x.openDate} Close:${x.closeDate} List:${x.listingDate} RM${x.price}`));
+    const scheduled = upcoming.filter(x => !x.past);
+    console.log(`📋 Dijumpai ${scheduled.length} IPO akan datang + ${upcoming.length - scheduled.length} kaunter sudah disenaraikan dari KLSE Screener:`);
+    scheduled.forEach(x => console.log(`   ${x.ticker} | ${x.companyName} | Open:${x.openDate} Close:${x.closeDate} List:${x.listingDate} RM${x.price}`));
 
     // Load data
     const data = JSON.parse(fs.readFileSync(DATA_JSON, 'utf8'));
@@ -214,36 +253,65 @@ function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
     upcoming.forEach(s => {
         const ipo = matchEntry(data, s.companyName, s.ticker);
         if (!ipo) {
-            console.log(`   ⚠️  Tak jumpa padanan untuk: ${s.companyName} (${s.ticker})`);
+            // Past counters we do not track are normal; only upcoming misses are actionable.
+            if (!s.past) console.log(`   ⚠️  Tak jumpa padanan untuk: ${s.companyName} (${s.ticker})`);
             return;
         }
 
-        // NEVER downgrade a listed (stage 5) IPO
-        if (ipo.stage === 5) return;
+        // NEVER downgrade a listed (stage 5) IPO, but still correct its ticker and
+        // missing metadata — the price scraper needs a real symbol to find the counter.
+        const listed = ipo.stage === 5;
+
+        if (s.past) {
+            // Past cards have no verified year, so only identity metadata is trusted here.
+            if (!listed) return;
+            let corrected = false;
+            if (isBursaTicker(s.ticker) && ipo.symbol !== s.ticker) { ipo.symbol = s.ticker; corrected = true; }
+            if (s.market && (!ipo.market || ipo.market === 'Unknown')) { ipo.market = s.market; corrected = true; }
+            if (s.sector && !ipo.sector) { ipo.sector = s.sector; corrected = true; }
+            if (!corrected) return;
+            console.log(`   🔧 ${ipo.companyName} → ${ipo.symbol} (${ipo.market || 'market'} / ${ipo.sector || 'sector'}) dari KLSE`);
+            if (!overrides[ipo.id]) overrides[ipo.id] = {};
+            ['symbol', 'market', 'sector'].forEach(k => { overrides[ipo.id][k] = ipo[k]; });
+            updatedCount++;
+            return;
+        }
 
         let changed = false;
 
-        if (s.openDate && ipo.openingDate !== s.openDate) {
-            ipo.openingDate = s.openDate; changed = true;
-        }
-        if (s.closeDate && ipo.closingDate !== s.closeDate) {
-            ipo.closingDate = s.closeDate; changed = true;
-        }
-        if (s.listingDate && ipo.listingDate !== s.listingDate) {
-            ipo.listingDate = s.listingDate; changed = true;
-        }
-        if (s.price && s.price > 0 && (!ipo.price || ipo.price === 0)) {
-            ipo.price = s.price; changed = true;
-        }
-        // Update ticker symbol if missing
-        if (s.ticker && !ipo.symbol) {
-            ipo.symbol = s.ticker; changed = true;
+        if (!listed) {
+            if (s.openDate && ipo.openingDate !== s.openDate) {
+                ipo.openingDate = s.openDate; changed = true;
+            }
+            if (s.closeDate && ipo.closingDate !== s.closeDate) {
+                ipo.closingDate = s.closeDate; changed = true;
+            }
+            if (s.listingDate && ipo.listingDate !== s.listingDate) {
+                ipo.listingDate = s.listingDate; changed = true;
+            }
+            if (s.price && s.price > 0 && (!ipo.price || ipo.price === 0)) {
+                ipo.price = s.price; changed = true;
+            }
         }
 
-        const lifecycle = resolveLifecycle(ipo, now);
-        if (lifecycle.stage !== ipo.stage || lifecycle.status !== ipo.status) {
-            Object.assign(ipo, lifecycle);
-            changed = true;
+        // Trust the KLSE ticker over stored symbols, which include company names and
+        // stale '[NS]' suffixes that make the price scraper miss the counter.
+        if (isBursaTicker(s.ticker) && ipo.symbol !== s.ticker) {
+            ipo.symbol = s.ticker; changed = true;
+        }
+        if (s.market && (!ipo.market || ipo.market === 'Unknown')) {
+            ipo.market = s.market; changed = true;
+        }
+        if (s.sector && !ipo.sector) {
+            ipo.sector = s.sector; changed = true;
+        }
+
+        if (!listed) {
+            const lifecycle = resolveLifecycle(ipo, now);
+            if (lifecycle.stage !== ipo.stage || lifecycle.status !== ipo.status) {
+                Object.assign(ipo, lifecycle);
+                changed = true;
+            }
         }
 
         if (changed) {
@@ -252,29 +320,31 @@ function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
 
             // Sync to overrides
             if (!overrides[ipo.id]) overrides[ipo.id] = {};
-            ['stage', 'status', 'openingDate', 'closingDate', 'listingDate', 'price', 'symbol'].forEach(k => {
+            ['stage', 'status', 'openingDate', 'closingDate', 'listingDate', 'price', 'symbol', 'market', 'sector'].forEach(k => {
                 if (ipo[k] !== undefined) overrides[ipo.id][k] = ipo[k];
             });
         }
     });
 
+    // Records that dropped out of the upcoming feed still advance: listings become
+    // Stage 5 and expired MITI offers become Stage 6 (awaiting decision).
     data.forEach(ipo => {
-        if (ipo.stage === 5 || !ipo.listingDate) return;
+        if (ipo.stage === 5 || ipo.mitiWithdrawn) return;
         const lifecycle = resolveLifecycle(ipo, now);
-        if (lifecycle.stage !== 5) return;
+        if (!(lifecycle.stage > ipo.stage)) return;
 
         Object.assign(ipo, lifecycle);
         if (!overrides[ipo.id]) overrides[ipo.id] = {};
         overrides[ipo.id].stage = ipo.stage;
         overrides[ipo.id].status = ipo.status;
-        console.log(`   ✨ ${ipo.companyName} → Stage 5 (Listed) | List:${ipo.listingDate}`);
+        console.log(`   ✨ ${ipo.companyName} → Stage ${ipo.stage} (${ipo.status}) | List:${ipo.listingDate || '-'}`);
         updatedCount++;
     });
 
     return updatedCount;
 }
 
-module.exports = { applyPublicRecords, matchEntry, parseInlineDate, main };
+module.exports = { applyPublicRecords, matchEntry, parseInlineDate, readCardDetails, isBursaTicker, main };
 if (require.main === module) {
     main().catch(e => { console.error('Fatal:', e); process.exitCode = 1; });
 }

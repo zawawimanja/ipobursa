@@ -323,12 +323,13 @@
         "openingDate": "28-Sep-2026",
         "closingDate": "08-Oct-2026",
         "listingDate": "22-Oct-2026",
-        "symbol": "REDPLANET",
+        "symbol": "RPLANET",
         "os": 85.28,
         "isAutoOS": true,
         "osSource": "https://www.klsescreener.com/v2/announcements/view/11683823",
         "osSourceDate": "13 Oct 2026",
-        "osMetric": "overall-public-oversubscription"
+        "osMetric": "overall-public-oversubscription",
+        "market": "ACE Market"
     },
     "1doc": {
         "mitiOpenDate": "01-Jul-2026",
@@ -477,7 +478,8 @@
         "closingDate": "27-Oct-2026",
         "listingDate": "11-Nov-2026",
         "price": 0.425,
-        "symbol": "SKA Capital Berhad"
+        "symbol": "SKACAP",
+        "market": "ACE Market"
     },
     "empg-group-berhad": {
         "mitiApplicants": 97,
@@ -551,17 +553,19 @@
         "openingDate": "24-Sep-2026",
         "closingDate": "05-Oct-2026",
         "listingDate": "16-Oct-2026",
-        "symbol": "EGHI [NS]",
+        "symbol": "ECOGRP",
         "os": 1.63,
         "isAutoOS": true,
         "osSource": "https://www.klsescreener.com/v2/announcements/view/11680893",
         "osSourceDate": "07 Oct 2026",
         "osMetric": "overall-public-oversubscription",
-        "osSubscriptionRate": 2.63
+        "osSubscriptionRate": 2.63,
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services (Interior Fit-out)"
     },
     "kk-mart-retail-berhad": {
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "hasMitiTranche": true,
         "predictedGrade": "B",
         "sifuTargetPrice": 1.65,
@@ -584,8 +588,8 @@
         "mitiCloseDate": "08-Oct-2026",
         "mitiOfferShares": 203125000,
         "shariah": true,
-        "stage": 2,
-        "status": "MITI Allocation Phase",
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
         "hasMitiTranche": true,
         "year": 2026,
         "sector": "Consumer Products & Services (Retailers & Fashion)",
@@ -606,7 +610,8 @@
         "openingDate": "19-Aug-2026",
         "closingDate": "26-Aug-2026",
         "listingDate": "08-Sep-2026",
-        "price": 0.35
+        "price": 0.35,
+        "symbol": "GTA"
     },
     "stratus-global": {
         "stage": 5,
@@ -622,7 +627,10 @@
         "openingDate": "16-Jun-2026",
         "closingDate": "24-Jun-2026",
         "listingDate": "07-Jul-2026",
-        "price": 0.13
+        "price": 0.13,
+        "symbol": "RESTNGO",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
     },
     "eckem-holdings-berhad": {
         "stage": 5,
@@ -630,7 +638,10 @@
         "openingDate": "25-May-2026",
         "closingDate": "19-Jun-2026",
         "listingDate": "03-Jul-2026",
-        "price": 0.12
+        "price": 0.12,
+        "symbol": "ECKEM",
+        "market": "ACE Market",
+        "sector": "Industrial Products & Services"
     },
     "liftech-group-berhad": {
         "stage": 5,
@@ -638,7 +649,10 @@
         "openingDate": "08-Jun-2026",
         "closingDate": "16-Jun-2026",
         "listingDate": "30-Jun-2026",
-        "price": 0.29
+        "price": 0.29,
+        "symbol": "LIFTECH",
+        "market": "ACE Market",
+        "sector": "Industrial Products & Services"
     },
     "rt-pastry-holdings-berhad": {
         "stage": 5,
@@ -646,7 +660,10 @@
         "openingDate": "05-Jun-2026",
         "closingDate": "15-Jun-2026",
         "listingDate": "29-Jun-2026",
-        "price": 0.18
+        "price": 0.18,
+        "symbol": "RT",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
     },
     "hss-holdings-berhad": {
         "stage": 5,
@@ -734,7 +751,10 @@
         "openingDate": "26-Feb-2026",
         "closingDate": "05-Mar-2026",
         "listingDate": "17-Mar-2026",
-        "price": 0.2
+        "price": 0.2,
+        "symbol": "ADNEX",
+        "market": "ACE Market",
+        "sector": "Construction (Interior Fit-out)"
     },
     "ogx": {
         "stage": 5,
@@ -843,7 +863,10 @@
         "openingDate": "12-Sep-2025",
         "closingDate": "23-Sep-2025",
         "listingDate": "07-Oct-2025",
-        "price": 0.36
+        "price": 0.36,
+        "symbol": "CHEEDING",
+        "market": "ACE Market",
+        "sector": "Utilities (Power Infrastructure)"
     },
     "eca": {
         "stage": 5,
@@ -931,7 +954,10 @@
         "openingDate": "16-May-2025",
         "closingDate": "23-May-2025",
         "listingDate": "10-Jun-2025",
-        "price": 1
+        "price": 1,
+        "symbol": "PARADIGM",
+        "market": "ACE Market",
+        "sector": "Real Estate Investment Trusts"
     },
     "hkb": {
         "stage": 5,
@@ -1084,8 +1110,8 @@
         "mitiOpenDate": "14-Oct-2026",
         "mitiCloseDate": "21-Oct-2026",
         "hasMitiTranche": true,
-        "stage": 2,
-        "status": "MITI Allocation Phase"
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
     },
     "wil-key-berhad": {
         "mitiOpenDate": "22-Oct-2026",
@@ -1100,5 +1126,20 @@
         "hasMitiTranche": true,
         "stage": 2,
         "status": "MITI Allocation Phase"
+    },
+    "semico-ns-": {
+        "symbol": "SEMICO",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
+    },
+    "foodie-ns-": {
+        "symbol": "FOODIE",
+        "market": "ACE Market",
+        "sector": "Telecommunications & Media"
+    },
+    "camaroe--ns-": {
+        "symbol": "CAMAROE",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
     }
 }
