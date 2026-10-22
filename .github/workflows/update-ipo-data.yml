@@ -60,10 +60,14 @@ jobs:
           MITI_USERNAME: ${{ secrets.MITI_USERNAME }}
           MITI_PASSWORD: ${{ secrets.MITI_PASSWORD }}
         run: |
-          if [ -n "$MITI_USERNAME" ] && [ -n "$MITI_PASSWORD" ]; then
-            node scripts/run-sync-step.js miti-applicants --managed-status scratch/sync-miti-applicants-login.js --no-push
-          else
+          # The login script needs a real Chromium through Puppeteer, which is not part
+          # of the locked CI dependencies, so it only runs where Puppeteer is installed.
+          if ! node -e "import('puppeteer').then(() => process.exit(0), () => process.exit(1))" >/dev/null 2>&1; then
+            node scripts/run-sync-step.js miti-applicants --skip "Puppeteer is not installed in CI; run scratch/sync-miti-applicants-login.js locally."
+          elif [ -z "$MITI_USERNAME" ] || [ -z "$MITI_PASSWORD" ]; then
             node scripts/run-sync-step.js miti-applicants --skip "MITI credentials are not configured."
+          else
+            node scripts/run-sync-step.js miti-applicants --managed-status scratch/sync-miti-applicants-login.js --no-push
           fi
         continue-on-error: true
 
@@ -93,8 +97,6 @@ jobs:
           fi
           git diff --staged --quiet || (git commit -m "Automated update: Daily IPO market data and group archive" && git pull --rebase origin main && git push)
 
-      - name: Report MITI source failures after preserving other updates
-        if: always() && (steps.miti_portal.outcome == 'failure' || steps.miti_details.outcome == 'failure')
-        run: |
-          echo "::error::MITI sync failed. Existing data was preserved; see the MITI step and sync-status.js for the cause."
-          exit 1
+      - name: Report pipeline health (blocked external sources stay warnings)
+        if: always()
+        run: node scripts/check-sync-sources.js
