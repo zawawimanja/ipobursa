@@ -1081,5 +1081,19 @@
         "hasMitiTranche": true,
         "stage": 2,
         "status": "MITI Allocation Phase"
+    },
+    "wil-key-berhad": {
+        "mitiOpenDate": "22-Oct-2026",
+        "mitiCloseDate": "29-Oct-2026",
+        "hasMitiTranche": true,
+        "stage": 2,
+        "status": "MITI Allocation Phase"
+    },
+    "bestari-food-berhad": {
+        "mitiOpenDate": "19-Oct-2026",
+        "mitiCloseDate": "25-Oct-2026",
+        "hasMitiTranche": true,
+        "stage": 2,
+        "status": "MITI Allocation Phase"
     }
 }

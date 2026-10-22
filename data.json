@@ -1,5 +1,22 @@
 [
     {
+        "id": "bestari-food-berhad",
+        "companyName": "BESTARI FOOD BERHAD",
+        "symbol": "",
+        "market": "Unknown",
+        "price": 0,
+        "openingDate": "",
+        "closingDate": "",
+        "listingDate": "",
+        "stage": 2,
+        "status": "MITI Allocation Phase",
+        "year": 2026,
+        "sector": "",
+        "mitiOpenDate": "19-Oct-2026",
+        "mitiCloseDate": "25-Oct-2026",
+        "hasMitiTranche": true
+    },
+    {
         "id": "nwe-resources-group-berhad",
         "companyName": "NWE Resources Group Berhad",
         "symbol": "NWEBHD",
@@ -9995,15 +10012,18 @@
         "closingDate": "",
         "listingDate": "",
         "shariah": true,
-        "stage": 1,
-        "status": "Draft / Exposure Phase",
+        "stage": 2,
+        "status": "MITI Allocation Phase",
         "year": 2026,
         "sector": "Industrial (Engineering)",
         "geography": "Selangor",
         "sifuTargetPrice": 0.28,
         "calibratedSifuTargetPrice": 0.27,
         "v7TargetPrice": 0.27,
-        "zone2TargetPrice": 0.27
+        "zone2TargetPrice": 0.27,
+        "mitiOpenDate": "22-Oct-2026",
+        "mitiCloseDate": "29-Oct-2026",
+        "hasMitiTranche": true
     },
     {
         "id": "tfp",
