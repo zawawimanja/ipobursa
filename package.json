@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zawawimanja/ipohunterv2.git"
+    "url": "git+https://github.com/zawawimanja/ipobursa.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zawawimanja/ipohunterv2/issues"
+    "url": "https://github.com/zawawimanja/ipobursa/issues"
   },
-  "homepage": "https://github.com/zawawimanja/ipohunterv2#readme",
+  "homepage": "https://github.com/zawawimanja/ipobursa#readme",
   "description": "Comprehensive Bursa Malaysia IPO tracking portal: MITI allocations, Balloting stages, Prospectus analysis, Sifu Target Prices, and Day 1 Performance.",
   "dependencies": {
     "axios": "^1.16.0",
