@@ -2456,13 +2456,13 @@ const IPO_DATA = [
     "status": "Listed",
     "shariah": true,
     "openPrice": 1.7,
-    "closePrice": 1.69998,
+    "closePrice": 1.85,
     "strategy": "Swing",
     "outlier": true,
-    "pe": 16.5,
+    "pe": 64.8,
     "highPrice": 2.1734999999999998,
     "symbol": "SUNMED",
-    "analystInsight": "🚀 <b>PREMIUM SCALABLE BRAND (GRADE A)</b><br>Sunway Healthcare (SUNMED) merekodkan permohonan runcit tertinggi dengan tarikan jenama Sunway yang sangat kuat. Merupakan hospital pertahanan bertaraf mega dengan profil pertumbuhan jangka panjang yang mantap.<br><br>📊 <b>Kelebihan Utama:</b><br>• Rekod jumlah permohonan runcit tertinggi (hype amat besar).<br>• Hospital defensif bertaraf mega dengan kualiti aset gred-A.<br>• Potensi sasaran Fair Value RM1.84 (+26.9% upside).",
+    "analystInsight": "<b>HASIL IPO SUNMED — RUJUKAN SEJARAH</b><br>Harga IPO RM1.45; pembukaan debut RM1.70 (+17.24%); tutup hari pertama RM1.85 (+27.59%). PE sejarah pada harga IPO 64.8x (PATAMI FY24), OFS 70.8%, OS awam 5.57x. Sebelum listing: 20 cornerstone mengambil 52.6% tawaran institusi. Hasil ini tidak meramalkan prestasi IPO lain. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a>",
     "sifuTargetPrice": 1.84,
     "dailyChange": 0.5,
     "calibratedSifuTargetPrice": 1.94,
@@ -2520,7 +2520,11 @@ const IPO_DATA = [
     "v7TargetPrice": 1.94,
     "hasMitiTranche": true,
     "openingDate": "27-Feb-2026",
-    "closingDate": "05-Mar-2026"
+    "closingDate": "05-Mar-2026",
+    "ipoPe": 64.8,
+    "ipoPeBasis": "PE pada harga IPO RM1.45 berdasarkan PATAMI FY24; prospektus 27 Feb 2026.",
+    "ofs": true,
+    "ofsPercentage": 70.79687850257818
   },
   {
     "id": "teamstr",
@@ -9856,12 +9860,12 @@ const IPO_DATA = [
     "companyName": "Big Caring Group Bhd",
     "symbol": "Big Caring Group Bhd",
     "market": "Main Market",
-    "price": 0,
+    "price": 1.08,
     "closingDate": "",
     "listingDate": "",
     "shariah": true,
     "stage": 6,
-    "status": "Awaiting MITI Decision",
+    "status": "Public Opening Soon",
     "mitiOpenDate": "14-Aug-2026",
     "mitiCloseDate": "24-Aug-2026",
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
@@ -9871,15 +9875,163 @@ const IPO_DATA = [
     "hasMitiTranche": true,
     "ib": "Maybank IB, RHB IB, AmInvestment Bank",
     "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Market Leader:</b> Largest pharmacy retail chain (>600 outlets) backed by Creador PE.<br>• <b>Debt Clearance:</b> IPO proceeds repay M&A bank debt, driving net margin expansion.<br>• <b>Institutional Play:</b> Strong institutional cornerstone interest; solid mid-to-long term dividend play.",
-    "fullAnalysis": "✅ <b>BEDAH SIASAT LENGKAP — BIG CARING GROUP BHD (GRADE B)</b><br>Rangkaian runcit farmasi terbesar di Malaysia (>600 cawangan) hasil penggabungan jenama BIG Pharmacy, CARiNG Pharmacy, Georgetown, Wellings & Ting.<br><br>📊 <b>Bedah Siasat Isu 'Bayar Hutang' & Playbook Creador:</b><br>• <b>Isu Hutang Bank:</b> Sebahagian besar dana IPO digunakan untuk melunaskan pinjaman bank yang diambil semasa pengambilalihan CARiNG bernilai ~RM850M–RM900M pada 2023. Ini adalah <i>hutang akuisisi strategik M&A</i>, bukan hutang kerugian operasi.<br>• <b>Impak Positif Penjimatan Faedah:</b> Pelunasan pinjaman ini memotong beban kos faedah tahunan secara mendadak dan terus melonjakkan margin keuntungan bersih (Net Profit) pada suku-suku tahun berikutnya.<br>• <b>DNA Serupa MR D.I.Y. & CTOS:</b> Disokong oleh firma ekuiti swasta (PE) <i>Creador</i>. Seperti kes MR D.I.Y. (2020), keraguan awal pelabur mengenai 'bayar hutang & OFS' diimbangi oleh minat agresif dana institusi gergasi (KWSP, PNB) terhadap bisnes tunai monopoli runcit yang kalis krisis.<br><br>🎯 <b>Strategi Pelaburan:</b><br>• <b>Sederhana/Panjang & Dividen:</b> Sangat kukuh kerana dominasi pasaran, aliran tunai harian konsisten, dan potensi dividen tetap.<br>• <b>Stagging / Flip Hari Pertama:</b> Berpada-pada kerana saiz modal pasaran Main Market yang mega lazimnya mencatatkan kenaikan hari pertama yang lebih stabil berbanding kaunter Pasaran ACE.",
-    "sifuTargetPrice": 0.5,
-    "calibratedSifuTargetPrice": 0.6,
-    "v7TargetPrice": 0.6,
-    "zone2TargetPrice": 0.6,
+    "analystInsight": "<b>SEMAKAN RM1.08 — PENILAIAN PREMIUM, PATAMI FY26 BELUM DISAHKAN</b><br>• Pada harga yang dilaporkan melalui tawaran MITI, market cap kira-kira RM7.97 bilion; PE sejarah 65.19x berdasarkan PATAMI FY25 RM122.3 juta.<br>• Group PAT FY26 RM231.8 juta tidak boleh terus digunakan sebagai PATAMI. Sasaran automatik ditangguh sehingga asas pendapatan lengkap.<br>• SUNMED juga ditawarkan pada PE sejarah 64.8x dan OFS 70.8%, kemudian dibuka +17.24%; ini perbandingan sejarah, bukan ramalan Big Caring.<br>• Peruntukan MITI penuh yang dilaporkan individu tidak menggantikan OS awam atau bukti bookbuilding institusi.<br>• <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Prestasi debut SUNMED</a>",
+    "fullAnalysis": "<b>DAPATAN KAJIAN — BIG CARING PADA HARGA DILAPORKAN RM1.08</b><br><br><b>Asas harga dan keuntungan</b><br>Harga RM1.08 berdasarkan maklumat tawaran MITI pengguna pada 22 Okt 2026. Draf SC masih mengandungi harga kosong. Dengan andaian 7,381,835,680 saham, market cap ialah RM7.972 bilion. PATAMI FY25 RM122.3 juta memberi EPS 1.657 sen dan PE 65.19x. Group PAT FY26 RM231.8 juta dilaporkan pada 14 Okt; PATAMI FY26 belum disahkan dalam semakan ini. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=0ec5b677-9d03-4ce9-b0c6-c1b094f5f231\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Pendedahan FY26</a><br><br><b>Senario penilaian, bukan sasaran</b><br>Gandaan andaian 25–30x atas group PAT FY26 menghasilkan RM0.785–RM0.942. Kiraan ini tidak menolak kepentingan bukan kawalan dan tidak boleh dilabel EPS pemegang saham atau nilai wajar disahkan. Sasaran Sifu dan isyarat beli/jual automatik ditangguh.<br><br><b>Model bisnes dan penggunaan dana</b><br>Big Caring terutamanya runcit farmasi; SUNMED terutamanya hospital. Label healthcare tidak dengan sendiri menyokong gandaan sama. Big Caring dilaporkan mempunyai 668 kedai pada 30 Sep 2026, berbanding 626 dalam draf awal. Baki pinjaman RM1.3 bilion ialah pada 31 Jan 2026; draf menyatakan pembayaran sebahagian pinjaman, pusat pengedaran dan kos listing, dengan amaun akhir belum diisi. Bayar hutang boleh menjimatkan faedah, tetapi perlu disemak kesannya pada PATAMI. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Perkembangan operasi</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Penggunaan dana, seksyen 4.5</a><br><br><b>OFS dan struktur tawaran</b><br>1,291,821,000 OFS / 1,882,368,000 saham IPO = 68.63%; ini bukan 69% seluruh syarikat. Tranche MITI mengandungi 599,821,000 OFS / 922,730,000 = 65.01%. Jika semua saham berharga RM1.08, hasil kasar saham baharu ialah RM637.79 juta dan penjual RM1.395 bilion, sebelum kos. OFS tinggi sahaja tidak membuktikan saham overvalued. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual tawaran SC, muka surat 23</a><br><br><b>Perbandingan keputusan SUNMED</b><br>SUNMED: harga IPO RM1.45, PE FY24 64.8x, OFS 70.8%, OS awam 5.57x; dibuka RM1.70 (+17.24%) dan tutup hari pertama RM1.85 (+27.59%). Sebelum listing terdapat 20 cornerstone mengambil 52.6% tawaran institusi dan permintaan bookbuilding melebihi RM11.7 bilion. Prestasi satu IPO bukan sasaran pulangan Big Caring. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan langganan MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a><br><br><b>Permintaan dan sokongan institusi</b><br>Peruntukan MITI penuh yang dilaporkan pengguna tidak mengesahkan permintaan agregat atau OS awam. Pada 20 Okt, The Edge memetik WSJ mengenai komitmen puluhan cornerstone untuk Big Caring; nama, kuantiti dan terma akhir masih perlu disahkan melalui dokumen tawaran. Opsyen over-allotment draf 225,146,000 saham bernilai kira-kira RM243.16 juta pada RM1.08 ialah nilai opsyen, bukan dana yang wajib digunakan mempertahankan harga. Pengurus stabilisation tiada kewajipan membeli dan boleh menghentikannya. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan cornerstone, 20 Okt</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat stabilisation, seksyen 4.1.4</a><br><br><b>Penilaian semasa</b><br>Berharga premium dan perlu bukti pertumbuhan keuntungan. Kejayaan SUNMED tidak menjamin Big Caring mengulang pulangannya; PE sejarah dan OFS sahaja juga tidak cukup untuk menolak Big Caring. Semak PATAMI FY26, hutang selepas IPO, margin serta permintaan awam/institusi sebelum membuat kesimpulan.",
+    "sifuTargetPrice": null,
+    "calibratedSifuTargetPrice": null,
+    "v7TargetPrice": null,
+    "zone2TargetPrice": null,
     "mitiOfferShares": 922730000,
     "mitiApplicants": 2563,
-    "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd"
+    "insightUrl": "https://www.isaham.my/ipo/insights/big-caring-group-bhd",
+    "mitiAllocationRate": 100,
+    "mitiResultDate": "22-Oct-2026",
+    "mitiResultNote": "Pengguna dan beberapa pemohon melaporkan menerima peruntukan penuh. Ini bukan kadar OS awam dan tidak mengesahkan permintaan keseluruhan tranche.",
+    "ofs": true,
+    "ofsPercentage": 68.6,
+    "totalShares": 7381835680,
+    "freeFloat": 0.255,
+    "pe": 65.19,
+    "targetPe": 30,
+    "headers": [
+      "FY23",
+      "FY24",
+      "FY25",
+      "FY26 — PATAMI belum disahkan",
+      "FY27 — belum disahkan"
+    ],
+    "rev23": 1100000000,
+    "rev25": 3410000000,
+    "revF": null,
+    "pat23": null,
+    "pat25": 122300000,
+    "patF": null,
+    "eps23": null,
+    "eps25": 1.6567694717366017,
+    "epsF": null,
+    "epsGrowthF": null,
+    "priceSourceNote": "RM1.08 berdasarkan maklumat tawaran MITI yang dilaporkan pengguna pada 22 Okt 2026; harga belum disahkan melalui prospektus berdaftar dalam semakan ini.",
+    "financialProfileStatus": "incomplete",
+    "financialReviewDate": "22-Oct-2026",
+    "financialBasis": "PATAMI untuk EPS dan PE; group PAT dipaparkan berasingan dan tidak digunakan sebagai keuntungan pemegang saham.",
+    "verifiedPatami25": 122300000,
+    "groupPat25": 143020000,
+    "groupPat26": 231800000,
+    "ipoPe": 65.19,
+    "ipoPeBasis": "FY25 PATAMI RM122.3 juta; harga RM1.08 dan saham selepas IPO mengikut draf.",
+    "targetPeBasis": "Andaian senario boleh laras; bukan gandaan wajar yang disahkan.",
+    "historicalYears": [
+      23,
+      24,
+      25
+    ],
+    "projectionHeaders": [
+      "FY26 — PATAMI belum disahkan",
+      "FY27 — belum disahkan"
+    ],
+    "pat24": null,
+    "patF1": null,
+    "eps24": null,
+    "epsF1": null,
+    "epsGrowthF1": null,
+    "rev24": null,
+    "valuationScenarios": [
+      {
+        "multiple": 25,
+        "price": 0.7850350849316114
+      },
+      {
+        "multiple": 30,
+        "price": 0.9420421019179338
+      }
+    ],
+    "valuationScenarioBasis": "Sensitiviti berdasarkan group PAT FY26 RM231.8 juta, bukan PATAMI. Julat ini bukan nilai wajar disahkan, ramalan debut atau sasaran Sifu.",
+    "mitiVerdict": "PERLU SEMAK PATAMI",
+    "mitiAllocationScope": "individual-reported",
+    "catalysts": [
+      "<strong>Harga dan status:</strong> RM1.08 dilaporkan melalui tawaran MITI pengguna; <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">prospektus awam yang disemak masih draf</a>.",
+      "<strong>Keuntungan pemegang saham:</strong> PATAMI FY25 RM122.3 juta → EPS 1.657 sen → PE 65.19x. Group PAT FY26 RM231.8 juta dipaparkan berasingan; PATAMI FY26 belum disahkan.",
+      "<strong>Model farmasi:</strong> Pertumbuhan jualan kedai, margin, aliran tunai dan penjimatan faedah perlu menyokong harga premium; jumlah kedai dan label healthcare sahaja tidak menentukan nilai. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Operasi terkini: 668 kedai</a>.",
+      "<strong>OFS 68.63%:</strong> Daripada saham IPO, bukan seluruh syarikat. Pada RM1.08 hasil kasar syarikat RM637.79 juta, penjual RM1.395 bilion; struktur tertakluk dokumen akhir.",
+      "<strong>Penggunaan dana:</strong> Big Caring merancang bayar sebahagian hutang dan pusat pengedaran. SUNMED juga membayar sukuk: 66.5% hasil baharu untuk hospital sedia ada, 29.9% sukuk, 3.6% kos. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a>.",
+      "<strong>Permintaan:</strong> Full allocation MITI individu tidak sama dengan OS awam. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan 20 Okt</a> menyebut komitmen puluhan cornerstone Big Caring, tetapi terma akhir belum disahkan.",
+      "<strong>Stabilisation:</strong> 225.146 juta saham dalam draf; tiada kewajipan membeli atau menjamin harga IPO. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat SC</a>."
+    ],
+    "peers": "<strong>Asas perbandingan:</strong> Gunakan rangkaian farmasi/runcit yang setara untuk menilai keuntungan Big Caring. SUNMED ialah rujukan hasil debut dan permintaan, bukan sasaran pulangan. RM0.785–RM0.942 ialah senario andaian atas group PAT, bukan nilai wajar atau sasaran Sifu.",
+    "researchComparison": {
+      "title": "Big Caring berbanding keputusan IPO SUNMED",
+      "columns": [
+        "Perkara",
+        "SUNMED",
+        "Big Caring"
+      ],
+      "rows": [
+        [
+          "Model bisnes",
+          "Hospital",
+          "Terutamanya runcit farmasi"
+        ],
+        [
+          "Harga IPO",
+          "RM1.45",
+          "RM1.08 — laporan MITI"
+        ],
+        [
+          "PE sejarah IPO",
+          "64.8x (FY24)",
+          "65.19x (FY25)"
+        ],
+        [
+          "OFS / saham IPO",
+          "70.8%",
+          "68.63% (draf)"
+        ],
+        [
+          "OS awam",
+          "5.57x",
+          "Belum diketahui"
+        ],
+        [
+          "Pembukaan debut",
+          "RM1.70 (+17.24%)",
+          "Belum listing"
+        ],
+        [
+          "Tutup hari pertama",
+          "RM1.85 (+27.59%)",
+          "Belum listing"
+        ],
+        [
+          "Cornerstone sebelum IPO",
+          "20; 52.6% tawaran institusi",
+          "Komitmen dilaporkan media; terma akhir belum disahkan"
+        ]
+      ],
+      "note": "PE menggunakan tahun kewangan berbeza. Prestasi SUNMED ialah sejarah, bukan ramalan Big Caring. Full allocation MITI individu bukan OS awam.",
+      "sources": [
+        {
+          "label": "Prospektus SUNMED",
+          "url": "https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf"
+        },
+        {
+          "label": "Keputusan langganan MIH",
+          "url": "https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf"
+        },
+        {
+          "label": "Hasil debut SUNMED",
+          "url": "https://theedgemalaysia.com/node/796630"
+        },
+        {
+          "label": "Draf Big Caring",
+          "url": "https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc"
+        },
+        {
+          "label": "Laporan cornerstone Big Caring, 20 Okt",
+          "url": "https://theedgemalaysia.com/node/822547"
+        }
+      ]
+    },
+    "groupRevenue26": 4000000000
   },
   {
     "id": "ioipg-malaysia-reit",

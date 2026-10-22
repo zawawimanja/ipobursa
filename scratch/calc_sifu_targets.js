@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const jsonPath = path.join(__dirname, '..', 'data.json');
+const targetFields = ['sifuTargetPrice', 'calibratedSifuTargetPrice', 'v7TargetPrice', 'zone2TargetPrice'];
+const hasPositiveValue = value => Number.isFinite(value) && value > 0;
+const roundTarget = value => hasPositiveValue(value) ? Number(value.toFixed(2)) : null;
+const formatTarget = value => value === null ? 'Unavailable' : `RM ${value.toFixed(2)}`;
 
 try {
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
@@ -113,8 +117,8 @@ try {
     const calibratedTargets = {};
     
     targets.forEach(ipo => {
-        let sifuTP = 0;
-        let calibratedTP = 0;
+        let sifuTP = null;
+        let calibratedTP = null;
         let source = '';
         
         // Parse metadata for calibration
@@ -127,13 +131,21 @@ try {
         const promoterQuality = ipo.promoterQuality || 'experienced_founder';
         
         const override = overrides[ipo.id];
+        const profileStatus = override && override.financialProfileStatus !== undefined
+            ? override.financialProfileStatus : ipo.financialProfileStatus;
         
-        if (override && override.sifuTargetPrice !== undefined) {
-            sifuTP = override.sifuTargetPrice;
+        if (profileStatus === 'incomplete') {
+            // Group PAT must not silently become a shareholder-earnings target.
+            // Keep targets unavailable until the profile has verified earnings.
+            source = 'Financial profile incomplete — verified PATAMI required';
+        } else if (override && override.sifuTargetPrice !== undefined) {
+            sifuTP = hasPositiveValue(override.sifuTargetPrice) ? override.sifuTargetPrice : null;
             // Respect manual target price without applying discounts, unless user provided calibratedSifuTargetPrice explicitly
-            calibratedTP = override.calibratedSifuTargetPrice !== undefined ? override.calibratedSifuTargetPrice : override.sifuTargetPrice;
+            calibratedTP = override.calibratedSifuTargetPrice !== undefined
+                ? (hasPositiveValue(override.calibratedSifuTargetPrice) ? override.calibratedSifuTargetPrice : null)
+                : sifuTP;
             source = `overrides.json (Manual Override)`;
-        } else if (ipo.headers !== undefined && ipo.patF !== undefined && ipo.totalShares !== undefined && ipo.targetPe !== undefined) {
+        } else if (ipo.headers !== undefined && hasPositiveValue(ipo.patF) && hasPositiveValue(ipo.totalShares) && hasPositiveValue(ipo.targetPe)) {
             // Calculate Valuation 1 for Projection F (first projection column)
             // Sifu Sheets calculates EPS = (patF / totalShares) * 100
             // Valuation 1 = targetPe * EPS / 100
@@ -145,9 +157,13 @@ try {
             source = `data.json profile (Projection F: RM ${valF.toFixed(2)})`;
         } else {
             // Fallback for dynamic IPOs
-            sifuTP = ipo.avgTP || ipo.price || 0.50;
-            calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib, ipo.targetPe);
-            source = ipo.avgTP ? 'avgTP from database' : 'IPO Price (fallback)';
+            sifuTP = hasPositiveValue(ipo.avgTP) ? ipo.avgTP : (hasPositiveValue(ipo.price) ? ipo.price : null);
+            if (sifuTP !== null) {
+                calibratedTP = getCalibratedTarget(sifuTP, sector, market, os, ipo.price || 0, ipo.geography || '', ipo.ofs, anchorInvestors, freeFloat, lockupMonths, promoterQuality, ipo.ib, ipo.targetPe);
+                source = hasPositiveValue(ipo.avgTP) ? 'avgTP from database' : 'IPO Price (fallback)';
+            } else {
+                source = 'IPO price and analyst target unavailable';
+            }
         }
 
         // Apply MITI 50% target price cap (for Stage 2 IPOs)
@@ -156,15 +172,21 @@ try {
             source += ' | [MITI 50% Cap]';
         }
         
-        sifuTargets[ipo.id] = parseFloat(sifuTP.toFixed(2));
-        calibratedTargets[ipo.id] = parseFloat(calibratedTP.toFixed(2));
-        console.log(`- ${ipo.id} (${ipo.companyName}): target = RM ${sifuTargets[ipo.id].toFixed(2)} | Calibrated = RM ${calibratedTargets[ipo.id].toFixed(2)} [Source: ${source}]`);
+        sifuTargets[ipo.id] = roundTarget(sifuTP);
+        calibratedTargets[ipo.id] = roundTarget(calibratedTP);
+        console.log(`- ${ipo.id} (${ipo.companyName}): target = ${formatTarget(sifuTargets[ipo.id])} | Calibrated = ${formatTarget(calibratedTargets[ipo.id])} [Source: ${source}]`);
     });
     
     // Save both targets and overrides into data.json
     data.forEach(ipo => {
         if (overrides[ipo.id]) {
             Object.assign(ipo, overrides[ipo.id]);
+        }
+        // Apply the guard to every exported record, including profiles outside
+        // this run's year/Shariah selection, so stale targets cannot reappear.
+        if (ipo.financialProfileStatus === 'incomplete') {
+            targetFields.forEach(field => { ipo[field] = null; });
+            return;
         }
         if (sifuTargets[ipo.id] !== undefined) {
             ipo.sifuTargetPrice = sifuTargets[ipo.id];

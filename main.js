@@ -1301,19 +1301,17 @@ function renderTodayActionRadar() {
     const now = new Date();
     const today = malaysiaToday();
     const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-    const yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
 
     const todayEvents = [];
     const timelineEvents = [];
 
     (ipoData || []).forEach(ipo => {
-        // 1. Listing Events — only show for IPOs at Stage 4+ (pre-listing or listed)
+        // 1. Listing Events — today's debuts and upcoming listings at Stage 4+
         if (ipo.listingDate && ipo.stage >= 4) {
             const ld = parseFlexDate(ipo.listingDate);
             if (ld) {
                 ld.setHours(0, 0, 0, 0);
-                if (ld.getTime() === today.getTime() || (ipo.stage === 5 && ld.getTime() === yesterday.getTime())) {
-                    const isToday = ld.getTime() === today.getTime();
+                if (ld.getTime() === today.getTime()) {
                     const hasDebut = Number.isFinite(ipo.openPrice) && ipo.openPrice > 0;
                     const debutDecimals = hasDebut && Math.abs(ipo.openPrice * 100 - Math.round(ipo.openPrice * 100)) > 0.000001 ? 3 : 2;
                     const openPriceStr = hasDebut ? `RM ${ipo.openPrice.toFixed(debutDecimals)}` : 'Belum disahkan';
@@ -1321,7 +1319,7 @@ function renderTodayActionRadar() {
                     const perfStr = openPerf === null ? '' : (openPerf >= 0 ? '+' : '') + openPerf.toFixed(2) + '%';
                     todayEvents.push({
                         type: 'listing',
-                        badge: isToday ? '🚀 DEBUT PENYENARAIAN HARI INI' : '🚀 BARU DISENARAIKAN SEMALAM',
+                        badge: '🚀 DEBUT PENYENARAIAN HARI INI',
                         badgeClass: 'listing',
                         title: ipo.companyName,
                         market: ipo.market,
@@ -1951,10 +1949,20 @@ function createIPOCard(ipo, index = 0) {
     } else if (ipo.stage === 5) {
         dateDisplay = ipo.listingDate || ipo.year || 'Listed';
     } else if (ipo.stage === 6) {
-        dateDisplay = `
-            <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
-            <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">${ipo.status === 'Public Opening Soon' ? '⏳ Public Opening Soon' : '⏳ Awaiting Decision'}</div>
-        `;
+        const hasMitiResult = ipo.mitiAllocationRate !== undefined && ipo.mitiAllocationRate !== null;
+        const applicantsLine = ipo.mitiApplicants
+            ? `<div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">${Number(ipo.mitiApplicants).toLocaleString('en-MY')} applicants · no ballot</div>`
+            : '';
+        dateDisplay = hasMitiResult
+            ? `
+                <div style="font-weight: 600; color: #34d399; font-size: 0.75rem;">MITI Result:</div>
+                <div style="font-size: 0.75rem; color: #34d399; margin-top: 2px; font-weight: 700; text-transform: uppercase;">✅ ${Number(ipo.mitiAllocationRate).toFixed(0)}% Allotted</div>
+                ${applicantsLine}
+            `
+            : `
+                <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
+                <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">${ipo.status === 'Public Opening Soon' ? '⏳ Public Opening Soon' : '⏳ Awaiting Decision'}</div>
+            `;
     }
 
     let priceDisplay = ipo.price > 0 ? 'RM ' + ipo.price.toFixed(2) : 'TBA';

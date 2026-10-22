@@ -17,7 +17,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=4.9"></script>
+    <script src="data.js?v=5.0"></script>
     <script src="sync-status.js?v=3.4"></script>
     <style>
         #sheet-stock-select {
@@ -43,10 +43,17 @@
 
         .sheet-container {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 340px minmax(0, 1fr);
             gap: 2rem;
             margin-top: 2rem;
             margin-bottom: 4rem;
+        }
+
+        .sheet-container > * { min-width: 0; }
+        #qual-insight a, #sheet-catalysts-content a, #sheet-peers-content a {
+            color: #a5b4fc;
+            text-decoration: underline;
+            overflow-wrap: anywhere;
         }
 
         @media (max-width: 1100px) {
@@ -306,6 +313,9 @@
             </div>
         </div>
 
+        <div id="sheet-data-notice" role="status" style="display: none; margin-bottom: 1.5rem; padding: 1rem 1.25rem; border: 1px solid rgba(245,158,11,0.4); border-radius: 12px; background: rgba(245,158,11,0.08); color: #fde68a; font-size: 0.85rem; line-height: 1.6;"></div>
+        <section id="sheet-research-comparison" class="sheet-card" style="display:none; margin-bottom:1.5rem; min-width:0;" aria-label="Perbandingan keputusan IPO"></section>
+
         <div class="sheet-container">
             <!-- Left Panel: Controls & Guides -->
             <div class="sheet-sidebar">
@@ -334,7 +344,7 @@
                     <div id="sheet-catalysts-content" style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; display: flex; flex-direction: column; gap: 0.5rem;">
                         <!-- Dynamically filled -->
                     </div>
-                    <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.75rem; color: var(--text-dim);" id="sheet-peers-content">
+                    <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.75rem; color: var(--text-dim); overflow-x: auto;" id="sheet-peers-content">
                         <!-- Dynamically filled -->
                     </div>
                 </div>
@@ -387,7 +397,7 @@
                     <div id="sifu-sop-dynamic-content" style="margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px dashed rgba(255,255,255,0.1);">
                         <!-- Dynamically filled -->
                     </div>
-                    <div style="font-size: 0.72rem; color: var(--text-dim); line-height: 1.45;">
+                    <div id="sifu-sop-reference" style="font-size: 0.72rem; color: var(--text-dim); line-height: 1.45;">
                         <span style="font-weight: bold; color: #ffffff; display: block; margin-bottom: 0.25rem;">SOP Guidelines Reference:</span>
                         • <strong>Filter 1:</strong> Buy if IPO price &lt; Sifu Target (has MoS).<br>
                         • <strong>Filter 2 Grade A/B:</strong> Can Apply & Hold (Swing/DCA).<br>
@@ -467,7 +477,7 @@
                                 <td><input type="number" id="inp-gp-fye-f1" value="34000000" oninput="calculateSheet()"></td>
                             </tr>
                             <tr>
-                                <td class="label-cell">Profit After Tax (PAT)</td>
+                                <td class="label-cell" id="sheet-profit-label">Profit After Tax (PAT)</td>
                                 <td>RM</td>
                                 <td><input type="number" id="inp-pat-23" value="6850000" oninput="calculateSheet()"></td>
                                 <td><input type="number" id="inp-pat-24" value="9500000" oninput="calculateSheet()"></td>
@@ -700,6 +710,9 @@
 
         // Utility to find the 3 best historical years
         function getHistoricalSuffixes(data) {
+            if (Array.isArray(data.historicalYears) && data.historicalYears.length === 3) {
+                return data.historicalYears;
+            }
             const suffixes = [];
             for (const key in data) {
                 if (key.startsWith('rev') && key !== 'revF' && key !== 'revF1') {
@@ -762,6 +775,69 @@
             });
         }
 
+        function sheetEscapeText(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+        }
+
+        function getSheetFinancialReview(data) {
+            const review = data?.financialReview || {};
+            const legacyBigCaring = data?.id === 'big-caring-group-bhd' && Number.isFinite(data.groupPat26);
+            return {
+                title: review.title || (legacyBigCaring ? 'Penilaian belum lengkap — PATAMI FY26 belum disahkan.' : 'Penilaian belum lengkap.'),
+                summary: review.summary || (legacyBigCaring
+                    ? `FY26 group PAT RM${(data.groupPat26 / 1e6).toFixed(1)} juta merangkumi keuntungan kumpulan dan tidak digunakan sebagai PATAMI atau EPS pemegang saham. Sasaran harga serta keputusan beli/jual automatik ditangguhkan.`
+                    : 'Unjuran keuntungan pemegang saham dan sasaran harga belum disahkan. Sasaran harga serta keputusan beli/jual automatik ditangguhkan.'),
+                profitLabel: review.profitLabel || (legacyBigCaring ? 'PATAMI (keuntungan pemegang saham)' : data?.financialProfileStatus === 'incomplete' ? 'Keuntungan (asas belum disahkan)' : 'Profit After Tax (PAT)'),
+                scenarioLabel: review.scenarioLabel || (legacyBigCaring
+                    ? 'Senario gandaan atas group PAT sahaja — bukan nilai wajar disahkan atau ramalan debut.'
+                    : 'Senario andaian — bukan nilai wajar disahkan atau ramalan debut.'),
+                sopNote: review.sopNote || (legacyBigCaring
+                    ? 'PATAMI FY26 dan OS awam belum disahkan. Peruntukan penuh MITI bukan ukuran yang sama dengan OS awam. Sasaran dan keputusan beli/jual automatik ditangguhkan.'
+                    : 'Sahkan asas keuntungan, harga tawaran dan permintaan awam/institusi. Peruntukan MITI bukan ukuran yang sama dengan OS awam. Sasaran dan keputusan beli/jual automatik ditangguhkan.')
+            };
+        }
+
+        function updateSheetDataNotice(data) {
+            const notice = document.getElementById('sheet-data-notice');
+            if (!notice) return;
+            const missingPrice = !(data?.price > 0);
+            const incomplete = data?.financialProfileStatus === 'incomplete';
+            notice.style.display = missingPrice || incomplete ? 'block' : 'none';
+            notice.innerHTML = '';
+            if (missingPrice) {
+                notice.innerHTML += '<strong>Harga IPO belum disahkan.</strong> Paparan harga dibiarkan kosong. Penilaian yang memerlukan harga tawaran belum tersedia.';
+            }
+            if (incomplete) {
+                const review = getSheetFinancialReview(data);
+                notice.innerHTML += `<div><strong>${sheetEscapeText(review.title)}</strong><br>${sheetEscapeText(review.summary)}</div>`;
+                if (data.priceSourceNote) notice.innerHTML += `<p style="margin:0.5rem 0;">${sheetEscapeText(data.priceSourceNote)}</p>`;
+                if (Array.isArray(data.valuationScenarios) && data.valuationScenarios.length) {
+                    notice.innerHTML += `<div style="margin-top:0.75rem;"><strong>${sheetEscapeText(review.scenarioLabel)}</strong><div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.35rem;">${data.valuationScenarios.filter(row => Number.isFinite(row.multiple) && Number.isFinite(row.price)).map(row => `<span style="padding:0.25rem 0.6rem;border:1px solid rgba(245,158,11,0.25);border-radius:6px;">${row.multiple}x: RM${row.price.toFixed(3)}</span>`).join('')}</div></div>`;
+                }
+                if (data.financialSourcesHTML) notice.innerHTML += `<div style="margin-top:0.75rem;overflow-wrap:anywhere;">${Array.isArray(data.financialSourcesHTML) ? data.financialSourcesHTML.join(' · ') : data.financialSourcesHTML}</div>`;
+            }
+        }
+
+        function renderResearchComparison(data) {
+            const card = document.getElementById('sheet-research-comparison');
+            if (!card) return;
+            const comparison = data?.researchComparison;
+            card.style.display = comparison ? 'block' : 'none';
+            card.innerHTML = '';
+            if (!comparison) return;
+            const sources = (comparison.sources || []).filter(source => /^https?:\/\//i.test(source.url)).map(source => `<a href="${sheetEscapeText(source.url)}" target="_blank" rel="noopener noreferrer" style="color:#a5b4fc;">${sheetEscapeText(source.label)}</a>`).join(' · ');
+            card.innerHTML = `<h2 style="font-size:1.2rem;margin:0 0 0.5rem;color:#e2e8f0;">${sheetEscapeText(comparison.title)}</h2>
+                <p style="margin:0 0 0.75rem;font-size:0.78rem;color:#a5b4fc;">↔ Leret ke kiri/kanan untuk melihat semua lajur.</p>
+                <div style="overflow-x:auto;max-width:100%;border:1px solid rgba(148,163,184,0.2);border-radius:8px;">
+                    <table style="width:100%;min-width:580px;border-collapse:collapse;text-align:left;font-size:0.84rem;">
+                        <thead><tr>${(comparison.columns || []).map((column, index) => `<th style="padding:0.7rem 0.85rem;background:${index === 0 ? '#172236' : 'rgba(99,102,241,0.12)'};color:#c7d2fe;${index === 0 ? 'position:sticky;left:0;z-index:2;' : ''}">${sheetEscapeText(column)}</th>`).join('')}</tr></thead>
+                        <tbody>${(comparison.rows || []).map(row => `<tr>${row.map((cell, index) => `<${index === 0 ? 'th scope="row"' : 'td'} style="padding:0.7rem 0.85rem;border-top:1px solid rgba(148,163,184,0.12);font-weight:${index === 0 ? '600' : '400'};color:#e2e8f0;${index === 0 ? 'position:sticky;left:0;z-index:1;background:#111c2e;' : ''}">${sheetEscapeText(cell)}</${index === 0 ? 'th' : 'td'}>`).join('')}</tr>`).join('')}</tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.8rem;color:#94a3b8;margin:0.75rem 0 0;line-height:1.5;">${sheetEscapeText(comparison.note)}</p>
+                <div style="font-size:0.78rem;margin-top:0.5rem;line-height:1.6;overflow-wrap:anywhere;">${sources}</div>`;
+        }
+
         // Load data from selection
         function loadSelectedStock() {
             const id = document.getElementById('sheet-stock-select').value;
@@ -777,10 +853,10 @@
             if (typeof localIpoData !== 'undefined') {
                 const ipo = localIpoData.find(x => x.id === id);
                 if (ipo) {
-                    const price = ipo.price || ipo.currentPrice || 0.50;
+                    const price = Number.isFinite(ipo.price) && ipo.price > 0 ? ipo.price : null;
                     
                     // If the IPO contains complete pre-defined financial profile fields (headers)
-                    if (ipo.headers !== undefined) {
+                    if (ipo.headers !== undefined || ipo.financialProfileStatus === 'incomplete') {
                         data = ipo;
                         fillFormValues(data);
                         document.getElementById('sheet-target-pe').value = (data.targetPe || 15).toFixed(1);
@@ -788,7 +864,7 @@
                     } else {
                         // Otherwise, estimate dynamically for general/new IPOs
                         const pe = ipo.pe || 15;
-                        const totalShares = ipo.totalShares || (ipo.marketCap ? Math.round(ipo.marketCap / price) : 250000000);
+                        const totalShares = ipo.totalShares || (ipo.marketCap && price ? Math.round(ipo.marketCap / price) : 250000000);
                         const revenue = ipo.revenue || 80000000;
                         const pat = ipo.pat || (revenue * 0.12);
                         
@@ -828,8 +904,8 @@
                             targetPe: targetPe,
                             catalysts: [
                                 `Syarikat IPO sektor ${ipo.sector || 'N/A'}.`,
-                                `Harga IPO ditawarkan pada RM ${price.toFixed(2)}.`,
-                                `Analyst Target Price purata: RM ${(ipo.avgTP || price).toFixed(2)}.`
+                                price ? `Harga IPO ditawarkan pada RM ${price.toFixed(2)}.` : 'Harga IPO belum disahkan.',
+                                ipo.avgTP > 0 ? `Analyst Target Price purata: RM ${ipo.avgTP.toFixed(2)}.` : 'Sasaran harga penganalisis belum disahkan.'
                             ],
                             peers: `<strong>Peer Comparison:</strong> Implied PE owner: ${pe}x. Sila masukkan data kewangan sasaran untuk melihat unjuran perbandingan.`
                         };
@@ -852,8 +928,8 @@
                 const h2 = h.find(x => x.includes(s2.toString())) || `FYE ${s2}`;
                 const h3 = h.find(x => x.includes(s3.toString())) || `FYE ${s3}`;
                 
-                const hp1 = h[h.length - 2] || "Projection (FYE F)";
-                const hp2 = h[h.length - 1] || "Projection (FYE F+1)";
+                const hp1 = data.projectionHeaders?.[0] || h[h.length - 2] || "Projection (FYE F)";
+                const hp2 = data.projectionHeaders?.[1] || h[h.length - 1] || "Projection (FYE F+1)";
                 
                 const thead = document.querySelector('.excel-table thead tr');
                 if (thead) {
@@ -869,8 +945,23 @@
                 }
             }
             
+            updateSheetDataNotice(data);
+            renderResearchComparison(data);
             calculateSheet();
             updateQualitativeOverlay(id);
+            const sopReference = document.getElementById('sifu-sop-reference');
+            if (sopReference) sopReference.style.display = data && (data.financialProfileStatus === 'incomplete' || !(data.price > 0)) ? 'none' : '';
+            if (data && (data.financialProfileStatus === 'incomplete' || !(data.price > 0))) {
+                const warningCard = document.getElementById('sifu-edu-warning-card');
+                if (warningCard) {
+                    warningCard.style.display = 'block';
+                    warningCard.innerHTML = '<strong>Penilaian belum lengkap</strong><p>Gred kualitatif tidak mengesahkan harga tawaran murah. Sahkan PATAMI terkini dan permintaan awam/institusi sebelum membuat perbandingan nilai.</p>';
+                }
+                const sop = document.getElementById('sifu-sop-dynamic-content');
+                if (sop) sop.innerHTML = data.financialProfileStatus === 'incomplete'
+                    ? `<strong>Menunggu data penilaian</strong><p>${sheetEscapeText(getSheetFinancialReview(data).sopNote)}</p>`
+                    : '<strong>Menunggu harga tawaran</strong><p>Harga IPO belum disahkan. Sasaran dan keputusan beli/jual automatik ditangguhkan.</p>';
+            }
         }
 
         // Helpers to format and parse numbers
@@ -893,9 +984,11 @@
             const el = document.getElementById(id);
             if (!el) return;
             if (val === undefined || val === null || isNaN(val)) {
-                el.value = (0).toFixed(decimals);
+                el.value = '';
+                el.placeholder = '—';
             } else {
                 el.value = Number(val).toFixed(decimals);
+                el.placeholder = '';
             }
         }
 
@@ -908,7 +1001,11 @@
                     setTimeout(() => lucide.createIcons(), 50);
                 }
             }
-            setInputNumber('inp-price', data.price, 2);
+            const priceDecimals = Number.isFinite(data.price) && Math.abs(data.price * 100 - Math.round(data.price * 100)) > 0.000001 ? 3 : 2;
+            setInputNumber('inp-price', data.price > 0 ? data.price : null, priceDecimals);
+            document.getElementById('inp-price').placeholder = data.price > 0 ? '' : 'Belum disahkan';
+            const profitLabel = document.getElementById('sheet-profit-label');
+            if (profitLabel) profitLabel.innerText = getSheetFinancialReview(data).profitLabel;
             setInputNumber('inp-total-shares', data.totalShares, 0);
             
             // Get the 3 historical suffixes
@@ -935,8 +1032,8 @@
             setInputNumber('inp-pat-23', data[`pat${s1}`], 0);
             setInputNumber('inp-pat-24', data[`pat${s2}`], 0);
             setInputNumber('inp-pat-25', data[`pat${s3}`], 0);
-            setInputNumber('inp-pat-fye-f', data.patF, 0);
-            setInputNumber('inp-pat-fye-f1', data.patF1, 0);
+            setInputNumber('inp-pat-fye-f', data.financialProfileStatus === 'incomplete' ? null : data.patF, 0);
+            setInputNumber('inp-pat-fye-f1', data.financialProfileStatus === 'incomplete' ? null : data.patF1, 0);
             
             // Growth
             setInputNumber('inp-eps-growth-f', data.epsGrowthF, 1);
@@ -1017,7 +1114,7 @@
                 const ofs = ipo.ofs;
                 if (ofs === true) {
                     // show percentage or value when available
-                    let ofsText = 'OFS: Yes (Selling Pressure) ⚠️';
+                    let ofsText = 'OFS: Saham sedia ada';
                     if (ipo.ofsPercentage !== undefined) ofsText += ` — ${ipo.ofsPercentage}%`;
                     else if (ipo.ofsValue !== undefined) ofsText += ` — RM ${ipo.ofsValue}`;
                     ofsEl.innerText = ofsText;
@@ -1172,6 +1269,56 @@
                 if (sopDynamicEl) sopDynamicEl.innerHTML = '<div style="font-size: 0.8rem; color: var(--text-dim);">Sila muat naik profil saham terlebih dahulu.</div>';
             }
             if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // Missing inputs stay unavailable instead of becoming zero-valued financial claims.
+        function applySheetAvailability() {
+            const selectedId = document.getElementById('sheet-stock-select')?.value;
+            const selectedProfile = (typeof localIpoData !== 'undefined' ? localIpoData : []).find(ipo => ipo.id === selectedId);
+            const incomplete = selectedProfile?.financialProfileStatus === 'incomplete';
+            const hasValue = id => {
+                const value = document.getElementById(id)?.value;
+                return value !== undefined && String(value).trim() !== '' && Number.isFinite(Number(String(value).replace(/,/g, '')));
+            };
+            const unavailable = id => {
+                const el = document.getElementById(id);
+                if (el) { el.innerText = '—'; el.style.color = '#94a3b8'; }
+            };
+            const hasPrice = hasValue('inp-price') && parseInputValue('inp-price') > 0;
+            const hasShares = hasValue('inp-total-shares') && parseInputValue('inp-total-shares') > 0;
+            if (!hasPrice || !hasShares) unavailable('td-market-cap');
+            ['23', '24', '25', 'fye-f', 'fye-f1'].forEach(period => {
+                const hasProfit = !(incomplete && period.startsWith('fye-')) && hasValue(`inp-pat-${period}`);
+                const hasRevenue = hasValue(`inp-rev-${period}`) && parseInputValue(`inp-rev-${period}`) > 0;
+                const hasEquity = hasValue(`inp-assets-${period}`) && hasValue(`inp-liab-${period}`);
+                if (!hasProfit || !hasShares) unavailable(`td-eps-${period}`);
+                if (!hasProfit || !hasShares || !hasPrice || parseInputValue(`inp-pat-${period}`) <= 0) unavailable(`td-per-${period}`);
+                if (!hasRevenue || !hasShares || !hasPrice) unavailable(`td-psr-${period}`);
+                if (!hasEquity) unavailable(`td-equity-${period}`);
+                if (!hasEquity || !hasShares || !hasPrice) unavailable(`td-pbr-${period}`);
+                if (!hasEquity || !hasProfit) unavailable(`td-roe-${period}`);
+            });
+            [['fye-f', '25', 'f'], ['fye-f1', 'fye-f', 'f1']].forEach(([period, previous, growth]) => {
+                const hasGrowth = hasValue(`inp-pat-${period}`) && hasValue(`inp-pat-${previous}`) && parseInputValue(`inp-pat-${previous}`) > 0;
+                if (!hasGrowth) {
+                    setInputNumber(`inp-eps-growth-${growth}`, null);
+                    unavailable(`td-peg-${period}`);
+                } else if (!hasPrice) unavailable(`td-peg-${period}`);
+            });
+            ['fye-f', 'fye-f1'].forEach((period, index) => {
+                if (incomplete || !hasValue(`inp-pat-${period}`) || !hasShares || !hasPrice) {
+                    unavailable(`td-val1-${period}`);
+                    unavailable(`td-buy1-${period}`);
+                    unavailable(index === 0 ? 'td-v3-db' : 'td-v3-db-f1');
+                    unavailable(index === 0 ? 'td-v5-db' : 'td-v5-db-f1');
+                }
+            });
+            if (incomplete || !hasPrice || !hasShares || !hasValue('inp-pat-fye-f')) {
+                const verdict = document.getElementById('sheet-verdict-box');
+                verdict.className = 'verdict-banner hold';
+                verdict.innerHTML = '<strong>PENILAIAN BELUM LENGKAP</strong><br>Harga tawaran, jumlah saham dan PATAMI unjuran yang sah diperlukan untuk mengira sasaran. Tiada keputusan beli/jual automatik diberikan.';
+                document.getElementById('inp-price').style.color = '#cbd5e1';
+            }
         }
 
         // Core Calculation Engine
@@ -1353,7 +1500,7 @@
                     if (os && os > 0) t *= (1 + p.osScale * Math.log1p(os) / 5);
                     else t *= (1 + p.osScale * Math.log1p(15) / 5);
                     
-                    const upsideRatio = (val - price) / price;
+                    const upsideRatio = price > 0 ? (val - price) / price : 0;
                     t *= (1 + p.upsideScale * upsideRatio);
                     
                     return t;
@@ -1527,6 +1674,7 @@
             document.getElementById('td-buy1-fye-f1').style.color = colorF1;
             document.getElementById('td-per-fye-f1').style.color = colorF1;
             document.getElementById('td-peg-fye-f1').style.color = colorF1;
+            applySheetAvailability();
         }
 
         // Initialize Page
@@ -1570,11 +1718,15 @@
                     }
                     const enrichedEl = document.getElementById('sync-status-enriched');
                     if (enrichedEl) {
-                        enrichedEl.innerHTML = `<span style="color: #cbd5e1;">Enriched:</span> <strong style="color: #a855f7;">${SYNC_STATUS.enrichedCount}</strong>`;
+                        const hasCount = Number.isFinite(SYNC_STATUS.enrichedCount);
+                        enrichedEl.style.display = hasCount ? '' : 'none';
+                        enrichedEl.innerHTML = hasCount ? `<span style="color: #cbd5e1;">Enriched:</span> <strong style="color: #a855f7;">${SYNC_STATUS.enrichedCount}</strong>` : '';
                     }
                     const totalEl = document.getElementById('sync-status-total');
                     if (totalEl) {
-                        totalEl.innerHTML = `<span style="color: #cbd5e1;">Total:</span> <strong style="color: #10b981;">${SYNC_STATUS.totalIpos} IPOs</strong>`;
+                        const hasCount = Number.isFinite(SYNC_STATUS.totalIpos);
+                        totalEl.style.display = hasCount ? '' : 'none';
+                        totalEl.innerHTML = hasCount ? `<span style="color: #cbd5e1;">Total:</span> <strong style="color: #10b981;">${SYNC_STATUS.totalIpos} IPOs</strong>` : '';
                     }
                 }
             }

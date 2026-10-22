@@ -191,8 +191,20 @@ ipos.forEach((ipo) => {
     const symbol = ipo.symbol || '-';
     const sector = ipo.sector || 'General Equities';
     const market = ipo.market || 'ACE / Main Market';
+    const incompleteFinancials = ipo.financialProfileStatus === 'incomplete';
+    const financialReview = ipo.financialReview || {};
+    const legacyBigCaring = ipo.id === 'big-caring-group-bhd' && positiveNumber(ipo.groupPat26);
+    const financialNoticeTitle = financialReview.title || (legacyBigCaring ? 'PATAMI FY26 belum disahkan.' : 'Penilaian belum lengkap.');
+    const financialNoticeSummary = financialReview.summary || (legacyBigCaring
+        ? `Group PAT FY26 yang dilaporkan ialah RM ${formatLargeNumber(ipo.groupPat26)}; angka ini bukan PATAMI. EPS, P/E FY26 dan sasaran harga belum boleh disahkan.`
+        : 'Unjuran keuntungan pemegang saham dan sasaran harga belum disahkan.');
+    const profitLabel = financialReview.profitLabel || (legacyBigCaring ? 'PATAMI (verified)' : incompleteFinancials ? 'Keuntungan (asas belum disahkan)' : 'Profit After Tax (PAT)');
+    const historicalPe = financialReview.historicalPe || (legacyBigCaring && positiveNumber(ipo.verifiedPatami25)
+        ? { year: 25, patami: ipo.verifiedPatami25 } : null);
+    const historicalYears = Array.isArray(ipo.historicalYears) && ipo.historicalYears.length === 3
+        ? ipo.historicalYears : [23, 24, 25];
     const priceStr = positiveNumber(ipo.price) ? formatCurrency(ipo.price) : 'TBA';
-    const sifuTpStr = positiveNumber(ipo.sifuTargetPrice) ? formatCurrency(ipo.sifuTargetPrice)
+    const sifuTpStr = incompleteFinancials ? 'TBA' : positiveNumber(ipo.sifuTargetPrice) ? formatCurrency(ipo.sifuTargetPrice)
         : (positiveNumber(ipo.fairValue) ? formatCurrency(ipo.fairValue) : '-');
     const grade = getIpoGrade(ipo).grade;
     const shariahText = ipo.shariah === true ? 'Shariah Compliant' : (ipo.shariah === false ? 'Non-Shariah' : 'Status Pending');
@@ -203,7 +215,7 @@ ipos.forEach((ipo) => {
     const listingDate = ipo.listingDate || 'TBA';
 
     let upsideHtml = '';
-    if (ipo.price && (ipo.sifuTargetPrice || ipo.fairValue)) {
+    if (!incompleteFinancials && ipo.price && (ipo.sifuTargetPrice || ipo.fairValue)) {
         const tp = Number(ipo.sifuTargetPrice || ipo.fairValue);
         const p = Number(ipo.price);
         if (p > 0) {
@@ -246,37 +258,30 @@ ipos.forEach((ipo) => {
                         <thead>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-dim);">
                                 <th style="padding: 0.75rem 0.5rem;">Financial Metric</th>
-                                <th style="padding: 0.75rem 0.5rem; text-align: right;">FY23</th>
-                                <th style="padding: 0.75rem 0.5rem; text-align: right;">FY24</th>
-                                <th style="padding: 0.75rem 0.5rem; text-align: right;">FY25</th>
-                                <th style="padding: 0.75rem 0.5rem; text-align: right;">Projected (FY F)</th>
+                                ${historicalYears.map(year => `<th style="padding: 0.75rem 0.5rem; text-align: right;">FY${escapeHtml(year)}</th>`).join('')}
+                                <th style="padding: 0.75rem 0.5rem; text-align: right;">${escapeHtml(ipo.projectionHeaders?.[0] || (incompleteFinancials ? 'Unjuran — belum disahkan' : 'Projected (FY F)'))}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                                 <td style="padding: 0.75rem 0.5rem; font-weight: 600; color: white;">Revenue (RM)</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.rev23)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.rev24)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.rev25)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${formatLargeNumber(ipo.revF)}</td>
+                                ${historicalYears.map(year => `<td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo[`rev${year}`])}</td>`).join('')}
+                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${formatLargeNumber(incompleteFinancials ? null : ipo.revF)}</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 0.75rem 0.5rem; font-weight: 600; color: white;">Profit After Tax (PAT)</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.pat23)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.pat24)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo.pat25)}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${formatLargeNumber(ipo.patF)}</td>
+                                <td style="padding: 0.75rem 0.5rem; font-weight: 600; color: white;">${escapeHtml(profitLabel)}</td>
+                                ${historicalYears.map(year => `<td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${formatLargeNumber(ipo[`pat${year}`])}</td>`).join('')}
+                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${formatLargeNumber(incompleteFinancials ? null : ipo.patF)}</td>
                             </tr>
                             <tr>
                                 <td style="padding: 0.75rem 0.5rem; font-weight: 600; color: white;">EPS (sen)</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${ipo.eps23 !== null && ipo.eps23 !== undefined ? Number(ipo.eps23).toFixed(2) : '-'}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${ipo.eps24 !== null && ipo.eps24 !== undefined ? Number(ipo.eps24).toFixed(2) : '-'}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${ipo.eps25 !== null && ipo.eps25 !== undefined ? Number(ipo.eps25).toFixed(2) : '-'}</td>
-                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${ipo.epsGrowthF !== null && ipo.epsGrowthF !== undefined ? '+' + Number(ipo.epsGrowthF).toFixed(1) + '%' : '-'}</td>
+                                ${historicalYears.map(year => `<td style="padding: 0.75rem 0.5rem; text-align: right; color: var(--text-dim);">${ipo[`eps${year}`] !== null && ipo[`eps${year}`] !== undefined ? Number(ipo[`eps${year}`]).toFixed(2) : '-'}</td>`).join('')}
+                                <td style="padding: 0.75rem 0.5rem; text-align: right; color: #34d399; font-weight: 600;">${!incompleteFinancials && ipo.epsGrowthF !== null && ipo.epsGrowthF !== undefined ? '+' + Number(ipo.epsGrowthF).toFixed(1) + '%' : '-'}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                ${incompleteFinancials ? `<p style="font-size:0.85rem;color:#fbbf24;line-height:1.6;margin:1rem 0 0;"><strong>${escapeHtml(financialNoticeTitle)}</strong> ${escapeHtml(financialNoticeSummary)} Ruang tanpa data ditunjukkan sebagai “—”.</p>` : ''}
             </div>
         `;
     }
@@ -456,8 +461,14 @@ ipos.forEach((ipo) => {
                 </div>
                 <div>
                     <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">Target P/E Ratio</span>
-                    <strong style="color: white;">${ipo.targetPe ? ipo.targetPe + 'x' : (ipo.pe ? ipo.pe + 'x' : '-')}</strong>
+                    <strong style="color: white;">${incompleteFinancials ? 'Belum disahkan' : (ipo.targetPe ? ipo.targetPe + 'x' : (ipo.pe ? ipo.pe + 'x' : '-'))}</strong>
                 </div>
+                ${historicalPe && Number.isFinite(Number(historicalPe.year)) && positiveNumber(historicalPe.patami) && positiveNumber(ipo.totalShares) && positiveNumber(ipo.price) ? `
+                <div>
+                    <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">P/E IPO FY${escapeHtml(historicalPe.year)} (PATAMI)</span>
+                    <strong style="color: white;">${(Number(ipo.price) * Number(ipo.totalShares) / Number(historicalPe.patami)).toFixed(2)}x</strong>
+                </div>
+                ` : ''}
                 <div>
                     <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">Total Enlarged Shares</span>
                     <strong style="color: white;">${formatLargeNumber(ipo.totalShares)}</strong>
@@ -470,6 +481,25 @@ ipos.forEach((ipo) => {
                     <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">MITI Special Allocation</span>
                     <strong style="color: white;">${ipo.hasMitiTranche ? 'Yes (Bumiputera Reserved)' : 'No Tranche'}</strong>
                 </div>
+                ${ipo.mitiAllocationRate !== undefined && ipo.mitiAllocationRate !== null ? `
+                <div>
+                    <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">MITI Result</span>
+                    <strong style="color: #34d399;">${ipo.mitiAllocationScope === 'individual-reported' ? 'Laporan individu: ' : ''}${Number(ipo.mitiAllocationRate).toFixed(0)}% allotted</strong>
+                    ${ipo.mitiAllocationScope === 'individual-reported' ? '<div style="font-size:0.75rem;color:var(--text-dim);">Peruntukan keseluruhan tranche dan OS awam belum disahkan.</div>' : ''}
+                </div>
+                ` : ''}
+                ${ipo.mitiApplicants !== undefined && ipo.mitiApplicants !== null ? `
+                <div>
+                    <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">MITI Applicants${ipo.mitiAllocationScope === 'individual-reported' ? ' (rekod belum disahkan)' : ''}</span>
+                    <strong style="color: white;">${Number(ipo.mitiApplicants).toLocaleString('en-MY')}</strong>
+                </div>
+                ` : ''}
+                ${ipo.mitiOfferShares ? `
+                <div>
+                    <span style="color: var(--text-dim); display: block; font-size: 0.75rem;">MITI Offer Shares</span>
+                    <strong style="color: white;">${formatLargeNumber(ipo.mitiOfferShares)}</strong>
+                </div>
+                ` : ''}
             </div>
         </div>
 

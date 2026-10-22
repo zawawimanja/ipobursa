@@ -17,7 +17,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=4.9"></script>
+    <script src="data.js?v=5.0"></script>
     <script src="sync-status.js?v=3.4"></script>
     <style>
         .journal-container {
@@ -655,6 +655,15 @@
         }
 
 
+        function getMitiValuation(ipo) {
+            const ipoPrice = Number(ipo.price) || 0;
+            const candidate = ipo.financialProfileStatus === 'incomplete' ? null
+                : (ipo.calibratedSifuTargetPrice || ipo.v7TargetPrice || ipo.sifuTargetPrice || ipoPrice);
+            const tp = Number.isFinite(Number(candidate)) && Number(candidate) > 0 ? Number(candidate) : null;
+            const upsidePercent = tp !== null && ipoPrice > 0 ? (tp - ipoPrice) / ipoPrice * 100 : null;
+            return { ipoPrice, tp, upsidePercent };
+        }
+
         // Render Stage 2 Active/Recently Closed
         function renderStage2() {
             const tableBody = document.querySelector('#stage2-table tbody');
@@ -704,7 +713,14 @@
 
                 if (ipo.mitiOpenDate && ipo.mitiCloseDate) {
                     const closeD = parseFlexDate(ipo.mitiCloseDate);
-                    if (closeD && closeD >= today) {
+                    if (ipo.mitiAllocationRate !== undefined && ipo.mitiAllocationRate !== null) {
+                        const individualReport = ipo.mitiAllocationScope === 'individual-reported';
+                        const applicants = ipo.mitiApplicants
+                            ? `<div style="font-size:0.68rem;color:var(--text-dim);margin-top:0.25rem;">${Number(ipo.mitiApplicants).toLocaleString('en-MY')} applicants${individualReport ? ' · rekod belum disahkan' : ' · no ballot'}</div>`
+                            : '';
+                        dateDisplay = `<span style="color:var(--text-dim);">${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}</span>`;
+                        statusLabel = `<span style="color:#10b981;font-weight:700;background:rgba(16,185,129,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(16,185,129,0.2);font-size:0.7rem;">${individualReport ? 'Laporan individu: ' : '✅ RESULTS OUT — '}${Number(ipo.mitiAllocationRate).toFixed(0)}% ALLOTTED</span>${applicants}${individualReport ? '<div style="font-size:0.68rem;color:var(--text-dim);">Peruntukan keseluruhan tranche dan OS awam belum disahkan.</div>' : ''}`;
+                    } else if (closeD && closeD >= today) {
                         dateDisplay = `<span style="color:#10b981;font-weight:600;">${ipo.mitiOpenDate} → ${ipo.mitiCloseDate}</span>`;
                         statusLabel = `<span style="color:#10b981;font-weight:700;background:rgba(16,185,129,0.1);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid rgba(16,185,129,0.2);font-size:0.7rem;">ACTIVE OPEN</span>`;
                     } else {
@@ -740,12 +756,10 @@
                 let fireStr = '';
                 for (let i = 0; i < fires; i++) fireStr += '🔥';
 
-                const ipoPrice = ipo.price || 0;
-                const tp = ipo.calibratedSifuTargetPrice || ipo.v7TargetPrice || ipo.sifuTargetPrice || ipoPrice;
-                const upsidePercent = ipoPrice > 0 ? ((tp - ipoPrice) / ipoPrice * 100) : 0;
-                const upsideStr = ipoPrice > 0 ? (upsidePercent >= 0 ? '+' : '') + upsidePercent.toFixed(1) + '%' : 'TBA';
-                const upsideColor = upsidePercent >= 15 ? '#10b981' : upsidePercent > 0 ? '#60a5fa' : '#f87171';
-                const tpCell = ipoPrice > 0 
+                const { ipoPrice, tp, upsidePercent } = getMitiValuation(ipo);
+                const upsideStr = upsidePercent !== null ? (upsidePercent >= 0 ? '+' : '') + upsidePercent.toFixed(1) + '%' : '—';
+                const upsideColor = upsidePercent === null ? 'var(--text-dim)' : upsidePercent >= 15 ? '#10b981' : upsidePercent > 0 ? '#60a5fa' : '#f87171';
+                const tpCell = tp !== null && ipoPrice > 0
                     ? `<div>RM ${tp.toFixed(3)}</div><div style="font-size:0.72rem;font-weight:700;color:${upsideColor};">${upsideStr}</div>` 
                     : `<span style="color:var(--text-dim);">TBA</span>`;
 
@@ -756,7 +770,9 @@
                 let verdictBorder = 'rgba(245,158,11,0.3)';
 
                 const isReit = (sector || '').toLowerCase().includes('reit');
-                if (ipo.mitiVerdict) {
+                if (ipo.financialProfileStatus === 'incomplete') {
+                    verdictLabel = ipo.mitiVerdict || 'PERLU SEMAK PATAMI';
+                } else if (ipo.mitiVerdict) {
                     verdictLabel = ipo.mitiVerdict;
                 } else if (isReit) {
                     verdictLabel = `DIVIDEND (${grade})`;
