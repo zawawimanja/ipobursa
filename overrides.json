@@ -307,8 +307,8 @@
     "redplanet-berhad": {
         "price": 0.19,
         "shariah": true,
-        "stage": 4,
-        "status": "Pre-Listing",
+        "stage": 5,
+        "status": "Listed",
         "sector": "Technology (Geospatial & Intelligent Rail Systems)",
         "geography": "Kuala Lumpur",
         "ib": "UOB Kay Hian",
@@ -471,8 +471,13 @@
         "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425.",
         "sector": "Power Infrastructure (EPCC Substation)",
         "mitiCloseDate": "01-Sep-2026",
-        "stage": 6,
-        "status": "Awaiting MITI Decision"
+        "stage": 3,
+        "status": "Application Open",
+        "openingDate": "20-Oct-2026",
+        "closingDate": "27-Oct-2026",
+        "listingDate": "11-Nov-2026",
+        "price": 0.425,
+        "symbol": "SKA Capital Berhad"
     },
     "empg-group-berhad": {
         "mitiApplicants": 97,

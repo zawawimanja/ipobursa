@@ -1,14 +1,14 @@
 const SYNC_STATUS = {
-  "lastSync": "22/10/2026, 10:51:07 am",
+  "lastSync": "22/10/2026, 11:21:44 am",
   "status": "Partial",
-  "source": "miti-portal",
+  "source": "ipo-pages",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
       "status": "success",
-      "lastSuccess": "2026-10-22T02:51:07.872Z",
-      "lastAttempt": "2026-10-22T02:51:07.872Z",
-      "message": "2 public MITI offers verified; 2 records updated."
+      "lastSuccess": "2026-10-22T03:21:43.723Z",
+      "lastAttempt": "2026-10-22T03:21:43.723Z",
+      "message": "2 public MITI offers verified; 0 records updated."
     },
     "miti-applicants": {
       "status": "failed",
@@ -19,20 +19,20 @@ const SYNC_STATUS = {
     "isaham-api": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-20T03:36:52.243Z",
+      "lastAttempt": "2026-10-22T03:03:28.224Z",
       "message": "Not used by choice; IPO data comes from KLSE Screener, i3investor and MITI."
     },
     "klse": {
       "status": "success",
-      "lastSuccess": "2026-10-20T03:36:53.315Z",
-      "lastAttempt": "2026-10-20T03:36:53.315Z",
+      "lastSuccess": "2026-10-22T03:03:30.541Z",
+      "lastAttempt": "2026-10-22T03:03:30.541Z",
       "message": "Sync completed."
     },
     "i3investor": {
       "status": "partial",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-20T03:43:36.576Z",
-      "message": "110 prices refreshed; 2 could not be refreshed."
+      "lastAttempt": "2026-10-22T03:21:41.191Z",
+      "message": "92 prices refreshed; 22 could not be refreshed."
     },
     "shariah": {
       "status": "success",
@@ -42,8 +42,8 @@ const SYNC_STATUS = {
     },
     "target-calculation": {
       "status": "success",
-      "lastSuccess": "2026-10-20T03:43:43.718Z",
-      "lastAttempt": "2026-10-20T03:43:43.718Z",
+      "lastSuccess": "2026-10-22T03:21:44.038Z",
+      "lastAttempt": "2026-10-22T03:21:44.038Z",
       "message": "Sync completed."
     },
     "group-archive": {
@@ -54,14 +54,14 @@ const SYNC_STATUS = {
     },
     "ipo-pages": {
       "status": "success",
-      "lastSuccess": "2026-10-20T03:43:44.027Z",
-      "lastAttempt": "2026-10-20T03:43:44.027Z",
+      "lastSuccess": "2026-10-22T03:21:44.500Z",
+      "lastAttempt": "2026-10-22T03:21:44.500Z",
       "message": "Sync completed."
     },
     "balloting": {
       "status": "failed",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-20T03:43:36.690Z",
+      "lastAttempt": "2026-10-22T03:21:41.518Z",
       "message": "Overall public OS: 0 updated, 1 unavailable, 0 deferred."
     }
   }
