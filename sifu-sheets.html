@@ -765,6 +765,13 @@
         // Load data from selection
         function loadSelectedStock() {
             const id = document.getElementById('sheet-stock-select').value;
+            if (id) {
+                try {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('stock', id);
+                    window.history.replaceState(null, '', url);
+                } catch (e) { /* file:// pages cannot rewrite history */ }
+            }
             let data = null;
             
             if (typeof localIpoData !== 'undefined') {
