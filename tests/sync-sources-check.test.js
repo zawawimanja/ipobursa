@@ -57,6 +57,20 @@ test('partial prices warn but do not block, and a silent source does', () => {
     assert.deepEqual(missing.errors, ['ipo-pages did not report a status.']);
 });
 
+test('a corrupted sync-status.js is reported instead of crashing the step', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sync-check-broken-'));
+    fs.writeFileSync(path.join(root, 'sync-status.js'), 'const SYNC_STATUS = { <<<<<<< HEAD };\n');
+    const error = console.error;
+    const errors = [];
+    console.error = message => errors.push(message);
+    try {
+        assert.deepEqual(main(root), { errors: ['sync-status.js is unreadable.'], warnings: [] });
+    } finally {
+        console.error = error;
+    }
+    assert.match(errors.join('\n'), /sync-status\.js could not be read/);
+});
+
 test('each workflow only checks the sources it ran itself', () => {
     const sources = {};
     WORKING_SOURCES.forEach(name => { sources[name] = { status: 'success', message: 'Sync completed.' }; });

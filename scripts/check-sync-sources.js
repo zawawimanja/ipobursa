@@ -36,7 +36,13 @@ function parseArgs(argv) {
 
 function main(root = path.join(__dirname, '..'), argv = process.argv.slice(2)) {
     const { only } = parseArgs(argv);
-    const { sources } = readSyncStatus(root);
+    let sources;
+    try {
+        sources = readSyncStatus(root).sources;
+    } catch (error) {
+        console.error(`::error::sync-status.js could not be read: ${error.message}`);
+        return { errors: ['sync-status.js is unreadable.'], warnings: [] };
+    }
     const required = only
         ? only.map(name => {
             if (!WORKING_SOURCES.includes(name)) throw new Error(`Unknown sync source: ${name}`);

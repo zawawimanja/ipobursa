@@ -63,7 +63,22 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json data.js data_export.js overrides.json sync-status.js ipo/ sitemap.xml
-          git diff --staged --quiet || (git commit -m "Automated update: MITI applicants" && git pull --rebase origin main && git push)
+          if ! git diff --staged --quiet; then
+            git commit -m "Automated update: MITI applicants"
+            # The two IPO workflows write the same generated files, so the branch can move
+            # between this run's checkout and its push. Retry against the newest data.
+            for attempt in 1 2 3; do
+              if git push origin main; then
+                break
+              fi
+              if [ "$attempt" = "3" ]; then
+                git rebase --abort 2>/dev/null || true
+                echo "::error::Could not push the data commit after 3 attempts; the run's data stays unpushed."
+                exit 1
+              fi
+              git pull --rebase -X theirs origin main || { git rebase --abort 2>/dev/null || true; exit 1; }
+            done
+          fi
 
       - name: Report pipeline health (blocked external sources stay warnings)
         if: always()
