@@ -17,7 +17,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data.js?v=5.0"></script>
+    <script src="data.js?v=5.1"></script>
     <script src="sync-status.js?v=3.4"></script>
     <style>
         #sheet-stock-select {
@@ -50,7 +50,7 @@
         }
 
         .sheet-container > * { min-width: 0; }
-        #qual-insight a, #sheet-catalysts-content a, #sheet-peers-content a {
+        #qual-insight a, #sheet-catalysts-content a, #sheet-peers-content a, #sheet-data-notice a {
             color: #a5b4fc;
             text-decoration: underline;
             overflow-wrap: anywhere;
@@ -367,7 +367,7 @@
                     <div class="calc-form-group" style="margin-bottom: 0;">
                         <label style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                             <span>Target PE Multiple (Valuation 1)</span>
-                            <span style="font-size: 0.65rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">🔄 Autoloaded</span>
+                            <span id="sheet-pe-status" style="font-size: 0.65rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">🔄 Autoloaded</span>
                         </label>
                         <input type="number" id="sheet-target-pe" value="9.0" step="0.5" oninput="calculateSheet()" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 0.5rem; text-align: left; font-weight: bold; font-size: 1.1rem; border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);">
                         <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 0.5rem; line-height: 1.4; padding: 0.6rem 0.75rem; background: rgba(99, 102, 241, 0.06); border-radius: 0.4rem; border: 1px solid rgba(99, 102, 241, 0.15);">
@@ -947,6 +947,17 @@
             
             updateSheetDataNotice(data);
             renderResearchComparison(data);
+            const peInput = document.getElementById('sheet-target-pe');
+            const peStatus = document.getElementById('sheet-pe-status');
+            if (data?.financialProfileStatus === 'incomplete') {
+                const hasScenarioPe = Number.isFinite(data.targetPe) && data.targetPe > 0;
+                peInput.value = hasScenarioPe ? data.targetPe.toFixed(1) : '';
+                peInput.placeholder = 'Belum disahkan';
+                if (peStatus) peStatus.innerText = hasScenarioPe ? 'Andaian senario' : 'Belum disahkan';
+            } else {
+                peInput.placeholder = '';
+                if (peStatus) peStatus.innerText = '🔄 Autoloaded';
+            }
             calculateSheet();
             updateQualitativeOverlay(id);
             const sopReference = document.getElementById('sifu-sop-reference');

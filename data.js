@@ -9569,70 +9569,74 @@ const IPO_DATA = [
     "listingDate": "",
     "shariah": true,
     "stage": 6,
-    "status": "Awaiting MITI Decision",
+    "status": "MITI Payment Open",
     "year": 2026,
-    "sector": "Technology (Data Centre)",
+    "sector": "Data Centre MEPF Integration",
     "geography": "Kuala Lumpur",
     "ib": "TA Securities",
-    "fundUse": "Hiring 12.66%, sewa pejabat 7.16%, latihan 3.58%, IT 5.97%, subcontracted costs 35.30%, opex lain 8.82%, performance bond 17.91%, kos penyenaraian 8.60%",
+    "fundUse": "Draf: tenaga kerja, ruang pejabat, IT, modal kerja termasuk subkontraktor dan performance bonds, serta kos listing. Amaun akhir perlu dirujuk kepada dokumen akhir.",
     "predictedGrade": "B",
-    "analystInsight": "✅ <b>DATA CENTER THEME (GRADE B)</b><br>• <b>Data Center Boom:</b> MEPF integrator benefiting from Malaysia's hyperscale data center boom.<br>• <b>Valuation Premium:</b> FY2025 revenue +105% YoY; RM0.56 price represents premium 25.5x P/E.<br>• <b>Strategy:</b> Hot theme suitable for day-1 momentum scalp; pre-IPO dividend payout was high.",
+    "analystInsight": "<b>MYDCD RM0.56 — PERTUMBUHAN KUAT, SEMAK TUNAI DAN PELANGGAN</b><br>• Harga tawaran MITI disahkan pengguna; pada modal saham draf, PE sejarah FY25 25.44x.<br>• PATAMI RM39.486 juta, CFO RM9.648 juta (24.43%); Binastra 61.68% hasil.<br>• OFS 30.21%; RM55 juta dividen dibayar, sehingga RM33 juta lagi masih cadangan dalam draf.<br>• Unjuran lama dan sasaran automatik dibuang. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa</a>",
     "prospectusUrl": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd",
-    "sifuTargetPrice": 0.4,
-    "calibratedSifuTargetPrice": 0.34,
-    "v3TargetPrice": 0.4,
-    "zone2TargetPrice": 0.34,
-    "v7TargetPrice": 0.34,
+    "sifuTargetPrice": null,
+    "calibratedSifuTargetPrice": null,
+    "v3TargetPrice": null,
+    "zone2TargetPrice": null,
+    "v7TargetPrice": null,
     "ofs": true,
-    "ofsPercentage": 30.2,
+    "ofsPercentage": 30.21,
     "hasMitiTranche": true,
     "totalShares": 1794000000,
     "headers": [
-      "FYE 23",
-      "FYE 24",
-      "FYE 25",
-      "Projection (FYE F)",
-      "Projection (FYE F+1)"
+      "FY23",
+      "FY24",
+      "FY25",
+      "FY26 — unjuran belum tersedia",
+      "FY27 — unjuran belum tersedia"
     ],
     "rev23": 186684000,
     "rev24": 180907000,
     "rev25": 371985000,
-    "revF": 360000000,
-    "revF1": 380000000,
+    "revF": null,
+    "revF1": null,
     "gp23": 31428000,
     "gp24": 35854000,
     "gp25": 61026000,
-    "gpF": 59400000,
-    "gpF1": 62700000,
+    "gpF": null,
+    "gpF1": null,
     "pat23": 16780000,
     "pat24": 20021000,
     "pat25": 39486000,
-    "patF": 36000000,
-    "patF1": 38000000,
-    "eps23": 0.94,
-    "eps24": 1.12,
-    "eps25": 2.2,
-    "epsF": 2.01,
-    "epsF1": 2.12,
-    "epsGrowthF": -8.6,
-    "epsGrowthF1": 5.5,
+    "patF": null,
+    "patF1": null,
+    "eps23": 0.9353400222965441,
+    "eps24": 1.1159977703455966,
+    "eps25": 2.2010033444816055,
+    "epsF": null,
+    "epsF1": null,
+    "epsGrowthF": null,
+    "epsGrowthF1": null,
     "assets23": 126867000,
     "assets24": 188037000,
     "assets25": 341745000,
-    "assetsF": 360000000,
-    "assetsF1": 380000000,
+    "assetsF": null,
+    "assetsF1": null,
     "liab23": 58430000,
     "liab24": 99579000,
     "liab25": 268802000,
-    "liabF": 270000000,
-    "liabF1": 275000000,
-    "targetPe": 20,
+    "liabF": null,
+    "liabF1": null,
+    "targetPe": null,
     "catalysts": [
-      "Catalyst 1: Order book RM213.33 juta (92% diiktiraf FYE2026) + 8 kontrak pusat data baharu bernilai RM206.40 juta (disahkan 18 Dis 2025).",
-      "Catalyst 2: Rekod kukuh: Customer A Group (12 projek DC, RM288 juta) & Customer B Group (42 projek DC, RM147 juta; 18 projek berjalan RM79.78 juta); Binastra — projek DC Bukit Jalil & Cyberjaya.",
-      "Catalyst 3: Hasil IPO: 17.9% untuk performance bond projek masa depan, 35.3% subcontracted costs — kapasiti projek lebih besar."
+      "<strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.",
+      "<strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.",
+      "<strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.",
+      "<strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.",
+      "<strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.",
+      "<strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.",
+      "<strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>."
     ],
-    "peers": "Peer comparison: MN Holdings (P/E ~16-20x, P/S ~2.1x), EI Power (ACE, infrastruktur kuasa DC), Binastra Corp (pembinaan DC). Median Sektor Technology PE ~21x. MyDCD P/E ±25.5x — premium.",
+    "peers": "Bandingkan dengan kontraktor/integrator MEPF berdasarkan PATAMI, cash conversion dan kontrak, bukan gandaan pemilik pusat data. PE sejarah 25.44x pada harga MITI dilaporkan perlu disokong pertumbuhan berulang; tiada nilai wajar atau sasaran debut automatik yang disahkan.",
     "freeFloat": 0.38,
     "anchorInvestors": false,
     "lockupMonths": 6,
@@ -9640,7 +9644,155 @@ const IPO_DATA = [
     "mitiOpenDate": "18-Aug-2026",
     "mitiCloseDate": "28-Aug-2026",
     "mitiOfferShares": 224250000,
-    "mitiApplicants": 2887
+    "mitiApplicants": 2887,
+    "financialProfileStatus": "incomplete",
+    "financialReviewDate": "23-Oct-2026",
+    "historicalYears": [
+      23,
+      24,
+      25
+    ],
+    "projectionHeaders": [
+      "FY26 — unjuran belum tersedia",
+      "FY27 — unjuran belum tersedia"
+    ],
+    "fairValue": null,
+    "valuationScenarios": [],
+    "mitiApplicantsStatus": "unverified",
+    "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
+    "mitiPaymentSource": "https://www.mih.com.my/",
+    "priceStatus": "user-reported-miti",
+    "priceSourceNote": "RM0.56 berdasarkan pengesahan harga tawaran MITI pengguna pada 22 Okt 2026. Draf Bursa yang disemak masih memaparkan harga kosong; harga akhir prospektus awam belum disahkan secara bebas.",
+    "ipoNewShares": 335000000,
+    "ipoOfferForSaleShares": 145000000,
+    "ipoTotalOfferShares": 480000000,
+    "ipoCompanyGrossProceeds": 187600000,
+    "ipoSellerGrossProceeds": 81200000,
+    "ipoProceedsBasis": "Senario RM0.56 pada struktur saham draf; sebelum kos, tertakluk dokumen akhir.",
+    "mitiNewShares": 158590000,
+    "mitiOfsShares": 65660000,
+    "mitiOfsPercentage": 29.28,
+    "mitiPaymentDeadline": "2026-10-27T17:00:00+08:00",
+    "mitiPaymentNote": "Penerimaan dan bayaran MITI melalui BSIP; tarikh tutup permohonan awam dan listing belum disahkan.",
+    "verifiedPatami25": 39486000,
+    "operatingCashFlow25": 9648000,
+    "operatingCashConversion25": 24.43397659930102,
+    "pe": 25.44,
+    "ipoPe": 25.44,
+    "ipoPeBasis": "FY25 PATAMI RM39.486 juta dalam draf; harga MITI RM0.56 dilaporkan pengguna, modal diperbesar 1.794 bilion saham.",
+    "financialBasis": "PAT attributable to owners (PATAMI), draf Bursa, muka surat tercetak 15–16. Harga dan struktur akhir tertakluk dokumen akhir.",
+    "financialEvidenceStatus": "primary-draft",
+    "financialReview": {
+      "title": "MyDCD: sejarah PATAMI disahkan dalam draf; unjuran belum tersedia.",
+      "summary": "Pada harga MITI dilaporkan RM0.56, market cap RM1.005 bilion dan PE FY25 25.44x. PATAMI FY25 RM39.486 juta ialah keuntungan pemegang saham. Risiko utama: tumpuan pelanggan dan cash conversion rendah. Unjuran dan sasaran harga automatik ditangguhkan.",
+      "profitLabel": "PATAMI — draf Bursa",
+      "historicalPe": {
+        "year": 25,
+        "patami": 39486000
+      },
+      "scenarioLabel": "Tiada sasaran debut yang disahkan.",
+      "sopNote": "Nilai harga bersama keuntungan berulang, kutipan tunai dan kontrak baharu. Jangan gunakan jumlah saham MITI sebagai bukti OS atau permintaan institusi. Harga RM0.56 dilaporkan pengguna; prospektus awam akhir belum disahkan."
+    },
+    "financialSourcesHTML": [
+      "<a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa: ms15–16 dan261–263</a>",
+      "<a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Laman penerbit</a>",
+      "<a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman bayaran MITI</a>"
+    ],
+    "mitiVerdict": "SEMAK TUNAI & PELANGGAN",
+    "researchComparison": {
+      "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
+      "columns": [
+        "Perkara",
+        "SKA Capital",
+        "MyDCD"
+      ],
+      "rows": [
+        [
+          "Model bisnes",
+          "Kejuruteraan pencawang dan utiliti bawah tanah",
+          "Integrasi MEPF dan penyelenggaraan pusat data"
+        ],
+        [
+          "Harga digunakan",
+          "RM0.43 — prospektus berdaftar",
+          "RM0.56 — tawaran MITI dilaporkan pengguna"
+        ],
+        [
+          "Modal saham selepas IPO",
+          "895.5 juta saham",
+          "1,794 juta saham (draf)"
+        ],
+        [
+          "Market cap pada harga ini",
+          "RM385.07 juta",
+          "RM1,004.64 juta"
+        ],
+        [
+          "PATAMI FY25",
+          "RM28.94 juta — ringkasan sekunder",
+          "RM39.486 juta — draf Bursa"
+        ],
+        [
+          "PE sejarah FY25",
+          "Kira-kira 13.31x; kualiti untung perlu disemak",
+          "25.44x pada harga MITI dilaporkan"
+        ],
+        [
+          "OFS / jumlah saham IPO",
+          "30.11%",
+          "30.21% (draf)"
+        ],
+        [
+          "OFS / tranche MITI",
+          "0% — semuanya saham baharu",
+          "29.28% (draf)"
+        ],
+        [
+          "Bayaran MITI (MYT)",
+          "Tutup 22 Okt 2026, 5 petang",
+          "Tutup 27 Okt 2026, 5 petang"
+        ],
+        [
+          "Permohonan awam",
+          "20–27 Okt 2026; tutup 5 petang",
+          "Belum disahkan"
+        ],
+        [
+          "Listing",
+          "11 Nov 2026",
+          "Belum disahkan"
+        ],
+        [
+          "OS awam / sasaran debut",
+          "Belum tersedia",
+          "Belum tersedia"
+        ]
+      ],
+      "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
+      "sources": [
+        {
+          "label": "Pengumuman prospektus SKA",
+          "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
+        },
+        {
+          "label": "Jadual SKA",
+          "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
+        },
+        {
+          "label": "Ringkasan kewangan SKA (sekunder)",
+          "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
+        },
+        {
+          "label": "Draf MyDCD Bursa",
+          "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
+        },
+        {
+          "label": "Pengumuman bayaran MIH",
+          "url": "https://www.mih.com.my/"
+        }
+      ]
+    },
+    "fullAnalysis": "<b>SEMAKAN MYDCD — 23 OKT 2026</b><br><br><strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.<br><br><strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.<br><br><strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.<br><br><strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.<br><br><strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.<br><br><strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.<br><br><strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>.<br><br><b>Asas dokumen:</b> Draf belum berdaftar; LPD 30 Nov 2025 dengan maklumat tambahan sehingga 13 Feb 2026. Angka sejarah bukan unjuran semasa. Struktur dan hasil IPO pada RM0.56 ialah kiraan berdasarkan harga tawaran MITI dilaporkan pengguna dan modal saham draf.<br><br><b>Rumusan:</b> Pertumbuhan kukuh dengan penilaian yang memerlukan kesinambungan keuntungan dan kutipan tunai. Tumpuan pelanggan, modal kerja serta dividen sebelum IPO perlu diteliti. Jumlah saham MITI tidak membuktikan minat institusi atau OS tinggi. Tiada sasaran debut atau keputusan beli/jual automatik diterbitkan."
   },
   {
     "id": "gb-bond-holdings-berhad",
@@ -10154,7 +10306,7 @@ const IPO_DATA = [
     "companyName": "SKA Capital Berhad",
     "symbol": "SKACAP",
     "market": "ACE Market",
-    "price": 0.425,
+    "price": 0.43,
     "closingDate": "27-Oct-2026",
     "listingDate": "11-Nov-2026",
     "shariah": true,
@@ -10163,10 +10315,10 @@ const IPO_DATA = [
     "year": 2026,
     "sector": "Power Infrastructure (EPCC Substation)",
     "geography": "Kuala Lumpur",
-    "sifuTargetPrice": 0.42,
-    "calibratedSifuTargetPrice": 0.49,
-    "v7TargetPrice": 0.49,
-    "zone2TargetPrice": 0.49,
+    "sifuTargetPrice": null,
+    "calibratedSifuTargetPrice": null,
+    "v7TargetPrice": null,
+    "zone2TargetPrice": null,
     "mitiApplicants": 2070,
     "mitiOfferShares": 111938000,
     "hasMitiTranche": true,
@@ -10174,8 +10326,210 @@ const IPO_DATA = [
     "mitiCloseDate": "01-Sep-2026",
     "predictedGrade": "B",
     "grade": "B",
-    "analystInsight": "⚡ <b>POWER INFRASTRUCTURE & SUBSTATION EPCC (GRADE B):</b> EPCC specialist for power substations & underground utility engineering. Indirect beneficiary of Malaysia's power grid expansion driven by high data center energy demand. Indicative price RM0.425.",
-    "openingDate": "20-Oct-2026"
+    "analystInsight": "<b>SKA RM0.43 — PE SEJARAH ~13.31x, SEMAK KUALITI UNTUNG</b><br>• Harga rasmi menggantikan RM0.425 lama; OFS 30.11% IPO dan MITI semuanya saham baharu.<br>• PATAMI FY25 ~RM28.94 juta daripada ringkasan sekunder; keuntungan berulang dan kutipan tunai perlu disemak.<br>• Unjuran serta sasaran automatik ditangguh; jumlah pemohon lama bukan bukti OS.<br>• <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a> · <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan sekunder</a>",
+    "openingDate": "20-Oct-2026",
+    "financialProfileStatus": "incomplete",
+    "financialReviewDate": "23-Oct-2026",
+    "historicalYears": [
+      23,
+      24,
+      25
+    ],
+    "headers": [
+      "FY23",
+      "FY24",
+      "FY25",
+      "FY26 — unjuran belum tersedia",
+      "FY27 — unjuran belum tersedia"
+    ],
+    "projectionHeaders": [
+      "FY26 — unjuran belum tersedia",
+      "FY27 — unjuran belum tersedia"
+    ],
+    "targetPe": null,
+    "v3TargetPrice": null,
+    "fairValue": null,
+    "valuationScenarios": [],
+    "mitiApplicantsStatus": "unverified",
+    "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
+    "mitiPaymentSource": "https://www.mih.com.my/",
+    "revF": null,
+    "revF1": null,
+    "gpF": null,
+    "gpF1": null,
+    "patF": null,
+    "patF1": null,
+    "epsF": null,
+    "epsF1": null,
+    "assetsF": null,
+    "assetsF1": null,
+    "liabF": null,
+    "liabF1": null,
+    "epsGrowthF": null,
+    "epsGrowthF1": null,
+    "priceStatus": "registered-prospectus",
+    "priceSourceNote": "RM0.43 disahkan melalui pengumuman prospektus Bursa pada 20 Okt 2026 dan harga tawaran MITI pengguna. Menggantikan indikatif lama RM0.425.",
+    "ib": "TA Securities",
+    "totalShares": 895500000,
+    "ipoNewShares": 168075500,
+    "ipoOfferForSaleShares": 72400000,
+    "ipoTotalOfferShares": 240475500,
+    "ipoCompanyGrossProceeds": 72272465,
+    "ipoSellerGrossProceeds": 31132000,
+    "ofs": true,
+    "ofsPercentage": 30.11,
+    "mitiNewShares": 111938000,
+    "mitiOfsShares": 0,
+    "mitiOfsPercentage": 0,
+    "mitiPaymentDeadline": "2026-10-22T17:00:00+08:00",
+    "mitiPaymentNote": "Tarikh akhir penerimaan dan bayaran MITI menurut MIH pada 22 Okt 2026; bukan tarikh tutup permohonan awam.",
+    "closingTime": "17:00",
+    "ballotingDate": "29-Oct-2026",
+    "allotmentDate": "05-Nov-2026",
+    "prospectusUrl": "https://www.klsescreener.com/v2/announcements/view/11687405",
+    "rev23": 44440000,
+    "rev24": 151800000,
+    "rev25": 241360000,
+    "gp23": 11270000,
+    "gp24": 29470000,
+    "gp25": 44040000,
+    "pat23": 560000,
+    "pat24": 16290000,
+    "pat25": 28940000,
+    "assets23": null,
+    "assets24": null,
+    "assets25": null,
+    "liab23": null,
+    "liab24": null,
+    "liab25": null,
+    "pe": 13.31,
+    "ipoPe": 13.31,
+    "ipoPeBasis": "FY25 PATAMI kira-kira RM28.94 juta daripada ringkasan sekunder; 895.5 juta saham dan harga rasmi RM0.43.",
+    "financialBasis": "PATAMI, bukan group PAT. Angka sejarah dibundarkan dalam ringkasan sekunder; belum disemak dengan PDF kewangan asal.",
+    "financialEvidenceStatus": "secondary-corroborated",
+    "financialReview": {
+      "title": "SKA: harga rasmi disahkan; kualiti keuntungan masih perlu disemak.",
+      "summary": "Sejarah FY23–FY25 diisi daripada ringkasan prospektus sekunder. PATAMI FY25 kira-kira RM28.94 juta memberi PE 13.31x. PDF kewangan asal belum berjaya diakses; unjuran dan sasaran harga automatik ditangguhkan.",
+      "profitLabel": "PATAMI — ringkasan sekunder",
+      "historicalPe": {
+        "year": 25,
+        "patami": 28940000
+      },
+      "scenarioLabel": "Tiada sasaran debut yang disahkan.",
+      "sopNote": "Semak pembalikan impairment, aliran tunai operasi dan tumpuan pelanggan dalam prospektus asal. PE sejarah rendah sahaja tidak mengesahkan murah; OS awam belum tersedia."
+    },
+    "financialSourcesHTML": [
+      "<a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman prospektus Bursa</a>",
+      "<a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan: ringkasan sekunder</a>",
+      "<a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Kualiti untung: analisis sekunder</a>"
+    ],
+    "mitiVerdict": "SEMAK KUALITI UNTUNG",
+    "catalysts": [
+      "<strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.",
+      "<strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.",
+      "<strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.",
+      "<strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.",
+      "<strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.",
+      "<strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>."
+    ],
+    "peers": "Bandingkan dengan kontraktor pencawang dan utiliti menggunakan PATAMI berulang, cash conversion, order book bertarikh dan tumpuan pelanggan. Hubungan tema pusat data tidak menjadikannya pemilik pusat data. Tiada gandaan peer semasa atau sasaran debut yang disahkan.",
+    "researchComparison": {
+      "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
+      "columns": [
+        "Perkara",
+        "SKA Capital",
+        "MyDCD"
+      ],
+      "rows": [
+        [
+          "Model bisnes",
+          "Kejuruteraan pencawang dan utiliti bawah tanah",
+          "Integrasi MEPF dan penyelenggaraan pusat data"
+        ],
+        [
+          "Harga digunakan",
+          "RM0.43 — prospektus berdaftar",
+          "RM0.56 — tawaran MITI dilaporkan pengguna"
+        ],
+        [
+          "Modal saham selepas IPO",
+          "895.5 juta saham",
+          "1,794 juta saham (draf)"
+        ],
+        [
+          "Market cap pada harga ini",
+          "RM385.07 juta",
+          "RM1,004.64 juta"
+        ],
+        [
+          "PATAMI FY25",
+          "RM28.94 juta — ringkasan sekunder",
+          "RM39.486 juta — draf Bursa"
+        ],
+        [
+          "PE sejarah FY25",
+          "Kira-kira 13.31x; kualiti untung perlu disemak",
+          "25.44x pada harga MITI dilaporkan"
+        ],
+        [
+          "OFS / jumlah saham IPO",
+          "30.11%",
+          "30.21% (draf)"
+        ],
+        [
+          "OFS / tranche MITI",
+          "0% — semuanya saham baharu",
+          "29.28% (draf)"
+        ],
+        [
+          "Bayaran MITI (MYT)",
+          "Tutup 22 Okt 2026, 5 petang",
+          "Tutup 27 Okt 2026, 5 petang"
+        ],
+        [
+          "Permohonan awam",
+          "20–27 Okt 2026; tutup 5 petang",
+          "Belum disahkan"
+        ],
+        [
+          "Listing",
+          "11 Nov 2026",
+          "Belum disahkan"
+        ],
+        [
+          "OS awam / sasaran debut",
+          "Belum tersedia",
+          "Belum tersedia"
+        ]
+      ],
+      "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
+      "sources": [
+        {
+          "label": "Pengumuman prospektus SKA",
+          "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
+        },
+        {
+          "label": "Jadual SKA",
+          "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
+        },
+        {
+          "label": "Ringkasan kewangan SKA (sekunder)",
+          "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
+        },
+        {
+          "label": "Draf MyDCD Bursa",
+          "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
+        },
+        {
+          "label": "Pengumuman bayaran MIH",
+          "url": "https://www.mih.com.my/"
+        }
+      ]
+    },
+    "fullAnalysis": "<b>SEMAKAN SKA — 23 OKT 2026</b><br><br><strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.<br><br><strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.<br><br><strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.<br><br><strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.<br><br><strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.<br><br><strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>.<br><br><b>Rumusan:</b> Pertumbuhan tinggi dan penggunaan saham baharu lebih besar daripada OFS. PE sejarah kira-kira 13.31x belum cukup untuk melabel murah kerana kualiti keuntungan, kutipan tunai dan tumpuan pelanggan masih perlu disemak. Sasaran Sifu tidak diterbitkan tanpa asas unjuran yang boleh disokong.",
+    "eps23": 0.06253489670575098,
+    "eps24": 1.8190954773869346,
+    "eps25": 3.2317141261864877
   },
   {
     "id": "wil-key-berhad",

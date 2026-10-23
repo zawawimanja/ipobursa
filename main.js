@@ -1889,6 +1889,18 @@ function renderStyledVerdict(reason, grade, ipo) {
     `;
 }
 
+function getMitiPaymentState(ipo, now = Date.now()) {
+    const raw = ipo.mitiPaymentDeadline;
+    if (typeof raw !== 'string' || !/T.*(?:Z|[+-]\d{2}:\d{2})$/.test(raw)) return null;
+    const deadline = new Date(raw);
+    if (!Number.isFinite(deadline.getTime())) return null;
+    const label = deadline.toLocaleString('en-GB', {
+        timeZone: 'Asia/Kuala_Lumpur', day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false
+    }) + ' MYT';
+    return { deadline, label, isOpen: Number(now) < deadline.getTime() };
+}
+
 function createIPOCard(ipo, index = 0) {
     let specificDetails = '';
     // B2: stage 6 (Post-MITI menunggu keputusan) guna class 'post-miti', berbeza dari draft 'pending'
@@ -1902,6 +1914,7 @@ function createIPOCard(ipo, index = 0) {
     const prediction = getBoomPrediction(ipo);
     const baseGrade = grade.replace('Pred: ', '');
     const gradeColor = baseGrade === 'A' ? '#10b981' : baseGrade === 'B' ? '#f59e0b' : (baseGrade === 'Pending' ? '#a5b4fc' : '#ef4444');
+    const mitiPayment = getMitiPaymentState(ipo);
 
     let dateDisplay = '<span style="color: var(--text-dim);">TBA</span>';
     if (ipo.stage === 2) {
@@ -1950,7 +1963,9 @@ function createIPOCard(ipo, index = 0) {
         dateDisplay = ipo.listingDate || ipo.year || 'Listed';
     } else if (ipo.stage === 6) {
         const hasMitiResult = ipo.mitiAllocationRate !== undefined && ipo.mitiAllocationRate !== null;
-        const applicantsLine = ipo.mitiApplicants
+        const applicantsLine = ipo.mitiApplicantsStatus === 'unverified'
+            ? '<div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">Angka pemohon belum disahkan; bukan OS.</div>'
+            : ipo.mitiApplicants
             ? `<div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">${Number(ipo.mitiApplicants).toLocaleString('en-MY')} applicants · no ballot</div>`
             : '';
         dateDisplay = hasMitiResult
@@ -1961,8 +1976,18 @@ function createIPOCard(ipo, index = 0) {
             `
             : `
                 <div style="font-weight: 600; color: #fbbf24; font-size: 0.75rem;">MITI Status:</div>
-                <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">${ipo.status === 'Public Opening Soon' ? '⏳ Public Opening Soon' : '⏳ Awaiting Decision'}</div>
+                <div style="font-size: 0.75rem; color: #fbbf24; margin-top: 2px; font-weight: 700; text-transform: uppercase;">${ipo.status === 'Public Opening Soon' ? '⏳ Public Opening Soon' : ipo.status === 'MITI Payment Open' ? 'MITI Payment · deadline TBA' : '⏳ Awaiting Decision'}</div>
             `;
+        if (mitiPayment) {
+            dateDisplay = `${hasMitiResult ? dateDisplay : applicantsLine}
+                <div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">Permohonan MITI: ${ipo.mitiOpenDate || 'TBA'} → ${ipo.mitiCloseDate || 'TBA'}</div>`;
+        }
+    }
+    if (mitiPayment) {
+        const paymentColor = mitiPayment.isOpen ? '#34d399' : '#f87171';
+        dateDisplay += `
+            <div style="font-weight: 700; color: ${paymentColor}; font-size: 0.75rem; margin-top: 4px;">MITI Payment ${mitiPayment.isOpen ? 'Open' : 'Closed'}</div>
+            <div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">Bayaran akhir: ${mitiPayment.label}</div>`;
     }
 
     let priceDisplay = ipo.price > 0 ? 'RM ' + ipo.price.toFixed(2) : 'TBA';
