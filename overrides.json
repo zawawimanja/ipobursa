@@ -302,7 +302,15 @@
         "v3TargetPrice": 0.28,
         "zone2TargetPrice": 0.28,
         "analystInsight": "🚨 <b>HIGH RISK (GRADE C)</b><br>• <b>Sector Headwind:</b> ACE Market property developers exhibit lowest debut win rates & frequent discounts.<br>• <b>Cash Flow Risk:</b> High working capital lockup in residential projects.<br>• <b>Verdict:</b> Historically underperforms on debut (-5% to -15%); exercise caution.",
-        "prospectusUrl": "https://sahamonline.miti.gov.my/"
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "stage": 3,
+        "status": "Application Open",
+        "openingDate": "23-Oct-2026",
+        "closingDate": "02-Nov-2026",
+        "listingDate": "16-Nov-2026",
+        "price": 0.28,
+        "symbol": "KEB",
+        "market": "ACE Market"
     },
     "redplanet-berhad": {
         "price": 0.19,
