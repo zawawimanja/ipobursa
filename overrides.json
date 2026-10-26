@@ -612,8 +612,8 @@
         "mitiApplicants": 406
     },
     "mydcd-berhad": {
-        "stage": 6,
-        "status": "MITI Payment Open",
+        "stage": 3,
+        "status": "Application Open",
         "price": 0.56,
         "mitiOpenDate": "18-Aug-2026",
         "mitiCloseDate": "28-Aug-2026",
@@ -827,7 +827,12 @@
         "fullAnalysis": "<b>SEMAKAN MYDCD — 23 OKT 2026</b><br><br><strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.<br><br><strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.<br><br><strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.<br><br><strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.<br><br><strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.<br><br><strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.<br><br><strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>.<br><br><b>Asas dokumen:</b> Draf belum berdaftar; LPD 30 Nov 2025 dengan maklumat tambahan sehingga 13 Feb 2026. Angka sejarah bukan unjuran semasa. Struktur dan hasil IPO pada RM0.56 ialah kiraan berdasarkan harga tawaran MITI dilaporkan pengguna dan modal saham draf.<br><br><b>Rumusan:</b> Pertumbuhan kukuh dengan penilaian yang memerlukan kesinambungan keuntungan dan kutipan tunai. Tumpuan pelanggan, modal kerja serta dividen sebelum IPO perlu diteliti. Jumlah saham MITI tidak membuktikan minat institusi atau OS tinggi. Tiada sasaran debut atau keputusan beli/jual automatik diterbitkan.",
         "eps23": 0.9353400222965441,
         "eps24": 1.1159977703455966,
-        "eps25": 2.2010033444816055
+        "eps25": 2.2010033444816055,
+        "openingDate": "26-Oct-2026",
+        "closingDate": "02-Nov-2026",
+        "listingDate": "17-Nov-2026",
+        "symbol": "MYDCD",
+        "market": "ACE Market"
     },
     "wct-reit": {
         "shariah": false
