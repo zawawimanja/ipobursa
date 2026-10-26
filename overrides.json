@@ -1707,8 +1707,8 @@
         "mitiOpenDate": "19-Oct-2026",
         "mitiCloseDate": "25-Oct-2026",
         "hasMitiTranche": true,
-        "stage": 2,
-        "status": "MITI Allocation Phase"
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
     },
     "semico-ns-": {
         "symbol": "SEMICO",
