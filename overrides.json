@@ -847,8 +847,8 @@
         "analystInsight": "<b>SKA RM0.43 — PE SEJARAH ~13.31x, SEMAK KUALITI UNTUNG</b><br>• Harga rasmi menggantikan RM0.425 lama; OFS 30.11% IPO dan MITI semuanya saham baharu.<br>• PATAMI FY25 ~RM28.94 juta daripada ringkasan sekunder; keuntungan berulang dan kutipan tunai perlu disemak.<br>• Unjuran serta sasaran automatik ditangguh; jumlah pemohon lama bukan bukti OS.<br>• <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a> · <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan sekunder</a>",
         "sector": "Power Infrastructure (EPCC Substation)",
         "mitiCloseDate": "01-Sep-2026",
-        "stage": 3,
-        "status": "Application Open",
+        "stage": 4,
+        "status": "Pre-Listing",
         "openingDate": "20-Oct-2026",
         "closingDate": "27-Oct-2026",
         "listingDate": "11-Nov-2026",
@@ -1729,5 +1729,16 @@
         "symbol": "CAMAROE",
         "market": "ACE Market",
         "sector": "Consumer Products & Services"
+    },
+    "impact-capital-holdings-berhad": {
+        "stage": 3,
+        "status": "Application Open",
+        "openingDate": "27-Oct-2026",
+        "closingDate": "06-Nov-2026",
+        "listingDate": "24-Nov-2026",
+        "price": 0.25,
+        "symbol": "IMPACT",
+        "market": "ACE Market",
+        "sector": "Finance (Investment Holding)"
     }
 }
