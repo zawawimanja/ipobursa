@@ -1,19 +1,19 @@
 const SYNC_STATUS = {
-  "lastSync": "27/10/2026, 5:55:40 pm",
+  "lastSync": "27/10/2026, 11:35:08 pm",
   "status": "Partial",
-  "source": "group-archive",
+  "source": "ipo-pages",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
       "status": "failed",
       "lastSuccess": "2026-10-22T03:21:43.723Z",
-      "lastAttempt": "2026-10-27T09:55:37.638Z",
+      "lastAttempt": "2026-10-27T15:35:07.689Z",
       "message": "MITI public portal HTTP 403 (access denied from this runner); existing data retained."
     },
     "miti-applicants": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-27T09:55:37.734Z",
+      "lastAttempt": "2026-10-27T15:35:07.793Z",
       "message": "Puppeteer is not installed in CI; run scratch/sync-miti-applicants-login.js locally."
     },
     "isaham-api": {
@@ -54,8 +54,8 @@ const SYNC_STATUS = {
     },
     "ipo-pages": {
       "status": "success",
-      "lastSuccess": "2026-10-27T09:55:40.221Z",
-      "lastAttempt": "2026-10-27T09:55:40.221Z",
+      "lastSuccess": "2026-10-27T15:35:08.069Z",
+      "lastAttempt": "2026-10-27T15:35:08.069Z",
       "message": "Sync completed."
     },
     "balloting": {
