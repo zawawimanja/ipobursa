@@ -308,7 +308,7 @@
         "openingDate": "23-Oct-2026",
         "closingDate": "02-Nov-2026",
         "listingDate": "16-Nov-2026",
-        "price": 0.28,
+        "price": 0.35,
         "symbol": "KEB",
         "market": "ACE Market"
     },
@@ -1736,9 +1736,9 @@
         "openingDate": "27-Oct-2026",
         "closingDate": "06-Nov-2026",
         "listingDate": "24-Nov-2026",
-        "price": 0.25,
+        "price": 0.22,
         "symbol": "IMPACT",
         "market": "ACE Market",
-        "sector": "Finance (Investment Holding)"
+        "sector": "Technology (ICT Infrastructure Integration)"
     }
 }

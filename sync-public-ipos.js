@@ -289,7 +289,9 @@ function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
             if (s.listingDate && ipo.listingDate !== s.listingDate) {
                 ipo.listingDate = s.listingDate; changed = true;
             }
-            if (s.price && s.price > 0 && (!ipo.price || ipo.price === 0)) {
+            // The scheduled card carries the prospectus offer price, which supersedes
+            // any placeholder kept from the draft/MITI stage.
+            if (s.price && s.price > 0 && ipo.price !== s.price) {
                 ipo.price = s.price; changed = true;
             }
         }
