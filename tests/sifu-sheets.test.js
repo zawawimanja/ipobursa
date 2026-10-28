@@ -194,31 +194,31 @@ test('a generic incomplete record keeps absent price, shares and earnings unknow
     assert.equal(element('td-val1-fye-f').innerText, '—');
 });
 
-test('SKA research renders its actual capital and marks secondary earnings without inventing a target', () => {
+test('SKA research renders its verified prospectus financials and calculates Sifu targets', () => {
     const record = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data.json'), 'utf8')).find(x => x.id === 'ska-capital-berhad');
     const { element } = load([record]);
     assert.equal(element('inp-price').value, '0.43');
     assert.equal(element('td-market-cap').innerText, 'RM 385,065,000');
     assert.equal(element('td-per-25').innerText, '13.31');
-    assert.match(element('sheet-profit-label').innerText, /sekunder/);
-    assert.equal(element('sheet-target-pe').value, '');
-    assert.equal(element('sheet-pe-status').innerText, 'Belum disahkan');
-    assert.match(element('sheet-data-notice').innerHTML, /PDF kewangan asal belum berjaya diakses/);
-    assert.equal(element('inp-pat-fye-f').value, '');
-    assert.equal(element('td-val1-fye-f').innerText, '—');
-    assert.match(element('sheet-verdict-box').innerHTML, /PENILAIAN BELUM LENGKAP/);
+    assert.match(element('sheet-profit-label').innerText, /PATAMI/);
+    assert.equal(element('sheet-target-pe').value, '14.0');
+    assert.equal(element('inp-pat-25').value, '28940000');
+    assert.equal(element('inp-pat-fye-f').value, '34500000');
+    assert.equal(element('td-val1-fye-f').innerText, 'RM 0.54');
+    assert.match(element('sheet-verdict-box').innerHTML, /ZON BELI/);
 });
 
-test('MyDCD research separates reported MITI price and draft historical PATAMI from missing forecasts', () => {
+test('MyDCD research renders its verified historical and forward financial profile', () => {
     const record = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data.json'), 'utf8')).find(x => x.id === 'mydcd-berhad');
     const { element } = load([record]);
     assert.equal(element('inp-price').value, '0.56');
     assert.equal(element('td-market-cap').innerText, 'RM 1,004,640,000');
     assert.equal(element('td-per-25').innerText, '25.44');
-    assert.match(element('sheet-data-notice').innerHTML, /tawaran MITI pengguna/);
-    assert.match(element('sheet-profit-label').innerText, /PATAMI — draf Bursa/);
-    assert.equal(element('inp-pat-fye-f').value, '');
-    assert.equal(element('inp-rev-fye-f').value, '');
-    assert.equal(element('td-val1-fye-f').innerText, '—');
-    assert.doesNotMatch(element('sheet-data-notice').innerHTML, /group PAT|PATAMI FY26 belum/);
+    assert.match(element('sheet-profit-label').innerText, /PATAMI/);
+    assert.equal(element('inp-pat-25').value, '39486000');
+    assert.equal(element('inp-pat-fye-f').value, '36000000');
+    assert.equal(element('inp-rev-fye-f').value, '360000000');
+    assert.equal(element('sheet-target-pe').value, '20.0');
+    assert.equal(element('td-val1-fye-f').innerText, 'RM 0.40');
 });
+
