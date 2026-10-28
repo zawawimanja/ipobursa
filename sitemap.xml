@@ -157,6 +157,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://www.ipobursa.my/donate.html</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.ipobursa.my/privacy-policy.html</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>yearly</changefreq>

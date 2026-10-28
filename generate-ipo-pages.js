@@ -169,6 +169,7 @@ const megaFooterHtml = `
                         <li><a href="../privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy & Cookie Policy</a></li>
                         <li><a href="../terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a></li>
                         <li><a href="../sitemap.xml" style="color: var(--text-dim); text-decoration: none;">XML Sitemap</a></li>
+                        <li><a href="../donate.html" style="color: #ec4899; text-decoration: none;">&hearts; Support Us / Donate</a></li>
                     </ul>
                 </div>
             </div>
@@ -574,6 +575,7 @@ ipos.forEach((ipo) => {
     <script>
         lucide.createIcons();
     </script>
+    <script src="../donate-banner.js"></script>
 </body>
 </html>
 `;
@@ -733,6 +735,7 @@ const directoryHtml = `<!DOCTYPE html>
             });
         }
     </script>
+    <script src="../donate-banner.js"></script>
 </body>
 </html>
 `;

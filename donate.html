@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="canonical" href="https://www.ipobursa.my/donate.html">
+    <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us | Bursa IPO Tracker</title>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6303372615694359"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .donate-card {
+            max-width: 460px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .donate-qr-wrap {
+            display: inline-block;
+            padding: 0.75rem;
+            border-radius: 1.25rem;
+            background: rgba(236, 72, 153, 0.08);
+            border: 1px solid rgba(236, 72, 153, 0.35);
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.15);
+        }
+        .donate-qr-wrap img {
+            width: 280px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2" style="background: rgba(16, 185, 129, 0.2);"></div>
+        <div class="blob blob-3" style="background: rgba(236, 72, 153, 0.2);"></div>
+    </div>
+
+    <nav class="glass-header">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">
+                <i data-lucide="trending-up"></i>
+                <span class="logo-text"><span>Bursa</span>IPO</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="btn-moomoo">
+                    <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 3rem; margin-bottom: 5rem;">
+        <header class="hero" style="text-align: center; margin-bottom: 3rem;">
+            <h1>Support <span>Our Work</span></h1>
+            <p>Bursa IPO Tracker is run by volunteers. If our data, grades and tools have helped you, a small donation keeps the servers running and the data fresh.</p>
+        </header>
+
+        <section class="glass-card donate-card">
+            <div class="donate-qr-wrap">
+                <img src="assets/donate-qr.png" alt="Malaysia National QR (DuitNow) donation code for Bursa IPO Tracker" width="280" height="317">
+            </div>
+            <h2 style="font-size: 1.3rem; margin: 1.5rem 0 0.5rem 0; color: white; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <i data-lucide="scan-qr-code" style="width: 22px; color: #ec4899;"></i> Scan to Donate
+            </h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                Open your bank or e-wallet app (Maybank2u, TNG eWallet, GrabPay, Boost, etc.), choose <strong style="color: var(--text-main);">Scan &amp; Pay / DuitNow QR</strong>, and point your camera at the code above. Any amount is appreciated &mdash; RM1, RM5, RM10, whatever you can spare.
+            </p>
+            <a href="contact.html" class="btn-moomoo" style="display: inline-flex; justify-content: center; text-decoration: none;">
+                <i data-lucide="mail"></i> Questions? Contact Us
+            </a>
+        </section>
+
+        <p style="text-align: center; color: var(--text-dim); font-size: 0.8rem; margin-top: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            Thank you for keeping this project free for all retail investors. Donations are voluntary and do not entitle donors to any investment advice or guaranteed outcomes.
+        </p>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container" style="text-align: center; padding: 2rem 0;">
+            <p>&copy; 2026 Bursa IPO Tracker. All rights reserved.</p>
+            <p style="max-width: 850px; margin: 1rem auto 0 auto; font-size: 0.78rem; color: var(--text-dim); line-height: 1.6;">&#9888;&#65039; <strong>Financial Disclaimer:</strong> All information, analyses, grades, price projections, and calculator outputs on this website are for educational and research reference purposes only. They do not constitute investment advice or a recommendation to buy or sell any security. Stock market investments, particularly IPO subscriptions, carry a high risk of capital loss. We do not guarantee the accuracy of the information compiled. You are advised to consult a licensed financial advisor before making any investment decisions.</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; font-size: 0.85rem;">
+                <a href="privacy-policy.html" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
+                <a href="about.html" style="color: var(--text-dim); text-decoration: none;">About Us</a>
+                <a href="contact.html" style="color: var(--text-dim); text-decoration: none;">Contact Us</a>
+                <a href="donate.html" style="color: #ec4899; text-decoration: none;">Donate</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
