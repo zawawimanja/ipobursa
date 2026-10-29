@@ -225,11 +225,132 @@
             margin-bottom: 0.5rem;
         }
 
+        .sheet-notice-stack {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .sheet-notice-block {
+            padding: 0.9rem 1rem;
+            border-radius: 0.9rem;
+            border: 1px solid rgba(245, 158, 11, 0.24);
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .sheet-notice-block h4 {
+            margin: 0 0 0.35rem 0;
+            font-size: 0.88rem;
+            color: #fde68a;
+        }
+
+        .sheet-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 0.55rem;
+        }
+
+        .sheet-chip {
+            padding: 0.28rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: #fde68a;
+            font-size: 0.74rem;
+            line-height: 1.2;
+        }
+
+        .sheet-catalyst-grid {
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .sheet-catalyst-item {
+            padding: 0.9rem 1rem;
+            border-radius: 0.85rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sheet-catalyst-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-bottom: 0.45rem;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #93c5fd;
+        }
+
+        .sheet-catalyst-copy {
+            font-size: 0.82rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .sheet-catalyst-copy a,
+        .sheet-peer-box a,
+        .sheet-source-card a {
+            color: #a5b4fc;
+            text-decoration: underline;
+            overflow-wrap: anywhere;
+        }
+
+        .sheet-source-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .sheet-source-card {
+            display: block;
+            padding: 0.9rem 1rem;
+            border-radius: 0.85rem;
+            background: rgba(59, 130, 246, 0.06);
+            border: 1px solid rgba(96, 165, 250, 0.14);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sheet-source-card:hover {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: rgba(96, 165, 250, 0.28);
+        }
+
+        .sheet-source-host {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-bottom: 0.45rem;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #7dd3fc;
+        }
+
+        .sheet-source-title {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
+        .sheet-peer-box {
+            padding: 0.9rem 1rem;
+            border-radius: 0.85rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
         .ai-badge {
             background: linear-gradient(135deg, #6366f1, #a855f7);
             color: white;
             font-size: 0.7rem;
-            padding: 0.15rem 0.5rem;
             border-radius: 9999px;
             font-weight: 600;
             display: inline-flex;
@@ -343,6 +464,12 @@
                     </h3>
                     <div id="sheet-catalysts-content" style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; display: flex; flex-direction: column; gap: 0.5rem;">
                         <!-- Dynamically filled -->
+                    </div>
+                    <div id="sheet-sources-wrap" style="display: none; margin-top: 1rem; padding-top: 0.9rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                        <div style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: #7dd3fc; margin-bottom: 0.7rem;">
+                            Berita & Sumber Terkini
+                        </div>
+                        <div id="sheet-sources-content"></div>
                     </div>
                     <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.75rem; color: var(--text-dim); overflow-x: auto;" id="sheet-peers-content">
                         <!-- Dynamically filled -->
@@ -779,6 +906,57 @@
             return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
         }
 
+        function sheetStripHtml(value) {
+            return String(value ?? '')
+                .replace(/<[^>]*>/g, ' ')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function getSheetSourceHost(url) {
+            try {
+                return new URL(url).hostname.replace(/^www\./i, '');
+            } catch (error) {
+                return 'source';
+            }
+        }
+
+        function extractSheetSources(data) {
+            const rawItems = Array.isArray(data?.financialSourcesHTML) ? data.financialSourcesHTML : [];
+            const seen = new Set();
+            const sources = [];
+
+            rawItems.forEach(item => {
+                const matches = String(item ?? '').matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/gi);
+                for (const match of matches) {
+                    const url = match[1];
+                    const label = sheetStripHtml(match[2]);
+                    if (!url || seen.has(url)) continue;
+                    seen.add(url);
+                    sources.push({ url, label });
+                }
+            });
+
+            return sources;
+        }
+
+        function renderSheetSourceCards(data) {
+            const sources = extractSheetSources(data);
+            if (!sources.length) return '';
+            return `<div class="sheet-source-grid">${sources.map(source => `
+                <a href="${sheetEscapeText(source.url)}" target="_blank" rel="noopener noreferrer" class="sheet-source-card">
+                    <span class="sheet-source-host">${sheetEscapeText(getSheetSourceHost(source.url))}</span>
+                    <span class="sheet-source-title">${sheetEscapeText(source.label)}</span>
+                </a>
+            `).join('')}</div>`;
+        }
+
         function getSheetFinancialReview(data) {
             const review = data?.financialReview || {};
             const legacyBigCaring = data?.id === 'big-caring-group-bhd' && Number.isFinite(data.groupPat26);
@@ -803,19 +981,39 @@
             const missingPrice = !(data?.price > 0);
             const incomplete = data?.financialProfileStatus === 'incomplete';
             notice.style.display = missingPrice || incomplete ? 'block' : 'none';
-            notice.innerHTML = '';
+            const blocks = [];
             if (missingPrice) {
-                notice.innerHTML += '<strong>Harga IPO belum disahkan.</strong> Paparan harga dibiarkan kosong. Penilaian yang memerlukan harga tawaran belum tersedia.';
+                blocks.push(`
+                    <div class="sheet-notice-block">
+                        <h4>Harga IPO belum disahkan</h4>
+                        <div>Paparan harga dibiarkan kosong. Penilaian yang memerlukan harga tawaran belum tersedia.</div>
+                    </div>
+                `);
             }
             if (incomplete) {
                 const review = getSheetFinancialReview(data);
-                notice.innerHTML += `<div><strong>${sheetEscapeText(review.title)}</strong><br>${sheetEscapeText(review.summary)}</div>`;
-                if (data.priceSourceNote) notice.innerHTML += `<p style="margin:0.5rem 0;">${sheetEscapeText(data.priceSourceNote)}</p>`;
-                if (Array.isArray(data.valuationScenarios) && data.valuationScenarios.length) {
-                    notice.innerHTML += `<div style="margin-top:0.75rem;"><strong>${sheetEscapeText(review.scenarioLabel)}</strong><div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.35rem;">${data.valuationScenarios.filter(row => Number.isFinite(row.multiple) && Number.isFinite(row.price)).map(row => `<span style="padding:0.25rem 0.6rem;border:1px solid rgba(245,158,11,0.25);border-radius:6px;">${row.multiple}x: RM${row.price.toFixed(3)}</span>`).join('')}</div></div>`;
-                }
-                if (data.financialSourcesHTML) notice.innerHTML += `<div style="margin-top:0.75rem;overflow-wrap:anywhere;">${Array.isArray(data.financialSourcesHTML) ? data.financialSourcesHTML.join(' · ') : data.financialSourcesHTML}</div>`;
+                const scenarioHtml = Array.isArray(data.valuationScenarios) && data.valuationScenarios.length
+                    ? `<div style="margin-top:0.75rem;">
+                            <strong>${sheetEscapeText(review.scenarioLabel)}</strong>
+                            <div class="sheet-chip-row">${data.valuationScenarios
+                                .filter(row => Number.isFinite(row.multiple) && Number.isFinite(row.price))
+                                .map(row => `<span class="sheet-chip">${row.multiple}x: RM${row.price.toFixed(3)}</span>`)
+                                .join('')}</div>
+                       </div>`
+                    : '';
+                const noteHtml = data.priceSourceNote
+                    ? `<div style="margin-top:0.65rem; color:#fde68a;">${sheetEscapeText(data.priceSourceNote)}</div>`
+                    : '';
+                blocks.push(`
+                    <div class="sheet-notice-block">
+                        <h4>${sheetEscapeText(review.title)}</h4>
+                        <div>${sheetEscapeText(review.summary)}</div>
+                        ${noteHtml}
+                        ${scenarioHtml}
+                    </div>
+                `);
             }
+            notice.innerHTML = blocks.length ? `<div class="sheet-notice-stack">${blocks.join('')}</div>` : '';
         }
 
         function renderResearchComparison(data) {
@@ -1069,19 +1267,30 @@
             const notesCard = document.getElementById('sheet-notes-card');
             const catalystsContent = document.getElementById('sheet-catalysts-content');
             const peersContent = document.getElementById('sheet-peers-content');
-            
-            if (data.catalysts && data.catalysts.length > 0) {
-                notesCard.style.display = 'block';
-                let html = '<ul class="catalyst-list">';
-                data.catalysts.forEach(c => {
-                    html += `<li>${c}</li>`;
-                });
-                html += '</ul>';
-                catalystsContent.innerHTML = html;
-                peersContent.innerHTML = data.peers || '';
-            } else {
-                notesCard.style.display = 'none';
+            const sourcesWrap = document.getElementById('sheet-sources-wrap');
+            const sourcesContent = document.getElementById('sheet-sources-content');
+            const hasCatalysts = Array.isArray(data?.catalysts) && data.catalysts.length > 0;
+            const hasPeers = Boolean(data?.peers);
+            const sourceCards = renderSheetSourceCards(data);
+
+            notesCard.style.display = hasCatalysts || hasPeers || sourceCards ? 'block' : 'none';
+            if (notesCard.style.display === 'none') return;
+
+            catalystsContent.innerHTML = hasCatalysts
+                ? `<div class="sheet-catalyst-grid">${data.catalysts.map((c, index) => `
+                    <div class="sheet-catalyst-item">
+                        <div class="sheet-catalyst-kicker">Highlight ${index + 1}</div>
+                        <div class="sheet-catalyst-copy">${c}</div>
+                    </div>
+                `).join('')}</div>`
+                : '<div style="color: var(--text-dim);">Tiada highlight tambahan untuk IPO ini buat masa sekarang.</div>';
+
+            if (sourcesWrap && sourcesContent) {
+                sourcesWrap.style.display = sourceCards ? 'block' : 'none';
+                sourcesContent.innerHTML = sourceCards;
             }
+
+            peersContent.innerHTML = hasPeers ? `<div class="sheet-peer-box">${data.peers}</div>` : '';
         }
 
         function updateQualitativeOverlay(id) {

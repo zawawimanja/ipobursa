@@ -1,7 +1,7 @@
 const SYNC_STATUS = {
-  "lastSync": "29/10/2026, 3:29:13 pm",
+  "lastSync": "29/10/2026, 4:18:59 pm",
   "status": "Partial",
-  "source": "miti-portal",
+  "source": "ipo-news",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
@@ -63,6 +63,12 @@ const SYNC_STATUS = {
       "lastSuccess": null,
       "lastAttempt": "2026-10-29T04:44:53.661Z",
       "message": "Overall public OS: 0 updated, 1 unavailable, 0 deferred."
+    },
+    "ipo-news": {
+      "status": "success",
+      "lastSuccess": "2026-10-29T08:18:59.247Z",
+      "lastAttempt": "2026-10-29T08:18:59.247Z",
+      "message": "120 news items from 12 feed(s); 0 feed(s) failed."
     }
   }
 };

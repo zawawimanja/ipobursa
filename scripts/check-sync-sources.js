@@ -6,7 +6,7 @@ const path = require('node:path');
 const { readSyncStatus } = require('../lib/sync-health');
 
 const WORKING_SOURCES = ['klse', 'i3investor', 'shariah', 'target-calculation', 'ipo-pages', 'group-archive'];
-const BLOCKED_SOURCES = ['miti-portal', 'miti-applicants', 'balloting', 'isaham-api'];
+const BLOCKED_SOURCES = ['miti-portal', 'miti-applicants', 'balloting', 'isaham-api', 'ipo-news'];
 
 function evaluate(sources = {}, required = WORKING_SOURCES) {
     const errors = [];

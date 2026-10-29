@@ -25,6 +25,53 @@ const ipos = JSON.parse(rawData);
 
 console.log(`Loaded ${ipos.length} IPO entries from data.json`);
 
+// Berita berkaitan (auto-agregat RSS → news.json, dijana oleh scratch/sync-ipo-news.js).
+// Kalau fail tiada/rosak, halaman tetap dijana tanpa seksyen berita.
+function loadIpoNews() {
+    for (const file of [path.join(__dirname, 'news.json'), path.join(outputRoot, 'news.json')]) {
+        try {
+            if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, 'utf8'));
+        } catch (error) {
+            console.warn(`Berita: gagal baca ${file} — ${error.message}`);
+        }
+    }
+    return { items: [] };
+}
+
+const newsByCompany = new Map();
+for (const item of (loadIpoNews().items || [])) {
+    for (const id of (item.companies || [])) {
+        if (!newsByCompany.has(id)) newsByCompany.set(id, []);
+        newsByCompany.get(id).push(item);
+    }
+}
+
+function formatNewsDate(iso) {
+    const time = Date.parse(iso || '');
+    if (Number.isNaN(time)) return '';
+    return new Date(time).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function companyNewsHtml(ipo) {
+    const items = (newsByCompany.get(ipo.id) || []).slice(0, 8);
+    if (!items.length) return '';
+    const rows = items.map(item => `
+                <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"
+                   style="display: block; padding: 0.75rem 0.9rem; border-radius: 0.6rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); text-decoration: none; margin-bottom: 0.6rem;">
+                    <span style="display: block; color: white; font-size: 0.92rem; font-weight: 600; line-height: 1.35;">${escapeHtml(item.title)}</span>
+                    <span style="display: block; color: var(--text-dim); font-size: 0.7rem; margin-top: 0.3rem;">${escapeHtml([item.source, formatNewsDate(item.date)].filter(Boolean).join(' · '))}</span>
+                </a>`).join('');
+    return `
+        <div class="glass-card" style="padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
+            <h3 style="color: white; font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="newspaper" style="color: #60a5fa; width: 20px;"></i> Berita Berkaitan
+            </h3>
+            ${rows}
+            <p style="font-size: 0.7rem; color: var(--text-dim); margin: 0.5rem 0 0 0;">Auto-agregat daripada Google News &amp; Bing News. Dikemas kini setiap jam semasa sync.</p>
+        </div>
+    `;
+}
+
 function sanitizeSlug(str) {
     if (!str) return 'ipo-counter';
     return str
@@ -545,6 +592,9 @@ ipos.forEach((ipo) => {
             </div>
         </div>
         ` : ''}
+
+        <!-- Related News -->
+        ${companyNewsHtml(ipo)}
 
         <!-- Action Box -->
         <div class="glass-card" style="padding: 2rem; border-radius: 16px; margin-top: 2.5rem; text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(16, 185, 129, 0.08)); border: 1px solid rgba(99, 102, 241, 0.3);">
