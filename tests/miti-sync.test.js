@@ -146,7 +146,8 @@ test('parseMaklumatJSON extracts profiles and detects expired session or missing
                         name: 'Unioleo Holdings Berhad',
                         tarikh_akhir_tiers: '21/10/2026',
                         rating: '15,000,000',
-                        stockIndication: 'RM 0.28'
+                        stockIndication: 'RM 0.28',
+                        total_applicants: 150
                     }
                 ],
                 { s: 'clctn' }
@@ -161,6 +162,14 @@ test('parseMaklumatJSON extracts profiles and detects expired session or missing
     assert.equal(results[0].mitiCloseDate, '21-Oct-2026');
     assert.equal(results[0].offerShares, 15000000);
     assert.equal(results[0].price, 0.28);
+    assert.equal(results[0].applicants, 150);
+
+    const snapshotNoApp = JSON.stringify({
+        data: { profiles: [[{ name: 'Wil-Key Berhad', tarikh: '2026-11-02', rating: '56,250,000', stockIndication: 'RM 0.23' }]] }
+    });
+    const htmlWithText = `<div wire:snapshot='${snapshotNoApp}'><div>Wil-Key Berhad ... 259 pelabur memohon</div></div>`;
+    const textResults = parseMaklumatJSON(htmlWithText);
+    assert.equal(textResults[0].applicants, 259);
 
     const loginHtml = '<form><input id="data.username" /></form>';
     assert.throws(() => parseMaklumatJSON(loginHtml), /MITI login was not accepted/);
@@ -214,13 +223,15 @@ test('applyResults updates MITI allocation details without demoting listed stock
             company: 'Unioleo Holdings Berhad',
             mitiCloseDate: '21-Oct-2026',
             offerShares: 20000000,
-            price: 0.28
+            price: 0.28,
+            applicants: 259
         },
         {
             company: 'Demo Listed Berhad',
             mitiCloseDate: '20-Oct-2026',
             offerShares: 5000000,
-            price: 0.50
+            price: 0.50,
+            applicants: 50
         }
     ];
 
@@ -228,11 +239,13 @@ test('applyResults updates MITI allocation details without demoting listed stock
     assert.equal(result.updated, 2);
     assert.equal(result.unmatched, 0);
 
-    const { data } = readData(project.root);
+    const { data, overrides } = readData(project.root);
     const unioleo = data.find(ipo => ipo.id === 'unioleo-holdings-berhad');
     assert.equal(unioleo.stage, 2);
     assert.equal(unioleo.mitiOfferShares, 20000000);
     assert.equal(unioleo.price, 0.28);
+    assert.equal(unioleo.mitiApplicants, 259);
+    assert.equal(overrides['unioleo-holdings-berhad']?.mitiApplicants, 259);
 
     const listed = data.find(ipo => ipo.id === 'demo-listed-berhad');
     // Listed stage 5 must not be demoted or have its price overwritten

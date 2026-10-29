@@ -32,7 +32,7 @@ function applyResults(found, root = ROOT) {
         if ([1, 2, 6].includes(ipo.stage) && row.price != null) fields.price = row.price;
         if (row.mitiCloseDate) fields.mitiCloseDate = row.mitiCloseDate;
         if (row.offerShares != null) fields.mitiOfferShares = row.offerShares;
-        // Opening dates and applicant counts absent from the source must remain unknown.
+        if (row.applicants != null) fields.mitiApplicants = row.applicants;
         if (updateFields(ipo, fields, overrides)) updated++;
     }
     if (updated) saveData(root, data, overrides);
@@ -97,7 +97,7 @@ async function syncApplicants(options = {}) {
         browser = await launch();
         const found = await readAuthenticatedOffers(browser, env.MITI_USERNAME, env.MITI_PASSWORD);
         const result = applyResults(found, root);
-        const message = `${found.length} authenticated MITI offers verified; ${result.updated} updated; ${result.unmatched} unmatched. Applicant counts are not provided by this portal.`;
+        const message = `${found.length} authenticated MITI offers verified; ${result.updated} updated; ${result.unmatched} unmatched.`;
         updateSourceStatus('miti-applicants', { status: result.unmatched ? 'partial' : 'success', message }, root);
         return { found: found.length, ...result };
     } catch (error) {

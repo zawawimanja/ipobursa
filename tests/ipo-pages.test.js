@@ -75,7 +75,7 @@ test('upcoming profiles keep application tools without implying listing results'
     const html = generate(t, [listed({ stage: 4, status: 'Pre-Listing' })])('fixture-berhad');
     assert.equal(performanceSection(html), '');
     assert.doesNotMatch(html, />Listed<\/span>/);
-    assert.match(html, /Decision Engine: Sub or Skip\?/);
+    assert.match(html, /View Sifu Sheets/);
 });
 
 test('profiles and directory use the dashboard grade after fresh subscription results', t => {
