@@ -177,8 +177,6 @@ const megaFooterHtml = `
                         <li><a href="../index.html" style="color: var(--text-dim); text-decoration: none;">Dashboard & Live Radar</a></li>
                         <li><a href="../sifu-sheets.html" style="color: var(--text-dim); text-decoration: none;">Sifu's Projection Sheets</a></li>
                         <li><a href="../cincai-analysis.html" style="color: var(--text-dim); text-decoration: none;">Cincai2 Kira (60 IPOs)</a></li>
-                        <li><a href="../ipo-decision.html" style="color: var(--text-dim); text-decoration: none;">Decision Engine: Sub / Skip</a></li>
-                        <li><a href="../morning-brief.html" style="color: var(--text-dim); text-decoration: none;">Daily Morning Briefing</a></li>
                         <li><a href="../miti-journal.html" style="color: var(--text-dim); text-decoration: none;">MITI Investment Journal</a></li>
                         <li><a href="../sifu-picks.html" style="color: var(--text-dim); text-decoration: none;">Sifu Target Picks</a></li>
                         <li><a href="../alerts.html" style="color: var(--text-dim); text-decoration: none;">IPO Alerts Tracker</a></li>
@@ -414,9 +412,6 @@ ipos.forEach((ipo) => {
                 <a href="./index.html" class="btn-moomoo" style="background: rgba(99, 102, 241, 0.25); border-color: rgba(99, 102, 241, 0.5);">
                     <i data-lucide="folder"></i> <span class="nav-text">All IPOs</span>
                 </a>
-                <a href="../morning-brief.html" class="btn-moomoo">
-                    <i data-lucide="sun"></i> <span class="nav-text">Morning Brief</span>
-                </a>
                 <a href="../sifu-sheets.html" class="btn-moomoo">
                     <i data-lucide="table"></i> <span class="nav-text">Sifu Sheets</span>
                 </a>
@@ -600,15 +595,10 @@ ipos.forEach((ipo) => {
         <div class="glass-card" style="padding: 2rem; border-radius: 16px; margin-top: 2.5rem; text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(16, 185, 129, 0.08)); border: 1px solid rgba(99, 102, 241, 0.3);">
             <h3 style="color: white; font-size: 1.3rem; margin-bottom: 0.5rem;">Evaluate ${escapeHtml(companyName)} with Our Tools</h3>
             <p style="color: var(--text-dim); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem auto;">
-                ${isListed ? 'Review the recorded listing performance and cross-check valuations with Sifu projection sheets.' : 'Use the Decision Engine to test whether to subscribe or skip, calculate your optimal balloting tier, or cross-check with Sifu projection sheets.'}
+                ${isListed ? 'Review the recorded listing performance and cross-check valuations with Sifu projection sheets.' : 'Evaluate valuations, calculate your optimal balloting tier, and cross-check fair values with Sifu projection sheets.'}
             </p>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-                ${!isListed ? `
-                <a href="../ipo-decision.html" class="btn-moomoo" style="background: var(--primary); color: white; font-weight: 700; text-decoration: none;">
-                    <i data-lucide="zap"></i> Decision Engine: Sub or Skip?
-                </a>
-                ` : ''}
-                <a href="../sifu-sheets.html" class="btn-moomoo" style="text-decoration: none;">
+                <a href="../sifu-sheets.html" class="btn-moomoo" style="background: var(--primary); color: white; font-weight: 700; text-decoration: none;">
                     <i data-lucide="table"></i> View Sifu Sheets
                 </a>
                 ${ipo.prospectusUrl ? `
@@ -707,9 +697,6 @@ const directoryHtml = `<!DOCTYPE html>
                 <a href="../index.html" class="btn-moomoo">
                     <i data-lucide="layout-dashboard"></i> <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="../morning-brief.html" class="btn-moomoo">
-                    <i data-lucide="sun"></i> <span class="nav-text">Morning Brief</span>
-                </a>
                 <a href="../sifu-sheets.html" class="btn-moomoo">
                     <i data-lucide="table"></i> <span class="nav-text">Sifu Sheets</span>
                 </a>
@@ -801,11 +788,9 @@ const staticUrls = [
     { url: 'https://www.ipobursa.my/', priority: '1.0', changefreq: 'daily' },
     { url: 'https://www.ipobursa.my/ipo/', priority: '0.9', changefreq: 'daily' },
     { url: 'https://www.ipobursa.my/sifu-sheets.html', priority: '0.9', changefreq: 'daily' },
-    { url: 'https://www.ipobursa.my/morning-brief.html', priority: '0.9', changefreq: 'daily' },
     { url: 'https://www.ipobursa.my/miti-journal.html', priority: '0.8', changefreq: 'weekly' },
     { url: 'https://www.ipobursa.my/sifu-picks.html', priority: '0.8', changefreq: 'weekly' },
     { url: 'https://www.ipobursa.my/cincai-analysis.html', priority: '0.8', changefreq: 'weekly' },
-    { url: 'https://www.ipobursa.my/ipo-decision.html', priority: '0.8', changefreq: 'weekly' },
     { url: 'https://www.ipobursa.my/strategy.html', priority: '0.7', changefreq: 'monthly' },
     { url: 'https://www.ipobursa.my/tips.html', priority: '0.7', changefreq: 'monthly' },
     { url: 'https://www.ipobursa.my/alerts.html', priority: '0.7', changefreq: 'weekly' },
