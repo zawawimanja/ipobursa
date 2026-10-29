@@ -549,7 +549,7 @@
         "prospectusUrl": "https://sahamonline.miti.gov.my/",
         "sector": "Healthcare (Pharmacy)",
         "shariah": true,
-        "price": 1.08,
+        "price": 1.081,
         "ib": "Maybank IB, RHB IB, AmInvestment Bank, UBS",
         "predictedGrade": "B",
         "analystInsight": "<b>PROSPEKTUS BERDAFTAR 29 OKT 2026 — RM1.08, PE 41.6x ATAS PATAMI FY26</b><br>• Harga runcit RM1.08 disahkan prospektus; permodalan pasaran ~RM8.0 bilion (7.38 bilion saham).<br>• PATAMI FY26 teraudit RM191.6 juta (+56.7%) atas hasil RM4,024.0 juta — PE 41.6x, masih premium untuk runcit farmasi.<br>• 89.5% hasil terbitan baharu (RM570.7 juta) untuk bayar hutang bank; gear dijangka turun 2.8x → 0.9x dengan penjimatan faedah ~RM26.3 juta/tahun.<br>• Cornerstone: 19 pelabur institusi (termasuk IFC, JPMorgan Asset Management, abrdn, Principal Asset Management, First Sentier Investors) mengambil 665.5 juta saham (9.0% modal diperbesarkan); harga institusi ditetapkan 10 Nov 2026.<br>• Sasaran harga Sifu masih ditangguh — profil kewangan penuh belum dimuatkan.<br>• <a href=\"https://theedgemalaysia.com/node/823732\" target=\"_blank\" rel=\"noopener noreferrer\">The Edge</a> · <a href=\"https://www.thestar.com.my/business/business-news/2026/10/29/big-caring-plans-to-raise-rm6378mil-from-main-market-ipo\" target=\"_blank\" rel=\"noopener noreferrer\">The Star</a>",
@@ -1221,7 +1221,12 @@
         "eps24": 1.82,
         "eps25": 3.23,
         "zone1TargetPrice": 0.52,
-        "sifuGrade": "B+"
+        "sifuGrade": "B+",
+        "os": 80.42,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11694461",
+        "osSourceDate": "29 Oct 2026",
+        "osMetric": "overall-public-oversubscription"
     },
     "empg-group-berhad": {
         "mitiApplicants": 97,

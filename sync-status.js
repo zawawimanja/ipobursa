@@ -1,73 +1,73 @@
 const SYNC_STATUS = {
-  "lastSync": "29/10/2026, 6:29:17 pm",
+  "lastSync": "29/10/2026, 7:25:18 pm",
   "status": "Partial",
-  "source": "ipo-pages",
+  "source": "group-archive",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
       "status": "failed",
       "lastSuccess": "2026-10-29T07:29:13.480Z",
-      "lastAttempt": "2026-10-29T10:29:17.067Z",
+      "lastAttempt": "2026-10-29T11:25:08.633Z",
       "message": "MITI public portal HTTP 403 (access denied from this runner); existing data retained."
     },
     "miti-applicants": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-29T10:29:17.159Z",
+      "lastAttempt": "2026-10-29T11:25:08.708Z",
       "message": "Puppeteer is not installed in CI; run scratch/sync-miti-applicants-login.js locally."
     },
     "isaham-api": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-10-29T04:35:44.235Z",
+      "lastAttempt": "2026-10-29T11:18:49.324Z",
       "message": "Not used by choice; IPO data comes from KLSE Screener, i3investor and MITI."
     },
     "klse": {
       "status": "success",
-      "lastSuccess": "2026-10-29T04:35:45.162Z",
-      "lastAttempt": "2026-10-29T04:35:45.162Z",
+      "lastSuccess": "2026-10-29T11:18:50.467Z",
+      "lastAttempt": "2026-10-29T11:18:50.467Z",
       "message": "Sync completed."
     },
     "i3investor": {
-      "status": "partial",
-      "lastSuccess": "2026-10-28T11:07:44.314Z",
-      "lastAttempt": "2026-10-29T04:44:53.565Z",
-      "message": "119 prices refreshed; 3 could not be refreshed."
+      "status": "success",
+      "lastSuccess": "2026-10-29T11:25:07.224Z",
+      "lastAttempt": "2026-10-29T11:25:07.224Z",
+      "message": "111 prices refreshed; 0 could not be refreshed."
     },
     "shariah": {
       "status": "success",
-      "lastSuccess": "2026-10-29T04:44:57.165Z",
-      "lastAttempt": "2026-10-29T04:44:57.165Z",
+      "lastSuccess": "2026-10-29T11:25:09.502Z",
+      "lastAttempt": "2026-10-29T11:25:09.502Z",
       "message": "Sync completed."
     },
     "target-calculation": {
       "status": "success",
-      "lastSuccess": "2026-10-29T04:44:57.261Z",
-      "lastAttempt": "2026-10-29T04:44:57.261Z",
+      "lastSuccess": "2026-10-29T11:25:09.595Z",
+      "lastAttempt": "2026-10-29T11:25:09.595Z",
       "message": "Sync completed."
     },
     "group-archive": {
       "status": "success",
-      "lastSuccess": "2026-10-29T04:44:57.610Z",
-      "lastAttempt": "2026-10-29T04:44:57.610Z",
+      "lastSuccess": "2026-10-29T11:25:18.168Z",
+      "lastAttempt": "2026-10-29T11:25:18.168Z",
       "message": "Sync completed."
     },
     "ipo-pages": {
       "status": "success",
-      "lastSuccess": "2026-10-29T10:29:17.468Z",
-      "lastAttempt": "2026-10-29T10:29:17.468Z",
+      "lastSuccess": "2026-10-29T11:25:18.081Z",
+      "lastAttempt": "2026-10-29T11:25:18.081Z",
       "message": "Sync completed."
     },
     "balloting": {
-      "status": "failed",
-      "lastSuccess": null,
-      "lastAttempt": "2026-10-29T04:44:53.661Z",
-      "message": "Overall public OS: 0 updated, 1 unavailable, 0 deferred."
+      "status": "success",
+      "lastSuccess": "2026-10-29T11:25:07.324Z",
+      "lastAttempt": "2026-10-29T11:25:07.324Z",
+      "message": "Overall public OS: 1 updated, 0 unavailable, 0 deferred."
     },
     "ipo-news": {
       "status": "success",
-      "lastSuccess": "2026-10-29T08:18:59.247Z",
-      "lastAttempt": "2026-10-29T08:18:59.247Z",
+      "lastSuccess": "2026-10-29T11:25:17.808Z",
+      "lastAttempt": "2026-10-29T11:25:17.808Z",
       "message": "120 news items from 12 feed(s); 0 feed(s) failed."
     }
   }
