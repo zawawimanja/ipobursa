@@ -1,14 +1,14 @@
 const SYNC_STATUS = {
-  "lastSync": "29/10/2026, 12:44:57 pm",
+  "lastSync": "29/10/2026, 3:29:13 pm",
   "status": "Partial",
-  "source": "group-archive",
+  "source": "miti-portal",
   "totalIpos": 307,
   "sources": {
     "miti-portal": {
-      "status": "failed",
-      "lastSuccess": "2026-10-28T17:30:05.620Z",
-      "lastAttempt": "2026-10-29T04:44:54.663Z",
-      "message": "MITI public portal HTTP 403 (access denied from this runner); existing data retained."
+      "status": "success",
+      "lastSuccess": "2026-10-29T07:29:13.480Z",
+      "lastAttempt": "2026-10-29T07:29:13.480Z",
+      "message": "2 public MITI offers verified; 1 records updated."
     },
     "miti-applicants": {
       "status": "skipped",
