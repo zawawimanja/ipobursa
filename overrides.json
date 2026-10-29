@@ -1,1900 +1,1905 @@
 {
-  "sum-technology": {
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Sector Tailwind:</b> Tech hardware momentum in 2026; no OFS component & Shariah-compliant.<br>• <b>Sponsor Watch:</b> Final IB appointment will determine debut liquidity.<br>• <b>Valuation:</b> Indicative RM0.28 pricing provides reasonable entry multiple.",
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "20-May-2026",
-    "closingDate": "04-Jun-2026",
-    "listingDate": "18-Jun-2026",
-    "price": 0.28
-  },
-  "elsa": {
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Software R&D:</b> Enterprise software developer backed by Malacca Securities (momentum IB).<br>• <b>Valuation:</b> Fair 15.6x P/E with strong 26.9x retail oversubscription.<br>• <b>Action:</b> +13.6% debut pop with stable price action above IPO price; suitable for swing/scalp.",
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-May-2026",
-    "closingDate": "03-Jun-2026",
-    "listingDate": "16-Jun-2026",
-    "price": 0.23
-  },
-  "pentech": {
-    "sifuTargetPrice": 0.33,
-    "predictedGrade": "A",
-    "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Massive Demand:</b> High 120.98x retail oversubscription sponsored by Public Investment Bank.<br>• <b>Debut Surge:</b> +45% opening surge to RM0.29 with strong continuation to ATH RM0.355.<br>• <b>Profile:</b> Top-tier momentum scalp and trend-following setup.",
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "20-May-2026",
-    "closingDate": "29-May-2026",
-    "listingDate": "15-Jun-2026",
-    "price": 0.2
-  },
-  "mm-computer": {
-    "sifuTargetPrice": 0.24,
-    "predictedGrade": "C",
-    "analystInsight": "❌ <b>AVOID (GRADE C)</b><br>• <b>OFS Overhang:</b> Heavy 47.34M secondary share sale dampened market appetite.<br>• <b>Flat Debut:</b> Opened flat (0.0%) and closed below IPO price at RM0.215 (-2.3%).<br>• <b>Verdict:</b> Lack of sector tailwinds and substantial vendor profit-taking.",
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "11-May-2026",
-    "closingDate": "25-May-2026",
-    "listingDate": "11-Jun-2026",
-    "price": 0.22
-  },
-  "ambest": {
-    "sifuTargetPrice": 0.34,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Jan-2026",
-    "closingDate": "27-Jan-2026",
-    "listingDate": "06-Feb-2026",
-    "price": 0.25
-  },
-  "ams-material": {
-    "sifuTargetPrice": 0.33,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "27-Mar-2026",
-    "closingDate": "10-Apr-2026",
-    "listingDate": "23-Apr-2026",
-    "price": 0.29
-  },
-  "ei-power": {
-    "sifuTargetPrice": 0.61
-  },
-  "hocksoon": {
-    "sifuTargetPrice": 0.63,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "22-Jan-2026",
-    "closingDate": "30-Jan-2026",
-    "listingDate": "13-Feb-2026",
-    "price": 0.6
-  },
-  "isf": {
-    "sifuTargetPrice": 0.69,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "08-Jan-2026",
-    "closingDate": "14-Jan-2026",
-    "listingDate": "28-Jan-2026",
-    "price": 0.53
-  },
-  "keeming": {
-    "sifuTargetPrice": 0.68,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Jan-2026",
-    "closingDate": "27-Jan-2026",
-    "listingDate": "12-Feb-2026",
-    "price": 0.38
-  },
-  "ogm": {
-    "sifuTargetPrice": 0.3,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "12-Jan-2026",
-    "closingDate": "16-Jan-2026",
-    "listingDate": "27-Jan-2026",
-    "price": 0.25
-  },
-  "skyechip": {
-    "sifuTargetPrice": 1.58,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-Apr-2026",
-    "closingDate": "06-May-2026",
-    "listingDate": "20-May-2026",
-    "price": 0.88
-  },
-  "teamstr": {
-    "sifuTargetPrice": 0.32,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "27-Jan-2026",
-    "closingDate": "09-Feb-2026",
-    "listingDate": "25-Feb-2026",
-    "price": 0.26
-  },
-  "cbhb": {
-    "sifuTargetPrice": 0.38
-  },
-  "ecoshop": {
-    "sifuTargetPrice": 1.31,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-Apr-2025",
-    "closingDate": "07-May-2025",
-    "listingDate": "23-May-2025",
-    "price": 1.13
-  },
-  "iab": {
-    "sifuTargetPrice": 0.71,
-    "stage": 5,
-    "status": "Listed"
-  },
-  "kopi": {
-    "sifuTargetPrice": 0.55
-  },
-  "power": {
-    "sifuTargetPrice": 0.41,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "20-Aug-2025",
-    "closingDate": "08-Sep-2025",
-    "listingDate": "24-Sep-2025",
-    "price": 0.35
-  },
-  "sag": {
-    "avgTP": 0.88,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "14-May-2025",
-    "closingDate": "21-May-2025",
-    "listingDate": "05-Jun-2025",
-    "price": 0.62
-  },
-  "supreme-consolidated": {
-    "sifuTargetPrice": 0.29
-  },
-  "techstore": {
-    "sifuTargetPrice": 0.28,
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "22-Jan-2025",
-    "closingDate": "04-Feb-2025",
-    "listingDate": "18-Feb-2025",
-    "price": 0.2
-  },
-  "verdant": {
-    "sifuTargetPrice": 0.38,
-    "stage": 5,
-    "status": "Listed"
-  },
-  "xpb": {
-    "sifuTargetPrice": 0.25
-  },
-  "azam-jaya": {
-    "sifuTargetPrice": 1.04
-  },
-  "bwys": {
-    "sifuTargetPrice": 0.31
-  },
-  "crest": {
-    "sifuTargetPrice": 0.32
-  },
-  "crpmate": {
-    "sifuTargetPrice": 0.23
-  },
-  "elridge": {
-    "sifuTargetPrice": 0.55
-  },
-  "epb": {
-    "sifuTargetPrice": 0.71
-  },
-  "keyfield": {
-    "sifuTargetPrice": 2.14
-  },
-  "lwsabah": {
-    "sifuTargetPrice": 0.8
-  },
-  "sdcg": {
-    "sifuTargetPrice": 0.54
-  },
-  "topvisn": {
-    "sifuTargetPrice": 0.41
-  },
-  "winstar": {
-    "sifuTargetPrice": 0.51
-  },
-  "srkk-ai": {
-    "predictedGrade": "A",
-    "enrichedBy": "AI",
-    "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Record Oversubscription:</b> 312.3x retail demand — highest in 2026; certified Microsoft AI Cloud partner.<br>• <b>Recurring Revenue:</b> ~50% recurring income with fair 18.2x P/E on RM0.32 offer price.<br>• <b>Outlook:</b> Strong debut pop anticipated on enterprise AI digitization theme.",
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "18-Jun-2026",
-    "closingDate": "25-Jun-2026",
-    "listingDate": "09-Jul-2026",
-    "price": 0.32
-  },
-  "enest-group-berhad": {
-    "companyName": "Enest Group Berhad",
-    "symbol": "ENEST",
-    "market": "ACE Market",
-    "price": 0.13,
-    "shariah": true,
-    "stage": 5,
-    "status": "Listed",
-    "year": 2026,
-    "totalShares": 581250000,
-    "sector": "Consumer Products (Edible Bird's Nest)",
-    "headers": [
-      "FYE 22",
-      "FYE 23",
-      "FYE 24",
-      "Projection (FYE F)",
-      "Projection (FYE F+1)"
-    ],
-    "rev22": 112970000,
-    "rev23": 120330000,
-    "rev24": 146210000,
-    "revF": 158380000,
-    "revF1": 168440000,
-    "gp22": 28242500,
-    "gp23": 13500000,
-    "gp24": 15055000,
-    "gpF": 39595000,
-    "gpF1": 42110000,
-    "pat22": 6460000,
-    "pat23": 7000000,
-    "pat24": 8430000,
-    "patF": 8370000,
-    "patF1": 8600000,
-    "assets22": 50000000,
-    "assets23": 58000000,
-    "assets24": 70046000,
-    "assetsF": 90000000,
-    "assetsF1": 100000000,
-    "liab22": 20000000,
-    "liab23": 30000000,
-    "liab24": 38000000,
-    "liabF": 35000000,
-    "liabF1": 38000000,
-    "targetPe": 15,
-    "predictedGrade": "B",
-    "enrichedBy": "AI",
-    "catalysts": [
-      "<strong>Transfer to ACE Market:</strong> Greater visibility and liquidity compared to LEAP market.",
-      "<strong>New Kajang Facility:</strong> Plans to double bird's nest production capacity by 2028.",
-      "<strong>Strong China Presence:</strong> China is their largest export market, driving growth."
-    ],
-    "peers": "Peers trade at 15x-20x PE in consumer processing. Enest at 9x PE (unadjusted) is cheap.",
-    "analystInsight": "✅ <b>LEAP-TO-ACE TRANSFER (GRADE B)</b><br>• <b>Business:</b> Edible bird's nest processor transferred from LEAP to ACE Market.<br>• <b>Valuation:</b> Low entry price at RM0.13 (~9.0x unadjusted P/E).<br>• <b>Proceeds:</b> Loan repayment and factory expansion for China export market.",
-    "openingDate": "26-Jun-2026",
-    "closingDate": "02-Jul-2026",
-    "listingDate": "15-Jul-2026",
-    "pat25": 8365000,
-    "gp25": 17003000,
-    "assets25": 83585000,
-    "liab25": 43000000
-  },
-  "gb-bond-holdings-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "symbol": "GBBOND",
-    "predictedGrade": "C",
-    "openPrice": 0.255,
-    "highPrice": 0.255,
-    "lowPrice": 0.225,
-    "closePrice": 0.225,
-    "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
-    "os": 8.22
-  },
-  "spb-development-berhad": {
-    "mitiOpenDate": "01-Jul-2026",
-    "mitiCloseDate": "10-Jul-2026"
-  },
-  "keb-berhad": {
-    "sector": "Property",
-    "shariah": true,
-    "predictedGrade": "B",
-    "mitiOpenDate": "13-Jul-2026",
-    "mitiCloseDate": "22-Jul-2026",
-    "sifuTargetPrice": 0.44,
-    "calibratedSifuTargetPrice": 0.44,
-    "v3TargetPrice": 0.38,
-    "zone2TargetPrice": 0.45,
-    "analystInsight": "🚨 <b>HIGH RISK (GRADE C)</b><br>• <b>Sector Headwind:</b> ACE Market property developers exhibit lowest debut win rates & frequent discounts.<br>• <b>Cash Flow Risk:</b> High working capital lockup in residential projects.<br>• <b>Verdict:</b> Historically underperforms on debut (-5% to -15%); exercise caution.",
-    "prospectusUrl": "https://sahamonline.miti.gov.my/",
-    "stage": 3,
-    "status": "Application Open",
-    "openingDate": "23-Oct-2026",
-    "closingDate": "02-Nov-2026",
-    "listingDate": "16-Nov-2026",
-    "price": 0.35,
-    "symbol": "KEB",
-    "market": "ACE Market",
-    "financialProfileStatus": "complete",
-    "financialEvidenceStatus": "audited-prospectus",
-    "financialReviewDate": "29-Oct-2026",
-    "headers": [
-      "FYE 23",
-      "FYE 24",
-      "FYE 25",
-      "Projection (FYE F)",
-      "Projection (FYE F+1)"
-    ],
-    "historicalYears": [
-      23,
-      24,
-      25
-    ],
-    "projectionHeaders": [
-      "FYE 26 (F)",
-      "FYE 27 (F+1)"
-    ],
-    "rev23": 183326000,
-    "rev24": 187457000,
-    "rev25": 359270000,
-    "revF": 380000000,
-    "revF1": 410000000,
-    "gp23": 64200000,
-    "gp24": 61900000,
-    "gp25": 107500000,
-    "gpF": 114000000,
-    "gpF1": 123000000,
-    "pat23": 33075000,
-    "pat24": 33416000,
-    "pat25": 51610000,
-    "patF": 55000000,
-    "patF1": 60000000,
-    "assets23": 350000000,
-    "assets24": 420000000,
-    "assets25": 492349000,
-    "assetsF": 530000000,
-    "assetsF1": 570000000,
-    "liab23": 180000000,
-    "liab24": 210000000,
-    "liab25": 234010000,
-    "liabF": 245000000,
-    "liabF1": 255000000,
-    "totalShares": 882390000,
-    "eps23": 3.75,
-    "eps24": 3.79,
-    "eps25": 5.85,
-    "epsF": 6.23,
-    "epsF1": 6.8,
-    "epsGrowthF": 6.5,
-    "epsGrowthF1": 9.1,
-    "targetPe": 7,
-    "zone1TargetPrice": 0.38,
-    "v7TargetPrice": 0.45,
-    "fairValue": 0.44,
-    "sifuGrade": "B",
-    "financialReview": {
-      "title": "KEB: Penyata kewangan prospektus disahkan; PAT FY25 melonjak RM51.6 juta.",
-      "summary": "Hasil FY25 melonjak RM359.27 juta dan PAT RM51.61 juta (EPS 5.85 sen) didorong kemajuan projek pembangunan hartanah kediaman di Selangor. Pada harga IPO RM0.35, P/E sejarah hanya 5.98x. Sasaran wajar Sifu RM0.44 pada gandaan konservatif P/E 7.0x.",
-      "profitLabel": "Profit After Tax (PAT)",
-      "historicalPe": {
-        "year": 25,
-        "patami": 51610000
-      },
-      "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (6.23 sen):",
-      "sopNote": "Gandaan P/E 7.0x adalah standard konservatif untuk pemaju hartanah ACE Market. Pada harga RM0.35, saham menawarkan potensi kenaikan +25.7%."
+    "sum-technology": {
+        "predictedGrade": "B",
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Sector Tailwind:</b> Tech hardware momentum in 2026; no OFS component & Shariah-compliant.<br>• <b>Sponsor Watch:</b> Final IB appointment will determine debut liquidity.<br>• <b>Valuation:</b> Indicative RM0.28 pricing provides reasonable entry multiple.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-May-2026",
+        "closingDate": "04-Jun-2026",
+        "listingDate": "18-Jun-2026",
+        "price": 0.28
+    },
+    "elsa": {
+        "predictedGrade": "B",
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Software R&D:</b> Enterprise software developer backed by Malacca Securities (momentum IB).<br>• <b>Valuation:</b> Fair 15.6x P/E with strong 26.9x retail oversubscription.<br>• <b>Action:</b> +13.6% debut pop with stable price action above IPO price; suitable for swing/scalp.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-May-2026",
+        "closingDate": "03-Jun-2026",
+        "listingDate": "16-Jun-2026",
+        "price": 0.23
+    },
+    "pentech": {
+        "sifuTargetPrice": 0.33,
+        "predictedGrade": "A",
+        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Massive Demand:</b> High 120.98x retail oversubscription sponsored by Public Investment Bank.<br>• <b>Debut Surge:</b> +45% opening surge to RM0.29 with strong continuation to ATH RM0.355.<br>• <b>Profile:</b> Top-tier momentum scalp and trend-following setup.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-May-2026",
+        "closingDate": "29-May-2026",
+        "listingDate": "15-Jun-2026",
+        "price": 0.2
+    },
+    "mm-computer": {
+        "sifuTargetPrice": 0.24,
+        "predictedGrade": "C",
+        "analystInsight": "❌ <b>AVOID (GRADE C)</b><br>• <b>OFS Overhang:</b> Heavy 47.34M secondary share sale dampened market appetite.<br>• <b>Flat Debut:</b> Opened flat (0.0%) and closed below IPO price at RM0.215 (-2.3%).<br>• <b>Verdict:</b> Lack of sector tailwinds and substantial vendor profit-taking.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-May-2026",
+        "closingDate": "25-May-2026",
+        "listingDate": "11-Jun-2026",
+        "price": 0.22
+    },
+    "ambest": {
+        "sifuTargetPrice": 0.34,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2026",
+        "closingDate": "27-Jan-2026",
+        "listingDate": "06-Feb-2026",
+        "price": 0.25
+    },
+    "ams-material": {
+        "sifuTargetPrice": 0.33,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Mar-2026",
+        "closingDate": "10-Apr-2026",
+        "listingDate": "23-Apr-2026",
+        "price": 0.29
+    },
+    "ei-power": {
+        "sifuTargetPrice": 0.61
+    },
+    "hocksoon": {
+        "sifuTargetPrice": 0.63,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "22-Jan-2026",
+        "closingDate": "30-Jan-2026",
+        "listingDate": "13-Feb-2026",
+        "price": 0.6
+    },
+    "isf": {
+        "sifuTargetPrice": 0.69,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "08-Jan-2026",
+        "closingDate": "14-Jan-2026",
+        "listingDate": "28-Jan-2026",
+        "price": 0.53
+    },
+    "keeming": {
+        "sifuTargetPrice": 0.68,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2026",
+        "closingDate": "27-Jan-2026",
+        "listingDate": "12-Feb-2026",
+        "price": 0.38
+    },
+    "ogm": {
+        "sifuTargetPrice": 0.3,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Jan-2026",
+        "closingDate": "16-Jan-2026",
+        "listingDate": "27-Jan-2026",
+        "price": 0.25
+    },
+    "skyechip": {
+        "sifuTargetPrice": 1.58,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Apr-2026",
+        "closingDate": "06-May-2026",
+        "listingDate": "20-May-2026",
+        "price": 0.88
+    },
+    "teamstr": {
+        "sifuTargetPrice": 0.32,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Jan-2026",
+        "closingDate": "09-Feb-2026",
+        "listingDate": "25-Feb-2026",
+        "price": 0.26
+    },
+    "cbhb": {
+        "sifuTargetPrice": 0.38
+    },
+    "ecoshop": {
+        "sifuTargetPrice": 1.31,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Apr-2025",
+        "closingDate": "07-May-2025",
+        "listingDate": "23-May-2025",
+        "price": 1.13
+    },
+    "iab": {
+        "sifuTargetPrice": 0.71,
+        "stage": 5,
+        "status": "Listed"
+    },
+    "kopi": {
+        "sifuTargetPrice": 0.55
+    },
+    "power": {
+        "sifuTargetPrice": 0.41,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-Aug-2025",
+        "closingDate": "08-Sep-2025",
+        "listingDate": "24-Sep-2025",
+        "price": 0.35
+    },
+    "sag": {
+        "avgTP": 0.88,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "14-May-2025",
+        "closingDate": "21-May-2025",
+        "listingDate": "05-Jun-2025",
+        "price": 0.62
+    },
+    "supreme-consolidated": {
+        "sifuTargetPrice": 0.29
+    },
+    "techstore": {
+        "sifuTargetPrice": 0.28,
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "22-Jan-2025",
+        "closingDate": "04-Feb-2025",
+        "listingDate": "18-Feb-2025",
+        "price": 0.2
+    },
+    "verdant": {
+        "sifuTargetPrice": 0.38,
+        "stage": 5,
+        "status": "Listed"
+    },
+    "xpb": {
+        "sifuTargetPrice": 0.25
+    },
+    "azam-jaya": {
+        "sifuTargetPrice": 1.04
+    },
+    "bwys": {
+        "sifuTargetPrice": 0.31
+    },
+    "crest": {
+        "sifuTargetPrice": 0.32
+    },
+    "crpmate": {
+        "sifuTargetPrice": 0.23
+    },
+    "elridge": {
+        "sifuTargetPrice": 0.55
+    },
+    "epb": {
+        "sifuTargetPrice": 0.71
+    },
+    "keyfield": {
+        "sifuTargetPrice": 2.14
+    },
+    "lwsabah": {
+        "sifuTargetPrice": 0.8
+    },
+    "sdcg": {
+        "sifuTargetPrice": 0.54
+    },
+    "topvisn": {
+        "sifuTargetPrice": 0.41
+    },
+    "winstar": {
+        "sifuTargetPrice": 0.51
+    },
+    "srkk-ai": {
+        "predictedGrade": "A",
+        "enrichedBy": "AI",
+        "analystInsight": "🚀 <b>EXCEPTIONAL DEMAND (GRADE A)</b><br>• <b>Record Oversubscription:</b> 312.3x retail demand — highest in 2026; certified Microsoft AI Cloud partner.<br>• <b>Recurring Revenue:</b> ~50% recurring income with fair 18.2x P/E on RM0.32 offer price.<br>• <b>Outlook:</b> Strong debut pop anticipated on enterprise AI digitization theme.",
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "18-Jun-2026",
+        "closingDate": "25-Jun-2026",
+        "listingDate": "09-Jul-2026",
+        "price": 0.32
+    },
+    "enest-group-berhad": {
+        "companyName": "Enest Group Berhad",
+        "symbol": "ENEST",
+        "market": "ACE Market",
+        "price": 0.13,
+        "shariah": true,
+        "stage": 5,
+        "status": "Listed",
+        "year": 2026,
+        "totalShares": 581250000,
+        "sector": "Consumer Products (Edible Bird's Nest)",
+        "headers": [
+            "FYE 22",
+            "FYE 23",
+            "FYE 24",
+            "Projection (FYE F)",
+            "Projection (FYE F+1)"
+        ],
+        "rev22": 112970000,
+        "rev23": 120330000,
+        "rev24": 146210000,
+        "revF": 158380000,
+        "revF1": 168440000,
+        "gp22": 28242500,
+        "gp23": 13500000,
+        "gp24": 15055000,
+        "gpF": 39595000,
+        "gpF1": 42110000,
+        "pat22": 6460000,
+        "pat23": 7000000,
+        "pat24": 8430000,
+        "patF": 8370000,
+        "patF1": 8600000,
+        "assets22": 50000000,
+        "assets23": 58000000,
+        "assets24": 70046000,
+        "assetsF": 90000000,
+        "assetsF1": 100000000,
+        "liab22": 20000000,
+        "liab23": 30000000,
+        "liab24": 38000000,
+        "liabF": 35000000,
+        "liabF1": 38000000,
+        "targetPe": 15,
+        "predictedGrade": "B",
+        "enrichedBy": "AI",
+        "catalysts": [
+            "<strong>Transfer to ACE Market:</strong> Greater visibility and liquidity compared to LEAP market.",
+            "<strong>New Kajang Facility:</strong> Plans to double bird's nest production capacity by 2028.",
+            "<strong>Strong China Presence:</strong> China is their largest export market, driving growth."
+        ],
+        "peers": "Peers trade at 15x-20x PE in consumer processing. Enest at 9x PE (unadjusted) is cheap.",
+        "analystInsight": "✅ <b>LEAP-TO-ACE TRANSFER (GRADE B)</b><br>• <b>Business:</b> Edible bird's nest processor transferred from LEAP to ACE Market.<br>• <b>Valuation:</b> Low entry price at RM0.13 (~9.0x unadjusted P/E).<br>• <b>Proceeds:</b> Loan repayment and factory expansion for China export market.",
+        "openingDate": "26-Jun-2026",
+        "closingDate": "02-Jul-2026",
+        "listingDate": "15-Jul-2026",
+        "pat25": 8365000,
+        "gp25": 17003000,
+        "assets25": 83585000,
+        "liab25": 43000000
+    },
+    "gb-bond-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "GBBOND",
+        "predictedGrade": "C",
+        "openPrice": 0.255,
+        "highPrice": 0.255,
+        "lowPrice": 0.225,
+        "closePrice": 0.225,
+        "analystInsight": "❌ <b>BELOW IPO PRICE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> Open RM0.255 (+2%) tapi terus jatuh bawah IPO price.<br>• <b>Close RM0.225</b> (-10% dari IPO RM0.25) — selling pressure kuat sepanjang hari.<br>• <b>OS 8.22x</b> tidak mencukupi untuk sustain harga listing; industrial chemicals sector tiada momentum.",
+        "os": 8.22
+    },
+    "spb-development-berhad": {
+        "mitiOpenDate": "01-Jul-2026",
+        "mitiCloseDate": "10-Jul-2026"
+    },
+    "keb-berhad": {
+        "sector": "Property",
+        "shariah": true,
+        "predictedGrade": "B",
+        "mitiOpenDate": "13-Jul-2026",
+        "mitiCloseDate": "22-Jul-2026",
+        "sifuTargetPrice": 0.44,
+        "calibratedSifuTargetPrice": 0.44,
+        "v3TargetPrice": 0.38,
+        "zone2TargetPrice": 0.45,
+        "analystInsight": "🚨 <b>HIGH RISK (GRADE C)</b><br>• <b>Sector Headwind:</b> ACE Market property developers exhibit lowest debut win rates & frequent discounts.<br>• <b>Cash Flow Risk:</b> High working capital lockup in residential projects.<br>• <b>Verdict:</b> Historically underperforms on debut (-5% to -15%); exercise caution.",
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "stage": 3,
+        "status": "Application Open",
+        "openingDate": "23-Oct-2026",
+        "closingDate": "02-Nov-2026",
+        "listingDate": "16-Nov-2026",
+        "price": 0.35,
+        "symbol": "KEB",
+        "market": "ACE Market",
+        "financialProfileStatus": "complete",
+        "financialEvidenceStatus": "audited-prospectus",
+        "financialReviewDate": "29-Oct-2026",
+        "headers": [
+            "FYE 23",
+            "FYE 24",
+            "FYE 25",
+            "Projection (FYE F)",
+            "Projection (FYE F+1)"
+        ],
+        "historicalYears": [
+            23,
+            24,
+            25
+        ],
+        "projectionHeaders": [
+            "FYE 26 (F)",
+            "FYE 27 (F+1)"
+        ],
+        "rev23": 183326000,
+        "rev24": 187457000,
+        "rev25": 359270000,
+        "revF": 380000000,
+        "revF1": 410000000,
+        "gp23": 64200000,
+        "gp24": 61900000,
+        "gp25": 107500000,
+        "gpF": 114000000,
+        "gpF1": 123000000,
+        "pat23": 33075000,
+        "pat24": 33416000,
+        "pat25": 51610000,
+        "patF": 55000000,
+        "patF1": 60000000,
+        "assets23": 350000000,
+        "assets24": 420000000,
+        "assets25": 492349000,
+        "assetsF": 530000000,
+        "assetsF1": 570000000,
+        "liab23": 180000000,
+        "liab24": 210000000,
+        "liab25": 234010000,
+        "liabF": 245000000,
+        "liabF1": 255000000,
+        "totalShares": 882390000,
+        "eps23": 3.75,
+        "eps24": 3.79,
+        "eps25": 5.85,
+        "epsF": 6.23,
+        "epsF1": 6.8,
+        "epsGrowthF": 6.5,
+        "epsGrowthF1": 9.1,
+        "targetPe": 7,
+        "zone1TargetPrice": 0.38,
+        "v7TargetPrice": 0.45,
+        "fairValue": 0.44,
+        "sifuGrade": "B",
+        "financialReview": {
+            "title": "KEB: Penyata kewangan prospektus disahkan; PAT FY25 melonjak RM51.6 juta.",
+            "summary": "Hasil FY25 melonjak RM359.27 juta dan PAT RM51.61 juta (EPS 5.85 sen) didorong kemajuan projek pembangunan hartanah kediaman di Selangor. Pada harga IPO RM0.35, P/E sejarah hanya 5.98x. Sasaran wajar Sifu RM0.44 pada gandaan konservatif P/E 7.0x.",
+            "profitLabel": "Profit After Tax (PAT)",
+            "historicalPe": {
+                "year": 25,
+                "patami": 51610000
+            },
+            "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (6.23 sen):",
+            "sopNote": "Gandaan P/E 7.0x adalah standard konservatif untuk pemaju hartanah ACE Market. Pada harga RM0.35, saham menawarkan potensi kenaikan +25.7%."
+        }
+    },
+    "redplanet-berhad": {
+        "price": 0.19,
+        "shariah": true,
+        "stage": 5,
+        "status": "Listed",
+        "sector": "Technology (Geospatial & Intelligent Rail Systems)",
+        "geography": "Kuala Lumpur",
+        "ib": "UOB Kay Hian",
+        "totalShares": 80000000,
+        "predictedGrade": "A",
+        "sifuTargetPrice": 0.22,
+        "calibratedSifuTargetPrice": 0.22,
+        "v3TargetPrice": 0.22,
+        "v7TargetPrice": 0.22,
+        "zone2TargetPrice": 0.22,
+        "analystInsight": "<b>OS awam disahkan:</b> 85.28×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683823\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: A</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
+        "openingDate": "28-Sep-2026",
+        "closingDate": "08-Oct-2026",
+        "listingDate": "22-Oct-2026",
+        "symbol": "RPLANET",
+        "os": 85.28,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11683823",
+        "osSourceDate": "13 Oct 2026",
+        "osMetric": "overall-public-oversubscription",
+        "market": "ACE Market"
+    },
+    "1doc": {
+        "mitiOpenDate": "01-Jul-2026",
+        "mitiCloseDate": "10-Jul-2026",
+        "pat23": 89668000,
+        "pat24": 97052000,
+        "gp23": 252400000,
+        "gp24": 283900000,
+        "gp25": 366600000,
+        "assets23": 180000000,
+        "assets24": 230000000,
+        "assets25": 310000000,
+        "liab23": 95000000,
+        "liab24": 115000000,
+        "liab25": 150000000
+    },
+    "ecosys--malaysia--berhad": {
+        "openingDate": "23-Sep-2026",
+        "closingDate": "29-Sep-2026",
+        "ballotingDate": "01-Oct-2026",
+        "listingDate": "14-Oct-2026",
+        "stage": 5,
+        "status": "Listed",
+        "hasMitiTranche": true,
+        "price": 0.27,
+        "symbol": "ECOSYS",
+        "openPrice": 0.7,
+        "os": 206.7,
+        "analystInsight": "✅ <b>ECOSYS — DEBUT 14 OKT 2026</b><br>• <b>Harga IPO:</b> RM0.27.<br>• <b>Harga debut:</b> RM0.70 (+159.26%; +RM0.43 sesaham).<br>• <b>Permintaan awam:</b> Oversubscription 206.70×; 31,734 permohonan.<br>• <b>Pasaran:</b> ACE Market, kod saham 0477.<br>• <b>Perniagaan:</b> Komponen kejuruteraan ketepatan UHP dan sistem abatement untuk industri semikonduktor.<br>• <b>Sumber:</b> <a href=\"https://finance.yahoo.com/markets/stocks/articles/ecosys-malaysia-berhad-debuts-ace-074500156.html\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman debut EcoSys</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11677871\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>."
+    },
+    "butterfield-fb-berhad": {
+        "mitiOpenDate": "01-Jul-2026",
+        "mitiCloseDate": "10-Jul-2026",
+        "closingDate": "02-Sep-2026",
+        "listingDate": "15-Sep-2026",
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "BFIELD",
+        "sifuTargetPrice": 0.5,
+        "calibratedSifuTargetPrice": 0.5,
+        "v7TargetPrice": 0.5,
+        "v3TargetPrice": 0.5,
+        "openingDate": "18-Aug-2026",
+        "price": 0.48,
+        "pat23": 9537000,
+        "pat24": 11434000,
+        "pat25": 30409000,
+        "gp23": 18400000,
+        "gp24": 22400000,
+        "gp25": 46000000,
+        "assets23": 62000000,
+        "assets24": 78000000,
+        "assets25": 155000000,
+        "liab23": 38000000,
+        "liab24": 48000000,
+        "liab25": 92000000
+    },
+    "evocom-berhad": {
+        "os": 3.6,
+        "price": 0.18,
+        "openingDate": "03-Sep-2026",
+        "closingDate": "14-Sep-2026",
+        "listingDate": "28-Sep-2026",
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "EVOCOM",
+        "predictedGrade": "C",
+        "sifuTargetPrice": 0.2,
+        "calibratedSifuTargetPrice": 0.2,
+        "v3TargetPrice": 0.2,
+        "analystInsight": "⚠️ <b>HIGH RISK / WEAK MARGINS (GRADE C)</b><br>Penyedia rantai bekalan e-dagang & tenaga kerja logistik (flexible staffing).<br><br>📊 <b>Penilaian & Risiko:</b><br>• <b>Harga IPO:</b> RM0.18 sesaham (Market cap RM82.0M).<br>• <b>Persaingan & Marjin:</b> Marjin kasar nipis dalam perkhidmatan penyediaan tenaga kerja logistik.<br>• <b>Target Price:</b> RM0.18–RM0.20 (+0% hingga +11% potensi terhad).",
+        "openPrice": 0.15,
+        "gp23": 8763000,
+        "gp24": 9727000,
+        "gp25": 9299000,
+        "assets23": 120000000,
+        "assets24": 140000000,
+        "assets25": 180000000,
+        "liab23": 68000000,
+        "liab24": 78000000,
+        "liab25": 96000000
+    },
+    "slgc-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "symbol": "SLG",
+        "ib": "M & A Securities",
+        "predictedGrade": "C",
+        "openPrice": 0.28,
+        "highPrice": 0.28,
+        "lowPrice": 0.24,
+        "closePrice": 0.25,
+        "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
+        "os": 3.06,
+        "pat23": 5730000,
+        "pat24": 16030000,
+        "pat25": 13990000,
+        "gp23": 24890000,
+        "gp24": 39240000,
+        "gp25": 49660000,
+        "assets23": 192520000,
+        "assets24": 190640000,
+        "assets25": 289450000,
+        "liab23": 110000000,
+        "liab24": 108000000,
+        "liab25": 175000000
+    },
+    "united-asiapac-energy-berhad": {
+        "symbol": "UNIPAC",
+        "price": 0.35,
+        "openingDate": "28-Jul-2026",
+        "closingDate": "05-Aug-2026",
+        "listingDate": "14-Sep-2026",
+        "sector": "Energy (Oil & Gas Services / Well Intervention)",
+        "ib": "TA Securities",
+        "fundUse": "Acquisition of specialised well intervention tools & equipment, expansion of workforce, and new corporate office.",
+        "geography": "Terengganu / Labuan",
+        "pe": 27.6,
+        "ofs": false,
+        "sifuTargetPrice": 0.41,
+        "calibratedSifuTargetPrice": 0.41,
+        "v3TargetPrice": 0.39,
+        "zone2TargetPrice": 0.41,
+        "v7TargetPrice": 0.41,
+        "predictedGrade": "B",
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>O&G Niche:</b> Upstream well intervention specialist sponsored by TA Securities.<br>• <b>Forward Valuation:</b> Attractive ~12.7x forward P/E on annualized FY2026 earnings with zero OFS.<br>• <b>Target Price:</b> Fair value estimated at RM0.39–RM0.41 (~17% upside potential).",
+        "mitiOpenDate": "01-Jul-2026",
+        "mitiCloseDate": "10-Jul-2026",
+        "stage": 5,
+        "status": "Listed"
+    },
+    "big-caring-group-bhd": {
+        "stage": 3,
+        "status": "Application Open",
+        "mitiOpenDate": "14-Aug-2026",
+        "mitiCloseDate": "24-Aug-2026",
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "sector": "Healthcare (Pharmacy)",
+        "shariah": true,
+        "price": 1.081,
+        "ib": "Maybank IB, RHB IB, AmInvestment Bank",
+        "predictedGrade": "B",
+        "analystInsight": "<b>SEMAKAN RM1.08 — PENILAIAN PREMIUM, PATAMI FY26 BELUM DISAHKAN</b><br>• Pada harga yang dilaporkan melalui tawaran MITI, market cap kira-kira RM7.97 bilion; PE sejarah 65.19x berdasarkan PATAMI FY25 RM122.3 juta.<br>• Group PAT FY26 RM231.8 juta tidak boleh terus digunakan sebagai PATAMI. Sasaran automatik ditangguh sehingga asas pendapatan lengkap.<br>• SUNMED juga ditawarkan pada PE sejarah 64.8x dan OFS 70.8%, kemudian dibuka +17.24%; ini perbandingan sejarah, bukan ramalan Big Caring.<br>• Peruntukan MITI penuh yang dilaporkan individu tidak menggantikan OS awam atau bukti bookbuilding institusi.<br>• <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Prestasi debut SUNMED</a>",
+        "fullAnalysis": "<b>DAPATAN KAJIAN — BIG CARING PADA HARGA DILAPORKAN RM1.08</b><br><br><b>Asas harga dan keuntungan</b><br>Harga RM1.08 berdasarkan maklumat tawaran MITI pengguna pada 22 Okt 2026. Draf SC masih mengandungi harga kosong. Dengan andaian 7,381,835,680 saham, market cap ialah RM7.972 bilion. PATAMI FY25 RM122.3 juta memberi EPS 1.657 sen dan PE 65.19x. Group PAT FY26 RM231.8 juta dilaporkan pada 14 Okt; PATAMI FY26 belum disahkan dalam semakan ini. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=0ec5b677-9d03-4ce9-b0c6-c1b094f5f231\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Pendedahan FY26</a><br><br><b>Senario penilaian, bukan sasaran</b><br>Gandaan andaian 25–30x atas group PAT FY26 menghasilkan RM0.785–RM0.942. Kiraan ini tidak menolak kepentingan bukan kawalan dan tidak boleh dilabel EPS pemegang saham atau nilai wajar disahkan. Sasaran Sifu dan isyarat beli/jual automatik ditangguh.<br><br><b>Model bisnes dan penggunaan dana</b><br>Big Caring terutamanya runcit farmasi; SUNMED terutamanya hospital. Label healthcare tidak dengan sendiri menyokong gandaan sama. Big Caring dilaporkan mempunyai 668 kedai pada 30 Sep 2026, berbanding 626 dalam draf awal. Baki pinjaman RM1.3 bilion ialah pada 31 Jan 2026; draf menyatakan pembayaran sebahagian pinjaman, pusat pengedaran dan kos listing, dengan amaun akhir belum diisi. Bayar hutang boleh menjimatkan faedah, tetapi perlu disemak kesannya pada PATAMI. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Perkembangan operasi</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Penggunaan dana, seksyen 4.5</a><br><br><b>OFS dan struktur tawaran</b><br>1,291,821,000 OFS / 1,882,368,000 saham IPO = 68.63%; ini bukan 69% seluruh syarikat. Tranche MITI mengandungi 599,821,000 OFS / 922,730,000 = 65.01%. Jika semua saham berharga RM1.08, hasil kasar saham baharu ialah RM637.79 juta dan penjual RM1.395 bilion, sebelum kos. OFS tinggi sahaja tidak membuktikan saham overvalued. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual tawaran SC, muka surat 23</a><br><br><b>Perbandingan keputusan SUNMED</b><br>SUNMED: harga IPO RM1.45, PE FY24 64.8x, OFS 70.8%, OS awam 5.57x; dibuka RM1.70 (+17.24%) dan tutup hari pertama RM1.85 (+27.59%). Sebelum listing terdapat 20 cornerstone mengambil 52.6% tawaran institusi dan permintaan bookbuilding melebihi RM11.7 bilion. Prestasi satu IPO bukan sasaran pulangan Big Caring. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan langganan MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a><br><br><b>Permintaan dan sokongan institusi</b><br>Peruntukan MITI penuh yang dilaporkan pengguna tidak mengesahkan permintaan agregat atau OS awam. Pada 20 Okt, The Edge memetik WSJ mengenai komitmen puluhan cornerstone untuk Big Caring; nama, kuantiti dan terma akhir masih perlu disahkan melalui dokumen tawaran. Opsyen over-allotment draf 225,146,000 saham bernilai kira-kira RM243.16 juta pada RM1.08 ialah nilai opsyen, bukan dana yang wajib digunakan mempertahankan harga. Pengurus stabilisation tiada kewajipan membeli dan boleh menghentikannya. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan cornerstone, 20 Okt</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat stabilisation, seksyen 4.1.4</a><br><br><b>Penilaian semasa</b><br>Berharga premium dan perlu bukti pertumbuhan keuntungan. Kejayaan SUNMED tidak menjamin Big Caring mengulang pulangannya; PE sejarah dan OFS sahaja juga tidak cukup untuk menolak Big Caring. Semak PATAMI FY26, hutang selepas IPO, margin serta permintaan awam/institusi sebelum membuat kesimpulan.",
+        "mitiOfferShares": 922730000,
+        "mitiApplicants": 2563,
+        "mitiAllocationRate": 100,
+        "mitiResultDate": "22-Oct-2026",
+        "mitiResultNote": "Pengguna dan beberapa pemohon melaporkan menerima peruntukan penuh. Ini bukan kadar OS awam dan tidak mengesahkan permintaan keseluruhan tranche.",
+        "ofs": true,
+        "ofsPercentage": 68.6,
+        "totalShares": 7381835680,
+        "freeFloat": 0.255,
+        "pe": 65.19,
+        "targetPe": 30,
+        "headers": [
+            "FY23",
+            "FY24",
+            "FY25",
+            "FY26 — PATAMI belum disahkan",
+            "FY27 — belum disahkan"
+        ],
+        "rev23": 1100000000,
+        "rev25": 3410000000,
+        "revF": null,
+        "pat23": null,
+        "pat25": 122300000,
+        "patF": null,
+        "eps23": null,
+        "eps25": 1.6567694717366017,
+        "epsF": null,
+        "epsGrowthF": null,
+        "priceSourceNote": "RM1.08 berdasarkan maklumat tawaran MITI yang dilaporkan pengguna pada 22 Okt 2026; harga belum disahkan melalui prospektus berdaftar dalam semakan ini.",
+        "financialProfileStatus": "incomplete",
+        "financialReviewDate": "22-Oct-2026",
+        "financialBasis": "PATAMI untuk EPS dan PE; group PAT dipaparkan berasingan dan tidak digunakan sebagai keuntungan pemegang saham.",
+        "verifiedPatami25": 122300000,
+        "groupPat25": 143020000,
+        "groupPat26": 231800000,
+        "ipoPe": 65.19,
+        "ipoPeBasis": "FY25 PATAMI RM122.3 juta; harga RM1.08 dan saham selepas IPO mengikut draf.",
+        "targetPeBasis": "Andaian senario boleh laras; bukan gandaan wajar yang disahkan.",
+        "historicalYears": [
+            23,
+            24,
+            25
+        ],
+        "projectionHeaders": [
+            "FY26 — PATAMI belum disahkan",
+            "FY27 — belum disahkan"
+        ],
+        "pat24": null,
+        "patF1": null,
+        "eps24": null,
+        "epsF1": null,
+        "epsGrowthF1": null,
+        "rev24": null,
+        "sifuTargetPrice": null,
+        "calibratedSifuTargetPrice": null,
+        "v7TargetPrice": null,
+        "zone2TargetPrice": null,
+        "valuationScenarios": [
+            {
+                "multiple": 25,
+                "price": 0.7850350849316114
+            },
+            {
+                "multiple": 30,
+                "price": 0.9420421019179338
+            }
+        ],
+        "valuationScenarioBasis": "Sensitiviti berdasarkan group PAT FY26 RM231.8 juta, bukan PATAMI. Julat ini bukan nilai wajar disahkan, ramalan debut atau sasaran Sifu.",
+        "mitiVerdict": "PERLU SEMAK PATAMI",
+        "mitiAllocationScope": "individual-reported",
+        "catalysts": [
+            "<strong>Harga dan status:</strong> RM1.08 dilaporkan melalui tawaran MITI pengguna; <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">prospektus awam yang disemak masih draf</a>.",
+            "<strong>Keuntungan pemegang saham:</strong> PATAMI FY25 RM122.3 juta → EPS 1.657 sen → PE 65.19x. Group PAT FY26 RM231.8 juta dipaparkan berasingan; PATAMI FY26 belum disahkan.",
+            "<strong>Model farmasi:</strong> Pertumbuhan jualan kedai, margin, aliran tunai dan penjimatan faedah perlu menyokong harga premium; jumlah kedai dan label healthcare sahaja tidak menentukan nilai. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Operasi terkini: 668 kedai</a>.",
+            "<strong>OFS 68.63%:</strong> Daripada saham IPO, bukan seluruh syarikat. Pada RM1.08 hasil kasar syarikat RM637.79 juta, penjual RM1.395 bilion; struktur tertakluk dokumen akhir.",
+            "<strong>Penggunaan dana:</strong> Big Caring merancang bayar sebahagian hutang dan pusat pengedaran. SUNMED juga membayar sukuk: 66.5% hasil baharu untuk hospital sedia ada, 29.9% sukuk, 3.6% kos. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a>.",
+            "<strong>Permintaan:</strong> Full allocation MITI individu tidak sama dengan OS awam. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan 20 Okt</a> menyebut komitmen puluhan cornerstone Big Caring, tetapi terma akhir belum disahkan.",
+            "<strong>Stabilisation:</strong> 225.146 juta saham dalam draf; tiada kewajipan membeli atau menjamin harga IPO. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat SC</a>."
+        ],
+        "peers": "<strong>Asas perbandingan:</strong> Gunakan rangkaian farmasi/runcit yang setara untuk menilai keuntungan Big Caring. SUNMED ialah rujukan hasil debut dan permintaan, bukan sasaran pulangan. RM0.785–RM0.942 ialah senario andaian atas group PAT, bukan nilai wajar atau sasaran Sifu.",
+        "researchComparison": {
+            "title": "Big Caring berbanding keputusan IPO SUNMED",
+            "columns": [
+                "Perkara",
+                "SUNMED",
+                "Big Caring"
+            ],
+            "rows": [
+                [
+                    "Model bisnes",
+                    "Hospital",
+                    "Terutamanya runcit farmasi"
+                ],
+                [
+                    "Harga IPO",
+                    "RM1.45",
+                    "RM1.08 — laporan MITI"
+                ],
+                [
+                    "PE sejarah IPO",
+                    "64.8x (FY24)",
+                    "65.19x (FY25)"
+                ],
+                [
+                    "OFS / saham IPO",
+                    "70.8%",
+                    "68.63% (draf)"
+                ],
+                [
+                    "OS awam",
+                    "5.57x",
+                    "Belum diketahui"
+                ],
+                [
+                    "Pembukaan debut",
+                    "RM1.70 (+17.24%)",
+                    "Belum listing"
+                ],
+                [
+                    "Tutup hari pertama",
+                    "RM1.85 (+27.59%)",
+                    "Belum listing"
+                ],
+                [
+                    "Cornerstone sebelum IPO",
+                    "20; 52.6% tawaran institusi",
+                    "Komitmen dilaporkan media; terma akhir belum disahkan"
+                ]
+            ],
+            "note": "PE menggunakan tahun kewangan berbeza. Prestasi SUNMED ialah sejarah, bukan ramalan Big Caring. Full allocation MITI individu bukan OS awam.",
+            "sources": [
+                {
+                    "label": "Prospektus SUNMED",
+                    "url": "https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf"
+                },
+                {
+                    "label": "Keputusan langganan MIH",
+                    "url": "https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf"
+                },
+                {
+                    "label": "Hasil debut SUNMED",
+                    "url": "https://theedgemalaysia.com/node/796630"
+                },
+                {
+                    "label": "Draf Big Caring",
+                    "url": "https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc"
+                },
+                {
+                    "label": "Laporan cornerstone Big Caring, 20 Okt",
+                    "url": "https://theedgemalaysia.com/node/822547"
+                }
+            ]
+        },
+        "groupRevenue26": 4000000000,
+        "openingDate": "29-Oct-2026",
+        "closingDate": "05-Nov-2026",
+        "listingDate": "19-Nov-2026",
+        "symbol": "BCG",
+        "market": "Main Market"
+    },
+    "ioipg-malaysia-reit": {
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "mitiOpenDate": "17-Aug-2026",
+        "mitiCloseDate": "31-Aug-2026",
+        "prospectusUrl": "https://sahamonline.miti.gov.my/",
+        "sector": "REITs",
+        "shariah": false,
+        "price": 0,
+        "ib": "Maybank IB",
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.97,
+        "calibratedSifuTargetPrice": 0.98,
+        "v7TargetPrice": 1,
+        "zone2TargetPrice": 1.05,
+        "analystInsight": "📊 <b>REIT PERTAMA IOI — UNJURAN YIELD 6.5–7%</b><br>💡 IOIPG Malaysia REIT — REIT milik IOI Properties (kekal 60% selepas listing). Portfolio RM7.58B (9 hartanah): IOI City Mall (RM5.1B — 2/3 portfolio, mall kedua terbesar Malaysia), IOI City Towers, PFCC Towers + 6 hotel premium (Putrajaya Marriott, Le Méridien Putrajaya, Moxy Putrajaya, Four Points Puchong, W Kuala Lumpur, Courtyard Penang).<br><br>⚠️ <b>POINT PENTING:</b><br>• Harga indikatif RM0.90/unit ≈ NAV — bukan premium.<br>• Unjuran yield 6.5–7.0% — hujung atas sektor REIT Malaysia (~5-6%).<br>• MITI tranche 687.5 juta unit (12.5%) — gergasi, 0 pelabur setakat ni → allocation hampir pasti penuh.<br>• REIT = playbook dividen, BUKAN flip besar. Debut biasanya +0–5%.<br>• ⚠️ Status shariah SAC belum disahkan rasmi (sebelum listing) — diandaikan compliant: pembiayaan sukuk, core asset retail mall.<br><br>📌 <b>Keputusan:</b> Bagus untuk yield & keselamatan (sponsor IOI kukuh, aset landmark). Untuk flip: jangkaan kecil (+2–5%) — jangan banding dengan Big Caring (+15–20%). Angka kewangan adalah pro-forma/unjuran (REIT baharu, prospektus belum diakses).",
+        "mitiApplicants": 406
+    },
+    "mydcd-berhad": {
+        "stage": 3,
+        "status": "Application Open",
+        "price": 0.56,
+        "mitiOpenDate": "18-Aug-2026",
+        "mitiCloseDate": "28-Aug-2026",
+        "mitiOfferShares": 224250000,
+        "mitiApplicants": 2887,
+        "analystInsight": "<b>MYDCD RM0.56 — PERTUMBUHAN KUAT, SEMAK TUNAI DAN PELANGGAN</b><br>• Harga tawaran MITI disahkan pengguna; pada modal saham draf, PE sejarah FY25 25.44x.<br>• PATAMI RM39.486 juta, CFO RM9.648 juta (24.43%); Binastra 61.68% hasil.<br>• OFS 30.21%; RM55 juta dividen dibayar, sehingga RM33 juta lagi masih cadangan dalam draf.<br>• Unjuran lama dan sasaran automatik dibuang. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa</a>",
+        "financialProfileStatus": "complete",
+        "financialReviewDate": "29-Oct-2026",
+        "historicalYears": [
+            23,
+            24,
+            25
+        ],
+        "headers": [
+            "FYE 23",
+            "FYE 24",
+            "FYE 25",
+            "Projection (FYE F)",
+            "Projection (FYE F+1)"
+        ],
+        "projectionHeaders": [
+            "FYE 26 (F)",
+            "FYE 27 (F+1)"
+        ],
+        "targetPe": 20,
+        "sifuTargetPrice": 0.45,
+        "calibratedSifuTargetPrice": 0.45,
+        "v3TargetPrice": 0.4,
+        "v7TargetPrice": 0.55,
+        "zone2TargetPrice": 0.55,
+        "fairValue": 0.45,
+        "valuationScenarios": [],
+        "mitiApplicantsStatus": "unverified",
+        "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
+        "mitiPaymentSource": "https://www.mih.com.my/",
+        "revF": 360000000,
+        "revF1": 380000000,
+        "gpF": 59400000,
+        "gpF1": 62700000,
+        "patF": 36000000,
+        "patF1": 38000000,
+        "epsF": 2.01,
+        "epsF1": 2.12,
+        "assetsF": 360000000,
+        "assetsF1": 380000000,
+        "liabF": 270000000,
+        "liabF1": 275000000,
+        "epsGrowthF": -8.6,
+        "epsGrowthF1": 5.5,
+        "priceStatus": "user-reported-miti",
+        "priceSourceNote": "RM0.56 berdasarkan pengesahan harga tawaran MITI pengguna pada 22 Okt 2026. Draf Bursa yang disemak masih memaparkan harga kosong; harga akhir prospektus awam belum disahkan secara bebas.",
+        "sector": "Data Centre MEPF Integration",
+        "totalShares": 1794000000,
+        "ipoNewShares": 335000000,
+        "ipoOfferForSaleShares": 145000000,
+        "ipoTotalOfferShares": 480000000,
+        "ipoCompanyGrossProceeds": 187600000,
+        "ipoSellerGrossProceeds": 81200000,
+        "ipoProceedsBasis": "Senario RM0.56 pada struktur saham draf; sebelum kos, tertakluk dokumen akhir.",
+        "ofs": true,
+        "ofsPercentage": 30.21,
+        "mitiNewShares": 158590000,
+        "mitiOfsShares": 65660000,
+        "mitiOfsPercentage": 29.28,
+        "mitiPaymentDeadline": "2026-10-27T17:00:00+08:00",
+        "mitiPaymentNote": "Penerimaan dan bayaran MITI melalui BSIP; tarikh tutup permohonan awam dan listing belum disahkan.",
+        "rev23": 186684000,
+        "rev24": 180907000,
+        "rev25": 371985000,
+        "gp23": 31428000,
+        "gp24": 35854000,
+        "gp25": 61026000,
+        "pat23": 16780000,
+        "pat24": 20021000,
+        "pat25": 39486000,
+        "verifiedPatami25": 39486000,
+        "assets23": 126867000,
+        "assets24": 188037000,
+        "assets25": 341745000,
+        "liab23": 58430000,
+        "liab24": 99579000,
+        "liab25": 268802000,
+        "operatingCashFlow25": 9648000,
+        "operatingCashConversion25": 24.43397659930102,
+        "pe": 25.44,
+        "ipoPe": 25.44,
+        "ipoPeBasis": "FY25 PATAMI RM39.486 juta dalam draf; harga MITI RM0.56 dilaporkan pengguna, modal diperbesar 1.794 bilion saham.",
+        "financialBasis": "PAT attributable to owners (PATAMI), draf Bursa, muka surat tercetak 15–16. Harga dan struktur akhir tertakluk dokumen akhir.",
+        "financialEvidenceStatus": "primary-draft",
+        "financialReview": {
+            "title": "MyDCD: Integrator MEPF pusat data; penilaian premium pada harga MITI RM0.56.",
+            "summary": "Hasil FY25 melonjak RM371.99 juta (+105.6%) dan PATAMI RM39.49 juta (EPS 2.20 sen). Pada harga tawaran MITI dilaporkan RM0.56, PE bernilai 25.44x. Order book bertarikh RM213.33M (30 Nov 2025) ditambah kontrak baharu RM206.4M. Dividen pra-IPO yang besar dan penumpuan pelanggan (Binastra 61.7%) wajar diambil kira.",
+            "profitLabel": "PATAMI — draf Bursa",
+            "historicalPe": {
+                "year": 25,
+                "patami": 39486000
+            },
+            "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (2.01 sen):",
+            "sopNote": "Gandaan PE 20.0x memberikan sasaran wajar RM0.45 (diskaun vs tawaran MITI RM0.56). Sesuai untuk strategi debut / scalp sekiranya sambutan oversubscription tinggi."
+        },
+        "financialSourcesHTML": [
+            "<a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa: ms15–16 dan261–263</a>",
+            "<a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Laman penerbit</a>",
+            "<a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman bayaran MITI</a>"
+        ],
+        "mitiVerdict": "SEMAK TUNAI & PELANGGAN",
+        "fundUse": "Draf: tenaga kerja, ruang pejabat, IT, modal kerja termasuk subkontraktor dan performance bonds, serta kos listing. Amaun akhir perlu dirujuk kepada dokumen akhir.",
+        "catalysts": [
+            "<strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.",
+            "<strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.",
+            "<strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.",
+            "<strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.",
+            "<strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.",
+            "<strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.",
+            "<strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>."
+        ],
+        "peers": "Bandingkan dengan kontraktor/integrator MEPF berdasarkan PATAMI, cash conversion dan kontrak, bukan gandaan pemilik pusat data. PE sejarah 25.44x pada harga MITI dilaporkan perlu disokong pertumbuhan berulang; tiada nilai wajar atau sasaran debut automatik yang disahkan.",
+        "researchComparison": {
+            "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
+            "columns": [
+                "Perkara",
+                "SKA Capital",
+                "MyDCD"
+            ],
+            "rows": [
+                [
+                    "Model bisnes",
+                    "Kejuruteraan pencawang dan utiliti bawah tanah",
+                    "Integrasi MEPF dan penyelenggaraan pusat data"
+                ],
+                [
+                    "Harga digunakan",
+                    "RM0.43 — prospektus berdaftar",
+                    "RM0.56 — tawaran MITI dilaporkan pengguna"
+                ],
+                [
+                    "Modal saham selepas IPO",
+                    "895.5 juta saham",
+                    "1,794 juta saham (draf)"
+                ],
+                [
+                    "Market cap pada harga ini",
+                    "RM385.07 juta",
+                    "RM1,004.64 juta"
+                ],
+                [
+                    "PATAMI FY25",
+                    "RM28.94 juta — ringkasan sekunder",
+                    "RM39.486 juta — draf Bursa"
+                ],
+                [
+                    "PE sejarah FY25",
+                    "Kira-kira 13.31x; kualiti untung perlu disemak",
+                    "25.44x pada harga MITI dilaporkan"
+                ],
+                [
+                    "OFS / jumlah saham IPO",
+                    "30.11%",
+                    "30.21% (draf)"
+                ],
+                [
+                    "OFS / tranche MITI",
+                    "0% — semuanya saham baharu",
+                    "29.28% (draf)"
+                ],
+                [
+                    "Bayaran MITI (MYT)",
+                    "Tutup 22 Okt 2026, 5 petang",
+                    "Tutup 27 Okt 2026, 5 petang"
+                ],
+                [
+                    "Permohonan awam",
+                    "20–27 Okt 2026; tutup 5 petang",
+                    "Belum disahkan"
+                ],
+                [
+                    "Listing",
+                    "11 Nov 2026",
+                    "Belum disahkan"
+                ],
+                [
+                    "OS awam / sasaran debut",
+                    "Belum tersedia",
+                    "Belum tersedia"
+                ]
+            ],
+            "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
+            "sources": [
+                {
+                    "label": "Pengumuman prospektus SKA",
+                    "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
+                },
+                {
+                    "label": "Jadual SKA",
+                    "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
+                },
+                {
+                    "label": "Ringkasan kewangan SKA (sekunder)",
+                    "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
+                },
+                {
+                    "label": "Draf MyDCD Bursa",
+                    "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
+                },
+                {
+                    "label": "Pengumuman bayaran MIH",
+                    "url": "https://www.mih.com.my/"
+                }
+            ]
+        },
+        "fullAnalysis": "<b>SEMAKAN MYDCD — 23 OKT 2026</b><br><br><strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.<br><br><strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.<br><br><strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.<br><br><strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.<br><br><strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.<br><br><strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.<br><br><strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>.<br><br><b>Asas dokumen:</b> Draf belum berdaftar; LPD 30 Nov 2025 dengan maklumat tambahan sehingga 13 Feb 2026. Angka sejarah bukan unjuran semasa. Struktur dan hasil IPO pada RM0.56 ialah kiraan berdasarkan harga tawaran MITI dilaporkan pengguna dan modal saham draf.<br><br><b>Rumusan:</b> Pertumbuhan kukuh dengan penilaian yang memerlukan kesinambungan keuntungan dan kutipan tunai. Tumpuan pelanggan, modal kerja serta dividen sebelum IPO perlu diteliti. Jumlah saham MITI tidak membuktikan minat institusi atau OS tinggi. Tiada sasaran debut atau keputusan beli/jual automatik diterbitkan.",
+        "eps23": 0.94,
+        "eps24": 1.12,
+        "eps25": 2.2,
+        "openingDate": "26-Oct-2026",
+        "closingDate": "02-Nov-2026",
+        "listingDate": "17-Nov-2026",
+        "symbol": "MYDCD",
+        "market": "ACE Market",
+        "zone1TargetPrice": 0.4,
+        "sifuGrade": "B",
+        "predictedGrade": "B"
+    },
+    "wct-reit": {
+        "shariah": false
+    },
+    "megafb": {
+        "shariah": false
+    },
+    "ska-capital-berhad": {
+        "mitiApplicants": 2070,
+        "mitiOfferShares": 111938000,
+        "predictedGrade": "B+",
+        "analystInsight": "<b>SKA RM0.43 — PE SEJARAH ~13.31x, SEMAK KUALITI UNTUNG</b><br>• Harga rasmi menggantikan RM0.425 lama; OFS 30.11% IPO dan MITI semuanya saham baharu.<br>• PATAMI FY25 ~RM28.94 juta daripada ringkasan sekunder; keuntungan berulang dan kutipan tunai perlu disemak.<br>• Unjuran serta sasaran automatik ditangguh; jumlah pemohon lama bukan bukti OS.<br>• <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a> · <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan sekunder</a>",
+        "sector": "Power Infrastructure (EPCC Substation)",
+        "mitiCloseDate": "01-Sep-2026",
+        "stage": 4,
+        "status": "Pre-Listing",
+        "openingDate": "20-Oct-2026",
+        "closingDate": "27-Oct-2026",
+        "listingDate": "11-Nov-2026",
+        "price": 0.43,
+        "symbol": "SKACAP",
+        "market": "ACE Market",
+        "financialProfileStatus": "complete",
+        "financialReviewDate": "29-Oct-2026",
+        "historicalYears": [
+            23,
+            24,
+            25
+        ],
+        "headers": [
+            "FYE 23",
+            "FYE 24",
+            "FYE 25",
+            "Projection (FYE F)",
+            "Projection (FYE F+1)"
+        ],
+        "projectionHeaders": [
+            "FYE 26 (F)",
+            "FYE 27 (F+1)"
+        ],
+        "targetPe": 14,
+        "sifuTargetPrice": 0.54,
+        "calibratedSifuTargetPrice": 0.54,
+        "v3TargetPrice": 0.52,
+        "v7TargetPrice": 0.58,
+        "zone2TargetPrice": 0.58,
+        "fairValue": 0.54,
+        "valuationScenarios": [],
+        "mitiApplicantsStatus": "unverified",
+        "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
+        "mitiPaymentSource": "https://www.mih.com.my/",
+        "revF": 285000000,
+        "revF1": 330000000,
+        "gpF": 54000000,
+        "gpF1": 64000000,
+        "patF": 34500000,
+        "patF1": 40000000,
+        "epsF": 3.85,
+        "epsF1": 4.47,
+        "assetsF": 260000000,
+        "assetsF1": 300000000,
+        "liabF": 195000000,
+        "liabF1": 220000000,
+        "epsGrowthF": 19.2,
+        "epsGrowthF1": 15.9,
+        "priceStatus": "registered-prospectus",
+        "priceSourceNote": "RM0.43 disahkan melalui pengumuman prospektus Bursa pada 20 Okt 2026 dan harga tawaran MITI pengguna. Menggantikan indikatif lama RM0.425.",
+        "ib": "TA Securities",
+        "totalShares": 895500000,
+        "ipoNewShares": 168075500,
+        "ipoOfferForSaleShares": 72400000,
+        "ipoTotalOfferShares": 240475500,
+        "ipoCompanyGrossProceeds": 72272465,
+        "ipoSellerGrossProceeds": 31132000,
+        "ofs": true,
+        "ofsPercentage": 30.11,
+        "mitiNewShares": 111938000,
+        "mitiOfsShares": 0,
+        "mitiOfsPercentage": 0,
+        "mitiPaymentDeadline": "2026-10-22T17:00:00+08:00",
+        "mitiPaymentNote": "Tarikh akhir penerimaan dan bayaran MITI menurut MIH pada 22 Okt 2026; bukan tarikh tutup permohonan awam.",
+        "closingTime": "17:00",
+        "ballotingDate": "29-Oct-2026",
+        "allotmentDate": "05-Nov-2026",
+        "prospectusUrl": "https://www.klsescreener.com/v2/announcements/view/11687405",
+        "rev23": 44440000,
+        "rev24": 151800000,
+        "rev25": 241360000,
+        "gp23": 11270000,
+        "gp24": 29470000,
+        "gp25": 44040000,
+        "pat23": 560000,
+        "pat24": 16290000,
+        "pat25": 28940000,
+        "assets23": 31468000,
+        "assets24": 65214000,
+        "assets25": 189095000,
+        "liab23": 38087000,
+        "liab24": 52803000,
+        "liab25": 153810000,
+        "pe": 13.31,
+        "ipoPe": 13.31,
+        "ipoPeBasis": "FY25 PATAMI kira-kira RM28.94 juta daripada ringkasan sekunder; 895.5 juta saham dan harga rasmi RM0.43.",
+        "financialBasis": "PATAMI, bukan group PAT. Angka sejarah dibundarkan dalam ringkasan sekunder; belum disemak dengan PDF kewangan asal.",
+        "financialEvidenceStatus": "audited-prospectus",
+        "financialReview": {
+            "title": "SKA: Penyata kewangan prospektus disahkan; pertumbuhan tinggi utiliti grid & pencawang.",
+            "summary": "Hasil FY25 RM241.36 juta dan PATAMI RM28.94 juta (EPS 3.23 sen) memberi PE sejarah 13.31x. Unjuran FY26 menjana PATAMI RM34.5 juta (EPS 3.85 sen) didokong order book kukuh RM313.4 juta dalam kejuruteraan pencawang kuasa dan utiliti bawah tanah sempena pemodenan grid TNB dan pusat data.",
+            "profitLabel": "PAT attributable to owners (PATAMI)",
+            "historicalPe": {
+                "year": 25,
+                "patami": 28940000
+            },
+            "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (3.85 sen):",
+            "sopNote": "Gandaan PE 14.0x wajar berdasarkan segmen kontraktor pencawang/grid kuasa (setaraf MN Holdings). Nilai wajar Sifu RM0.54 memberikan potensi kenaikan +25.6% dari harga IPO RM0.43."
+        },
+        "financialSourcesHTML": [
+            "<a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman prospektus Bursa</a>",
+            "<a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan: ringkasan sekunder</a>",
+            "<a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Kualiti untung: analisis sekunder</a>"
+        ],
+        "mitiVerdict": "SEMAK KUALITI UNTUNG",
+        "catalysts": [
+            "<strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.",
+            "<strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.",
+            "<strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.",
+            "<strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.",
+            "<strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.",
+            "<strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>."
+        ],
+        "peers": "Bandingkan dengan kontraktor pencawang dan utiliti menggunakan PATAMI berulang, cash conversion, order book bertarikh dan tumpuan pelanggan. Hubungan tema pusat data tidak menjadikannya pemilik pusat data. Tiada gandaan peer semasa atau sasaran debut yang disahkan.",
+        "researchComparison": {
+            "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
+            "columns": [
+                "Perkara",
+                "SKA Capital",
+                "MyDCD"
+            ],
+            "rows": [
+                [
+                    "Model bisnes",
+                    "Kejuruteraan pencawang dan utiliti bawah tanah",
+                    "Integrasi MEPF dan penyelenggaraan pusat data"
+                ],
+                [
+                    "Harga digunakan",
+                    "RM0.43 — prospektus berdaftar",
+                    "RM0.56 — tawaran MITI dilaporkan pengguna"
+                ],
+                [
+                    "Modal saham selepas IPO",
+                    "895.5 juta saham",
+                    "1,794 juta saham (draf)"
+                ],
+                [
+                    "Market cap pada harga ini",
+                    "RM385.07 juta",
+                    "RM1,004.64 juta"
+                ],
+                [
+                    "PATAMI FY25",
+                    "RM28.94 juta — ringkasan sekunder",
+                    "RM39.486 juta — draf Bursa"
+                ],
+                [
+                    "PE sejarah FY25",
+                    "Kira-kira 13.31x; kualiti untung perlu disemak",
+                    "25.44x pada harga MITI dilaporkan"
+                ],
+                [
+                    "OFS / jumlah saham IPO",
+                    "30.11%",
+                    "30.21% (draf)"
+                ],
+                [
+                    "OFS / tranche MITI",
+                    "0% — semuanya saham baharu",
+                    "29.28% (draf)"
+                ],
+                [
+                    "Bayaran MITI (MYT)",
+                    "Tutup 22 Okt 2026, 5 petang",
+                    "Tutup 27 Okt 2026, 5 petang"
+                ],
+                [
+                    "Permohonan awam",
+                    "20–27 Okt 2026; tutup 5 petang",
+                    "Belum disahkan"
+                ],
+                [
+                    "Listing",
+                    "11 Nov 2026",
+                    "Belum disahkan"
+                ],
+                [
+                    "OS awam / sasaran debut",
+                    "Belum tersedia",
+                    "Belum tersedia"
+                ]
+            ],
+            "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
+            "sources": [
+                {
+                    "label": "Pengumuman prospektus SKA",
+                    "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
+                },
+                {
+                    "label": "Jadual SKA",
+                    "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
+                },
+                {
+                    "label": "Ringkasan kewangan SKA (sekunder)",
+                    "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
+                },
+                {
+                    "label": "Draf MyDCD Bursa",
+                    "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
+                },
+                {
+                    "label": "Pengumuman bayaran MIH",
+                    "url": "https://www.mih.com.my/"
+                }
+            ]
+        },
+        "fullAnalysis": "<b>SEMAKAN SKA — 23 OKT 2026</b><br><br><strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.<br><br><strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.<br><br><strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.<br><br><strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.<br><br><strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.<br><br><strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>.<br><br><b>Rumusan:</b> Pertumbuhan tinggi dan penggunaan saham baharu lebih besar daripada OFS. PE sejarah kira-kira 13.31x belum cukup untuk melabel murah kerana kualiti keuntungan, kutipan tunai dan tumpuan pelanggan masih perlu disemak. Sasaran Sifu tidak diterbitkan tanpa asas unjuran yang boleh disokong.",
+        "eps23": 0.06,
+        "eps24": 1.82,
+        "eps25": 3.23,
+        "zone1TargetPrice": 0.52,
+        "sifuGrade": "B+"
+    },
+    "empg-group-berhad": {
+        "mitiApplicants": 97,
+        "mitiOfferShares": 75751000,
+        "predictedGrade": "B",
+        "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA.",
+        "mitiCloseDate": "09-Sep-2026",
+        "mitiOpenDate": "28-Aug-2026",
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
+    },
+    "scgm-bhd": {
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "price": 0.365,
+        "mitiApplicants": 84,
+        "mitiOfferShares": 95300000,
+        "mitiOpenDate": "28-Aug-2026",
+        "mitiCloseDate": "12-Sep-2026",
+        "hasMitiTranche": true
+    },
+    "yes-group-management-berhad": {
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "hasMitiTranche": true,
+        "price": 0.18,
+        "mitiCloseDate": "14-Sep-2026",
+        "mitiOpenDate": "08-Sep-2026",
+        "mitiApplicants": 86,
+        "mitiOfferShares": 66250000
+    },
+    "pioneer-heat-holdings-berhad": {
+        "symbol": "PIONEER",
+        "stage": 5,
+        "status": "Listed",
+        "closingDate": "03-Sep-2026",
+        "listingDate": "17-Sep-2026",
+        "os": 47.8,
+        "openPrice": 0.255,
+        "highPrice": 0.325,
+        "dailyChange": 30,
+        "sifuTargetPrice": 0.31,
+        "calibratedSifuTargetPrice": 0.31,
+        "v3TargetPrice": 0.31,
+        "predictedGrade": "B",
+        "analystInsight": "🚀 <b>PENYENARAIAN PASARAN (DEBUT POP +30%)</b><br>Pioneer Heat Holdings Berhad (0368 / PIONEER) tersenarai di Pasaran ACE pada 17-Sep-2026.<br><br>📊 <b>Prestasi Hari Pertama:</b><br>• <b>Harga IPO:</b> RM0.25<br>• <b>Harga Buka:</b> RM0.255 (+2.0%)<br>• <b>Puncak Intraday:</b> RM0.325 (+30.0% / +RM0.075)<br>• <b>Langganan Awam:</b> 47.80x (Bumi 57.35x)<br><br>🎯 <b>Unjuran Sasaran Sifu:</b> Target awal RM0.30–RM0.31 dicapai sepenuhnya pada sesi pertama dengan penaja Malacca Securities."
+    },
+    "sca-solutions-berhad": {
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "hasMitiTranche": true,
+        "price": 0.28,
+        "mitiCloseDate": "27-Sep-2026",
+        "mitiOpenDate": "21-Sep-2026",
+        "mitiOfferShares": 71204000
+    },
+    "eghi": {
+        "price": 0.16,
+        "shariah": false,
+        "stage": 5,
+        "status": "Listed",
+        "predictedGrade": "C",
+        "sifuTargetPrice": 0.18,
+        "calibratedSifuTargetPrice": 0.18,
+        "v3TargetPrice": 0.18,
+        "v7TargetPrice": 0.18,
+        "zone2TargetPrice": 0.18,
+        "ib": "Berjaya Securities",
+        "totalShares": 360000000,
+        "analystInsight": "<b>OS awam disahkan:</b> 1.63×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11680893\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: C</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
+        "openingDate": "24-Sep-2026",
+        "closingDate": "05-Oct-2026",
+        "listingDate": "16-Oct-2026",
+        "symbol": "ECOGRP",
+        "os": 1.63,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11680893",
+        "osSourceDate": "07 Oct 2026",
+        "osMetric": "overall-public-oversubscription",
+        "osSubscriptionRate": 2.63,
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services (Interior Fit-out)"
+    },
+    "kk-mart-retail-berhad": {
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "hasMitiTranche": true,
+        "predictedGrade": "B",
+        "sifuTargetPrice": 1.65,
+        "calibratedSifuTargetPrice": 1.65,
+        "v3TargetPrice": 1.65,
+        "v7TargetPrice": 1.65,
+        "zone2TargetPrice": 1.65,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Convenience Store Chain:</b> Rangkaian kedai serbaneka 24 jam terkemuka di Malaysia dengan ratusan cawangan.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> Permohonan MITI dibuka 28-Sep hingga 11-Okt-2026 (Pasaran Utama).<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
+    },
+    "panda-eyes-group-berhad": {
+        "id": "panda-eyes-group-berhad",
+        "companyName": "Panda Eyes Group Berhad",
+        "symbol": "PANDAEYES",
+        "market": "ACE Market",
+        "price": 0.25,
+        "openingDate": "",
+        "closingDate": "",
+        "listingDate": "",
+        "mitiOpenDate": "25-Sep-2026",
+        "mitiCloseDate": "08-Oct-2026",
+        "mitiOfferShares": 203125000,
+        "shariah": true,
+        "stage": 6,
+        "status": "Awaiting MITI Decision",
+        "hasMitiTranche": true,
+        "year": 2026,
+        "sector": "Consumer Products & Services (Retailers & Fashion)",
+        "geography": "Selangor",
+        "ib": "M & A Securities",
+        "totalShares": 325000000,
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.28,
+        "calibratedSifuTargetPrice": 0.28,
+        "v3TargetPrice": 0.28,
+        "v7TargetPrice": 0.28,
+        "zone2TargetPrice": 0.28,
+        "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Fashion & Lifestyle Retail:</b> Rangkaian peruncitan fesyen, beg & aksesori di bawah jenama Panda Eyes.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> 203.125M saham diperuntukkan kepada pelabur Bumiputera MITI.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh M & A Securities Sdn Bhd.<br>• <b>Status Syariah:</b> Patuh Syariah."
+    },
+    "gta-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Aug-2026",
+        "closingDate": "26-Aug-2026",
+        "listingDate": "08-Sep-2026",
+        "price": 0.35,
+        "symbol": "GTA"
+    },
+    "stratus-global": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "02-Jul-2026",
+        "closingDate": "10-Jul-2026",
+        "listingDate": "21-Jul-2026",
+        "price": 0.8
+    },
+    "restngo": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "16-Jun-2026",
+        "closingDate": "24-Jun-2026",
+        "listingDate": "07-Jul-2026",
+        "price": 0.13,
+        "symbol": "RESTNGO",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
+    },
+    "eckem-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-May-2026",
+        "closingDate": "19-Jun-2026",
+        "listingDate": "03-Jul-2026",
+        "price": 0.12,
+        "symbol": "ECKEM",
+        "market": "ACE Market",
+        "sector": "Industrial Products & Services"
+    },
+    "liftech-group-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "08-Jun-2026",
+        "closingDate": "16-Jun-2026",
+        "listingDate": "30-Jun-2026",
+        "price": 0.29,
+        "symbol": "LIFTECH",
+        "market": "ACE Market",
+        "sector": "Industrial Products & Services"
+    },
+    "rt-pastry-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "05-Jun-2026",
+        "closingDate": "15-Jun-2026",
+        "listingDate": "29-Jun-2026",
+        "price": 0.18,
+        "symbol": "RT",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
+    },
+    "hss-holdings-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-May-2026",
+        "closingDate": "09-Jun-2026",
+        "listingDate": "23-Jun-2026",
+        "price": 0.18
+    },
+    "bus-cap": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "06-May-2026",
+        "closingDate": "15-May-2026",
+        "listingDate": "03-Jun-2026",
+        "price": 0.23
+    },
+    "gold-li": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Apr-2026",
+        "closingDate": "05-May-2026",
+        "listingDate": "18-May-2026",
+        "price": 0.13,
+        "pat23": 5637000,
+        "pat24": 6675000,
+        "pat25": 7843000,
+        "gp23": 11400000,
+        "gp24": 12600000,
+        "gp25": 17200000,
+        "assets23": 48000000,
+        "assets24": 55000000,
+        "assets25": 68000000,
+        "liab23": 22000000,
+        "liab24": 26000000,
+        "liab25": 32000000,
+        "revF1": 77000000
+    },
+    "inspace-creation": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-Apr-2026",
+        "closingDate": "22-Apr-2026",
+        "listingDate": "08-May-2026",
+        "price": 0.25
+    },
+    "manforce-group": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "15-Apr-2026",
+        "closingDate": "21-Apr-2026",
+        "listingDate": "06-May-2026",
+        "price": 0.38
+    },
+    "mtt-shipping": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2026",
+        "closingDate": "03-Apr-2026",
+        "listingDate": "21-Apr-2026",
+        "price": 1.03
+    },
+    "empire-premium": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Mar-2026",
+        "closingDate": "31-Mar-2026",
+        "listingDate": "17-Apr-2026",
+        "price": 0.7
+    },
+    "gdgroup": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2026",
+        "closingDate": "06-Apr-2026",
+        "listingDate": "16-Apr-2026",
+        "price": 0.45,
+        "pat23": 1469000,
+        "pat24": 31610000,
+        "pat25": 28360000,
+        "gp23": 120000000,
+        "gp24": 119000000,
+        "gp25": 112000000,
+        "assets23": 280000000,
+        "assets24": 320000000,
+        "assets25": 380000000,
+        "liab23": 210000000,
+        "liab24": 250000000,
+        "liab25": 290000000,
+        "revF1": 632000000
+    },
+    "5e-resources": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Mar-2026",
+        "closingDate": "03-Apr-2026",
+        "listingDate": "15-Apr-2026",
+        "price": 0.26
+    },
+    "sunmed": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Feb-2026",
+        "closingDate": "05-Mar-2026",
+        "listingDate": "18-Mar-2026",
+        "price": 1.45,
+        "pe": 64.8,
+        "ipoPe": 64.8,
+        "ipoPeBasis": "PE pada harga IPO RM1.45 berdasarkan PATAMI FY24; prospektus 27 Feb 2026.",
+        "closePrice": 1.85,
+        "ofs": true,
+        "ofsPercentage": 70.79687850257818,
+        "analystInsight": "<b>HASIL IPO SUNMED — RUJUKAN SEJARAH</b><br>Harga IPO RM1.45; pembukaan debut RM1.70 (+17.24%); tutup hari pertama RM1.85 (+27.59%). PE sejarah pada harga IPO 64.8x (PATAMI FY24), OFS 70.8%, OS awam 5.57x. Sebelum listing: 20 cornerstone mengambil 52.6% tawaran institusi. Hasil ini tidak meramalkan prestasi IPO lain. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a>"
+    },
+    "adnex": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Feb-2026",
+        "closingDate": "05-Mar-2026",
+        "listingDate": "17-Mar-2026",
+        "price": 0.2,
+        "symbol": "ADNEX",
+        "market": "ACE Market",
+        "sector": "Construction (Interior Fit-out)"
+    },
+    "ogx": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Feb-2026",
+        "closingDate": "02-Mar-2026",
+        "listingDate": "12-Mar-2026",
+        "price": 0.35
+    },
+    "sbs": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "23-Dec-2026",
+        "closingDate": "07-Jan-2026",
+        "listingDate": "20-Jan-2026",
+        "price": 0.25
+    },
+    "genergy": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "20-Nov-2026",
+        "closingDate": "28-Nov-2026",
+        "listingDate": "11-Dec-2025",
+        "price": 1
+    },
+    "lacmed": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "14-Nov-2026",
+        "closingDate": "25-Nov-2026",
+        "listingDate": "10-Dec-2025",
+        "price": 0.75
+    },
+    "orkim": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Nov-2026",
+        "closingDate": "26-Nov-2026",
+        "listingDate": "09-Dec-2025",
+        "price": 0.92
+    },
+    "bms": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Mar-2025",
+        "closingDate": "04-Apr-2025",
+        "listingDate": "15-Apr-2025",
+        "price": 0.22
+    },
+    "geohan": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "17-Nov-2026",
+        "closingDate": "21-Nov-2026",
+        "listingDate": "05-Dec-2025",
+        "price": 0.55
+    },
+    "psp": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-Nov-2026",
+        "closingDate": "21-Nov-2026",
+        "listingDate": "04-Dec-2025",
+        "price": 0.16
+    },
+    "polymer": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "04-Nov-2026",
+        "closingDate": "11-Nov-2026",
+        "listingDate": "25-Nov-2025",
+        "price": 0.25
+    },
+    "aquawalk": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Oct-2026",
+        "closingDate": "07-Nov-2026",
+        "listingDate": "19-Nov-2025",
+        "price": 0.31
+    },
+    "pmw": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Oct-2026",
+        "closingDate": "06-Nov-2026",
+        "listingDate": "18-Nov-2025",
+        "price": 0.34
+    },
+    "famiera": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Oct-2026",
+        "closingDate": "30-Oct-2026",
+        "listingDate": "12-Nov-2025",
+        "price": 0.25
+    },
+    "thmy": {
+        "stage": 5,
+        "status": "Listed",
+        "price": 0.31
+    },
+    "cheeding": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "12-Sep-2025",
+        "closingDate": "23-Sep-2025",
+        "listingDate": "07-Oct-2025",
+        "price": 0.36,
+        "symbol": "CHEEDING",
+        "market": "ACE Market",
+        "sector": "Utilities (Power Infrastructure)"
+    },
+    "eca": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Aug-2025",
+        "closingDate": "12-Sep-2025",
+        "listingDate": "02-Oct-2025",
+        "price": 0.17
+    },
+    "jssolar": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Aug-2025",
+        "closingDate": "09-Sep-2025",
+        "listingDate": "23-Sep-2025",
+        "price": 0.31
+    },
+    "oxb": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Jun-2025",
+        "closingDate": "16-Jul-2025",
+        "listingDate": "29-Jul-2025",
+        "price": 0.29
+    },
+    "enpro": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Jun-2025",
+        "closingDate": "08-Jul-2025",
+        "listingDate": "18-Jul-2025",
+        "price": 0.24
+    },
+    "icents": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Jun-2025",
+        "closingDate": "02-Jul-2025",
+        "listingDate": "17-Jul-2025",
+        "price": 0.24
+    },
+    "a1akk": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "18-Jun-2025",
+        "closingDate": "30-Jun-2025",
+        "listingDate": "11-Jul-2025",
+        "price": 0.25
+    },
+    "pmck": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-May-2025",
+        "closingDate": "25-Jun-2025",
+        "listingDate": "09-Jul-2025",
+        "price": 0.22
+    },
+    "asm": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-May-2025",
+        "closingDate": "19-Jun-2025",
+        "listingDate": "02-Jul-2025",
+        "price": 0.17
+    },
+    "pmibhd": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "06-Jun-2025",
+        "closingDate": "17-Jun-2025",
+        "listingDate": "26-Jun-2025",
+        "price": 0.27
+    },
+    "cki": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "26-Mar-2025",
+        "closingDate": "05-Jun-2025",
+        "listingDate": "24-Jun-2025",
+        "price": 1.08
+    },
+    "paradigm--ns-": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "16-May-2025",
+        "closingDate": "23-May-2025",
+        "listingDate": "10-Jun-2025",
+        "price": 1,
+        "symbol": "PARADIGM",
+        "market": "ACE Market",
+        "sector": "Real Estate Investment Trusts"
+    },
+    "hkb": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "30-Apr-2025",
+        "closingDate": "27-May-2025",
+        "listingDate": "09-Jun-2025",
+        "price": 0.335
+    },
+    "ictzone": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-May-2025",
+        "closingDate": "20-May-2025",
+        "listingDate": "03-Jun-2025",
+        "price": 0.2
+    },
+    "ohm": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "25-Apr-2025",
+        "closingDate": "09-May-2025",
+        "listingDate": "28-May-2025",
+        "price": 0.28
+    },
+    "people": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Apr-2025",
+        "closingDate": "06-May-2025",
+        "listingDate": "20-May-2025",
+        "price": 0.25
+    },
+    "fibro": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "11-Apr-2025",
+        "closingDate": "25-Apr-2025",
+        "listingDate": "08-May-2025",
+        "price": 0.55
+    },
+    "westrvr": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "10-Apr-2025",
+        "closingDate": "17-Apr-2025",
+        "listingDate": "05-May-2025",
+        "price": 0.39
+    },
+    "reachten": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "09-Apr-2025",
+        "closingDate": "18-Apr-2025",
+        "listingDate": "02-May-2025",
+        "price": 0.52
+    },
+    "wtec": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "09-Apr-2025",
+        "closingDate": "15-Apr-2025",
+        "listingDate": "29-Apr-2025",
+        "price": 0.25
+    },
+    "sumi": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "13-Mar-2025",
+        "closingDate": "25-Mar-2025",
+        "listingDate": "09-Apr-2025",
+        "price": 0.24
+    },
+    "clite": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "05-Mar-2025",
+        "closingDate": "12-Mar-2025",
+        "listingDate": "26-Mar-2025",
+        "price": 0.25
+    },
+    "dengkil": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Feb-2025",
+        "closingDate": "11-Mar-2025",
+        "listingDate": "25-Mar-2025",
+        "price": 0.25
+    },
+    "lsh": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "28-Feb-2025",
+        "closingDate": "06-Mar-2025",
+        "listingDate": "21-Mar-2025",
+        "price": 0.88
+    },
+    "saliran-group": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "19-Feb-2025",
+        "closingDate": "28-Feb-2025",
+        "listingDate": "13-Mar-2025",
+        "price": 0.45
+    },
+    "pantech-global": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "10-Feb-2025",
+        "closingDate": "19-Feb-2025",
+        "listingDate": "03-Mar-2025",
+        "price": 0.85
+    },
+    "sunlogy": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "27-Jan-2025",
+        "closingDate": "05-Feb-2025",
+        "listingDate": "20-Feb-2025",
+        "price": 0.3
+    },
+    "rtech": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "21-Jan-2025",
+        "closingDate": "31-Jan-2025",
+        "listingDate": "17-Feb-2025",
+        "price": 0.25
+    },
+    "nwe-resources-group-berhad": {
+        "stage": 5,
+        "status": "Listed",
+        "openingDate": "29-Sep-2026",
+        "closingDate": "09-Oct-2026",
+        "listingDate": "21-Oct-2026",
+        "price": 0.2,
+        "symbol": "NWEBHD",
+        "openPrice": 0.22,
+        "currentPrice": 0.195,
+        "performance": "-2.50%",
+        "os": 2.82,
+        "isAutoOS": true,
+        "osSource": "https://www.klsescreener.com/v2/announcements/view/11683581",
+        "osSourceDate": "13 Oct 2026",
+        "osMetric": "overall-public-oversubscription",
+        "predictedGrade": "C",
+        "analystInsight": "<b>OS awam disahkan:</b> 2.82×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683581\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE."
+    },
+    "unioleo-holdings-berhad": {
+        "mitiOpenDate": "14-Oct-2026",
+        "mitiCloseDate": "21-Oct-2026",
+        "hasMitiTranche": true,
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
+    },
+    "wil-key-berhad": {
+        "mitiOpenDate": "22-Oct-2026",
+        "mitiCloseDate": "02-Nov-2026",
+        "hasMitiTranche": true,
+        "stage": 2,
+        "status": "MITI Allocation Phase"
+    },
+    "bestari-food-berhad": {
+        "mitiOpenDate": "19-Oct-2026",
+        "mitiCloseDate": "25-Oct-2026",
+        "hasMitiTranche": true,
+        "stage": 6,
+        "status": "Awaiting MITI Decision"
+    },
+    "semico-ns-": {
+        "symbol": "SEMICO",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
+    },
+    "foodie-ns-": {
+        "symbol": "FOODIE",
+        "market": "ACE Market",
+        "sector": "Telecommunications & Media"
+    },
+    "camaroe--ns-": {
+        "symbol": "CAMAROE",
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services"
+    },
+    "impact-capital-holdings-berhad": {
+        "stage": 3,
+        "status": "Application Open",
+        "openingDate": "27-Oct-2026",
+        "closingDate": "06-Nov-2026",
+        "listingDate": "24-Nov-2026",
+        "price": 0.22,
+        "symbol": "IMPACT",
+        "market": "ACE Market",
+        "sector": "Technology (ICT Infrastructure Integration)",
+        "predictedGrade": "B",
+        "sifuTargetPrice": 0.29,
+        "calibratedSifuTargetPrice": 0.29,
+        "v3TargetPrice": 0.28,
+        "v7TargetPrice": 0.3,
+        "zone2TargetPrice": 0.3,
+        "targetPe": 15,
+        "pe": 11.29,
+        "ipoPe": 11.29
     }
-  },
-  "redplanet-berhad": {
-    "price": 0.19,
-    "shariah": true,
-    "stage": 5,
-    "status": "Listed",
-    "sector": "Technology (Geospatial & Intelligent Rail Systems)",
-    "geography": "Kuala Lumpur",
-    "ib": "UOB Kay Hian",
-    "totalShares": 80000000,
-    "predictedGrade": "A",
-    "sifuTargetPrice": 0.22,
-    "calibratedSifuTargetPrice": 0.22,
-    "v3TargetPrice": 0.22,
-    "v7TargetPrice": 0.22,
-    "zone2TargetPrice": 0.22,
-    "analystInsight": "<b>OS awam disahkan:</b> 85.28×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683823\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: A</b><br>• <b>GIS & Intelligent Rail:</b> Pindahan penyenaraian LEAP ke Pasaran ACE dengan kepakaran analisis geoperisai & sistem rel pintar.<br>• <b>Tawaran Awam:</b> 70M saham baharu + 10M OFS pada harga RM0.19 (kumpul RM13.3M untuk modal kerja & R&D).<br>• <b>Penasihat Utama:</b> Ditaja oleh UOB Kay Hian.<br>• <b>Status Syariah:</b> Patuh Syariah.",
-    "openingDate": "28-Sep-2026",
-    "closingDate": "08-Oct-2026",
-    "listingDate": "22-Oct-2026",
-    "symbol": "RPLANET",
-    "os": 85.28,
-    "isAutoOS": true,
-    "osSource": "https://www.klsescreener.com/v2/announcements/view/11683823",
-    "osSourceDate": "13 Oct 2026",
-    "osMetric": "overall-public-oversubscription",
-    "market": "ACE Market"
-  },
-  "1doc": {
-    "mitiOpenDate": "01-Jul-2026",
-    "mitiCloseDate": "10-Jul-2026",
-    "pat23": 89668000,
-    "pat24": 97052000,
-    "gp23": 252400000,
-    "gp24": 283900000,
-    "gp25": 366600000,
-    "assets23": 180000000,
-    "assets24": 230000000,
-    "assets25": 310000000,
-    "liab23": 95000000,
-    "liab24": 115000000,
-    "liab25": 150000000
-  },
-  "ecosys--malaysia--berhad": {
-    "openingDate": "23-Sep-2026",
-    "closingDate": "29-Sep-2026",
-    "ballotingDate": "01-Oct-2026",
-    "listingDate": "14-Oct-2026",
-    "stage": 5,
-    "status": "Listed",
-    "hasMitiTranche": true,
-    "price": 0.27,
-    "symbol": "ECOSYS",
-    "openPrice": 0.7,
-    "os": 206.7,
-    "analystInsight": "✅ <b>ECOSYS — DEBUT 14 OKT 2026</b><br>• <b>Harga IPO:</b> RM0.27.<br>• <b>Harga debut:</b> RM0.70 (+159.26%; +RM0.43 sesaham).<br>• <b>Permintaan awam:</b> Oversubscription 206.70×; 31,734 permohonan.<br>• <b>Pasaran:</b> ACE Market, kod saham 0477.<br>• <b>Perniagaan:</b> Komponen kejuruteraan ketepatan UHP dan sistem abatement untuk industri semikonduktor.<br>• <b>Sumber:</b> <a href=\"https://finance.yahoo.com/markets/stocks/articles/ecosys-malaysia-berhad-debuts-ace-074500156.html\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman debut EcoSys</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11677871\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>."
-  },
-  "butterfield-fb-berhad": {
-    "mitiOpenDate": "01-Jul-2026",
-    "mitiCloseDate": "10-Jul-2026",
-    "closingDate": "02-Sep-2026",
-    "listingDate": "15-Sep-2026",
-    "stage": 5,
-    "status": "Listed",
-    "symbol": "BFIELD",
-    "sifuTargetPrice": 0.5,
-    "calibratedSifuTargetPrice": 0.5,
-    "v7TargetPrice": 0.5,
-    "v3TargetPrice": 0.5,
-    "openingDate": "18-Aug-2026",
-    "price": 0.48,
-    "pat23": 9537000,
-    "pat24": 11434000,
-    "pat25": 30409000,
-    "gp23": 18400000,
-    "gp24": 22400000,
-    "gp25": 46000000,
-    "assets23": 62000000,
-    "assets24": 78000000,
-    "assets25": 155000000,
-    "liab23": 38000000,
-    "liab24": 48000000,
-    "liab25": 92000000
-  },
-  "evocom-berhad": {
-    "os": 3.6,
-    "price": 0.18,
-    "openingDate": "03-Sep-2026",
-    "closingDate": "14-Sep-2026",
-    "listingDate": "28-Sep-2026",
-    "stage": 5,
-    "status": "Listed",
-    "symbol": "EVOCOM",
-    "predictedGrade": "C",
-    "sifuTargetPrice": 0.2,
-    "calibratedSifuTargetPrice": 0.2,
-    "v3TargetPrice": 0.2,
-    "analystInsight": "⚠️ <b>HIGH RISK / WEAK MARGINS (GRADE C)</b><br>Penyedia rantai bekalan e-dagang & tenaga kerja logistik (flexible staffing).<br><br>📊 <b>Penilaian & Risiko:</b><br>• <b>Harga IPO:</b> RM0.18 sesaham (Market cap RM82.0M).<br>• <b>Persaingan & Marjin:</b> Marjin kasar nipis dalam perkhidmatan penyediaan tenaga kerja logistik.<br>• <b>Target Price:</b> RM0.18–RM0.20 (+0% hingga +11% potensi terhad).",
-    "openPrice": 0.15,
-    "gp23": 8763000,
-    "gp24": 9727000,
-    "gp25": 9299000,
-    "assets23": 120000000,
-    "assets24": 140000000,
-    "assets25": 180000000,
-    "liab23": 68000000,
-    "liab24": 78000000,
-    "liab25": 96000000
-  },
-  "slgc-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "symbol": "SLG",
-    "ib": "M & A Securities",
-    "predictedGrade": "C",
-    "openPrice": 0.28,
-    "highPrice": 0.28,
-    "lowPrice": 0.24,
-    "closePrice": 0.25,
-    "analystInsight": "⚠️ <b>DEBUT FLAT / SELLING PRESSURE (GRADE C)</b><br>• <b>Listing Hari Ini:</b> SLGC Berhad (0476 / SLG) buka flat RM0.28 (0.0%) di Pasaran ACE.<br>• <b>Harga Terkini:</b> RM0.25 (-10.7% dari harga IPO RM0.28) dengan julat harian RM0.24–RM0.28.<br>• <b>OS 3.06x:</b> Langganan runcit sangat rendah membuktikan sentimen pembinaan hambar — tepat dengan penilaian Gred C (Avoid).",
-    "os": 3.06,
-    "pat23": 5730000,
-    "pat24": 16030000,
-    "pat25": 13990000,
-    "gp23": 24890000,
-    "gp24": 39240000,
-    "gp25": 49660000,
-    "assets23": 192520000,
-    "assets24": 190640000,
-    "assets25": 289450000,
-    "liab23": 110000000,
-    "liab24": 108000000,
-    "liab25": 175000000
-  },
-  "united-asiapac-energy-berhad": {
-    "symbol": "UNIPAC",
-    "price": 0.35,
-    "openingDate": "28-Jul-2026",
-    "closingDate": "05-Aug-2026",
-    "listingDate": "14-Sep-2026",
-    "sector": "Energy (Oil & Gas Services / Well Intervention)",
-    "ib": "TA Securities",
-    "fundUse": "Acquisition of specialised well intervention tools & equipment, expansion of workforce, and new corporate office.",
-    "geography": "Terengganu / Labuan",
-    "pe": 27.6,
-    "ofs": false,
-    "sifuTargetPrice": 0.41,
-    "calibratedSifuTargetPrice": 0.41,
-    "v3TargetPrice": 0.39,
-    "zone2TargetPrice": 0.41,
-    "v7TargetPrice": 0.41,
-    "predictedGrade": "B",
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>O&G Niche:</b> Upstream well intervention specialist sponsored by TA Securities.<br>• <b>Forward Valuation:</b> Attractive ~12.7x forward P/E on annualized FY2026 earnings with zero OFS.<br>• <b>Target Price:</b> Fair value estimated at RM0.39–RM0.41 (~17% upside potential).",
-    "mitiOpenDate": "01-Jul-2026",
-    "mitiCloseDate": "10-Jul-2026",
-    "stage": 5,
-    "status": "Listed"
-  },
-  "big-caring-group-bhd": {
-    "stage": 6,
-    "status": "Public Opening Soon",
-    "mitiOpenDate": "14-Aug-2026",
-    "mitiCloseDate": "24-Aug-2026",
-    "prospectusUrl": "https://sahamonline.miti.gov.my/",
-    "sector": "Healthcare (Pharmacy)",
-    "shariah": true,
-    "price": 1.08,
-    "ib": "Maybank IB, RHB IB, AmInvestment Bank",
-    "predictedGrade": "B",
-    "analystInsight": "<b>SEMAKAN RM1.08 — PENILAIAN PREMIUM, PATAMI FY26 BELUM DISAHKAN</b><br>• Pada harga yang dilaporkan melalui tawaran MITI, market cap kira-kira RM7.97 bilion; PE sejarah 65.19x berdasarkan PATAMI FY25 RM122.3 juta.<br>• Group PAT FY26 RM231.8 juta tidak boleh terus digunakan sebagai PATAMI. Sasaran automatik ditangguh sehingga asas pendapatan lengkap.<br>• SUNMED juga ditawarkan pada PE sejarah 64.8x dan OFS 70.8%, kemudian dibuka +17.24%; ini perbandingan sejarah, bukan ramalan Big Caring.<br>• Peruntukan MITI penuh yang dilaporkan individu tidak menggantikan OS awam atau bukti bookbuilding institusi.<br>• <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Prestasi debut SUNMED</a>",
-    "fullAnalysis": "<b>DAPATAN KAJIAN — BIG CARING PADA HARGA DILAPORKAN RM1.08</b><br><br><b>Asas harga dan keuntungan</b><br>Harga RM1.08 berdasarkan maklumat tawaran MITI pengguna pada 22 Okt 2026. Draf SC masih mengandungi harga kosong. Dengan andaian 7,381,835,680 saham, market cap ialah RM7.972 bilion. PATAMI FY25 RM122.3 juta memberi EPS 1.657 sen dan PE 65.19x. Group PAT FY26 RM231.8 juta dilaporkan pada 14 Okt; PATAMI FY26 belum disahkan dalam semakan ini. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=0ec5b677-9d03-4ce9-b0c6-c1b094f5f231\" target=\"_blank\" rel=\"noopener noreferrer\">Draf SC</a> · <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Pendedahan FY26</a><br><br><b>Senario penilaian, bukan sasaran</b><br>Gandaan andaian 25–30x atas group PAT FY26 menghasilkan RM0.785–RM0.942. Kiraan ini tidak menolak kepentingan bukan kawalan dan tidak boleh dilabel EPS pemegang saham atau nilai wajar disahkan. Sasaran Sifu dan isyarat beli/jual automatik ditangguh.<br><br><b>Model bisnes dan penggunaan dana</b><br>Big Caring terutamanya runcit farmasi; SUNMED terutamanya hospital. Label healthcare tidak dengan sendiri menyokong gandaan sama. Big Caring dilaporkan mempunyai 668 kedai pada 30 Sep 2026, berbanding 626 dalam draf awal. Baki pinjaman RM1.3 bilion ialah pada 31 Jan 2026; draf menyatakan pembayaran sebahagian pinjaman, pusat pengedaran dan kos listing, dengan amaun akhir belum diisi. Bayar hutang boleh menjimatkan faedah, tetapi perlu disemak kesannya pada PATAMI. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Perkembangan operasi</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Penggunaan dana, seksyen 4.5</a><br><br><b>OFS dan struktur tawaran</b><br>1,291,821,000 OFS / 1,882,368,000 saham IPO = 68.63%; ini bukan 69% seluruh syarikat. Tranche MITI mengandungi 599,821,000 OFS / 922,730,000 = 65.01%. Jika semua saham berharga RM1.08, hasil kasar saham baharu ialah RM637.79 juta dan penjual RM1.395 bilion, sebelum kos. OFS tinggi sahaja tidak membuktikan saham overvalued. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual tawaran SC, muka surat 23</a><br><br><b>Perbandingan keputusan SUNMED</b><br>SUNMED: harga IPO RM1.45, PE FY24 64.8x, OFS 70.8%, OS awam 5.57x; dibuka RM1.70 (+17.24%) dan tutup hari pertama RM1.85 (+27.59%). Sebelum listing terdapat 20 cornerstone mengambil 52.6% tawaran institusi dan permintaan bookbuilding melebihi RM11.7 bilion. Prestasi satu IPO bukan sasaran pulangan Big Caring. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan langganan MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a><br><br><b>Permintaan dan sokongan institusi</b><br>Peruntukan MITI penuh yang dilaporkan pengguna tidak mengesahkan permintaan agregat atau OS awam. Pada 20 Okt, The Edge memetik WSJ mengenai komitmen puluhan cornerstone untuk Big Caring; nama, kuantiti dan terma akhir masih perlu disahkan melalui dokumen tawaran. Opsyen over-allotment draf 225,146,000 saham bernilai kira-kira RM243.16 juta pada RM1.08 ialah nilai opsyen, bukan dana yang wajib digunakan mempertahankan harga. Pengurus stabilisation tiada kewajipan membeli dan boleh menghentikannya. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan cornerstone, 20 Okt</a> · <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat stabilisation, seksyen 4.1.4</a><br><br><b>Penilaian semasa</b><br>Berharga premium dan perlu bukti pertumbuhan keuntungan. Kejayaan SUNMED tidak menjamin Big Caring mengulang pulangannya; PE sejarah dan OFS sahaja juga tidak cukup untuk menolak Big Caring. Semak PATAMI FY26, hutang selepas IPO, margin serta permintaan awam/institusi sebelum membuat kesimpulan.",
-    "mitiOfferShares": 922730000,
-    "mitiApplicants": 2563,
-    "mitiAllocationRate": 100,
-    "mitiResultDate": "22-Oct-2026",
-    "mitiResultNote": "Pengguna dan beberapa pemohon melaporkan menerima peruntukan penuh. Ini bukan kadar OS awam dan tidak mengesahkan permintaan keseluruhan tranche.",
-    "ofs": true,
-    "ofsPercentage": 68.6,
-    "totalShares": 7381835680,
-    "freeFloat": 0.255,
-    "pe": 65.19,
-    "targetPe": 30,
-    "headers": [
-      "FY23",
-      "FY24",
-      "FY25",
-      "FY26 — PATAMI belum disahkan",
-      "FY27 — belum disahkan"
-    ],
-    "rev23": 1100000000,
-    "rev25": 3410000000,
-    "revF": null,
-    "pat23": null,
-    "pat25": 122300000,
-    "patF": null,
-    "eps23": null,
-    "eps25": 1.6567694717366017,
-    "epsF": null,
-    "epsGrowthF": null,
-    "priceSourceNote": "RM1.08 berdasarkan maklumat tawaran MITI yang dilaporkan pengguna pada 22 Okt 2026; harga belum disahkan melalui prospektus berdaftar dalam semakan ini.",
-    "financialProfileStatus": "incomplete",
-    "financialReviewDate": "22-Oct-2026",
-    "financialBasis": "PATAMI untuk EPS dan PE; group PAT dipaparkan berasingan dan tidak digunakan sebagai keuntungan pemegang saham.",
-    "verifiedPatami25": 122300000,
-    "groupPat25": 143020000,
-    "groupPat26": 231800000,
-    "ipoPe": 65.19,
-    "ipoPeBasis": "FY25 PATAMI RM122.3 juta; harga RM1.08 dan saham selepas IPO mengikut draf.",
-    "targetPeBasis": "Andaian senario boleh laras; bukan gandaan wajar yang disahkan.",
-    "historicalYears": [
-      23,
-      24,
-      25
-    ],
-    "projectionHeaders": [
-      "FY26 — PATAMI belum disahkan",
-      "FY27 — belum disahkan"
-    ],
-    "pat24": null,
-    "patF1": null,
-    "eps24": null,
-    "epsF1": null,
-    "epsGrowthF1": null,
-    "rev24": null,
-    "sifuTargetPrice": null,
-    "calibratedSifuTargetPrice": null,
-    "v7TargetPrice": null,
-    "zone2TargetPrice": null,
-    "valuationScenarios": [
-      {
-        "multiple": 25,
-        "price": 0.7850350849316114
-      },
-      {
-        "multiple": 30,
-        "price": 0.9420421019179338
-      }
-    ],
-    "valuationScenarioBasis": "Sensitiviti berdasarkan group PAT FY26 RM231.8 juta, bukan PATAMI. Julat ini bukan nilai wajar disahkan, ramalan debut atau sasaran Sifu.",
-    "mitiVerdict": "PERLU SEMAK PATAMI",
-    "mitiAllocationScope": "individual-reported",
-    "catalysts": [
-      "<strong>Harga dan status:</strong> RM1.08 dilaporkan melalui tawaran MITI pengguna; <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">prospektus awam yang disemak masih draf</a>.",
-      "<strong>Keuntungan pemegang saham:</strong> PATAMI FY25 RM122.3 juta → EPS 1.657 sen → PE 65.19x. Group PAT FY26 RM231.8 juta dipaparkan berasingan; PATAMI FY26 belum disahkan.",
-      "<strong>Model farmasi:</strong> Pertumbuhan jualan kedai, margin, aliran tunai dan penjimatan faedah perlu menyokong harga premium; jumlah kedai dan label healthcare sahaja tidak menentukan nilai. <a href=\"https://theedgemalaysia.com/node/821839\" target=\"_blank\" rel=\"noopener noreferrer\">Operasi terkini: 668 kedai</a>.",
-      "<strong>OFS 68.63%:</strong> Daripada saham IPO, bukan seluruh syarikat. Pada RM1.08 hasil kasar syarikat RM637.79 juta, penjual RM1.395 bilion; struktur tertakluk dokumen akhir.",
-      "<strong>Penggunaan dana:</strong> Big Caring merancang bayar sebahagian hutang dan pusat pengedaran. SUNMED juga membayar sukuk: 66.5% hasil baharu untuk hospital sedia ada, 29.9% sukuk, 3.6% kos. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus SUNMED</a>.",
-      "<strong>Permintaan:</strong> Full allocation MITI individu tidak sama dengan OS awam. <a href=\"https://theedgemalaysia.com/node/822547\" target=\"_blank\" rel=\"noopener noreferrer\">Laporan 20 Okt</a> menyebut komitmen puluhan cornerstone Big Caring, tetapi terma akhir belum disahkan.",
-      "<strong>Stabilisation:</strong> 225.146 juta saham dalam draf; tiada kewajipan membeli atau menjamin harga IPO. <a href=\"https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc\" target=\"_blank\" rel=\"noopener noreferrer\">Syarat SC</a>."
-    ],
-    "peers": "<strong>Asas perbandingan:</strong> Gunakan rangkaian farmasi/runcit yang setara untuk menilai keuntungan Big Caring. SUNMED ialah rujukan hasil debut dan permintaan, bukan sasaran pulangan. RM0.785–RM0.942 ialah senario andaian atas group PAT, bukan nilai wajar atau sasaran Sifu.",
-    "researchComparison": {
-      "title": "Big Caring berbanding keputusan IPO SUNMED",
-      "columns": [
-        "Perkara",
-        "SUNMED",
-        "Big Caring"
-      ],
-      "rows": [
-        [
-          "Model bisnes",
-          "Hospital",
-          "Terutamanya runcit farmasi"
-        ],
-        [
-          "Harga IPO",
-          "RM1.45",
-          "RM1.08 — laporan MITI"
-        ],
-        [
-          "PE sejarah IPO",
-          "64.8x (FY24)",
-          "65.19x (FY25)"
-        ],
-        [
-          "OFS / saham IPO",
-          "70.8%",
-          "68.63% (draf)"
-        ],
-        [
-          "OS awam",
-          "5.57x",
-          "Belum diketahui"
-        ],
-        [
-          "Pembukaan debut",
-          "RM1.70 (+17.24%)",
-          "Belum listing"
-        ],
-        [
-          "Tutup hari pertama",
-          "RM1.85 (+27.59%)",
-          "Belum listing"
-        ],
-        [
-          "Cornerstone sebelum IPO",
-          "20; 52.6% tawaran institusi",
-          "Komitmen dilaporkan media; terma akhir belum disahkan"
-        ]
-      ],
-      "note": "PE menggunakan tahun kewangan berbeza. Prestasi SUNMED ialah sejarah, bukan ramalan Big Caring. Full allocation MITI individu bukan OS awam.",
-      "sources": [
-        {
-          "label": "Prospektus SUNMED",
-          "url": "https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf"
-        },
-        {
-          "label": "Keputusan langganan MIH",
-          "url": "https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf"
-        },
-        {
-          "label": "Hasil debut SUNMED",
-          "url": "https://theedgemalaysia.com/node/796630"
-        },
-        {
-          "label": "Draf Big Caring",
-          "url": "https://www.sc.com.my/api/documentms/download.ashx?id=e7df6728-59f7-4f95-9b86-c605e7e319dc"
-        },
-        {
-          "label": "Laporan cornerstone Big Caring, 20 Okt",
-          "url": "https://theedgemalaysia.com/node/822547"
-        }
-      ]
-    },
-    "groupRevenue26": 4000000000
-  },
-  "ioipg-malaysia-reit": {
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "mitiOpenDate": "17-Aug-2026",
-    "mitiCloseDate": "31-Aug-2026",
-    "prospectusUrl": "https://sahamonline.miti.gov.my/",
-    "sector": "REITs",
-    "shariah": false,
-    "price": 0,
-    "ib": "Maybank IB",
-    "predictedGrade": "B",
-    "sifuTargetPrice": 0.97,
-    "calibratedSifuTargetPrice": 0.98,
-    "v7TargetPrice": 1,
-    "zone2TargetPrice": 1.05,
-    "analystInsight": "📊 <b>REIT PERTAMA IOI — UNJURAN YIELD 6.5–7%</b><br>💡 IOIPG Malaysia REIT — REIT milik IOI Properties (kekal 60% selepas listing). Portfolio RM7.58B (9 hartanah): IOI City Mall (RM5.1B — 2/3 portfolio, mall kedua terbesar Malaysia), IOI City Towers, PFCC Towers + 6 hotel premium (Putrajaya Marriott, Le Méridien Putrajaya, Moxy Putrajaya, Four Points Puchong, W Kuala Lumpur, Courtyard Penang).<br><br>⚠️ <b>POINT PENTING:</b><br>• Harga indikatif RM0.90/unit ≈ NAV — bukan premium.<br>• Unjuran yield 6.5–7.0% — hujung atas sektor REIT Malaysia (~5-6%).<br>• MITI tranche 687.5 juta unit (12.5%) — gergasi, 0 pelabur setakat ni → allocation hampir pasti penuh.<br>• REIT = playbook dividen, BUKAN flip besar. Debut biasanya +0–5%.<br>• ⚠️ Status shariah SAC belum disahkan rasmi (sebelum listing) — diandaikan compliant: pembiayaan sukuk, core asset retail mall.<br><br>📌 <b>Keputusan:</b> Bagus untuk yield & keselamatan (sponsor IOI kukuh, aset landmark). Untuk flip: jangkaan kecil (+2–5%) — jangan banding dengan Big Caring (+15–20%). Angka kewangan adalah pro-forma/unjuran (REIT baharu, prospektus belum diakses).",
-    "mitiApplicants": 406
-  },
-  "mydcd-berhad": {
-    "stage": 3,
-    "status": "Application Open",
-    "price": 0.56,
-    "mitiOpenDate": "18-Aug-2026",
-    "mitiCloseDate": "28-Aug-2026",
-    "mitiOfferShares": 224250000,
-    "mitiApplicants": 2887,
-    "analystInsight": "<b>MYDCD RM0.56 — PERTUMBUHAN KUAT, SEMAK TUNAI DAN PELANGGAN</b><br>• Harga tawaran MITI disahkan pengguna; pada modal saham draf, PE sejarah FY25 25.44x.<br>• PATAMI RM39.486 juta, CFO RM9.648 juta (24.43%); Binastra 61.68% hasil.<br>• OFS 30.21%; RM55 juta dividen dibayar, sehingga RM33 juta lagi masih cadangan dalam draf.<br>• Unjuran lama dan sasaran automatik dibuang. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa</a>",
-    "financialProfileStatus": "complete",
-    "financialReviewDate": "29-Oct-2026",
-    "historicalYears": [
-      23,
-      24,
-      25
-    ],
-    "headers": [
-      "FYE 23",
-      "FYE 24",
-      "FYE 25",
-      "Projection (FYE F)",
-      "Projection (FYE F+1)"
-    ],
-    "projectionHeaders": [
-      "FYE 26 (F)",
-      "FYE 27 (F+1)"
-    ],
-    "targetPe": 20,
-    "sifuTargetPrice": 0.45,
-    "calibratedSifuTargetPrice": 0.45,
-    "v3TargetPrice": 0.4,
-    "v7TargetPrice": 0.55,
-    "zone2TargetPrice": 0.55,
-    "fairValue": 0.45,
-    "valuationScenarios": [],
-    "mitiApplicantsStatus": "unverified",
-    "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
-    "mitiPaymentSource": "https://www.mih.com.my/",
-    "revF": 360000000,
-    "revF1": 380000000,
-    "gpF": 59400000,
-    "gpF1": 62700000,
-    "patF": 36000000,
-    "patF1": 38000000,
-    "epsF": 2.01,
-    "epsF1": 2.12,
-    "assetsF": 360000000,
-    "assetsF1": 380000000,
-    "liabF": 270000000,
-    "liabF1": 275000000,
-    "epsGrowthF": -8.6,
-    "epsGrowthF1": 5.5,
-    "priceStatus": "user-reported-miti",
-    "priceSourceNote": "RM0.56 berdasarkan pengesahan harga tawaran MITI pengguna pada 22 Okt 2026. Draf Bursa yang disemak masih memaparkan harga kosong; harga akhir prospektus awam belum disahkan secara bebas.",
-    "sector": "Data Centre MEPF Integration",
-    "totalShares": 1794000000,
-    "ipoNewShares": 335000000,
-    "ipoOfferForSaleShares": 145000000,
-    "ipoTotalOfferShares": 480000000,
-    "ipoCompanyGrossProceeds": 187600000,
-    "ipoSellerGrossProceeds": 81200000,
-    "ipoProceedsBasis": "Senario RM0.56 pada struktur saham draf; sebelum kos, tertakluk dokumen akhir.",
-    "ofs": true,
-    "ofsPercentage": 30.21,
-    "mitiNewShares": 158590000,
-    "mitiOfsShares": 65660000,
-    "mitiOfsPercentage": 29.28,
-    "mitiPaymentDeadline": "2026-10-27T17:00:00+08:00",
-    "mitiPaymentNote": "Penerimaan dan bayaran MITI melalui BSIP; tarikh tutup permohonan awam dan listing belum disahkan.",
-    "rev23": 186684000,
-    "rev24": 180907000,
-    "rev25": 371985000,
-    "gp23": 31428000,
-    "gp24": 35854000,
-    "gp25": 61026000,
-    "pat23": 16780000,
-    "pat24": 20021000,
-    "pat25": 39486000,
-    "verifiedPatami25": 39486000,
-    "assets23": 126867000,
-    "assets24": 188037000,
-    "assets25": 341745000,
-    "liab23": 58430000,
-    "liab24": 99579000,
-    "liab25": 268802000,
-    "operatingCashFlow25": 9648000,
-    "operatingCashConversion25": 24.43397659930102,
-    "pe": 25.44,
-    "ipoPe": 25.44,
-    "ipoPeBasis": "FY25 PATAMI RM39.486 juta dalam draf; harga MITI RM0.56 dilaporkan pengguna, modal diperbesar 1.794 bilion saham.",
-    "financialBasis": "PAT attributable to owners (PATAMI), draf Bursa, muka surat tercetak 15–16. Harga dan struktur akhir tertakluk dokumen akhir.",
-    "financialEvidenceStatus": "primary-draft",
-    "financialReview": {
-      "title": "MyDCD: Integrator MEPF pusat data; penilaian premium pada harga MITI RM0.56.",
-      "summary": "Hasil FY25 melonjak RM371.99 juta (+105.6%) dan PATAMI RM39.49 juta (EPS 2.20 sen). Pada harga tawaran MITI dilaporkan RM0.56, PE bernilai 25.44x. Order book bertarikh RM213.33M (30 Nov 2025) ditambah kontrak baharu RM206.4M. Dividen pra-IPO yang besar dan penumpuan pelanggan (Binastra 61.7%) wajar diambil kira.",
-      "profitLabel": "PATAMI — draf Bursa",
-      "historicalPe": {
-        "year": 25,
-        "patami": 39486000
-      },
-      "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (2.01 sen):",
-      "sopNote": "Gandaan PE 20.0x memberikan sasaran wajar RM0.45 (diskaun vs tawaran MITI RM0.56). Sesuai untuk strategi debut / scalp sekiranya sambutan oversubscription tinggi."
-    },
-    "financialSourcesHTML": [
-      "<a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa: ms15–16 dan261–263</a>",
-      "<a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Laman penerbit</a>",
-      "<a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman bayaran MITI</a>"
-    ],
-    "mitiVerdict": "SEMAK TUNAI & PELANGGAN",
-    "fundUse": "Draf: tenaga kerja, ruang pejabat, IT, modal kerja termasuk subkontraktor dan performance bonds, serta kos listing. Amaun akhir perlu dirujuk kepada dokumen akhir.",
-    "catalysts": [
-      "<strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.",
-      "<strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.",
-      "<strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.",
-      "<strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.",
-      "<strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.",
-      "<strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.",
-      "<strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>."
-    ],
-    "peers": "Bandingkan dengan kontraktor/integrator MEPF berdasarkan PATAMI, cash conversion dan kontrak, bukan gandaan pemilik pusat data. PE sejarah 25.44x pada harga MITI dilaporkan perlu disokong pertumbuhan berulang; tiada nilai wajar atau sasaran debut automatik yang disahkan.",
-    "researchComparison": {
-      "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
-      "columns": [
-        "Perkara",
-        "SKA Capital",
-        "MyDCD"
-      ],
-      "rows": [
-        [
-          "Model bisnes",
-          "Kejuruteraan pencawang dan utiliti bawah tanah",
-          "Integrasi MEPF dan penyelenggaraan pusat data"
-        ],
-        [
-          "Harga digunakan",
-          "RM0.43 — prospektus berdaftar",
-          "RM0.56 — tawaran MITI dilaporkan pengguna"
-        ],
-        [
-          "Modal saham selepas IPO",
-          "895.5 juta saham",
-          "1,794 juta saham (draf)"
-        ],
-        [
-          "Market cap pada harga ini",
-          "RM385.07 juta",
-          "RM1,004.64 juta"
-        ],
-        [
-          "PATAMI FY25",
-          "RM28.94 juta — ringkasan sekunder",
-          "RM39.486 juta — draf Bursa"
-        ],
-        [
-          "PE sejarah FY25",
-          "Kira-kira 13.31x; kualiti untung perlu disemak",
-          "25.44x pada harga MITI dilaporkan"
-        ],
-        [
-          "OFS / jumlah saham IPO",
-          "30.11%",
-          "30.21% (draf)"
-        ],
-        [
-          "OFS / tranche MITI",
-          "0% — semuanya saham baharu",
-          "29.28% (draf)"
-        ],
-        [
-          "Bayaran MITI (MYT)",
-          "Tutup 22 Okt 2026, 5 petang",
-          "Tutup 27 Okt 2026, 5 petang"
-        ],
-        [
-          "Permohonan awam",
-          "20–27 Okt 2026; tutup 5 petang",
-          "Belum disahkan"
-        ],
-        [
-          "Listing",
-          "11 Nov 2026",
-          "Belum disahkan"
-        ],
-        [
-          "OS awam / sasaran debut",
-          "Belum tersedia",
-          "Belum tersedia"
-        ]
-      ],
-      "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
-      "sources": [
-        {
-          "label": "Pengumuman prospektus SKA",
-          "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
-        },
-        {
-          "label": "Jadual SKA",
-          "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
-        },
-        {
-          "label": "Ringkasan kewangan SKA (sekunder)",
-          "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
-        },
-        {
-          "label": "Draf MyDCD Bursa",
-          "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
-        },
-        {
-          "label": "Pengumuman bayaran MIH",
-          "url": "https://www.mih.com.my/"
-        }
-      ]
-    },
-    "fullAnalysis": "<b>SEMAKAN MYDCD — 23 OKT 2026</b><br><br><strong>Model bisnes:</strong> Kontraktor/integrator MEPF pusat data, bukan pemilik/operator pusat data dengan hasil sewaan. Integrasi MEPF menyumbang 95.64% hasil FY25. <a href=\"https://www.dcdtech.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">Perniagaan penerbit</a> · <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf Bursa, ms16</a>.<br><br><strong>Pertumbuhan sejarah:</strong> Hasil FY25 RM371.985 juta (+105.6%) dan PATAMI RM39.486 juta (+97.2%). Pada harga MITI dilaporkan RM0.56, PE sejarah 25.44x dan market cap RM1.005 bilion.<br><br><strong>Aliran tunai:</strong> CFO FY25 RM9.648 juta bersamaan 24.43% PATAMI. Trade receivables RM153.70 juta dan contract assets kira-kira RM154.13 juta menunjukkan modal kerja besar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms261–263</a>.<br><br><strong>Penumpuan pelanggan:</strong> Binastra 61.68% hasil FY25; lima pelanggan terbesar 94.21%. Kehilangan atau kelewatan projek besar boleh menjejaskan hasil dan kutipan. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms152–153</a>.<br><br><strong>OFS dan dividen:</strong> OFS 30.21% IPO; 29.28% tranche MITI ialah OFS. RM55 juta dividen dibayar FY25; tambahan sehingga RM33 juta masih cadangan dan belum diisytiharkan pada 13 Feb 2026. Jangan anggap RM88 juta semuanya dibayar. <a href=\"https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd\" target=\"_blank\" rel=\"noopener noreferrer\">Draf, ms8 dan15</a>.<br><br><strong>Order book bertarikh:</strong> RM213.33 juta pada 30 Nov 2025 dan lapan kontrak RM206.4 juta hingga 18 Dis 2025. Jumlah ini bukan order book semasa Okt 2026 kerana kemajuan kerja belum ditolak.<br><br><strong>Status MITI:</strong> Penerimaan dan bayaran tutup 27 Okt 2026, 5 petang MYT. Tarikh awam/listing dan OS awam belum tersedia. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a>.<br><br><b>Asas dokumen:</b> Draf belum berdaftar; LPD 30 Nov 2025 dengan maklumat tambahan sehingga 13 Feb 2026. Angka sejarah bukan unjuran semasa. Struktur dan hasil IPO pada RM0.56 ialah kiraan berdasarkan harga tawaran MITI dilaporkan pengguna dan modal saham draf.<br><br><b>Rumusan:</b> Pertumbuhan kukuh dengan penilaian yang memerlukan kesinambungan keuntungan dan kutipan tunai. Tumpuan pelanggan, modal kerja serta dividen sebelum IPO perlu diteliti. Jumlah saham MITI tidak membuktikan minat institusi atau OS tinggi. Tiada sasaran debut atau keputusan beli/jual automatik diterbitkan.",
-    "eps23": 0.94,
-    "eps24": 1.12,
-    "eps25": 2.2,
-    "openingDate": "26-Oct-2026",
-    "closingDate": "02-Nov-2026",
-    "listingDate": "17-Nov-2026",
-    "symbol": "MYDCD",
-    "market": "ACE Market",
-    "zone1TargetPrice": 0.4,
-    "sifuGrade": "B",
-    "predictedGrade": "B"
-  },
-  "wct-reit": {
-    "shariah": false
-  },
-  "megafb": {
-    "shariah": false
-  },
-  "ska-capital-berhad": {
-    "mitiApplicants": 2070,
-    "mitiOfferShares": 111938000,
-    "predictedGrade": "B+",
-    "analystInsight": "<b>SKA RM0.43 — PE SEJARAH ~13.31x, SEMAK KUALITI UNTUNG</b><br>• Harga rasmi menggantikan RM0.425 lama; OFS 30.11% IPO dan MITI semuanya saham baharu.<br>• PATAMI FY25 ~RM28.94 juta daripada ringkasan sekunder; keuntungan berulang dan kutipan tunai perlu disemak.<br>• Unjuran serta sasaran automatik ditangguh; jumlah pemohon lama bukan bukti OS.<br>• <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a> · <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan sekunder</a>",
-    "sector": "Power Infrastructure (EPCC Substation)",
-    "mitiCloseDate": "01-Sep-2026",
-    "stage": 4,
-    "status": "Pre-Listing",
-    "openingDate": "20-Oct-2026",
-    "closingDate": "27-Oct-2026",
-    "listingDate": "11-Nov-2026",
-    "price": 0.43,
-    "symbol": "SKACAP",
-    "market": "ACE Market",
-    "financialProfileStatus": "complete",
-    "financialReviewDate": "29-Oct-2026",
-    "historicalYears": [
-      23,
-      24,
-      25
-    ],
-    "headers": [
-      "FYE 23",
-      "FYE 24",
-      "FYE 25",
-      "Projection (FYE F)",
-      "Projection (FYE F+1)"
-    ],
-    "projectionHeaders": [
-      "FYE 26 (F)",
-      "FYE 27 (F+1)"
-    ],
-    "targetPe": 14,
-    "sifuTargetPrice": 0.54,
-    "calibratedSifuTargetPrice": 0.54,
-    "v3TargetPrice": 0.52,
-    "v7TargetPrice": 0.58,
-    "zone2TargetPrice": 0.58,
-    "fairValue": 0.54,
-    "valuationScenarios": [],
-    "mitiApplicantsStatus": "unverified",
-    "mitiApplicantsNote": "Angka pemohon dalam rekod lama belum disahkan daripada sumber primer; bukan OS awam.",
-    "mitiPaymentSource": "https://www.mih.com.my/",
-    "revF": 285000000,
-    "revF1": 330000000,
-    "gpF": 54000000,
-    "gpF1": 64000000,
-    "patF": 34500000,
-    "patF1": 40000000,
-    "epsF": 3.85,
-    "epsF1": 4.47,
-    "assetsF": 260000000,
-    "assetsF1": 300000000,
-    "liabF": 195000000,
-    "liabF1": 220000000,
-    "epsGrowthF": 19.2,
-    "epsGrowthF1": 15.9,
-    "priceStatus": "registered-prospectus",
-    "priceSourceNote": "RM0.43 disahkan melalui pengumuman prospektus Bursa pada 20 Okt 2026 dan harga tawaran MITI pengguna. Menggantikan indikatif lama RM0.425.",
-    "ib": "TA Securities",
-    "totalShares": 895500000,
-    "ipoNewShares": 168075500,
-    "ipoOfferForSaleShares": 72400000,
-    "ipoTotalOfferShares": 240475500,
-    "ipoCompanyGrossProceeds": 72272465,
-    "ipoSellerGrossProceeds": 31132000,
-    "ofs": true,
-    "ofsPercentage": 30.11,
-    "mitiNewShares": 111938000,
-    "mitiOfsShares": 0,
-    "mitiOfsPercentage": 0,
-    "mitiPaymentDeadline": "2026-10-22T17:00:00+08:00",
-    "mitiPaymentNote": "Tarikh akhir penerimaan dan bayaran MITI menurut MIH pada 22 Okt 2026; bukan tarikh tutup permohonan awam.",
-    "closingTime": "17:00",
-    "ballotingDate": "29-Oct-2026",
-    "allotmentDate": "05-Nov-2026",
-    "prospectusUrl": "https://www.klsescreener.com/v2/announcements/view/11687405",
-    "rev23": 44440000,
-    "rev24": 151800000,
-    "rev25": 241360000,
-    "gp23": 11270000,
-    "gp24": 29470000,
-    "gp25": 44040000,
-    "pat23": 560000,
-    "pat24": 16290000,
-    "pat25": 28940000,
-    "assets23": 31468000,
-    "assets24": 65214000,
-    "assets25": 189095000,
-    "liab23": 38087000,
-    "liab24": 52803000,
-    "liab25": 153810000,
-    "pe": 13.31,
-    "ipoPe": 13.31,
-    "ipoPeBasis": "FY25 PATAMI kira-kira RM28.94 juta daripada ringkasan sekunder; 895.5 juta saham dan harga rasmi RM0.43.",
-    "financialBasis": "PATAMI, bukan group PAT. Angka sejarah dibundarkan dalam ringkasan sekunder; belum disemak dengan PDF kewangan asal.",
-    "financialEvidenceStatus": "audited-prospectus",
-    "financialReview": {
-      "title": "SKA: Penyata kewangan prospektus disahkan; pertumbuhan tinggi utiliti grid & pencawang.",
-      "summary": "Hasil FY25 RM241.36 juta dan PATAMI RM28.94 juta (EPS 3.23 sen) memberi PE sejarah 13.31x. Unjuran FY26 menjana PATAMI RM34.5 juta (EPS 3.85 sen) didokong order book kukuh RM313.4 juta dalam kejuruteraan pencawang kuasa dan utiliti bawah tanah sempena pemodenan grid TNB dan pusat data.",
-      "profitLabel": "PAT attributable to owners (PATAMI)",
-      "historicalPe": {
-        "year": 25,
-        "patami": 28940000
-      },
-      "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (3.85 sen):",
-      "sopNote": "Gandaan PE 14.0x wajar berdasarkan segmen kontraktor pencawang/grid kuasa (setaraf MN Holdings). Nilai wajar Sifu RM0.54 memberikan potensi kenaikan +25.6% dari harga IPO RM0.43."
-    },
-    "financialSourcesHTML": [
-      "<a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman prospektus Bursa</a>",
-      "<a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Kewangan: ringkasan sekunder</a>",
-      "<a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Kualiti untung: analisis sekunder</a>"
-    ],
-    "mitiVerdict": "SEMAK KUALITI UNTUNG",
-    "catalysts": [
-      "<strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.",
-      "<strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.",
-      "<strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.",
-      "<strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.",
-      "<strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.",
-      "<strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>."
-    ],
-    "peers": "Bandingkan dengan kontraktor pencawang dan utiliti menggunakan PATAMI berulang, cash conversion, order book bertarikh dan tumpuan pelanggan. Hubungan tema pusat data tidak menjadikannya pemilik pusat data. Tiada gandaan peer semasa atau sasaran debut yang disahkan.",
-    "researchComparison": {
-      "title": "SKA Capital dan MyDCD — semakan tawaran MITI",
-      "columns": [
-        "Perkara",
-        "SKA Capital",
-        "MyDCD"
-      ],
-      "rows": [
-        [
-          "Model bisnes",
-          "Kejuruteraan pencawang dan utiliti bawah tanah",
-          "Integrasi MEPF dan penyelenggaraan pusat data"
-        ],
-        [
-          "Harga digunakan",
-          "RM0.43 — prospektus berdaftar",
-          "RM0.56 — tawaran MITI dilaporkan pengguna"
-        ],
-        [
-          "Modal saham selepas IPO",
-          "895.5 juta saham",
-          "1,794 juta saham (draf)"
-        ],
-        [
-          "Market cap pada harga ini",
-          "RM385.07 juta",
-          "RM1,004.64 juta"
-        ],
-        [
-          "PATAMI FY25",
-          "RM28.94 juta — ringkasan sekunder",
-          "RM39.486 juta — draf Bursa"
-        ],
-        [
-          "PE sejarah FY25",
-          "Kira-kira 13.31x; kualiti untung perlu disemak",
-          "25.44x pada harga MITI dilaporkan"
-        ],
-        [
-          "OFS / jumlah saham IPO",
-          "30.11%",
-          "30.21% (draf)"
-        ],
-        [
-          "OFS / tranche MITI",
-          "0% — semuanya saham baharu",
-          "29.28% (draf)"
-        ],
-        [
-          "Bayaran MITI (MYT)",
-          "Tutup 22 Okt 2026, 5 petang",
-          "Tutup 27 Okt 2026, 5 petang"
-        ],
-        [
-          "Permohonan awam",
-          "20–27 Okt 2026; tutup 5 petang",
-          "Belum disahkan"
-        ],
-        [
-          "Listing",
-          "11 Nov 2026",
-          "Belum disahkan"
-        ],
-        [
-          "OS awam / sasaran debut",
-          "Belum tersedia",
-          "Belum tersedia"
-        ]
-      ],
-      "note": "Angka SKA kewangan masih bersumberkan ringkasan sekunder; PDF kewangan asal belum berjaya diakses. MyDCD berdasarkan draf, kecuali RM0.56 yang dilaporkan pengguna melalui tawaran MITI. PE lebih rendah sahaja tidak mengesahkan murah. Tarikh bayaran MITI berbeza daripada permohonan awam.",
-      "sources": [
-        {
-          "label": "Pengumuman prospektus SKA",
-          "url": "https://www.klsescreener.com/v2/announcements/view/11687405"
-        },
-        {
-          "label": "Jadual SKA",
-          "url": "https://www.klsescreener.com/v2/announcements/view/11687407"
-        },
-        {
-          "label": "Ringkasan kewangan SKA (sekunder)",
-          "url": "https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market"
-        },
-        {
-          "label": "Draf MyDCD Bursa",
-          "url": "https://www.bursamalaysia.com/regulation/prospectus_exposure/mydcd-berhad-mydcd"
-        },
-        {
-          "label": "Pengumuman bayaran MIH",
-          "url": "https://www.mih.com.my/"
-        }
-      ]
-    },
-    "fullAnalysis": "<b>SEMAKAN SKA — 23 OKT 2026</b><br><br><strong>Tawaran rasmi:</strong> RM0.43; 895.5 juta saham selepas IPO memberi market cap RM385.07 juta. <a href=\"https://www.klsescreener.com/v2/announcements/view/11687405\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Bursa</a>.<br><br><strong>Dana baharu dominan:</strong> 168.0755 juta saham baharu dan 72.4 juta OFS. OFS ialah 30.11% saham IPO; kutipan kasar syarikat RM72.27 juta dan penjual RM31.13 juta. Tranche MITI 111.938 juta semuanya saham baharu.<br><br><strong>Operasi:</strong> Kejuruteraan pencawang dan utiliti bawah tanah. Order book RM313.4 juta pada 21 Sep 2026; angka bertarikh ini bukan jaminan hasil atau margin masa depan. <a href=\"https://www.junipersjournal.com/ska-capital-berhad-launches-ipo-prospectus-ahead-of-ace-market-listing/\" target=\"_blank\" rel=\"noopener noreferrer\">Kenyataan pelancaran syarikat</a>.<br><br><strong>Keuntungan:</strong> Ringkasan sekunder melaporkan PATAMI FY25 RM28.94 juta, berbeza daripada group PAT RM30.80 juta. Angka 5 bulan 2026 bukan keuntungan setahun. <a href=\"https://mahersaham.com/blogs/ipo-ska-capital-berhad-ace-market\" target=\"_blank\" rel=\"noopener noreferrer\">Ringkasan kewangan</a>.<br><br><strong>Semakan tertangguh:</strong> Analisis sekunder menyebut pembalikan impairment bukan tunai RM7.19 juta dan CFO FY25 RM6.73 juta. Semak asas cukai serta agihan minority sebelum menukar ini kepada adjusted PATAMI; angka belum disemak dengan PDF asal. <a href=\"https://ipo.dausdk.com/ipo/ska-capital\" target=\"_blank\" rel=\"noopener noreferrer\">Analisis kualiti keuntungan</a>.<br><br><strong>Tarikh berasingan:</strong> Bayaran MITI tutup 22 Okt, 5 petang; permohonan awam tutup 27 Okt, 5 petang; listing 11 Nov 2026. <a href=\"https://www.mih.com.my/\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11687407\" target=\"_blank\" rel=\"noopener noreferrer\">Jadual Bursa</a>.<br><br><b>Rumusan:</b> Pertumbuhan tinggi dan penggunaan saham baharu lebih besar daripada OFS. PE sejarah kira-kira 13.31x belum cukup untuk melabel murah kerana kualiti keuntungan, kutipan tunai dan tumpuan pelanggan masih perlu disemak. Sasaran Sifu tidak diterbitkan tanpa asas unjuran yang boleh disokong.",
-    "eps23": 0.06,
-    "eps24": 1.82,
-    "eps25": 3.23,
-    "zone1TargetPrice": 0.52,
-    "sifuGrade": "B+"
-  },
-  "empg-group-berhad": {
-    "mitiApplicants": 97,
-    "mitiOfferShares": 75751000,
-    "predictedGrade": "B",
-    "analystInsight": "📣 <b>EVENTS & MEDIA SERVICES (GRADE B):</b> Event management, brand activation and marketing media solutions. Newly opened on MITI portal, indicative price TBA.",
-    "mitiCloseDate": "09-Sep-2026",
-    "mitiOpenDate": "28-Aug-2026",
-    "stage": 6,
-    "status": "Awaiting MITI Decision"
-  },
-  "scgm-bhd": {
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "price": 0.365,
-    "mitiApplicants": 84,
-    "mitiOfferShares": 95300000,
-    "mitiOpenDate": "28-Aug-2026",
-    "mitiCloseDate": "12-Sep-2026",
-    "hasMitiTranche": true
-  },
-  "yes-group-management-berhad": {
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "hasMitiTranche": true,
-    "price": 0.18,
-    "mitiCloseDate": "14-Sep-2026",
-    "mitiOpenDate": "08-Sep-2026",
-    "mitiApplicants": 86,
-    "mitiOfferShares": 66250000
-  },
-  "pioneer-heat-holdings-berhad": {
-    "symbol": "PIONEER",
-    "stage": 5,
-    "status": "Listed",
-    "closingDate": "03-Sep-2026",
-    "listingDate": "17-Sep-2026",
-    "os": 47.8,
-    "openPrice": 0.255,
-    "highPrice": 0.325,
-    "dailyChange": 30,
-    "sifuTargetPrice": 0.31,
-    "calibratedSifuTargetPrice": 0.31,
-    "v3TargetPrice": 0.31,
-    "predictedGrade": "B",
-    "analystInsight": "🚀 <b>PENYENARAIAN PASARAN (DEBUT POP +30%)</b><br>Pioneer Heat Holdings Berhad (0368 / PIONEER) tersenarai di Pasaran ACE pada 17-Sep-2026.<br><br>📊 <b>Prestasi Hari Pertama:</b><br>• <b>Harga IPO:</b> RM0.25<br>• <b>Harga Buka:</b> RM0.255 (+2.0%)<br>• <b>Puncak Intraday:</b> RM0.325 (+30.0% / +RM0.075)<br>• <b>Langganan Awam:</b> 47.80x (Bumi 57.35x)<br><br>🎯 <b>Unjuran Sasaran Sifu:</b> Target awal RM0.30–RM0.31 dicapai sepenuhnya pada sesi pertama dengan penaja Malacca Securities."
-  },
-  "sca-solutions-berhad": {
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "hasMitiTranche": true,
-    "price": 0.28,
-    "mitiCloseDate": "27-Sep-2026",
-    "mitiOpenDate": "21-Sep-2026",
-    "mitiOfferShares": 71204000
-  },
-  "eghi": {
-    "price": 0.16,
-    "shariah": false,
-    "stage": 5,
-    "status": "Listed",
-    "predictedGrade": "C",
-    "sifuTargetPrice": 0.18,
-    "calibratedSifuTargetPrice": 0.18,
-    "v3TargetPrice": 0.18,
-    "v7TargetPrice": 0.18,
-    "zone2TargetPrice": 0.18,
-    "ib": "Berjaya Securities",
-    "totalShares": 360000000,
-    "analystInsight": "<b>OS awam disahkan:</b> 1.63×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11680893\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>📊 <b>GRED SELEPAS BALLOTING: C</b><br>• <b>Interior Fit-out Specialist:</b> Penyedia penyelesaian ubah suai dan hiasan dalaman komersil/kediaman.<br>• <b>Penilaian & Tawaran:</b> Harga IPO RM0.16 sesaham (PE ~14.7x FY26). Terbitan 240M saham baharu + 120M OFS.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh Berjaya Securities Sdn Bhd.<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah.",
-    "openingDate": "24-Sep-2026",
-    "closingDate": "05-Oct-2026",
-    "listingDate": "16-Oct-2026",
-    "symbol": "ECOGRP",
-    "os": 1.63,
-    "isAutoOS": true,
-    "osSource": "https://www.klsescreener.com/v2/announcements/view/11680893",
-    "osSourceDate": "07 Oct 2026",
-    "osMetric": "overall-public-oversubscription",
-    "osSubscriptionRate": 2.63,
-    "market": "ACE Market",
-    "sector": "Consumer Products & Services (Interior Fit-out)"
-  },
-  "kk-mart-retail-berhad": {
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "hasMitiTranche": true,
-    "predictedGrade": "B",
-    "sifuTargetPrice": 1.65,
-    "calibratedSifuTargetPrice": 1.65,
-    "v3TargetPrice": 1.65,
-    "v7TargetPrice": 1.65,
-    "zone2TargetPrice": 1.65,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Convenience Store Chain:</b> Rangkaian kedai serbaneka 24 jam terkemuka di Malaysia dengan ratusan cawangan.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> Permohonan MITI dibuka 28-Sep hingga 11-Okt-2026 (Pasaran Utama).<br>• <b>Status Syariah:</b> [NS] Bukan patuh Syariah."
-  },
-  "panda-eyes-group-berhad": {
-    "id": "panda-eyes-group-berhad",
-    "companyName": "Panda Eyes Group Berhad",
-    "symbol": "PANDAEYES",
-    "market": "ACE Market",
-    "price": 0.25,
-    "openingDate": "",
-    "closingDate": "",
-    "listingDate": "",
-    "mitiOpenDate": "25-Sep-2026",
-    "mitiCloseDate": "08-Oct-2026",
-    "mitiOfferShares": 203125000,
-    "shariah": true,
-    "stage": 6,
-    "status": "Awaiting MITI Decision",
-    "hasMitiTranche": true,
-    "year": 2026,
-    "sector": "Consumer Products & Services (Retailers & Fashion)",
-    "geography": "Selangor",
-    "ib": "M & A Securities",
-    "totalShares": 325000000,
-    "predictedGrade": "B",
-    "sifuTargetPrice": 0.28,
-    "calibratedSifuTargetPrice": 0.28,
-    "v3TargetPrice": 0.28,
-    "v7TargetPrice": 0.28,
-    "zone2TargetPrice": 0.28,
-    "analystInsight": "✅ <b>WORTH IT (GRADE B)</b><br>• <b>Fashion & Lifestyle Retail:</b> Rangkaian peruncitan fesyen, beg & aksesori di bawah jenama Panda Eyes.<br>• <b>Tawaran Saham Khas Bumiputera (MITI):</b> 203.125M saham diperuntukkan kepada pelabur Bumiputera MITI.<br>• <b>Penasihat Utama:</b> Ditaja sepenuhnya oleh M & A Securities Sdn Bhd.<br>• <b>Status Syariah:</b> Patuh Syariah."
-  },
-  "gta-holdings-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "19-Aug-2026",
-    "closingDate": "26-Aug-2026",
-    "listingDate": "08-Sep-2026",
-    "price": 0.35,
-    "symbol": "GTA"
-  },
-  "stratus-global": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "02-Jul-2026",
-    "closingDate": "10-Jul-2026",
-    "listingDate": "21-Jul-2026",
-    "price": 0.8
-  },
-  "restngo": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "16-Jun-2026",
-    "closingDate": "24-Jun-2026",
-    "listingDate": "07-Jul-2026",
-    "price": 0.13,
-    "symbol": "RESTNGO",
-    "market": "ACE Market",
-    "sector": "Consumer Products & Services"
-  },
-  "eckem-holdings-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "25-May-2026",
-    "closingDate": "19-Jun-2026",
-    "listingDate": "03-Jul-2026",
-    "price": 0.12,
-    "symbol": "ECKEM",
-    "market": "ACE Market",
-    "sector": "Industrial Products & Services"
-  },
-  "liftech-group-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "08-Jun-2026",
-    "closingDate": "16-Jun-2026",
-    "listingDate": "30-Jun-2026",
-    "price": 0.29,
-    "symbol": "LIFTECH",
-    "market": "ACE Market",
-    "sector": "Industrial Products & Services"
-  },
-  "rt-pastry-holdings-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "05-Jun-2026",
-    "closingDate": "15-Jun-2026",
-    "listingDate": "29-Jun-2026",
-    "price": 0.18,
-    "symbol": "RT",
-    "market": "ACE Market",
-    "sector": "Consumer Products & Services"
-  },
-  "hss-holdings-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-May-2026",
-    "closingDate": "09-Jun-2026",
-    "listingDate": "23-Jun-2026",
-    "price": 0.18
-  },
-  "bus-cap": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "06-May-2026",
-    "closingDate": "15-May-2026",
-    "listingDate": "03-Jun-2026",
-    "price": 0.23
-  },
-  "gold-li": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "27-Apr-2026",
-    "closingDate": "05-May-2026",
-    "listingDate": "18-May-2026",
-    "price": 0.13,
-    "pat23": 5637000,
-    "pat24": 6675000,
-    "pat25": 7843000,
-    "gp23": 11400000,
-    "gp24": 12600000,
-    "gp25": 17200000,
-    "assets23": 48000000,
-    "assets24": 55000000,
-    "assets25": 68000000,
-    "liab23": 22000000,
-    "liab24": 26000000,
-    "liab25": 32000000,
-    "revF1": 77000000
-  },
-  "inspace-creation": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "13-Apr-2026",
-    "closingDate": "22-Apr-2026",
-    "listingDate": "08-May-2026",
-    "price": 0.25
-  },
-  "manforce-group": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "15-Apr-2026",
-    "closingDate": "21-Apr-2026",
-    "listingDate": "06-May-2026",
-    "price": 0.38
-  },
-  "mtt-shipping": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Mar-2026",
-    "closingDate": "03-Apr-2026",
-    "listingDate": "21-Apr-2026",
-    "price": 1.03
-  },
-  "empire-premium": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "25-Mar-2026",
-    "closingDate": "31-Mar-2026",
-    "listingDate": "17-Apr-2026",
-    "price": 0.7
-  },
-  "gdgroup": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Mar-2026",
-    "closingDate": "06-Apr-2026",
-    "listingDate": "16-Apr-2026",
-    "price": 0.45,
-    "pat23": 1469000,
-    "pat24": 31610000,
-    "pat25": 28360000,
-    "gp23": 120000000,
-    "gp24": 119000000,
-    "gp25": 112000000,
-    "assets23": 280000000,
-    "assets24": 320000000,
-    "assets25": 380000000,
-    "liab23": 210000000,
-    "liab24": 250000000,
-    "liab25": 290000000,
-    "revF1": 632000000
-  },
-  "5e-resources": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "30-Mar-2026",
-    "closingDate": "03-Apr-2026",
-    "listingDate": "15-Apr-2026",
-    "price": 0.26
-  },
-  "sunmed": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "27-Feb-2026",
-    "closingDate": "05-Mar-2026",
-    "listingDate": "18-Mar-2026",
-    "price": 1.45,
-    "pe": 64.8,
-    "ipoPe": 64.8,
-    "ipoPeBasis": "PE pada harga IPO RM1.45 berdasarkan PATAMI FY24; prospektus 27 Feb 2026.",
-    "closePrice": 1.85,
-    "ofs": true,
-    "ofsPercentage": 70.79687850257818,
-    "analystInsight": "<b>HASIL IPO SUNMED — RUJUKAN SEJARAH</b><br>Harga IPO RM1.45; pembukaan debut RM1.70 (+17.24%); tutup hari pertama RM1.85 (+27.59%). PE sejarah pada harga IPO 64.8x (PATAMI FY24), OFS 70.8%, OS awam 5.57x. Sebelum listing: 20 cornerstone mengambil 52.6% tawaran institusi. Hasil ini tidak meramalkan prestasi IPO lain. <a href=\"https://www.sunwayhealthcaregroup.com/images/file/Sunway%20Healthcare%20%28ENG%29%20Bursa%20part%201.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Prospektus</a> · <a href=\"https://www.mih.com.my/storage/attachment/press/FINAL%20PRESS%20RELEASE%20-%20%20SUNWAY%20HEALTHCARE%20HOLDINGS%20BERHAD.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">MIH</a> · <a href=\"https://theedgemalaysia.com/node/796630\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan debut</a>"
-  },
-  "adnex": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Feb-2026",
-    "closingDate": "05-Mar-2026",
-    "listingDate": "17-Mar-2026",
-    "price": 0.2,
-    "symbol": "ADNEX",
-    "market": "ACE Market",
-    "sector": "Construction (Interior Fit-out)"
-  },
-  "ogx": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "12-Feb-2026",
-    "closingDate": "02-Mar-2026",
-    "listingDate": "12-Mar-2026",
-    "price": 0.35
-  },
-  "sbs": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "23-Dec-2026",
-    "closingDate": "07-Jan-2026",
-    "listingDate": "20-Jan-2026",
-    "price": 0.25
-  },
-  "genergy": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "20-Nov-2026",
-    "closingDate": "28-Nov-2026",
-    "listingDate": "11-Dec-2025",
-    "price": 1
-  },
-  "lacmed": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "14-Nov-2026",
-    "closingDate": "25-Nov-2026",
-    "listingDate": "10-Dec-2025",
-    "price": 0.75
-  },
-  "orkim": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "19-Nov-2026",
-    "closingDate": "26-Nov-2026",
-    "listingDate": "09-Dec-2025",
-    "price": 0.92
-  },
-  "bms": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Mar-2025",
-    "closingDate": "04-Apr-2025",
-    "listingDate": "15-Apr-2025",
-    "price": 0.22
-  },
-  "geohan": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "17-Nov-2026",
-    "closingDate": "21-Nov-2026",
-    "listingDate": "05-Dec-2025",
-    "price": 0.55
-  },
-  "psp": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "11-Nov-2026",
-    "closingDate": "21-Nov-2026",
-    "listingDate": "04-Dec-2025",
-    "price": 0.16
-  },
-  "polymer": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "04-Nov-2026",
-    "closingDate": "11-Nov-2026",
-    "listingDate": "25-Nov-2025",
-    "price": 0.25
-  },
-  "aquawalk": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "30-Oct-2026",
-    "closingDate": "07-Nov-2026",
-    "listingDate": "19-Nov-2025",
-    "price": 0.31
-  },
-  "pmw": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "28-Oct-2026",
-    "closingDate": "06-Nov-2026",
-    "listingDate": "18-Nov-2025",
-    "price": 0.34
-  },
-  "famiera": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Oct-2026",
-    "closingDate": "30-Oct-2026",
-    "listingDate": "12-Nov-2025",
-    "price": 0.25
-  },
-  "thmy": {
-    "stage": 5,
-    "status": "Listed",
-    "price": 0.31
-  },
-  "cheeding": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "12-Sep-2025",
-    "closingDate": "23-Sep-2025",
-    "listingDate": "07-Oct-2025",
-    "price": 0.36,
-    "symbol": "CHEEDING",
-    "market": "ACE Market",
-    "sector": "Utilities (Power Infrastructure)"
-  },
-  "eca": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-Aug-2025",
-    "closingDate": "12-Sep-2025",
-    "listingDate": "02-Oct-2025",
-    "price": 0.17
-  },
-  "jssolar": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "28-Aug-2025",
-    "closingDate": "09-Sep-2025",
-    "listingDate": "23-Sep-2025",
-    "price": 0.31
-  },
-  "oxb": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Jun-2025",
-    "closingDate": "16-Jul-2025",
-    "listingDate": "29-Jul-2025",
-    "price": 0.29
-  },
-  "enpro": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Jun-2025",
-    "closingDate": "08-Jul-2025",
-    "listingDate": "18-Jul-2025",
-    "price": 0.24
-  },
-  "icents": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "25-Jun-2025",
-    "closingDate": "02-Jul-2025",
-    "listingDate": "17-Jul-2025",
-    "price": 0.24
-  },
-  "a1akk": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "18-Jun-2025",
-    "closingDate": "30-Jun-2025",
-    "listingDate": "11-Jul-2025",
-    "price": 0.25
-  },
-  "pmck": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-May-2025",
-    "closingDate": "25-Jun-2025",
-    "listingDate": "09-Jul-2025",
-    "price": 0.22
-  },
-  "asm": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-May-2025",
-    "closingDate": "19-Jun-2025",
-    "listingDate": "02-Jul-2025",
-    "price": 0.17
-  },
-  "pmibhd": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "06-Jun-2025",
-    "closingDate": "17-Jun-2025",
-    "listingDate": "26-Jun-2025",
-    "price": 0.27
-  },
-  "cki": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "26-Mar-2025",
-    "closingDate": "05-Jun-2025",
-    "listingDate": "24-Jun-2025",
-    "price": 1.08
-  },
-  "paradigm--ns-": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "16-May-2025",
-    "closingDate": "23-May-2025",
-    "listingDate": "10-Jun-2025",
-    "price": 1,
-    "symbol": "PARADIGM",
-    "market": "ACE Market",
-    "sector": "Real Estate Investment Trusts"
-  },
-  "hkb": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "30-Apr-2025",
-    "closingDate": "27-May-2025",
-    "listingDate": "09-Jun-2025",
-    "price": 0.335
-  },
-  "ictzone": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "13-May-2025",
-    "closingDate": "20-May-2025",
-    "listingDate": "03-Jun-2025",
-    "price": 0.2
-  },
-  "ohm": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "25-Apr-2025",
-    "closingDate": "09-May-2025",
-    "listingDate": "28-May-2025",
-    "price": 0.28
-  },
-  "people": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Apr-2025",
-    "closingDate": "06-May-2025",
-    "listingDate": "20-May-2025",
-    "price": 0.25
-  },
-  "fibro": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "11-Apr-2025",
-    "closingDate": "25-Apr-2025",
-    "listingDate": "08-May-2025",
-    "price": 0.55
-  },
-  "westrvr": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "10-Apr-2025",
-    "closingDate": "17-Apr-2025",
-    "listingDate": "05-May-2025",
-    "price": 0.39
-  },
-  "reachten": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "09-Apr-2025",
-    "closingDate": "18-Apr-2025",
-    "listingDate": "02-May-2025",
-    "price": 0.52
-  },
-  "wtec": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "09-Apr-2025",
-    "closingDate": "15-Apr-2025",
-    "listingDate": "29-Apr-2025",
-    "price": 0.25
-  },
-  "sumi": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "13-Mar-2025",
-    "closingDate": "25-Mar-2025",
-    "listingDate": "09-Apr-2025",
-    "price": 0.24
-  },
-  "clite": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "05-Mar-2025",
-    "closingDate": "12-Mar-2025",
-    "listingDate": "26-Mar-2025",
-    "price": 0.25
-  },
-  "dengkil": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "28-Feb-2025",
-    "closingDate": "11-Mar-2025",
-    "listingDate": "25-Mar-2025",
-    "price": 0.25
-  },
-  "lsh": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "28-Feb-2025",
-    "closingDate": "06-Mar-2025",
-    "listingDate": "21-Mar-2025",
-    "price": 0.88
-  },
-  "saliran-group": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "19-Feb-2025",
-    "closingDate": "28-Feb-2025",
-    "listingDate": "13-Mar-2025",
-    "price": 0.45
-  },
-  "pantech-global": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "10-Feb-2025",
-    "closingDate": "19-Feb-2025",
-    "listingDate": "03-Mar-2025",
-    "price": 0.85
-  },
-  "sunlogy": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "27-Jan-2025",
-    "closingDate": "05-Feb-2025",
-    "listingDate": "20-Feb-2025",
-    "price": 0.3
-  },
-  "rtech": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "21-Jan-2025",
-    "closingDate": "31-Jan-2025",
-    "listingDate": "17-Feb-2025",
-    "price": 0.25
-  },
-  "nwe-resources-group-berhad": {
-    "stage": 5,
-    "status": "Listed",
-    "openingDate": "29-Sep-2026",
-    "closingDate": "09-Oct-2026",
-    "listingDate": "21-Oct-2026",
-    "price": 0.2,
-    "symbol": "NWEBHD",
-    "openPrice": 0.22,
-    "currentPrice": 0.195,
-    "performance": "-2.50%",
-    "os": 2.82,
-    "isAutoOS": true,
-    "osSource": "https://www.klsescreener.com/v2/announcements/view/11683581",
-    "osSourceDate": "13 Oct 2026",
-    "osMetric": "overall-public-oversubscription",
-    "predictedGrade": "C",
-    "analystInsight": "<b>OS awam disahkan:</b> 2.82×. <a href=\"https://www.klsescreener.com/v2/announcements/view/11683581\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.<br>✅ <b>NWE RESOURCES GROUP BERHAD (NWEBHD)</b><br>• <b>Public IPO:</b> Dibuka 29 Sep 2026, Tutup 09 Oct 2026, Listing 21 Oct 2026.<br>• <b>Harga IPO:</b> RM0.20 per saham.<br>• <b>Pasaran:</b> Pasaran ACE."
-  },
-  "unioleo-holdings-berhad": {
-    "mitiOpenDate": "14-Oct-2026",
-    "mitiCloseDate": "21-Oct-2026",
-    "hasMitiTranche": true,
-    "stage": 6,
-    "status": "Awaiting MITI Decision"
-  },
-  "wil-key-berhad": {
-    "mitiOpenDate": "22-Oct-2026",
-    "mitiCloseDate": "02-Nov-2026",
-    "hasMitiTranche": true,
-    "stage": 2,
-    "status": "MITI Allocation Phase"
-  },
-  "bestari-food-berhad": {
-    "mitiOpenDate": "19-Oct-2026",
-    "mitiCloseDate": "25-Oct-2026",
-    "hasMitiTranche": true,
-    "stage": 6,
-    "status": "Awaiting MITI Decision"
-  },
-  "semico-ns-": {
-    "symbol": "SEMICO",
-    "market": "ACE Market",
-    "sector": "Consumer Products & Services"
-  },
-  "foodie-ns-": {
-    "symbol": "FOODIE",
-    "market": "ACE Market",
-    "sector": "Telecommunications & Media"
-  },
-  "camaroe--ns-": {
-    "symbol": "CAMAROE",
-    "market": "ACE Market",
-    "sector": "Consumer Products & Services"
-  },
-  "impact-capital-holdings-berhad": {
-    "stage": 3,
-    "status": "Application Open",
-    "openingDate": "27-Oct-2026",
-    "closingDate": "06-Nov-2026",
-    "listingDate": "24-Nov-2026",
-    "price": 0.22,
-    "symbol": "IMPACT",
-    "market": "ACE Market",
-    "sector": "Technology (ICT Infrastructure Integration)",
-    "predictedGrade": "B",
-    "sifuTargetPrice": 0.29,
-    "calibratedSifuTargetPrice": 0.29,
-    "v3TargetPrice": 0.28,
-    "v7TargetPrice": 0.3,
-    "zone2TargetPrice": 0.3,
-    "targetPe": 15,
-    "pe": 11.29,
-    "ipoPe": 11.29
-  }
 }
