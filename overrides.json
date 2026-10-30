@@ -1547,7 +1547,7 @@
     "sbs": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "23-Dec-2026",
+        "openingDate": "23-Dec-2025",
         "closingDate": "07-Jan-2026",
         "listingDate": "20-Jan-2026",
         "price": 0.25
@@ -1555,24 +1555,24 @@
     "genergy": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "20-Nov-2026",
-        "closingDate": "28-Nov-2026",
+        "openingDate": "20-Nov-2025",
+        "closingDate": "28-Nov-2025",
         "listingDate": "11-Dec-2025",
         "price": 1
     },
     "lacmed": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "14-Nov-2026",
-        "closingDate": "25-Nov-2026",
+        "openingDate": "14-Nov-2025",
+        "closingDate": "25-Nov-2025",
         "listingDate": "10-Dec-2025",
         "price": 0.75
     },
     "orkim": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "19-Nov-2026",
-        "closingDate": "26-Nov-2026",
+        "openingDate": "19-Nov-2025",
+        "closingDate": "26-Nov-2025",
         "listingDate": "09-Dec-2025",
         "price": 0.92
     },
@@ -1587,48 +1587,48 @@
     "geohan": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "17-Nov-2026",
-        "closingDate": "21-Nov-2026",
+        "openingDate": "17-Nov-2025",
+        "closingDate": "21-Nov-2025",
         "listingDate": "05-Dec-2025",
         "price": 0.55
     },
     "psp": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "11-Nov-2026",
-        "closingDate": "21-Nov-2026",
+        "openingDate": "11-Nov-2025",
+        "closingDate": "21-Nov-2025",
         "listingDate": "04-Dec-2025",
         "price": 0.16
     },
     "polymer": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "04-Nov-2026",
-        "closingDate": "11-Nov-2026",
+        "openingDate": "04-Nov-2025",
+        "closingDate": "11-Nov-2025",
         "listingDate": "25-Nov-2025",
         "price": 0.25
     },
     "aquawalk": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "30-Oct-2026",
-        "closingDate": "07-Nov-2026",
+        "openingDate": "30-Oct-2025",
+        "closingDate": "07-Nov-2025",
         "listingDate": "19-Nov-2025",
         "price": 0.31
     },
     "pmw": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "28-Oct-2026",
-        "closingDate": "06-Nov-2026",
+        "openingDate": "28-Oct-2025",
+        "closingDate": "06-Nov-2025",
         "listingDate": "18-Nov-2025",
         "price": 0.34
     },
     "famiera": {
         "stage": 5,
         "status": "Listed",
-        "openingDate": "21-Oct-2026",
-        "closingDate": "30-Oct-2026",
+        "openingDate": "21-Oct-2025",
+        "closingDate": "30-Oct-2025",
         "listingDate": "12-Nov-2025",
         "price": 0.25
     },

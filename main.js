@@ -1387,17 +1387,27 @@ function shariahBadge(ipo) {
 }
 
 // Today's Action Radar & Event Hub (Date-based live events + upcoming timeline)
-function renderTodayActionRadar() {
+function renderTodayActionRadar(nowValue = Date.now()) {
     const container = document.getElementById('today-action-radar');
     if (!container) return;
-    const now = new Date();
-    const today = malaysiaToday();
+    const now = new Date(nowValue);
+    const today = malaysiaToday(now);
     const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    // today/tomorrow are already Malaysia dates, so read them with local getters; deadline
+    // instants go through IpoRules.dayKey, which converts to Malaysia time itself.
+    const localDayKey = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const todayKey = localDayKey(today);
+    const tomorrowKey = localDayKey(tomorrow);
 
     const todayEvents = [];
     const timelineEvents = [];
 
     (ipoData || []).forEach(ipo => {
+        // A listed/cancelled/withdrawn record is a finished story, and any application date
+        // falling after its listing day is corrupt data — neither may raise an event.
+        const closedChapter = IpoRules.isChapterClosed(ipo);
+        const notAfterListing = value => !IpoRules.isAfterListing(ipo, value);
+
         // 1. Listing Events — today's debuts and upcoming listings at Stage 4+
         if (ipo.listingDate && ipo.stage >= 4) {
             const ld = parseFlexDate(ipo.listingDate);
@@ -1438,7 +1448,7 @@ function renderTodayActionRadar() {
         }
 
         // 2. Public Opening Events — only show for Stage 3 (Application Open)
-        if (ipo.openingDate && ipo.stage >= 3) {
+        if (!closedChapter && notAfterListing(ipo.openingDate) && ipo.openingDate && ipo.stage >= 3) {
             const od = parseFlexDate(ipo.openingDate);
             if (od) {
                 od.setHours(0, 0, 0, 0);
@@ -1460,7 +1470,7 @@ function renderTodayActionRadar() {
         }
 
         // 3. Public Closing Events — only show for Stage 3 (Application Open)
-        if (ipo.closingDate && ipo.stage >= 3) {
+        if (!closedChapter && notAfterListing(ipo.closingDate) && ipo.closingDate && ipo.stage >= 3) {
             const cd = parseFlexDate(ipo.closingDate);
             if (cd) {
                 cd.setHours(0, 0, 0, 0);
@@ -1506,8 +1516,9 @@ function renderTodayActionRadar() {
             }
         }
 
-        // 4. MITI Opening Events — only show for Stage 1-2 (MITI phase)
-        if (ipo.mitiOpenDate && ipo.stage <= 2) {
+        // 4. MITI Opening Events — any record still in play; a MITI tranche stays open
+        // while the IPO itself has already moved to the public phase.
+        if (!closedChapter && notAfterListing(ipo.mitiOpenDate) && ipo.mitiOpenDate) {
             const mo = parseFlexDate(ipo.mitiOpenDate);
             if (mo) {
                 mo.setHours(0, 0, 0, 0);
@@ -1523,15 +1534,15 @@ function renderTodayActionRadar() {
                         shariah: ipo.shariah,
                         sub: `Bumi VIP Quota: <strong style="color:#34d399;">${offerStr}</strong> · Tutup: <strong>${ipo.mitiCloseDate || 'TBA'}</strong>`,
                         extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
-                        stage: 2,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 }
             }
         }
 
-        // 5. MITI Closing Events — only show for Stage 1-2 (MITI phase)
-        if (ipo.mitiCloseDate && ipo.stage <= 2) {
+        // 5. MITI Closing Events — any record still in play (see branch 4)
+        if (!closedChapter && notAfterListing(ipo.mitiCloseDate) && ipo.mitiCloseDate) {
             const mc = parseFlexDate(ipo.mitiCloseDate);
             if (mc) {
                 mc.setHours(0, 0, 0, 0);
@@ -1545,7 +1556,7 @@ function renderTodayActionRadar() {
                         shariah: ipo.shariah,
                         sub: `Hari Terakhir MITI! Tutup jam ${deadlineLabel(ipo, 'miti')} MYT.`,
                         extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
-                        stage: 2,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 } else if (mc.getTime() === tomorrow.getTime()) {
@@ -1558,7 +1569,7 @@ function renderTodayActionRadar() {
                         shariah: ipo.shariah,
                         sub: `Tamat: <strong>${ipo.mitiCloseDate} (${deadlineLabel(ipo, 'miti')})</strong>`,
                         extra: `Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}`,
-                        stage: 2,
+                        stage: ipo.stage,
                         id: ipo.id
                     });
                 } else if (mc > today && mc <= new Date(today.getTime() + 35 * 86400000)) {
@@ -1571,9 +1582,48 @@ function renderTodayActionRadar() {
                         date: mc,
                         dateStr: ipo.mitiCloseDate,
                         ipo,
-                        stage: 2
+                        stage: ipo.stage
                     });
                 }
+            }
+        }
+
+        // 6. MITI Payment Deadlines — SKB allotments must be paid by an exact MYT instant,
+        // which the portal quotes independently of the application dates above.
+        const payment = IpoRules.getMitiPayment(ipo, now);
+        if (payment && !closedChapter && !IpoRules.isAfterListing(ipo, payment.day)) {
+            const payTime = payment.deadline.toLocaleTimeString('en-GB', {
+                timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit', hour12: false
+            });
+            const allocationStr = Number.isFinite(Number(ipo.mitiAllocationRate))
+                ? `${Number(ipo.mitiAllocationRate).toFixed(0)}%` : 'TBA';
+            if (payment.day === todayKey || payment.day === tomorrowKey) {
+                const when = payment.day === todayKey ? 'HARI INI' : 'ESOK';
+                todayEvents.push({
+                    type: payment.isOpen ? `miti-payment-${payment.day === todayKey ? 'today' : 'tomorrow'}` : 'miti-payment-passed',
+                    badge: payment.isOpen ? `💰 BAYARAN MITI TUTUP ${when} (${payTime} MYT)` : `⛔ BAYARAN MITI SUDAH LEPAS (${payTime} MYT)`,
+                    badgeClass: 'closing',
+                    title: ipo.companyName,
+                    market: ipo.market,
+                    shariah: ipo.shariah,
+                    sub: `${payment.isOpen ? 'Penerima SKB mesti selesaikan bayaran sebelum' : 'Tempoh bayaran tamat pada'} <strong>${payTime} MYT</strong> · Peruntukan MITI: <strong style="color:#34d399;">${allocationStr}</strong>`,
+                    extra: `Permohonan MITI: ${ipo.mitiOpenDate || 'TBA'} → ${ipo.mitiCloseDate || 'TBA'} · Harga: RM ${ipo.price ? ipo.price.toFixed(2) : 'TBA'}`,
+                    stage: ipo.stage,
+                    id: ipo.id
+                });
+            } else if (payment.isOpen && payment.day > todayKey &&
+                payment.deadline <= new Date(today.getTime() + 35 * 86400000)) {
+                timelineEvents.push({
+                    type: 'miti-payment',
+                    label: '💰 Bayaran MITI',
+                    badgeBg: 'rgba(251, 191, 36, 0.15)',
+                    badgeColor: '#fbbf24',
+                    badgeBorder: 'rgba(251, 191, 36, 0.3)',
+                    date: new Date(payment.deadline.getTime() - 8 * 3600000),
+                    dateStr: `${IpoRules.dayKey(payment.deadline)} ${payTime} MYT`,
+                    ipo,
+                    stage: ipo.stage
+                });
             }
         }
     });
@@ -1695,10 +1745,24 @@ function renderMitiCountdownStrip() {
         .filter(ipo => ipo.mitiCloseDate && parseFlexDate(ipo.mitiCloseDate) && !ipo.mitiWithdrawn)
         .map(ipo => {
             const close = IpoRules.getDeadline(ipo, 'miti');
-            return { ipo, close };
+            return { ipo, close, kind: 'application' };
         })
-        .filter(x => x.close && IpoRules.isApplicationOpen(x.ipo, 'miti', now))
-        .sort((a, b) => a.close - b.close);
+        .filter(x => x.close && IpoRules.isApplicationOpen(x.ipo, 'miti', now));
+
+    // The SKB payment window ticks down on the same strip: the money deadline is the action
+    // that must not be missed and it runs after the application itself has closed.
+    (ipoData || []).forEach(ipo => {
+        const payment = IpoRules.getMitiPayment(ipo, now);
+        if (payment && payment.isOpen && !IpoRules.isChapterClosed(ipo)) {
+            items.push({ ipo, close: payment.deadline, kind: 'payment' });
+        }
+    });
+
+    items.sort((a, b) => a.close - b.close);
+    // One card per IPO: the soonest MITI deadline is the actionable one.
+    for (let i = items.length - 1; i > 0; i--) {
+        if (items.slice(0, i).some(x => x.ipo.id === items[i].ipo.id)) items.splice(i, 1);
+    }
 
     if (items.length === 0) {
         container.style.display = 'none';
@@ -1722,8 +1786,8 @@ function renderMitiCountdownStrip() {
                 </div>
             </div>
             <div style="display: ${collapsed ? 'none' : 'grid'}; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem;">
-                ${items.map(({ ipo, close }) => {
-                    const cd = formatCountdown(close - now, '#10b981');
+                ${items.map(({ ipo, close, kind }) => {
+                    const cd = formatCountdown(close - now, kind === 'payment' ? '#fbbf24' : '#10b981');
                     const offerShares = ipo.mitiOfferShares || ipo.mitiTranche;
                     const offerStr = offerShares ? (offerShares / 1e6).toFixed(1) + 'M' : '—';
                     const appsStr = ipo.mitiApplicants != null ? ipo.mitiApplicants.toLocaleString() : '—';
@@ -1733,8 +1797,12 @@ function renderMitiCountdownStrip() {
                     const marketBadge = (ipo.market || '').toLowerCase().includes('main')
                         ? '<span style="font-size:0.62rem;color:#a5b4fc;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">MAIN</span>'
                         : '<span style="font-size:0.62rem;color:#f472b6;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);padding:0.1rem 0.35rem;border-radius:4px;font-weight:600;">ACE</span>';
+                    const payTime = close.toLocaleTimeString('en-GB', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit', hour12: false });
+                    const deadlineLine = kind === 'payment'
+                        ? `bayaran MITI · ${IpoRules.dayKey(close)} · ${payTime} MYT`
+                        : `closes · ${ipo.mitiCloseDate} · ${deadlineLabel(ipo, 'miti')} MYT`;
                     return `
-                        <div class="cd-clickable-card miti" onclick="navigateToIpo('${ipo.id}', 2)" title="Click to view ${ipo.companyName} in Stage 02 MITI" style="background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
+                        <div class="cd-clickable-card miti" onclick="navigateToIpo('${ipo.id}', ${ipo.stage})" title="Click to view ${ipo.companyName} in Stage 0${ipo.stage}" style="background: rgba(15,23,42,0.55); border: 1px solid ${kind === 'payment' ? 'rgba(251,191,36,0.35)' : 'rgba(255,255,255,0.08)'}; border-radius: 0.7rem; padding: 0.65rem 0.8rem;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem;">
                                 <strong style="color:white; font-size:0.82rem;">${ipo.companyName}</strong>
                                 ${marketBadge}
@@ -1744,13 +1812,13 @@ function renderMitiCountdownStrip() {
                                 <span style="font-size:0.68rem; color:var(--text-dim);">${(ipo.sector || 'N/A').split('(')[0].trim()}${ibText} · Grade ${getIpoGrade(ipo).grade.replace('Pred: ', '')}</span>
                             </div>
                             <div data-cd-end="${close.getTime()}" data-cd-base="${cd.base}" style="font-size:1.05rem; font-weight:800; color:${cd.color}; line-height:1.2;">${cd.text}</div>
-                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">closes · ${ipo.mitiCloseDate} · ${deadlineLabel(ipo, 'miti')} MYT</div>
+                            <div style="font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:0.25rem;">${deadlineLine}</div>
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-top:0.4rem; padding-top:0.35rem; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.7rem; color:var(--text-main);">
                                 <span style="font-size:0.72rem; color:var(--text-dim);">💰 ${priceStr} · 🎯 ${offerStr}</span>
                                 <span style="font-size:0.85rem; font-weight:700; color:#34d399;">👥 ${appsStr}</span>
                             </div>
-                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: #6ee7b7; opacity: 0.85; font-weight: 600;">
-                                <span>View Stage 02</span> →
+                            <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; font-size: 0.65rem; color: ${kind === 'payment' ? '#fcd34d' : '#6ee7b7'}; opacity: 0.85; font-weight: 600;">
+                                <span>${kind === 'payment' ? '💰 Bayaran · View Stage 0' + ipo.stage : 'View Stage 0' + ipo.stage}</span> →
                             </div>
                         </div>`;
                 }).join('')}

@@ -233,3 +233,35 @@ test('all IPO prices are non-negative', () => {
 
     assert.deepEqual(failures, [], `Negative price values found:\n${failures.join('\n')}`);
 });
+
+// -------------------------------------------------------------------
+// Test 11: No application date may fall after the record's own listing date.
+// KLSE past-IPO cards quote "21 Oct" without a year, so a year stamped as the current
+// one turns a 2025 listing into a phantom "tutup hari ini" card on the dashboard radar.
+// See scratch/fix-listed-year-slip.js for the repair.
+// -------------------------------------------------------------------
+test('no open, close or MITI date falls after its own listing date', () => {
+    const rules = require('../lib/ipo-rules');
+    const overrides = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'overrides.json'), 'utf8'));
+    const fields = ['openingDate', 'closingDate', 'mitiOpenDate', 'mitiCloseDate'];
+    const failures = [];
+
+    for (const ipo of data) {
+        for (const field of fields) {
+            if (rules.isAfterListing(ipo, ipo[field])) {
+                failures.push(`${ipo.id}.${field}=${ipo[field]} is after listing ${ipo.listingDate}`);
+            }
+        }
+        // The same bad date must not survive in overrides.json, or apply-overrides.js restores it.
+        const override = overrides[ipo.id];
+        if (override) {
+            for (const field of fields) {
+                if (override[field] !== undefined && rules.isAfterListing(ipo, override[field])) {
+                    failures.push(`overrides.${ipo.id}.${field}=${override[field]} is after listing ${ipo.listingDate}`);
+                }
+            }
+        }
+    }
+
+    assert.deepEqual(failures, [], `Dates after their own listing day:\n${failures.join('\n')}`);
+});

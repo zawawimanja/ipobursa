@@ -2372,7 +2372,7 @@ const IPO_DATA = [
     "enrichedBy": "AI",
     "v7TargetPrice": 0.26,
     "hasMitiTranche": false,
-    "openingDate": "23-Dec-2026",
+    "openingDate": "23-Dec-2025",
     "closingDate": "07-Jan-2026"
   },
   {
@@ -2658,8 +2658,8 @@ const IPO_DATA = [
     "symbol": "AQUAWALK",
     "dailyChange": null,
     "hasMitiTranche": false,
-    "openingDate": "30-Oct-2026",
-    "closingDate": "07-Nov-2026"
+    "openingDate": "30-Oct-2025",
+    "closingDate": "07-Nov-2025"
   },
   {
     "id": "asm",
@@ -3012,8 +3012,8 @@ const IPO_DATA = [
     "symbol": "FAMIERA",
     "dailyChange": null,
     "hasMitiTranche": false,
-    "openingDate": "21-Oct-2026",
-    "closingDate": "30-Oct-2026"
+    "openingDate": "21-Oct-2025",
+    "closingDate": "30-Oct-2025"
   },
   {
     "id": "fibro",
@@ -3066,8 +3066,8 @@ const IPO_DATA = [
     "symbol": "GENERGY",
     "dailyChange": null,
     "hasMitiTranche": true,
-    "openingDate": "20-Nov-2026",
-    "closingDate": "28-Nov-2026"
+    "openingDate": "20-Nov-2025",
+    "closingDate": "28-Nov-2025"
   },
   {
     "id": "geohan",
@@ -3092,8 +3092,8 @@ const IPO_DATA = [
     "symbol": "GEOHAN",
     "dailyChange": null,
     "hasMitiTranche": true,
-    "openingDate": "17-Nov-2026",
-    "closingDate": "21-Nov-2026"
+    "openingDate": "17-Nov-2025",
+    "closingDate": "21-Nov-2025"
   },
   {
     "id": "hi",
@@ -3414,8 +3414,8 @@ const IPO_DATA = [
     "symbol": "LACMED",
     "dailyChange": null,
     "hasMitiTranche": true,
-    "openingDate": "14-Nov-2026",
-    "closingDate": "25-Nov-2026"
+    "openingDate": "14-Nov-2025",
+    "closingDate": "25-Nov-2025"
   },
   {
     "id": "lsh",
@@ -3568,8 +3568,8 @@ const IPO_DATA = [
     "v3TargetPrice": 0.747,
     "zone2TargetPrice": 1.098,
     "hasMitiTranche": true,
-    "openingDate": "19-Nov-2026",
-    "closingDate": "26-Nov-2026"
+    "openingDate": "19-Nov-2025",
+    "closingDate": "26-Nov-2025"
   },
   {
     "id": "oxb",
@@ -3749,8 +3749,8 @@ const IPO_DATA = [
     "symbol": "PMW",
     "dailyChange": null,
     "hasMitiTranche": false,
-    "openingDate": "28-Oct-2026",
-    "closingDate": "06-Nov-2026"
+    "openingDate": "28-Oct-2025",
+    "closingDate": "06-Nov-2025"
   },
   {
     "id": "polymer",
@@ -3775,8 +3775,8 @@ const IPO_DATA = [
     "symbol": "POLYMER",
     "dailyChange": null,
     "hasMitiTranche": false,
-    "openingDate": "04-Nov-2026",
-    "closingDate": "11-Nov-2026"
+    "openingDate": "04-Nov-2025",
+    "closingDate": "11-Nov-2025"
   },
   {
     "id": "power",
@@ -3830,8 +3830,8 @@ const IPO_DATA = [
     "symbol": "PSP",
     "dailyChange": null,
     "hasMitiTranche": false,
-    "openingDate": "11-Nov-2026",
-    "closingDate": "21-Nov-2026"
+    "openingDate": "11-Nov-2025",
+    "closingDate": "21-Nov-2025"
   },
   {
     "id": "reachten",

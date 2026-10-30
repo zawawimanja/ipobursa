@@ -55,6 +55,33 @@ test('explicit close times override defaults and invalid calendar dates are reje
     assert.equal(rules.atMyt('14-Oct-2026', '25:00'), null);
 });
 
+test('dayKey, closed chapters and post-listing dates are judged in Malaysia time', () => {
+    for (const TZ of ['UTC', 'America/Los_Angeles', 'Asia/Kuala_Lumpur']) {
+        const code = `const r=require(${JSON.stringify(path.join(__dirname, '..', 'lib', 'ipo-rules.js'))});` +
+            'console.log(r.dayKey("30-Oct-2026"), r.dayKey("2026-10-30T17:00:00+08:00"), r.dayKey(new Date("2026-10-30T16:30:00Z")));';
+        assert.equal(execFileSync(process.execPath, ['-e', code], { env: { ...process.env, TZ }, encoding: 'utf8' }).trim(),
+            '2026-10-30 2026-10-30 2026-10-31');
+    }
+    const listed = { stage: 5, listingDate: '12-Nov-2025', closingDate: '30-Oct-2026' };
+    assert.equal(rules.isChapterClosed(listed), true);
+    assert.equal(rules.isChapterClosed({ stage: 3 }), false);
+    assert.equal(rules.isChapterClosed({ stage: 2, mitiWithdrawn: true }), true);
+    assert.equal(rules.isAfterListing(listed, listed.closingDate), true);
+    assert.equal(rules.isAfterListing({ listingDate: '19-Nov-2026' }, '05-Nov-2026'), false);
+    // No listing date yet means nothing to compare against, so the date stays trusted.
+    assert.equal(rules.isAfterListing({ closingDate: '30-Oct-2026' }, '30-Oct-2026'), false);
+});
+
+test('a MITI payment deadline needs an exact instant, not a bare date', () => {
+    const payment = rules.getMitiPayment({ mitiPaymentDeadline: '2026-10-30T17:00:00+08:00' }, time('2026-10-30T08:00:00Z'));
+    assert.equal(payment.day, '2026-10-30');
+    assert.equal(payment.isOpen, true);
+    assert.equal(rules.getMitiPayment({ mitiPaymentDeadline: '2026-10-30T17:00:00+08:00' }, time('2026-10-30T09:00:00Z')).isOpen, false);
+    for (const raw of [undefined, '', '2026-10-30', '2026-10-30T17:00:00', 'not-a-date']) {
+        assert.equal(rules.getMitiPayment({ mitiPaymentDeadline: raw }), null);
+    }
+});
+
 test('withdrawn and manually listed IPOs retain their lifecycle', () => {
     for (const ipo of [publicIpo({ stage: 0, status: 'Cancelled' }), publicIpo({ stage: 2, status: 'Withdrawn', mitiWithdrawn: true }), publicIpo({ stage: 5, status: 'Listed' })]) {
         assert.deepEqual(rules.resolveLifecycle(ipo, time('2026-12-01T00:00:00Z')), { stage: ipo.stage, status: ipo.status });

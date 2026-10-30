@@ -12,7 +12,7 @@ const listed = extra => ({ id: 'ecosys', companyName: 'EcoSys (Malaysia) Berhad'
     stage: 5, listingDate: '14-Oct-2026', price: 0.27, openPrice: 0.7,
     currentPrice: 0.8, performance: '+196.30%', os: 206.7, ...extra });
 
-function render(records, today = new Date(2026, 9, 14)) {
+function render(records, today = new Date(2026, 9, 14), now = null) {
     const container = { style: {}, innerHTML: '' };
     const sandbox = {
         ipoData: records, document: { getElementById: () => container },
@@ -22,9 +22,14 @@ function render(records, today = new Date(2026, 9, 14)) {
             return parts ? new Date(parts.year, parts.month, parts.day) : null;
         },
         getIpoGrade: () => ({ grade: 'A' }), isCdCollapsed: () => false,
-        shariahBadge: () => '', IpoRules: rules
+        shariahBadge: () => '', IpoRules: rules,
+        deadlineLabel: (ipo, kind = 'public') => {
+            const deadline = rules.getDeadline(ipo, kind);
+            return deadline ? deadline.toLocaleTimeString('en-US', { timeZone: 'Asia/Kuala_Lumpur', hour: 'numeric', minute: '2-digit', hour12: true }) : 'TBA';
+        }
     };
-    vm.runInNewContext(openingHelper + radar + '\nrenderTodayActionRadar();', sandbox);
+    const clock = now === null ? new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12).getTime() : now;
+    vm.runInNewContext(openingHelper + radar + `\nrenderTodayActionRadar(${clock});`, sandbox);
     return container.innerHTML;
 }
 
@@ -72,4 +77,53 @@ test('past debuts stay out while today and upcoming listings remain visible', ()
     assert.match(html, /Today IPO/);
     assert.match(html, /Upcoming IPO/);
     assert.match(html, /navigateToIpo\('upcoming', 4\)/);
+});
+
+// Regression: FAMIERA and AQUAWALK are listed 2025 IPOs whose open/close dates were stamped with
+// the current year by a KLSE past card. They produced phantom "awam dibuka/tutup hari ini" cards.
+test('a listed IPO with a year-slipped application date raises no open or close event', () => {
+    const slipped = { id: 'famiera', companyName: 'FAMIERA', stage: 5, status: 'Listed', market: 'ACE Market',
+        price: 0.25, openingDate: '21-Oct-2026', closingDate: '30-Oct-2026', listingDate: '12-Nov-2025' };
+    assert.equal(render([slipped], new Date(2026, 9, 30)), '');
+});
+
+test('an IPO still in play is never announced as opening or closing after it listed', () => {
+    const leaked = { id: 'future', companyName: 'Leaked Dates', stage: 3, status: 'Application Open',
+        market: 'ACE Market', price: 0.3, openingDate: '28-Oct-2027', closingDate: '30-Oct-2027', listingDate: '12-Nov-2026' };
+    const html = render([leaked], new Date(2026, 9, 30));
+    assert.doesNotMatch(html, /Leaked Dates/);
+});
+
+test('MITI closing today is announced even when the IPO already went public', () => {
+    const ipo = { id: 'big-caring-group-bhd', companyName: 'Big Caring Group Bhd', stage: 3,
+        status: 'Application Open', market: 'Main Market', price: 1.08,
+        openingDate: '29-Oct-2026', closingDate: '05-Nov-2026', listingDate: '19-Nov-2026',
+        mitiOpenDate: '26-Oct-2026', mitiCloseDate: '30-Oct-2026' };
+    const html = render([ipo], new Date(2026, 9, 30));
+    assert.match(html, /PERMOHONAN MITI TUTUP HARI INI/);
+    assert.match(html, /navigateToIpo\('big-caring-group-bhd', 3\)/);
+    assert.doesNotMatch(html, /navigateToIpo\('big-caring-group-bhd', 2\)/);
+});
+
+test('the MITI payment deadline is surfaced on the day money is due and marked passed after', () => {
+    const ipo = { id: 'big-caring-group-bhd', companyName: 'Big Caring Group Bhd', stage: 3,
+        status: 'Application Open', market: 'Main Market', price: 1.08, closingDate: '05-Nov-2026',
+        listingDate: '19-Nov-2026', mitiOpenDate: '14-Aug-2026', mitiCloseDate: '24-Aug-2026',
+        mitiAllocationRate: 100, mitiPaymentDeadline: '2026-10-30T17:00:00+08:00' };
+    const today = new Date(2026, 9, 30);
+    const before = render([ipo], today, Date.parse('2026-10-30T08:00:00Z'));
+    assert.match(before, /💰 BAYARAN MITI TUTUP HARI INI \(17:00 MYT\)/);
+    assert.match(before, /Peruntukan MITI: <strong style="color:#34d399;">100%<\/strong>/);
+    const after = render([ipo], today, Date.parse('2026-10-30T09:30:00Z'));
+    assert.match(after, /⛔ BAYARAN MITI SUDAH LEPAS \(17:00 MYT\)/);
+    assert.doesNotMatch(after, /BAYARAN MITI TUTUP HARI INI/);
+});
+
+test('a payment deadline quoted without a timezone is never guessed into an event', () => {
+    const ipo = { id: 'keb', companyName: 'KEB Berhad', stage: 3, status: 'Application Open',
+        market: 'ACE Market', price: 0.35, closingDate: '02-Nov-2026', listingDate: '12-Nov-2026',
+        mitiPaymentDeadline: '2026-10-30' };
+    const html = render([ipo], new Date(2026, 9, 30));
+    // Its public closing date is still upcoming, but no payment event may be invented for it.
+    assert.doesNotMatch(html, /BAYARAN MITI|Bayaran MITI/);
 });

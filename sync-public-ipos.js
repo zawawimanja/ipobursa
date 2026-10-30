@@ -187,6 +187,17 @@ async function main() {
         const listingDate = parseKlseDate(dayText, monthText, yearAttr);
         if (!listingDate) return;
 
+        // Past cards can lose both the inline style marker and the title year, which would stamp
+        // "Open: 21 Oct" with the current year. A card whose listing day has already passed is a
+        // past card whatever its markup says, so it may only correct identity metadata.
+        if (listingDate.getTime() < Date.now() - 24 * 60 * 60 * 1000) {
+            if (companyName) {
+                upcoming.push({ past: true, ticker, companyName,
+                    market: details.market, sector: details.sector });
+            }
+            return;
+        }
+
         // Get open/close dates from text like "Open: 09 Sep" "Close: 18 Sep"
         let openDate = null, closeDate = null;
         cardEl.find('span').each((j, span) => {
