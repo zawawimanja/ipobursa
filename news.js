@@ -1,8 +1,51 @@
 const IPO_NEWS = {
-  "generatedAt": "2026-10-30T04:42:11.626Z",
-  "generatedAtMYT": "30/10/2026, 12:42:11 pm",
+  "generatedAt": "2026-10-30T11:17:31.173Z",
+  "generatedAtMYT": "30/10/2026, 7:17:31 pm",
   "count": 120,
   "items": [
+    {
+      "title": "Asia OneHealthcare Files Draft IPO for 4.38 Billion Shares",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOdTVmQ2NWUjVrQTA4OGpaX3lvcGxqZ2FiTGQ1MmhQZ3ktVlNoNDBSeXpRVWtDXzVuMUFadHhrVEtCNXlnOUh1NVlnTXlwTmFRMDZRSlIzTmh4Wm1hSVl6dXN1TUZRWF83Ul9qRGJXNV9rNXdsLWkxcnRmLTlDRTVKeTZyS1ZzTVFFMkE?oc=5",
+      "source": "Retail News Asia",
+      "date": "2026-10-30T06:58:51.000Z",
+      "companies": []
+    },
+    {
+      "title": "Analysts see growth potential for KEB ahead of ACE Market debut",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPVlc5TEhla3JUdnpDYjFtYlAtWlRNSTVaS0ZNVlBlWDNJTG1vcHRGZzhhTlhDSjExc1RGT084cng3M3JwNEhVZzZiWXhKbVJSWEt4R1NIWm5KZEhXSlJPT0cxT2hZRFNWR19hTTctblFaQnZRVHdGak1CaG5qNEZyTjI5YmRlRE9yVFVfSHhSSTNQLTFiSUg4Y29HNmh6a19RLVV4VF92a3lrMDJrVHZlUURYdFY?oc=5",
+      "source": "NST Online",
+      "date": "2026-10-30T06:39:44.000Z",
+      "companies": [
+        "keb-berhad"
+      ]
+    },
+    {
+      "title": "Malaysia’s healthcare IPO wave gathers pace as two major players seek mainboard listings",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNcFBud05pOWtNcDN1eHZjWXc2QktTQU5Ud1N5Z0RZS3Y1Y2thUFE1X2p0SjBDV3pGZVlUXzFnTHZSREpHb3EydHFJTU95OFE2b3dvUjFkRjlJRGk2M1JWQVE4LXBzc212Q0VMOXFPWmpDY1pLcWdaSDJRWFcxTUdlS25QZ2RWZThEdzFqTnpjNDFab3NIQkZjbkdEY2c1NXhFR01idDdyRHk5dTlYa3FMSTRaQS1MdHY3Q0FUSHhWNEgwdlM5SHdYb3ZOZ0w5dTRKTTdBNXluUQ?oc=5",
+      "source": "联合早报",
+      "date": "2026-10-30T05:31:20.000Z",
+      "companies": [
+        "big-caring-group-bhd"
+      ]
+    },
+    {
+      "title": "SKA Capital's IPO 80.42 Times Oversubscribed Ahead",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNRVdNNk8taVQ3WjlIRmk1TEl1VDVIM05ndlcyRmlsS2dSVlg0RFlyUjRCNHRzenhiOHkyMXVlT2ZudzE0Xy1SVHI3WGtxamdIekR4bldpUE9zaW1WLTl0X0N3WTRhUDRsLTVLSF8tajI5ZzJtR2p1NHE1X1c2a2RmTlU0VVM0ekN1TDBhZHlqNTQzVmNyUVRFSEdZTEZKTDVLYzBqY2RR?oc=5",
+      "source": "www.marketscreener.com",
+      "date": "2026-10-30T04:16:17.000Z",
+      "companies": [
+        "ska-capital-berhad"
+      ]
+    },
+    {
+      "title": "Big Caring Group Bhd (BCG) IPO Analysis: Participating in Healthcare Resilience on Bursa Malaysia 📊🚀",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPSy1rSzNfWlBsV0VWVHN1OGNMcVoyem9SMVA0d1VRM01TR2FYQnBQRDZvOVJsR05NcC1FSU5LeEJhSUlQVV9HY2RKYlN3VndGdUtLcGZvOVlmdzlmMmJnR05sS3Y1VjBzdnVvRVUzcmxTa3c4ZXdYeWhXWW82ODdLQjR3dFpOTlRCaDRWSVBwVldTRXZmbHJFdVAtVk5tSTUzQXpESlUtS3BORUk0cF9jTkN4cTB0Q1M3YzlF?oc=5",
+      "source": "Moomoo",
+      "date": "2026-10-30T02:45:04.000Z",
+      "companies": [
+        "big-caring-group-bhd"
+      ]
+    },
     {
       "title": "MyDCD may have 91% upside, but watch out for risks, says analyst",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBCNlBnWlRhSm5PbF91aHdFdV92ME9HUnJ1MEV5eTRib2loS1BMLXdqZmMwOUF3MDBZSVRaeVV6Q0FyRkg5Y3FmcWZkZks2c0dJ?oc=5",
@@ -47,6 +90,13 @@ const IPO_NEWS = {
       ]
     },
     {
+      "title": "Latest Trending News",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9LUk9oQzhmOEpRWFZ2MU81T2VISHBqWXlNb0stcktmSy1hN1lza0piSU1haF9uUlpuZl9yaWhUakZBc0ZnLVE4WDR6bXNRQ2hERWEwSE9aSUVteUlQOERqbmZHZ3NrNUNJTnB4cFJJUHZLd0toMDBRRA?oc=5",
+      "source": "The Sun Malaysia",
+      "date": "2026-10-29T15:18:29.000Z",
+      "companies": []
+    },
+    {
       "title": "How to Invest Big Caring Group IPO Malaysia 2026",
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5ROEZWN01CelBzTm15aC1kbHRaRk9LM0c5S0R2UjZLWk55ZFltUkRRUXBNUU9tc3Y0X01wVmE5bWZ2QXNMTHgyelprd1dFZVVfSlQxN3NVQWpZczJIMUZBVXFRVFVzQ2tHTHMxTm80alR2QWM?oc=5",
       "source": "Moomoo",
@@ -84,9 +134,9 @@ const IPO_NEWS = {
     },
     {
       "title": "SKA Capital’s ACE Market IPO oversubscribed 80.42 times",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNdWF3MkhyYUlWRTBEX3E0UjFSdjJvQ205aDBPRTRFYnVFOGpwVk5Vek1va2VkQnZXeGRxYWVPcHpNT0dWWlFPc3l2VnpOOVpWYk1BQWNpUDA2elZ1UWhSTlJUdUcyeXlfWTdpSVo1ZFotelNENy1fMzBCUXNTQzdDeUFfc0MyUUNoZm9keVdyRzlVNkV4VmZBc1lndTFDVTBLYy1YbUF6NjA4cWtaS2s2V2FYaG8?oc=5",
-      "source": "The Star",
-      "date": "2026-10-29T12:29:00.000Z",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQWlJ4QWZWYVV1RXhJNFZUMFR3N2UwNTdxVjkxZEVHb3FiUF9Tdk1Ha1FudFhkMTJrUm0xWlVfZzVnc1dfdjM2Z3Vpd1QwYTdybFhQeGItcFBQR012ZXJ0X0k4UGg4TGh3VUFaMFhpVTM0SW5SZnZ3eWhJMlptMGhlWFdIbDVQYmplOTFUQVJoRzJjaU9Bc3Axdjc0S0k3TUtPX2ExYVBBUWw?oc=5",
+      "source": "KLSE Screener",
+      "date": "2026-10-29T12:46:53.000Z",
       "companies": [
         "ska-capital-berhad"
       ]
@@ -171,13 +221,6 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "Asia OneHealthcare plans IPO of 4.4b shares after returning to profit in FY2026",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOZFN5clZOQ1hSTkdZMXVWWTliRFg4M1JPZVhiYllEUXlSdGU0dngtX1hxYUx5ZGN3NmxaT1ZmN1hwYVIwUHd6ek01cE5VdTFrLVotOEloVmZFMy1OT3hfOXBlM2JWRlN0LXhlMGdpWjROZTFXVEU4ejdpaS11RDJ6TDBaZzNxZHJ0V1dEVWhaLVVkU0hXQXlkQlNSaTQ4SVdSMVJMc0R1VVI1U1VZS2FXSm9SWjE4SnFadEc1MDA1VG4?oc=5",
-      "source": "The Malaysian Reserve",
-      "date": "2026-10-29T09:53:13.000Z",
-      "companies": []
-    },
-    {
       "title": "Big Caring launches IPO at up to RM1.08 a share, bulk of proceeds to repay debt",
       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNRnpqa2s0SGZ2T3BvMktjVW51cUQxcE9qVW9Tb3U3ZnpnemYzU3ZVN2tFdnN4ZFNFdnhKYzluMklwYU9oTHNOM0JobUFubFhDaExVY0t1WENTTDBoSEJ1QXE3WHF1YVBsaTk0RTRSYTdKSmJsZXcxYTZZTUVYbEhPWTRaTTFrNkd3VTdoMC1vS0pxeHU4ZlRzVFlEVHlseTFxMDBQWE5LTEFpRVN2X3FPMTJKVTUxQ1JLVEc5OEVONA?oc=5",
       "source": "The Malaysian Reserve",
@@ -188,7 +231,7 @@ const IPO_NEWS = {
     },
     {
       "title": "Big Caring aims to add up to 50 stores a year in next phase of growth",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5fYzNYY0dQeGtoVXpFVkpEbEg5ME9KdjZQZzlUTDYxVEd6SXE5a0NuNGhjNVdUQXlVdEdCaDR5STczM01XZXd2T0M4czJDWmNWMnFF?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9hVWxRci1jdWEyeXltT0hULWZjTUhsRDdoY2dvZndtQVBtc0dHaFFMZGdQQmthWDBYUVFBa0lHVDJiMUJmTW1LTmZLUFBVY3BP?oc=5",
       "source": "The Edge Malaysia",
       "date": "2026-10-29T09:06:24.000Z",
       "companies": [
@@ -212,13 +255,6 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "Bursa Malaysia remains on track to meet FY2026 targets after third-quarter earnings meet expectations",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNSG51c0pDR2VIQWZMcHR2SWRtVVBGbC1XSDBjZDB0N0lnRGtHNE5leDZWUjJNa1VrdHRMTGdTTnRSOWw4X2NCVUN1V1Y3TTVEVVBnN3REc0t5dm5mXzY4SE5IdDRMaXE5LXc0bS0tc0NCWllMNy1kbU5YQklkcmdSeFRscFZ2aGNmMWt2RU9KZw?oc=5",
-      "source": "Traders Union",
-      "date": "2026-10-29T08:30:45.000Z",
-      "companies": []
-    },
-    {
       "title": "Bursa Malaysia on track for FY2026 targets as 3Q earnings meet consensus estimate",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE91SWxiWnQxaDlFQ2RXNktOaHJybDQ1aW1ILWFwU0hoOExfSVZtd3hXZHVHT08xSGV5UTdISldFQzJYUGtkSllJX1BIcHRTVUlx?oc=5",
       "source": "The Edge Malaysia",
@@ -236,13 +272,6 @@ const IPO_NEWS = {
       "title": "Parkland: Regulator green-lights Main Market IPO",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1PX1ROamFhSFFHMTMtc0VZM1V0YzQyajEzaldqbUtBUzZ3UUlIckdGd19RZGJNanhrRWh5eDNmdnZGbzJER1NGUTJzUWlnN3pS?oc=5",
       "source": "The Edge Malaysia",
-      "date": "2026-10-29T07:35:09.000Z",
-      "companies": []
-    },
-    {
-      "title": "Parkland: Regulator greenlights Main Market IPO",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPZHlSc3FVRVF2V1NLZG1WN0VpeU9hSkc5YW5JMDBwaE1MU19xUG5hTHFoTmVObW8yWUhaZHpGdHByemowUDRkSHo1U2c2cXphcThMcTBwUDdQVTZDWkVqS2h0WXFwSFZxOXhNdk52c3U0WjhOMldKYVgyaFpkLWhTS0Zzb1YzekRPZlRhVk1ZQzc2MkloRnBreFdpWW4?oc=5",
-      "source": "KLSE Screener",
       "date": "2026-10-29T07:35:09.000Z",
       "companies": []
     },
@@ -288,6 +317,13 @@ const IPO_NEWS = {
       "companies": [
         "big-caring-group-bhd"
       ]
+    },
+    {
+      "title": "Global Market: Malaysia's Asia OneHealthcare files draft prospectus for IPO of up to 4.38 billion shares",
+      "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPTjN0QmViblFiSnpBVmgwaEZZYUhrck9OQVlVOUZzSW54cDYxSHF3MTY3Z3dNMUE0VDh4SXpXTmVsX1lMVXRHbHpJQlEyQnRqTDlhdnh2aFpyc2FYb1p3V0ktckVfV1pxV2ZUQXRHNFNudDEwd3M1QllCSjY5UlV0YzRndklkOU5DZS14aUFZaUlwYUI3VUdoYUt2LWNkN2FKLTNWS05wTmR4RGlyNXRrT3lGYVByWHZOcE9rbXl0TTBJdnUzc1lFQXVqMUtJV21mQkY4N1ZObVZGejhpQjFzRWVfYWRJUEswczg4OTN1SkU0bG5zUjJHT2V5ZEtoN0JiZTVMWlFlVlVodU3SAZACQVVfeXFMTXQzSjlOV0RYeUE3UWdiTE1tZm03Z1FFNXN1Vl9kU1ZaamMtRjdxNmNqOG1UQmZZUmdKdnZucHZuNDd5dkVlT1lHbUlZUGNpS3d3NmVGdXZkSUgxV3dTckdPdkxsa2JlLWVOdkY1WGJ4OUs5SGJtbDN1eThqNkwzbDlVM2huN3Nya1lFc1JtblJNQXZCQXU0Z2ZqYk5EMnc1UkZKM0NKWFJ4YkdvRGFubFpOdHgtNmVSVDhVM21QMXMyWEhDTDczVkNTZnRzS3JsMWlKX3JGTEdENlVheThBbmNYeDI2anBsMElFM2Z6aXJYQURQSzZRcXpyUnI0SlhkZ0NHSUljek53WmVkQkhIelQ?oc=5",
+      "source": "The Economic Times",
+      "date": "2026-10-29T05:33:58.000Z",
+      "companies": []
     },
     {
       "title": "Big Caring eyes overseas expansion through acquisitions",
@@ -358,7 +394,16 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "Big Caring sets Main Market IPO at RM1.08 apiece, shareholders to pocket RM1.4 bil",
+      "title": "Big Caring launches IPO valuing Malaysian pharmacy chain at $2 billion",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPdVV3MV9CRXNxY1dZQzlJQ09qY1RwRXgza0dON0N4azJaLWJYc1pnam0xT3NLM3daZkUtMGx3Q2JtYkdHTlEteUZuM3hWRDBJRTYxeEl4NU50SXJETzF2YTdGR1pLVXg0QUlFRVNoUzVSRW9WenBGYnNZVlZSTjlqcjlLZ3JaVXRaOFN4dDB3VTFITFpWZDA3UUZPMGZMVU5qbkNrSnNkTnI1OVl3TXBZUGc5MjFuZlBaTEE1YWdJYw?oc=5",
+      "source": "Reuters",
+      "date": "2026-10-29T02:34:00.000Z",
+      "companies": [
+        "big-caring-group-bhd"
+      ]
+    },
+    {
+      "title": "Big Caring sets Main Market IPO at RM1.08 apiece",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE91NWsyTDBIdmNRc0FGblZpSEd5azBnN0gtZU80dWVxcVZNanptckUwdjU2b0NxQXBkWldOOTJXT0NZMHRDSHNWOFJsZzdRekR2?oc=5",
       "source": "The Edge Malaysia",
       "date": "2026-10-29T02:22:55.000Z",
@@ -368,7 +413,16 @@ const IPO_NEWS = {
     },
     {
       "title": "Big Caring sets Main Market IPO at RM1.08 apiece to raise over RM2 bil",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQa2xNV1ZvTFFkek5GbmNFZkg3SVlJRVZPY09CbkhWSWF5RTB3QVlvYVloeHNlV3A3VUZMT1pxRUlUV1VKaVdMNjdMSEZxTlhKeUtOUEdVRTVZMU1lSDlYQUhwNVdEakxvcE1wLW53YzUyTTdMZW8zT05kSlItTkNkNFBlUE9NMGViZTdnMklxODRZVkdVRzJXTTF1NVViVzRXV081WktZLVZONjNObW9LbElONFZHeVU0dU80Yw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQcklUS01NOHlHcmV0Y1poWC1tZmZaTkotSVpvM0lsQkt0a0o2MXQ1LXgyWU1nNTJUZ0RRaWFrQ2NUZkRJYU80aExvRU93ejlXNEw2OVdybmpFY29salB3QWRLTlFBcjZUUFllNy05TTdkWm9IdDZEM3BRWTJ5ZHJoV0VlN0dTSmJDUU9KUGl1R3hJV1FKMGdzc29SbFFDdGdkY2NEakxWbkJtS2U1MVFnSjRuTGNteVFYUTdNdA?oc=5",
+      "source": "KLSE Screener",
+      "date": "2026-10-29T02:22:55.000Z",
+      "companies": [
+        "big-caring-group-bhd"
+      ]
+    },
+    {
+      "title": "Big Caring sets Main Market IPO at RM1.08 apiece, shareholders to pocket RM1.4 bil",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFB6b0xlUUpzN3Z5RXI3MkhqSFc2MDBvcWhHeFVzcWFTQ3lHa2p0bEg0WEhkQ3Z1QnRKMW9rQVNhWWZjZkhyZldkX3lwZk03andZcG9kRWlSMXdLaGhPenc?oc=5",
       "source": "KLSE Screener",
       "date": "2026-10-29T02:22:55.000Z",
       "companies": [
@@ -470,15 +524,6 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "Big Caring launches IPO valuing Malaysian pharmacy chain at $2 billion",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOSkgzeGVSeVN6M0hnMlBPdldHX21veGFnY2w1T0xBZ2ZPdkEtN2NXQThTLVlqRjZNT1ZkOWxodXp0U2JDNVNocFlmekdId1ZKT1RWVi1XYlpVaUtnTGdPYnZCOXNobkZHV2xkMEpsdkx0bThhQ25DaHFnejVPNmJFcDdOeEtMWVlYQUxxX1BQZlFXUTdLaE01N0xTa2ZwMFkwdVEw?oc=5",
-      "source": "97.9 WEVE",
-      "date": "2026-10-28T07:00:00.000Z",
-      "companies": [
-        "big-caring-group-bhd"
-      ]
-    },
-    {
       "title": "Impact Capital Holdings launches IPO prospectus",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPazNjdWwtMVhRbkJGb1MtcTB2aHNsRGNNYUlpMWl0bW01N2xRNGRHVVZCN09CdFM1YkRmUXI1aG1FVlYzTGU0RGFqMXp1TXk0MGRweTM2MzJlUmE3eUpEUHUyUTVqQXZlWm02czU0bWk3d1dzQk5MOEtYYzNDN0JqZHljSEpFdWtJek5mYzhSM3lXa1JZRm0tRjZ2a05oTXdBSnVyaUdpbzhvWFZP?oc=5",
       "source": "The Star",
@@ -547,8 +592,7 @@ const IPO_NEWS = {
       "source": "NST Online",
       "date": "2026-10-27T09:05:57.000Z",
       "companies": [
-        "impact-capital-holdings-berhad",
-        "ska-capital-berhad"
+        "impact-capital-holdings-berhad"
       ]
     },
     {
@@ -594,6 +638,15 @@ const IPO_NEWS = {
       "date": "2026-10-27T07:30:57.000Z",
       "companies": [
         "impact-capital-holdings-berhad"
+      ]
+    },
+    {
+      "title": "New ipo MYDCD",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBqOThUTHIyQmhHVm1ITTZid1JBcVNnajhYV0Q0VkpidVZZZ1lpeDJDY09rNk1ubW1VWVd5YmdhaFMwbXZQWHFWSVBrU0lXXzB5YU56RmNmUGpCc3hhV3FtVVBzSFJfUTZVbHhyQm5fbE9WS0JYQVE?oc=5",
+      "source": "Moomoo",
+      "date": "2026-10-27T05:59:15.000Z",
+      "companies": [
+        "mydcd-berhad"
       ]
     },
     {
@@ -661,6 +714,15 @@ const IPO_NEWS = {
       ]
     },
     {
+      "title": "ACE-Market bound MyDCD looks beyond Klang Valley amid data centre building boom",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE0yaHdvX1pocWt4S2dRN1JsU1NwMFpUY3RLWUJ6NjJLVkhpZ0lwYnU5VTg1MWN2RUQzRllRSm1Fc0d2NGhpY2N6anRROVcweE5N?oc=5",
+      "source": "The Edge Malaysia",
+      "date": "2026-10-26T08:43:33.000Z",
+      "companies": [
+        "mydcd-berhad"
+      ]
+    },
+    {
       "title": "NEWS: KEB aims to raise nearly RM80 mil from IPO",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5va1lFOHdjSXNDZ2ZGTGN1a2tvN2FzVEVGTUx0Ni13NnJTeTVFZ2ZWb1NtMC03RmJxUWg4cHM0ME9KclY2ckZibHl0cUFQZnA4?oc=5",
       "source": "The Edge Malaysia",
@@ -703,16 +765,6 @@ const IPO_NEWS = {
       "date": "2026-10-26T07:00:00.000Z",
       "companies": [
         "mydcd-berhad"
-      ]
-    },
-    {
-      "title": "MN Holdings Berhad (KLSE:MNHLDG) - Stock Analysis",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPM19tV2pCTDNuU2ZNTzliOTVaX1NzVERlbElra3BGUlZaVnBHYl83TEdjMjVaOEU4Xzh5WTVObThKdmdzWE82NW53ck0zYzNpOUJJaURtN0dEVmdrREJBdnJUTENrVkFSZ1NBb3diZ3BiSWc4RmpuSHFXT2FlVDc5ZUNiNXJtWnB6Q1hZ?oc=5",
-      "source": "Simply Wall St",
-      "date": "2026-10-26T07:00:00.000Z",
-      "companies": [
-        "ska-capital-berhad",
-        "mnhldg"
       ]
     },
     {
@@ -797,6 +849,24 @@ const IPO_NEWS = {
       ]
     },
     {
+      "title": "KEB Berhad Sets Stage for ACE Market Debut with Prospectus Launch",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOSmVWN0JqOXN0QnkwUXF3Y1VFSWVuNHl6X3NOT0dXWU9wd1MtUTJGWFdRdHVIc0RYbUJSMGRiY1U3NTdROHAydjdfbEJwQ3BnT20xWW11S2RJYWFlMDRKYjN5Q2xJVThtTU16RVpUZDE0NURLdzJ0YWdENVlBRm9kdGpKcXB1Nkk0Vjl0b2pmR2RleDlYdVNRZ2dtWXQySjBESEdUNXEzVTU3OXhFSlcxaVA4R0Zoc2FISTF1X240UFQ4MkVpeEE?oc=5",
+      "source": "FinancialContent",
+      "date": "2026-10-23T14:30:00.000Z",
+      "companies": [
+        "keb-berhad"
+      ]
+    },
+    {
+      "title": "EdgeProp Daily Digest — October 23, 2026",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9TRXRBdXZ1Tno0TWJwN1VYbkNHazF4OVNlaFVoVHRZaC16ZjhrRzVnQ3FVc3ktRXR1Y0tibzhxZkJLS2NUTGdsMWNDM1drNXFiWkhrTHJZdnlNRE0?oc=5",
+      "source": "EdgeProp",
+      "date": "2026-10-23T14:02:33.000Z",
+      "companies": [
+        "keb-berhad"
+      ]
+    },
+    {
       "title": "KEB to raise RM48.49mil from ACE Market IPO",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNb3kzOHJYQmE1X3dNSXZiRjExUGFBYnVjeXl0ZjB3OUVLVTN1SzR1NFpqdUtWSm1GcW93VENtclVaU0V4Z3ViUHhsSF9rOXVJSG5sUk5XcXpodUFxdC1ncklsc2xPSzFwakhrV3VXbDB5QUVpenQzZXBoTHY0M1lIVzJMLTViODJjMWNrMlpWWGxfbVl6UEV3Q010WU5nTTY2ZGVrbEJB?oc=5",
       "source": "The Star",
@@ -860,46 +930,12 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "IOI Properties Group REIT IPO is Coming in Malaysia 2026",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE4wTXUxbmN3akFTejQ0alpjSGRvTDk0YkpOQ1V3RjY0WjgxbjdRZzdIaVQ3U210cjRVZ2hCWDA3YnA2c2VfVU03YktCeUdFT0VqWlpRQXJSQ1J3eldPNEwyaUNzU0FsdVpxQ2xr?oc=5",
-      "source": "Moomoo",
-      "date": "2026-10-22T04:05:57.000Z",
-      "companies": []
-    },
-    {
-      "title": "SKA Capital Prospectus Highlights",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPVnptVlZVd25ia1dseVdENzR6Tkdya3NJV1VNOWl3VDZFSk9QVzN4ZVJESWhqVThzV3pmM2p0cElJOG1ubHNYeUQ1RzNseVFZWFJ0TTQ4Mi1uV0JHd3VLaXJSdkNxU200Tmtkc3duNzFXYnZuU0Z5azNmcXNRN0JDbktxQQ?oc=5",
-      "source": "Moomoo",
-      "date": "2026-10-21T08:54:00.000Z",
-      "companies": [
-        "ska-capital-berhad"
-      ]
-    },
-    {
-      "title": "SKA Capital Launches RM72.27 Million ACE Market IPO at 43 Sen Per Share",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdThYZnd2U3BOQTlxNEhSempZVzI0TVFWZXBiQTUxTnM0OWFPUnpVcERFNEhqTGpqdkdBVDFHVzhJNUdnSjd5NG9CVDRIc2l3Q3h3bGxPUU1MU0c4WDNWZTc1aDJvOUNLa0liR0d3NHh2Wjg5ZF9hcmxnOU5lLTdta2kzb3M5OXhYVzRaT0ZDZDU5dDZhdmFsRnZRMnJ2THlNcFBqZzhLSURuaEpRYVdVZ0pB?oc=5",
-      "source": "Minichart",
-      "date": "2026-10-20T13:55:00.000Z",
-      "companies": [
-        "ska-capital-berhad"
-      ]
-    },
-    {
-      "title": "Big Caring targets late-October Main Market IPO to raise approximately RM2.45 billion",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPbXpSRUMxczVuUDBSN1M4N2pDZFRwWnowSjJhLTBsQjJEekVBSnI4YnBkV0Y3dTMtQ0VKemZrdXc0Zm1KUXJ1eXkzLUpYeWxBWHdtUmR2R3hYbUY4a0RVMVpzelJNd3ZnTGtOOG5RdU9oa3p2elo2U0tCcmhFUVJwQ3hyTTVwRHZOVHBQVDdWemR1QQ?oc=5",
-      "source": "Traders Union",
-      "date": "2026-10-20T09:55:33.000Z",
+      "title": "Big Caring IPO to raise RM2.45bil",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWmdCNE5XYkhtM2RUeXdlSEY4SXBJanQ4STYzeHhXa2llM0xDYkppOGx1VzQ2X2dpUmw5eGtfd2FTMWFqU09KOUtrZEdnTXljamhQcDRPMHNKY2F4bUxFOUhvX1NtNjJDMFRnYUJ4dmktdkZjbGk3X3kxNVFwenRKSjNFX0NEb3BhNHk0T1F0Q0J2N3hLZWRGRGFKUDlMZw?oc=5",
+      "source": "Free Malaysia Today",
+      "date": "2026-10-20T07:00:00.000Z",
       "companies": [
         "big-caring-group-bhd"
-      ]
-    },
-    {
-      "title": "SKA Capital: An Undervalued Entry Into Malaysia’s Grid and Data Centre Build-Out",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNcUJuaFJlTFN5ZU4tcjdhZmR2ZzBEZUZ6SHBkZE5RZW9pUmYxOWFCc1pWeWstb2d0Zy1aaUU0eGZzTExwR195c3EtcGNMWlh5d0Z5ZDdUdUxYQ1cyaHB1VDlKNC1VMVlTWHFleFBHLUdWaGpPZnNWTkhkcHB2YmtndEVOV3RCaHBSODhfOWFoQTRsenpmeWQ0VzhqVDlkbUNHXzcyR1dzMFVGXzdrMHJ4Tg?oc=5",
-      "source": "Moomoo",
-      "date": "2026-10-20T09:42:42.000Z",
-      "companies": [
-        "ska-capital-berhad"
       ]
     },
     {
@@ -912,9 +948,9 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "Big Caring IPO to raise RM2.45bil",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWmdCNE5XYkhtM2RUeXdlSEY4SXBJanQ4STYzeHhXa2llM0xDYkppOGx1VzQ2X2dpUmw5eGtfd2FTMWFqU09KOUtrZEdnTXljamhQcDRPMHNKY2F4bUxFOUhvX1NtNjJDMFRnYUJ4dmktdkZjbGk3X3kxNVFwenRKSjNFX0NEb3BhNHk0T1F0Q0J2N3hLZWRGRGFKUDlMZw?oc=5",
-      "source": "Free Malaysia Today",
+      "title": "Big Caring targets late-October Main Market IPO to raise approximately RM2.45 billion",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPbXpSRUMxczVuUDBSN1M4N2pDZFRwWnowSjJhLTBsQjJEekVBSnI4YnBkV0Y3dTMtQ0VKemZrdXc0Zm1KUXJ1eXkzLUpYeWxBWHdtUmR2R3hYbUY4a0RVMVpzelJNd3ZnTGtOOG5RdU9oa3p2elo2U0tCcmhFUVJwQ3hyTTVwRHZOVHBQVDdWemR1QQ?oc=5",
+      "source": "Traders Union",
       "date": "2026-10-20T07:00:00.000Z",
       "companies": [
         "big-caring-group-bhd"
@@ -984,15 +1020,6 @@ const IPO_NEWS = {
       ]
     },
     {
-      "title": "SKA Capital Berhad: Power Infrastructure Engineering Specialist Heads to the ACE Market",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNUXBzTXBweC0yOUFZaWhrc1B0bGpWTmxMRnBhNjQ5UUw4Z0FPQmVMMU10MmlLQTBpREhKYlhhSXZ6WHl3cGMyVk1LajVpR21kc0RyUFdGYS02M2Rsa2NWMER4SHJIVURyWjF0Wk01NjI4RXBaV3R1eDctQmR4alBKQWZ1NXhtM1pteTBTWlgta29vQUlreGJzckgwV3hqQWRmNWpteF9uNURVMDFKa2JDUDVUN19VQ09sVEdHakR4TDRWVktWaG45Uw?oc=5",
-      "source": "Moomoo",
-      "date": "2026-10-20T07:00:00.000Z",
-      "companies": [
-        "ska-capital-berhad"
-      ]
-    },
-    {
       "title": "SKA Capital sets IPO price at 43 sen ahead Nov 11 listing",
       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbTZ5TVBMODEza1lGMnUwV2oxZ2JFcUVJejRtclJ6ZDlpZngzRWJ0dVROdEV2X082V2lfaGxYSVBFSnI1MXd5MmthS3h3QVNoSUJRdkt1Tm04SE14aS1pbGo4V0NCOVFuZVlReWxVRDlzZGRNWWREMnluYnZJR195Vlg1RlVMZ3VBdTZ1LVFUMDVSUlFGc0xsWDc0LVVBWE84a2p0Q0pWcGo4aDlSN1BiNEdn0gG3AUFVX3lxTFBHMk4teGNpUU1VSVNJLVNYekJTdFN4QXdjd2R2d25JaU5acEt4cVNlNmswUUtJektycWtPYmpOZlpJbEVObTd5eUkwdkNpTVROWlNSbXhVNGNoOGxUbjdGUy1qMmJFRjU3QVl5QnRvRlM5aVdZS25mV3ZORm9TY3lpeUlaSFhGNS1QYWZNcGRBaGJQTDI4SkN0UHlQTWNiUk9MZHB6SGdQX0JyMlUtZkVQaWlRQnBRUQ?oc=5",
       "source": "NST Online",
@@ -1005,34 +1032,7 @@ const IPO_NEWS = {
       "title": "Malaysia’s Big Caring Pharmacy Chain Plans US$600 Million IPO",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPZlhOTEVremdvMXZYQUxqVG5LZUliOUdvck1IeHlGSGhTWjJsanRaaF9mSVAwbzVMdHZhZS1tc3otb3p0dTJWU0dtVTdwd0NHclRVNmwySzJhaERCWFduMzBGVWVMRTIwcDFmTGdjZ0Fxc3B2ZUhNNjVlOTJSYlg0ajRqSTJ4QzZIa3pYQ3oyYWwtalIzRmNkd1BEeVk?oc=5",
       "source": "Global Cosmetics News",
-      "date": "2026-10-19T05:00:34.000Z",
-      "companies": [
-        "big-caring-group-bhd"
-      ]
-    },
-    {
-      "title": "SQ Advanced Interconnect IPO is Coming in Malaysia Early 2027",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9lVTRucnVhZzV3SUt1MFZsVHhkNXVvUHNpTkVFT0U3cW42Ni1xOGdyUzZaRWQyUmFXcXR5cHBmNjRzbTRDR0Z4SzNwV2p6alpnNk5CUmwzWmV2TGI2R0xfcllsQ1FFMVYxT21jRFUySmJfZ1k2S2o1VnNBNE9FQQ?oc=5",
-      "source": "Moomoo",
-      "date": "2026-10-15T07:00:00.000Z",
-      "companies": [
-        "sq-advanced-interconnect-berhad"
-      ]
-    },
-    {
-      "title": "Malaysia’s Caring moves a step closer to IPO",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPV29icEhOQUdpUDJKN2NKbUwtUzAzY3RmMXRqWUlWMFBTVXo2LWcwLTgxN3VRbWtlUXptc2l1ZGZxcjg4cUJxa2xaUnRCQTRJYzQ1UDV3QzduTnJfN2VmNnVyMWVTTTM4U2xfaTFTVkY5SU15RnF1YVpGQ0s4eWszdk5UYWhtX1l3?oc=5",
-      "source": "Inside Retail Asia",
-      "date": "2026-10-15T07:00:00.000Z",
-      "companies": [
-        "big-caring-group-bhd"
-      ]
-    },
-    {
-      "title": "Big Caring Group signs retail underwriting agreement for IPO",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQdHpCVmdJSFBmdlhGOEVBTktsQkpoRm1Ka3JpQXBENFNkbnB1OUhKaG1pdnljazRHY0Eybl80YXlsdUd3QXpST3BVTExrUVo4SUJTVURwNUIycHNoR0tEdEpJb2dEeG9oQzVUajZQU3JoTF82LVFCcEptbWsxaDhUdFVaRGdrVmpnZzg4bkN0QjBmQQ?oc=5",
-      "source": "The Sun Malaysia",
-      "date": "2026-10-14T14:11:50.000Z",
+      "date": "2026-10-19T07:00:00.000Z",
       "companies": [
         "big-caring-group-bhd"
       ]
