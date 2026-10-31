@@ -944,12 +944,29 @@
         function renderSheetSourceCards(data) {
             const sources = extractSheetSources(data);
             if (!sources.length) return '';
-            return `<div class="sheet-source-grid">${sources.map(source => `
+            const renderCard = source => `
                 <a href="${sheetEscapeText(source.url)}" target="_blank" rel="noopener noreferrer" class="sheet-source-card">
                     <span class="sheet-source-host">${sheetEscapeText(getSheetSourceHost(source.url))}</span>
                     <span class="sheet-source-title">${sheetEscapeText(source.label)}</span>
                 </a>
-            `).join('')}</div>`;
+            `;
+            const primary = sources.slice(0, 3);
+            const extra = sources.slice(3);
+
+            let html = `<div class="sheet-source-grid">${primary.map(renderCard).join('')}</div>`;
+            if (extra.length > 0) {
+                html += `
+                    <details style="margin-top: 0.6rem;">
+                        <summary style="cursor: pointer; color: #7dd3fc; font-size: 0.76rem; font-weight: 600; padding: 0.35rem 0.65rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.2); border-radius: 6px; display: inline-flex; align-items: center; gap: 0.35rem; list-style: none; user-select: none;">
+                            + Lihat ${extra.length} lagi rujukan / sumber...
+                        </summary>
+                        <div class="sheet-source-grid" style="margin-top: 0.6rem;">
+                            ${extra.map(renderCard).join('')}
+                        </div>
+                    </details>
+                `;
+            }
+            return html;
         }
 
         function getSheetFinancialReview(data) {

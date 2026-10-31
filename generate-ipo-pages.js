@@ -53,21 +53,48 @@ function formatNewsDate(iso) {
 }
 
 function companyNewsHtml(ipo) {
-    const items = (newsByCompany.get(ipo.id) || []).slice(0, 8);
-    if (!items.length) return '';
-    const rows = items.map(item => `
+    const allItems = (newsByCompany.get(ipo.id) || []).slice(0, 8);
+    if (!allItems.length) return '';
+
+    const renderItem = item => `
                 <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"
-                   style="display: block; padding: 0.75rem 0.9rem; border-radius: 0.6rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); text-decoration: none; margin-bottom: 0.6rem;">
-                    <span style="display: block; color: white; font-size: 0.92rem; font-weight: 600; line-height: 1.35;">${escapeHtml(item.title)}</span>
-                    <span style="display: block; color: var(--text-dim); font-size: 0.7rem; margin-top: 0.3rem;">${escapeHtml([item.source, formatNewsDate(item.date)].filter(Boolean).join(' · '))}</span>
-                </a>`).join('');
+                   style="display: block; padding: 0.7rem 0.85rem; border-radius: 0.6rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); text-decoration: none; margin-bottom: 0.5rem; transition: background 0.15s, border-color 0.15s;"
+                   onmouseover="this.style.background='rgba(96,165,250,0.08)';this.style.borderColor='rgba(96,165,250,0.25)';"
+                   onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.06)';">
+                    <span style="display: block; color: white; font-size: 0.88rem; font-weight: 600; line-height: 1.35;">${escapeHtml(item.title)}</span>
+                    <span style="display: block; color: var(--text-dim); font-size: 0.7rem; margin-top: 0.25rem;">${escapeHtml([item.source, formatNewsDate(item.date)].filter(Boolean).join(' · '))}</span>
+                </a>`;
+
+    const visibleItems = allItems.slice(0, 3);
+    const hiddenItems = allItems.slice(3);
+
+    const visibleRows = visibleItems.map(renderItem).join('');
+    let moreHtml = '';
+    if (hiddenItems.length > 0) {
+        const hiddenRows = hiddenItems.map(renderItem).join('');
+        moreHtml = `
+            <details style="margin-top: 0.5rem;">
+                <summary style="cursor: pointer; color: #60a5fa; font-size: 0.78rem; font-weight: 600; padding: 0.4rem 0.75rem; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); border-radius: 6px; display: inline-flex; align-items: center; gap: 0.4rem; list-style: none; user-select: none;">
+                    + Lihat ${hiddenItems.length} lagi berita...
+                </summary>
+                <div style="margin-top: 0.6rem;">
+                    ${hiddenRows}
+                </div>
+            </details>
+        `;
+    }
+
     return `
-        <div class="glass-card" style="padding: 1.75rem; border-radius: 12px; margin-top: 1.5rem;">
-            <h3 style="color: white; font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="newspaper" style="color: #60a5fa; width: 20px;"></i> Berita Berkaitan
-            </h3>
-            ${rows}
-            <p style="font-size: 0.7rem; color: var(--text-dim); margin: 0.5rem 0 0 0;">Auto-agregat daripada Google News &amp; Bing News. Dikemas kini setiap jam semasa sync.</p>
+        <div class="glass-card" style="padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                <h3 style="color: white; font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="newspaper" style="color: #60a5fa; width: 18px;"></i> Berita Berkaitan
+                </h3>
+                <span style="font-size: 0.72rem; color: var(--text-dim);">${allItems.length} berita</span>
+            </div>
+            ${visibleRows}
+            ${moreHtml}
+            <p style="font-size: 0.68rem; color: var(--text-dim); margin: 0.6rem 0 0 0;">Auto-agregat daripada Google News &amp; Bing News. Dikemas kini setiap jam semasa sync.</p>
         </div>
     `;
 }
