@@ -210,9 +210,10 @@ const IPO_DATA = [
     "enrichedBy": "AI",
     "v7TargetPrice": 0.45,
     "openPrice": 0.7,
-    "currentPrice": 0.705,
-    "performance": "+161.11%",
-    "highPrice": 0.765
+    "currentPrice": 0.715,
+    "performance": "+164.81%",
+    "highPrice": 0.765,
+    "pe": 11.69
   },
   {
     "id": "srkk-ai",
@@ -790,7 +791,8 @@ const IPO_DATA = [
     "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 12x - 15x PE. Bus Cap adalah industri tradisional tetapi dijamin murah.",
     "v7TargetPrice": 0.3,
     "hasMitiTranche": false,
-    "openingDate": "06-May-2026"
+    "openingDate": "06-May-2026",
+    "pe": 7.88
   },
   {
     "id": "5e-resources",
@@ -879,7 +881,8 @@ const IPO_DATA = [
     "v7TargetPrice": 0.3,
     "hasMitiTranche": false,
     "openingDate": "30-Mar-2026",
-    "closingDate": "03-Apr-2026"
+    "closingDate": "03-Apr-2026",
+    "pe": 23.64
   },
   {
     "id": "adnex",
@@ -960,7 +963,8 @@ const IPO_DATA = [
     "v7TargetPrice": 0.21,
     "hasMitiTranche": false,
     "openingDate": "26-Feb-2026",
-    "closingDate": "05-Mar-2026"
+    "closingDate": "05-Mar-2026",
+    "pe": 15.65
   },
   {
     "id": "aerodyne",
@@ -1268,7 +1272,8 @@ const IPO_DATA = [
     "strategy": "Swing",
     "v7TargetPrice": 1.15,
     "hasMitiTranche": true,
-    "openingDate": "02-Jul-2026"
+    "openingDate": "02-Jul-2026",
+    "pe": 12.82
   },
   {
     "id": "ei-power",
@@ -1478,8 +1483,8 @@ const IPO_DATA = [
     "listingDate": "16-Apr-2026",
     "year": 2026,
     "price": 0.45,
-    "currentPrice": 0.37,
-    "performance": "-17.78%",
+    "currentPrice": 0.375,
+    "performance": "-16.67%",
     "os": 7.04,
     "ib": "UOB Kay Hian",
     "sector": "Consumer (Tourism)",
@@ -1626,7 +1631,8 @@ const IPO_DATA = [
     "enrichedBy": "AI",
     "v7TargetPrice": 0.12,
     "hasMitiTranche": false,
-    "openingDate": "27-Apr-2026"
+    "openingDate": "27-Apr-2026",
+    "pe": 9.95
   },
   {
     "id": "hocksoon",
@@ -1799,7 +1805,8 @@ const IPO_DATA = [
     "peers": "<strong>Peer Comparison & Risiko:</strong> Penilaian murah (11.4x PE sasaran vs peers 15.5x). Risiko utama: Tiada pendapatan berulang (project-based), Order Book kecil, tumpuan pelanggan tinggi (Top 5 = 62.9%), dan OCF negatif.",
     "v7TargetPrice": 0.31,
     "hasMitiTranche": false,
-    "openingDate": "13-Apr-2026"
+    "openingDate": "13-Apr-2026",
+    "pe": 10.87
   },
   {
     "id": "isf",
@@ -2046,7 +2053,8 @@ const IPO_DATA = [
     "peers": "<strong>Peer Comparison:</strong> Forward PE berada pada 12.5x - 14.5x. Sektor pengurusan tenaga kerja asing menghadapi risiko dasar kawal selia kemasukan pekerja asing yang tidak menentu. Ditawarkan pada nilai saksama **RM 0.395** (+3.9% upside).",
     "v7TargetPrice": 0.37,
     "hasMitiTranche": false,
-    "openingDate": "15-Apr-2026"
+    "openingDate": "15-Apr-2026",
+    "pe": 23.75
   },
   {
     "id": "mtt-shipping",
@@ -2481,7 +2489,8 @@ const IPO_DATA = [
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (FY26) berada di sekitar 24.50x - 26.73x. Premium yang wajar berbanding peers semikonduktor tempatan kerana pendedahan langsung kepada rekaan litar AI/HPC proprietary.",
     "v7TargetPrice": 1.58,
     "hasMitiTranche": false,
-    "openingDate": "29-Apr-2026"
+    "openingDate": "29-Apr-2026",
+    "pe": 29.24
   },
   {
     "id": "sunmed",
@@ -2790,7 +2799,8 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 25.6x, bersesuaian dengan margin premium subsektor M&E data center.",
     "v7TargetPrice": 0.38,
-    "hasMitiTranche": false
+    "hasMitiTranche": false,
+    "pe": 36.58
   },
   {
     "id": "cheeding",
@@ -2909,8 +2919,8 @@ const IPO_DATA = [
     "listingDate": "25-Mar-2025",
     "year": 2025,
     "price": 0.25,
-    "currentPrice": 0.115,
-    "performance": "-54.00%",
+    "currentPrice": 0.12,
+    "performance": "-52.00%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -3201,7 +3211,8 @@ const IPO_DATA = [
     "v7TargetPrice": 0.21,
     "hasMitiTranche": false,
     "openingDate": "30-Apr-2025",
-    "closingDate": "27-May-2025"
+    "closingDate": "27-May-2025",
+    "pe": 24.28
   },
   {
     "id": "iab",
@@ -3277,7 +3288,8 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 24.5x, menikmati diskaun berbanding peers teknologi analitik data yang berdagang melebihi 30x PE.",
     "v7TargetPrice": 0.71,
-    "hasMitiTranche": false
+    "hasMitiTranche": false,
+    "pe": 38.84
   },
   {
     "id": "icents",
@@ -6640,7 +6652,8 @@ const IPO_DATA = [
       "<strong>Katalis TNB Grid Upgrade:</strong> Menjadi rakan kontrak utama TNB dalam menaik taraf infrastruktur penghantaran tenaga nasional selaras dengan Pelan Hala Tuju Peralihan Tenaga Negara (NETR)."
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 19.7x. Berada di paras menarik berbanding peers data center utilities yang berdagang sekitar 25x - 30x PE.",
-    "v7TargetPrice": 2.97
+    "v7TargetPrice": 2.97,
+    "pe": 32.6
   },
   {
     "id": "orgabio",
@@ -7511,8 +7524,8 @@ const IPO_DATA = [
     "listingDate": "15-Oct-2020",
     "year": 2020,
     "price": 0.48,
-    "currentPrice": 3.05,
-    "performance": "+535.42%",
+    "currentPrice": 3.04,
+    "performance": "+533.33%",
     "os": 20,
     "ib": "M&A Securities",
     "sector": "Industrial / Consumer",
@@ -7975,7 +7988,8 @@ const IPO_DATA = [
     "v7TargetPrice": 0.24,
     "hasMitiTranche": false,
     "openingDate": "08-Jun-2026",
-    "sector": "Industrial Products & Services"
+    "sector": "Industrial Products & Services",
+    "pe": 13.88
   },
   {
     "id": "hss-holdings-berhad",
@@ -8059,7 +8073,8 @@ const IPO_DATA = [
     "highPrice": 0.18,
     "v7TargetPrice": 0.2,
     "hasMitiTranche": false,
-    "openingDate": "29-May-2026"
+    "openingDate": "29-May-2026",
+    "pe": 10.47
   },
   {
     "id": "spb-development-berhad",
@@ -8342,10 +8357,11 @@ const IPO_DATA = [
     "mitiOpenDate": "01-Jul-2026",
     "mitiCloseDate": "10-Jul-2026",
     "hasMitiTranche": true,
-    "currentPrice": 0.405,
-    "performance": "-15.62%",
+    "currentPrice": 0.41,
+    "performance": "-14.58%",
     "openingDate": "18-Aug-2026",
-    "highPrice": 0.48
+    "highPrice": 0.48,
+    "pe": 12.63
   },
   {
     "id": "evocom-berhad",
@@ -8417,8 +8433,9 @@ const IPO_DATA = [
     "openingDate": "03-Sep-2026",
     "openPrice": 0.15,
     "highPrice": 0.18,
-    "currentPrice": 0.085,
-    "performance": "-52.78%"
+    "currentPrice": 0.09,
+    "performance": "-50.00%",
+    "pe": 1.24
   },
   {
     "id": "slgc-berhad",
@@ -8432,7 +8449,7 @@ const IPO_DATA = [
     "stage": 5,
     "status": "Listed",
     "year": 2026,
-    "currentPrice": 0.245,
+    "currentPrice": 0.23,
     "sector": "Construction",
     "predictedGrade": "C",
     "sifuTargetPrice": 0.28,
@@ -8503,11 +8520,12 @@ const IPO_DATA = [
     "ballotingDate": "24-Sep-2026",
     "os": 3.06,
     "openPrice": 0.28,
-    "performance": "-12.50%",
+    "performance": "-17.86%",
     "highPrice": 0.28,
     "lowPrice": 0.24,
     "closePrice": 0.25,
-    "ib": "M & A Securities"
+    "ib": "M & A Securities",
+    "pe": 10.69
   },
   {
     "id": "keb-berhad",
@@ -8527,7 +8545,7 @@ const IPO_DATA = [
     "sector": "Property",
     "geography": "Selangor",
     "v3TargetPrice": 0.38,
-    "zone2TargetPrice": 0.45,
+    "zone2TargetPrice": 0.44,
     "predictedGrade": "B",
     "analystInsight": "🚨 <b>HIGH RISK (GRADE C)</b><br>• <b>Sector Headwind:</b> ACE Market property developers exhibit lowest debut win rates & frequent discounts.<br>• <b>Cash Flow Risk:</b> High working capital lockup in residential projects.<br>• <b>Verdict:</b> Historically underperforms on debut (-5% to -15%); exercise caution.",
     "insightUrl": "https://www.isaham.my/ipo/insights/keb-berhad",
@@ -8574,7 +8592,7 @@ const IPO_DATA = [
     "mitiOpenDate": "13-Jul-2026",
     "mitiCloseDate": "22-Jul-2026",
     "ib": "M&A Securities",
-    "v7TargetPrice": 0.45,
+    "v7TargetPrice": 0.44,
     "prospectusUrl": "https://sahamonline.miti.gov.my/",
     "hasMitiTranche": true,
     "openingDate": "23-Oct-2026",
@@ -8610,7 +8628,8 @@ const IPO_DATA = [
       },
       "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (6.23 sen):",
       "sopNote": "Gandaan P/E 7.0x adalah standard konservatif untuk pemaju hartanah ACE Market. Pada harga RM0.35, saham menawarkan potensi kenaikan +25.7%."
-    }
+    },
+    "pe": 5.98
   },
   {
     "id": "impact-capital-holdings-berhad",
@@ -8630,8 +8649,8 @@ const IPO_DATA = [
     "sector": "Technology (ICT Infrastructure Integration)",
     "geography": "Kuching, Sarawak",
     "v3TargetPrice": 0.28,
-    "zone2TargetPrice": 0.3,
-    "v7TargetPrice": 0.3,
+    "zone2TargetPrice": 0.29,
+    "v7TargetPrice": 0.29,
     "openingDate": "27-Oct-2026",
     "ib": "Public Investment Bank",
     "prospectusUrl": "https://www.klsescreener.com/v2/announcements/view/11691851",
@@ -8764,7 +8783,7 @@ const IPO_DATA = [
     "ib": "UOB Kay Hian",
     "sector": "Technology (Semiconductor)",
     "fundUse": "Expansion & Working Capital",
-    "predictedGrade": "A",
+    "predictedGrade": "C",
     "stage": 5,
     "status": "Listed",
     "shariah": true,
@@ -8827,7 +8846,8 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan (Forward) sekitar 21.5x, sejajar dengan purata industri pembuatan peralatan SMT/Semicon.",
     "v7TargetPrice": 0.67,
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "pe": 86.67
   },
   {
     "id": "destini",
@@ -8905,7 +8925,8 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> Forward PE bernilai sekitar 5.2x, sangat murah berbanding purata peers industri kejuruteraan MRO.",
     "v7TargetPrice": 0.61,
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "pe": 5.37
   },
   {
     "id": "solarvest",
@@ -8984,11 +9005,12 @@ const IPO_DATA = [
     ],
     "peers": "<strong>Peer Comparison:</strong> PE Terbitan sekitar 30.0x-35.0x disokong oleh CAGR untung melebihi 40% berbanding purata industri utility-scale solar.",
     "v7TargetPrice": 3.29,
-    "hasMitiTranche": true
+    "hasMitiTranche": true,
+    "pe": 53.3
   },
   {
     "id": "semico-ns-",
-    "companyName": "SEMICO[NS]",
+    "companyName": "Semico Capital Berhad",
     "symbol": "SEMICO",
     "stage": 5,
     "status": "Listed",
@@ -9002,7 +9024,9 @@ const IPO_DATA = [
     "market": "ACE Market",
     "highPrice": 0.63,
     "shariah": false,
-    "sector": "Consumer Products & Services"
+    "sector": "Consumer Products & Services (Arcade Machine & Toy Distribution)",
+    "os": 28.09,
+    "predictedGrade": "B"
   },
   {
     "id": "foodie-ns-",
@@ -9378,14 +9402,16 @@ const IPO_DATA = [
     "stage": 5,
     "status": "Listed",
     "year": 2026,
-    "currentPrice": 0.125,
-    "performance": "-30.56%",
+    "currentPrice": 0.12,
+    "performance": "-33.33%",
     "highPrice": 0.18,
     "os": 59.96,
     "isAutoOS": true,
     "openingDate": "05-Jun-2026",
-    "predictedGrade": "A",
-    "sector": "Consumer Products & Services"
+    "predictedGrade": "C",
+    "sector": "Consumer Products & Services",
+    "openPrice": 0.18,
+    "closePrice": 0.175
   },
   {
     "id": "eckem-holdings-berhad",
@@ -9490,7 +9516,8 @@ const IPO_DATA = [
     "v7TargetPrice": 0.22,
     "hasMitiTranche": false,
     "highPrice": 0.13,
-    "openingDate": "26-Jun-2026"
+    "openingDate": "26-Jun-2026",
+    "pe": 9.03
   },
   {
     "id": "tuc-holdings-berhad",
@@ -9692,7 +9719,8 @@ const IPO_DATA = [
     "insightUrl": "https://www.isaham.my/ipo/insights/united-asiapac-energy-berhad",
     "currentPrice": 0.25,
     "performance": "-28.57%",
-    "highPrice": 0.35
+    "highPrice": 0.35,
+    "openPrice": 0.35
   },
   {
     "id": "qube-international-berhad",
@@ -9736,8 +9764,8 @@ const IPO_DATA = [
     "highPrice": 0.325,
     "dailyChange": 30,
     "v3TargetPrice": 0.31,
-    "currentPrice": 0.345,
-    "performance": "+38.00%"
+    "currentPrice": 0.365,
+    "performance": "+46.00%"
   },
   {
     "id": "jrk-holdings-berhad",
@@ -9776,8 +9804,8 @@ const IPO_DATA = [
     "sifuTargetPrice": 0.45,
     "calibratedSifuTargetPrice": 0.45,
     "v3TargetPrice": 0.4,
-    "zone2TargetPrice": 0.55,
-    "v7TargetPrice": 0.55,
+    "zone2TargetPrice": 0.45,
+    "v7TargetPrice": 0.45,
     "ofs": true,
     "ofsPercentage": 30.21,
     "hasMitiTranche": true,
@@ -10066,7 +10094,7 @@ const IPO_DATA = [
     "highPrice": 0.27,
     "currentPrice": 0.255,
     "openPrice": 0.27,
-    "performance": "+28.95%"
+    "performance": "+34.21%"
   },
   {
     "id": "empg-group-berhad",
@@ -10110,15 +10138,18 @@ const IPO_DATA = [
     "sector": "Industrial (Aviation MRO)",
     "geography": "Selangor",
     "sifuTargetPrice": 0.35,
-    "calibratedSifuTargetPrice": 0.34,
-    "v7TargetPrice": 0.34,
-    "zone2TargetPrice": 0.34,
+    "calibratedSifuTargetPrice": 0.33,
+    "v7TargetPrice": 0.33,
+    "zone2TargetPrice": 0.33,
     "analystInsight": "✈️ <b>POTENSI — MRO PENERBANGAN (DRAFT PHASE)</b><br>Syarikat MRO helikopter & enjin pesawat sayap tetap yang mendapat kelulusan Bursa pada Jun 2026. IPO 329 juta saham (205 juta terbitan baharu + 124 juta OFS) ditaja jamin <b>HLIB (Hong Leong Investment Bank)</b>.<br><br>📊 <b>Kekuatan:</b><br>• Niche teknikal MRO dengan moat pensijilan & hubungan lama.<br>• Pengembangan MRO helikopter ke Timur Tengah (JV) & segmen landing gear/roda/brek bernilai tinggi.<br>• Shariah-compliant; permodalan pasaran ~RM387 juta pada harga RM0.30.<br><br>⚠️ <b>Risiko:</b> Komponen OFS 124 juta saham & kebergantungan kepada kitaran sektor penerbangan. Pantau tarikh pembukaan aplikasi.",
     "ib": "Hong Leong Investment Bank",
     "openingDate": "19-Aug-2026",
     "highPrice": 0.35,
-    "currentPrice": 0.23,
-    "performance": "-34.29%"
+    "currentPrice": 0.225,
+    "performance": "-35.71%",
+    "openPrice": 0.35,
+    "os": 22.16,
+    "predictedGrade": "C"
   },
   {
     "id": "emits-berhad",
@@ -10251,13 +10282,13 @@ const IPO_DATA = [
       "FY27 — belum disahkan",
       "FY28 — belum disahkan"
     ],
-    "rev23": 1100000000,
-    "rev25": 3410000000,
+    "rev23": 1110700000,
+    "rev25": 3412000000,
     "revF": null,
-    "pat23": null,
+    "pat23": 37000000,
     "pat25": 122300000,
     "patF": null,
-    "eps23": null,
+    "eps23": 0.5012,
     "eps25": 1.6568,
     "epsF": null,
     "epsGrowthF": null,
@@ -10280,12 +10311,12 @@ const IPO_DATA = [
       "FY27 — belum disahkan",
       "FY28 — belum disahkan"
     ],
-    "pat24": null,
+    "pat24": 37200000,
     "patF1": null,
-    "eps24": null,
+    "eps24": 0.5039,
     "epsF1": null,
     "epsGrowthF1": null,
-    "rev24": null,
+    "rev24": 2171400000,
     "valuationScenarios": [
       {
         "multiple": 25,
@@ -10418,6 +10449,19 @@ const IPO_DATA = [
       "<a href=\"https://www.minichart.com.sg/2026/10/29/big-caring-launches-rm8-0-billion-main-market-ipo-at-rm1-08-retail-price/\" target=\"_blank\" rel=\"noopener noreferrer\">MiniChart: Tarikh, cornerstone & PE 41.5x (29 Okt 2026)</a>",
       "<a href=\"https://www.bursamalaysia.com/market_information/announcements/company_announcement/announcement_details?ann_id=3719881\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman jadual IPO Bursa Malaysia</a>"
     ],
+    "rev26": 4024000000,
+    "gp23": 232400000,
+    "gp24": 465100000,
+    "gp25": 845800000,
+    "gp26": 1212400000,
+    "assets23": 727613000,
+    "assets24": 2460246000,
+    "assets25": 3170871000,
+    "assets26": 3476521000,
+    "liab23": 568481000,
+    "liab24": 2040957000,
+    "liab25": 2642090000,
+    "liab26": 2917391000,
     "mitiPaymentDeadline": "2026-10-30T17:00:00+08:00",
     "mitiPaymentSource": "Surat MITI No Fail MITI.S.700-20/2/322, 22/10/2026",
     "mitiPaymentNote": "Surat MITI 22/10/2026: peruntukan 3,500 unit pada RM1.08; arahan pembayaran dan dokumen mesti dikembalikan serta bayaran dibuat selewat-lewatnya 5.00 petang, 30 Okt 2026 (Jumaat) kepada Malaysian Issuing House Sdn Bhd. Bukan tarikh tutup permohonan awam (5 Nov 2026).",
@@ -10554,8 +10598,8 @@ const IPO_DATA = [
     "geography": "Kuala Lumpur",
     "sifuTargetPrice": 0.54,
     "calibratedSifuTargetPrice": 0.54,
-    "v7TargetPrice": 0.58,
-    "zone2TargetPrice": 0.58,
+    "v7TargetPrice": 0.54,
+    "zone2TargetPrice": 0.54,
     "mitiApplicants": 2070,
     "mitiOfferShares": 111938000,
     "hasMitiTranche": true,
@@ -10997,7 +11041,8 @@ const IPO_DATA = [
     "peers": "<strong>Peer Comparison:</strong> Pesaing traded sekitar 15x - 20x PE. RNG Tech mempunyai kelebihan pasaran (market leader) yang besar.",
     "v7TargetPrice": 0.24,
     "openingDate": "16-Jun-2026",
-    "sector": "Consumer Products & Services"
+    "sector": "Consumer Products & Services",
+    "pe": 7.1
   },
   {
     "id": "eghi",
@@ -11031,9 +11076,9 @@ const IPO_DATA = [
     "osMetric": "overall-public-oversubscription",
     "osSubscriptionRate": 2.63,
     "highPrice": 0.16,
-    "currentPrice": 0.085,
+    "currentPrice": 0.09,
     "openPrice": 0.145,
-    "performance": "-46.88%"
+    "performance": "-43.75%"
   },
   {
     "id": "rt--ns-",
@@ -11081,7 +11126,7 @@ const IPO_DATA = [
   },
   {
     "id": "ghs-ns-",
-    "companyName": "GHS[NS]",
+    "companyName": "Guan Huat Seng Holdings Berhad",
     "symbol": "GHS[NS]",
     "stage": 5,
     "status": "Listed",
@@ -11091,7 +11136,11 @@ const IPO_DATA = [
     "currentPrice": 0.175,
     "performance": "-30.00%",
     "year": 2026,
-    "listingDate": "2026-01-22"
+    "listingDate": "2026-01-22",
+    "os": 4.78,
+    "market": "ACE Market",
+    "sector": "Consumer Products & Services (Food Distribution)",
+    "predictedGrade": "C"
   },
   {
     "id": "wellchip--ns-",

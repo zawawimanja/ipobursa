@@ -105,7 +105,8 @@
         "openingDate": "29-Apr-2026",
         "closingDate": "06-May-2026",
         "listingDate": "20-May-2026",
-        "price": 0.88
+        "price": 0.88,
+        "pe": 29.24
     },
     "teamstr": {
         "sifuTargetPrice": 0.32,
@@ -117,7 +118,8 @@
         "price": 0.26
     },
     "cbhb": {
-        "sifuTargetPrice": 0.38
+        "sifuTargetPrice": 0.38,
+        "pe": 36.58
     },
     "ecoshop": {
         "sifuTargetPrice": 1.31,
@@ -131,7 +133,8 @@
     "iab": {
         "sifuTargetPrice": 0.71,
         "stage": 5,
-        "status": "Listed"
+        "status": "Listed",
+        "pe": 38.84
     },
     "kopi": {
         "sifuTargetPrice": 0.55
@@ -277,7 +280,8 @@
         "pat25": 8365000,
         "gp25": 17003000,
         "assets25": 83585000,
-        "liab25": 43000000
+        "liab25": 43000000,
+        "pe": 9.03
     },
     "gb-bond-holdings-berhad": {
         "stage": 5,
@@ -382,7 +386,8 @@
             },
             "scenarioLabel": "Senario Gandaan Penilaian Berasaskan EPS FY26 (6.23 sen):",
             "sopNote": "Gandaan P/E 7.0x adalah standard konservatif untuk pemaju hartanah ACE Market. Pada harga RM0.35, saham menawarkan potensi kenaikan +25.7%."
-        }
+        },
+        "pe": 5.98
     },
     "redplanet-berhad": {
         "price": 0.19,
@@ -438,7 +443,8 @@
         "symbol": "ECOSYS",
         "openPrice": 0.7,
         "os": 206.7,
-        "analystInsight": "✅ <b>ECOSYS — DEBUT 14 OKT 2026</b><br>• <b>Harga IPO:</b> RM0.27.<br>• <b>Harga debut:</b> RM0.70 (+159.26%; +RM0.43 sesaham).<br>• <b>Permintaan awam:</b> Oversubscription 206.70×; 31,734 permohonan.<br>• <b>Pasaran:</b> ACE Market, kod saham 0477.<br>• <b>Perniagaan:</b> Komponen kejuruteraan ketepatan UHP dan sistem abatement untuk industri semikonduktor.<br>• <b>Sumber:</b> <a href=\"https://finance.yahoo.com/markets/stocks/articles/ecosys-malaysia-berhad-debuts-ace-074500156.html\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman debut EcoSys</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11677871\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>."
+        "analystInsight": "✅ <b>ECOSYS — DEBUT 14 OKT 2026</b><br>• <b>Harga IPO:</b> RM0.27.<br>• <b>Harga debut:</b> RM0.70 (+159.26%; +RM0.43 sesaham).<br>• <b>Permintaan awam:</b> Oversubscription 206.70×; 31,734 permohonan.<br>• <b>Pasaran:</b> ACE Market, kod saham 0477.<br>• <b>Perniagaan:</b> Komponen kejuruteraan ketepatan UHP dan sistem abatement untuk industri semikonduktor.<br>• <b>Sumber:</b> <a href=\"https://finance.yahoo.com/markets/stocks/articles/ecosys-malaysia-berhad-debuts-ace-074500156.html\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman debut EcoSys</a> · <a href=\"https://www.klsescreener.com/v2/announcements/view/11677871\" target=\"_blank\" rel=\"noopener noreferrer\">Keputusan balloting</a>.",
+        "pe": 11.69
     },
     "butterfield-fb-berhad": {
         "mitiOpenDate": "01-Jul-2026",
@@ -465,7 +471,8 @@
         "assets25": 155000000,
         "liab23": 38000000,
         "liab24": 48000000,
-        "liab25": 92000000
+        "liab25": 92000000,
+        "pe": 12.63
     },
     "evocom-berhad": {
         "os": 3.6,
@@ -490,7 +497,8 @@
         "assets25": 180000000,
         "liab23": 68000000,
         "liab24": 78000000,
-        "liab25": 96000000
+        "liab25": 96000000,
+        "pe": 1.24
     },
     "slgc-berhad": {
         "stage": 5,
@@ -515,7 +523,8 @@
         "assets25": 289450000,
         "liab23": 110000000,
         "liab24": 108000000,
-        "liab25": 175000000
+        "liab25": 175000000,
+        "pe": 10.69
     },
     "united-asiapac-energy-berhad": {
         "symbol": "UNIPAC",
@@ -539,7 +548,8 @@
         "mitiOpenDate": "01-Jul-2026",
         "mitiCloseDate": "10-Jul-2026",
         "stage": 5,
-        "status": "Listed"
+        "status": "Listed",
+        "openPrice": 0.35
     },
     "big-caring-group-bhd": {
         "stage": 3,
@@ -572,13 +582,13 @@
             "FY27 — belum disahkan",
             "FY28 — belum disahkan"
         ],
-        "rev23": 1100000000,
-        "rev25": 3410000000,
+        "rev23": 1110700000,
+        "rev25": 3412000000,
         "revF": null,
-        "pat23": null,
+        "pat23": 37000000,
         "pat25": 122300000,
         "patF": null,
-        "eps23": null,
+        "eps23": 0.5012,
         "eps25": 1.6568,
         "epsF": null,
         "epsGrowthF": null,
@@ -601,12 +611,12 @@
             "FY27 — belum disahkan",
             "FY28 — belum disahkan"
         ],
-        "pat24": null,
+        "pat24": 37200000,
         "patF1": null,
-        "eps24": null,
+        "eps24": 0.5039,
         "epsF1": null,
         "epsGrowthF1": null,
-        "rev24": null,
+        "rev24": 2171400000,
         "sifuTargetPrice": null,
         "calibratedSifuTargetPrice": null,
         "v7TargetPrice": null,
@@ -751,7 +761,20 @@
         "mitiPaymentDeadline": "2026-10-30T17:00:00+08:00",
         "mitiPaymentSource": "Surat MITI No Fail MITI.S.700-20/2/322, 22/10/2026",
         "mitiPaymentNote": "Surat MITI 22/10/2026: peruntukan 3,500 unit pada RM1.08; arahan pembayaran dan dokumen mesti dikembalikan serta bayaran dibuat selewat-lewatnya 5.00 petang, 30 Okt 2026 (Jumaat) kepada Malaysian Issuing House Sdn Bhd. Bukan tarikh tutup permohonan awam (5 Nov 2026).",
-        "mitiAllocationUnits": 3500
+        "mitiAllocationUnits": 3500,
+        "rev26": 4024000000,
+        "gp23": 232400000,
+        "gp24": 465100000,
+        "gp25": 845800000,
+        "gp26": 1212400000,
+        "assets23": 727613000,
+        "assets24": 2460246000,
+        "assets25": 3170871000,
+        "assets26": 3476521000,
+        "liab23": 568481000,
+        "liab24": 2040957000,
+        "liab25": 2642090000,
+        "liab26": 2917391000
     },
     "ioipg-malaysia-reit": {
         "stage": 6,
@@ -1362,7 +1385,9 @@
         "closingDate": "26-Aug-2026",
         "listingDate": "08-Sep-2026",
         "price": 0.35,
-        "symbol": "GTA"
+        "symbol": "GTA",
+        "openPrice": 0.35,
+        "os": 22.16
     },
     "stratus-global": {
         "stage": 5,
@@ -1370,7 +1395,8 @@
         "openingDate": "02-Jul-2026",
         "closingDate": "10-Jul-2026",
         "listingDate": "21-Jul-2026",
-        "price": 0.8
+        "price": 0.8,
+        "pe": 12.82
     },
     "restngo": {
         "stage": 5,
@@ -1381,7 +1407,8 @@
         "price": 0.13,
         "symbol": "RESTNGO",
         "market": "ACE Market",
-        "sector": "Consumer Products & Services"
+        "sector": "Consumer Products & Services",
+        "pe": 7.1
     },
     "eckem-holdings-berhad": {
         "stage": 5,
@@ -1403,7 +1430,8 @@
         "price": 0.29,
         "symbol": "LIFTECH",
         "market": "ACE Market",
-        "sector": "Industrial Products & Services"
+        "sector": "Industrial Products & Services",
+        "pe": 13.88
     },
     "rt-pastry-holdings-berhad": {
         "stage": 5,
@@ -1414,7 +1442,9 @@
         "price": 0.18,
         "symbol": "RT",
         "market": "ACE Market",
-        "sector": "Consumer Products & Services"
+        "sector": "Consumer Products & Services",
+        "openPrice": 0.18,
+        "closePrice": 0.175
     },
     "hss-holdings-berhad": {
         "stage": 5,
@@ -1422,7 +1452,8 @@
         "openingDate": "29-May-2026",
         "closingDate": "09-Jun-2026",
         "listingDate": "23-Jun-2026",
-        "price": 0.18
+        "price": 0.18,
+        "pe": 10.47
     },
     "bus-cap": {
         "stage": 5,
@@ -1430,7 +1461,8 @@
         "openingDate": "06-May-2026",
         "closingDate": "15-May-2026",
         "listingDate": "03-Jun-2026",
-        "price": 0.23
+        "price": 0.23,
+        "pe": 7.88
     },
     "gold-li": {
         "stage": 5,
@@ -1451,7 +1483,8 @@
         "liab23": 22000000,
         "liab24": 26000000,
         "liab25": 32000000,
-        "revF1": 77000000
+        "revF1": 77000000,
+        "pe": 9.95
     },
     "inspace-creation": {
         "stage": 5,
@@ -1459,7 +1492,8 @@
         "openingDate": "13-Apr-2026",
         "closingDate": "22-Apr-2026",
         "listingDate": "08-May-2026",
-        "price": 0.25
+        "price": 0.25,
+        "pe": 10.87
     },
     "manforce-group": {
         "stage": 5,
@@ -1467,7 +1501,8 @@
         "openingDate": "15-Apr-2026",
         "closingDate": "21-Apr-2026",
         "listingDate": "06-May-2026",
-        "price": 0.38
+        "price": 0.38,
+        "pe": 23.75
     },
     "mtt-shipping": {
         "stage": 5,
@@ -1512,7 +1547,8 @@
         "openingDate": "30-Mar-2026",
         "closingDate": "03-Apr-2026",
         "listingDate": "15-Apr-2026",
-        "price": 0.26
+        "price": 0.26,
+        "pe": 23.64
     },
     "sunmed": {
         "stage": 5,
@@ -1538,7 +1574,8 @@
         "price": 0.2,
         "symbol": "ADNEX",
         "market": "ACE Market",
-        "sector": "Construction (Interior Fit-out)"
+        "sector": "Construction (Interior Fit-out)",
+        "pe": 15.65
     },
     "ogx": {
         "stage": 5,
@@ -1749,7 +1786,8 @@
         "openingDate": "30-Apr-2025",
         "closingDate": "27-May-2025",
         "listingDate": "09-Jun-2025",
-        "price": 0.335
+        "price": 0.335,
+        "pe": 24.28
     },
     "ictzone": {
         "stage": 5,
@@ -1918,7 +1956,9 @@
     "semico-ns-": {
         "symbol": "SEMICO",
         "market": "ACE Market",
-        "sector": "Consumer Products & Services"
+        "sector": "Consumer Products & Services (Arcade Machine & Toy Distribution)",
+        "companyName": "Semico Capital Berhad",
+        "os": 28.09
     },
     "foodie-ns-": {
         "symbol": "FOODIE",
@@ -1987,5 +2027,23 @@
         "fundUse": "Hasil terbitan baharu untuk bon pelaksanaan projek, pembelian peralatan projek (transformer, sistem telekawalan, panel geganti), bayaran subkontraktor, bahan projek dan kos penyenaraian. Sebahagian besar hasil tawaran jualan diterima oleh TSLIM Holdings (pemegang saham sedia ada), bukan syarikat.",
         "price": 0.63,
         "mitiApplicants": 184
+    },
+    "mnhldg": {
+        "pe": 32.6
+    },
+    "cnergenz": {
+        "pe": 86.67
+    },
+    "destini": {
+        "pe": 5.37
+    },
+    "solarvest": {
+        "pe": 53.3
+    },
+    "ghs-ns-": {
+        "companyName": "Guan Huat Seng Holdings Berhad",
+        "os": 4.78,
+        "market": "ACE Market",
+        "sector": "Consumer Products & Services (Food Distribution)"
     }
 }
