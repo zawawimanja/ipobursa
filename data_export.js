@@ -10403,7 +10403,7 @@ const IPO_DATA = [
       "<strong>Rangkaian runcit terbesar:</strong> 668 kedai dan 24.2% bahagian pasaran (akhir September) dengan enam jenama farmasi.",
       "<strong>Polisi dividen:</strong> sehingga 50% PATAMI selepas penyenaraian; tempoh moratorium 6 bulan untuk promoter/pemegang saham besar."
     ],
-    "peers": "<strong>Asas perbandingan:</strong> Bandingkan dengan rangkaian farmasi/runcit kesihatan serantau. Pada PE sejarah 41.6x atas PATAMI FY26, penilaian adalah premium; pertumbuhan keuntungan, margin dan pengurangan hutang selepas IPO menentukan sama ada gandaan ini berbaloi.",
+    "peers": "<strong>Asas Perbandingan Industri & Playbook Creador (MR D.I.Y., CTOS & Eco-Shop):</strong><br><br>• <strong>Formula Private Equity Creador:</strong> Pasaran membandingkan Big Caring Group (BCG) secara langsung dengan portfolio Creador terdahulu seperti <strong>MR D.I.Y. Group</strong>, <strong>CTOS Digital</strong>, dan <strong>Eco-Shop Marketing</strong>. Playbook yang diguna pakai adalah identikal: penguasaan skala melalui M&A agresif (gabungan BIG & CARiNG membentuk 668 cawangan dan 24.2% bahagian pasaran farmasi runcit), penswastaan terbitan berskala mega (RM8.0 bilion), dan tawaran jualan saham lama (OFS) yang besar untuk PE mengunci keuntungan (BCG: 68.6% tawaran bersamaan RM1.40 bilion OFS).<br><br>• <strong>Gandaan Penilaian (Valuation Multiple):</strong> Pada harga runcit RM1.08, PE sejarah BCG ialah 41.6x (PATAMI FY26 RM191.6 juta) atau ~36.6x unjuran konsensus FY27. Ini selaras dengan gandaan penyenaraian premium portfolio Creador: MR D.I.Y. disenaraikan pada PE ~31x, 99 Speed Mart pada ~32x, dan CTOS pada ~40x. Sebaliknya, rakan farmasi runcit serantau seperti Apex Healthcare berlegar pada gandaan konservatif 20x–24x.<br><br>• <strong>Perisai Pelabur Institusi (Cornerstone):</strong> Bagi menyokong saiz terbitan gergasi ini agar tidak goyah semasa debut, Creador mengikat 19 pelabur institusi terkemuka (IFC Bank Dunia, JPMorgan Asset Management, abrdn, Principal Asset Management) yang menyerap 665.5 juta unit (9.0% modal diperbesarkan) — strategi yang sama diguna pakai ketika melancarkan MR D.I.Y. pada tahun 2020.",
     "researchComparison": {
       "title": "Big Caring berbanding keputusan IPO SUNMED",
       "columns": [
@@ -10414,43 +10414,38 @@ const IPO_DATA = [
       "rows": [
         [
           "Model bisnes",
-          "Hospital",
-          "Terutamanya runcit farmasi"
+          "Hospital / Penjagaan Kesihatan",
+          "Rangkaian Farmasi Runcit Terbesar (BIG, CARiNG, Georgetown, Wellings)"
+        ],
+        [
+          "Hubungan Ekuiti Swasta",
+          "GIC Private Limited",
+          "Creador (seperti MR D.I.Y., CTOS, Eco-Shop)"
         ],
         [
           "Harga IPO",
           "RM1.45",
-          "RM1.08 — laporan MITI"
+          "RM1.08 (Permodalan Pasaran ~RM8.0 Bilion)"
         ],
         [
-          "PE sejarah IPO",
+          "PE Sejarah IPO",
           "64.8x (FY24)",
-          "65.19x (FY25)"
+          "41.6x (FY26 Audit PATAMI) / ~36.6x (FY27 Unjuran)"
         ],
         [
-          "OFS / saham IPO",
+          "OFS / Saham IPO",
           "70.8%",
-          "68.63% (draf)"
+          "68.6% (RM1.40 Bilion OFS untuk PE & Pengasas)"
         ],
         [
-          "OS awam",
-          "5.57x",
-          "Belum diketahui"
+          "Penggunaan Hasil Baharu",
+          "Perluasan hospital & modal kerja",
+          "89.5% (RM570.7j) untuk langsaikan pinjaman bank (jimat faedah RM26.3j/thn)"
         ],
         [
-          "Pembukaan debut",
-          "RM1.70 (+17.24%)",
-          "Belum listing"
-        ],
-        [
-          "Tutup hari pertama",
-          "RM1.85 (+27.59%)",
-          "Belum listing"
-        ],
-        [
-          "Cornerstone sebelum IPO",
-          "20; 52.6% tawaran institusi",
-          "Komitmen dilaporkan media; terma akhir belum disahkan"
+          "Cornerstone Investors",
+          "20 pelabur institusi",
+          "19 pelabur institusi (JPMorgan, IFC World Bank, abrdn dll)"
         ]
       ],
       "note": "PE menggunakan tahun kewangan berbeza. Prestasi SUNMED ialah sejarah, bukan ramalan Big Caring. Full allocation MITI individu bukan OS awam.",
