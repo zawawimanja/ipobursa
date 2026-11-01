@@ -2176,13 +2176,11 @@ function createIPOCard(ipo, index = 0) {
         }
     }
 
-    const detailsBtn = `<button onclick="showDetails('${ipo.id}')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.borderColor='rgba(99, 102, 241, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Details AI</button>`;
     const sifuBtn = `<a href="sifu-sheets.html?stock=${ipo.id}" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); border-radius: 6px; transition: 0.3s; text-decoration: none; display: inline-block; color: white;" onmouseover="this.style.background='rgba(245, 158, 11, 0.2)'; this.style.borderColor='rgba(245, 158, 11, 0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)';">Sifu Sheet</a>`;
 
     const commonBtns = `
         <div style="display: flex; gap: 0.4rem; align-items: center;">
             ${sifuBtn}
-            ${detailsBtn}
         </div>`;
 
     let actionBtn = '';
@@ -2191,7 +2189,6 @@ function createIPOCard(ipo, index = 0) {
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <button onclick="alert('Apply via your Online Banking (e-IPO) menu e.g. Maybank2u, CIMB Clicks, etc.')" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; cursor: pointer; border: none; background: var(--primary);">Apply</button>
                 ${sifuBtn}
-                ${detailsBtn}
             </div>`;
     } else if (ipo.stage === 3) {
         actionBtn = commonBtns;
@@ -2201,13 +2198,11 @@ function createIPOCard(ipo, index = 0) {
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <span style="font-size: 0.7rem; color: #f87171; font-weight: 700; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 0.3rem 0.6rem; border-radius: 6px;">WITHDRAWN</span>
                 ${sifuBtn}
-                ${detailsBtn}
             </div>`
             : `
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <a href="https://sahamonline.miti.gov.my/" target="_blank" class="btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.75rem; text-decoration: none; display: inline-block; background: #059669; border: none;">MITI</a>
                 ${sifuBtn}
-                ${detailsBtn}
             </div>`;
     } else if (ipo.stage === 1) {
         actionBtn = commonBtns;
@@ -2220,7 +2215,6 @@ function createIPOCard(ipo, index = 0) {
             <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <span style="font-size: 0.75rem; color: var(--text-dim); margin-right: 0.25rem;">${getIpoStrategy(ipo)}</span>
                 ${sifuBtn}
-                ${detailsBtn}
             </div>`;
     }
 
@@ -2462,252 +2456,7 @@ if (sortSelect) {
 }
 
 // renderIPOs(1) is now called inside the fetch promise
-// Modal Logic
-const modal = document.getElementById('ipo-modal');
-const modalBody = document.getElementById('modal-body');
-const closeModal = document.getElementById('close-modal');
 
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-window.showDetails = function(id) {
-    const ipo = ipoData.find(item => item.id === id);
-    if (!ipo) return;
-
-    modalBody.innerHTML = `
-        <h2>${ipo.companyName}</h2>
-        <p><strong>Sector:</strong> ${ipo.sector} &nbsp;|&nbsp; <strong>Market:</strong> ${ipo.market}</p>
-        <div class="modal-details">
-            <div class="detail-item">
-                <span class="label">Stage</span>
-                <span class="value" style="color: #f59e0b;">${ipo.status}</span>
-            </div>
-            <div class="detail-item">
-                <span class="label">Est. Price</span>
-                <span class="value">${ipo.price > 0 ? 'RM ' + ipo.price.toFixed(2) : 'TBA'}</span>
-            </div>
-        </div>
-        
-        <div class="ai-analysis-container" style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem;">
-            <h4 style="margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.4rem; font-family: 'Outfit', sans-serif; color: #a78bfa; font-size: 0.9rem;">
-                <i data-lucide="sparkles" style="width: 14px; height: 14px; color: #a78bfa;"></i>
-                <span>Groq AI Smart Analysis</span>
-            </h4>
-            <div id="ai-verdict-box" style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.5rem; padding: 0.85rem; min-height: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-moomoo" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); border: none; color: white; padding: 0.45rem 1.1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); transition: all 0.3s;">
-                    <i data-lucide="zap" style="width: 13px; height: 13px;"></i> Generate AI Verdict
-                </button>
-                <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 0.4rem; text-align: center;">Powered by Llama-3.3-70b-versatile for instant fundamental & valuation insights.</div>
-            </div>
-        </div>
-
-        <p style="font-size: 0.8rem; margin-top: 1.25rem; padding: 0.75rem; background: rgba(99, 102, 241, 0.08); border-radius: 0.5rem; border: 1px dashed rgba(165, 180, 252, 0.3); color: var(--text-dim);">
-            <strong>Notice:</strong> This is a Draft Prospectus phase. Information is for reference only and not an offer to buy shares.
-        </p>
-    `;
-    
-    modal.style.display = 'flex';
-    if(typeof lucide !== 'undefined') lucide.createIcons();
-};
-
-window.generateModalAIAnalysis = async function(id) {
-    const ipo = ipoData.find(item => item.id === id);
-    if (!ipo) return;
-
-    const verdictBox = document.getElementById('ai-verdict-box');
-    if (!verdictBox) return;
-
-    // Rate Limit Cooldown (client-side check to prevent rapid clicking)
-    const now = Date.now();
-    const lastClick = window._lastAnalysisClick || 0;
-    const cooldownMs = 15000; // 15 seconds cooldown
-    if (now - lastClick < cooldownMs) {
-        const remaining = Math.ceil((cooldownMs - (now - lastClick)) / 1000);
-        alert(`Please wait ${remaining} seconds before making a new analysis.`);
-        return;
-    }
-    window._lastAnalysisClick = now;
-
-    // Show loading state
-    verdictBox.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.75rem;">
-            <div class="spinner" style="width: 22px; height: 22px; border: 2px solid rgba(167, 139, 250, 0.2); border-top-color: #a78bfa; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-            <span style="font-size: 0.8rem; color: #a78bfa; font-weight: 600;">Analysing Prospectus & Sector...</span>
-        </div>
-    `;
-
-    try {
-        const systemPrompt = `You are "Hunter AI Verdict", a professional stock analyst specializing in Malaysian IPOs on Bursa Malaysia.
-You evaluate IPOs across 4 pillars:
-1. Valuation (P/E ratio compared to peer averages of ~20x-25x for tech, ~12x-15x for industrial, cash flow, and market cap).
-2. Sponsor/Investment Bank (IB) quality (Maybank/M&A/KAF are elite Tier 1, TA/Kenanga/Malacca/UOB are mid Tier 2, others are Tier 3).
-3. Sector Momentum (High-growth tech, solar, AI, semiconductors, cleanroom are super hot; standard fabrication, trading, services are neutral/boring).
-4. Structure & Risks (OFS components decrease retail listing performance, lock-up terms, utilization of funds like debt paying vs R&D/Expansion).
-
-Format your response in professional English, using the following exact structure:
-### 🌟 AI VERDICT: [MUST BUY / WORTH IT / SCALP / AVOID / PENDING]
-Provide a concise 1-sentence verdict on whether to subscribe or skip.
-
-### 📊 Valuation & Financial Health
-Give a brief critique of the valuation (is it cheap, fair, or overpriced? PE value) and fund utilization.
-
-### ⚡ Catalysts
-List 2-3 positive catalysts (e.g. sponsor record, industry trends, orderbook, growth strategy) as bullet points.
-
-### ⚠️ Risk Factors
-List 1-2 major risks (e.g. OFS percentage, customer concentration, competitor pricing, shariah status if non-shariah) as bullet points.
-
-### ⚓ Action Strategy
-Tell the user exactly how to trade it (e.g., "Apply maximum and hold for target price", "Apply for listing day scalp", "Skip completely").`;
-
-        const _hunterGradeObj = getIpoGrade(ipo);
-        const hunterGrade = _hunterGradeObj ? _hunterGradeObj.grade : 'N/A';
-        const hunterReason = _hunterGradeObj ? (_hunterGradeObj.reason || '').replace(/<[^>]*>/g, '') : 'N/A';
-
-        const prompt = `Please evaluate the following IPO detail:
-- Company Name: ${ipo.companyName}
-- Sector: ${ipo.sector}
-- Market: ${ipo.market}
-- Price: RM ${ipo.price ? ipo.price.toFixed(3) : 'TBA'}
-- PE Ratio: ${ipo.pe || 'TBA'}
-- Investment Bank / Sponsor: ${ipo.ib || 'TBA'}
-- Use of Funds: ${ipo.fundUse || 'TBA'}
-- Oversubscription Rate: ${ipo.os || 'TBA'}
-- Offer For Sale (OFS): ${ipo.ofs === true ? 'Yes (Has existing shares sold by promoters)' : ipo.ofs === false ? 'No (Pure public issue)' : 'Unknown'}
-- Sifu Target Price: RM ${ipo.sifuTargetPrice ? ipo.sifuTargetPrice.toFixed(3) : 'TBA'}
-- Shariah Compliant: ${ipo.shariah === true ? 'Yes' : ipo.shariah === false ? 'No' : 'Unknown'}
-- Analyst Insight Summary: ${ipo.analystInsight || 'TBA'}
-- HUNTER SYSTEM GRADE: ${hunterGrade} (A=Strong Buy, B=Scalp Only, C=AVOID — official Hunter algorithm verdict)
-- Hunter Grade Reason: ${hunterReason}
-
-IMPORTANT: Your verdict MUST align with the Hunter System Grade. Grade C = AVOID only. Grade B = SCALP only. Grade A = MUST BUY or WORTH IT. Never contradict the Hunter Grade.`;
-
-        let responseText = '';
-
-        // Helper: call Groq through the secure serverless proxy (key lives in Vercel env vars)
-        const callGroqWithFallback = async (primaryModel, fallbackModel) => {
-            const tryModel = async (model) => {
-                const res = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    // B1: sertakan context IPO supaya AI verdict ada data pasaran semasa
-                    body: JSON.stringify({ prompt, systemPrompt, context: IpoChatUtils.buildContext(ipoData, ipo.companyName, getIpoGrade).context, model, max_tokens: 1024, temperature: 0.5 })
-                });
-                const d = await res.json();
-                if (!res.ok || d.error) {
-                    const error = new Error(d?.error || 'Proxy error');
-                    error.status = res.status;
-                    throw error;
-                }
-                return d.text || '';
-            };
-
-            try {
-                const result = await tryModel(primaryModel);
-                if (result) return { text: result, model: primaryModel };
-                throw new Error('Empty response');
-            } catch (e) {
-                if ([400, 403, 429].includes(e.status)) throw e;
-                console.warn(`[AI Verdict] ${primaryModel} failed: ${e.message}. Falling back to ${fallbackModel}...`);
-                const result = await tryModel(fallbackModel);
-                return { text: result, model: fallbackModel };
-            }
-        };
-
-        const { text: aiText, model: usedModel } = await callGroqWithFallback('llama-3.3-70b-versatile', 'llama-3.1-8b-instant');
-        responseText = aiText;
-        console.log(`[AI Verdict] Used model: ${usedModel}`);
-
-        if (!responseText) {
-            throw new Error('No analysis generated.');
-        }
-
-        const formattedHtml = IpoChatUtils.formatMarkdown(responseText);
-
-        verdictBox.style.alignItems = 'stretch';
-        verdictBox.style.textAlign = 'left';
-        verdictBox.innerHTML = `
-            <div style="font-size:0.78rem; color:var(--text-main); line-height:1.5; padding: 0.1rem;">
-                ${formattedHtml}
-            </div>
-            <div style="margin-top:0.5rem; padding:0.35rem 0.5rem; background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.18); border-radius:5px; font-size:0.65rem; color:#f59e0b; line-height:1.4;">
-                ⚠️ AI verdict is a guide only — not financial advice. Check the official prospectus & Bursa before making any decision.
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.05); margin-top:0.6rem; padding-top:0.4rem; text-align:right;">
-                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-moomoo" style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--text-dim); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.65rem; cursor:pointer; transition:0.3s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.color='#a78bfa';" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)'; this.style.color='var(--text-dim)';">
-                    <i data-lucide="refresh-cw" style="width: 9px; height: 9px; display:inline-block; margin-bottom:-1px;"></i> Recalculate
-                </button>
-            </div>
-        `;
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-
-    } catch (err) {
-        console.error('AI Analysis failed:', err);
-        const isRateLimited = err && err.status === 429;
-        const msg = isRateLimited
-            ? '⏳ Had capaian dicapai (Rate limit). Sila tunggu sebentar (anggaran 5 minit) sebelum mencuba semula.'
-            : '⚠️ Gagal menjana analisis. Sila semak sambungan internet atau tetapan API Key anda.';
-        verdictBox.innerHTML = `
-            <div style="color:${isRateLimited ? '#f59e0b' : '#ef4444'}; font-size:0.75rem; text-align:center; padding: 0.75rem;">
-                ${msg}
-                <button onclick="generateModalAIAnalysis('${IpoChatUtils.escapeHtml(ipo.id)}')" class="btn-primary" style="margin-top:0.5rem; padding:0.35rem 0.75rem; font-size:0.75rem; cursor:pointer; border:none;">Retry</button>
-            </div>
-        `;
-    }
-};
-
-function showResearch(ipoId) {
-    const ipo = ipoData.find(item => item.id === ipoId);
-    if (!ipo || !ipo.research) return;
-
-    modalBody.innerHTML = `
-        <div class="research-hub">
-            <h2 style="color: var(--primary-light); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-                <i data-lucide="microscope" style="width: 24px;"></i> Analyst Research Lab
-            </h2>
-            
-            <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
-                ${ipo.research.map(note => `
-                    <div class="lab-card glass-card" style="padding: 1.25rem; border: 1px solid rgba(99, 102, 241, 0.2);">
-                        <div style="font-size: 0.7rem; text-transform: uppercase; color: #a5b4fc; font-weight: 700; margin-bottom: 0.5rem;">${note.house}</div>
-                        <div style="font-size: 1.25rem; font-weight: 800; color: white; margin-bottom: 0.25rem;">RM ${note.tp.toFixed(2)}</div>
-                        <div style="font-size: 0.8rem; color: #10b981; font-weight: 600; margin-bottom: 1rem;">${note.view}</div>
-                        
-                        <div class="note-preview" style="background: rgba(0,0,0,0.3); border-radius: 0.5rem; overflow: hidden; height: 180px; position: relative; cursor: pointer;" onclick="window.open('${note.img}', '_blank')">
-                            <img src="${note.img}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
-                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 0.75rem; font-size: 0.7rem; color: white; text-align: center;">
-                                Click to View Full Note
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-
-            <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.75rem;">
-                <h4 style="margin: 0 0 0.5rem 0; color: #10b981;">Hunter Strategy Analysis:</h4>
-                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.5;">
-                    The consensus from major research houses confirms a strong upside potential of ${((ipo.avgTP - ipo.price) / ipo.price * 100).toFixed(1)}% compared to the retail price. 
-                    While some analysts are more conservative, others project a higher "Fair Value" target. 
-                    <strong>Our Take:</strong> Accumulate for Step 3, but prioritize taking partial profits at ${ipo.avgTP}.
-                </p>
-            </div>
-        </div>
-    `;
-
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    if(typeof lucide !== 'undefined') lucide.createIcons();
-}
-
-window.showResearch = showResearch;
-window.showDetails = showDetails;
 window.initializeData = initializeData;
 window.playNotificationSound = playNotificationSound;
 window.showToast = showToast;
