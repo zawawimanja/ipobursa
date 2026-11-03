@@ -1,5 +1,5 @@
 const SYNC_STATUS = {
-  "lastSync": "03/11/2026, 10:32:27 am",
+  "lastSync": "03/11/2026, 11:00:23 am",
   "status": "Partial",
   "source": "ipo-news",
   "totalIpos": 314,
@@ -66,8 +66,8 @@ const SYNC_STATUS = {
     },
     "ipo-news": {
       "status": "success",
-      "lastSuccess": "2026-11-03T02:32:27.134Z",
-      "lastAttempt": "2026-11-03T02:32:27.134Z",
+      "lastSuccess": "2026-11-03T03:00:23.649Z",
+      "lastAttempt": "2026-11-03T03:00:23.649Z",
       "message": "120 news items from 13 feed(s); 0 feed(s) failed."
     },
     "isaham-scrape": {
