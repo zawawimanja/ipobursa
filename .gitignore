@@ -23,3 +23,11 @@ overrides_*.json
 scratch/*.pdf
 scratch/*.html
 scratch/temp_*.js
+
+# Prospectus PDF dumps + Cloudflare/SC cookie jars downloaded by scratch extract scripts
+scratch/raiden-pdfs/
+scratch/rosado-pdfs/
+scratch/parkland-pdfs/
+scratch/**/*.pdf
+scratch/**/cf-cookies.txt
+scratch/**/sc-cookies.txt

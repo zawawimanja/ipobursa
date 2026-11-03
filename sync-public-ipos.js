@@ -119,6 +119,14 @@ function isBursaTicker(value) {
     return /^[A-Z0-9][A-Z0-9.\-]{1,9}$/.test(String(value || '').trim()) && !/^\d+$/.test(String(value).trim());
 }
 
+// A card whose listing day is already more than a day old is a past card whatever its
+// markup says — past cards carry no trustworthy listing year, so they must never stamp
+// "Open: 21 Oct" with the current year. Unparseable dates stay treated as upcoming.
+function isPastListingCard(listingDate, now = Date.now()) {
+    const listingMoment = parseFlexDate(listingDate);
+    return !!listingMoment && listingMoment.getTime() < now - 24 * 60 * 60 * 1000;
+}
+
 async function main() {
     const axios = require('axios');
     const cheerio = require('cheerio');
@@ -190,7 +198,9 @@ async function main() {
         // Past cards can lose both the inline style marker and the title year, which would stamp
         // "Open: 21 Oct" with the current year. A card whose listing day has already passed is a
         // past card whatever its markup says, so it may only correct identity metadata.
-        if (listingDate.getTime() < Date.now() - 24 * 60 * 60 * 1000) {
+        // parseKlseDate yields a "DD-Mon-YYYY" string; isPastListingCard turns it into a
+        // Date for the "already listed" comparison below.
+        if (isPastListingCard(listingDate)) {
             if (companyName) {
                 upcoming.push({ past: true, ticker, companyName,
                     market: details.market, sector: details.sector });
@@ -357,7 +367,7 @@ function applyPublicRecords(upcoming, data, overrides, now = Date.now()) {
     return updatedCount;
 }
 
-module.exports = { applyPublicRecords, matchEntry, parseInlineDate, readCardDetails, isBursaTicker, main };
+module.exports = { applyPublicRecords, matchEntry, parseInlineDate, parseKlseDate, parseFlexDate, isPastListingCard, readCardDetails, isBursaTicker, main };
 if (require.main === module) {
     main().catch(e => { console.error('Fatal:', e); process.exitCode = 1; });
 }
