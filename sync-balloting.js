@@ -28,7 +28,7 @@ function normalizeCompany(value) {
 
 function matchesCompany(title, ipo) {
     const company = title.match(/^(.+?)\s*[-–—]\s*INITIAL PUBLIC OFFERING\b/i);
-    return !!company && normalizeCompany(company[1]).length >= 4 &&
+    return !!company && normalizeCompany(company[1]).length >= 3 &&
         normalizeCompany(company[1]) === normalizeCompany(ipo.companyName);
 }
 
