@@ -1,19 +1,19 @@
 const SYNC_STATUS = {
-  "lastSync": "12/11/2026, 12:30:05 am",
+  "lastSync": "12/11/2026, 10:00:02 pm",
   "status": "Partial",
   "source": "miti-portal",
   "totalIpos": 314,
   "sources": {
     "miti-portal": {
       "status": "success",
-      "lastSuccess": "2026-11-11T16:30:05.418Z",
-      "lastAttempt": "2026-11-11T16:30:05.418Z",
+      "lastSuccess": "2026-11-12T14:00:02.627Z",
+      "lastAttempt": "2026-11-12T14:00:02.627Z",
       "message": "1 public MITI offers verified; 0 records updated."
     },
     "miti-applicants": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-11-11T16:30:04.675Z",
+      "lastAttempt": "2026-11-12T14:00:02.194Z",
       "message": "MITI credentials are not configured; authenticated offer details were not checked."
     },
     "isaham-api": {

@@ -89,3 +89,4 @@ console.log('\nRunning generate-ipo-pages.js...');
 execSync('node generate-ipo-pages.js', { cwd: rootDir, stdio: 'inherit' });
 
 console.log('\n🎉 Finished updating Impact Capital balloting status!');
+
