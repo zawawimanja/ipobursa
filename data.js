@@ -8938,7 +8938,7 @@ const IPO_DATA = [
     "prospectusUrl": "https://www.klsescreener.com/v2/announcements/view/11691851",
     "closingTime": "5:00 p.m.",
     "ballotingDate": "12-Nov-2026",
-    "allotmentDate": "20-Nov-2026",
+    "allotmentDate": "19-Nov-2026",
     "totalShares": 480000000,
     "ipoNewShares": 96690000,
     "ipoOfferForSaleShares": 28620900,
@@ -9048,9 +9048,16 @@ const IPO_DATA = [
     "eps24": 1.946875,
     "epsGrowthF": 33.3,
     "epsGrowthF1": 17.6,
-    "predictedGrade": "B",
-    "analystInsight": "<b>PERMOHONAN AWAM DITUTUP 06 NOV 2026 — MENUNGGU KEPUTUSAN UNDIAN HARI INI (12 NOV)</b><br>• Tawaran awam RM0.22 ditutup 06 Nov 2026; proses undian dijadualkan berlangsung hari ini, 12 Nov 2026.<br>• Model perniagaan integrasi infrastruktur ICT & telekomunikasi, menjana PATAMI FY25 RM7.02 juta.<br>• Nilai wajar Sifu RM0.29 (potensi +31.8% dari harga IPO RM0.22). Penyenaraian Pasaran ACE pada 24 Nov 2026.",
-    "epsF": 1.95
+    "predictedGrade": "A",
+    "analystInsight": "<b>BALLOTING 12 NOV 2026: OS 139.69x — PERMINTAAN LUAR BIASA!</b><br>• Tranche awam 24.00 juta saham menerima 15,203 permohonan bagi 3.38 bilion saham bernilai RM742.84 juta (terlebih langgan 139.69x).<br>• Permintaan amat kuat didorong gandaan PE murah 11.29x, order book RM169.9 juta, dan tajaan Public Investment Bank.<br>• Notis peruntukan diposkan selewat-lewatnya 19 Nov 2026; penyenaraian Pasaran ACE pada 24 Nov 2026.<br>• <a href=\"https://www.klsescreener.com/v2/announcements/view/11701137\" target=\"_blank\" rel=\"noopener noreferrer\">Pengumuman Balloting Bursa</a>",
+    "epsF": 1.95,
+    "os": 139.69,
+    "isAutoOS": true,
+    "osSource": "https://www.klsescreener.com/v2/announcements/view/11701137",
+    "osSourceDate": "12 Nov 2026",
+    "osMetric": "overall-public-oversubscription",
+    "grade": "A",
+    "sifuGrade": "A"
   },
   {
     "id": "cnergenz",

@@ -1,20 +1,20 @@
 const SYNC_STATUS = {
-  "lastSync": "03/11/2026, 11:49:11 am",
+  "lastSync": "12/11/2026, 12:30:05 am",
   "status": "Partial",
-  "source": "ipo-news",
+  "source": "miti-portal",
   "totalIpos": 314,
   "sources": {
     "miti-portal": {
       "status": "success",
-      "lastSuccess": "2026-11-03T02:06:16.109Z",
-      "lastAttempt": "2026-11-03T02:06:16.109Z",
-      "message": "3 public MITI offers verified; 2 records updated."
+      "lastSuccess": "2026-11-11T16:30:05.418Z",
+      "lastAttempt": "2026-11-11T16:30:05.418Z",
+      "message": "1 public MITI offers verified; 0 records updated."
     },
     "miti-applicants": {
       "status": "skipped",
       "lastSuccess": null,
-      "lastAttempt": "2026-11-02T13:46:13.894Z",
-      "message": "Puppeteer is not installed in CI; run scratch/sync-miti-applicants-login.js locally."
+      "lastAttempt": "2026-11-11T16:30:04.675Z",
+      "message": "MITI credentials are not configured; authenticated offer details were not checked."
     },
     "isaham-api": {
       "status": "skipped",
