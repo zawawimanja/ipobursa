@@ -1,5 +1,5 @@
 const SYNC_STATUS = {
-  "lastSync": "12/11/2026, 10:00:02 pm",
+  "lastSync": "16/11/2026, 12:07:59 pm",
   "status": "Partial",
   "source": "miti-portal",
   "totalIpos": 314,
@@ -59,16 +59,16 @@ const SYNC_STATUS = {
       "message": "Sync completed."
     },
     "balloting": {
-      "status": "failed",
+      "status": "partial",
       "lastSuccess": "2026-10-29T11:25:07.324Z",
-      "lastAttempt": "2026-11-02T13:46:12.789Z",
-      "message": "Overall public OS: 0 updated, 2 unavailable, 0 deferred."
+      "lastAttempt": "2026-11-16T04:03:51.140Z",
+      "message": "Overall public OS: 2 updated, 2 unavailable, 0 deferred."
     },
     "ipo-news": {
       "status": "success",
-      "lastSuccess": "2026-11-03T03:49:11.568Z",
-      "lastAttempt": "2026-11-03T03:49:11.568Z",
-      "message": "120 news items from 13 feed(s); 0 feed(s) failed."
+      "lastSuccess": "2026-11-16T04:07:59.373Z",
+      "lastAttempt": "2026-11-16T04:07:59.373Z",
+      "message": "120 news items from 12 feed(s); 0 feed(s) failed."
     },
     "isaham-scrape": {
       "status": "failed",
