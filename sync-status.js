@@ -1,7 +1,7 @@
 const SYNC_STATUS = {
-  "lastSync": "16/11/2026, 12:07:59 pm",
+  "lastSync": "18/11/2026, 10:14:01 am",
   "status": "Partial",
-  "source": "miti-portal",
+  "source": "ipo-news",
   "totalIpos": 314,
   "sources": {
     "miti-portal": {
@@ -66,9 +66,9 @@ const SYNC_STATUS = {
     },
     "ipo-news": {
       "status": "success",
-      "lastSuccess": "2026-11-16T04:07:59.373Z",
-      "lastAttempt": "2026-11-16T04:07:59.373Z",
-      "message": "120 news items from 12 feed(s); 0 feed(s) failed."
+      "lastSuccess": "2026-11-18T02:14:01.859Z",
+      "lastAttempt": "2026-11-18T02:14:01.859Z",
+      "message": "120 news items from 11 feed(s); 0 feed(s) failed."
     },
     "isaham-scrape": {
       "status": "failed",
