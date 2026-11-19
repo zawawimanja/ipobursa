@@ -5,10 +5,10 @@ const SYNC_STATUS = {
   "totalIpos": 314,
   "sources": {
     "miti-portal": {
-      "status": "success",
+      "status": "failed",
       "lastSuccess": "2026-11-12T14:00:02.627Z",
-      "lastAttempt": "2026-11-12T14:00:02.627Z",
-      "message": "1 public MITI offers verified; 0 records updated."
+      "lastAttempt": "2026-11-19T08:06:20.099Z",
+      "message": "MITI portal returned no recognized offer announcement or explicit empty state; existing data retained."
     },
     "miti-applicants": {
       "status": "skipped",
@@ -65,10 +65,10 @@ const SYNC_STATUS = {
       "message": "Overall public OS: 2 updated, 2 unavailable, 0 deferred."
     },
     "ipo-news": {
-      "status": "success",
+      "status": "partial",
       "lastSuccess": "2026-11-18T02:14:01.859Z",
-      "lastAttempt": "2026-11-18T02:14:01.859Z",
-      "message": "120 news items from 11 feed(s); 0 feed(s) failed."
+      "lastAttempt": "2026-11-19T08:23:19.298Z",
+      "message": "120 news items from 9 feed(s); 1 feed(s) failed."
     },
     "isaham-scrape": {
       "status": "failed",
