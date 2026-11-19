@@ -63,7 +63,7 @@ function parseFlexDate(str) {
 
 function normalize(name) {
     return (name || '').toLowerCase()
-        .replace(/\bberhad\b|\bgroup\b|\bholdings\b|\bcorp\b|\bbhd\b|\bthe\b/g, '')
+        .replace(/\bberhad\b|\bgroup\b|\bholdings\b|\bcorp\b|\bbhd\b|\bthe\b|\breal estate investment trust\b|\breit\b/g, '')
         .replace(/[^a-z0-9]/g, '')
         .trim();
 }
@@ -233,8 +233,8 @@ async function main() {
             });
         }
 
-        // Get price from right green block
-        const priceText = cardEl.find('div[style*="background-color:#27AE60"] h4').text().trim();
+        // Get price from right green block (use .first() because KLSE has separate mobile/desktop divs)
+        const priceText = cardEl.find('div[style*="background-color:#27AE60"] h4').first().text().trim();
         const price = parseFloat(priceText) || null;
 
         if (!companyName || !listingDate) return;

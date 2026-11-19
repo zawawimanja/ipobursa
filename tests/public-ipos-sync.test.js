@@ -66,3 +66,29 @@ test('a past card never rewinds the dates of an offer still open', () => {
     assert.equal(data[0].closingDate, '06-Nov-2026');
     assert.equal(data[0].listingDate, '24-Nov-2026');
 });
+
+test('REIT full titles match short REIT company names in database', () => {
+    const card = {
+        past: false,
+        ticker: 'IOIREIT',
+        companyName: 'IOIPG MALAYSIA REAL ESTATE INVESTMENT TRUST',
+        openDate: '03-Nov-2026',
+        closeDate: '10-Nov-2026',
+        listingDate: '25-Nov-2026',
+        price: 0.96
+    };
+    const data = [{
+        id: 'ioipg-malaysia-reit',
+        companyName: 'IOIPG Malaysia REIT',
+        symbol: 'IOIPG REIT',
+        stage: 2,
+        status: 'MITI Allocation Phase',
+        price: 0
+    }];
+    const overrides = {};
+    const updated = applyPublicRecords([card], data, overrides);
+    assert.equal(updated, 1);
+    assert.equal(data[0].symbol, 'IOIREIT');
+    assert.equal(data[0].price, 0.96);
+});
+
